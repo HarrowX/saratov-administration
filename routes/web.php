@@ -1,10 +1,7 @@
 <?php
 
+use App\Livewire\Index;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['layout' => 'components.layouts.app'], function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
-});
+Route::get('/', Index::class);
 
