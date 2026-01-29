@@ -15,173 +15,6 @@ function fixAppStoreButtons() {
     });
 }
 
-// ========================================
-// 2. ДОБАВЛЕНИЕ КАРТОЧЕК ДОСТОПРИМЕЧАТЕЛЬНОСТЕЙ С ПРОКРУТКОЙ
-// ========================================
-const attractionsData = [
-    {
-        id: 1,
-        title: "Саратовская консерватория",
-        description: "Первая консерватория в российской провинции, основана в 1912 году. Уникальная архитектура и богатая история.",
-        image: "https://www.tursar.ru/image/img424_0.jpg",
-        time: "15 мин",
-        category: "Фотозона",
-        rating: 4.9,
-        coordinates: [51.5333, 46.0342]
-    },
-    {
-        id: 2,
-        title: "Набережная Космонавтов",
-        description: "Любимое место отдыха горожан с видом на Волгу. Здесь приземлился Юрий Гагарин после первого полёта.",
-        image: "https://www.tursar.ru/image/img363_0.jpg",
-        time: "30 мин",
-        category: "Кафе",
-        rating: 4.8,
-        coordinates: [51.5247, 46.0667]
-    },
-    {
-        id: 3,
-        title: "Парк Победы",
-        description: "Музей военной техники под открытым небом с уникальной экспозицией и вечным огнем.",
-        image: "https://saratov.travel/upload/resize_cache/iblock/18c/8glui7vh5ldyyw0g7m2e4xcc3530vuzk/800_800_1/photo_2022-11-14_16-25-54.jpg",
-        time: "45 мин",
-        category: "Музей",
-        rating: 4.7,
-        coordinates: [51.5555, 45.9567]
-    },
-    {
-        id: 4,
-        title: "Саратовский мост",
-        description: "Символ города, один из самых длинных мостов в Европе. Потрясающие виды на Волгу.",
-        image: "https://photocentra.ru/images/main19/192962_main.jpg",
-        time: "20 мин",
-        category: "Фотозона",
-        rating: 4.9,
-        coordinates: [51.5066, 46.0077]
-    },
-    {
-        id: 5,
-        title: "Театр оперы и балета",
-        description: "Один из старейших театров России с богатой историей и великолепной архитектурой.",
-        image: "image/saratovskiy-teatr-operyi-i-baleta.jpg",
-        time: "60 мин",
-        category: "Культура",
-        rating: 4.8,
-        coordinates: [51.5294, 46.0354]
-    },
-    {
-        id: 6,
-        title: "Лимонарий",
-        description: "Уникальная оранжерея с экзотическими растениями и цитрусовыми деревьями.",
-        image: "image/limonariy.jpg",
-        time: "40 мин",
-        category: "Парк",
-        rating: 4.6,
-        coordinates: [51.5444, 46.0022]
-    },
-    {
-        id: 7,
-        title: "Музей Радищева",
-        description: "Первый общедоступный художественный музей в провинции России.",
-        image: "image/scale_1200 (1).jpeg",
-        time: "90 мин",
-        category: "Музей",
-        rating: 4.7,
-        coordinates: [51.5289, 46.0333]
-    },
-    {
-        id: 8,
-        title: "Городской парк",
-        description: "Центральный парк города с аттракционами, прудом и зелёными аллеями.",
-        image: "image/scale_1200 (2).jpeg",
-        time: "60 мин",
-        category: "Парк",
-        rating: 4.5,
-        coordinates: [51.5389, 46.0089]
-    },
-    {
-        id: 9,
-        title: "Проспект Кирова",
-        description: "Пешеходная улица - 'Саратовский Арбат' с магазинами, кафе и уличными музыкантами.",
-        image: "image/f621dd6a9c428d4e949c4a00ebcc57d4.jpg",
-        time: "45 мин",
-        category: "Прогулка",
-        rating: 4.6,
-        coordinates: [51.5311, 46.0344]
-    },
-    {
-        id: 10,
-        title: "Цирк братьев Никитиных",
-        description: "Первый стационарный цирк в России, основанный в 1876 году.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/%D0%A6%D0%B8%D1%80%D0%BA_%D0%B2_%D0%A1%D0%B0%D1%80%D0%B0%D1%82%D0%BE%D0%B2%D0%B5.jpg/1200px-%D0%A6%D0%B8%D1%80%D0%BA_%D0%B2_%D0%A1%D0%B0%D1%80%D0%B0%D1%82%D0%BE%D0%B2%D0%B5.jpg",
-        time: "90 мин",
-        category: "Развлечения",
-        rating: 4.7,
-        coordinates: [51.5233, 46.0433]
-    },
-    {
-        id: 11,
-        title: "Национальная деревня",
-        description: "Этнографический комплекс с домами разных народов Поволжья.",
-        image: "https://www.tursar.ru/image/img441_0.jpg",
-        time: "60 мин",
-        category: "Культура",
-        rating: 4.5,
-        coordinates: [51.5622, 45.9922]
-    }
-];
-
-function createAttractionsCarousel() {
-    const attractionsSection = document.getElementById('attractions-carousel');
-    if (!attractionsSection) return;
-    
-    const html = `
-        <div class="relative">
-            <div class="flex overflow-x-auto space-x-6 pb-4 scrollbar-hide" id="attractions-scroll">
-                ${attractionsData.map(attraction => `
-                    <div class="min-w-[350px] bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="${attraction.image}" alt="${attraction.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                                <span class="text-sm font-semibold">⭐ ${attraction.rating}</span>
-                            </div>
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <span class="bg-blue-500/80 backdrop-blur px-3 py-1 rounded-full text-xs">
-                                    ${attraction.category}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">${attraction.title}</h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">${attraction.description}</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center text-gray-500 text-sm">
-                                    <i class="fas fa-clock mr-2"></i>
-                                    <span>${attraction.time}</span>
-                                </div>
-                                <button onclick="showAttractionDetails(${attraction.id})" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm py-2 px-4 rounded-lg transition">
-                                    Подробнее →
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-            
-            <!-- Кнопки прокрутки -->
-            <button onclick="scrollAttractions('left')" class="scroll-button left-0 -translate-x-4">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button onclick="scrollAttractions('right')" class="scroll-button right-0 translate-x-4">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
-    `;
-    
-    attractionsSection.innerHTML = html;
-}
-
 function scrollAttractions(direction) {
     const container = document.getElementById('attractions-scroll');
     const scrollAmount = 370;
@@ -454,36 +287,36 @@ function buildRoute(attractionId) {
 // ========================================
 // 8. УВЕДОМЛЕНИЯ
 // ========================================
-function showNotification(message, type = 'info') {
-    const notification = document.createElement('div');
-    const colors = {
-        'success': 'bg-green-500',
-        'error': 'bg-red-500',
-        'info': 'bg-blue-500',
-        'warning': 'bg-yellow-500'
-    };
+// function showNotification(message, type = 'info') {
+//     const notification = document.createElement('div');
+//     const colors = {
+//         'success': 'bg-green-500',
+//         'error': 'bg-red-500',
+//         'info': 'bg-blue-500',
+//         'warning': 'bg-yellow-500'
+//     };
     
-    notification.className = `fixed top-20 right-4 ${colors[type]} text-white px-6 py-4 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300`;
-    notification.innerHTML = `
-        <div class="flex items-center space-x-3">
-            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-            <p>${message}</p>
-        </div>
-    `;
+//     notification.className = `fixed top-20 right-4 ${colors[type]} text-white px-6 py-4 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300`;
+//     notification.innerHTML = `
+//         <div class="flex items-center space-x-3">
+//             <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+//             <p>${message}</p>
+//         </div>
+//     `;
     
-    document.body.appendChild(notification);
+//     document.body.appendChild(notification);
     
-    // Анимация появления
-    setTimeout(() => {
-        notification.style.transform = 'translateX(0)';
-    }, 10);
+//     // Анимация появления
+//     setTimeout(() => {
+//         notification.style.transform = 'translateX(0)';
+//     }, 10);
     
-    // Удаление через 3 секунды
-    setTimeout(() => {
-        notification.style.transform = 'translateX(100%)';
-        setTimeout(() => notification.remove(), 300);
-    }, 3000);
-}
+//     // Удаление через 3 секунды
+//     setTimeout(() => {
+//         notification.style.transform = 'translateX(100%)';
+//         setTimeout(() => notification.remove(), 300);
+//     }, 3000);
+// }
 
 // ========================================
 // ИНИЦИАЛИЗАЦИЯ ВСЕХ ИСПРАВЛЕНИЙ
@@ -491,8 +324,6 @@ function showNotification(message, type = 'info') {
 document.addEventListener('DOMContentLoaded', function() {
     // Применяем все исправления
     fixAppStoreButtons();
-    createAttractionsCarousel();
-    // fixChatbot();
     fixPhotoGallery();
     
     // Добавляем глобальные функции

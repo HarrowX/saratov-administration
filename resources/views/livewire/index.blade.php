@@ -106,7 +106,7 @@
                         <div id="heroSlider" class="relative h-[500px]">
                             <!-- Slide 1 -->
                             <div class="slider-slide active absolute inset-0">
-                                <img src="https://www.tursar.ru/images/img363_0.jpg" alt="Набережная Космонавтов">
+                                <img src="images/nabereznaya-kosmonavtov.jpeg" alt="Набережная Космонавтов">
                                 <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
                                 <div class="absolute bottom-15 lg:bottom-22 left-14 right-6 text-white">
                                     <div class="flex items-center space-x-2 mb-2">
@@ -119,7 +119,7 @@
                             
                             <!-- Slide 2 -->
                             <div class="slider-slide absolute inset-0">
-                                <img src="https://www.tursar.ru/images/img424_0.jpg" alt="Саратовская консерватория">
+                                <img src="images/konservatoria.jpeg" alt="Саратовская консерватория">
                                 <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
                                 <div class="absolute bottom-15 lg:bottom-22 left-14 right-6 text-white">
                                     <div class="flex items-center space-x-2 mb-2">
@@ -132,7 +132,7 @@
                             
                             <!-- Slide 3 -->
                             <div class="slider-slide absolute inset-0">
-                                <img src="" alt="Саратовский цирк">
+                                <img src="images/cirk.jpeg" alt="Саратовский цирк">
                                 <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
                                 <div class="absolute bottom-15 lg:bottom-22 left-14 right-6 text-white">
                                     <div class="flex items-center space-x-2 mb-2">
@@ -346,13 +346,51 @@
             
             <!-- Attractions Carousel -->
             <div id="attractions-carousel" class="mb-12">
-                <!-- Carousel will be filled by JavaScript -->
+                <div class="relative">
+                    <div class="flex overflow-x-auto space-x-6 pb-4 scrollbar-hide" id="attractions-scroll">
+                        @foreach ($places as $place)
+                            <div class="min-w-[350px] bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
+                                <div class="relative h-48 overflow-hidden">
+                                    <img src="{{ $place->image }}" alt="{{ $place->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
+                                    <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
+                                        <span class="text-sm font-semibold">⭐ {{ $place->rating }}</span>
+                                    </div>
+                                    <div class="absolute bottom-4 left-4 text-white">
+                                        <span class="bg-blue-500/80 backdrop-blur px-3 py-1 rounded-full text-xs">
+                                            {{ $place->category }}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold mb-2">{{ $place->title }}</h3>
+                                    <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $place->description }}</p>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center text-gray-500 text-sm">
+                                            <i class="fas fa-clock mr-2"></i>
+                                            <span>{{ $place->time }}</span>
+                                        </div>
+                                        <button onclick="showAttractionDetails({{ $place->id }})" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm py-2 px-4 rounded-lg transition">
+                                            Подробнее →
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                        <button onclick="scrollAttractions('left')" class="scroll-button left-0 -translate-x-4">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button onclick="scrollAttractions('right')" class="scroll-button right-0 translate-x-4">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
             
             <div class="grid md:grid-cols-2 gap-8 mb-12">
                 <div data-aos="fade-right" class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://www.tursar.ru/images/img424_0.jpg" alt="Саратовская консерватория" class="group-hover:scale-110 transition duration-500">
+                        <img src="images/konservatoria.jpeg" alt="Саратовская консерватория" class="group-hover:scale-110 transition duration-500">
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
                             <i class="fas fa-star text-yellow-500"></i>
                             <span class="font-semibold">4.9</span>
@@ -375,7 +413,7 @@
                 
                 <div data-aos="fade-left" class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://www.tursar.ru/images/img363_0.jpg" alt="Набережная Космонавтов" class="group-hover:scale-110 transition duration-500">
+                        <img src="images/nabereznaya-kosmonavtov.jpeg" alt="Набережная Космонавтов" class="group-hover:scale-110 transition duration-500">
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
                             <i class="fas fa-star text-yellow-500"></i>
                             <span class="font-semibold">4.8</span>
@@ -705,7 +743,7 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <!-- Row 1 -->
                 <div data-aos="zoom-in" class="col-span-2 row-span-2 relative group overflow-hidden rounded-lg">
-                    <img src="https://wikiway.com/upload/uf/fb4/rch1txzrqxf5ibm4ae05uo95ffhq671d/Saratovskiy-Krytyy-rynok.jpg" alt="Набережная Космонавтов" class="group-hover:scale-110 transition duration-500">
+                    <img src="images/nabereznaya-kosmonavtov.jpeg" alt="Набережная Космонавтов" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <h3 class="font-bold text-lg">Набережная Космонавтов</h3>
@@ -715,7 +753,7 @@
                 </div>
                 
                 <div data-aos="zoom-in" data-aos-delay="100" class="relative group overflow-hidden rounded-lg">
-                    <img src="https://www.tursar.ru/images/img424_0.jpg" alt="Консерватория" class="group-hover:scale-110 transition duration-500">
+                    <img src="images/konservatoria.jpeg" alt="Консерватория" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <p class="font-bold">Консерватория</p>
@@ -724,7 +762,7 @@
                 </div>
                 
                 <div data-aos="zoom-in" data-aos-delay="150" class="relative group overflow-hidden rounded-lg">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/%D0%A6%D0%B8%D1%80%D0%BA_%D0%B2_%D0%A1%D0%B0%D1%80%D0%B0%D1%82%D0%BE%D0%B2%D0%B5.jpg/1200px-%D0%A6%D0%B8%D1%80%D0%BA_%D0%B2_%D0%A1%D0%B0%D1%80%D0%B0%D1%82%D0%BE%D0%B2%D0%B5.jpg" alt="Цирк" class="group-hover:scale-110 transition duration-500">
+                    <img src="images/cirk.jpeg" alt="Цирк" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <p class="font-bold">Первый цирк России</p>
@@ -743,7 +781,7 @@
                 </div>
                 
                 <div data-aos="zoom-in" data-aos-delay="250" class="relative group overflow-hidden rounded-lg">
-                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop&crop=center" alt="Мост через Волгу" class="group-hover:scale-110 transition duration-500">
+                    <img src="images/dd9a72bae8da46a9d6df6ff58fcb4292.jpg" alt="Мост через Волгу" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <p class="font-bold">Саратовский мост</p>
@@ -851,7 +889,7 @@
                 <!-- Active Quest 2 -->
                 <div data-aos="fade-up" data-aos-delay="100" class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition">
                     <div class="relative h-48">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/%D0%A6%D0%B8%D1%80%D0%BA_%D0%B2_%D0%A1%D0%B0%D1%80%D0%B0%D1%82%D0%BE%D0%B2%D0%B5.jpg/1200px-%D0%A6%D0%B8%D1%80%D0%BA_%D0%B2_%D0%A1%D0%B0%D1%80%D0%B0%D1%82%D0%BE%D0%B2%D0%B5.jpg" 
+                        <img src="images/cirk.jpeg" 
                              alt="Квест По следам Никитиных">
                         <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                             <i class="fas fa-child mr-1"></i>Семейный
