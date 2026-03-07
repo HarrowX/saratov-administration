@@ -37,9 +37,12 @@ const ARModule = {
         modal.className = 'fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4';
         modal.innerHTML = `
             <div class="bg-white rounded-2xl max-w-2xl w-full p-6 relative h-160 overflow-scroll">
-                <button onclick="this.closest('.fixed').remove()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
+        <div class="sticky top-0 z-50 flex justify-end -mt-10">
+            <button onclick="this.closest('.fixed').remove()" 
+                    class="bg-white/90 backdrop-blur rounded-full w-10 h-10 flex items-center justify-center hover:bg-white transition shadow-md hover:shadow-lg">
+                <i class="fas fa-times text-gray-700"></i>
+            </button>
+        </div>
                 
                 <div class="text-center mb-6">
                     <div class="w-20 h-20 bg-linear-to-r from-purple-500 to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">

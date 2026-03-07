@@ -1,16 +1,8 @@
-@import 'tailwindcss';
-@import '@fortawesome/fontawesome-free/css/all.min.css';
-
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
-
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
-}
-
+@import "tailwindcss";
+@import '@fortawesome/fontawesome-free/css/all.css';
+/* Custom styles for Saratov 435 */
+/*кнопки по центру 
+картинку по центру */
 :root {
     --primary-blue: #3B82F6;
     --primary-purple: #9333EA;
@@ -18,6 +10,40 @@
     --text-dark: #1F2937;
     --text-light: #6B7280;
     --bg-light: #F9FAFB;
+}
+
+@theme {
+  --breakpoint-3xl: 120rem; /*1920px*/
+}
+
+@theme {
+    --breakpoint-xs: 25rem;
+    --breakpoint-3xl: 120rem;
+}
+
+@font-face {
+  font-family: "FindSansPro";
+  font-style: normal;
+  font-weight: 400;
+  src: local("FindSansPro"),
+       url("../fonts/FindSansPro-Regular.ttf") format("woff2"),
+       url("../fonts/FindSansPro-Regular.ttf") format("woff");
+}
+@font-face {
+  font-family: "Centurygothic";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Centurygothic"),
+       url("../fonts/centurygothic.ttf") format("woff2"),
+       url("../fonts/centurygothic.ttf") format("woff");
+}
+@font-face {
+  font-family: "CenturygothicBold";
+  font-style: normal;
+  font-weight: 800;
+  src: local("CenturygothicBold"),
+       url("../fonts/centurygothic_bold.ttf") format("woff2"),
+       url("../fonts/centurygothic_bold.ttf") format("woff");
 }
 
 body {
@@ -28,10 +54,18 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Merriweather', serif;
 }
-img:not(.photo){
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+h2{
+    @apply text-3xl lg:text-3xl 3xl:text-4xl font-bold mb-4 tracking-[1px]
+}
+h3{
+    @apply text-lg md:text-3xl lg:text-2xl 3xl:text-[32px] font-bold mb-1 md:mb-4 tracking-[1px]
+}
+h4{
+    @apply text-xs sm:text-xl lg:text-2xl 3xl:text-[32px] font-bold mb-1 md:mb-4 tracking-[1px]
+}
+
+img:not(.photo, .icon, .img-guid){
+    @apply w-full h-full object-cover
 }
 /* Smooth scrolling */
 html {
@@ -40,8 +74,7 @@ html {
 
 /* Navigation styles */
 .nav-link {
-  @apply text-gray-700 hover:text-blue-500;
-  position: relative;
+  @apply relative text-gray-700 hover:text-blue-500 font-['FindSansPro'];
   transition: all 0.3s ease;
 }
 .nav-link::after {
@@ -53,6 +86,9 @@ html {
     height: 2px;
     background: linear-gradient(to right, var(--primary-blue), var(--primary-purple));
     transition: width 0.3s ease;
+}
+.nav-link-active{
+    @apply relative text-blue-500 font-['FindSansPro'] border-b-2 border-b-(--primary-blue);
 }
 
 .stats-card{
@@ -71,19 +107,11 @@ html {
     width: 100%;
 }
 .text{
-    @apply text-base sm:text-xl mb-8
+    @apply text-base sm:text-xl
 }
-.title-big{
-    @apply text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold mb-4
-}
-.title3xl{
-    @apply text-2xl sm:text-3xl font-bold
-}
+
 .title{
     @apply text-2xl font-bold text-center 
-}
-.title-block{
-    @apply text-xl lg:text-2xl font-bold mb-4
 }
 
 /* Hero section animations */
@@ -104,8 +132,9 @@ html {
         transform: translateY(-10px) rotate(-3deg);
     }
 }
+    
 .hero-section-button{
-    @apply bg-linear-to-r text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-1 transition cursor-pointer
+    @apply bg-linear-to-r text-white px-3 py-2 md:px-6 md:py-4 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-1 transition cursor-pointer
 }
 
 .floating-card {
@@ -153,6 +182,52 @@ html {
     100% {
         transform: rotate(45deg) translateX(100%);
     }
+}
+
+.parent-grid {
+    @apply flex flex-col gap-4;
+}
+
+@media (min-width: 768px) {
+    .parent-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .parent-grid {
+        display: grid;
+        grid-template-columns: 32% 32% 32%;
+        justify-content: space-between;
+    }
+    
+    .child-grid {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-template-columns: subgrid;
+        grid-row: span 4;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .parent-grid .child-grid:last-child {
+        grid-column: 1 / -1;
+        max-width: 100%;
+    }
+}
+
+.child-grid p {
+    @apply pb-5 3xl:pb-11 text-gray-600;
+}
+
+.child-grid h3 {
+    @apply pb-3 3xl:pb-6 text-black text-xl lg:text-2xl font-bold;
+}
+
+.child-grid ul {
+    @apply space-y-2 text-gray-600 pb-4;
 }
 
 /* Map styles */
@@ -303,7 +378,7 @@ html {
     animation: progress-shine 2s linear infinite;
 }
 .map-button{
-    @apply px-1 justify-center lg:px-4 py-2 flex flex-col text-xs lg:text-base rounded-lg transition lg:flex-row cursor-pointer
+    @apply px-4 items-center lg:px-4 py-2 flex flex-col text-xs lg:text-base rounded-lg transition lg:flex-row cursor-pointer justify-center
 }
 
 @keyframes progress-shine {
@@ -345,20 +420,22 @@ html {
     transform: scale(1.1);
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments
 @media (max-width: 768px) {
-    h1 {
+    /* h1 {
         font-size: 2.5rem;
     }
     
     h2 {
         font-size: 2rem;
-    }
+    } */
+     /*
     
     .hero-section {
         padding: 3rem 1rem;
     }
-}
+    
+}*/
 
 /* Footer styles */
 footer {
@@ -573,8 +650,109 @@ footer .flex {
     100% { background-position: 0% 50%; }
 }
 .scroll-button{
-    @apply absolute cursor-pointer top-1/2 -translate-y-1/2 bg-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center hover:shadow-xl transition z-10
+    @apply absolute cursor-pointer top-1/2 -translate-y-1/2 bg-white shadow-lg rounded-full size-12 flex items-center justify-center hover:shadow-xl transition z-10
 }
 button{
     cursor: pointer;
 }
+
+/* Календарь */
+.calendar-day-names span {
+    @apply text-center text-black py-1 font-bold;
+    font-family: "Centurygothic"
+}
+
+.calendar-days span {
+    @apply flex items-center justify-center size-6 sm:size-9 lg:size-11 xl:size-12 3xl:size-16 rounded-full text-gray-700 hover:bg-gray-200 transition-colors cursor-pointer mx-auto;
+}
+
+.calendar-days .today {
+    @apply bg-[#A855F7] md:bg-[#352AA2] text-white font-bold hover:bg-[#64269f] md:hover:bg-[#281f82];
+}
+
+.calendar-days .calendar-days-hidden {
+    @apply invisible;
+} 
+
+/* Фильтр в секции с карточками эксткурсии */
+
+/* Карточки экскурсий */
+.gradient-button {
+    background: linear-gradient(to right, #A855F7, #2563EB);
+}
+
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+@media (max-width: 1023px) {
+    .filter::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 40px;
+        pointer-events: none;
+        opacity: 0.8;
+        border-radius: 0 16px 16px 0;
+    }
+    
+    .filter {
+        position: relative;
+    }
+}
+    
+select option {
+    background-color: white;
+    color: black;
+}
+
+select option:hover,
+select option:checked {
+    background: linear-gradient(0deg, black 0%, black 100%);
+    color: white;
+}
+
+/* Для Firefox */
+select option:checked {
+    background-color: black;
+    color: white;
+}
+@theme {
+    --breakpoint-xs: 25rem;
+    --breakpoint-3xl: 120rem;
+}
+
+/* Стили для свайпера */
+.swiper-pagination {
+    @apply bottom-0! lg:bottom-12! 3xl:bottom-0! ;
+  position: absolute;
+}
+
+.swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+  background: #f4f6f5 !important;
+}
+
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #ffffff !important;
+}
+
+/* Стили для кнопок навигации */
+.button-navigation--job-left,
+.button-navigation--job-right {
+  transition: all 0.3s ease;
+}
+
+
+
+

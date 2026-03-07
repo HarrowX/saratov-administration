@@ -362,7 +362,7 @@ function addGeolocation() {
                 mapObjects.push(userMarker);
 
                 // Центрируем карту на пользователе
-                yandexMap.setCenter([userLat, userLng], 15);
+                // yandexMap.setCenter([userLat, userLng], 15);
             },
             function(error) {
                 console.log('Не удалось получить местоположение:', error);

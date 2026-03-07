@@ -1,7 +1,8 @@
-// Main JavaScript file for Saratov 435
+import Aos from "aos";
 
+// Main JavaScript file for Saratov 435
 // Initialize AOS animations
-AOS.init({
+Aos.init({
     duration: 1000,
     once: true,
     offset: 100
@@ -26,9 +27,11 @@ const mobileMenu = document.getElementById('mobileMenu');
 const profileBtn = document.getElementById('profileBtn');
 const profileModal = document.getElementById('profileModal');
 
+
 // Mobile menu toggle
 mobileMenuBtn?.addEventListener('click', () => {
     mobileMenu.classList.toggle('hidden');
+    console.log(1123)
 });
 
 // Profile modal
@@ -41,6 +44,7 @@ function showProfileModal() {
     profileModal.querySelector('.bg-white').classList.add('modal-enter');
     updateProfileData();
 }
+
 
 function closeProfileModal() {
     profileModal.classList.add('hidden');
@@ -368,3 +372,5 @@ window.saratovApp = {
     addBonusPoints,
     userProfile
 };
+
+
