@@ -16,7 +16,7 @@ const ARModule = {
     
     async startExperience() {
         if (!this.isSupported) {
-            window.saratovApp.showNotification('AR функция доступна только в мобильном приложении', 'info');
+            window.showNotification('AR функция доступна только в мобильном приложении', 'info');
             this.showARDemo();
             return;
         }
@@ -94,7 +94,7 @@ const ARModule = {
     },
     
     switchARMode(mode) {
-        window.saratovApp.showNotification(`AR режим "${mode}" будет доступен в мобильном приложении`, 'info');
+        window.showNotification(`AR режим "${mode}" будет доступен в мобильном приложении`, 'info');
     },
     
     showARInterface(stream) {
@@ -391,7 +391,7 @@ const QuestModule = {
     
     showQRScanner(qrCode) {
         // Simulate QR scanning
-        window.saratovApp.showNotification('QR-сканер откроется в мобильном приложении', 'info');
+        window.showNotification('QR-сканер откроется в мобильном приложении', 'info');
         
         // Simulate successful scan after delay
         setTimeout(() => {
@@ -406,8 +406,8 @@ const QuestModule = {
         if (point && !this.completedPoints.includes(point.id)) {
             this.completedPoints.push(point.id);
             
-            window.saratovApp.showNotification(`Точка "${point.name}" пройдена! +100 баллов`, 'success');
-            window.saratovApp.addBonusPoints(100);
+            window.showNotification(`Точка "${point.name}" пройдена! +100 баллов`, 'success');
+            window.addBonusPoints(100);
             
             // Check if quest completed
             if (this.completedPoints.length === this.currentQuest.points.length) {
@@ -417,7 +417,7 @@ const QuestModule = {
     },
     
     completeQuest() {
-        window.saratovApp.unlockAchievement(
+        window.unlockAchievement(
             `quest_${this.currentQuest.id}`,
             `Квест "${this.currentQuest.name}" завершен!`,
             this.currentQuest.reward
@@ -466,12 +466,12 @@ const QuestModule = {
             });
         }
         
-        window.saratovApp.showNotification('Точки квеста отмечены на карте', 'success');
+        window.showNotification('Точки квеста отмечены на карте', 'success');
     },
     
     startQuestTimer(questId) {
         this.closeQuest();
-        window.saratovApp.showNotification('Квест начат! Удачи в поисках!', 'success');
+        window.showNotification('Квест начат! Удачи в поисках!', 'success');
     },
     
     closeQuest() {
@@ -507,7 +507,7 @@ const VoiceModule = {
     
     startListening() {
         if (!this.recognition) {
-            window.saratovApp.showNotification('Голосовой ввод не поддерживается в вашем браузере', 'warning');
+            window.showNotification('Голосовой ввод не поддерживается в вашем браузере', 'warning');
             return;
         }
         
@@ -515,7 +515,7 @@ const VoiceModule = {
         
         this.isListening = true;
         this.recognition.start();
-        window.saratovApp.showNotification('Говорите...', 'info');
+        window.showNotification('Говорите...', 'info');
     },
     
     stopListening() {
@@ -584,6 +584,12 @@ function voiceInput() {
 function startQuest(questId) {
     QuestModule.startQuest(questId);
 }
+
+window.startARExperience = startARExperience;
+window.startQuest = startQuest;
+window.QuestModule = QuestModule;
+window.ARModule = ARModule;
+window.VoiceModule = VoiceModule;
 
 // Add animations CSS
 const style = document.createElement('style');

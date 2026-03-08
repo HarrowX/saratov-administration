@@ -246,9 +246,7 @@ function addLandmarksToYandexMap() {
     console.log('Добавление маркеров на карту...');
 
     saratovLandmarks.forEach((landmark, index) => {
-        try {
-            console.log(`Добавляем маркер: ${landmark.name}, изображение: ${landmark.image}`);
-            
+        try {            
             // Создаем маркер с простой иконкой
             const marker = new ymaps.Placemark(
                 [landmark.lat, landmark.lng],

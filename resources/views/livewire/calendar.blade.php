@@ -8,7 +8,7 @@
         <div class="flex flex-row justify-center font-['Centurygothic'] tracking-widest">
             <div class="w-36 sm:w-50 lg:w-70 xl:w-75 3xl:w-88">
                 <div class="relative w-full rounded-l-xl lg:rounded-l-4xl overflow-hidden shadow-xl">
-                    <img src="image/f3429762a6cc1d6808382c4abeff79f593da9f61.jpg" class="w-full h-full object-cover">
+                    <img src="/images/f3429762a6cc1d6808382c4abeff79f593da9f61.jpg" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black/50"></div>
                     <div class="absolute top-0 right-0 px-1 py-0.5 lg:px-2 lg:py-1 m-2 text-[#FFFFFFB2] border-[#FFFFFF66] border xl:border-2 text-[6px] sm:text-xs lg:text-base rounded-sm">СЕГОДНЯ</div>
                     <div class="absolute inset-0 flex flex-col items-center justify-center text-white">
@@ -22,11 +22,11 @@
                 <div class="calendar bg-white px-1 sm:px-3 pt-4 lg:px-5 lg:pt-7 3xl:px-7 3xl:pt-8">
                     <div class="calendar-header flex items-center justify-between mb-1 sm:mb-4 lg:mb-8">
                         <button type="button" class="calendar-btn size-3 lg:size-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors" id="prev-btn">
-                            <img src="image/Vector.svg" alt="Предыдущий месяц" class="icon size-2 lg:size-4"> 
+                            <img src="/images/Vector.svg" alt="Предыдущий месяц" class="icon size-2 lg:size-4"> 
                         </button>
                         <span id="month-year" class="text-[9px] sm:text-sm lg:text-xl 3xl:text-2xl font-semibold text-gray-800"></span>
                         <button type="button" class="calendar-btn size-3 lg:size-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors" id="next-btn">
-                            <img src="image/Vector.svg" alt="Следующий месяц" class="icon size-2 lg:size-4 transform rotate-180">
+                            <img src="/images/Vector.svg" alt="Следующий месяц" class="icon size-2 lg:size-4 transform rotate-180">
                         </button>
                     </div>
                     

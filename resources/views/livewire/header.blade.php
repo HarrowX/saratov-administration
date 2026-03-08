@@ -2,19 +2,19 @@
     <div class="max-w-6xl 3xl:max-w-427 mx-auto px-4 sm:px-10">
         <div class="flex justify-between items-center h-20 3xl:h-24">
             <div class="flex items-center">
-                <a href="#" class="flex items-center space-x-3">
-                    <img src="images/Photoroom 1.png" alt="Логотип" class="icon">
+                <a href="{{ route('index') }}" class="flex items-center space-x-3">
+                    <img src="/images/Photoroom 1.png" alt="Логотип" class="icon">
                     <span class="md:text-base lg:text-xl 3xl:text-2xl text-black font-['FindSansPro']">Саратов</span>
                 </a>
             </div>
             
             <div class="hidden 3xl:flex items-center md:space-x-4 lg:space-x-5 3xl:space-x-6 transition text-xs 3xl:text-sm">
-                <a href="index.html" class="nav-link ">Главная</a>
-                <a href="excurtions.html" class="nav-link ">Туры и экскурсии</a>
-                <a href="guided-tours.html" class="nav-link">Экскурсоводы</a>
-                <a href="location.html" class="nav-link">Заведения</a>
-                <a href="attractions.html" class="nav-link">Достопримечательности</a>
-                <a href="housing.html" class="nav-link">Где остановиться</a> 
+                <a href="{{ route('index') }}" class="{{ request()->is('/') ? "nav-link-active nav-link" : "nav-link" }}">Главная</a>
+                <a href="{{ route('all-excurtions') }}" class="{{ request()->is('excurtions*') ? "nav-link-active nav-link" : "nav-link" }}">Туры и экскурсии</a>
+                <a href="{{ route('all-guided-tours') }}" class="{{ request()->is('guided-tours*') ? "nav-link-active nav-link" : "nav-link" }}">Экскурсоводы</a>
+                <a href="{{ route('all-places') }}" class="{{ request()->is('places*') ? "nav-link-active nav-link" : "nav-link" }}">Заведения</a>
+                <a href="{{ route('all-attractions') }}" class="{{ request()->is('attractions*') ? "nav-link-active nav-link" : "nav-link" }}">Достопримечательности</a>
+                <a href="{{ route('all-hotels') }}" class="{{ request()->is('hotels*') ? "nav-link-active nav-link" : "nav-link" }}">Где остановиться</a> 
             </div>
 
             <div class="flex items-center space-x-8">
@@ -22,10 +22,10 @@
                     <i class="fas fa-download mr-3"></i>Приложение
                 </button>
                 <button id="" class="">
-                    <img src="images/image 21.svg" alt="поиск" class="icon size-7 3xl:size-11">
+                    <img src="/images/image 21.svg" alt="поиск" class="icon size-7 3xl:size-11">
                 </button>
                 <button id="profileBtn" class="relative cursor-pointer">
-                    <img src="images/image 18.svg" alt="мой профиль" class="icon size-6 3xl:size-10">
+                    <img src="/images/image 18.svg" alt="мой профиль" class="icon size-6 3xl:size-10">
                     <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center achievement-count">0</span>
                 </button>
                 <div class="relative">
@@ -36,36 +36,36 @@
                     <!-- Mobile menu -->
                     <div id="mobileMenu" class="hidden fixed md:absolute inset-x-0 top-20 md:top-13 md:right-full w-full md:w-140 bg-white z-50 transition-all duration-300 ease-in-out md:-translate-x-127 rounded-b-3xl">
                         <div class="px-6 py-5 space-y-5 text-xl 3xl:text-2xl">
-                            <a href="#home" class="nav-link-active flex items-center gap-5 px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
+                            <a href="{{ route('index') }}" class="{{ request()->is('/') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-5 px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
                                 <i class="fa-solid fa-house w-5 text-gray-700 transition-colors"></i>
                                 <span>Главная</span>
                             </a>
                             
-                            <a href="excurtions.html" class="nav-link flex items-center gap-5 px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-linear-to-r hover:from-green-50 hover:to-teal-50/50 rounded-xl transition-all duration-200 font-medium group">
+                            <a href="{{ route('all-excurtions') }}" class="{{ request()->is('excurtions*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-5 px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-linear-to-r hover:from-green-50 hover:to-teal-50/50 rounded-xl transition-all duration-200 font-medium group">
                                 <i class="fa-solid fa-map w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
                                 <span>Туры и экскурсии</span>
                                 <span class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">→</span>
                             </a>
                             
-                            <a href="guided-tours.html" class="nav-link flex items-center gap-5 px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-linear-to-r hover:from-green-50 hover:to-teal-50/50 rounded-xl transition-all duration-200 font-medium group">
+                            <a href="{{ route('all-guided-tours') }}" class="{{ request()->is('guided-tours*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-5 px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-linear-to-r hover:from-green-50 hover:to-teal-50/50 rounded-xl transition-all duration-200 font-medium group">
                                 <i class="fa-solid fa-users w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
                                 <span>Экскурсоводы</span>
                                 <span class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">→</span>
                             </a>
                             
-                            <a href="location.html" class="nav-link flex items-center gap-5 px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-linear-to-r hover:from-green-50 hover:to-teal-50/50 rounded-xl transition-all duration-200 font-medium group">
+                            <a href="{{ route('all-places') }}" class="{{ request()->is('places*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-5 px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-linear-to-r hover:from-green-50 hover:to-teal-50/50 rounded-xl transition-all duration-200 font-medium group">
                                 <i class="fa-solid fa-utensils w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
                                 <span>Заведения</span>
                                 <span class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">→</span>
                             </a>
                             
-                            <a href="attractions.html" class="nav-link flex items-center gap-5 px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-linear-to-r hover:from-green-50 hover:to-teal-50/50 rounded-xl transition-all duration-200 font-medium group">
+                            <a href="{{ route('all-attractions') }}" class="{{ request()->is('attractions*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-5 px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-linear-to-r hover:from-green-50 hover:to-teal-50/50 rounded-xl transition-all duration-200 font-medium group">
                                 <i class="fa-solid fa-landmark w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
                                 <span>Достопримечательности</span>
                                 <span class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">→</span>
                             </a>
                             
-                            <a href="housing.html" class="nav-link flex items-center gap-5 px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-linear-to-r hover:from-green-50 hover:to-teal-50/50 rounded-xl transition-all duration-200 font-medium group">
+                            <a href="{{ route('all-hotels') }}" class="{{ request()->is('hotels*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-5 px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-linear-to-r hover:from-green-50 hover:to-teal-50/50 rounded-xl transition-all duration-200 font-medium group">
                                 <i class="fa-solid fa-hotel w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
                                 <span>Где остановиться</span>
                                 <span class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">→</span>

@@ -288,7 +288,7 @@ function saveCoupon(offerId, partnerName, offerTitle) {
     if (!savedCoupons.includes(offerId)) {
         savedCoupons.push(offerId);
         localStorage.setItem('savedCoupons', JSON.stringify(savedCoupons));
-        window.saratovApp.showNotification(`Купон "${offerTitle}" сохранен`, 'success');
+        window.showNotification(`Купон "${offerTitle}" сохранен`, 'success');
         
         // Update button
         event.target.classList.remove('bg-blue-500');
@@ -358,11 +358,11 @@ function markCouponAsUsed(offerId) {
         
         // Achievement check
         if (usedCoupons.length === 5) {
-            window.saratovApp.unlockAchievement('coupon_hunter', 'Охотник за скидками', 'Использовано 5 купонов');
+            window.unlockAchievement('coupon_hunter', 'Охотник за скидками', 'Использовано 5 купонов');
         }
         
-        window.saratovApp.showNotification('Купон успешно использован!', 'success');
-        window.saratovApp.addBonusPoints(20);
+        window.showNotification('Купон успешно использован!', 'success');
+        window.addBonusPoints(20);
         
         // Close modal
         document.querySelector('.fixed').remove();
@@ -463,3 +463,9 @@ window.businessModule = {
     useCoupon,
     businessPartners
 };
+
+window.showAllOffers = showAllOffers;
+window.showMyCoupons = showMyCoupons;
+window.saveCoupon = saveCoupon;
+window.useCoupon = useCoupon;
+window.businessPartners = businessPartners;

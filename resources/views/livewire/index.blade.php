@@ -98,7 +98,7 @@
                         <h1 class="text-gray-900 font-bold text-xl mb-4">Сканируйте QR-код</h1>
                         <!-- QR Code image -->
                         <div class="w-64 h-64 rounded-lg overflow-hidden mb-4">
-                            <img src="images/qrprila.jpg" alt="QR-код приложения">
+                            <img src="/images/qrprila.jpg" alt="QR-код приложения">
                         </div>
                         <p class="text-gray-600">Наведите камеру телефона</p>
                     </div>
@@ -155,7 +155,7 @@
                 <div data-aos="fade-up" data-aos-delay="300" class="child-grid bg-linear-to-br from-green-50 to-green-100 rounded-xl p-5 3xl:p-8 hover:shadow-xl transition">
                     <div class="size-16 bg-green-500 rounded-lg flex items-center justify-center mb-6">
                         <div class="w-7.5 h-7.5">
-                            <img src="images/streamline-ultimate_concert-dj-bold.png" alt="иконка">
+                            <img src="/images/streamline-ultimate_concert-dj-bold.png" alt="иконка">
                         </div>
                     </div>
                     <h3>Узнавай первым про мероприятия в городе</h3>
@@ -187,7 +187,7 @@
                     <!-- Карточка 1  -->
                     <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
                         <div class="relative h-48 overflow-hidden">
-                            <img src="images/img424_0.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="/images/img424_0.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
                             <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
                                 <i class="fas fa-star text-yellow-500"></i>
@@ -215,7 +215,7 @@
                     <!-- Карточка 2  -->
                     <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
                         <div class="relative h-48 overflow-hidden">
-                            <img src="images/4fe8539f70401070351fe8228c84deaf619dded8.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="/images/4fe8539f70401070351fe8228c84deaf619dded8.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
                             <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
                                 <i class="fas fa-star text-yellow-500"></i>
@@ -243,7 +243,7 @@
                     <!-- Карточка 3  -->
                     <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
                         <div class="relative h-48 overflow-hidden">
-                            <img src="images/photo_2022-11-14_16-25-54.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="/images/photo_2022-11-14_16-25-54.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
                             <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
                                 <i class="fas fa-star text-yellow-500"></i>
@@ -271,7 +271,7 @@
                     <!-- Карточка 4  -->
                     <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
                         <div class="relative h-48 overflow-hidden">
-                            <img src="images/Саратов легендарный и мистический.png" alt="Саратовский мост" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="/images/Саратов легендарный и мистический.png" alt="Саратовский мост" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
                             <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
                                 <i class="fas fa-star text-yellow-500"></i>
@@ -299,7 +299,7 @@
                     <!-- Карточка 5  -->
                     <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
                         <div class="relative h-48 overflow-hidden">
-                            <img src="images/saratovskiy-teatr-operyi-i-baleta.jpg" alt="Театр оперы и балета" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="/images/saratovskiy-teatr-operyi-i-baleta.jpg" alt="Театр оперы и балета" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
                             <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
                                 <i class="fas fa-star text-yellow-500"></i>
@@ -327,7 +327,7 @@
                     <!-- Карточка 6  -->
                     <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
                         <div class="relative h-48 overflow-hidden">
-                            <img src="images/limonariy.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="/images/limonariy.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
                             <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
                                 <i class="fas fa-star text-yellow-500"></i>
@@ -355,7 +355,7 @@
                     <!-- Карточка 7  -->
                     <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
                         <div class="relative h-48 overflow-hidden">
-                            <img src="images/scale_1200 (1).jpeg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="/images/scale_1200 (1).jpeg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
                             <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
                                 <i class="fas fa-star text-yellow-500"></i>
@@ -382,7 +382,7 @@
                     <!-- Карточка 8  -->
                     <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
                         <div class="relative h-48 overflow-hidden">
-                            <img src="images/scale_1200 (2).jpeg" alt="Городской парк" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="/images/scale_1200 (2).jpeg" alt="Городской парк" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
                             <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
                                 <i class="fas fa-star text-yellow-500"></i>
@@ -410,7 +410,7 @@
                     <!-- Карточка 9  -->
                     <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
                         <div class="relative h-48 overflow-hidden">
-                            <img src="images/f621dd6a9c428d4e949c4a00ebcc57d4.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="/images/f621dd6a9c428d4e949c4a00ebcc57d4.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
                             <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
                                 <i class="fas fa-star text-yellow-500"></i>
@@ -438,7 +438,7 @@
                     <!-- Карточка 10  -->
                     <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
                         <div class="relative h-48 overflow-hidden">
-                            <img src="images/07458c68242fb8524be00a45a7df919ea6e65e78.png" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="/images/07458c68242fb8524be00a45a7df919ea6e65e78.png" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
                             <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
                                 <i class="fas fa-star text-yellow-500"></i>
@@ -466,7 +466,7 @@
                     <!-- Карточка 11  -->
                     <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
                         <div class="relative h-48 overflow-hidden">
-                            <img src="images/img441_0.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="/images/img441_0.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
                             <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
                                 <i class="fas fa-star text-yellow-500"></i>
@@ -581,7 +581,7 @@
         <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4">
             <div class="flex flex-col items-center mb-12" data-aos="fade-up">
                 <span class="flex justify-center gap-2 bg-linear-to-r from-purple-600 to-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-4">
-                     <img src="images/Symbol.svg" alt="Иконка" class="icon">НОВАЯ ФУНКЦИЯ
+                     <img src="/images/Symbol.svg" alt="Иконка" class="icon">НОВАЯ ФУНКЦИЯ
                 </span>
                 <h2>Путешествие во времени с AR</h2>
                 <p class="text text-gray-600">Увидьте, как выглядел Саратов 100 лет назад через камеру телефона</p>
@@ -648,95 +648,7 @@
         </div>
     </section>
 
-    <!-- AI City Guide Section (Enhanced!) -->
-    <section id="ai-guide" class="bg-white">
-        <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10">
-            <div class="text-center mb-12" data-aos="fade-up">
-                <span class="bg-linear-to-r from-green-600 to-teal-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
-                    <i class="fas fa-robot mr-2"></i>AI АССИСТЕНТ
-                </span>
-                <h2>Ваш персональный гид Сара</h2>
-                <p class="text text-gray-600 content-center">Интерактивный помощник, который подберет идеальный маршрут именно для вас</p>
-            </div>
-            
-            <div class="max-w-4xl mx-auto">
-                <div class="bg-linear-to-br from-green-50 to-teal-50 rounded-2xl p-4 md:p-8" data-aos="zoom-in">
-                    <!-- Chat interface -->
-                    <div class="bg-white flex flex-col rounded-xl shadow-inner h-125 p-2 md:p-6 mb-6" id="chatContainer">
-                        <div class="flex-1 overflow-y-auto min-h-0 flex flex-col-reverse">
-                            <div class="flex flex-col space-y-4 w-full px-2" id="chat-messages">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Input area -->
-                    <div class="flex space-x-3">
-                        <input type="text" id="aiChatInput" placeholder="Напишите сообщение..." 
-                               onkeypress="if(event.key === 'Enter') { handleChatMessage(this.value); this.value=''; }"
-                               class="flex-1 w-20 text-sm lg:text-base py-2 px-2 md:px-4 md:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500">
-                        <button onclick="const input = document.getElementById('aiChatInput'); handleChatMessage(input.value); input.value='';" class="bg-linear-to-r from-green-500 to-teal-600 text-white px-2 py-3 md:px-6 md:py-3 rounded-lg hover:shadow-lg transition">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                        <button onclick="voiceInput()" class="bg-gray-200 text-gray-700 px-2 py-3 md:px-6 md:py-3 rounded-lg hover:bg-gray-300 transition">
-                            <i class="fas fa-microphone"></i>
-                        </button>
-                    </div>
-                    
-                    <!-- Quick actions -->
-                    <div class="mt-4 flex flex-wrap gap-2">
-                        <button onclick="handleChatMessage('start')" class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm hover:bg-blue-200 transition">
-                            🚀 Поехали!
-                        </button>
-                        <button onclick="handleChatMessage('где поесть')" class="bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm hover:bg-orange-200 transition">
-                            🍽️ Рестораны и кафе
-                        </button>
-                        <button onclick="handleChatMessage('парки')" class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm hover:bg-green-200 transition">
-                            🌳 Парки и прогулки
-                        </button>
-                        <button onclick="handleChatMessage('музеи')" class="bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm hover:bg-purple-200 transition">
-                            🏛️ Музеи и культура
-                        </button>
-                        <button onclick="handleChatMessage('погода')" class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm hover:bg-yellow-200 transition">
-                            🌤️ Погода
-                        </button>
-                        <button onclick="handleChatMessage('события')" class="bg-pink-100 text-pink-700 px-4 py-2 rounded-full text-sm hover:bg-pink-200 transition">
-                            🎭 События
-                        </button>
-                        <button onclick="handleChatMessage('история')" class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full text-sm hover:bg-indigo-200 transition">
-                            📚 История города
-                        </button>
-                        <button onclick="handleChatMessage('шопинг')" class="bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm hover:bg-red-200 transition">
-                            🛍️ Шопинг
-                        </button>
-                    </div>
-                    
-                    <!-- AI Features -->
-                    <div class="grid md:grid-cols-4 gap-4 mt-8">
-                        <div class="bg-white rounded-lg p-4 text-center">
-                            <i class="fas fa-comments text-3xl text-blue-500 mb-2"></i>
-                            <p class="font-semibold">Диалог</p>
-                            <p class="text-xs text-gray-600">Интерактивное общение</p>
-                        </div>
-                        <div class="bg-white rounded-lg p-4 text-center">
-                            <i class="fas fa-user-cog text-3xl text-green-500 mb-2"></i>
-                            <p class="font-semibold">Персонализация</p>
-                            <p class="text-xs text-gray-600">Учет ваших предпочтений</p>
-                        </div>
-                        <div class="bg-white rounded-lg p-4 text-center">
-                            <i class="fas fa-map-marked text-3xl text-purple-500 mb-2"></i>
-                            <p class="font-semibold">50+ мест</p>
-                            <p class="text-xs text-gray-600">База знаний о городе</p>
-                        </div>
-                        <div class="bg-white rounded-lg p-4 text-center">
-                            <i class="fas fa-sync text-3xl text-orange-500 mb-2"></i>
-                            <p class="font-semibold">Обновления</p>
-                            <p class="text-xs text-gray-600">Актуальная информация</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @livewire('sara-ai')
 
     <!-- Photo Gallery Section -->
     <section id="gallery-section" class="py-10 md:py-25.5 bg-white">
@@ -751,8 +663,8 @@
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <!-- Row 1 -->
-                <div data-aos="zoom-in" class="col-span-2 row-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="images/Saratovskiy-Krytyy-rynok.jpg"  data-caption="Набережная Космонавтов - любимое место отдыха горожан">
-                    <img src="images/Saratovskiy-Krytyy-rynok.jpg" alt="Набережная Космонавтов" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" class="col-span-2 row-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/Saratovskiy-Krytyy-rynok.jpg"  data-caption="Набережная Космонавтов - любимое место отдыха горожан">
+                    <img src="/images/Saratovskiy-Krytyy-rynok.jpg" alt="Набережная Космонавтов" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <h1 class="font-bold text-lg">Набережная Космонавтов</h1>
@@ -761,8 +673,8 @@
                     </div>
                 </div>
                 
-                <div data-aos="zoom-in" data-aos-delay="100" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="images/img424_0.jpg" data-caption="Консерватория">
-                    <img src="images/img424_0.jpg" alt="Консерватория" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="100" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/img424_0.jpg" data-caption="Консерватория">
+                    <img src="/images/img424_0.jpg" alt="Консерватория" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <h1 class="font-bold">Консерватория</h1>
@@ -770,8 +682,8 @@
                     </div>
                 </div>
                 
-                <div data-aos="zoom-in" data-aos-delay="150" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="images/07458c68242fb8524be00a45a7df919ea6e65e78.png" data-caption="Первый цирк России">
-                    <img src="images/07458c68242fb8524be00a45a7df919ea6e65e78.png" alt="Цирк" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="150" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/07458c68242fb8524be00a45a7df919ea6e65e78.png" data-caption="Первый цирк России">
+                    <img src="/images/07458c68242fb8524be00a45a7df919ea6e65e78.png" alt="Цирк" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <h1 class="font-bold">Первый цирк России</h1>
@@ -780,8 +692,8 @@
                 </div>
                 
                 <!-- Row 2 -->
-                <div data-aos="zoom-in" data-aos-delay="200" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="images/photo_2022-11-14_16-25-54.jpg"  data-caption="Парк Победы">
-                    <img src="images/photo_2022-11-14_16-25-54.jpg" alt="Парк Победы" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="200" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/photo_2022-11-14_16-25-54.jpg"  data-caption="Парк Победы">
+                    <img src="/images/photo_2022-11-14_16-25-54.jpg" alt="Парк Победы" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <h1 class="font-bold">Парк Победы</h1>
@@ -789,8 +701,8 @@
                     </div>
                 </div>
                 
-                <div data-aos="zoom-in" data-aos-delay="250" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="images/8356339c970afc2d070e74f08f8a05505a083931.png" data-caption="Саратовский мост">
-                    <img src="images/8356339c970afc2d070e74f08f8a05505a083931.png" alt="Мост через Волгу" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="250" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/8356339c970afc2d070e74f08f8a05505a083931.png" data-caption="Саратовский мост">
+                    <img src="/images/8356339c970afc2d070e74f08f8a05505a083931.png" alt="Мост через Волгу" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <h1 class="font-bold">Саратовский мост</h1>
@@ -798,8 +710,8 @@
                     </div>
                 </div>
                 
-                <div data-aos="zoom-in" data-aos-delay="300" class="col-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="images/Saratov-3.jpg" data-caption="Веречний саратов">
-                    <img src="images/Saratov-3.jpg" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="300" class="col-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/Saratov-3.jpg" data-caption="Веречний саратов">
+                    <img src="/images/Saratov-3.jpg" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-lineart-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <h1 class="font-bold text-lg">Вечерний Саратов</h1>
@@ -809,8 +721,8 @@
                 </div>
                 
                 <!-- Row 3 -->
-                <div data-aos="zoom-in" data-aos-delay="350" class="col-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="images/ato58r5xh7sog4k40swwg0ksw.jpg" data-caption="Архитекртурное наследие">
-                    <img src="images/ato58r5xh7sog4k40swwg0ksw.jpg" alt="Консерватория фасад" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="350" class="col-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/ato58r5xh7sog4k40swwg0ksw.jpg" data-caption="Архитекртурное наследие">
+                    <img src="/images/ato58r5xh7sog4k40swwg0ksw.jpg" alt="Консерватория фасад" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <h1 class="font-bold text-lg">Архитектурное наследие</h1>
@@ -819,8 +731,8 @@
                     </div>
                 </div>
                 
-                <div data-aos="zoom-in" data-aos-delay="400" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="images/6whi7saljzocs40kwoo8okksg.jpg" data-caption="Великая Волга">
-                    <img src="images/6whi7saljzocs40kwoo8okksg.jpg" alt="Волга" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="400" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/6whi7saljzocs40kwoo8okksg.jpg" data-caption="Великая Волга">
+                    <img src="/images/6whi7saljzocs40kwoo8okksg.jpg" alt="Волга" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <h1 class="font-bold">Великая Волга</h1>
@@ -836,16 +748,16 @@
                         </div>
                     </div>
                 </div>
-                <div data-aos="zoom-in" data-aos-delay="450" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="images/d6e40fb855b389b4827ce14c2652cfc3c5295f12.png" data-caption="Церковь иконы Божией Матери">
-                    <img src="images/image 3.png" alt="Церковь иконы Божией Матери" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="450" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/d6e40fb855b389b4827ce14c2652cfc3c5295f12.png" data-caption="Церковь иконы Божией Матери">
+                    <img src="/images/image 3.png" alt="Церковь иконы Божией Матери" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <h1 class="font-bold">Церковь иконы Божией Матери</h1>
                         </div>
                     </div>
                 </div>
-                <div data-aos="zoom-in" data-aos-delay="450" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.png" data-caption="Набережная космонавтов">
-                    <img src="images/image 22.png" alt="Набережная космонавтов" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="450" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.png" data-caption="Набережная космонавтов">
+                    <img src="/images/image 22.png" alt="Набережная космонавтов" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <h1 class="font-bold">Набережная космонавтов</h1>
@@ -863,25 +775,25 @@
             </div>
             <!-- Скрытая fancybox галерея -->
             <div style="display: none;">
-                <a href="images/Saratovskiy-Krytyy-rynok.jpg" data-fancybox="full-gallery" data-caption="Набережная Космонавтов - любимое место отдыха горожан"></a>
-                <a href="images/img424_0.jpg" data-fancybox="full-gallery" data-caption="Консерватория"></a>
-                <a href="images/07458c68242fb8524be00a45a7df919ea6e65e78.png" data-fancybox="full-gallery"
+                <a href="/images/Saratovskiy-Krytyy-rynok.jpg" data-fancybox="full-gallery" data-caption="Набережная Космонавтов - любимое место отдыха горожан"></a>
+                <a href="/images/img424_0.jpg" data-fancybox="full-gallery" data-caption="Консерватория"></a>
+                <a href="/images/07458c68242fb8524be00a45a7df919ea6e65e78.png" data-fancybox="full-gallery"
                 data-caption="Первый цирк России"></a>
-                <a href="images/photo_2022-11-14_16-25-54.jpg" data-fancybox="full-gallery"
+                <a href="/images/photo_2022-11-14_16-25-54.jpg" data-fancybox="full-gallery"
                 data-caption="Парк Победы"></a>
-                <a href="images/8356339c970afc2d070e74f08f8a05505a083931.png" data-fancybox="full-gallery"
+                <a href="/images/8356339c970afc2d070e74f08f8a05505a083931.png" data-fancybox="full-gallery"
                 data-caption="Саратовский мост"></a>
-                <a href="images/Saratov-3.jpg" data-fancybox="full-gallery"
+                <a href="/images/Saratov-3.jpg" data-fancybox="full-gallery"
                 data-caption="Вечерний Саратов"></a>
-                <a href="images/ato58r5xh7sog4k40swwg0ksw.jpg" data-fancybox="full-gallery"
+                <a href="/images/ato58r5xh7sog4k40swwg0ksw.jpg" data-fancybox="full-gallery"
                 data-caption="Архитектурное наследие"></a>
-                <a href="images/6whi7saljzocs40kwoo8okksg.jpg" data-fancybox="full-gallery"
+                <a href="/images/6whi7saljzocs40kwoo8okksg.jpg" data-fancybox="full-gallery"
                 data-caption="Великая волга"></a>
                 <a href="https://fs.tonkosti.ru/30/ls/30lsy6fot9s0o04g4wow8wkgc.jpg" data-fancybox="full-gallery"
                 data-caption="Летний Саратов"></a>
-                <a href="images/d6e40fb855b389b4827ce14c2652cfc3c5295f12.png" data-fancybox="full-gallery"
+                <a href="/images/d6e40fb855b389b4827ce14c2652cfc3c5295f12.png" data-fancybox="full-gallery"
                 data-caption="Церковь иконы Божией Матери"></a>
-                <a href="images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.png" data-fancybox="full-gallery"
+                <a href="/images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.png" data-fancybox="full-gallery"
                 data-caption="Набережная космонавтов"></a>
             </div>
         </div>
@@ -902,7 +814,7 @@
                 <!-- Active Quest 1 -->
                 <div data-aos="fade-up" class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition flex flex-col h-full">
                     <div class="relative h-48 shrink-0">
-                        <img src="images/photo_2022-11-14_16-25-54.jpg" 
+                        <img src="/images/photo_2022-11-14_16-25-54.jpg" 
                             alt="Квест Тайны старого города" class="w-full h-full object-cover">
                         <div class="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                             <i class="fas fa-fire mr-1"></i>Активен
@@ -939,7 +851,7 @@
                 <!-- Active Quest 2 -->
                 <div data-aos="fade-up" data-aos-delay="100" class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition flex flex-col h-full">
                     <div class="relative h-48 shrink-0">
-                        <img src="images/07458c68242fb8524be00a45a7df919ea6e65e78.png" 
+                        <img src="/images/07458c68242fb8524be00a45a7df919ea6e65e78.png" 
                             alt="Квест По следам Никитиных" class="w-full h-full object-cover">
                         <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                             <i class="fas fa-child mr-1"></i>Семейный
@@ -976,7 +888,7 @@
                 <!-- Active Quest 3 -->
                 <div data-aos="fade-up" data-aos-delay="200" class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition flex flex-col h-full">
                     <div class="relative h-48 shrink-0">
-                        <img src="images/Саратов легендарный и мистический.png" 
+                        <img src="/images/Саратов легендарный и мистический.png" 
                             alt="Квест Космическая одиссея" class="w-full h-full object-cover">
                         <div class="absolute top-4 left-4 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                             <i class="fas fa-rocket mr-1"></i>Космос

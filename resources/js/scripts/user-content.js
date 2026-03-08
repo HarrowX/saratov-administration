@@ -29,7 +29,7 @@ const UserContent = {
         }
         
         // Send notification
-        window.saratovApp?.showNotification('Место успешно добавлено! Модераторы проверят его в течение 24 часов', 'success');
+        window?.showNotification('Место успешно добавлено! Модераторы проверят его в течение 24 часов', 'success');
         
         return place;
     },
@@ -85,7 +85,7 @@ const UserContent = {
                 likesElement.textContent = place.likes;
             }
             
-            window.saratovApp?.showNotification('♥️ Спасибо за лайк!', 'success');
+            window?.showNotification('♥️ Спасибо за лайк!', 'success');
         }
     },
     
@@ -122,7 +122,7 @@ const UserContent = {
         this.userRoutes.push(route);
         localStorage.setItem('userRoutes', JSON.stringify(this.userRoutes));
         
-        window.saratovApp?.showNotification('Маршрут создан и опубликован!', 'success');
+        window?.showNotification('Маршрут создан и опубликован!', 'success');
         return route;
     },
     

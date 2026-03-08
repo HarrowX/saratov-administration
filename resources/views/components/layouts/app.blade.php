@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="icon" type="images/jpeg" href="images/gerb-goroda-saratov.jpg">
-        <link rel="shortcut icon" type="images/jpeg" href="images/gerb-goroda-saratov.jpg">
+        <link rel="icon" type="image/jpeg" href="/images/gerb-goroda-saratov.jpg">
+        <link rel="shortcut icon" type="image/jpeg" href="/images/gerb-goroda-saratov.jpg">
         <link rel="apple-touch-icon" href="images/gerb-goroda-saratov.jpg">
 
         <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
@@ -51,7 +51,7 @@
                             <p class="text-gray-600 mb-6">Получите полный доступ ко всем функциям</p>
                             
                             <div class="w-48 h-48 mx-auto rounded-lg overflow-hidden mb-4">
-                                <img src="image/qrprila.jpg" alt="QR-код для скачивания">
+                                <img src="images/qrprila.jpg" alt="QR-код для скачивания">
                             </div>
                             
                             <div class="flex flex-col space-y-3">

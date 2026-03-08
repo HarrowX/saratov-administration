@@ -307,12 +307,12 @@ function filterMarkers(category) {
 function visitPlace(placeId) {
     const place = landmarks.find(l => l.id === placeId);
     if (place) {
-        const visited = window.saratovApp.checkVisitedPlace(placeId);
+        const visited = window.checkVisitedPlace(placeId);
         if (visited) {
-            window.saratovApp.showNotification(`Вы посетили "${place.name}"! +10 баллов`, 'success');
-            window.saratovApp.addBonusPoints(10);
+            window.showNotification(`Вы посетили "${place.name}"! +10 баллов`, 'success');
+            window.addBonusPoints(10);
         } else {
-            window.saratovApp.showNotification('Вы уже посещали это место', 'info');
+            window.showNotification('Вы уже посещали это место', 'info');
         }
     }
 }
@@ -324,7 +324,7 @@ function showRoute(lat, lng) {
         const url = `https://www.openstreetmap.org/directions?from=${userLocation.lat},${userLocation.lng}&to=${lat},${lng}`;
         window.open(url, '_blank');
     } else {
-        window.saratovApp.showNotification('Для построения маршрута необходимо разрешить доступ к геолокации', 'warning');
+        window.showNotification('Для построения маршрута необходимо разрешить доступ к геолокации', 'warning');
         getUserLocation();
     }
 }

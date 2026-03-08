@@ -2,7 +2,7 @@
     <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4">
         <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
             <div class="flex items-center space-x-3">
-                <img src="image/Photoroom 1.png" alt="Герб Саратова" class="icon w-8 h-7">
+                <img src="/images/Photoroom 1.png" alt="Герб Саратова" class="icon w-8 h-7">
                 <span class="text-lg font-bold">Саратов 435</span>
             </div>
             

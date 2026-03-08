@@ -375,7 +375,7 @@ function checkRouteCompletion(routeId) {
     if (allPlacesVisited) {
         // Unlock route achievements
         if (routeId === 1) {
-            window.saratovApp.unlockAchievement('gagarin_path', 'По следам Гагарина', 'Пройден маршрут "Путь Гагарина"');
+            window.unlockAchievement('gagarin_path', 'По следам Гагарина', 'Пройден маршрут "Путь Гагарина"');
         }
         
         // Check for first route
@@ -385,9 +385,9 @@ function checkRouteCompletion(routeId) {
             localStorage.setItem('completedRoutes', JSON.stringify(completedRoutes));
             
             if (completedRoutes.length === 1) {
-                window.saratovApp.unlockAchievement('first_route', 'Первый маршрут', 'Пройден первый тематический маршрут');
+                window.unlockAchievement('first_route', 'Первый маршрут', 'Пройден первый тематический маршрут');
             } else if (completedRoutes.length === 5) {
-                window.saratovApp.unlockAchievement('route_master', 'Мастер маршрутов', 'Пройдено 5 разных маршрутов');
+                window.unlockAchievement('route_master', 'Мастер маршрутов', 'Пройдено 5 разных маршрутов');
             }
         }
     }
@@ -399,9 +399,9 @@ function checkTimeBasedAchievements() {
     const hour = now.getHours();
     
     if (hour < 9) {
-        window.saratovApp.unlockAchievement('early_bird', 'Ранняя пташка', 'Посещение места до 9 утра');
+        window.unlockAchievement('early_bird', 'Ранняя пташка', 'Посещение места до 9 утра');
     } else if (hour >= 21) {
-        window.saratovApp.unlockAchievement('night_owl', 'Ночная сова', 'Посещение места после 21:00');
+        window.unlockAchievement('night_owl', 'Ночная сова', 'Посещение места после 21:00');
     }
 }
 
@@ -420,8 +420,33 @@ function updateAchievementProgress() {
     
     // Check for legend achievement
     if (unlockedCount === totalCount - 1) { // -1 because legend itself is an achievement
-        window.saratovApp.unlockAchievement('legend', 'Легенда Саратова', 'Получены все достижения');
+        window.unlockAchievement('legend', 'Легенда Саратова', 'Получены все достижения');
     }
+}
+
+function showAchievementNotification(name, description) {
+    const notification = document.createElement('div');
+    notification.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-white rounded-xl shadow-2xl p-6 max-w-sm modal-enter';
+    
+    notification.innerHTML = `
+        <div class="text-center">
+            <div class="w-20 h-20 mx-auto mb-4 bg-linear-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center">
+                <i class="fas fa-trophy text-white text-3xl"></i>
+            </div>
+            <h4 class="text-xl font-bold mb-2">Достижение разблокировано!</h4>
+            <p class="font-semibold text-lg mb-1">${name}</p>
+            <p class="text-gray-600 text-sm">${description}</p>
+            <p class="text-green-500 font-semibold mt-3">+50 бонусных баллов</p>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Remove after 5 seconds
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => notification.remove(), 300);
+    }, 5000);
 }
 
 // Initialize achievements
@@ -433,9 +458,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Export for use
-window.achievementsModule = {
-    showAllAchievements,
-    checkRouteCompletion,
-    updateAchievementProgress,
-    achievements
-};
+window.showAllAchievements = showAllAchievements;
+window.checkRouteCompletion = checkRouteCompletion;
+window.updateAchievementProgress = updateAchievementProgress;
+window.achievements = achievements;
+window.showAchievementNotification = showAchievementNotification;

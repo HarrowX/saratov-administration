@@ -63,7 +63,7 @@ const SocialFeatures = {
         });
         
         // Show notification
-        window.saratovApp?.showNotification(`📍 Вы отметились в "${placeName}"! +25 баллов`, 'success');
+        window?.showNotification(`📍 Вы отметились в "${placeName}"! +25 баллов`, 'success');
         this.addPoints(25);
         
         return checkIn;
@@ -120,7 +120,7 @@ const SocialFeatures = {
         
         badges.forEach(badge => {
             this.userStats.badges.push(badge);
-            window.saratovApp?.showNotification(`🏅 Новый значок: ${badge.name} ${badge.icon}`, 'success');
+            window?.showNotification(`🏅 Новый значок: ${badge.name} ${badge.icon}`, 'success');
         });
         
         if (badges.length > 0) {
