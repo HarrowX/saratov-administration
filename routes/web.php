@@ -9,8 +9,8 @@ use App\Livewire\Pages\GuidedTours\AllGuidedTours;
 use App\Livewire\Pages\GuidedTours\SingleGuidedTour;
 use App\Livewire\Pages\Hotels\AllHotels;
 use App\Livewire\Pages\Hotels\SingleHotel;
-use App\Livewire\Pages\Places\AllPlaces;
-use App\Livewire\Pages\Places\SinglePlace;
+use App\Livewire\Pages\Restaurants\AllRestaurants;
+use App\Livewire\Pages\Restaurants\SingleRestaurant;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,9 +26,9 @@ Route::prefix('/guided-tours')->group(function () {
     Route::get('/{guidedTour}', SingleGuidedTour::class)->name('single-guided-tour');
 });
 
-Route::prefix('/places')->group(function () {
-    Route::get('/', AllPlaces::class)->name('all-places');
-    Route::get('/{place}', SinglePlace::class)->name('single-place');
+Route::prefix('/restaurants')->group(function () {
+    Route::get('/', AllRestaurants::class)->name('all-restaurants');
+    Route::get('/{restaurant}', SingleRestaurant::class)->name('single-restaurant');
 });
 
 Route::prefix('/attractions')->group(function () {

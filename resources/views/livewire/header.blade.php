@@ -12,7 +12,7 @@
                 <a href="{{ route('index') }}" class="{{ request()->is('/') ? "nav-link-active nav-link" : "nav-link" }}">Главная</a>
                 <a href="{{ route('all-excurtions') }}" class="{{ request()->is('excurtions*') ? "nav-link-active nav-link" : "nav-link" }}">Туры и экскурсии</a>
                 <a href="{{ route('all-guided-tours') }}" class="{{ request()->is('guided-tours*') ? "nav-link-active nav-link" : "nav-link" }}">Экскурсоводы</a>
-                <a href="{{ route('all-places') }}" class="{{ request()->is('places*') ? "nav-link-active nav-link" : "nav-link" }}">Заведения</a>
+                <a href="{{ route('all-restaurants') }}" class="{{ request()->is('restaurants*') ? "nav-link-active nav-link" : "nav-link" }}">Заведения</a>
                 <a href="{{ route('all-attractions') }}" class="{{ request()->is('attractions*') ? "nav-link-active nav-link" : "nav-link" }}">Достопримечательности</a>
                 <a href="{{ route('all-hotels') }}" class="{{ request()->is('hotels*') ? "nav-link-active nav-link" : "nav-link" }}">Где остановиться</a> 
             </div>
@@ -53,7 +53,7 @@
                                 <span class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">→</span>
                             </a>
                             
-                            <a href="{{ route('all-places') }}" class="{{ request()->is('places*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-5 px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-linear-to-r hover:from-green-50 hover:to-teal-50/50 rounded-xl transition-all duration-200 font-medium group">
+                            <a href="{{ route('all-restaurants') }}" class="{{ request()->is('restaurants*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-5 px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-linear-to-r hover:from-green-50 hover:to-teal-50/50 rounded-xl transition-all duration-200 font-medium group">
                                 <i class="fa-solid fa-utensils w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
                                 <span>Заведения</span>
                                 <span class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">→</span>
