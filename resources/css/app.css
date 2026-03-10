@@ -46,6 +46,24 @@
        url("../fonts/centurygothic_bold.ttf") format("woff");
 }
 
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    src: local("Inter"),
+        url("../fonts/Inter_18pt-Regular.ttf") format("woff2"),
+        url("../fonts/Inter_18pt-Regular.ttf") format("woff");
+}
+
+@font-face {
+    font-family: "Merriweather";
+    font-style: normal;
+    font-weight: 500;
+    src: local("Merriweather"),
+        url("../fonts/Merriweather_24pt-Regular.ttf") format("woff2"),
+        url("../fonts/Merriweather_24pt-Regular.ttf") format("woff");
+}
+
 body {
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
