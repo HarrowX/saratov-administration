@@ -31,17 +31,14 @@
                 <h2 class="title-big">Популярные экскурсии в Саратове</h2>
                 <p class="text text-gray-600 content-center">Лучшие экскурсии от профессиональных гидов и местных жителей.</p>
             </div>
-            <div class="w-full">
+            <div class="w-full"> 
                 <div class="filter overflow-x-auto md:overflow-x-auto lg:overflow-visible scrollbar-hide px-4 py-3 lg:p-6">
                     <div class="flex lg:flex-wrap justify-center gap-2 lg:gap-3 min-w-min lg:min-w-0 w-max lg:w-full">
 
                         <!-- Дата -->
-                        <div class="relative group inline-block">
+                        <div class="relative group">
                             <select id="date-filter" name="date-filter"
-                                    class="appearance-none bg-[#7676801F] hover:bg-black hover:text-white
-                                        focus:bg-black focus:text-white
-                                        transition-colors duration-200 rounded-[40px] pl-10 pr-2.5 py-2.5
-                                        text-sm text-gray-800 cursor-pointer outline-none w-auto min-w-[120px]">
+                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9 text-base  cursor-pointer outline-none w-auto min-w-[120px]">
                                 <option value="date" selected disabled hidden>Дата</option>
                                 <option value="all">Любое время</option>
                                 <option value="today">Сегодня</option>
@@ -49,20 +46,15 @@
                                 <option value="week">Эта неделя</option>
                                 <option value="month">Этот месяц</option>
                             </select>
-
-                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-                                <i class="fas fa-calendar text-xs text-gray-600 transition-all duration-200
-                                        group-hover:text-white group-focus-within:text-white"></i>
+                            <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                                <i class="fas fa-chevron-down text-xs text-gray-600 transition-all duration-200 group-hover:text-white group-focus-within:text-white group-focus-within:rotate-180"></i>
                             </div>
                         </div>
 
                         <!-- Время -->
-                        <div class="relative group inline-block">
+                        <div class="relative group">
                             <select id="time-filter" name="time-filter"
-                                    class="appearance-none bg-[#7676801F] hover:bg-black hover:text-white
-                                        focus:bg-black focus:text-white
-                                        transition-colors duration-200 rounded-[40px] pl-10 pr-4 py-2.5
-                                        text-sm text-gray-800 cursor-pointer outline-none w-auto min-w-[120px]">
+                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9 text-base  cursor-pointer outline-none w-auto min-w-[120px]">
                                 <option value="time" selected disabled hidden>Время</option>
                                 <option value="all">Любое время</option>
                                 <option value="morning">Утро (6:00-12:00)</option>
@@ -70,20 +62,15 @@
                                 <option value="evening">Вечер (18:00-24:00)</option>
                                 <option value="night">Ночь (0:00-6:00)</option>
                             </select>
-                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-                                <i class="fas fa-chevron-down text-xs text-gray-600 transition-all duration-200
-                                        group-hover:text-white group-focus-within:text-white
-                                        group-focus-within:rotate-180"></i>
+                            <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                                <i class="fas fa-chevron-down text-xs text-gray-600 transition-all duration-200 group-hover:text-white group-focus-within:text-white group-focus-within:rotate-180"></i>
                             </div>
                         </div>
 
                         <!-- Цена -->
-                        <div class="relative group inline-block">
+                        <div class="relative group">
                             <select id="price-filter" name="price-filter"
-                                    class="appearance-none bg-[#7676801F] hover:bg-black hover:text-white
-                                        focus:bg-black focus:text-white
-                                        transition-colors duration-200 rounded-[40px] pl-10 pr-2.5 py-2.5
-                                        text-sm text-gray-800 cursor-pointer outline-none w-auto min-w-[120px]">
+                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9 text-base  cursor-pointer outline-none w-auto min-w-[120px]">
                                 <option value="price" selected disabled hidden>Цена</option>
                                 <option value="all">Любая цена</option>
                                 <option value="budget">До 1000 ₽</option>
@@ -91,20 +78,15 @@
                                 <option value="high">3000-5000 ₽</option>
                                 <option value="luxury">5000+ ₽</option>
                             </select>
-                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-                                <i class="fas fa-chevron-down text-xs text-gray-600 transition-all duration-200
-                                        group-hover:text-white group-focus-within:text-white
-                                        group-focus-within:rotate-180"></i>
+                            <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                                <i class="fas fa-chevron-down text-xs text-gray-600 transition-all duration-200 group-hover:text-white group-focus-within:text-white group-focus-within:rotate-180"></i>
                             </div>
                         </div>
 
                         <!-- Количество человек -->
-                        <div class="relative group inline-block">
+                        <div class="relative group">
                             <select id="number-filter" name="number-filter"
-                                    class="appearance-none bg-[#7676801F] hover:bg-black hover:text-white
-                                        focus:bg-black focus:text-white
-                                        transition-colors duration-200 rounded-[40px] pl-10 pr-2.5 py-2.5
-                                        text-sm text-gray-800 cursor-pointer outline-none w-auto min-w-[120px]">
+                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9 text-base  cursor-pointer outline-none w-auto min-w-[120px]">
                                 <option value="number" selected disabled hidden>Количество человек</option>
                                 <option value="all">Любое количество</option>
                                 <option value="1">1 человек</option>
@@ -113,21 +95,15 @@
                                 <option value="4">4 человека</option>
                                 <option value="5">5+ человек</option>
                             </select>
-
-                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-                                <i class="fas fa-chevron-down text-xs text-gray-600 transition-all duration-200
-                                        group-hover:text-white group-focus-within:text-white
-                                        group-focus-within:rotate-180"></i>
+                            <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                                <i class="fas fa-chevron-down text-xs text-gray-600 transition-all duration-200 group-hover:text-white group-focus-within:text-white group-focus-within:rotate-180"></i>
                             </div>
                         </div>
 
                         <!-- Передвижение -->
-                        <div class="relative group inline-block">
+                        <div class="relative group">
                             <select id="movement-filter" name="movement-filter"
-                                    class="appearance-none bg-[#7676801F] hover:bg-black hover:text-white
-                                        focus:bg-black focus:text-white
-                                        transition-colors duration-200 rounded-[40px] pl-10 pr-2.5 py-2.5
-                                        text-sm text-gray-800 cursor-pointer outline-none w-auto min-w-[120px]">
+                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9 text-base  cursor-pointer outline-none w-auto min-w-[120px]">
                                 <option value="movement" selected disabled hidden>Передвижение</option>
                                 <option value="all">Любое передвижение</option>
                                 <option value="walking">Пешком</option>
@@ -136,21 +112,15 @@
                                 <option value="bike">Велосипед</option>
                                 <option value="taxi">Такси</option>
                             </select>
-
-                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-                                <i class="fas fa-chevron-down text-xs text-gray-600 transition-all duration-200
-                                        group-hover:text-white group-focus-within:text-white
-                                        group-focus-within:rotate-180"></i>
+                            <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                                <i class="fas fa-chevron-down text-xs text-gray-600 transition-all duration-200 group-hover:text-white group-focus-within:text-white group-focus-within:rotate-180"></i>
                             </div>
                         </div>
 
                         <!-- Точки посещения -->
-                        <div class="relative group inline-block">
+                        <div class="relative group">
                             <select id="visit-filter" name="visit-filter"
-                                    class="appearance-none bg-[#7676801F] hover:bg-black hover:text-white
-                                        focus:bg-black focus:text-white
-                                        transition-colors duration-200 rounded-[40px] pl-10 pr-2.5 py-2.5
-                                        text-sm text-gray-800 cursor-pointer outline-none w-auto min-w-[120px]">
+                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9 text-base  cursor-pointer outline-none w-auto min-w-[120px]">
                                 <option value="visit" selected disabled hidden>Точки посещения</option>
                                 <option value="all">Любые точки</option>
                                 <option value="restaurant">Рестораны</option>
@@ -160,11 +130,8 @@
                                 <option value="theater">Театры</option>
                                 <option value="cinema">Кинотеатры</option>
                             </select>
-
-                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-                                <i class="fas fa-chevron-down text-xs text-gray-600 transition-all duration-200
-                                        group-hover:text-white group-focus-within:text-white
-                                        group-focus-within:rotate-180"></i>
+                            <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                                <i class="fas fa-chevron-down text-xs text-gray-600 transition-all duration-200 group-hover:text-white group-focus-within:text-white group-focus-within:rotate-180"></i>
                             </div>
                         </div>
                     </div>
