@@ -2,6 +2,34 @@
     Саратов 435 - Модерн в Саратове
 @endsection
 <div>
+
+    <section id="home" class="relative md:min-h-screen mt-25 md:mt-42 xl:mt-61.5 3xl:mt-70.5 px-4 sm:px-20">
+        <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto relative">
+            <div class="relative overflow-hidden rounded-lg sm:rounded-2xl md:rounded-[30px] md:h-[500px] h-54 sm:h-116 xl:h-180 3xl:h-226">
+                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('/images/консерватория.png')]"></div>
+                <div class="absolute inset-x-0 bottom-0 h-40 sm:h-60 md:h-100 bg-linear-to-t from-black via-black/30 sm:via-black/50 to-transparent"></div>
+                <div class="absolute w-full h-full flex justify-center items-end">
+                    <h1 class="text-base sm:text-3xl xl:text-6xl text-white font-extrabold pb-4 sm:pb-15">Модерн в Саратове</h1>
+                </div>
+            </div>
+
+            <a href="{{ route('all-excurtions') }}"
+               class="absolute left-0 xl:-left-14 -top-14 xl:-top-25 hidden md:flex items-center xl:gap-2 text-[#5F5F5F] hover:text-blue-900 transition-colors font-['FindSansPro']">
+                <i class="fa-solid fa-chevron-left text-xl xl:text-xl 2xl:text-3xl"></i>
+                <span class="text-xl xl:text-3xl pl-4">Экскурсии</span>
+            </a>
+
+            <button class="absolute top-5 md:top-10 right-4 md:right-11 xl:top-18 xl:right-14 flex items-center text-white transition-colors font-['FindSansPro'] bg-[#A855F7] rounded-lg px-4 py-4 cursor-pointer">
+                <i class="fa-sharp fa-solid fa-heart text-base sm:text-xl lg:text-2xl xl:text-4xl"></i>
+                <span class="text-xs sm:text-sm lg:text-base xl:text-xl pl-4 text-nowrap">Добавить в избранное</span>
+            </button>
+        </div>
+
+    </section>
+    <section>
+
+    </section>
+
     <!--Hero Section-->
     <section class="flex justify-center px-5 sm:px-20">
         <div class="max-md:hidden md:max-w-[700px] lg:max-w-[1050px] xl:max-w-[1280px] 2xl:max-w-[1636px]">
@@ -15,10 +43,7 @@
 
                     <div class="absolute inset-x-0 bottom-0 h-40 sm:h-60 md:h-100 bg-linear-to-t from-black via-black/50 to-transparent h-[900px] rounded-[30px]"></div>
                 </div>
-                <button href="/attractions" class="absolute top-10 right-10 xl:top-18 xl:right-20 z-20 hidden md:flex items-center gap-2 text-white transition-colors font-['FindSansPro'] bg-[#A855F7] rounded-[8px] px-4 py-4">
-                    <img src="/images/image 9.svg" class="size-8">
-                    <span class="text-base xl:text-xl pl-4 text-nowrap">Добавить в избранное</span>
-                </button>
+
                 <div class="font-['FindSansPro'] absolute inset-0 flex items-center justify-center">
                     <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full text-white text-center py-2 text-6xl pb-12">
                         Модерн в Саратове

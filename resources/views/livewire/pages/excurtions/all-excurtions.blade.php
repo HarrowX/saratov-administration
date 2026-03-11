@@ -26,14 +26,14 @@
 
     <!-- Section with tour cards -->
     <section class="bg-white py-26">
-        <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-4 sm:px-10">
+        <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 2xl:max-w-380 3xl:max-w-398.25 mx-auto px-4 sm:px-10">
             <div class="text-center mb-12" data-aos="fade-up">
                 <h2 class="title-big">Популярные экскурсии в Саратове</h2>
                 <p class="text text-gray-600 content-center">Лучшие экскурсии от профессиональных гидов и местных жителей.</p>
             </div>
-            <div class="w-full"> 
+            <div class="w-full">
                 <div class="filter overflow-x-auto md:overflow-x-auto lg:overflow-visible scrollbar-hide px-4 py-3 lg:p-6">
-                    <div class="flex lg:flex-wrap justify-center gap-2 lg:gap-3 min-w-min lg:min-w-0 w-max lg:w-full">
+                    <div class="flex md:flex-wrap justify-center gap-2 lg:gap-3 min-w-min lg:min-w-0 w-max lg:w-full">
 
                         <!-- Дата -->
                         <div class="relative group">
