@@ -61,11 +61,10 @@
             </div>
         </div>
 
-
         <!--Mobile hero-->
         <div class="md:hidden md:max-w-[728px] sm:max-w-[600px]">
-            <div><button class="flex items-center gap-5 pt-39 pb-10 font-['FindSansPro'] text-[18px] lg:text-[20px] xl:text-[26px] 2xl:text-[32px] text-[#5F5F5F]">
-                <i class="text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl fa-solid fa-chevron-left"></i>Экскурсии</button>
+            <div><a href="" class="flex items-center gap-5 pt-39 pb-10 font-['FindSansPro'] text-[18px] lg:text-[20px] xl:text-[26px] 2xl:text-[32px] text-[#5F5F5F]">
+                <i class="text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl fa-solid fa-chevron-left"></i>Экскурсии</a>
             </div>
             <div class="flex justify-center relative">
                 <img src="/images/консерватория.png" alt="экскурсия" class="max-w-[1636px] max-h-[900px] object-scale-down">
@@ -203,9 +202,9 @@
 
             <!-- Карусель -->
             <div class="relative group">
-                <div class="flex overflow-x-auto gap-4 md:gap-6 pb-6 scrollbar-hide scroll-smooth snap-x snap-mandatory" 
+                <div class="flex overflow-x-auto gap-4 md:gap-6 pb-6 scrollbar-hide scroll-smooth snap-x snap-mandatory"
                     style="scrollbar-width: none; -ms-overflow-style: none;">
-                    
+
                     <!-- Карточка 1 -->
                     <div class="snap-start shrink-0 w-[calc(50%-8px)] sm:w-80 lg:w-[calc(33.333%-16px)] bg-white rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div class="p-2 sm:p-4 2xl:p-5 h-full flex flex-col">
@@ -218,7 +217,7 @@
                                     <h4 class="">Дом книги</h4>
                                     <p class="text-[7px] sm:text-base text-[#888888] line-clamp-4">Архитектура и памятники, театры и культурные центры</p>
                                 </div>
-                                
+
                                 <div class="shrink-0 mt-2 mb-3">
                                     <div class="flex items-end justify-between gap-2">
                                         <div class="flex gap-1 sm:gap-4 flex-1 max-w-37 sm:max-w-75">
@@ -248,7 +247,7 @@
                                     <h4 class="">Дом книги</h4>
                                     <p class="text-[7px] sm:text-base text-[#888888] line-clamp-4">Архитектура и памятники, театры и культурные центры</p>
                                 </div>
-                                
+
                                 <div class="shrink-0 mt-2 mb-3">
                                     <div class="flex items-end justify-between gap-2">
                                         <div class="flex gap-1 sm:gap-4 flex-1 max-w-37 sm:max-w-75">
@@ -278,7 +277,7 @@
                                     <h4 class="">Дом книги</h4>
                                     <p class="text-[7px] sm:text-base text-[#888888] line-clamp-4">Архитектура и памятники, театры и культурные центры</p>
                                 </div>
-                                
+
                                 <div class="shrink-0 mt-2 mb-3">
                                     <div class="flex items-end justify-between gap-2">
                                         <div class="flex gap-1 sm:gap-4 flex-1 max-w-37 sm:max-w-75">
@@ -308,37 +307,7 @@
                                     <h4 class="">Дом книги</h4>
                                     <p class="text-[7px] sm:text-base text-[#888888] line-clamp-4">Архитектура и памятники, театры и культурные центры</p>
                                 </div>
-                                
-                                <div class="shrink-0 mt-2 mb-3">
-                                    <div class="flex items-end justify-between gap-2">
-                                        <div class="flex gap-1 sm:gap-4 flex-1 max-w-37 sm:max-w-75">
-                                            <img src="/images/image 7.svg" alt="" class="icon size-2.5 sm:size-4 md:size-7 mt-2 sm:mt-5 shrink-0">
-                                            <span class="text-[8px] sm:text-xs xl:text-sm text-[#505050] pt-1 sm:pt-4">Саратов, Фрунзенский район, ул. Вольская, 81</span>
-                                        </div>
-                                        <form action="{{ route('all-attractions') }}">
-                                            <button class="shrink-0 size-5 sm:size-10 xl:size-11 2xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
-                                                <img src="/images/Arrow 2.png" alt="" class="icon w-1 sm:w-2 xl:w-3 2xl:w-4 h-2.5 sm:h-4.5 xl:h-6 2xl:h-7.5">
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Карточка 1 -->
-                    <div class="snap-start shrink-0 w-[calc(50%-8px)] sm:w-80 lg:w-[calc(33.333%-16px)] bg-white rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                        <div class="p-2 sm:p-4 2xl:p-5 h-full flex flex-col">
-                            <div class="w-full mb-4 overflow-hidden rounded-lg shrink-0">
-                                <img src="/images/image 23.png" alt="Дом книги">
-                            </div>
 
-                            <div class="font-['FindSansPro'] flex flex-col h-26 sm:h-50 md:h-60">
-                                <div class="grow">
-                                    <h4 class="">Дом книги</h4>
-                                    <p class="text-[7px] sm:text-base text-[#888888] line-clamp-4">Архитектура и памятники, театры и культурные центры</p>
-                                </div>
-                                
                                 <div class="shrink-0 mt-2 mb-3">
                                     <div class="flex items-end justify-between gap-2">
                                         <div class="flex gap-1 sm:gap-4 flex-1 max-w-37 sm:max-w-75">
@@ -368,7 +337,37 @@
                                     <h4 class="">Дом книги</h4>
                                     <p class="text-[7px] sm:text-base text-[#888888] line-clamp-4">Архитектура и памятники, театры и культурные центры</p>
                                 </div>
-                                
+
+                                <div class="shrink-0 mt-2 mb-3">
+                                    <div class="flex items-end justify-between gap-2">
+                                        <div class="flex gap-1 sm:gap-4 flex-1 max-w-37 sm:max-w-75">
+                                            <img src="/images/image 7.svg" alt="" class="icon size-2.5 sm:size-4 md:size-7 mt-2 sm:mt-5 shrink-0">
+                                            <span class="text-[8px] sm:text-xs xl:text-sm text-[#505050] pt-1 sm:pt-4">Саратов, Фрунзенский район, ул. Вольская, 81</span>
+                                        </div>
+                                        <form action="{{ route('all-attractions') }}">
+                                            <button class="shrink-0 size-5 sm:size-10 xl:size-11 2xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
+                                                <img src="/images/Arrow 2.png" alt="" class="icon w-1 sm:w-2 xl:w-3 2xl:w-4 h-2.5 sm:h-4.5 xl:h-6 2xl:h-7.5">
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Карточка 1 -->
+                    <div class="snap-start shrink-0 w-[calc(50%-8px)] sm:w-80 lg:w-[calc(33.333%-16px)] bg-white rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="p-2 sm:p-4 2xl:p-5 h-full flex flex-col">
+                            <div class="w-full mb-4 overflow-hidden rounded-lg shrink-0">
+                                <img src="/images/image 23.png" alt="Дом книги">
+                            </div>
+
+                            <div class="font-['FindSansPro'] flex flex-col h-26 sm:h-50 md:h-60">
+                                <div class="grow">
+                                    <h4 class="">Дом книги</h4>
+                                    <p class="text-[7px] sm:text-base text-[#888888] line-clamp-4">Архитектура и памятники, театры и культурные центры</p>
+                                </div>
+
                                 <div class="shrink-0 mt-2 mb-3">
                                     <div class="flex items-end justify-between gap-2">
                                         <div class="flex gap-1 sm:gap-4 flex-1 max-w-37 sm:max-w-75">
@@ -388,14 +387,14 @@
 
                     <!-- Стрелки навигации (только на десктопе) -->
                     <div class="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
-                        <button onclick="this.closest('.group').querySelector('.overflow-x-auto').scrollBy({left: -400, behavior: 'smooth'})" 
+                        <button onclick="this.closest('.group').querySelector('.overflow-x-auto').scrollBy({left: -400, behavior: 'smooth'})"
                                 class="scroll-button hover:text-blue-500 transition-colors">
                             <i class="fas fa-chevron-left"></i>
                         </button>
                     </div>
-                    
+
                     <div class="absolute top-1/2 -translate-y-1/2 right-12 translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
-                        <button onclick="this.closest('.group').querySelector('.overflow-x-auto').scrollBy({left: 400, behavior: 'smooth'})" 
+                        <button onclick="this.closest('.group').querySelector('.overflow-x-auto').scrollBy({left: 400, behavior: 'smooth'})"
                                 class="scroll-button hover:text-blue-500 transition-colors">
                             <i class="fas fa-chevron-right"></i>
                         </button>
