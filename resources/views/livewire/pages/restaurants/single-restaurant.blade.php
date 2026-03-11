@@ -1,5 +1,5 @@
 @section('title')
-    Саратов 435 - Port
+    Саратов 435 - {{ $restaurant->name }}
 @endsection
 
 <div>
@@ -10,20 +10,22 @@
                 <div data-aos="fade-right" class="flex flex-col gap-5 w-full lg:w-auto">
                     
                     <div class="mmin-w-full sm:min-w-140 xl:min-w-180 3xl:min-w-197">
-                        <img src="/images/Rectangle 12224702.png" class="photo w-full h-auto object-cover">
+                        <img src="{{ $restaurant->attachments?->get(0)?->url() ?? "" }}" class="photo w-full h-auto object-cover">
                     </div>
                     
                     <div class="grid grid-cols-3 gap-5 w-full">
-                        <img src="/images/Rectangle 12224706.png" class="photo w-full h-auto object-cover">
-                        <img src="/images/Rectangle 12224705.png" class="photo w-full h-auto object-cover">
-                        <img src="/images/Rectangle 12224704.png" class="photo w-full h-auto object-cover">
+                        @foreach ($restaurant->attachments as $attachment)                            
+                            @if ($loop->first)
+                                @continue
+                            @endif
+                            <img src="{{ $attachment?->url() ?? "" }}" class="photo w-full h-auto object-cover">
+                        @endforeach
                     </div>
                 </div>
 
                 <div data-aos="fade-left" class="w-full lg:w-auto">
-                    <h2 class="text-center lg:pb-10">Port</h2>
-                    <p class="text-base xl:text-xl 3xl:text-3xl">Ресторан ПОРТ в Саратове — это уютное заведение с атмосферой морского побережья, где каждый гость ощущает себя словно на отдыхе у моря. В меню представлены блюда европейской кухни с акцентом на свежие сезонные ингредиенты. Особенной популярностью пользуются фирменные блюда, приготовленные с любовью и мастерством.
-                    </p>
+                    <h2 class="text-center lg:pb-10">{{ $restaurant->name }}</h2>
+                    <p class="text-base xl:text-xl 3xl:text-3xl">{{ $restaurant->description }}</p>
                 </div>
             </div>
         </div>
@@ -35,28 +37,28 @@
                 <div class="flex flex-col w-full justify-around bg-[#E5E6F6] gap-3 md:gap-6.75 px-6 md:px-11 py-6 3xl:py-8 rounded-[20px] font-['FindSansPro'] text-sm sm:text-lg 3xl:text-2xl">
                     <div class="flex items-center gap-5">
                         <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/значок локации.svg">
-                        <p>Саратов, ул. Дзержинского, 18</p>
+                        <p>{{ $restaurant->address }}</p>
                     </div>
                     <div class="flex items-center gap-5">
                         <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/image 8.svg">
-                        <p>с 10:00 до 02:00</p>
+                        <p>{{ $restaurant->worktime }}</p>
                     </div>
                     <div class="flex items-center gap-5">
                         <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/image 15.svg">
-                        <p>21-22-68</p>
+                        <p>{{ $restaurant->phone }}</p>
                     </div>
                 </div>
                 <div class="w-full flex flex-col gap-2.5">
                     <div class="bg-[#E5E6F6] px-6 md:px-11 py-3 rounded-[20px] font-['FindSansPro'] text-xs md:text-lg 3xl:text-2xl">
                         <h3>Кухня</h3>
-                        <p class="text-[#5F5F5F]">Европейская и Паназиаткая</p>
+                        <p class="text-[#5F5F5F]">{{ $restaurant->kitchen }}</p>
                     </div>
                     <button class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-5 md:py-6 rounded-[20px] lg:rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-xl 3xl:text-3xl">Показать на карте</button>
                 </div>
             </div>
             <div class="font-['FindSansPro'] flex flex-col items-center lg:items-start">
                 <h3>Достижения</h3>
-                <p class="text-lg md:text-2xl text-center lg:text-left">За посещение ресторана “Port” вы получите:</p>
+                <p class="text-lg md:text-2xl text-center lg:text-left">За посещение ресторана “{{ $restaurant->name }}” вы получите:</p>
                 <div class="flex flex-row flex-wrap gap-4 lg:gap-10 justify-center lg:justify-start items-center text-sm pt-4 lg:pt-5 3xl:pt-7 md:text-xl">
                     <div class="text-white rounded-4xl bg-linear-to-r from-green-500 to-teal-600 py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Знатоку города” </div>
                     <div class="gradient-button text-white rounded-4xl py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Первооткрывателю” </div>

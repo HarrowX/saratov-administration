@@ -13,6 +13,9 @@ use MoonShine\Contracts\ColorManager\ColorManagerContract;
 use MoonShine\Contracts\ColorManager\PaletteContract;
 use MoonShine\UI\Components\Layout\Div;
 use Override;
+use App\MoonShine\Resources\Restaurant\RestaurantResource;
+use MoonShine\MenuManager\MenuItem;
+use App\MoonShine\Resources\Attachment\AttachmentResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -32,6 +35,8 @@ final class MoonShineLayout extends AppLayout
     {
         return [
             ...parent::menu(),
+            MenuItem::make(RestaurantResource::class, 'Заведения'),
+            MenuItem::make(AttachmentResource::class, 'Прикрепляемое'),
         ];
     }
 
