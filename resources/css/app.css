@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import '@fortawesome/fontawesome-free/css/all.css';
 /* Custom styles for Saratov 435 */
-/*кнопки по центру 
+/*кнопки по центру
 картинку по центру */
 :root {
     --primary-blue: #3B82F6;
@@ -14,12 +14,9 @@
 
 @theme {
   --breakpoint-3xl: 120rem; /*1920px*/
+    --breakpoint-xs: 25rem;
 }
 
-@theme {
-    --breakpoint-xs: 25rem;
-    --breakpoint-3xl: 120rem;
-}
 
 @font-face {
   font-family: "FindSansPro";
@@ -129,7 +126,7 @@ html {
 }
 
 .title{
-    @apply text-2xl font-bold text-center 
+    @apply text-2xl font-bold text-center
 }
 
 /* Hero section animations */
@@ -150,7 +147,7 @@ html {
         transform: translateY(-10px) rotate(-3deg);
     }
 }
-    
+
 .hero-section-button{
     @apply bg-linear-to-r text-white px-3 py-2 md:px-6 md:py-4 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-1 transition cursor-pointer
 }
@@ -220,7 +217,7 @@ html {
         grid-template-columns: 32% 32% 32%;
         justify-content: space-between;
     }
-    
+
     .child-grid {
         display: grid;
         grid-template-rows: subgrid;
@@ -438,23 +435,6 @@ html {
     transform: scale(1.1);
 }
 
-/* Responsive adjustments
-@media (max-width: 768px) {
-    /* h1 {
-        font-size: 2.5rem;
-    }
-    
-    h2 {
-        font-size: 2rem;
-    } */
-     /*
-    
-    .hero-section {
-        padding: 3rem 1rem;
-    }
-    
-}*/
-
 /* Footer styles */
 footer {
     min-height: auto;
@@ -464,23 +444,12 @@ footer .flex {
     align-items: center;
 }
 
-/* @media (max-width: 768px) {
-    footer .flex {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    footer .flex > div {
-        text-align: center;
-    }
-} */
-
 /* Print styles */
 @media print {
     nav, footer, .no-print {
         display: none;
     }
-    
+
     .print-break {
         page-break-after: always;
     }
@@ -563,8 +532,6 @@ footer .flex {
 .counter {
     animation: countUp 2s ease-out;
 }
-
-
 
 @keyframes countUp {
     0% {
@@ -680,19 +647,30 @@ button{
     font-family: "Centurygothic"
 }
 
-.calendar-days span {
-    @apply flex items-center justify-center size-6 sm:size-9 lg:size-11 xl:size-12 3xl:size-16 rounded-full text-gray-700 hover:bg-gray-200 transition-colors cursor-pointer mx-auto;
+.calendar-day {
+    @apply flex flex-col items-center justify-start relative cursor-pointer mx-auto w-full;
 }
 
-.calendar-days .today {
-    @apply bg-[#A855F7] md:bg-[#352AA2] text-white font-bold hover:bg-[#64269f] md:hover:bg-[#281f82];
+.calendar-day .day-number {
+    @apply flex items-center justify-center size-5 xs:size-6 sm:size-9 lg:size-11 xl:size-12 3xl:size-16 rounded-full text-gray-700 transition-colors mx-auto;
 }
 
-.calendar-days .calendar-days-hidden {
+.calendar-day:hover .day-number {
+    @apply bg-gray-200;
+}
+
+.calendar-day.today .day-number {
+    @apply bg-[#A855F7] md:bg-[#352AA2] text-white font-bold hover:bg-[#64269f] hover:md:bg-[#281f82];
+}
+
+.calendar-days-hidden {
     @apply invisible;
-} 
+}
 
-/* Фильтр в секции с карточками эксткурсии */
+.event-label {
+    @apply absolute -bottom-2 sm:-bottom-1 md:-bottom-3 rounded-xl px-0.5 sm:px-2 text-[8px] lg:text-xs tracking-normal ;
+    font-family: 'Inter', sans-serif;
+}
 
 /* Карточки экскурсий */
 .gradient-button {
@@ -720,12 +698,12 @@ button{
         opacity: 0.8;
         border-radius: 0 16px 16px 0;
     }
-    
+
     .filter {
         position: relative;
     }
 }
-    
+
 select option {
     background-color: white;
     color: black;
@@ -770,6 +748,8 @@ select option:checked {
 .button-navigation--job-right {
   transition: all 0.3s ease;
 }
+
+
 
 
 

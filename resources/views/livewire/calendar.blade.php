@@ -1,12 +1,12 @@
 <section id="achievements" class="pb-17.5 xl:pb-28.5 bg-white">
     <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10" data-aos="zoom-in" data-aos-delay="250">
-        <div class="text-center mb-12">
+        <div class="text-center mb-4 sm:mb-12">
             <h2>Календарь событий</h2>
             <p class="text text-gray-600">Планируй выходные вместе с нами</p>
         </div>
-        
+
         <div class="flex flex-row justify-center font-['Centurygothic'] tracking-widest">
-            <div class="w-36 sm:w-50 lg:w-70 xl:w-75 3xl:w-88">
+            <div class="w-38 xs:w-36 sm:w-50 lg:w-70 xl:w-75 3xl:w-88">
                 <div class="relative w-full rounded-l-xl lg:rounded-l-4xl overflow-hidden shadow-xl">
                     <img src="/images/f3429762a6cc1d6808382c4abeff79f593da9f61.jpg" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black/50"></div>
@@ -17,19 +17,19 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="rounded-r-xl lg:rounded-r-4xl shadow-xl">
-                <div class="calendar bg-white px-1 sm:px-3 pt-4 lg:px-5 lg:pt-7 3xl:px-7 3xl:pt-8">
+                <div class="calendar bg-white px-4 sm:px-3 pt-4 lg:pt-7 md:px-7 3xl:pt-8">
                     <div class="calendar-header flex items-center justify-between mb-1 sm:mb-4 lg:mb-8">
                         <button type="button" class="calendar-btn size-3 lg:size-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors" id="prev-btn">
-                            <img src="/images/Vector.svg" alt="Предыдущий месяц" class="icon size-2 lg:size-4"> 
+                            <img src="/images/Vector.svg" alt="Предыдущий месяц" class="icon size-2 lg:size-4">
                         </button>
                         <span id="month-year" class="text-[9px] sm:text-sm lg:text-xl 3xl:text-2xl font-semibold text-gray-800"></span>
                         <button type="button" class="calendar-btn size-3 lg:size-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors" id="next-btn">
                             <img src="/images/Vector.svg" alt="Следующий месяц" class="icon size-2 lg:size-4 transform rotate-180">
                         </button>
                     </div>
-                    
+
                     <div class="calendar-body text-[9px] sm:text-xs lg:text-lg 3xl:text-2xl">
                         <div class="calendar-day-names grid grid-cols-7 gap-1 sm:gap-2 mb-4">
                         </div>

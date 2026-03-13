@@ -39,7 +39,7 @@ const achievements = [
         points: 500,
         color: 'gold'
     },
-    
+
     // Route achievements
     {
         id: 'first_route',
@@ -68,7 +68,7 @@ const achievements = [
         points: 150,
         color: 'red'
     },
-    
+
     // Cultural achievements
     {
         id: 'culture_lover',
@@ -88,7 +88,7 @@ const achievements = [
         points: 150,
         color: 'pink'
     },
-    
+
     // Time-based achievements
     {
         id: 'early_bird',
@@ -117,7 +117,7 @@ const achievements = [
         points: 200,
         color: 'green'
     },
-    
+
     // Social achievements
     {
         id: 'social_butterfly',
@@ -146,7 +146,7 @@ const achievements = [
         points: 150,
         color: 'yellow'
     },
-    
+
     // Seasonal achievements
     {
         id: 'summer_explorer',
@@ -166,7 +166,7 @@ const achievements = [
         points: 200,
         color: 'cyan'
     },
-    
+
     // Business achievements
     {
         id: 'coupon_hunter',
@@ -186,7 +186,7 @@ const achievements = [
         points: 200,
         color: 'purple'
     },
-    
+
     // Special achievements
     {
         id: 'legend',
@@ -277,26 +277,26 @@ function showAllAchievements() {
     modal.className = 'fixed inset-0 bg-black/50 z-50 overflow-y-auto';
     modal.innerHTML = `
         <div class="min-h-screen flex items-center justify-center p-4">
-            <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+            <div class="bg-white rounded-2xl max-w-4xl xl:max-w-6xl w-full max-h-[90vh] overflow-hidden">
                 <div class="sticky top-0 bg-white border-b p-6 flex justify-between items-center">
                     <div>
-                        <h2 class="title3xl mb-2">Все достижения</h2>
+                        <h2>Все достижения</h2>
                         <p class="text-gray-600">Получено: ${getUnlockedAchievementsCount()}/${achievements.length}</p>
                     </div>
                     <button onclick="this.closest('.fixed').remove()" class="text-gray-400 hover:text-gray-600">
                         <i class="fas fa-times text-2xl"></i>
                     </button>
                 </div>
-                
+
                 <div class="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
                     ${renderAchievementCategories()}
                 </div>
             </div>
         </div>
     `;
-    
+
     document.body.appendChild(modal);
-    
+
     // Add animation
     setTimeout(() => {
         modal.querySelector('.bg-white').classList.add('modal-enter');
@@ -307,28 +307,28 @@ function showAllAchievements() {
 function renderAchievementCategories() {
     const unlockedAchievements = JSON.parse(localStorage.getItem('unlockedAchievements') || '[]');
     let html = '';
-    
+
     Object.entries(achievementCategories).forEach(([categoryId, category]) => {
         const categoryAchievements = achievements.filter(a => a.category === categoryId);
         if (categoryAchievements.length === 0) return;
-        
+
         const unlockedInCategory = categoryAchievements.filter(a => unlockedAchievements.includes(a.id)).length;
-        
+
         html += `
             <div class="mb-8">
                 <div class="flex items-center mb-4">
                     <i class="${category.icon} text-2xl mr-3 text-${category.color}-500"></i>
-                    <h3 class="text-xl font-bold">${category.name}</h3>
+                    <h5 class="text-xl font-bold">${category.name}</h5>
                     <span class="ml-3 text-gray-500">${unlockedInCategory}/${categoryAchievements.length}</span>
                 </div>
-                
-                <div class="grid  md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                <div class="grid  md:grid-cols-2 xl:grid-cols-3 gap-4">
                     ${categoryAchievements.map(achievement => renderAchievementCard(achievement, unlockedAchievements.includes(achievement.id))).join('')}
                 </div>
             </div>
         `;
     });
-    
+
     return html;
 }
 
@@ -336,23 +336,24 @@ function renderAchievementCategories() {
 function renderAchievementCard(achievement, isUnlocked) {
     const colorClass = getAchievementColorClass(achievement.color);
     const opacity = isUnlocked ? '' : 'opacity-50';
-    
+
     return `
-        <div class="bg-white border rounded-xl p-2 sm:p-4 ${opacity} ${isUnlocked ? 'hover:shadow-lg' : ''} transition cursor-pointer">
+        <div class="bg-white border rounded-xl p-2 sm:p-4 ${opacity} ${isUnlocked ? 'hover:shadow-lg' : ''} transition cursor-pointer flex flex-col h-full">
             <div class="flex items-start space-x-3">
                 <div class="w-9 h-9 sm:w-12 sm:h-12 bg-linear-to-br ${isUnlocked ? colorClass : 'from-gray-300 to-gray-400'} rounded-full flex items-center justify-center shrink-0">
                     <i class="${achievement.icon} text-white"></i>
                 </div>
                 <div class="flex-1">
-                    <h4 class="font-semibold mb-1">${achievement.name}</h4>
-                    <p class="text-sm text-gray-600 mb-2">${achievement.description}</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs ${isUnlocked ? 'text-green-600' : 'text-gray-400'}">
-                            ${isUnlocked ? '✓ Получено' : '🔒 Заблокировано'}
-                        </span>
-                        <span class="text-xs font-semibold text-purple-600">+${achievement.points}</span>
-                    </div>
+                    <h5 class="font-semibold mb-1 text-base sm:text-xl font-bold mb-1 md:mb-4 tracking-[1px]">${achievement.name}</h5>
+                    <p class="text-xs xs:text-sm md:text-lg text-gray-600 mb-2">${achievement.description}</p>
                 </div>
+            </div>
+
+            <div class="flex items-center justify-between mt-auto pt-2">
+                <span class="text-base ${isUnlocked ? 'text-green-600' : 'text-gray-400'}">
+                    ${isUnlocked ? '✓ Получено' : '🔒 Заблокировано'}
+                </span>
+                <span class="text-xs font-semibold text-purple-600">+${achievement.points}</span>
             </div>
         </div>
     `;
@@ -368,22 +369,22 @@ function getUnlockedAchievementsCount() {
 function checkRouteCompletion(routeId) {
     const route = window.mapModule?.routes.find(r => r.id === routeId);
     if (!route) return;
-    
+
     const visitedPlaces = JSON.parse(localStorage.getItem('visitedPlaces') || '[]');
     const allPlacesVisited = route.places.every(placeId => visitedPlaces.includes(placeId));
-    
+
     if (allPlacesVisited) {
         // Unlock route achievements
         if (routeId === 1) {
             window.unlockAchievement('gagarin_path', 'По следам Гагарина', 'Пройден маршрут "Путь Гагарина"');
         }
-        
+
         // Check for first route
         const completedRoutes = JSON.parse(localStorage.getItem('completedRoutes') || '[]');
         if (!completedRoutes.includes(routeId)) {
             completedRoutes.push(routeId);
             localStorage.setItem('completedRoutes', JSON.stringify(completedRoutes));
-            
+
             if (completedRoutes.length === 1) {
                 window.unlockAchievement('first_route', 'Первый маршрут', 'Пройден первый тематический маршрут');
             } else if (completedRoutes.length === 5) {
@@ -397,7 +398,7 @@ function checkRouteCompletion(routeId) {
 function checkTimeBasedAchievements() {
     const now = new Date();
     const hour = now.getHours();
-    
+
     if (hour < 9) {
         window.unlockAchievement('early_bird', 'Ранняя пташка', 'Посещение места до 9 утра');
     } else if (hour >= 21) {
@@ -410,14 +411,14 @@ function updateAchievementProgress() {
     const unlockedCount = getUnlockedAchievementsCount();
     const totalCount = achievements.length;
     const percentage = (unlockedCount / totalCount) * 100;
-    
+
     // Update progress bars
     const progressBars = document.querySelectorAll('.achievement-progress');
     progressBars.forEach(bar => {
         bar.style.width = `${percentage}%`;
         bar.setAttribute('data-progress', `${unlockedCount}/${totalCount}`);
     });
-    
+
     // Check for legend achievement
     if (unlockedCount === totalCount - 1) { // -1 because legend itself is an achievement
         window.unlockAchievement('legend', 'Легенда Саратова', 'Получены все достижения');
@@ -427,7 +428,7 @@ function updateAchievementProgress() {
 function showAchievementNotification(name, description) {
     const notification = document.createElement('div');
     notification.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-white rounded-xl shadow-2xl p-6 max-w-sm modal-enter';
-    
+
     notification.innerHTML = `
         <div class="text-center">
             <div class="w-20 h-20 mx-auto mb-4 bg-linear-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center">
@@ -439,9 +440,9 @@ function showAchievementNotification(name, description) {
             <p class="text-green-500 font-semibold mt-3">+50 бонусных баллов</p>
         </div>
     `;
-    
+
     document.body.appendChild(notification);
-    
+
     // Remove after 5 seconds
     setTimeout(() => {
         notification.style.opacity = '0';
@@ -452,7 +453,7 @@ function showAchievementNotification(name, description) {
 // Initialize achievements
 document.addEventListener('DOMContentLoaded', () => {
     updateAchievementProgress();
-    
+
     // Check time-based achievements periodically
     setInterval(checkTimeBasedAchievements, 60000); // Every minute
 });

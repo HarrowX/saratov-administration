@@ -117,46 +117,46 @@ const attractionsData = [
 function showAttractionDetails(id) {
     const attraction = attractionsData.find(a => a.id === id);
     if (!attraction) return;
-    
+
     const modal = document.createElement('div');
     modal.className = 'fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4';
     modal.innerHTML = `
         <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         <div class="sticky top-4 z-50 pr-5 flex justify-end -mt-10">
-            <button onclick="this.closest('.fixed').remove()" 
+            <button onclick="this.closest('.fixed').remove()"
                     class="bg-white/90 backdrop-blur rounded-full w-10 h-10 flex items-center justify-center hover:bg-white transition shadow-md hover:shadow-lg">
                 <i class="fas fa-times text-gray-700"></i>
             </button>
         </div>
-        
+
         <div class="relative">
-            <img src="${attraction.image}" alt="${attraction.title}" class="photo w-full h-60 xl:h-110 object-cover rounded-tl-2xl">
+            <img src="${attraction.image}" alt="${attraction.title}" class="photo w-full h-60 sm:h-80 md:h-90 lg:h-110 object-cover rounded-tl-2xl">
         </div>
             <div class="p-8">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4">
-                    <h2 class="title3xl">${attraction.title}</h2>
+                    <h2>${attraction.title}</h2>
                     <span class="title-block">⭐ ${attraction.rating}</span>
                 </div>
-                <p class="text-gray-600 mb-6">${attraction.description}</p>
-                
-                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                <p class="text-gray-600 mb-1 sm:mb-6 text-lg">${attraction.description}</p>
+
+                <div class="grid md:grid-cols-3 md:gap-4 mb-6">
                     <div class="bg-gray-50 rounded-lg p-4">
                         <i class="fas fa-clock text-blue-500 mb-2"></i>
-                        <p class="text-sm text-gray-500">Время посещения</p>
+                        <p class="text-lg text-gray-500">Время посещения</p>
                         <p class="font-semibold">${attraction.time}</p>
                     </div>
                     <div class="bg-gray-50 rounded-lg p-4">
                         <i class="fas fa-tag text-purple-500 mb-2"></i>
-                        <p class="text-sm text-gray-500">Категория</p>
+                        <p class="text-lg text-gray-500">Категория</p>
                         <p class="font-semibold">${attraction.category}</p>
                     </div>
                     <div class="bg-gray-50 rounded-lg p-4">
                         <i class="fas fa-map-marker-alt text-red-500 mb-2"></i>
-                        <p class="text-sm text-gray-500">Расстояние</p>
+                        <p class="text-lg text-gray-500">Расстояние</p>
                         <p class="font-semibold">2.5 км от центра</p>
                     </div>
                 </div>
-                
+
                 <div class="flex gap-4 flex-col sm:flex-row">
                     <button onclick="showOnMap(${attraction.id})" class=" flex-1 bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition flex flex-col sm:flex-row items-center justify-center">
                         <i class="fas fa-map mr-2 cursor-pointer"></i>Показать на карте
@@ -168,28 +168,28 @@ function showAttractionDetails(id) {
             </div>
         </div>
     `;
-    
+
     document.body.appendChild(modal);
 }
 
 function showOnMap(attractionId) {
     const attraction = attractionsData.find(a => a.id === attractionId);
     if (!attraction) return;
-    
+
     // Закрыть модальное окно если открыто
     const modal = document.querySelector('.fixed');
     if (modal) modal.remove();
-    
+
     // Прокрутить к карте
     const mapSection = document.getElementById('map');
     if (mapSection) {
         mapSection.scrollIntoView({ behavior: 'smooth' });
-        
+
         // Центрировать карту на достопримечательности
         setTimeout(() => {
             if (window.map && window.L) {
                 window.map.setView(attraction.coordinates, 15);
-                
+
                 // Добавить маркер
                 const marker = L.marker(attraction.coordinates)
                     .addTo(window.map)

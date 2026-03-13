@@ -9,13 +9,23 @@ const nextBtn = document.getElementById('next-btn');
 const currentMonthYearEl = document.getElementById('current-month-year');
 const currentDayEl = document.getElementById('current-day');
 
-// Массивы месяцев и дней недели 
+// Массивы месяцев и дней недели
 const monthNames = [
-    'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 
+    'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
     'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
 ];
 
 const dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+
+const events = {
+    2: {
+        2: {name: 'Квест', textColor: '#BE185D', bgColor: '#FCE7F5'},
+        11: {name: 'Концерт', textColor: '#7E22CE', bgColor: '#F3E8FF'},
+        23: {name: 'Экскурсия', textColor: '#15803D', bgColor: '#DCFCE7'},
+        27: {name: 'Лекция', textColor: '#4338CA', bgColor: '#E0E7FF'}
+    }
+};
+
 
 let currentDate = new Date();
 
@@ -23,9 +33,9 @@ let currentDate = new Date();
 const renderCurrentDate = () => {
     const today = new Date();
     const day = today.getDate();
-    const month = monthNames[today.getMonth()]; // Используем monthNames напрямую
+    const month = monthNames[today.getMonth()];
     const year = today.getFullYear();
-    
+
     currentDayEl.textContent = day;
     currentMonthYearEl.textContent = `${month} - ${year}`;
 };
@@ -52,11 +62,42 @@ const renderCalendar = () => {
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
-        const isToday = day === new Date().getDate() && 
-                        month === new Date().getMonth() && 
+        const isToday = day === new Date().getDate() &&
+                        month === new Date().getMonth() &&
                         year === new Date().getFullYear();
-        
-        daysContainer.innerHTML += `<span class="${isToday ? 'today' : ''}">${day}</span>`;
+
+        // Проверяем, есть ли событие в этот день
+        const event = events[month]?.[day];
+
+        // Создаем ячейку дня
+        const dayCell = document.createElement('span');
+
+        // Формируем классы
+        let dayCellClasses = 'calendar-day';
+        if (isToday) {
+            dayCellClasses += ' today';
+        }
+        if (event) {
+            dayCellClasses += ' has-event';
+        }
+        dayCell.className = dayCellClasses;
+
+        const dayNumber = document.createElement('span');
+        dayNumber.className = 'day-number';
+        dayNumber.textContent = day;
+        dayCell.appendChild(dayNumber);
+
+        if (event) {
+            const eventSpan = document.createElement('p');
+            eventSpan.className = 'event-label';
+            eventSpan.textContent = event.name;
+            eventSpan.style.color = event.textColor;
+            eventSpan.style.backgroundColor = event.bgColor;
+            dayCell.appendChild(eventSpan);
+        }
+
+        daysContainer.appendChild(dayCell);
+        // daysContainer.innerHTML += `<span class="${isToday ? 'today' : ''}">${day}</span>`;
     }
 };
 
