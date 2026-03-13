@@ -6,7 +6,7 @@
     <!--Hero Section-->
     <section class="features-section pt-28 md:pt-30 lg:pt-41.5 bg-white">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 xl:px-20">
-            <div class="flex flex-col-reverse lg:flex-row-reverse items-center gap-5 lg:gap-10 3xl:gap-22.5">
+            <div class="flex flex-col-reverse lg:flex-row-reverse items-center sm:gap-5 lg:gap-10 3xl:gap-22.5">
 
                 <div data-aos="fade-right" class="flex flex-col-reverse gap-5 w-full lg:w-auto">
 
@@ -25,7 +25,7 @@
                 </div>
 
                 <div data-aos="fade-left" class="w-full lg:w-auto">
-                    <h2 class="text-center pb-5 lg:pb-10">Где остановиться</h2>
+                    <h2 class="text-center sm:pb-5 lg:pb-10">Где остановиться</h2>
                     <p class="text-base xl:text-lg 3xl:text-xl hidden lg:block">В этом разделе собрали лучшие районы и варианты жилья для туристов - от отелей в центре до уютных апартаментов в тихих кварталах. Подскажем, где удобнее остановиться с учётом транспорта, достопримечательностей и бюджета, и на что обратить внимание при бронировании.</p>
                 </div>
             </div>
@@ -35,19 +35,18 @@
     @livewire('sara-ai')
 
     <!-- Section with filter and card-vebue -->
-    <section class="bg-white pb-25.5 px-4 sm:px-10">
-        <div class="max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto flex flex-col gap-12 items-center">
+    <section class="bg-white pb-10 md:pb-15 xl:pb-20 3xl:pb-26 px-4 sm:px-10">
+        <div class="max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto flex flex-col gap-7 3xl:gap-12 items-center">
             <div class="text-center" data-aos="fade-up">
                 <p class="text text-gray-600 content-center">Заведения рядом на любой вкус - от кофеен и пекарен до ресторанов и баров</p>
             </div>
             <div class="w-full">
                 <div class="filter overflow-x-auto md:overflow-x-auto lg:overflow-visible scrollbar-hide">
-                    <div class="flex lg:flex-wrap justify-center gap-2 lg:gap-3 min-w-min lg:min-w-0 w-max lg:w-full px-10">
-
-                        <!-- Район / зона -->
+                    <div class="text-xs md:text-base flex lg:flex-wrap justify-center gap-2 lg:gap-3 min-w-min lg:min-w-0 w-max lg:w-full">
+                        <!-- Район -->
                         <div class="relative group">
                             <select id="date-filter" name="date-filter"
-                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9 text-base  cursor-pointer outline-none w-auto min-w-[120px]">
+                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9  cursor-pointer outline-none w-auto min-w-[120px]">
                                 <option value="date" selected disabled hidden>Район</option>
                                 <option value="all">Любое</option>
                                 <option value="first">Первое</option>
@@ -63,7 +62,7 @@
                         <!-- Тип -->
                         <div class="relative group">
                             <select id="time-filter" name="time-filter"
-                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9 text-base  cursor-pointer outline-none w-auto min-w-[120px]">
+                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9  cursor-pointer outline-none w-auto min-w-[120px]">
                                 <option value="date" selected disabled hidden>Тип жилья</option>
                                 <option value="all">Любое</option>
                                 <option value="first">Первое</option>
@@ -79,7 +78,7 @@
                         <!-- Кухня -->
                         <div class="relative group">
                             <select id="price-filter" name="price-filter"
-                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9 text-base  cursor-pointer outline-none w-auto min-w-[120px]">
+                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9  cursor-pointer outline-none w-auto min-w-[120px]">
                                 <option value="date" selected disabled hidden>Дата</option>
                                 <option value="all">Любое</option>
                                 <option value="first">Первое</option>
@@ -95,7 +94,7 @@
                         <!-- Стоимость -->
                         <div class="relative group">
                             <select id="movement-filter" name="movement-filter"
-                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9 text-base  cursor-pointer outline-none w-auto min-w-[120px]">
+                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9  cursor-pointer outline-none w-auto min-w-[120px]">
                                 <option value="date" selected disabled hidden>Стоимость</option>
                                 <option value="all">Любое</option>
                                 <option value="first">Первое</option>
@@ -110,7 +109,7 @@
                         <!-- Количество человек-->
                         <div class="relative group">
                             <select id="movement-filter" name="movement-filter"
-                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9 text-base  cursor-pointer outline-none w-auto min-w-[120px]">
+                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9  cursor-pointer outline-none w-auto min-w-[120px]">
                                 <option value="date" selected disabled hidden>Количество человек</option>
                                 <option value="all">Любое</option>
                                 <option value="first">Первое</option>
@@ -125,7 +124,7 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-2 xl:grid-cols-3 gap-1 lg:gap-3 3xl:gap-5 p-6">
+            <div class="grid grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-3 3xl:gap-5">
                 <!-- Карточка 1 -->
                 <div class="card bg-white rounded-[7px] sm:rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mb-2 xl:mb-12">
                     <div class="card-content p-2 sm:p-5 relative">
@@ -134,9 +133,9 @@
                             <div class="absolute top-4 right-3.5 sm:top-10 sm:right-9.5 size-5 sm:size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-[3px] sm:rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-xl xl:text-2xl shadow-lg">
                                 <i class="fa-sharp fa-solid fa-heart"></i>
                             </div>
-                            <div class="absolute top-4 sm:top-10 left-3.5 sm:left-9.5 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5">
+                            <div class="absolute top-4 sm:top-10 left-3.5 sm:left-9.5 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5 text-[8px] sm:text-sm">
                                 <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold text-black">4.9</span>
+                                <span class="font-semibold text-black">4.9</span>
                             </div>
                         </div>
                         <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">
@@ -175,9 +174,9 @@
                             <div class="absolute top-4 right-3.5 sm:top-10 sm:right-9.5 size-5 sm:size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-[3px]  sm:rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-xl xl:text-2xl shadow-lg">
                                 <i class="fa-sharp fa-solid fa-heart"></i>
                             </div>
-                            <div class="absolute top-4 sm:top-10 left-3.5 sm:left-9.5 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5">
+                            <div class="absolute top-4 sm:top-10 left-3.5 sm:left-9.5 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5 text-[8px] sm:text-sm">
                                 <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold text-black">4.9</span>
+                                <span class="font-semibold text-black">4.9</span>
                             </div>
                         </div>
                         <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">
@@ -216,9 +215,9 @@
                             <div class="absolute top-4 right-3.5 sm:top-10 sm:right-9.5 size-5 sm:size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-[3px]  sm:rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-xl xl:text-2xl shadow-lg">
                                 <i class="fa-sharp fa-solid fa-heart"></i>
                             </div>
-                            <div class="absolute top-4 sm:top-10 left-3.5 sm:left-9.5 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5">
+                            <div class="absolute top-4 sm:top-10 left-3.5 sm:left-9.5 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5 text-[8px] sm:text-sm">
                                 <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold text-black">4.9</span>
+                                <span class="font-semibold text-black">4.9</span>
                             </div>
                         </div>
                         <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">
@@ -256,50 +255,9 @@
                             <div class="absolute top-4 right-3.5 sm:top-10 sm:right-9.5 size-5 sm:size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-[3px]  sm:rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-xl xl:text-2xl shadow-lg">
                                 <i class="fa-sharp fa-solid fa-heart"></i>
                             </div>
-                            <div class="absolute top-4 sm:top-10 left-3.5 sm:left-9.5 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5">
+                            <div class="absolute top-4 sm:top-10 left-3.5 sm:left-9.5 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5 text-[8px] sm:text-sm">
                                 <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold text-black">4.9</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">
-                            <h1 class="text-center text-xs sm:text-lg lg:text-xl xl:text-3xl font-bold">Сканди-дачи «Уголок»</h1>
-                            <div class="flex flex-col">
-                                <div class="flex flex-col text-[8px] sm:text-sm lg:text-base xl:text-lg 3xl:text-xl font-light gap-3 text-[#5F5F5F] mt-2 lg:mt-5 mb-0 sm:mb-2 lg:mb-6">
-                                    <p class="text-center">Дом отдыха</p>
-                                    <span class="flex items-center gap-3.5">
-                                        <i class="fa-solid fa-clock"></i>
-                                        Заезд с 12:00, выезд до 14:00
-                                    </span>
-                                    <span class="flex items-center gap-3.5">
-                                        <i class="fas fa-phone"></i>
-                                        8 937 252-20-25
-                                    </span>
-                                    <span class="flex items-center gap-3.5">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        1-ый Ключевой проезд, д. 21
-                                    </span>
-                                </div>
-                                <form action="{{ route('single-hotel', ['hotel' => 1]) }}">
-                                    <button class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity">
-                                        Подробнее
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Карточка 1 -->
-                <div class="card bg-white rounded-[7px] sm:rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mb-2 xl:mb-12">
-                    <div class="card-content p-2 sm:p-5 relative">
-                        <div class="">
-                            <img src="/images/«Гагарин на Саратовской земле» (3).png" alt="Мистический Саратов" class="">
-                            <div class="absolute top-4 right-3.5 sm:top-10 sm:right-9.5 size-5 sm:size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-[3px]  sm:rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-xl xl:text-2xl shadow-lg">
-                                <i class="fa-sharp fa-solid fa-heart"></i>
-                            </div>
-                            <div class="absolute top-4 sm:top-10 left-3.5 sm:left-9.5 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5">
-                                <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold text-black">4.9</span>
+                                <span class="font-semibold text-black">4.9</span>
                             </div>
                         </div>
                         <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">
@@ -338,9 +296,50 @@
                             <div class="absolute top-4 right-3.5 sm:top-10 sm:right-9.5 size-5 sm:size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-[3px]  sm:rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-xl xl:text-2xl shadow-lg">
                                 <i class="fa-sharp fa-solid fa-heart"></i>
                             </div>
-                            <div class="absolute top-4 sm:top-10 left-3.5 sm:left-9.5 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5">
+                            <div class="absolute top-4 sm:top-10 left-3.5 sm:left-9.5 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5 text-[8px] sm:text-sm">
                                 <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold text-black">4.9</span>
+                                <span class="font-semibold text-black">4.9</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">
+                            <h1 class="text-center text-xs sm:text-lg lg:text-xl xl:text-3xl font-bold">Сканди-дачи «Уголок»</h1>
+                            <div class="flex flex-col">
+                                <div class="flex flex-col text-[8px] sm:text-sm lg:text-base xl:text-lg 3xl:text-xl font-light gap-3 text-[#5F5F5F] mt-2 lg:mt-5 mb-0 sm:mb-2 lg:mb-6">
+                                    <p class="text-center">Дом отдыха</p>
+                                    <span class="flex items-center gap-3.5">
+                                        <i class="fa-solid fa-clock"></i>
+                                        Заезд с 12:00, выезд до 14:00
+                                    </span>
+                                    <span class="flex items-center gap-3.5">
+                                        <i class="fas fa-phone"></i>
+                                        8 937 252-20-25
+                                    </span>
+                                    <span class="flex items-center gap-3.5">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        1-ый Ключевой проезд, д. 21
+                                    </span>
+                                </div>
+                                <form action="{{ route('single-hotel', ['hotel' => 1]) }}">
+                                    <button class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity">
+                                        Подробнее
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карточка 1 -->
+                <div class="card bg-white rounded-[7px] sm:rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mb-2 xl:mb-12">
+                    <div class="card-content p-2 sm:p-5 relative">
+                        <div class="">
+                            <img src="/images/«Гагарин на Саратовской земле» (3).png" alt="Мистический Саратов" class="">
+                            <div class="absolute top-4 right-3.5 sm:top-10 sm:right-9.5 size-5 sm:size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-[3px]  sm:rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-xl xl:text-2xl shadow-lg">
+                                <i class="fa-sharp fa-solid fa-heart"></i>
+                            </div>
+                            <div class="absolute top-4 sm:top-10 left-3.5 sm:left-9.5 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5 text-[8px] sm:text-sm">
+                                <i class="fas fa-star text-yellow-500"></i>
+                                <span class="font-semibold text-black">4.9</span>
                             </div>
                         </div>
                         <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">

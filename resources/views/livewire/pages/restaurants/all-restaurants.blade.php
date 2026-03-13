@@ -5,32 +5,32 @@
 
 <div>
     <!--Hero Section-->
-    <section id="home" class="hero-section pt-21 min-h-screen flex flex-col gap-17 items-center justify-center relative">
+    <section id="home" class="hero-section pt-21 min-h-100 md:min-h-screen flex flex-col gap-17 items-center justify-center relative">
         <div class="absolute inset-0 bg-[url('/images/5f27bd4403328a4ff674a7c90c938d56b200c299.jpg')] bg-no-repeat bg-cover">
             <div class="absolute inset-0 bg-[rgba(239,230,215,0.73)]"></div>
         </div>
         <div class="relative z-10 text-center text-black">
             <h1 class="text-4xl font-extrabold mb-4">Заведения города</h1>
-            <p class="text-xl">Подберите лучшие заведения рядом: кафе, рестораны, бары и кофейни на любой вкус.</p>
+            <p class="text-xl px-5">Подберите лучшие заведения рядом: кафе, рестораны, бары и кофейни на любой вкус.</p>
         </div>
     </section>
 
     @livewire('sara-ai')
 
     <!-- Section with filter and card-vebue -->
-    <section class="bg-white pb-25.5">
+    <section class="bg-white pb-5 md:pb-10 xl:pb-20 3xl:pb-26">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-4 sm:px-10">
-            <div class="text-center mb-12" data-aos="fade-up">
+            <div class="text-center mb-2 3xl:mb-12" data-aos="fade-up">
                 <p class="text text-gray-600 content-center">Заведения рядом на любой вкус - от кофеен и пекарен до ресторанов и баров</p>
             </div>
             <div class="w-full">
                 <div class="filter overflow-x-auto md:overflow-x-auto lg:overflow-visible scrollbar-hide px-4 py-3 lg:p-6">
-                    <div class="flex lg:flex-wrap justify-center gap-2 lg:gap-3 min-w-min lg:min-w-0 w-max lg:w-full">
+                    <div class="text-xs md:text-base flex lg:flex-wrap justify-center gap-2 lg:gap-3 min-w-min lg:min-w-0 w-max lg:w-full">
 
                         <!-- Район / зона -->
                         <div class="relative group">
                             <select id="date-filter" name="date-filter"
-                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9 text-base  cursor-pointer outline-none w-auto min-w-[120px]">
+                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9  cursor-pointer outline-none w-auto min-w-[120px]">
                                 <option value="date" selected disabled hidden>Район / зона</option>
                                 <option value="all">Любое</option>
                                 <option value="first">Первое</option>
@@ -46,7 +46,7 @@
                         <!-- Тип -->
                         <div class="relative group">
                             <select id="time-filter" name="time-filter"
-                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9 text-base  cursor-pointer outline-none w-auto min-w-[120px]">
+                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9  cursor-pointer outline-none w-auto min-w-[120px]">
                                 <option value="date" selected disabled hidden>Тип</option>
                                 <option value="all">Любое</option>
                                 <option value="first">Первое</option>
@@ -62,7 +62,7 @@
                         <!-- Кухня -->
                         <div class="relative group">
                             <select id="price-filter" name="price-filter"
-                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9 text-base  cursor-pointer outline-none w-auto min-w-[120px]">
+                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9   cursor-pointer outline-none w-auto min-w-[120px]">
                                 <option value="date" selected disabled hidden>Кухня</option>
                                 <option value="all">Любое</option>
                                 <option value="first">Первое</option>
@@ -78,7 +78,7 @@
                         <!-- Время работы -->
                         <div class="relative group">
                             <select id="number-filter" name="number-filter"
-                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9 text-base  cursor-pointer outline-none w-auto min-w-[120px]">
+                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9  cursor-pointer outline-none w-auto min-w-[120px]">
                                 <option value="date" selected disabled hidden>Время работы</option>
                                 <option value="all">Любое</option>
                                 <option value="first">Первое</option>
@@ -94,7 +94,7 @@
                         <!-- Диапазон чека -->
                         <div class="relative group">
                             <select id="movement-filter" name="movement-filter"
-                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9 text-base  cursor-pointer outline-none w-auto min-w-[120px]">
+                                    class="appearance-none bg-[#7676801F] hover:bg-black  hover:text-white focus:bg-black focus-within:text-white  transition-colors duration-200 rounded-[40px] py-2.5 pl-4 pr-9  cursor-pointer outline-none w-auto min-w-[120px]">
                                 <option value="date" selected disabled hidden>Диапазон чека</option>
                                 <option value="all">Любое</option>
                                 <option value="first">Первое</option>

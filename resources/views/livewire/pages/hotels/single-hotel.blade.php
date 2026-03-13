@@ -30,24 +30,24 @@
         </div>
     </section>
 
-    <section class="features-section pt-8 md:pt-10 xl:pt-20 3xl:pt-26 pb-4 sm:pb-10 lg:pb-20 xl:pb-20 3xl:pb-36 bg-white">
+    <section class="features-section pt-8 md:pt-10 xl:pt-20 3xl:pt-26 pb-10 lg:pb-20 xl:pb-20 3xl:pb-36 bg-white">
         <div class="max-w-6xl 3xl:max-w-421 mx-auto px-4 sm:px-10">
-            <div class="flex flex-col lg:flex-row items-center justify-between gap-5 xl:gap-11">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-5 lg:gap-10 xl:gap-13.5">
                 <div data-aos="fade-left" class="flex flex-col gap-7 w-full">
-                    <div class="flex flex-col w-full justify-around bg-[#E5E6F6] gap-3 md:gap-6.75 px-6 xl:px-7 3xl:px-11 py-8 rounded-[20px] font-['FindSansPro'] text-sm sm:text-base xl:text-xl 3xl:text-2xl">
-                        <div class="flex items-center gap-2 xl:gap-5">
+                    <div class="flex flex-col w-full justify-around bg-[#E5E6F6] gap-3 md:gap-6.75 px-6 xl:px-7 3xl:px-11 py-6 lg:py-8 rounded-[20px] font-['FindSansPro'] text-sm sm:text-sm lg:text-lg 2xl:text-lg 3xl:text-2xl">
+                        <div class="flex items-center gap-3 xl:gap-5">
                             <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/значок локации.svg">
                             <p>1-ый Ключевой проезд, д. 21</p>
                         </div>
-                        <div class="flex items-center gap-2 xl:gap-5">
+                        <div class="flex items-center gap-3 xl:gap-5">
                             <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 15.svg">
                             <p>8 917 205-57-41</p>
                         </div>
-                        <a href="#" class="flex items-center gap-2 xl:gap-5">
+                        <a href="#" class="flex items-center gap-3 xl:gap-5">
                             <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 16.svg">
                             <p>https://ugolokdacha.ru</p>
                         </a>
-                        <div class="flex items-center gap-2 xl:gap-5">
+                        <div class="flex items-center gap-3 xl:gap-5">
                             <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 8.svg">
                             <p>Заезд с 12:00, выезд до 14:00</p>
                         </div>
@@ -57,14 +57,16 @@
                         </div>
                     </div>
                 </div>
-                <div data-aos="fade-right" class="font-['FindSansPro'] flex flex-col items-center lg:items-start">
-                    <h3>Достижения</h3>
-                    <p class="text-base xl:text-lg 3xl:text-2xl text-center lg:text-left text-nowrap">За прохождение “Модерн в Саратове” вы получите:</p>
-                    <div class="flex flex-col flex-wrap gap-4 lg:gap-4 lg:justify-start items-start text-sm pt-4 lg:pt-5 3xl:pt-7 md:text-base xl:text-lg 3xl:text-xl">
-                        <div class="text-white rounded-4xl gradient-button  py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Исследователю”</div>
-                        <a href="#" class="text-[#636363] text-nowrap"> перейти к другим квестам и достижениям ></a>
+                <div data-aos="fade-right" class="font-['FindSansPro'] flex flex-col-reverse md:flex-col gap-5 md:gap-0 w-full md:w-auto">
+                    <div>
+                        <h3 class="text-center md:text-left pb-2 md:pb-0">Достижения</h3>
+                        <p class="text-base xl:text-lg 3xl:text-2xl lg:text-nowrap">За прохождение “Модерн в Саратове” вы получите:</p>
+                        <div class="flex flex-row md:flex-col flex-wrap gap-2 lg:gap-4 justify-between md:justify-start items-center md:items-start pt-4 lg:pt-5 3xl:pt-7 text-[9px] sm:text-[13px] lg:text-base xl:text-lg 3xl:text-xl">
+                            <div class="text-white rounded-4xl gradient-button py-3 lg:py-4.5 px-8 lg:px-15">+1 к “Исследователю”</div>
+                            <a href="#" class="text-[#636363] text-nowrap"> перейти к другим квестам и достижениям ></a>
+                        </div>
                     </div>
-                    <button class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 xl:py-6 rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-lg xl:text-xl 3xl:text-3xl mt-4">Показать на карте</button>
+                    <button class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 xl:py-6 rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-lg xl:text-xl 3xl:text-3xl md:mt-4">Показать на карте</button>
                 </div>
             </div>
         </div>

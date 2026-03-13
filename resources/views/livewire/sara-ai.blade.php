@@ -1,11 +1,8 @@
 <div>
     <!-- AI City Guide Section (Enhanced!) -->
-    <section id="ai-guide" class="bg-white py-25.5">
+    <section id="ai-guide" class="bg-white py-10 sm:py-15 xl:py-20 3xl:py-25.5">
         <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10">
             <div class="text-center mb-12" data-aos="fade-up">
-                <span class="bg-linear-to-r from-green-600 to-teal-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
-                    <i class="fas fa-robot mr-2"></i>AI АССИСТЕНТ
-                </span>
                 <h2>Ваш персональный гид Сара</h2>
                 <p class="text text-gray-600 content-center">Интерактивный помощник, который подберет идеальный маршрут именно для вас</p>
             </div>

@@ -12,7 +12,7 @@
                     Саратов на волне времени!
                 </h1>
                 <div class="flex flex-wrap gap-3.5 sm:gap-7.5 justify-center md:justify-start">
-                    <button class="hero-section-button text-xs sm:text-sm lg:text-base from-green-500 to-teal-600">
+                    <button onclick="showAppDownload()" class="hero-section-button text-xs sm:text-sm lg:text-base from-green-500 to-teal-600">
                         <i class="fas fa-mobile-alt mr-2 group-hover:animate-bounce"></i>
                         Скачать приложение
                     </button>
@@ -46,7 +46,7 @@
     </section>
 
     <!-- App Download Section -->
-    <section id="app-download" class="pt-19 pb-32.5 overflow-hidden bg-linear-to-r from-blue-600 to-purple-600 text-white">
+    <section id="app-download" class="pb-15 pt-15 lg:pt-20 lg:pb-20 3xl:pb-32.5 overflow-hidden bg-linear-to-r from-blue-600 to-purple-600 text-white">
         <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div data-aos="fade-right" class="flex flex-col items-center md:items-start">
@@ -114,7 +114,7 @@
     </section>
 
     <!-- Features Section -->
-    <section class="features-section py-10 md:py-26 bg-white">
+    <section class="features-section py-10 sm:py-15 xl:py-20 3xl:py-26 bg-white">
         <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10">
             <div class="text-center mb-12" data-aos="fade-up">
                 <h2>Что вас ждет в приложении</h2>
@@ -577,9 +577,9 @@
     </section>
 
     <!-- AR Experience Section (New!) -->
-    <section id="ar-experience" class="py-10 md:py-25.5 bg-white overflow-hidden">
+    <section id="ar-experience" class="pt-10 sm:pt-15 xl:pt-20 3xl:pt-26 bg-white overflow-hidden">
         <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4">
-            <div class="flex flex-col items-center mb-12" data-aos="fade-up">
+            <div class="flex flex-col items-center mb-5 md:mb-12" data-aos="fade-up">
                 <span class="flex justify-center gap-2 bg-linear-to-r from-purple-600 to-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-4">
                      <img src="/images/Symbol.svg" alt="Иконка" class="icon">НОВАЯ ФУНКЦИЯ
                 </span>
@@ -587,10 +587,10 @@
                 <p class="text text-gray-600">Увидьте, как выглядел Саратов 100 лет назад через камеру телефона</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="grid md:grid-cols-2 gap-7 xl:gap-12 items-center">
                 <div data-aos="fade-right">
-                    <div class="relative">
-                        <img src="https://photocentra.ru/images/main19/192962_main.jpg" alt="Саратовский мост" class="rounded-2xl shadow-2xl">
+                    <div class="relative xl:w-full md:h-99 xl:h-full shadow-xl">
+                        <img src="/images/a2180e30ceeba4a115385d68e52b22ba3e08df0f.jpg" alt="Саратовский мост" class="rounded-2xl">
                         <div class="absolute inset-0 bg-linear-to-t from-black/50 to-transparent rounded-2xl"></div>
                         <div class="absolute bottom-6 left-6 text-white">
                             <div class="bg-white/20 backdrop-blur-sm rounded-lg p-4">
@@ -650,7 +650,7 @@
 
 {{--    @livewire('sara-ai')--}}
     <!-- AI City Guide Section (Enhanced!) -->
-    <section id="ai-guide" class="bg-white py-25.5">
+    <section id="ai-guide" class="bg-white py-10 sm:py-15 xl:py-20 3xl:py-26">
         <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10">
             <div class="text-center mb-12" data-aos="fade-up">
                 <span class="bg-linear-to-r from-green-600 to-teal-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
@@ -740,7 +740,7 @@
     </section>
 
     <!-- Photo Gallery Section -->
-    <section id="gallery-section" class="py-10 md:py-25.5 bg-white">
+    <section id="gallery-section" class="pb-10 sm:pb-15 xl:pb-20 3xl:pb-26 bg-white">
         <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4">
             <div class="text-center mb-12" data-aos="fade-up">
                 <span class="bg-linear-to-r from-pink-600 to-red-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
@@ -889,7 +889,7 @@
     </section>
 
     <!-- City Quests Section (New!) -->
-    <section id="quests" class="py-10 md:py-20 bg-gray-50">
+    <section id="quests" class="py-10 sm:py-15 xl:py-20 3xl:py-26 bg-gray-50">
         <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10">
             <div class="text-center mb-12" data-aos="fade-up">
                 <span class="bg-linear-to-r from-red-600 to-orange-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
@@ -1019,7 +1019,7 @@
                     <div class="flex items-center space-x-4 bg-linear-to-r from-yellow-50 to-yellow-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition" onclick="showProfile('alexander')">
                         <div class="text-3xl font-bold text-yellow-600">1</div>
                         <div class="w-12 h-12 rounded-full overflow-hidden bg-linear-to-r from-blue-400 to-purple-500 flex items-center justify-center">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Александр М.">
+                            <img src="/images/0d5da6ab018faf09b0940ac3e0ab4d6d514c431f.jpg" alt="Александр М.">
                         </div>
                         <div class="flex-1">
                             <p class="font-semibold">Александр М.</p>
@@ -1030,7 +1030,7 @@
                     <div class="flex items-center space-x-4 bg-linear-to-r from-gray-50 to-gray-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition" onclick="showProfile('maria')">
                         <div class="text-3xl font-bold text-gray-600">2</div>
                         <div class="w-12 h-12 rounded-full overflow-hidden bg-linear-to-r from-pink-400 to-red-500 flex items-center justify-center">
-                            <img src="https://fs.tonkosti.ru/30/ls/30lsy6fot9s0o04g4wow8wkgc.jpg" alt="Мария К.">
+                            <img src="/images/ff36dbfb2cd08696fa0f4b58af223c7dd6f39c0d.jpg" alt="Мария К.">
                         </div>
                         <div class="flex-1">
                             <p class="font-semibold">Мария К.</p>
@@ -1041,7 +1041,7 @@
                     <div class="flex items-center space-x-4 bg-linear-to-r from-orange-50 to-orange-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition" onclick="showProfile('ivanov')">
                         <div class="text-3xl font-bold text-orange-600">3</div>
                         <div class="w-12 h-12 rounded-full overflow-hidden bg-linear-to-r from-green-400 to-teal-500 flex items-center justify-center">
-                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Семья Ивановых">
+                            <img src="/images/9bbdfb06a5eae3ca01387e38cee556cb0ba93eb3.jpg" alt="Семья Ивановых">
                         </div>
                         <div class="flex-1">
                             <p class="font-semibold">Семья Ивановых</p>
@@ -1055,7 +1055,7 @@
     </section>
 
     <!-- Achievements Section -->
-    <section id="achievements" class="py-10 md:py-20 bg-white">
+    <section id="achievements" class="py-10 sm:py-15 xl:py-20 3xl:py-26 bg-white">
         <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10">
             <div class="text-center mb-12" data-aos="fade-up">
                 <h2>Система достижений</h2>
