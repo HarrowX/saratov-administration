@@ -1,5 +1,5 @@
 @section('title')
-    Саратов 435 - Экскурсии Фёдоровой Елены
+    Саратов 435 - Экскурсии {{ $guidedTour->name }}
 @endsection
 
 <div>
@@ -7,26 +7,25 @@
     <section class="features-section flex justify-center pt-25.5 xl:pt-41.5 pb-26 bg-white">
         <div class="flex flex-col lg:flex-row gap-2.5 sm:gap-10 2xl:gap-17.5 max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 sm:px-10">
             <div class="relative aspect-4/3 rounded-2xl overflow-hidden min-w-full lg:min-w-100 xl:min-w-150 3xl:min-w-202">
-                <img src="/images/20a0f326793ebefe350dba0bfc9acfb489484a4a.png">
+                <img src="{{ $guidedTour->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $guidedTour->name }}">
                 <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5">
                     <i class="fas fa-star text-yellow-500"></i>
                     <span class="text-sm font-semibold text-black">4.9</span>
                 </div>
             </div>
             <div>
-                <h1 class="font-black text-3xl xl:text-5xl text-center pb-12">Фёдорова Елена</h1>
+                <h1 class="font-black text-3xl xl:text-5xl text-center pb-12">{{ $guidedTour->name }}</h1>
                 <div class="text-base xl:text-xl flex flex-col gap-2.5 xl:gap-8">
-                    <p>Организует вечерние экскурсии с легендами и атмосферными остановками для фото.</p>
-                    <p>Стаж работы: 9 лет</p>
-                    <p>Экскурсовод Елена Фёдорова организует вечерние экскурсии, наполненные городскими легендами и интересными историями. Маршрут продуман так, чтобы вы не только услышали самые загадочные сюжеты, но и сделали атмосферные фотографии на лучших остановках. Это прогулки для тех, кто любит вечерний город и эффектные кадры.Елена уделяет внимание деталям — выбирает время и точки так, чтобы город выглядел особенно выразительно в вечернем свете. Экскурсия проходит в комфортном темпе, с паузами для фото и небольшого отдыха. По ходу маршрута она подсказывает удачные ракурсы и помогает поймать нужное настроение кадра. Такой формат подойдет и гостям города, и тем, кто хочет взглянуть на привычные места по-новому.
-                    </p>
+                    <p>{{ $guidedTour->short_description }}</p>
+                    <p>Стаж работы: {{ $guidedTour->experience }}</p>
+                    <p>{{ $guidedTour->description }}</p>
                     <div class="flex flex-row gap-10">
                        <img src="/images/phone.png" class="icon size-8">
-                       <p>+7 (777) 777-77-77</p>
+                       <p>{{ $guidedTour->phone }}</p>
                     </div>
                     <div class="flex flex-row gap-10 ml-3">
                        <img src="/images/gues.png" class="icon w-4.5 h-8">
-                       <p>Задать вопрос: helpme@mail.ru</p>
+                       <p>Задать вопрос: {{ $guidedTour->email }}</p>
                     </div>
                     <div class="flex flex-row gap-11 xl:gap-17.5 justify-center xl:justify-start">
                         <img src="/images/telegram.png" class="icon">
@@ -40,7 +39,7 @@
     <section class="py-20 bg-gray-50">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 sm:px-10">
             <div class="text-center mb-12">
-                <h2>Экскурсии Фёдоровой Елены</h2>
+                <h2>Экскурсии {{ $guidedTour->name }}</h2>
             </div>
 
             <!-- Карусель -->

@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('guided_tours', function (Blueprint $table) {
             $table->id();
+            $table->text('name');
+            $table->text('short_description');
+            $table->text('description');
+            $table->text('experience');
+            $table->text('phone');
+            $table->text('email');
             $table->timestamps();
         });
     }
