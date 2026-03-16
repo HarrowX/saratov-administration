@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('guided_tours', function (Blueprint $table) {
+        Schema::create('attachments', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
-            $table->text('short_description');
-            $table->text('description');
-            $table->text('experience');
-            $table->text('phone');
-            $table->text('email');
+            $table->morphs('attachable');
+            $table->integer('order');
+            $table->text('link');
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('guided_tours');
+        Schema::dropIfExists('attachments');
     }
 };
