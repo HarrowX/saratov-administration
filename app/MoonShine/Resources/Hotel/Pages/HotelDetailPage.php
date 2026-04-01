@@ -17,8 +17,10 @@ use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Phone;
+use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
+use Symfony\Component\Console\Input\Input;
 use Throwable;
 
 
@@ -37,10 +39,15 @@ class HotelDetailPage extends DetailPage
             Text::make('Название', 'name'),
             Text::make('Категория', 'category'),
             Textarea::make('Описание', 'description'),
-            Textarea::make('Второе описание', 'secondDescription'),
+            Textarea::make('Второе описание', 'second_description'),
             Text::make('Рабочее время', 'worktime'),
             Phone::make('Номер телефона', 'phone'),
             Text::make('Адрес', 'address'),
+            Text::make('Район', 'district'),
+            Text::make('Email', 'email'),
+            Text::make('Сайт', 'website'),
+            Number::make('Максимальная цена', 'max_price'),
+            Number::make('Минимальная цена', 'min_price'),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),

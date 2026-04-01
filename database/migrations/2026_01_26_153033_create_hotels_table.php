@@ -15,12 +15,10 @@ return new class extends Migration
         Schema::create('hotels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('type', ['hotel', 'hostel', 'guesthouse', 'glamping', 'resort'])->default('hotel');
+            $table->string('category');
             $table->string('description');
             $table->string('second_description');
             $table->json('worktime');
-            $table->tinyInteger('stars');
-            $table->string('district');
             $table->string('phone');
             $table->string('address');
             $table->string('slug');
@@ -29,18 +27,13 @@ return new class extends Migration
             $table->decimal('longitude');
             $table->string('email');
             $table->string('website');
-            $table->enum('status',['active','draft','archived'])->default('active');
-            $table->char('ticket_price');
-            $table->integer('visit_duration');
-            $table->boolean('accessibility');
-            $table->boolean('parking');
+            $table->decimal('max_price');
+            $table->decimal('min_price');
             $table->decimal('rating');
+            $table->integer('reviews_count')->default(0);
             $table->integer('views_count')->default(0);
-            $table->integer('favorites_count')->default(0);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->timestamp('deleted_at');
-            $table->integer('created_by');
             $table->timestamps();
         });
     }
