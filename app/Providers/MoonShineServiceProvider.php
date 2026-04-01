@@ -13,6 +13,9 @@ use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
 use App\MoonShine\Resources\Restaurant\RestaurantResource;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
+use App\MoonShine\Resources\Hotel\HotelResource;
+use App\MoonShine\Pages\Attraction;
+use App\MoonShine\Resources\Attraction\AttractionResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -28,9 +31,12 @@ class MoonShineServiceProvider extends ServiceProvider
                 RestaurantResource::class,
                 AttachmentResource::class,
                 GuidedTourResource::class,
+                HotelResource::class,
+                AttractionResource::class,
             ])
             ->pages([
                 ...$core->getConfig()->getPages(),
+                Attraction::class,
             ])
         ;
     }

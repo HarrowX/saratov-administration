@@ -1,0 +1,36 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\MoonShine\Resources\Hotel;
+
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Hotel;
+use App\MoonShine\Resources\Hotel\Pages\HotelIndexPage;
+use App\MoonShine\Resources\Hotel\Pages\HotelFormPage;
+use App\MoonShine\Resources\Hotel\Pages\HotelDetailPage;
+
+use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\Contracts\Core\PageContract;
+
+/**
+ * @extends ModelResource<Hotel, HotelIndexPage, HotelFormPage, HotelDetailPage>
+ */
+class HotelResource extends ModelResource
+{
+    protected string $model = Hotel::class;
+
+    protected string $title = 'Отели';
+
+    /**
+     * @return list<class-string<PageContract>>
+     */
+    protected function pages(): array
+    {
+        return [
+            HotelIndexPage::class,
+            HotelFormPage::class,
+            HotelDetailPage::class,
+        ];
+    }
+}

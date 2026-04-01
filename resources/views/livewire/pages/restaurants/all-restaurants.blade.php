@@ -114,7 +114,7 @@
                 <div class="card bg-white rounded-[7px] sm:rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mb-2 xl:mb-12">
                     <div class="card-content p-2 sm:p-5 relative">
                         <div class="">
-                            <img src="{{ $restaurant->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $restaurant->name }}" class="">
+                            <img src="{{ $restaurant->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $restaurant->name }}" class="photo rounded-[7px] sm:rounded-[19px]">
                             <div class="absolute top-4 right-3.5 sm:top-10 sm:right-9.5 size-5 sm:size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-[3px] sm:rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-xl xl:text-2xl shadow-lg">
                                 <i class="fa-sharp fa-solid fa-heart"></i>
                             </div>
@@ -124,7 +124,7 @@
                             </div>
                         </div>
                         <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">
-                            <h1 class="text-center text-xs sm:text-lg lg:text-xl xl:text-3xl font-bold">Port</h1>
+                            <h1 class="text-center text-xs sm:text-lg lg:text-xl xl:text-3xl font-bold">{{ $restaurant->name }}</h1>
                             <div class="flex flex-col">
                                 <div class="flex flex-col text-[8px] sm:text-sm lg:text-base xl:text-lg 3xl:text-2xl font-light gap-3 text-[#5F5F5F] mt-2 lg:mt-5 mb-0 sm:mb-2 lg:mb-6">
                                     <p class="text-center">{{ $restaurant->kitchen }} кухня</p>
@@ -141,6 +141,9 @@
                                         {{ $restaurant->address }}
                                     </span>
                                 </div>
+                                <a href="{{ route('single-restaurant', ['restaurant' => $restaurant->id]) }}" class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity text-center">
+                                    Подробнее
+                                </a>
                             </div>
                         </div>
                     </div>
