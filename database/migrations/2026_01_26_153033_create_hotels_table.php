@@ -32,8 +32,6 @@ return new class extends Migration
             $table->decimal('rating');
             $table->integer('reviews_count')->default(0);
             $table->integer('views_count')->default(0);
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamps();
         });
     }

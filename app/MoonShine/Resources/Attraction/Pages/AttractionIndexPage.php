@@ -20,6 +20,8 @@ use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Phone;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
+use MoonShine\UI\Fields\Select;
+use MoonShine\UI\Fields\Switcher;
 use Throwable;
 
 
@@ -38,11 +40,33 @@ class AttractionIndexPage extends IndexPage
         return [
             ID::make(),
             Text::make('Название', 'name'),
-            Text::make('Краткое описания', 'short_description'),
+            Text::make('Краткое описание', 'short_description'),
             Textarea::make('Описание', 'description'),
-            Text::make('Рабочее время', 'worktime'),
+            Text::make('С', 'worktime_from'),
+            Text::make('До', 'worktime_to'),
             Phone::make('Номер телефона', 'phone'),
             Text::make('Адрес', 'address'),
+            Text::make('Slug', 'slug')
+                ->default(fn($item) => Str::slug($item->name ?? '')),
+            Text::make('Район', 'district'),
+            Number::make('Широта', 'latitude'),
+            Number::make('Долгота', 'longitude'),
+            Text::make('Email', 'email'),
+            Text::make('Сайт', 'website'),
+            Select::make('Статус', 'status')
+                ->options([
+                    'active' => 'Активный',
+                    'draft' => 'Черновик',
+                    'archived' => 'Архив',
+                ])
+                ->required(),
+            Number::make('Цена билета', 'ticket_price'),
+            Number::make('Время посещения (мин)', 'visit_duration'),
+            Switcher::make('Доступность', 'accessibility'),
+            Switcher::make('Парковка', 'parking'),
+            Number::make('Рейтинг', 'rating'),
+            Number::make('Просмотры', 'views_count'),
+            Number::make('В избранном', 'favorites_count'),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),
