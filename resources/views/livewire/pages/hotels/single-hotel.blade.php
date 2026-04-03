@@ -45,7 +45,7 @@
                     @endif
                 </div>
                 <p class="text-base xl:text-lg 2xl:text-xl w-full lg:max-w-114 3xl:max-w-151.5 text-left lg:text-right xl:text-left">
-                    {{ $hotel->secondDescription }}
+                    {{ $hotel->second_description }}
                 </p>
             </div>
         </div>
@@ -70,7 +70,7 @@
                         </div>
                         <div class="flex items-center gap-2 xl:gap-5">
                             <i class="fa fa-home text-3xl"></i>
-                            <p>{{ $hotel->category}}</p>
+                            <p>{{ $hotel->type}}</p>
                         </div>
                     </div>
                 </div>

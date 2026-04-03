@@ -22,6 +22,7 @@ use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Phone;
+use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 use Throwable;
@@ -47,6 +48,18 @@ class RestaurantFormPage extends FormPage
                 Text::make('Рабочее время', 'worktime'),
                 Phone::make('Номер телефона', 'phone'),
                 Text::make('Кухня', 'kitchen'),
+                Select::make('Ценовая категория','price_category')
+                    ->options([
+                        'budget' => 'Дешево',
+                        'medium' => 'Средне',
+                        'premium' => 'Премиум',
+                        'luxury' => 'Люкс'
+                    ])
+                    ->required(),
+                Text::make('Адрес', 'address'),
+                Text::make('Район', 'district'),
+                Text::make('Email', 'email'),
+                Text::make('Сайт', 'website'),
                 RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                     ->fields([
                         ID::make(),

@@ -26,18 +26,14 @@ return new class extends Migration
             $table->string('email');
             $table->string('website');
             $table->enum('status',['active','draft','archived'])->default('active');
-            $table->char('ticket_price');
+            $table->decimal('ticket_price', 10, 2);
             $table->integer('visit_duration');
             $table->boolean('accessibility');
             $table->boolean('parking');
             $table->decimal('rating');
             $table->integer('views_count')->default(0);
             $table->integer('favorites_count')->default(0);
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->timestamp('deleted_at');
             $table->integer('created_by');
-            $table->timestamps();
             $table->timestamps();
         });
     }

@@ -13,6 +13,7 @@ use MoonShine\Contracts\UI\FieldContract;
 use App\MoonShine\Resources\Hotel\HotelResource;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\Email;
+use MoonShine\UI\Fields\Enum;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Number;
@@ -20,6 +21,7 @@ use MoonShine\UI\Fields\Phone;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
+use MoonShine\UI\Fields\Json;
 use Symfony\Component\Console\Input\Input;
 use Throwable;
 
@@ -37,10 +39,17 @@ class HotelDetailPage extends DetailPage
         return [
             ID::make(),
             Text::make('Название', 'name'),
-            Text::make('Категория', 'category'),
             Textarea::make('Описание', 'description'),
             Textarea::make('Второе описание', 'second_description'),
-            Text::make('Рабочее время', 'worktime'),
+            Json::make('Рабочее время', 'worktime')->keyValue(),
+            Select::make('Тип размещения', 'type')
+                ->options([
+                    'hostel' => 'Хостел',
+                    'guesthouse' => 'Гостевой дом',
+                    'glamping' => 'Глэмпинг',
+                    'resort' => 'Курорт'
+                ])
+                ->required(),
             Phone::make('Номер телефона', 'phone'),
             Text::make('Адрес', 'address'),
             Text::make('Район', 'district'),

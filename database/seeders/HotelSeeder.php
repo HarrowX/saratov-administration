@@ -26,22 +26,16 @@ class HotelSeeder extends Seeder
             'Горный воздух',
             'Берег солнца'
         ];
-        $category = [
-            'Дом отдыха',
-            'Хостел',
-            'Гостиница',
-            'Отель'
-        ];
 
         $hotels = [];
 
         for ($i = 0; $i < 8; $i++) {
             $hotels[] = [
                 'name' => fake()->randomElement($names),
-                'category' => fake()->randomElement($category),
+                'type' => fake()->randomElement(['hostel', 'guesthouse', 'glamping', 'resort' ]),
                 'description' => fake()->realText(),
-                'secondDescription' => fake()->realText(),
-                'worktime' => 'c ' . fake()->time('H:i') . ' до ' . fake()->time('H:i'),
+                'second_description' => fake()->realText(),
+                'worktime' => [], //'c ' . fake()->time('H:i') . ' до ' . fake()->time('H:i'),
                 'phone' => fake()->phoneNumber(),
                 'address' => fake()->address(),
             ];
