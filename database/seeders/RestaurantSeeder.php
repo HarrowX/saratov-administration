@@ -46,7 +46,7 @@ class RestaurantSeeder extends Seeder
                 'name' => fake()->randomElement($names),
                 'description' => fake()->realText(),
                 'address' => fake()->address(),
-                'worktime' => 'c ' . fake()->time('H:i') . ' до ' . fake()->time('H:i'),
+                'worktime' => '[]', //'c ' . fake()->time('H:i') . ' до ' . fake()->time('H:i'),
                 'phone' => fake()->phoneNumber(),
                 'kitchen' => fake()->randomElement($kitchens)
             ];

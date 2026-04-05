@@ -141,7 +141,7 @@
                                         <p class="text-center">{{ $hotel->type}}</p>
                                         <span class="flex items-center gap-3.5">
                                             <i class="fa-solid fa-clock"></i>
-                                            {{ $hotel->worktime }}
+                                            {{ json_encode($hotel->worktime, JSON_UNESCAPED_UNICODE)  }}
                                         </span>
                                         <span class="flex items-center gap-3.5">
                                             <i class="fas fa-phone"></i>

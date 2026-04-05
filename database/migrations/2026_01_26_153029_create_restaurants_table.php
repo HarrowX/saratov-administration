@@ -23,10 +23,11 @@ return new class extends Migration
             $table->json('worktime')->nullable();
             $table->text('phone');
             $table->text('kitchen');
+            $table->string('email')->nullable();
             $table->string('website')->nullable();
-            $table->enum('price_category',['budget','medium','premium','luxury']);
-            $table->integer('capacity');
-            $table->decimal('rating');
+            $table->enum('price_category',['budget','medium','premium','luxury'])->nullable();
+            $table->integer('capacity')->nullable();
+            $table->decimal('rating')->nullable();
             $table->integer('reviews_count')->default(0)->nullable();
             $table->integer('views_count')->default(0)->nullable();
             $table->timestamp('created_at')->nullable();

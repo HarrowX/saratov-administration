@@ -21,6 +21,7 @@ use MoonShine\UI\Fields\Phone;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
+use MoonShine\UI\Fields\Json;
 use Throwable;
 
 
@@ -41,7 +42,7 @@ class RestaurantIndexPage extends IndexPage
             Text::make('Название', 'name'),
             Textarea::make('Описание', 'description'),
             Text::make('Адрес', 'address'),
-            Text::make('Рабочее время', 'worktime'),
+            Json::make('Рабочее время', 'worktime')->keyValue(),
             Phone::make('Номер телефона', 'phone'),
             Text::make('Кухня', 'kitchen'),
             Select::make('Ценовая категория','price_category')
@@ -50,8 +51,7 @@ class RestaurantIndexPage extends IndexPage
                     'medium' => 'Средне',
                     'premium' => 'Премиум',
                     'luxury' => 'Люкс'
-                ])
-                ->required(),
+                ]),
             Text::make('Адрес', 'address'),
             Text::make('Район', 'district'),
             Text::make('Email', 'email'),

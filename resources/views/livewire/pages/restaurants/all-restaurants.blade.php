@@ -130,7 +130,7 @@
                                     <p class="text-center">{{ $restaurant->kitchen }} кухня</p>
                                     <span class="flex items-center gap-3.5">
                                         <i class="fa-solid fa-clock"></i>
-                                        {{ $restaurant->worktime }}
+                                        {{ json_encode($restaurant->worktime, JSON_UNESCAPED_UNICODE) }}
                                     </span>
                                     <span class="flex items-center gap-3.5">
                                         <i class="fas fa-phone"></i>

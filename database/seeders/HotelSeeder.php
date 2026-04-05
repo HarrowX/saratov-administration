@@ -35,7 +35,7 @@ class HotelSeeder extends Seeder
                 'type' => fake()->randomElement(['hostel', 'guesthouse', 'glamping', 'resort' ]),
                 'description' => fake()->realText(),
                 'second_description' => fake()->realText(),
-                'worktime' => [], //'c ' . fake()->time('H:i') . ' до ' . fake()->time('H:i'),
+                'worktime' => '[]', //'c ' . fake()->time('H:i') . ' до ' . fake()->time('H:i'),
                 'phone' => fake()->phoneNumber(),
                 'address' => fake()->address(),
             ];
