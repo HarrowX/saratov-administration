@@ -36,9 +36,15 @@
                             <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/значок локации.svg">
                             <p>{{ $attraction->address }}</p>
                         </div>
-                        <div class="flex items-center gap-5">
+                        <div class="flex items-start gap-5">
                             <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/image 8.svg">
-                            <p>{{$attraction->worktime}}</p>
+                            <div class="flex flex-col gap-2">
+                                @forelse($attraction->worktime ?? [] as $day => $time)
+                                    <p>{{ $day }}: {{$time}}</p>
+                                @empty
+                                <p>Не указано</p>
+                                @endforelse
+                            </div>
                         </div>
                     </div>
                     <div class="bg-[#E5E6F6] px-6 md:px-11 py-3 rounded-[20px] font-['FindSansPro'] text-xs md:text-lg xl:text-2xl">
@@ -46,6 +52,7 @@
                         <p class="text-[#5F5F5F]">{{$attraction->short_description}}</p>
                     </div>
                     <button class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-6 rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-xl xl:text-3xl">Показать на карте</button>
+
                 </div>
             </div>
             <div data-aos="fade-right" class="font-['FindSansPro'] flex flex-col items-center lg:items-start">

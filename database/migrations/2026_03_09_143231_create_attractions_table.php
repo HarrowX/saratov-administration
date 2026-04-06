@@ -19,21 +19,21 @@ return new class extends Migration
             $table->json('worktime');
             $table->string('phone');
             $table->string('address');
-            $table->string('slug');
+            $table->string('slug')->unique()->nullable();
             $table->string('district');
             $table->decimal('latitude');
             $table->decimal('longitude');
             $table->string('email');
             $table->string('website');
             $table->enum('status',['active','draft','archived'])->default('active');
-            $table->decimal('ticket_price', 10, 2);
+            $table->char('ticket_price');
             $table->integer('visit_duration');
             $table->boolean('accessibility');
             $table->boolean('parking');
             $table->decimal('rating');
             $table->integer('views_count')->default(0);
             $table->integer('favorites_count')->default(0);
-            $table->integer('created_by');
+            $table->integer('created_by')->nullable();
             $table->timestamps();
         });
     }
