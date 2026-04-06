@@ -16,12 +16,14 @@ use MoonShine\UI\Fields\ID;
 use App\MoonShine\Resources\Attraction\AttractionResource;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\Image;
+use MoonShine\UI\Fields\Json;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Phone;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Switcher;
+use MoonShine\UI\Fields\Url;
 use Throwable;
 
 
@@ -39,20 +41,15 @@ class AttractionIndexPage extends IndexPage
     {
         return [
             ID::make(),
-            Text::make('Название', 'name'),
-            Text::make('Краткое описание', 'short_description'),
-            Textarea::make('Описание', 'description'),
-            Text::make('С', 'worktime_from'),
-            Text::make('До', 'worktime_to'),
+            Text::make('Название', 'name')->unescape(),
+            Text::make('Краткое описание', 'short_description')->unescape(),
+            Textarea::make('Описание', 'description')->unescape(),
+            Json::make('Рабочее время', 'worktime')->keyValue('День', 'Время'),
             Phone::make('Номер телефона', 'phone'),
-            Text::make('Адрес', 'address'),
-            Text::make('Slug', 'slug')
-                ->default(fn($item) => Str::slug($item->name ?? '')),
+            Text::make('Адрес', 'address')->unescape(),
             Text::make('Район', 'district'),
-            Number::make('Широта', 'latitude'),
-            Number::make('Долгота', 'longitude'),
             Text::make('Email', 'email'),
-            Text::make('Сайт', 'website'),
+            Url::make('Сайт', 'website'),
             Select::make('Статус', 'status')
                 ->options([
                     'active' => 'Активный',
@@ -64,9 +61,6 @@ class AttractionIndexPage extends IndexPage
             Number::make('Время посещения (мин)', 'visit_duration'),
             Switcher::make('Доступность', 'accessibility'),
             Switcher::make('Парковка', 'parking'),
-            Number::make('Рейтинг', 'rating'),
-            Number::make('Просмотры', 'views_count'),
-            Number::make('В избранном', 'favorites_count'),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),

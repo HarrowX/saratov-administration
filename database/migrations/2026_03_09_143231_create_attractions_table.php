@@ -19,7 +19,7 @@ return new class extends Migration
             $table->json('worktime');
             $table->string('phone');
             $table->string('address');
-            $table->string('slug');
+            $table->string('slug')->unique()->nullable();
             $table->string('district');
             $table->decimal('latitude');
             $table->decimal('longitude');
