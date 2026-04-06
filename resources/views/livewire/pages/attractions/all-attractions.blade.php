@@ -150,185 +150,36 @@
 
             <!-- Сетка карточек -->
             <div class="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 xl:gap-10 3xl:gap-21">
-                <!-- Карточка 1 -->
-                <div class="bg-white rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="p-2 sm:p-4 3xl:p-5 h-full flex flex-col">
-                        <div class="w-full mb-4 overflow-hidden rounded-lg shrink-0">
-                            <img src="/images/image 23.png" alt="Дом книги" class="w-full h-full object-cover">
-                        </div>
-
-                        <div class="font-['FindSansPro'] flex flex-col h-26 sm:h-50 md:h-60">
-                            <div class="grow">
-                                <h4 class="">Дом книги</h4>
-                                <p class="text-[7px] sm:text-base text-[#888888] line-clamp-4">Архитектура и памятники, театры и культурные центры</p>
+                @foreach ($attractions as $attraction)
+                    <div class="bg-white rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="p-2 sm:p-4 3xl:p-5 h-full flex flex-col">
+                            <div class="w-full mb-4 overflow-hidden rounded-lg shrink-0">
+                                <img src="{{ $attraction->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $attraction->name }}" class="w-full h-full object-cover">
                             </div>
 
-                            <div class="shrink-0 mt-2 mb-3">
-                                <div class="flex items-end justify-between gap-2">
-                                    <div class="flex gap-1 sm:gap-4 flex-1 max-w-37 sm:max-w-75">
-                                        <img src="/images/image 7.svg" alt="" class="icon size-2.5 sm:size-4 md:size-7 mt-2 sm:mt-5 shrink-0">
-                                        <span class="text-[8px] sm:text-xs xl:text-sm text-[#505050] pt-1 sm:pt-4">Саратов, Фрунзенский район, ул. Вольская, 81</span>
+                            <div class="font-['FindSansPro'] flex flex-col h-26 sm:h-50 md:h-60">
+                                <div class="grow">
+                                    <h4 class="">{{ $attraction->name }}</h4>
+                                    <p class="text-[7px] sm:text-base text-[#888888] line-clamp-4">{{ $attraction->short_description }}</p>
+                                </div>
+
+                                <div class="shrink-0 mt-2 mb-3">
+                                    <div class="flex items-end justify-between gap-2">
+                                        <div class="flex gap-1 sm:gap-4 flex-1 max-w-37 sm:max-w-75">
+                                            <img src="/images/image 7.svg" alt="" class="icon size-2.5 sm:size-4 md:size-7 mt-2 sm:mt-5 shrink-0">
+                                            <span class="text-[8px] sm:text-xs xl:text-sm text-[#505050] pt-1 sm:pt-4">{{ $attraction->address }}</span>
+                                        </div>
+                                        <form action="{{ route('single-attraction', ['attraction' => $attraction->id]) }}">
+                                            <button class="shrink-0 size-5 sm:size-10 xl:size-11 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
+                                                <img src="/images/Arrow 2.png" alt="" class="icon w-1 sm:w-2 xl:w-3 h-2.5 sm:h-4.5 xl:h-6">
+                                            </button>
+                                        </form>
                                     </div>
-                                    <form action="{{ route('single-attraction', ['attraction' => 1]) }}">
-                                        <button class="shrink-0 size-5 sm:size-10 xl:size-11 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
-                                            <img src="/images/Arrow 2.png" alt="" class="icon w-1 sm:w-2 xl:w-3 h-2.5 sm:h-4.5 xl:h-6">
-                                        </button>
-                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Карточка 2 (копия с тем же содержимым) -->
-                <div class="bg-white rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="p-2 sm:p-4 3xl:p-5 h-full flex flex-col">
-                        <div class="w-full mb-4 overflow-hidden rounded-lg shrink-0">
-                            <img src="/images/image 23.png" alt="Дом книги" class="w-full h-full object-cover">
-                        </div>
-
-                        <div class="font-['FindSansPro'] flex flex-col h-26 sm:h-50 md:h-60">
-                            <div class="grow">
-                                <h4 class="">Дом книги</h4>
-                                <p class="text-[7px] sm:text-base text-[#888888] line-clamp-4">Архитектура и памятники, театры и культурные центры</p>
-                            </div>
-
-                            <div class="shrink-0 mt-2 mb-3">
-                                <div class="flex items-end justify-between gap-2">
-                                    <div class="flex gap-1 sm:gap-4 flex-1 max-w-37 sm:max-w-75">
-                                        <img src="/images/image 7.svg" alt="" class="icon size-2.5 sm:size-4 md:size-7 mt-2 sm:mt-5 shrink-0">
-                                        <span class="text-[8px] sm:text-xs xl:text-sm text-[#505050] pt-1 sm:pt-4">Саратов, Фрунзенский район, ул. Вольская, 81</span>
-                                    </div>
-                                    <form action="{{ route('single-attraction', ['attraction' => 1]) }}">
-                                        <button class="shrink-0 size-5 sm:size-10 xl:size-11 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
-                                            <img src="/images/Arrow 2.png" alt="" class="icon w-1 sm:w-2 xl:w-3 h-2.5 sm:h-4.5 xl:h-6">
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Карточка 3 -->
-                <div class="bg-white rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="p-2 sm:p-4 3xl:p-5 h-full flex flex-col">
-                        <div class="w-full mb-4 overflow-hidden rounded-lg shrink-0">
-                            <img src="/images/image 23.png" alt="Дом книги" class="w-full h-full object-cover">
-                        </div>
-
-                        <div class="font-['FindSansPro'] flex flex-col h-26 sm:h-50 md:h-60">
-                            <div class="grow">
-                                <h4 class="">Дом книги</h4>
-                                <p class="text-[7px] sm:text-base text-[#888888] line-clamp-4">Архитектура и памятники, театры и культурные центры</p>
-                            </div>
-
-                            <div class="shrink-0 mt-2 mb-3">
-                                <div class="flex items-end justify-between gap-2">
-                                    <div class="flex gap-1 sm:gap-4 flex-1 max-w-37 sm:max-w-75">
-                                        <img src="/images/image 7.svg" alt="" class="icon size-2.5 sm:size-4 md:size-7 mt-2 sm:mt-5 shrink-0">
-                                        <span class="text-[8px] sm:text-xs xl:text-sm text-[#505050] pt-1 sm:pt-4">Саратов, Фрунзенский район, ул. Вольская, 81</span>
-                                    </div>
-                                    <form action="{{ route('single-attraction', ['attraction' => 1]) }}">
-                                        <button class="shrink-0 size-5 sm:size-10 xl:size-11 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
-                                            <img src="/images/Arrow 2.png" alt="" class="icon w-1 sm:w-2 xl:w-3 h-2.5 sm:h-4.5 xl:h-6">
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Карточка 4 -->
-                <div class="bg-white rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="p-2 sm:p-4 3xl:p-5 h-full flex flex-col">
-                        <div class="w-full mb-4 overflow-hidden rounded-lg shrink-0">
-                            <img src="/images/image 23.png" alt="Дом книги" class="w-full h-full object-cover">
-                        </div>
-
-                        <div class="font-['FindSansPro'] flex flex-col h-26 sm:h-50 md:h-60">
-                            <div class="grow">
-                                <h4 class="">Дом книги</h4>
-                                <p class="text-[7px] sm:text-base text-[#888888] line-clamp-4">Архитектура и памятники, театры и культурные центры</p>
-                            </div>
-
-                            <div class="shrink-0 mt-2 mb-3">
-                                <div class="flex items-end justify-between gap-2">
-                                    <div class="flex gap-1 sm:gap-4 flex-1 max-w-37 sm:max-w-75">
-                                        <img src="/images/image 7.svg" alt="" class="icon size-2.5 sm:size-4 md:size-7 mt-2 sm:mt-5 shrink-0">
-                                        <span class="text-[8px] sm:text-xs xl:text-sm text-[#505050] pt-1 sm:pt-4">Саратов, Фрунзенский район, ул. Вольская, 81</span>
-                                    </div>
-                                    <form action="{{ route('single-attraction', ['attraction' => 1]) }}">
-                                        <button class="shrink-0 size-5 sm:size-10 xl:size-11 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
-                                            <img src="/images/Arrow 2.png" alt="" class="icon w-1 sm:w-2 xl:w-3 h-2.5 sm:h-4.5 xl:h-6">
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Карточка 5 -->
-                <div class="bg-white rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="p-2 sm:p-4 3xl:p-5 h-full flex flex-col">
-                        <div class="w-full mb-4 overflow-hidden rounded-lg shrink-0">
-                            <img src="/images/image 23.png" alt="Дом книги" class="w-full h-full object-cover">
-                        </div>
-
-                        <div class="font-['FindSansPro'] flex flex-col h-26 sm:h-50 md:h-60">
-                            <div class="grow">
-                                <h4 class="">Дом книги</h4>
-                                <p class="text-[7px] sm:text-base text-[#888888] line-clamp-4">Архитектура и памятники, театры и культурные центры</p>
-                            </div>
-
-                            <div class="shrink-0 mt-2 mb-3">
-                                <div class="flex items-end justify-between gap-2">
-                                    <div class="flex gap-1 sm:gap-4 flex-1 max-w-37 sm:max-w-75">
-                                        <img src="/images/image 7.svg" alt="" class="icon size-2.5 sm:size-4 md:size-7 mt-2 sm:mt-5 shrink-0">
-                                        <span class="text-[8px] sm:text-xs xl:text-sm text-[#505050] pt-1 sm:pt-4">Саратов, Фрунзенский район, ул. Вольская, 81</span>
-                                    </div>
-                                    <form action="{{ route('single-attraction', ['attraction' => 1]) }}">
-                                        <button class="shrink-0 size-5 sm:size-10 xl:size-11 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
-                                            <img src="/images/Arrow 2.png" alt="" class="icon w-1 sm:w-2 xl:w-3 h-2.5 sm:h-4.5 xl:h-6">
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Карточка 6 -->
-                <div class="bg-white rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="p-2 sm:p-4 3xl:p-5 h-full flex flex-col">
-                        <div class="w-full mb-4 overflow-hidden rounded-lg shrink-0">
-                            <img src="/images/image 23.png" alt="Дом книги" class="w-full h-full object-cover">
-                        </div>
-
-                        <div class="font-['FindSansPro'] flex flex-col h-26 sm:h-50 md:h-60">
-                            <div class="grow">
-                                <h4 class="">Дом книги</h4>
-                                <p class="text-[7px] sm:text-base text-[#888888] line-clamp-4">Архитектура и памятники, театры и культурные центры</p>
-                            </div>
-
-                            <div class="shrink-0 mt-2 mb-3">
-                                <div class="flex items-end justify-between gap-2">
-                                    <div class="flex gap-1 sm:gap-4 flex-1 max-w-37 sm:max-w-75">
-                                        <img src="/images/image 7.svg" alt="" class="icon size-2.5 sm:size-4 md:size-7 mt-2 sm:mt-5 shrink-0">
-                                        <span class="text-[8px] sm:text-xs xl:text-sm text-[#505050] pt-1 sm:pt-4">Саратов, Фрунзенский район, ул. Вольская, 81</span>
-                                    </div>
-                                    <form action="{{ route('single-attraction', ['attraction' => 1]) }}">
-                                        <button class="shrink-0 size-5 sm:size-10 xl:size-11 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
-                                            <img src="/images/Arrow 2.png" alt="" class="icon w-1 sm:w-2 xl:w-3 h-2.5 sm:h-4.5 xl:h-6">
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

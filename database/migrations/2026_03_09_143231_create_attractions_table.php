@@ -13,6 +13,27 @@ return new class extends Migration
     {
         Schema::create('attractions', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('short_description');
+            $table->text('description');
+            $table->json('worktime');
+            $table->string('phone');
+            $table->string('address');
+            $table->string('slug');
+            $table->string('district');
+            $table->decimal('latitude');
+            $table->decimal('longitude');
+            $table->string('email');
+            $table->string('website');
+            $table->enum('status',['active','draft','archived'])->default('active');
+            $table->decimal('ticket_price', 10, 2);
+            $table->integer('visit_duration');
+            $table->boolean('accessibility');
+            $table->boolean('parking');
+            $table->decimal('rating');
+            $table->integer('views_count')->default(0);
+            $table->integer('favorites_count')->default(0);
+            $table->integer('created_by');
             $table->timestamps();
         });
     }

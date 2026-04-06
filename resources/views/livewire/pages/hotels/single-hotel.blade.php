@@ -1,30 +1,51 @@
 @section('title')
-    Саратов 435 - Сканди-дачи «Уголок»
+    Саратов 435 - {{ $hotel->name }}
 @endsection
 
 <div>
     <!--Hero Section-->
     <section>
         <div class="max-w-6xl 3xl:max-w-421 mx-auto px-4 sm:px-10 pt-24 sm:pt-29 xl:pt-33">
-            <h2 class="sm:pb-6 lg:hidden text-center">Сканди-дачи «Уголок»</h2>
-            <div class="flex flex-col lg:flex-row items-center justify-center gap-3 sm:gap-5 lg:gap-11 pb-3 sm:pb-10 lg:pb-6 3xl:pb-15">
-                <div class="flex flex-row gap-2 sm:gap-3 3xl:gap-5 w-full">
-                    <img src="/images/Rectangle 12224601.png" class="photo object-cover w-full rounded-md sm:rounded-lg lg:rounded-2xl  max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-55 3xl:max-h-90">
-                    <img src="/images/Rectangle 12224603.png" class="photo object-cover w-full rounded-md sm:rounded-lg lg:rounded-2xl max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-55 3xl:max-h-90">
-                    <img src="/images/Rectangle 12224602.png" class="photo object-cover w-full rounded-md sm:rounded-lg lg:rounded-2xl  max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-55 3xl:max-h-90">
+            <h2 class="sm:pb-6 lg:hidden text-center">{{ $hotel->name }}</h2>
+            <div class="grid lg:grid-cols-[auto_1fr] items-center justify-center gap-3 sm:gap-5 lg:gap-11 pb-3 sm:pb-10 lg:pb-6 3xl:pb-15">
+                <div class="grid grid-cols-3 gap-2 sm:gap-3 3xl:gap-5 w-full">
+                    @php
+                        $attachments = $hotel->attachments;
+                        $count = $attachments->count();
+                    @endphp
+                    <img src="{{ $hotel->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $hotel->name }}" class="photo object-cover w-full rounded-md sm:rounded-lg lg:rounded-2xl  max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-55 lg:max-w-[190px] 3xl:max-h-90 3xl:max-w-[304px]">
+                    @if($count >= 2)
+                        <img src="{{ $hotel->attachments?->get(1)?->url() ?? "" }}" alt="Изображение {{ $hotel->name }}"
+                             class="photo object-cover w-full rounded-md sm:rounded-lg lg:rounded-2xl max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-55 lg:max-w-[190px] 3xl:max-h-90 3xl:max-w-[304px]">
+                    @endif
+
+                    @if($count >= 3)
+                        <img src="{{ $hotel->attachments?->get(2)?->url() ?? "" }}" alt="Изображение {{ $hotel->name }}"
+                             class="photo object-cover w-full rounded-md sm:rounded-lg lg:rounded-2xl max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-55 lg:max-w-[190px] 3xl:max-h-90 3xl:max-w-[304px]">
+                    @endif
                 </div>
-                <p class="text-base xl:text-lg 2xl:text-xl w-full lg:max-w-80 xl:max-w-114 3xl:max-w-151.5">
-                    Сканди-дачи расположены на границе с лесопарком Кумысная поляна – на холме, с которого открывается вид на Золотую долину. Эту долину неспроста называют Золотой. Дачи имеет свою территорию огороженную забором и со своей системой видеонаблюдения для безопасности гостей.
+                <p class="text-base xl:text-lg 2xl:text-xl w-full 3xl:max-w-151.5">
+                    {{ $hotel->description }}
                 </p>
             </div>
-            <h2 class="pb-3 3xl:pb-6 hidden lg:block text-center">Сканди-дачи «Уголок»</h2>
-            <div class="flex flex-col lg:flex-row-reverse items-center justify-center gap-3 sm:gap-5 lg:gap-11">
-                <div class="flex flex-row gap-2 sm:gap-3 3xl:gap-5 w-full">
-                    <img src="/images/Rectangle 12224606.png" class="photo object-cover w-full rounded-md sm:rounded-lg lg:rounded-2xl max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-67 xl:max-h-90">
-                    <img src="/images/Rectangle 12224607.png" class="photo w-full lg:w-55 xl:w-67 3xl:w-full object-cover rounded-md sm:rounded-lg lg:rounded-2xl max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-67 xl:max-h-90">
+            <h2 class="pb-3 3xl:pb-6 hidden lg:block text-center">{{ $hotel->name }}</h2>
+            <div class="grid lg:grid-cols-[auto_1fr] items-center justify-center gap-3 sm:gap-5 lg:gap-11">
+                <div class="grid grid-cols-2 gap-2 sm:gap-3 3xl:gap-5 w-full lg:order-2">
+                    @php
+                        $attachments = $hotel->attachments;
+                        $count = $attachments->count();
+                    @endphp
+                    @if($count >= 4)
+                        <img src="{{ $hotel->attachments?->get(3)?->url() ?? "" }}" alt="Изображение {{ $hotel->name }}"
+                             class="photo object-cover w-full rounded-md sm:rounded-lg lg:rounded-2xl max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-67 xl:max-h-90">
+                    @endif
+                    @if($count >= 5)
+                        <img src="{{ $hotel->attachments?->get(4)?->url() ?? "" }}" alt="Изображение {{ $hotel->name }}"
+                             class="photo w-full xl:w-80 3xl:w-full object-cover rounded-md sm:rounded-lg lg:rounded-2xl max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-67 xl:max-h-90">
+                    @endif
                 </div>
-                <p class="text-base xl:text-lg 2xl:text-xl w-full lg:max-w-114 3xl:max-w-151.5 text-left lg:text-right xl:text-left">
-                    На территории имеется: Питьевая вода из скважины с фильтрацией через обратный осмос обеспечивает качество родниковой. Посуда на все случаи: стеклянные бокалы и керамические тарелки Продукты для здорового завтрака и кофе в дрип-пакетах Банные полотенца и текстиль из 100% хлопка Ванная комната с душем и премиальными косметическими средствами от LiaLab. Проигрыватель пластинок Lenco, настольные игры и проектор для фильмов. Крытая терраса с грилем Weber и уличной мебелью. Дом оснащен системой кондиционирования и теплым полом по всему периметру
+                <p class="text-base xl:text-lg 2xl:text-xl w-full lg:max-w-114 3xl:max-w-151.5 text-left lg:text-right xl:text-left lg:order-1">
+                    {{ $hotel->second_description }}
                 </p>
             </div>
         </div>
@@ -37,30 +58,32 @@
                     <div class="flex flex-col w-full justify-around bg-[#E5E6F6] gap-3 md:gap-6.75 px-6 xl:px-7 3xl:px-11 py-6 lg:py-8 rounded-[20px] font-['FindSansPro'] text-sm sm:text-sm lg:text-lg 2xl:text-lg 3xl:text-2xl">
                         <div class="flex items-center gap-3 xl:gap-5">
                             <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/значок локации.svg">
-                            <p>1-ый Ключевой проезд, д. 21</p>
+                            <p>{{ $hotel->address }}</p>
                         </div>
                         <div class="flex items-center gap-3 xl:gap-5">
                             <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 15.svg">
-                            <p>8 917 205-57-41</p>
+                            <p>{{ $hotel->phone }}</p>
                         </div>
-                        <a href="#" class="flex items-center gap-3 xl:gap-5">
-                            <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 16.svg">
-                            <p>https://ugolokdacha.ru</p>
-                        </a>
-                        <div class="flex items-center gap-3 xl:gap-5">
+                        <div class="flex items-start gap-3 xl:gap-5">
                             <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 8.svg">
-                            <p>Заезд с 12:00, выезд до 14:00</p>
+                            <div class="flex flex-col gap-2">
+                                @forelse($restaurant->worktime ?? [] as $day => $time)
+                                    <p>{{ $day }}: {{ $time }}</p>
+                                @empty
+                                    <p>Не указано</p>
+                                @endforelse
+                            </div>
                         </div>
                         <div class="flex items-center gap-2 xl:gap-5">
-                            <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 17.svg">
-                            <p>Дом отдыха</p>
+                            <i class="fa fa-home text-3xl"></i>
+                            <p>{{ $hotel->type}}</p>
                         </div>
                     </div>
                 </div>
                 <div data-aos="fade-right" class="font-['FindSansPro'] flex flex-col-reverse md:flex-col gap-5 md:gap-0 w-full md:w-auto">
                     <div>
                         <h3 class="text-center md:text-left pb-2 md:pb-0">Достижения</h3>
-                        <p class="text-base xl:text-lg 3xl:text-2xl lg:text-nowrap">За прохождение “Модерн в Саратове” вы получите:</p>
+                        <p class="text-base xl:text-lg 3xl:text-2xl lg:text-nowrap">За прохождение “{{$hotel->name}}” вы получите:</p>
                         <div class="flex flex-row md:flex-col flex-wrap gap-2 lg:gap-4 justify-between md:justify-start items-center md:items-start pt-4 lg:pt-5 3xl:pt-7 text-[9px] sm:text-[13px] lg:text-base xl:text-lg 3xl:text-xl">
                             <div class="text-white rounded-4xl gradient-button py-3 lg:py-4.5 px-8 lg:px-15">+1 к “Исследователю”</div>
                             <a href="#" class="text-[#636363] text-nowrap"> перейти к другим квестам и достижениям ></a>

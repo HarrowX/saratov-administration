@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources\Restaurant\Pages;
+namespace App\MoonShine\Resources\Attraction\Pages;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
@@ -13,23 +13,20 @@ use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\QueryTags\QueryTag;
 use MoonShine\UI\Components\Metrics\Wrapped\Metric;
 use MoonShine\UI\Fields\ID;
-use App\MoonShine\Resources\Restaurant\RestaurantResource;
+use App\MoonShine\Resources\Attraction\AttractionResource;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Phone;
-use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
-use MoonShine\UI\Fields\Json;
-use MoonShine\UI\Fields\Url;
 use Throwable;
 
 
 /**
- * @extends IndexPage<RestaurantResource>
+ * @extends IndexPage<AttractionResource>
  */
-class RestaurantIndexPage extends IndexPage
+class AttractionIndexPage extends IndexPage
 {
     protected bool $isLazy = true;
 
@@ -40,30 +37,18 @@ class RestaurantIndexPage extends IndexPage
     {
         return [
             ID::make(),
-            Text::make('Название', 'name')->unescape(),
-            Textarea::make('Описание', 'description')->unescape(),
-            Text::make('Адрес', 'address')->unescape(),
-            Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы'),
+            Text::make('Название', 'name'),
+            Text::make('Краткое описания', 'short_description'),
+            Textarea::make('Описание', 'description'),
+            Text::make('Рабочее время', 'worktime'),
             Phone::make('Номер телефона', 'phone'),
-            Text::make('Кухня', 'kitchen')->unescape(),
-            Select::make('Ценовая категория','price_category')
-                ->options([
-                    'budget' => 'Дешево',
-                    'medium' => 'Средне',
-                    'premium' => 'Премиум',
-                    'luxury' => 'Люкс'
-                ]),
-            Number::make('Количество посадочных мест','capacity'),
-            Text::make('Адрес', 'address')->unescape(),
-            Text::make('Район', 'district'),
-            Text::make('Email', 'email'),
-            Url::make('Сайт', 'website'),
+            Text::make('Адрес', 'address'),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),
                     Image::make('Файл', 'link'),
                     Number::make('Порядковый номер', 'order')->default(0),
-            ]),
+                ]),
         ];
     }
 

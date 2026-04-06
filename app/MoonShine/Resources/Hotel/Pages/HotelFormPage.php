@@ -2,19 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources\Restaurant\Pages;
+namespace App\MoonShine\Resources\Hotel\Pages;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
-use MoonShine\Laravel\Pages\Crud\IndexPage;
+use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\UI\Components\Table\TableBuilder;
+use MoonShine\Contracts\UI\FormBuilderContract;
+use MoonShine\UI\Components\FormBuilder;
 use MoonShine\Contracts\UI\FieldContract;
-use MoonShine\Laravel\QueryTags\QueryTag;
-use MoonShine\UI\Components\Metrics\Wrapped\Metric;
-use MoonShine\UI\Fields\ID;
-use App\MoonShine\Resources\Restaurant\RestaurantResource;
+use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
+use App\MoonShine\Resources\Hotel\HotelResource;
 use MoonShine\Support\ListOf;
+use MoonShine\UI\Fields\Email;
+use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Phone;
@@ -27,14 +29,12 @@ use Throwable;
 
 
 /**
- * @extends IndexPage<RestaurantResource>
+ * @extends FormPage<HotelResource>
  */
-class RestaurantIndexPage extends IndexPage
+class HotelFormPage extends FormPage
 {
-    protected bool $isLazy = true;
-
     /**
-     * @return list<FieldContract>
+     * @return list<ComponentContract|FieldContract>
      */
     protected function fields(): iterable
     {
@@ -42,28 +42,30 @@ class RestaurantIndexPage extends IndexPage
             ID::make(),
             Text::make('Название', 'name')->unescape(),
             Textarea::make('Описание', 'description')->unescape(),
-            Text::make('Адрес', 'address')->unescape(),
+            Textarea::make('Второе описание', 'second_description')->unescape(),
             Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы'),
-            Phone::make('Номер телефона', 'phone'),
-            Text::make('Кухня', 'kitchen')->unescape(),
-            Select::make('Ценовая категория','price_category')
+            Select::make('Тип размещения', 'type')
                 ->options([
-                    'budget' => 'Дешево',
-                    'medium' => 'Средне',
-                    'premium' => 'Премиум',
-                    'luxury' => 'Люкс'
-                ]),
-            Number::make('Количество посадочных мест','capacity'),
+                    'hostel' => 'Хостел',
+                    'guesthouse' => 'Гостевой дом',
+                    'glamping' => 'Глэмпинг',
+                    'resort' => 'Курорт'
+                ])
+                ->required(),
+            Number::make('Количество звезд','stars'),
+            Phone::make('Номер телефона', 'phone'),
             Text::make('Адрес', 'address')->unescape(),
             Text::make('Район', 'district'),
             Text::make('Email', 'email'),
             Url::make('Сайт', 'website'),
+            Number::make('Максимальная цена', 'max_price'),
+            Number::make('Минимальная цена', 'min_price'),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),
                     Image::make('Файл', 'link'),
                     Number::make('Порядковый номер', 'order')->default(0),
-            ]),
+                ])->removable(),
         ];
     }
 
@@ -72,36 +74,22 @@ class RestaurantIndexPage extends IndexPage
         return parent::buttons();
     }
 
-    /**
-     * @return list<FieldContract>
-     */
-    protected function filters(): iterable
+    protected function formButtons(): ListOf
+    {
+        return parent::formButtons();
+    }
+
+    protected function rules(DataWrapperContract $item): array
     {
         return [];
     }
 
     /**
-     * @return list<QueryTag>
-     */
-    protected function queryTags(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return list<Metric>
-     */
-    protected function metrics(): array
-    {
-        return [];
-    }
-
-    /**
-     * @param  TableBuilder  $component
+     * @param  FormBuilder  $component
      *
-     * @return TableBuilder
+     * @return FormBuilder
      */
-    protected function modifyListComponent(ComponentContract $component): ComponentContract
+    protected function modifyFormComponent(FormBuilderContract $component): FormBuilderContract
     {
         return $component;
     }
