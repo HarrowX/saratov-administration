@@ -39,9 +39,15 @@
                         <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/значок локации.svg">
                         <p>{{ $restaurant->address }}</p>
                     </div>
-                    <div class="flex items-center gap-5">
+                    <div class="flex items-start gap-5">
                         <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/image 8.svg">
-                        <p>{{ json_encode($restaurant->worktime, JSON_UNESCAPED_UNICODE) }}</p>
+                        <div class="flex flex-col gap-2">
+                            @forelse($restaurant->worktime ?? [] as $day => $time)
+                                <p>{{ $day }}: {{ $time }}</p>
+                            @empty
+                                <p>Не указано</p>
+                            @endforelse
+                        </div>
                     </div>
                     <div class="flex items-center gap-5">
                         <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/image 15.svg">

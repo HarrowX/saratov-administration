@@ -139,10 +139,9 @@
                                 <div class="flex flex-col">
                                     <div class="flex flex-col text-[8px] sm:text-sm lg:text-base xl:text-lg 3xl:text-xl font-light gap-3 text-[#5F5F5F] mt-2 lg:mt-5 mb-0 sm:mb-2 lg:mb-6">
                                         <p class="text-center">{{ $hotel->type}}</p>
-                                        <span class="flex items-center gap-3.5">
-                                            <i class="fa-solid fa-clock"></i>
-                                            {{ json_encode($hotel->worktime, JSON_UNESCAPED_UNICODE)  }}
-                                        </span>
+{{--                                        <span class="flex items-center gap-3.5">--}}
+{{--                                            <i class="fa-solid fa-clock"></i>--}}
+{{--                                        </span>--}}
                                         <span class="flex items-center gap-3.5">
                                             <i class="fas fa-phone"></i>
                                             {{ $hotel->phone }}

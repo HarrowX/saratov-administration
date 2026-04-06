@@ -23,6 +23,7 @@ use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 use MoonShine\UI\Fields\Json;
+use MoonShine\UI\Fields\Url;
 use Throwable;
 
 
@@ -40,10 +41,10 @@ class HotelIndexPage extends IndexPage
     {
         return [
             ID::make(),
-            Text::make('Название', 'name'),
-            Textarea::make('Описание', 'description'),
-            Textarea::make('Второе описание', 'second_description'),
-            Json::make('Рабочее время', 'worktime')->keyValue()->removable(),
+            Text::make('Название', 'name')->unescape(),
+            Textarea::make('Описание', 'description')->unescape(),
+            Textarea::make('Второе описание', 'second_description')->unescape(),
+            Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы'),
             Select::make('Тип размещения', 'type')
                 ->options([
                     'hostel' => 'Хостел',
@@ -52,11 +53,12 @@ class HotelIndexPage extends IndexPage
                     'resort' => 'Курорт'
                 ])
                 ->required(),
+            Number::make('Количество звезд','stars'),
             Phone::make('Номер телефона', 'phone'),
-            Text::make('Адрес', 'address'),
+            Text::make('Адрес', 'address')->unescape(),
             Text::make('Район', 'district'),
             Text::make('Email', 'email'),
-            Text::make('Сайт', 'website'),
+            Url::make('Сайт', 'website'),
             Number::make('Максимальная цена', 'max_price'),
             Number::make('Минимальная цена', 'min_price'),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)

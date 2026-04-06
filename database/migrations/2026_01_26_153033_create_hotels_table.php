@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('slug')->unique()->nullable();
             $table->text('description');
             $table->string('second_description');
-            $table->enum('type',['hostel','guesthouse','glamping','resort']);
+            $table->enum('type',['Отель','Гостевой дом','Глэмпинг','Курорт']);
             $table->tinyInteger('stars')->unsigned()->nullable();
             $table->json('worktime')->nullable();
             $table->string('phone');
@@ -30,7 +30,6 @@ return new class extends Migration
             $table->string('website')->nullable();
             $table->decimal('max_price')->nullable();
             $table->decimal('min_price')->nullable();
-            $table->decimal('rating')->nullable();
             $table->integer('reviews_count')->default(0)->nullable();
             $table->integer('views_count')->default(0)->nullable();
             $table->timestamp('created_at')->nullable();

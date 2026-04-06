@@ -32,10 +32,10 @@ class HotelSeeder extends Seeder
         for ($i = 0; $i < 8; $i++) {
             $hotels[] = [
                 'name' => fake()->randomElement($names),
-                'type' => fake()->randomElement(['hostel', 'guesthouse', 'glamping', 'resort' ]),
+                'type' => fake()->randomElement(['Отель', 'Гостевой дом', 'Глэмпинг', 'Курорт']),
                 'description' => fake()->realText(),
                 'second_description' => fake()->realText(),
-                'worktime' => '[]', //'c ' . fake()->time('H:i') . ' до ' . fake()->time('H:i'),
+//                'worktime' => '[]', //'c ' . fake()->time('H:i') . ' до ' . fake()->time('H:i'),
                 'phone' => fake()->phoneNumber(),
                 'address' => fake()->address(),
             ];

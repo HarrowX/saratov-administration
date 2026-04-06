@@ -20,6 +20,7 @@ use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 use MoonShine\UI\Fields\Json;
+use MoonShine\UI\Fields\Url;
 use Throwable;
 
 
@@ -35,10 +36,10 @@ class RestaurantDetailPage extends DetailPage
     {
         return [
             ID::make(),
-            Text::make('Название', 'name'),
-            Textarea::make('Описание', 'description'),
-            Text::make('Адрес', 'address'),
-            Json::make('Рабочее время', 'worktime')->keyValue(),
+            Text::make('Название', 'name')->unescape(),
+            Textarea::make('Описание', 'description')->unescape(),
+            Text::make('Адрес', 'address')->unescape(),
+            Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы'),
             Phone::make('Номер телефона', 'phone'),
             Text::make('Кухня', 'kitchen'),
             Select::make('Ценовая категория','price_category')
@@ -48,10 +49,11 @@ class RestaurantDetailPage extends DetailPage
                     'premium' => 'Премиум',
                     'luxury' => 'Люкс'
                 ]),
-            Text::make('Адрес', 'address'),
+            Number::make('Количество посадочных мест','capacity'),
+            Text::make('Адрес', 'address')->unescape(),
             Text::make('Район', 'district'),
             Text::make('Email', 'email'),
-            Text::make('Сайт', 'website'),
+            Url::make('Сайт', 'website'),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),
