@@ -15,24 +15,25 @@ return new class extends Migration
         Schema::create('hotels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('category');
-            $table->string('description');
+            $table->string('slug')->unique()->nullable();
+            $table->text('description');
             $table->string('second_description');
-            $table->json('worktime');
+            $table->enum('type',['Отель','Гостевой дом','Глэмпинг','Курорт']);
+            $table->tinyInteger('stars')->unsigned()->nullable();
+            $table->json('worktime')->nullable();
             $table->string('phone');
             $table->string('address');
-            $table->string('slug');
-            $table->string('district');
-            $table->decimal('latitude');
-            $table->decimal('longitude');
-            $table->string('email');
-            $table->string('website');
-            $table->decimal('max_price');
-            $table->decimal('min_price');
-            $table->decimal('rating');
-            $table->integer('reviews_count')->default(0);
-            $table->integer('views_count')->default(0);
-            $table->timestamps();
+            $table->string('district')->nullable();
+            $table->decimal('latitude')->nullable();
+            $table->decimal('longitude')->nullable();
+            $table->string('email')->nullable();
+            $table->string('website')->nullable();
+            $table->decimal('max_price')->nullable();
+            $table->decimal('min_price')->nullable();
+            $table->integer('reviews_count')->default(0)->nullable();
+            $table->integer('views_count')->default(0)->nullable();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

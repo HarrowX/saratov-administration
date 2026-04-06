@@ -9,12 +9,16 @@ class Hotel extends Model
 {
     protected $fillable = [
         'name',
-        'category',
+        'type',
         'description',
-        'secondDescription',
+        'second_description',
         'worktime',
         'phone',
         'address',
+    ];
+
+    protected $casts = [
+        'worktime' => 'array',
     ];
 
     public function attachments(): MorphMany {

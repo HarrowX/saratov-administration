@@ -7,30 +7,30 @@
     <section>
         <div class="max-w-6xl 3xl:max-w-421 mx-auto px-4 sm:px-10 pt-24 sm:pt-29 xl:pt-33">
             <h2 class="sm:pb-6 lg:hidden text-center">{{ $hotel->name }}</h2>
-            <div class="flex flex-col lg:flex-row items-center justify-center gap-3 sm:gap-5 lg:gap-11 pb-3 sm:pb-10 lg:pb-6 3xl:pb-15">
-                <div class="flex flex-row gap-2 sm:gap-3 3xl:gap-5 w-full">
+            <div class="grid lg:grid-cols-[auto_1fr] items-center justify-center gap-3 sm:gap-5 lg:gap-11 pb-3 sm:pb-10 lg:pb-6 3xl:pb-15">
+                <div class="grid grid-cols-3 gap-2 sm:gap-3 3xl:gap-5 w-full">
                     @php
                         $attachments = $hotel->attachments;
                         $count = $attachments->count();
                     @endphp
-                    <img src="{{ $hotel->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $hotel->name }}" class="photo object-cover w-full rounded-md sm:rounded-lg lg:rounded-2xl  max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-55 3xl:max-h-90">
+                    <img src="{{ $hotel->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $hotel->name }}" class="photo object-cover w-full rounded-md sm:rounded-lg lg:rounded-2xl  max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-55 lg:max-w-[190px] 3xl:max-h-90 3xl:max-w-[304px]">
                     @if($count >= 2)
                         <img src="{{ $hotel->attachments?->get(1)?->url() ?? "" }}" alt="Изображение {{ $hotel->name }}"
-                             class="photo object-cover w-full rounded-md sm:rounded-lg lg:rounded-2xl max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-55 3xl:max-h-90">
+                             class="photo object-cover w-full rounded-md sm:rounded-lg lg:rounded-2xl max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-55 lg:max-w-[190px] 3xl:max-h-90 3xl:max-w-[304px]">
                     @endif
 
                     @if($count >= 3)
                         <img src="{{ $hotel->attachments?->get(2)?->url() ?? "" }}" alt="Изображение {{ $hotel->name }}"
-                             class="photo object-cover w-full rounded-md sm:rounded-lg lg:rounded-2xl max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-55 3xl:max-h-90">
+                             class="photo object-cover w-full rounded-md sm:rounded-lg lg:rounded-2xl max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-55 lg:max-w-[190px] 3xl:max-h-90 3xl:max-w-[304px]">
                     @endif
                 </div>
-                <p class="text-base xl:text-lg 2xl:text-xl w-full lg:max-w-80 xl:max-w-114 3xl:max-w-151.5">
+                <p class="text-base xl:text-lg 2xl:text-xl w-full 3xl:max-w-151.5">
                     {{ $hotel->description }}
                 </p>
             </div>
             <h2 class="pb-3 3xl:pb-6 hidden lg:block text-center">{{ $hotel->name }}</h2>
-            <div class="flex flex-col lg:flex-row-reverse items-center justify-center gap-3 sm:gap-5 lg:gap-11">
-                <div class="flex flex-row gap-2 sm:gap-3 3xl:gap-5 w-full">
+            <div class="grid lg:grid-cols-[auto_1fr] items-center justify-center gap-3 sm:gap-5 lg:gap-11">
+                <div class="grid grid-cols-2 gap-2 sm:gap-3 3xl:gap-5 w-full lg:order-2">
                     @php
                         $attachments = $hotel->attachments;
                         $count = $attachments->count();
@@ -41,11 +41,11 @@
                     @endif
                     @if($count >= 5)
                         <img src="{{ $hotel->attachments?->get(4)?->url() ?? "" }}" alt="Изображение {{ $hotel->name }}"
-                             class="photo w-full lg:w-55 xl:w-67 3xl:w-full object-cover rounded-md sm:rounded-lg lg:rounded-2xl max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-67 xl:max-h-90">
+                             class="photo w-full xl:w-80 3xl:w-full object-cover rounded-md sm:rounded-lg lg:rounded-2xl max-h-25 xs:max-h-35 md:max-h-62 lg:max-h-67 xl:max-h-90">
                     @endif
                 </div>
-                <p class="text-base xl:text-lg 2xl:text-xl w-full lg:max-w-114 3xl:max-w-151.5 text-left lg:text-right xl:text-left">
-                    {{ $hotel->secondDescription }}
+                <p class="text-base xl:text-lg 2xl:text-xl w-full lg:max-w-114 3xl:max-w-151.5 text-left lg:text-right xl:text-left lg:order-1">
+                    {{ $hotel->second_description }}
                 </p>
             </div>
         </div>
@@ -64,13 +64,19 @@
                             <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 15.svg">
                             <p>{{ $hotel->phone }}</p>
                         </div>
-                        <div class="flex items-center gap-3 xl:gap-5">
+                        <div class="flex items-start gap-3 xl:gap-5">
                             <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 8.svg">
-                            <p>{{ $hotel->worktime }}</p>
+                            <div class="flex flex-col gap-2">
+                                @forelse($restaurant->worktime ?? [] as $day => $time)
+                                    <p>{{ $day }}: {{ $time }}</p>
+                                @empty
+                                    <p>Не указано</p>
+                                @endforelse
+                            </div>
                         </div>
                         <div class="flex items-center gap-2 xl:gap-5">
                             <i class="fa fa-home text-3xl"></i>
-                            <p>{{ $hotel->category}}</p>
+                            <p>{{ $hotel->type}}</p>
                         </div>
                     </div>
                 </div>
