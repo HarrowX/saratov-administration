@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('hotels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug')->unique()->nullable();
+            $table->string('slug')->unique();
             $table->text('description');
             $table->string('second_description');
             $table->enum('type',['Отель','Гостевой дом','Глэмпинг','Курорт']);

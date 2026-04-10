@@ -51,10 +51,10 @@ class HotelFormPage extends FormPage
             Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы'),
             Select::make('Тип размещения', 'type')
                 ->options([
-                    'hostel' => 'Хостел',
-                    'guesthouse' => 'Гостевой дом',
-                    'glamping' => 'Глэмпинг',
-                    'resort' => 'Курорт'
+                    'Отель' => 'Отель',
+                    'Гостевой дом' => 'Гостевой дом',
+                    'Глэмпинг' => 'Глэмпинг',
+                    'Курорт' => 'Курорт'
                 ])
                 ->required(),
             Number::make('Количество звезд','stars'),

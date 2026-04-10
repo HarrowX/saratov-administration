@@ -6,6 +6,7 @@ use App\Models\Hotel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 
 class HotelSeeder extends Seeder
 {
