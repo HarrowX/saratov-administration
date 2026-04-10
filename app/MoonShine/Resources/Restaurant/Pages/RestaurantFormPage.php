@@ -9,6 +9,7 @@ use MoonShine\Laravel\Fields\Relationships\HasMany;
 use MoonShine\Laravel\Fields\Relationships\MorphMany;
 use MoonShine\Laravel\Fields\Relationships\MorphToMany;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
+use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FormBuilderContract;
@@ -45,8 +46,11 @@ class RestaurantFormPage extends FormPage
             Box::make([
                 ID::make(),
                 Text::make('Название', 'name')->unescape(),
+                Slug::make('Слаг','slug')->from('name')->unique()->canSee(function () {
+                    $item = $this->getResource()?->getItem();
+                    return $item && $item->exists;
+                }),
                 Textarea::make('Описание', 'description')->unescape(),
-                Text::make('Адрес', 'address')->unescape(),
                 Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы'),
                 Phone::make('Номер телефона', 'phone'),
                 Text::make('Кухня', 'kitchen')->unescape(),
@@ -62,6 +66,8 @@ class RestaurantFormPage extends FormPage
                 Text::make('Район', 'district'),
                 Text::make('Email', 'email'),
                 Url::make('Сайт', 'website'),
+                Number::make('Долгота','latitude'),
+                Number::make('Широта','longitude'),
                 RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                     ->fields([
                         ID::make(),

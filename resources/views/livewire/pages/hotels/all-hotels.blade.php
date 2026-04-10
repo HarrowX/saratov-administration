@@ -151,7 +151,7 @@
                                             {{ $hotel->address }}
                                         </span>
                                     </div>
-                                    <form action="{{ route('single-hotel', ['hotel' => $hotel->id]) }}">
+                                    <form action="{{ route('single-hotel', ['hotel' => $hotel->slug]) }}">
                                         <button class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity">
                                             Подробнее
                                         </button>

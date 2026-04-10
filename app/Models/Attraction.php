@@ -15,8 +15,14 @@ class Attraction extends Model
         'phone',
         'address'
     ];
-
+    protected $casts = [
+        'worktime' => 'array',
+    ];
     public function attachments(): MorphMany {
         return $this->morphMany(Attachment::class, 'attachable');
+    }
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 }
