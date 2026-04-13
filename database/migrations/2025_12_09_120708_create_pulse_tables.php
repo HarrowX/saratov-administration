@@ -20,11 +20,13 @@ return new class extends PulseMigration
             $table->unsignedInteger('timestamp');
             $table->string('type');
             $table->mediumText('key');
-            match ($this->driver()) {
-                'mariadb', 'mysql' => $table->char('key_hash', 16)->charset('binary')->virtualAs('unhex(md5(`key`))'),
-                'pgsql' => $table->uuid('key_hash')->storedAs('md5("key")::uuid'),
-                'sqlite' => $table->string('key_hash'),
-            };
+            if (in_array($this->driver(), ['mariadb', 'mysql'])) {
+                $table->char('key_hash', 16)->charset('binary');
+            } elseif ($this->driver() === 'pgsql') {
+                $table->uuid('key_hash')->storedAs('md5("key")::uuid');
+            } else { // sqlite
+                $table->string('key_hash');
+            }
             $table->mediumText('value');
 
             $table->index('timestamp'); // For trimming...
@@ -37,11 +39,13 @@ return new class extends PulseMigration
             $table->unsignedInteger('timestamp');
             $table->string('type');
             $table->mediumText('key');
-            match ($this->driver()) {
-                'mariadb', 'mysql' => $table->char('key_hash', 16)->charset('binary')->virtualAs('unhex(md5(`key`))'),
-                'pgsql' => $table->uuid('key_hash')->storedAs('md5("key")::uuid'),
-                'sqlite' => $table->string('key_hash'),
-            };
+            if (in_array($this->driver(), ['mariadb', 'mysql'])) {
+                $table->char('key_hash', 16)->charset('binary');
+            } elseif ($this->driver() === 'pgsql') {
+                $table->uuid('key_hash')->storedAs('md5("key")::uuid');
+            } else {
+                $table->string('key_hash');
+            }
             $table->bigInteger('value')->nullable();
 
             $table->index('timestamp'); // For trimming...
@@ -56,11 +60,13 @@ return new class extends PulseMigration
             $table->unsignedMediumInteger('period');
             $table->string('type');
             $table->mediumText('key');
-            match ($this->driver()) {
-                'mariadb', 'mysql' => $table->char('key_hash', 16)->charset('binary')->virtualAs('unhex(md5(`key`))'),
-                'pgsql' => $table->uuid('key_hash')->storedAs('md5("key")::uuid'),
-                'sqlite' => $table->string('key_hash'),
-            };
+            if (in_array($this->driver(), ['mariadb', 'mysql'])) {
+                $table->char('key_hash', 16)->charset('binary');
+            } elseif ($this->driver() === 'pgsql') {
+                $table->uuid('key_hash')->storedAs('md5("key")::uuid');
+            } else {
+                $table->string('key_hash');
+            }
             $table->string('aggregate');
             $table->decimal('value', 20, 2);
             $table->unsignedInteger('count')->nullable();

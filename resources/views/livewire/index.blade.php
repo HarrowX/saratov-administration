@@ -2,7 +2,13 @@
 @section('title')
     Саратов 435 - Цифровой дайвинг в историю города
 @endsection
-
+<script>
+    window.mapData = {
+        attractions: @js($attractions),
+        hotels: @js($hotels),
+        restaurants: @js($restaurants),
+    };
+</script>
 <div class="bg-gray-50">
    <section id="home" class="hero-section flex flex-col items-center justify-around relative bg-[url('/images/bg-image.png')] bg-center bg-no-repeat bg-cover mb-0 md:mb-15 xl:mb-23" style="min-height: calc(100dvh - 80px); margin-top: 80px;" xl:style="min-height: calc(100dvh - 96px); margin-top: 96px;">
         <div class="max-w-6xl 3xl:max-w-7xl mx-auto flex flex-col h-full w-full px-1 xs:px-4 sm:px-10">

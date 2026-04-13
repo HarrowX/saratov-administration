@@ -42,4 +42,3 @@ Route::prefix('/hotels')->group(function () {
 });
 
 
-
