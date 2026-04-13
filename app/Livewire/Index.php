@@ -2,11 +2,28 @@
 
 namespace App\Livewire;
 
+use App\Models\Attraction;
 use App\Models\Place;
 use Livewire\Component;
 
 class Index extends Component
 {
+    public $carouselAttractions;
+    public $featuredAttractions;
+
+    public function mount()
+    {
+        $this->carouselAttractions = Attraction::query()
+            ->where('display_location', 'carousel')
+            ->with('attachments')
+            ->get();
+
+        $this->featuredAttractions = Attraction::query()
+            ->where('display_location', 'featured')
+            ->with('attachments')
+            ->limit(2)
+            ->get();
+    }
 
     public function render()
     {

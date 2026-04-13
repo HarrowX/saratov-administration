@@ -1,3 +1,4 @@
+@php use App\Models\Attraction; @endphp
 
 @section('title')
     Саратов 435 - Цифровой дайвинг в историю города
@@ -16,7 +17,7 @@
                         <i class="fas fa-mobile-alt mr-2 group-hover:animate-bounce"></i>
                         Скачать приложение
                     </button>
-                    <button class="hero-section-button text-xs sm:text-sm lg:text-base from-blue-500 to-purple-600">
+                    <button onclick="startJourney()" class="hero-section-button text-xs sm:text-sm lg:text-base from-blue-500 to-purple-600">
                         <i class="fas fa-compass mr-2"></i>
                         Начать путешествие
                     </button>
@@ -179,328 +180,46 @@
                 <p class="text text-gray-600">Откройте для себя уникальные места Саратова</p>
             </div>
 
-            <!-- Карусель -->
+                <!-- Карусель -->
             <div class="relative group">
                 <div class="flex overflow-x-auto gap-6 pb-16 scrollbar-hide scroll-smooth"
-                    style="scrollbar-width: none; -ms-overflow-style: none;">
+                     style="scrollbar-width: none; -ms-overflow-style: none;">
 
-                    <!-- Карточка 1  -->
-                    <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="/images/img424_0.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                                <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold">4.9</span>
+                    @foreach($carouselAttractions as $attraction)
+                        <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="{{ $attraction->attachments?->get(0)?->url() ?? "" }}"
+                                     alt="Изображение {{ $attraction->name }}"
+                                     class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                             </div>
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <span class="bg-blue-500/80 backdrop-blur px-3 py-1 rounded-full text-xs">Фотозона</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h1 class="text-xl font-bold mb-2">Саратовская консерватория</h1>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">Первая консерватория в российской провинции, основана в 1912 году. Уникальная архитектура и богатая история.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center text-gray-500 text-sm">
-                                    <i class="fas fa-clock mr-2"></i>
-                                    <span>15 мин</span>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2">{{ $attraction->name }}</h3>
+                                <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $attraction->short_description }}</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center text-gray-500 text-sm">
+                                        <i class="fas fa-clock mr-2"></i>
+                                        <span>{{ $attraction->visit_duration }} мин</span>
+                                    </div>
+                                    <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}"
+                                       class="bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm py-2 px-4 rounded-lg transition">
+                                        Подробнее →
+                                    </a>
                                 </div>
-                                <button onclick="showAttractionDetails(1)" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm py-2 px-4 rounded-lg transition">
-                                    Подробнее →
-                                </button>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Карточка 2  -->
-                    <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="/images/4fe8539f70401070351fe8228c84deaf619dded8.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                                <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold">4.8</span>
-                            </div>
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <span class="bg-blue-500/80 backdrop-blur px-3 py-1 rounded-full text-xs">Кафе</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h1 class="text-xl font-bold mb-2">Набережная Космонавтов</h1>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">Любимое место отдыха горожан с видом на Волгу. Здесь приземлился Юрий Гагарин после первого полёта.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center text-gray-500 text-sm">
-                                    <i class="fas fa-clock mr-2"></i>
-                                    <span>30 мин</span>
-                                </div>
-                                <button onclick="showAttractionDetails(2)" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm py-2 px-4 rounded-lg transition">
-                                    Подробнее →
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 3  -->
-                    <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="/images/photo_2022-11-14_16-25-54.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                                <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold">4.7</span>
-                            </div>
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <span class="bg-blue-500/80 backdrop-blur px-3 py-1 rounded-full text-xs">Музей</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h1 class="text-xl font-bold mb-2">Парк Победы</h1>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">Музей военной техники под открытым небом с уникальной экспозицией и вечным огнем.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center text-gray-500 text-sm">
-                                    <i class="fas fa-clock mr-2"></i>
-                                    <span>45 мин</span>
-                                </div>
-                                <button onclick="showAttractionDetails(3)" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm py-2 px-4 rounded-lg transition">
-                                    Подробнее →
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 4  -->
-                    <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="/images/Саратов легендарный и мистический.png" alt="Саратовский мост" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                                <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold">4.9</span>
-                            </div>
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <span class="bg-blue-500/80 backdrop-blur px-3 py-1 rounded-full text-xs">Фотозона</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h1 class="text-xl font-bold mb-2">Саратовский мост</h1>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">Символ города, один из самых длинных мостов в Европе. Потрясающие виды на Волгу.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center text-gray-500 text-sm">
-                                    <i class="fas fa-clock mr-2"></i>
-                                    <span>20 мин</span>
-                                </div>
-                                <button onclick="showAttractionDetails(4)" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm py-2 px-4 rounded-lg transition">
-                                    Подробнее →
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 5  -->
-                    <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="/images/saratovskiy-teatr-operyi-i-baleta.jpg" alt="Театр оперы и балета" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                                <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold">4.8</span>
-                            </div>
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <span class="bg-blue-500/80 backdrop-blur px-3 py-1 rounded-full text-xs">Культура</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h1 class="text-xl font-bold mb-2">Театр оперы и балета</h1>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">Один из старейших театров России с богатой историей и великолепной архитектурой.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center text-gray-500 text-sm">
-                                    <i class="fas fa-clock mr-2"></i>
-                                    <span>60 мин</span>
-                                </div>
-                                <button onclick="showAttractionDetails(5)" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm py-2 px-4 rounded-lg transition">
-                                    Подробнее →
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 6  -->
-                    <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="/images/limonariy.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                                <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold">4.7</span>
-                            </div>
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <span class="bg-blue-500/80 backdrop-blur px-3 py-1 rounded-full text-xs">Парк</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h1 class="text-xl font-bold mb-2">Лимонарий</h1>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">Уникальная оранжерея с экзотическими растениями и цитрусовыми деревьями.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center text-gray-500 text-sm">
-                                    <i class="fas fa-clock mr-2"></i>
-                                    <span>60 мин</span>
-                                </div>
-                                <button onclick="showAttractionDetails(6)" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm py-2 px-4 rounded-lg transition">
-                                    Подробнее →
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 7  -->
-                    <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="/images/scale_1200 (1).jpeg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                                <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold">4.7</span>
-                            </div>
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <span class="bg-blue-500/80 backdrop-blur px-3 py-1 rounded-full text-xs">Музей</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h1 class="text-xl font-bold mb-2">Музей Радищева</h1>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">Первый общедоступный художественный музей в провинции России.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center text-gray-500 text-sm">
-                                    <i class="fas fa-clock mr-2"></i>
-                                    <span>90 мин</span>
-                                </div>
-                                <button onclick="showAttractionDetails(7)" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm py-2 px-4 rounded-lg transition">
-                                    Подробнее →
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Карточка 8  -->
-                    <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="/images/scale_1200 (2).jpeg" alt="Городской парк" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                                <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold">4.5</span>
-                            </div>
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <span class="bg-blue-500/80 backdrop-blur px-3 py-1 rounded-full text-xs">Парк</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h1 class="text-xl font-bold mb-2">Городской парк</h1>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">Центральный парк города с аттракционами, прудом и зелёными аллеями.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center text-gray-500 text-sm">
-                                    <i class="fas fa-clock mr-2"></i>
-                                    <span>60 мин</span>
-                                </div>
-                                <button onclick="showAttractionDetails(8)" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm py-2 px-4 rounded-lg transition">
-                                    Подробнее →
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 9  -->
-                    <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="/images/f621dd6a9c428d4e949c4a00ebcc57d4.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                                <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold">4.6</span>
-                            </div>
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <span class="bg-blue-500/80 backdrop-blur px-3 py-1 rounded-full text-xs">Прогулка</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h1 class="text-xl font-bold mb-2">Проспект Кирова</h1>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">Пешеходная улица - 'Саратовский Арбат' с магазинами, кафе и уличными музыкантами.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center text-gray-500 text-sm">
-                                    <i class="fas fa-clock mr-2"></i>
-                                    <span>45 мин</span>
-                                </div>
-                                <button onclick="showAttractionDetails(9)" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm py-2 px-4 rounded-lg transition">
-                                    Подробнее →
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 10  -->
-                    <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="/images/07458c68242fb8524be00a45a7df919ea6e65e78.png" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                                <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold">4.9</span>
-                            </div>
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <span class="bg-blue-500/80 backdrop-blur px-3 py-1 rounded-full text-xs">Развлечения</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h1 class="text-xl font-bold mb-2">Цирк братьев Никитиных</h1>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">Первый стационарный цирк в России, основанный в 1876 году.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center text-gray-500 text-sm">
-                                    <i class="fas fa-clock mr-2"></i>
-                                    <span>90 мин</span>
-                                </div>
-                                <button onclick="showAttractionDetails(10)" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm py-2 px-4 rounded-lg transition">
-                                    Подробнее →
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 11  -->
-                    <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
-                        <div class="relative h-48 overflow-hidden">
-                            <img src="/images/img441_0.jpg" alt="Консерватория" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                                <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold">4.5</span>
-                            </div>
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <span class="bg-blue-500/80 backdrop-blur px-3 py-1 rounded-full text-xs">Культура</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h1 class="text-xl font-bold mb-2">Национальная деревня</h1>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">Этнографический комплекс с домами разных народов Поволжья.</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center text-gray-500 text-sm">
-                                    <i class="fas fa-clock mr-2"></i>
-                                    <span>60 мин</span>
-                                </div>
-                                <button onclick="showAttractionDetails(11)" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm py-2 px-4 rounded-lg transition">
-                                    Подробнее →
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <!-- Кнопки навигации -->
                 <div class="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
-                    <button onclick="document.querySelector('.overflow-x-auto').scrollBy({left: -400, behavior: 'smooth'})"
+                    <button onclick="this.closest('.relative').querySelector('.overflow-x-auto').scrollBy({left: -400, behavior: 'smooth'})"
                             class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-blue-500 transition-colors">
                         <i class="fas fa-chevron-left"></i>
                     </button>
                 </div>
                 <div class="absolute top-1/2 -translate-y-1/2 right-0 translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
-                    <button onclick="document.querySelector('.overflow-x-auto').scrollBy({left: 400, behavior: 'smooth'})"
+                    <button onclick="this.closest('.relative').querySelector('.overflow-x-auto').scrollBy({left: 400, behavior: 'smooth'})"
                             class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-blue-500 transition-colors">
                         <i class="fas fa-chevron-right"></i>
                     </button>
@@ -508,70 +227,28 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-8 mb-12">
-                <div data-aos="fade-right" class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://www.tursar.ru/image/img424_0.jpg" alt="Саратовская консерватория" class="group-hover:scale-110 transition duration-500">
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <span class="font-semibold">4.9</span>
+                @foreach($featuredAttractions as $attraction)
+                    <div data-aos="fade-right" class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="{{ $attraction->attachments?->get(0)?->url() ?? "" }}"
+                                 alt="Изображение {{ $attraction->name }}"
+                                 class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                         </div>
-                    </div>
-                    <div class="p-6">
-                        <h1 class="text-2xl font-bold mb-3">Саратовская консерватория</h1>
-                        <p class="text-gray-600 mb-4">Первая консерватория в российской провинции, основана в 1912 году. Уникальная архитектура и богатая история.</p>
-                        <div class="space-y-3">
-                            <div class="flex items-center space-x-4 text-sm text-gray-500">
-                                <span><i class="fas fa-walking mr-1"></i>15 мин</span>
-                                <span><i class="fas fa-camera mr-1"></i>Фотозона</span>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-3">{{ $attraction->name }}</h3>
+                            <p class="text-gray-600 mb-4">{{ $attraction->short_description }}</p>
+                            <div class="space-y-3">
+                                <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                    <span><i class="fas fa-walking mr-1"></i>{{ $attraction->visit_duration }} мин</span>
+                                </div>
+                                <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}"
+                                   class="block w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition text-center">
+                                    Подробнее <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
                             </div>
-                            <button onclick="showAttractionDetails(1)" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition cursor-pointer">
-                                Подробнее <i class="fas fa-arrow-right ml-1"></i>
-                            </button>
                         </div>
                     </div>
-                </div>
-
-                <div data-aos="fade-left" class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="https://www.tursar.ru/image/img363_0.jpg" alt="Набережная Космонавтов" class="group-hover:scale-110 transition duration-500">
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <span class="font-semibold">4.8</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h1 class="text-2xl font-bold mb-3">Набережная Космонавтов</h1>
-                        <p class="text-gray-600 mb-4">Любимое место отдыха горожан с видом на Волгу. Здесь приземлился Юрий Гагарин после первого полета.</p>
-                        <div class="space-y-3">
-                            <div class="flex items-center space-x-4 text-sm text-gray-500">
-                                <span><i class="fas fa-walking mr-1"></i>30 мин</span>
-                                <span><i class="fas fa-utensils mr-1"></i>Кафе</span>
-                            </div>
-                            <button onclick="showAttractionDetails(2)" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition cursor-pointer">
-                                Подробнее <i class="fas fa-arrow-right ml-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Map Container -->
-            <div data-aos="fade-up" class="bg-white rounded-xl shadow-lg p-6">
-                <div class="flex flex-col sm:flex-row gap-4 lg:flex-row items-center justify-between mb-4">
-                    <h1 class="text-2xl font-bold mb-3">Интерактивная карта</h1>
-                    <div class="flex space-x-4">
-                        <button onclick="forceInitMap()" class="map-button bg-purple-100 text-purple-600 hover:bg-purple-200">
-                            <i class="fas fa-sync mr-2"></i>Загрузить карту
-                        </button>
-                        <button onclick="document.querySelector('.map-filter[data-category=all]').click()" class="map-button bg-blue-100 text-blue-600 hover:bg-blue-200">
-                            <i class="fas fa-filter mr-2"></i>Фильтры
-                        </button>
-                        <button onclick="showRoute(1)" class="map-button bg-green-100 text-green-600 hover:bg-green-200">
-                            <i class="fas fa-route mr-2"></i>Маршруты
-                        </button>
-                    </div>
-                </div>
-                <div id="map" class="h-125 rounded-lg"></div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -648,7 +325,6 @@
         </div>
     </section>
 
-{{--    @livewire('sara-ai')--}}
     <!-- AI City Guide Section (Enhanced!) -->
     <section id="ai-guide" class="bg-white py-10 sm:py-15 xl:py-20 3xl:py-26">
         <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10">
@@ -656,7 +332,7 @@
                 <span class="bg-linear-to-r from-green-600 to-teal-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
                     <i class="fas fa-robot mr-2"></i>AI АССИСТЕНТ
                 </span>
-                <h2>Ваш персональный гид Сара</h2>
+                <h2>Ваш персональный гид Саратов</h2>
                 <p class="text text-gray-600 content-center">Интерактивный помощник, который подберет идеальный маршрут именно для вас</p>
             </div>
 

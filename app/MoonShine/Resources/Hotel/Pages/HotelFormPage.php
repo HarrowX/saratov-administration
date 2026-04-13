@@ -41,14 +41,14 @@ class HotelFormPage extends FormPage
     {
         return [
             ID::make(),
-            Text::make('Название', 'name')->unescape(),
+            Text::make('Название', 'name')->unescape()->required(),
             Slug::make('Слаг','slug')->from('name')->unique()->canSee(function () {
                 $item = $this->getResource()?->getItem();
                 return $item && $item->exists;
             }),
-            Textarea::make('Описание', 'description')->unescape(),
-            Textarea::make('Второе описание', 'second_description')->unescape(),
-            Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы'),
+            Textarea::make('Описание', 'description')->unescape()->required(),
+            Textarea::make('Второе описание', 'second_description')->unescape()->required(),
+            Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы')->required(),
             Select::make('Тип размещения', 'type')
                 ->options([
                     'Отель' => 'Отель',
@@ -56,23 +56,23 @@ class HotelFormPage extends FormPage
                     'Глэмпинг' => 'Глэмпинг',
                     'Курорт' => 'Курорт'
                 ])
-                ->required(),
+                ->required()->required(),
             Number::make('Количество звезд','stars'),
             Phone::make('Номер телефона', 'phone'),
-            Text::make('Адрес', 'address')->unescape(),
-            Text::make('Район', 'district'),
+            Text::make('Адрес', 'address')->unescape()->required(),
+            Text::make('Район', 'district')->required(),
             Text::make('Email', 'email'),
             Url::make('Сайт', 'website'),
             Number::make('Максимальная цена', 'max_price'),
             Number::make('Минимальная цена', 'min_price'),
-            Number::make('Долгота','latitude'),
-            Number::make('Широта','longitude'),
+            Number::make('Долгота','latitude')->required(),
+            Number::make('Широта','longitude')->required(),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),
                     Image::make('Файл', 'link'),
                     Number::make('Порядковый номер', 'order')->default(0),
-                ])->removable(),
+                ])->removable()->required(),
         ];
     }
 

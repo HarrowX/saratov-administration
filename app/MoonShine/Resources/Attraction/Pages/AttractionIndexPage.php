@@ -49,6 +49,13 @@ class AttractionIndexPage extends IndexPage
             Json::make('Рабочее время', 'worktime')->keyValue('День', 'Время'),
             Phone::make('Номер телефона', 'phone'),
             Text::make('Адрес', 'address')->unescape(),
+            Select::make('Отображение на главной', 'display_location')
+                ->options([
+                    'null' => 'Не показывать',
+                    'carousel' => 'В карусели',
+                    'featured' => 'В больших карточках',
+                ])
+                ->default(''),
             Text::make('Район', 'district'),
             Text::make('Email', 'email'),
             Url::make('Сайт', 'website'),

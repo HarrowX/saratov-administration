@@ -7,7 +7,6 @@ import './scripts/attractions';
 import './scripts/profile-modal';
 import './scripts/user-profile';
 import './scripts/achievements';
-import './scripts/business';
 import './scripts/chatbot';
 import './scripts/fixes';
 import './scripts/innovations';
@@ -15,7 +14,6 @@ import './scripts/map-fixes';
 import './scripts/slider';
 import './scripts/social-features';
 import './scripts/swiper';
-import './scripts/tour';
 import './scripts/user-content';
 import './scripts/yandex-map';
 
@@ -46,7 +44,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 top: targetPosition,
                 behavior: 'smooth'
             });
-            
+
             // Close mobile menu if open
             if (!mobileMenu.classList.contains('hidden')) {
                 mobileMenu.classList.add('hidden');
@@ -93,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     counters.forEach(counter => {
         counterObserver.observe(counter);
     });
-    
+
     // Initialize user data
     updateProfileData();
 });

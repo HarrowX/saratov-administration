@@ -45,15 +45,15 @@ class RestaurantFormPage extends FormPage
         return [
             Box::make([
                 ID::make(),
-                Text::make('Название', 'name')->unescape(),
+                Text::make('Название', 'name')->unescape()->required(),
                 Slug::make('Слаг','slug')->from('name')->unique()->canSee(function () {
                     $item = $this->getResource()?->getItem();
                     return $item && $item->exists;
                 }),
-                Textarea::make('Описание', 'description')->unescape(),
-                Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы'),
-                Phone::make('Номер телефона', 'phone'),
-                Text::make('Кухня', 'kitchen')->unescape(),
+                Textarea::make('Описание', 'description')->unescape()->required(),
+                Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы')->required(),
+                Phone::make('Номер телефона', 'phone')->required(),
+                Text::make('Кухня', 'kitchen')->unescape()->required(),
                 Select::make('Ценовая категория','price_category')
                     ->options([
                         'budget' => 'Дешево',
@@ -62,7 +62,7 @@ class RestaurantFormPage extends FormPage
                         'luxury' => 'Люкс'
                     ]),
                 Number::make('Количество посадочных мест','capacity'),
-                Text::make('Адрес', 'address')->unescape(),
+                Text::make('Адрес', 'address')->unescape()->required(),
                 Text::make('Район', 'district'),
                 Text::make('Email', 'email'),
                 Url::make('Сайт', 'website'),
@@ -73,7 +73,7 @@ class RestaurantFormPage extends FormPage
                         ID::make(),
                         Image::make('Файл', 'link'),
                         Number::make('Порядковый номер', 'order')->default(0),
-                ])->removable(),
+                ])->removable()->required(),
             ]),
         ];
     }

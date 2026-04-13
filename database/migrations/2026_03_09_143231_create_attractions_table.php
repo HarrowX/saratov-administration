@@ -30,10 +30,10 @@ return new class extends Migration
             $table->integer('visit_duration');
             $table->boolean('accessibility');
             $table->boolean('parking');
-            $table->decimal('rating');
+            $table->enum('display_location',['null','carousel','featured'])->default('null');
             $table->integer('views_count')->default(0);
             $table->integer('favorites_count')->default(0);
-            $table->integer('created_by');
+            $table->integer('created_by')->nullable();
             $table->timestamps();
         });
     }
