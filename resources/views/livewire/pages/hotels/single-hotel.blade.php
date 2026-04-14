@@ -67,7 +67,7 @@
                         <div class="flex items-start gap-3 xl:gap-5">
                             <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 8.svg">
                             <div class="flex flex-col gap-2">
-                                @forelse($restaurant->worktime ?? [] as $day => $time)
+                                @forelse($hotel->worktime ?? [] as $day => $time)
                                     <p>{{ $day }}: {{ $time }}</p>
                                 @empty
                                     <p>Не указано</p>
