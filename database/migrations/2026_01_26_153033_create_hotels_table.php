@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('type',['Отель','Гостевой дом','Глэмпинг','Курорт']);
             $table->tinyInteger('stars')->unsigned()->nullable();
             $table->json('worktime')->nullable();
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->string('address');
             $table->string('district')->nullable();
             $table->decimal('latitude')->nullable();

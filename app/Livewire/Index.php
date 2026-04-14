@@ -2,21 +2,25 @@
 
 namespace App\Livewire;
 
-use App\Models\Hotel;
-use App\Models\Place;
-use App\Models\Restaurant;
-use Livewire\Component;
 use App\Models\Attraction;
+use Livewire\Component;
 class Index extends Component
 {
-    public $attractions;
-    public $hotels;
-    public $restaurants;
+    public $carouselAttractions;
+    public $featuredAttractions;
+
     public function mount()
     {
-        $this->attractions = Attraction::where('status', 'active')->get();
-        $this->hotels = Hotel::all();
-        $this->restaurants = Restaurant::all();
+        $this->carouselAttractions = Attraction::query()
+            ->where('display_location', 'carousel')
+            ->with('attachments')
+            ->get();
+
+        $this->featuredAttractions = Attraction::query()
+            ->where('display_location', 'featured')
+            ->with('attachments')
+            ->limit(2)
+            ->get();
     }
 
     public function render()

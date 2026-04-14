@@ -18,7 +18,7 @@ const monthNames = [
 const dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
 const events = {
-    2: {
+    3: {
         2: {name: 'Квест', textColor: '#BE185D', bgColor: '#FCE7F5'},
         11: {name: 'Концерт', textColor: '#7E22CE', bgColor: '#F3E8FF'},
         23: {name: 'Экскурсия', textColor: '#15803D', bgColor: '#DCFCE7'},

@@ -15,25 +15,25 @@ function fixChatbot() {
     if (window.handleChatMessage) {
         delete window.handleChatMessage;
     }
-    
+
     window.handleChatMessage = function(message) {
         if (window.chatbotProcessing) {
             return;
         }
-        
+
         window.chatbotProcessing = true;
-        
+
         const chatMessages = document.getElementById('chat-messages');
         if (!chatMessages) {
             window.chatbotProcessing = false;
             return;
         }
-        
+
         const input = document.getElementById('aiChatInput');
         if (input) {
             input.value = '';
         }
-        
+
         const userMessage = document.createElement('div');
         userMessage.className = 'flex justify-end mb-4';
         userMessage.innerHTML = `
@@ -42,15 +42,15 @@ function fixChatbot() {
             </div>
         `;
         chatMessages.appendChild(userMessage);
-        
+
         chatMessages.scrollTop = chatMessages.scrollHeight;
-        
+
         setTimeout(() => {
             const botMessage = document.createElement('div');
             botMessage.className = 'flex justify-start mb-4';
-            
+
             let response = getBotResponse(message);
-            
+
             botMessage.innerHTML = `
                 <div class="flex items-start space-x-2">
                     <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
@@ -63,9 +63,9 @@ function fixChatbot() {
                 </div>
             `;
             chatMessages.appendChild(botMessage);
-            
+
             chatMessages.scrollTop = chatMessages.scrollHeight;
-            
+
             window.chatbotProcessing = false;
         }, 1000);
     };
@@ -78,7 +78,7 @@ function escapeHtml(text) {
 
 function getBotResponse(message) {
     const lowerMessage = message.toLowerCase().trim();
-    
+
     const responses = {
         'привет': 'Привет! Я Сара - ваш виртуальный гид по Саратову. Чем могу помочь?',
         'start': 'Отлично! Давайте начнём знакомство с Саратовом. Что вас интересует: достопримечательности, рестораны, музеи или развлечения?',
@@ -96,19 +96,19 @@ function getBotResponse(message) {
         'события': 'Сегодня в Саратове проходят: концерт в филармонии, выставка в музее Радищева, фестиваль уличной еды на набережной. Что вас интересует?',
         'шопинг': 'В Саратове есть множество мест для шопинга — от крупных торговых центров до рынков. Вот некоторые из них: ТЦ "Happy Молл", ТЦ "Тау Галерея", Гостиный двор. Также рекомендую посетить ярмарку выходного дня на Театральной площади.'
     };
-    
+
     for (let key in responses) {
         if (lowerMessage === key || lowerMessage.includes(key)) {
             return responses[key];
         }
     }
-    
+
     return 'Интересный вопрос! Могу рассказать о достопримечательностях, ресторанах, музеях, парках Саратова. Что вас интересует?';
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     fixChatbot();
-    
+
     setTimeout(() => {
         const chatMessages = document.getElementById('chat-messages');
         if (chatMessages && chatMessages.children.length === 0) {
@@ -135,22 +135,22 @@ document.addEventListener('DOMContentLoaded', function() {
 // ========================================
 //fancybox
 Fancybox.bind('[data-fancybox="gallery"]',{
-    
+
 });
 
 Fancybox.bind('[data-fancybox="full-gallery"]',{
-    
+
 });
 
 document.querySelectorAll('.btn-gallery').forEach(btn => {
 btn.addEventListener('click', function(e) {
     e.preventDefault();
-    
+
     const galleryName = this.getAttribute('data-gallery');
-    
+
     if (galleryName) {
     const firstImage = document.querySelector(`[data-fancybox="full-gallery"]`);
-    
+
     if (firstImage) {
         firstImage.click();
     }
@@ -164,14 +164,14 @@ btn.addEventListener('click', function(e) {
 function buildRoute(attractionId) {
     const attraction = attractionsData.find(a => a.id === attractionId);
     if (!attraction) return;
-    
+
     // Закрыть модальное окно если открыто
-    const modal = document.querySelector('.fixed');
+    const modal = document.querySelector('[data-modal="attraction"]');
     if (modal) modal.remove();
-    
+
     // Показать уведомление
     showNotification(`Маршрут до "${attraction.title}" построен! Следуйте указаниям на карте.`, 'success');
-    
+
     // Перейти к карте
     showOnMap(attractionId);
 }
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Применяем все исправления
     // createAttractionsCarousel();
     fixChatbot();
-    
+
     // Добавляем глобальные функции
     window.buildRoute = buildRoute;
 });
@@ -251,7 +251,7 @@ const businessOffers = [
 function showOfferDetails(offerId) {
     const offer = businessOffers.find(o => o.id === offerId);
     if (!offer) return;
-    
+
     const modal = document.createElement('div');
     modal.className = 'fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4';
     modal.innerHTML = `
@@ -269,10 +269,10 @@ function showOfferDetails(offerId) {
                     </button>
                 </div>
             </div>
-            
+
             <div class="p-6">
                 <p class="text-gray-600 mb-4">${offer.description}</p>
-                
+
                 <div class="space-y-3 mb-6">
                     <div class="flex items-center text-gray-600">
                         <i class="fas fa-clock w-5 mr-3"></i>
@@ -287,7 +287,7 @@ function showOfferDetails(offerId) {
                         <span>${offer.phone}</span>
                     </div>
                 </div>
-                
+
                 <div class="bg-gray-100 rounded-lg p-4 mb-6">
                     <p class="text-sm text-gray-500 mb-2">Промокод для получения скидки:</p>
                     <div class="flex items-center justify-between bg-white rounded-lg px-4 py-3">
@@ -297,7 +297,7 @@ function showOfferDetails(offerId) {
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="flex gap-3">
                     <button onclick="activateOffer(${offer.id})" class="flex-1 bg-linear-to-r from-blue-500 to-purple-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition text-xs sm:text-base">
                         Активировать предложение
@@ -309,7 +309,7 @@ function showOfferDetails(offerId) {
             </div>
         </div>
     `;
-    
+
     document.body.appendChild(modal);
 }
 
@@ -341,7 +341,7 @@ function showAllOffers() {
             category: 'fitness'
         }
     ];
-    
+
     const modal = document.createElement('div');
     modal.className = 'fixed inset-0 bg-black/50 z-50 overflow-y-auto';
     modal.innerHTML = `
@@ -353,7 +353,7 @@ function showAllOffers() {
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
-                
+
                 <div class="p-6">
                     <div class="grid md:grid-cols-2 gap-4">
                         ${allOffers.map(offer => `
@@ -373,7 +373,7 @@ function showAllOffers() {
             </div>
         </div>
     `;
-    
+
     document.body.appendChild(modal);
 }
 
@@ -392,83 +392,12 @@ function copyPromoCode(code) {
     showNotification('Промокод скопирован!', 'success');
 }
 
-function showBusinessRegistration() {
-    const modal = document.createElement('div');
-    modal.className = 'fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4';
-    modal.innerHTML = `
-        <div class="bg-white rounded-2xl max-w-xl w-full">
-            <div class="bg-linear-to-r from-blue-500 to-purple-600 p-6 rounded-t-2xl text-white">
-                <h2 class="title3xl font-bold">Стать партнёром</h2>
-                <p class="text text-white/80 mt-1">Присоединяйтесь к программе лояльности</p>
-            </div>
-            
-            <form class="p-6 overflow-scroll max-h-120" onsubmit="event.preventDefault(); submitBusinessRegistration(event);">
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-gray-700 mb-2">Название компании</label>
-                        <input type="text" name="company_name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-gray-700 mb-2">Контактное лицо</label>
-                        <input type="text" name="contact_person" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-gray-700 mb-2">Телефон</label>
-                        <input type="tel" name="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-gray-700 mb-2">Email</label>
-                        <input type="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-gray-700 mb-2">Тип бизнеса</label>
-                        <select name="business_type" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="restaurant">Ресторан/Кафе</option>
-                            <option value="shop">Магазин</option>
-                            <option value="entertainment">Развлечения</option>
-                            <option value="services">Услуги</option>
-                            <option value="other">Другое</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-gray-700 mb-2">Описание предложения</label>
-                        <textarea name="description" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="3" placeholder="Опишите, какие скидки или услуги вы готовы предложить пользователям"></textarea>
-                    </div>
-                </div>
-                
-                <div class="mt-4 text-xs text-gray-500">
-                    <label class="flex items-start space-x-2">
-                        <input type="checkbox" required class>
-                        <span>Я согласен с <a href="#" class="text-blue-500 hover:text-blue-600 underline">обработкой персональных данных</a></span>
-                    </label>
-                </div>
-                
-                <div class="mt-6 flex gap-3">
-                    <button type="submit" class="flex-1 bg-linear-to-r from-blue-500 to-purple-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition">
-                        Отправить заявку
-                    </button>
-                    <button type="button" onclick="this.closest('.fixed').remove()" class="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
-                        Отмена
-                    </button>
-                </div>
-            </form>
-        </div>
-    `;
-    
-    document.body.appendChild(modal);
-}
-
 function submitBusinessRegistration(event) {
     event.preventDefault();
-    
+
     const form = event.target;
     const formData = new FormData(form);
-    
+
     // Send to Telegram
     if (window.TelegramIntegration) {
         window.TelegramIntegration.sendBusinessRegistration(formData);
@@ -476,7 +405,7 @@ function submitBusinessRegistration(event) {
         console.error('TelegramIntegration not available');
         showNotification('Ошибка: Telegram интеграция недоступна', 'error');
     }
-    
+
     // Close modal
     form.closest('.fixed').remove();
 }
@@ -486,8 +415,6 @@ window.showOfferDetails = showOfferDetails;
 window.showAllOffers = showAllOffers;
 window.activateOffer = activateOffer;
 window.copyPromoCode = copyPromoCode;
-window.showBusinessRegistration = showBusinessRegistration;
-window.submitBusinessRegistration = submitBusinessRegistration;
 
 // Экспорт для использования в других модулях
 if (typeof module !== 'undefined' && module.exports) {
@@ -497,6 +424,5 @@ if (typeof module !== 'undefined' && module.exports) {
         // showAllPhotos,
         showOfferDetails,
         showAllOffers,
-        showBusinessRegistration
     };
 }
