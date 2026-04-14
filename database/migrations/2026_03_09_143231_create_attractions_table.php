@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('slug');
             $table->string('district')->nullable();
-            $table->decimal('latitude');
-            $table->decimal('longitude');
+            $table->decimal('latitude')->nullable();
+            $table->decimal('longitude')->nullable();
             $table->string('email')->nullable();
             $table->string('website')->nullable();
             $table->enum('status',['active','draft','archived'])->default('active');
