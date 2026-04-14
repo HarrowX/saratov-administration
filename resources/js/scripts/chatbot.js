@@ -5,7 +5,7 @@ const ChatBot = {
 
     // Conversation history for context
     conversationHistory: [],
-    
+
     // Real Saratov places data
     places: {
         cafes: [
@@ -317,7 +317,7 @@ const ChatBot = {
             }
         ]
     },
-    
+
     // Chat state
     currentState: 'greeting',
     userPreferences: {
@@ -327,62 +327,62 @@ const ChatBot = {
         companions: null
     },
     chatHistory: [],
-    
+
     // Initialize chatbot
     init() {
         this.sendBotMessage(this.getGreeting(), ['start']);
     },
-    
+
     // Get greeting message with more variety
     getGreeting() {
         const hour = new Date().getHours();
         const dayOfWeek = new Date().getDay();
         const greetings = [];
-        
+
         // Time-based greetings
         if (hour < 6) {
-            greetings.push("Доброй ночи! Я Сара, ваш AI-гид по Саратову! 🌙");
-            greetings.push("Поздняя ночь! Я Сара, готова помочь с планами на завтра! ⭐");
+            greetings.push("Доброй ночи! Я Саратов, ваш AI-гид по Саратову! 🌙");
+            greetings.push("Поздняя ночь! Я Саратов, готова помочь с планами на завтра! ⭐");
         } else if (hour < 12) {
-            greetings.push("Доброе утро! Я Сара, готова помочь вам открыть Саратов! ☀️");
-            greetings.push("Утро доброе! Я Сара, давайте составим отличный план на день! 🌅");
-            greetings.push("Привет! Я Сара, ваш персональный гид! Готовы к новым открытиям? 🌟");
+            greetings.push("Доброе утро! Я Саратов, готова помочь вам открыть Саратов! ☀️");
+            greetings.push("Утро доброе! Я Саратов, давайте составим отличный план на день! 🌅");
+            greetings.push("Привет! Я Саратов, ваш персональный гид! Готовы к новым открытиям? 🌟");
         } else if (hour < 18) {
-            greetings.push("Добрый день! Я Сара, ваш персональный гид по городу! 🌞");
-            greetings.push("Привет! Я Сара, готова показать вам лучшие места Саратова! ✨");
-            greetings.push("Добрый день! Я Сара, давайте найдем что-то интересное! 🎯");
+            greetings.push("Добрый день! Я Саратов, ваш персональный гид по городу! 🌞");
+            greetings.push("Привет! Я Саратов, готова показать вам лучшие места Саратова! ✨");
+            greetings.push("Добрый день! Я Саратов, давайте найдем что-то интересное! 🎯");
         } else {
-            greetings.push("Добрый вечер! Я Сара, давайте составим план на завтра! 🌙");
-            greetings.push("Вечер добрый! Я Сара, готова помочь с вечерними планами! 🌆");
-            greetings.push("Привет! Я Сара, ваш AI-гид! Как прошел день? 🌟");
+            greetings.push("Добрый вечер! Я Саратов, давайте составим план на завтра! 🌙");
+            greetings.push("Вечер добрый! Я Саратов, готова помочь с вечерними планами! 🌆");
+            greetings.push("Привет! Я Саратов, ваш AI-гид! Как прошел день? 🌟");
         }
-        
+
         // Day-specific greetings
         if (dayOfWeek === 0 || dayOfWeek === 6) {
-            greetings.push("Выходные! Я Сара, готова помочь с планами на уикенд! 🎉");
-            greetings.push("Отличные выходные! Я Сара, давайте найдем что-то особенное! 🎊");
+            greetings.push("Выходные! Я Саратов, готова помочь с планами на уикенд! 🎉");
+            greetings.push("Отличные выходные! Я Саратов, давайте найдем что-то особенное! 🎊");
         }
-        
+
         // Random selection
         return greetings[Math.floor(Math.random() * greetings.length)];
     },
-    
+
     // Process user response
     processUserResponse(response, type = 'text') {
         // Add user message to chat
         if (type === 'text') {
             this.addUserMessage(response);
         }
-        
+
         // Handle option clicks directly
         if (type === 'option') {
             this.handleOptionClick(response);
             return;
         }
-        
+
         // Analyze user intent
         const intent = this.analyzeIntent(response);
-        
+
         // Process based on intent or current state
         if (intent.type === 'route_planning') {
             this.currentState = 'askCategory';
@@ -416,31 +416,31 @@ const ChatBot = {
                         this.handleGeneralResponse(response);
                     }
                     break;
-                    
+
                 case 'askCategory':
                     this.userPreferences.category = response;
                     this.currentState = 'askBudget';
                     this.askBudget(response);
                     break;
-                    
+
                 case 'askBudget':
                     this.userPreferences.budget = response;
                     this.currentState = 'askTime';
                     this.askTime();
                     break;
-                    
+
                 case 'askTime':
                     this.userPreferences.time = response;
                     this.currentState = 'askCompanions';
                     this.askCompanions();
                     break;
-                    
+
                 case 'askCompanions':
                     this.userPreferences.companions = response;
                     this.currentState = 'showRecommendations';
                     this.showRecommendations();
                     break;
-                    
+
                 case 'showRecommendations':
                     if (response === 'restart') {
                         this.restart();
@@ -452,14 +452,14 @@ const ChatBot = {
                         this.handleGeneralResponse(response);
                     }
                     break;
-                    
+
                 default:
                     this.handleGeneralResponse(response);
                     break;
             }
         }
     },
-    
+
     // Ask category
     askCategory() {
         const message = "Отлично! Что вас интересует больше всего? 🤔";
@@ -472,7 +472,7 @@ const ChatBot = {
         ];
         this.sendBotMessage(message, options);
     },
-    
+
     // Ask budget
     askBudget(category) {
         let emoji = category === 'food' ? '🍽️' : category === 'parks' ? '🌳' : category === 'museums' ? '🏛️' : '🎯';
@@ -485,7 +485,7 @@ const ChatBot = {
         ];
         this.sendBotMessage(message, options);
     },
-    
+
     // Ask time
     askTime() {
         const message = "Сколько времени вы планируете провести? ⏰";
@@ -497,7 +497,7 @@ const ChatBot = {
         ];
         this.sendBotMessage(message, options);
     },
-    
+
     // Ask companions
     askCompanions() {
         const message = "С кем вы будете? Это поможет мне подобрать лучшие места 👥";
@@ -510,13 +510,13 @@ const ChatBot = {
         ];
         this.sendBotMessage(message, options);
     },
-    
+
     // Show recommendations
     showRecommendations() {
         const recommendations = this.generateRecommendations();
-        
+
         let message = "🎯 Вот мой персональный план для вас:\n\n";
-        
+
         recommendations.forEach((rec, index) => {
             message += `${index + 1}. **${rec.name}**\n`;
             message += `📍 ${rec.address}\n`;
@@ -527,23 +527,23 @@ const ChatBot = {
             }
             message += '\n';
         });
-        
+
         message += "💡 **Совет дня**: " + this.getDayTip();
-        
+
         const options = [
             { text: '📋 Подробнее о местах', value: 'more' },
             { text: '🔄 Другие варианты', value: 'restart' },
             { text: '📱 Сохранить маршрут', value: 'save' }
         ];
-        
+
         this.sendBotMessage(message, options);
     },
-    
+
     // Generate recommendations based on preferences
     generateRecommendations() {
         let recommendations = [];
         const { category, budget, time, companions } = this.userPreferences;
-        
+
         // Food recommendations
         if (category === 'food' || category === 'all') {
             if (budget === 'economy' || budget === 'free') {
@@ -555,7 +555,7 @@ const ChatBot = {
                 recommendations.push(...this.places.restaurants.filter(r => r.priceRange === '$$$').slice(0, 2));
             }
         }
-        
+
         // Parks recommendations
         if (category === 'parks' || category === 'all') {
             if (companions === 'family') {
@@ -566,14 +566,14 @@ const ChatBot = {
                 recommendations.push(this.places.parks.find(p => p.name === 'Парк Победы'));
             }
         }
-        
+
         // Museums recommendations
         if (category === 'museums' || category === 'all') {
             if (budget !== 'free') {
                 recommendations.push(...this.places.museums.slice(0, 1));
             }
         }
-        
+
         // Entertainment recommendations
         if (category === 'entertainment' || category === 'all') {
             if (companions === 'family') {
@@ -582,7 +582,7 @@ const ChatBot = {
                 recommendations.push(this.places.entertainment.find(e => e.name === 'Лимонарий'));
             }
         }
-        
+
         // Limit recommendations based on time
         if (time === 'morning') {
             recommendations = recommendations.slice(0, 2);
@@ -591,10 +591,10 @@ const ChatBot = {
         } else if (time === 'evening') {
             recommendations = recommendations.slice(0, 2);
         }
-        
+
         return recommendations;
     },
-    
+
     // Get tip of the day
     getDayTip() {
         const tips = [
@@ -606,19 +606,19 @@ const ChatBot = {
         ];
         return tips[Math.floor(Math.random() * tips.length)];
     },
-    
+
     // Send bot message with typing animation
     sendBotMessage(text, options = []) {
         const chatContainer = document.getElementById('chatContainer');
         if (!chatContainer) return;
-        
+
         // Show typing indicator
         this.showTypingIndicator();
-        
+
         // Simulate typing delay
         setTimeout(() => {
             this.hideTypingIndicator();
-            
+
             const messageHtml = `
                 <div class="flex items-start space-x-3 animate-fadeIn">
                     <div class="w-10 h-10 bg-linear-to-r from-green-400 to-teal-500 rounded-full flex items-center justify-center">
@@ -626,29 +626,29 @@ const ChatBot = {
                     </div>
                     <div class="flex-1">
                         <div class="bg-gray-100 rounded-2xl rounded-tl-none p-4 max-w-md">
-                            <p class="font-semibold mb-1 text-green-600">Сара</p>
+                            <p class="font-semibold mb-1 text-green-600">Саратов</p>
                             <p class="whitespace-pre-line">${this.formatMessage(text)}</p>
                         </div>
                         ${options.length > 0 ? this.createOptions(options) : ''}
                     </div>
                 </div>
             `;
-            
+
             const messagesContainer = chatContainer.querySelector('.space-y-4');
             if (messagesContainer) {
                 messagesContainer.insertAdjacentHTML('beforeend', messageHtml);
                 chatContainer.scrollTop = chatContainer.scrollHeight;
             }
-            
+
             this.chatHistory.push({ sender: 'bot', text, timestamp: Date.now() });
         }, 1000 + Math.random() * 1000); // Random delay between 1-2 seconds
     },
-    
+
     // Show typing indicator
     showTypingIndicator() {
         const chatContainer = document.getElementById('chatContainer');
         if (!chatContainer) return;
-        
+
         const typingHtml = `
             <div class="flex items-start space-x-3 animate-fadeIn" id="typingIndicator">
                 <div class="w-10 h-10 bg-linear-to-r from-green-400 to-teal-500 rounded-full flex items-center justify-center">
@@ -656,7 +656,7 @@ const ChatBot = {
                 </div>
                 <div class="flex-1">
                     <div class="bg-gray-100 rounded-2xl rounded-tl-none p-4 max-w-md">
-                        <p class="font-semibold mb-1 text-green-600">Сара печатает...</p>
+                        <p class="font-semibold mb-1 text-green-600">Саратов печатает...</p>
                         <div class="flex space-x-1">
                             <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                             <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
@@ -666,14 +666,14 @@ const ChatBot = {
                 </div>
             </div>
         `;
-        
+
         const messagesContainer = chatContainer.querySelector('.space-y-4');
         if (messagesContainer) {
             messagesContainer.insertAdjacentHTML('beforeend', typingHtml);
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
     },
-    
+
     // Hide typing indicator
     hideTypingIndicator() {
         const typingIndicator = document.getElementById('typingIndicator');
@@ -681,12 +681,12 @@ const ChatBot = {
             typingIndicator.remove();
         }
     },
-    
+
     // Add user message
     addUserMessage(text) {
         const chatContainer = document.getElementById('chatContainer');
         if (!chatContainer) return;
-        
+
         const messageHtml = `
             <div class="flex items-start space-x-3 justify-end animate-fadeIn">
                 <div class="bg-blue-500 text-white rounded-2xl rounded-tr-none p-4 max-w-md">
@@ -697,36 +697,36 @@ const ChatBot = {
                 </div>
             </div>
         `;
-        
+
         const messagesContainer = chatContainer.querySelector('.space-y-4');
         if (messagesContainer) {
             messagesContainer.insertAdjacentHTML('beforeend', messageHtml);
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
-        
+
         this.chatHistory.push({ sender: 'user', text, timestamp: Date.now() });
     },
-    
+
     // Create options buttons
     createOptions(options) {
         const buttonsHtml = options.map(opt => {
             const value = opt.value || opt.text;
             const text = opt.text || opt;
             return `
-                <button onclick="ChatBot.selectOption('${value}', '${text}')" 
+                <button onclick="ChatBot.selectOption('${value}', '${text}')"
                         class="bg-white hover:bg-gray-50 px-4 py-2 rounded-lg text-sm border transition">
                     ${text}
                 </button>
             `;
         }).join('');
-        
+
         return `
             <div class="mt-3 flex flex-wrap gap-2">
                 ${buttonsHtml}
             </div>
         `;
     },
-    
+
     // Handle option selection
     selectOption(value, text) {
         this.addUserMessage(text);
@@ -794,90 +794,90 @@ const ChatBot = {
                 this.handleGeneralResponse(value);
         }
     },
-    
+
     // Format message with markdown-like syntax
     formatMessage(text) {
         return text
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/\*(.*?)\*/g, '<em>$1</em>');
     },
-    
+
     // Analyze user intent
     analyzeIntent(text) {
         const lowerText = text.toLowerCase();
-        
+
         // Route planning keywords
-        if (lowerText.includes('маршрут') || lowerText.includes('план') || lowerText.includes('начать') || 
+        if (lowerText.includes('маршрут') || lowerText.includes('план') || lowerText.includes('начать') ||
             lowerText.includes('путешествие') || lowerText.includes('экскурсия') || lowerText.includes('start')) {
             return { type: 'route_planning', confidence: 0.9 };
         }
-        
+
         // Food inquiry keywords
-        if (lowerText.includes('еда') || lowerText.includes('поесть') || lowerText.includes('кафе') || 
+        if (lowerText.includes('еда') || lowerText.includes('поесть') || lowerText.includes('кафе') ||
             lowerText.includes('ресторан') || lowerText.includes('кофе') || lowerText.includes('обед') ||
             lowerText.includes('ужин') || lowerText.includes('завтрак') || lowerText.includes('пицца') ||
             lowerText.includes('суши') || lowerText.includes('где поесть')) {
             return { type: 'food_inquiry', confidence: 0.8 };
         }
-        
+
         // Places inquiry keywords
         if (lowerText.includes('парк') || lowerText.includes('музей') || lowerText.includes('театр') ||
             lowerText.includes('цирк') || lowerText.includes('достопримечательность') || lowerText.includes('место') ||
             lowerText.includes('прогулка') || lowerText.includes('развлечение') || lowerText.includes('культура')) {
             return { type: 'places_inquiry', confidence: 0.8 };
         }
-        
+
         // Shopping inquiry keywords
         if (lowerText.includes('магазин') || lowerText.includes('торговый') || lowerText.includes('покупки') ||
             lowerText.includes('шопинг') || lowerText.includes('рынок') || lowerText.includes('молл') ||
             lowerText.includes('купить') || lowerText.includes('товары')) {
             return { type: 'shopping_inquiry', confidence: 0.8 };
         }
-        
+
         // Sports inquiry keywords
         if (lowerText.includes('спорт') || lowerText.includes('стадион') || lowerText.includes('фитнес') ||
             lowerText.includes('бассейн') || lowerText.includes('аквапарк') || lowerText.includes('ледовый') ||
             lowerText.includes('тренировка') || lowerText.includes('футбол') || lowerText.includes('хоккей')) {
             return { type: 'sports_inquiry', confidence: 0.8 };
         }
-        
+
         // Transport inquiry keywords
         if (lowerText.includes('вокзал') || lowerText.includes('аэропорт') || lowerText.includes('автобус') ||
             lowerText.includes('поезд') || lowerText.includes('транспорт') || lowerText.includes('как добраться') ||
             lowerText.includes('дорога') || lowerText.includes('маршрут')) {
             return { type: 'transport_inquiry', confidence: 0.8 };
         }
-        
+
         // Weather inquiry keywords
         if (lowerText.includes('погода') || lowerText.includes('дождь') || lowerText.includes('солнце') ||
             lowerText.includes('температура') || lowerText.includes('ветер') || lowerText.includes('снег')) {
             return { type: 'weather_inquiry', confidence: 0.9 };
         }
-        
+
         // Events inquiry keywords
         if (lowerText.includes('событие') || lowerText.includes('мероприятие') || lowerText.includes('концерт') ||
             lowerText.includes('выставка') || lowerText.includes('фестиваль') || lowerText.includes('шоу') ||
             lowerText.includes('сегодня') || lowerText.includes('завтра') || lowerText.includes('выходные')) {
             return { type: 'events_inquiry', confidence: 0.8 };
         }
-        
+
         // History inquiry keywords
         if (lowerText.includes('история') || lowerText.includes('прошлое') || lowerText.includes('гагарин') ||
             lowerText.includes('радищев') || lowerText.includes('чернышевский') || lowerText.includes('факт') ||
             lowerText.includes('интересно') || lowerText.includes('расскажи') || lowerText.includes('знать')) {
             return { type: 'history_inquiry', confidence: 0.7 };
         }
-        
+
         // General questions
         if (lowerText.includes('?') || lowerText.includes('что') || lowerText.includes('как') ||
             lowerText.includes('где') || lowerText.includes('когда') || lowerText.includes('почему') ||
             lowerText.includes('расскажи') || lowerText.includes('помоги')) {
             return { type: 'general_question', confidence: 0.6 };
         }
-        
+
         return { type: 'general_response', confidence: 0.5 };
     },
-    
+
     // Handle food inquiry
     handleFoodInquiry(intent) {
         const message = "🍽️ Отлично! Я помогу вам найти лучшие места для еды в Саратове. Что вас интересует?";
@@ -890,7 +890,7 @@ const ChatBot = {
         ];
         this.sendBotMessage(message, options);
     },
-    
+
     // Handle places inquiry
     handlePlacesInquiry(intent) {
         const message = "🏛️ Прекрасно! В Саратове есть множество интересных мест. Что вас больше привлекает?";
@@ -903,7 +903,7 @@ const ChatBot = {
         ];
         this.sendBotMessage(message, options);
     },
-    
+
     // Handle weather inquiry
     handleWeatherInquiry() {
         const weatherData = this.getWeatherInfo();
@@ -915,19 +915,19 @@ const ChatBot = {
         ];
         this.sendBotMessage(message, options);
     },
-    
+
     // Handle events inquiry
     handleEventsInquiry() {
         const events = this.getTodayEvents();
         let message = "📅 **События в Саратове сегодня:**\n\n";
-        
+
         events.forEach(event => {
             message += `🎭 **${event.name}**\n`;
             message += `📍 ${event.location}\n`;
             message += `⏰ ${event.time}\n`;
             message += `💰 ${event.price}\n\n`;
         });
-        
+
         const options = [
             { text: '📅 События на неделю', value: 'weekly_events' },
             { text: '🎫 Купить билеты', value: 'buy_tickets' },
@@ -935,14 +935,14 @@ const ChatBot = {
         ];
         this.sendBotMessage(message, options);
     },
-    
+
     // Handle history inquiry
     handleHistoryInquiry(intent) {
         const historyFacts = this.getHistoryFacts();
         const randomFact = historyFacts[Math.floor(Math.random() * historyFacts.length)];
-        
+
         let message = `📚 **Интересный факт о Саратове:**\n\n${randomFact.fact}\n\n${randomFact.details}`;
-        
+
         const options = [
             { text: '📖 Еще факты', value: 'more_facts' },
             { text: '🏛️ Исторические места', value: 'historical_places' },
@@ -950,7 +950,7 @@ const ChatBot = {
         ];
         this.sendBotMessage(message, options);
     },
-    
+
     // Handle shopping inquiry
     handleShoppingInquiry(intent) {
         const message = "🛍️ Отлично! Я помогу вам найти лучшие места для шопинга в Саратове. Что вас интересует?";
@@ -963,7 +963,7 @@ const ChatBot = {
         ];
         this.sendBotMessage(message, options);
     },
-    
+
     // Handle sports inquiry
     handleSportsInquiry(intent) {
         const message = "🏃‍♂️ Прекрасно! В Саратове есть отличные спортивные объекты. Что вас интересует?";
@@ -976,7 +976,7 @@ const ChatBot = {
         ];
         this.sendBotMessage(message, options);
     },
-    
+
     // Handle transport inquiry
     handleTransportInquiry(intent) {
         const message = "🚗 Отлично! Я помогу вам с транспортом в Саратове. Что вам нужно?";
@@ -989,7 +989,7 @@ const ChatBot = {
         ];
         this.sendBotMessage(message, options);
     },
-    
+
     // Handle general question
     handleGeneralQuestion(intent) {
         const responses = [
@@ -998,7 +998,7 @@ const ChatBot = {
             "🧠 Отличный вопрос! Я знаю много интересного о Саратове. Что конкретно вас интересует?",
             "✨ Интересно! Я готова поделиться знаниями о нашем городе. Уточните, пожалуйста, детали."
         ];
-        
+
         const randomResponse = responses[Math.floor(Math.random() * responses.length)];
         const options = [
             { text: '🍽️ Где поесть', value: 'food' },
@@ -1008,18 +1008,18 @@ const ChatBot = {
         ];
         this.sendBotMessage(randomResponse, options);
     },
-    
+
     // Handle general response with improved logic
     handleGeneralResponse(response) {
         const lowerResponse = response.toLowerCase();
-        
+
         // Greeting responses
         if (lowerResponse.includes('привет') || lowerResponse.includes('здравствуй') || lowerResponse.includes('добр')) {
             const greetings = [
-                "Привет! 👋 Я Сара, ваш персональный гид по Саратову! Рада познакомиться!",
+                "Привет! 👋 Я Саратов, ваш персональный гид по Саратову! Рада познакомиться!",
                 "Здравствуйте! 😊 Добро пожаловать в Саратов! Я помогу вам открыть все секреты нашего города!",
-                "Привет! 🌟 Я Сара, и я знаю все самые интересные места в Саратове. Что вас интересует?",
-                "Добро пожаловать! 🎉 Я Сара, ваш AI-гид. Готовы к удивительному путешествию по Саратову?"
+                "Привет! 🌟 Я Саратов, и я знаю все самые интересные места в Саратове. Что вас интересует?",
+                "Добро пожаловать! 🎉 Я Саратов, ваш AI-гид. Готовы к удивительному путешествию по Саратову?"
             ];
             const greeting = greetings[Math.floor(Math.random() * greetings.length)];
             this.sendBotMessage(greeting, [
@@ -1030,7 +1030,7 @@ const ChatBot = {
             ]);
             return;
         }
-        
+
         // Thank you responses
         if (lowerResponse.includes('спасибо') || lowerResponse.includes('благодар')) {
             const thanks = [
@@ -1046,7 +1046,7 @@ const ChatBot = {
             ]);
             return;
         }
-        
+
         // Confusion responses
         if (lowerResponse.includes('не понимаю') || lowerResponse.includes('не знаю') || lowerResponse.includes('что')) {
             const confusion = [
@@ -1063,7 +1063,7 @@ const ChatBot = {
             ]);
             return;
         }
-        
+
         // Default responses with personality - but only if no specific intent detected
         const responses = [
             "Интересно! 🤔 Расскажите больше о том, что вас привлекает в Саратове?",
@@ -1073,7 +1073,7 @@ const ChatBot = {
             "Прекрасно! 🎯 Я знаю много интересного о Саратове. Что вас больше всего интересует?",
             "Замечательно! 🌈 Саратов - удивительный город с богатой историей. О чем бы вы хотели узнать?"
         ];
-        
+
         const randomResponse = responses[Math.floor(Math.random() * responses.length)];
         const options = [
             { text: '🏛️ Достопримечательности', value: 'attractions' },
@@ -1082,14 +1082,14 @@ const ChatBot = {
             { text: '📅 События', value: 'events' },
             { text: '🚀 Поехали!', value: 'start' }
         ];
-        
+
         this.sendBotMessage(randomResponse, options);
     },
 
     // Handle follow-up responses
     handleFollowUpResponse(response, lastBotMessage) {
         const lowerResponse = response.toLowerCase();
-        
+
         // If asking about places
         if (lastBotMessage.includes('места') || lastBotMessage.includes('достопримечательности')) {
             if (lowerResponse.includes('да') || lowerResponse.includes('конечно') || lowerResponse.includes('хочу')) {
@@ -1108,7 +1108,7 @@ const ChatBot = {
             }
             return;
         }
-        
+
         // If asking about food
         if (lastBotMessage.includes('еда') || lastBotMessage.includes('ресторан') || lastBotMessage.includes('кафе')) {
             if (lowerResponse.includes('да') || lowerResponse.includes('конечно') || lowerResponse.includes('хочу')) {
@@ -1127,11 +1127,11 @@ const ChatBot = {
             }
             return;
         }
-        
+
         // Default follow-up
         this.handleGeneralResponse(response);
     },
-    
+
     // Get weather information
     getWeatherInfo() {
         const weatherConditions = [
@@ -1148,10 +1148,10 @@ const ChatBot = {
                 tip: "💡 Дождливая погода - идеальное время для музеев, театров или уютных кафе."
             }
         ];
-        
+
         return weatherConditions[Math.floor(Math.random() * weatherConditions.length)];
     },
-    
+
     // Get today's events
     getTodayEvents() {
         return [
@@ -1175,7 +1175,7 @@ const ChatBot = {
             }
         ];
     },
-    
+
     // Get history facts
     getHistoryFacts() {
         return [
@@ -1197,7 +1197,7 @@ const ChatBot = {
             }
         ];
     },
-    
+
     // Show more recommendations
     showMoreRecommendations() {
         const allPlaces = [
@@ -1210,13 +1210,13 @@ const ChatBot = {
             ...this.places.sports,
             ...this.places.transport
         ];
-        
+
         // Get random places
         const shuffled = allPlaces.sort(() => 0.5 - Math.random());
         const moreRecommendations = shuffled.slice(0, 5);
-        
+
         let message = "🌟 **Дополнительные рекомендации:**\n\n";
-        
+
         moreRecommendations.forEach((place, index) => {
             message += `${index + 1}. **${place.name}**\n`;
             message += `📍 ${place.address}\n`;
@@ -1227,16 +1227,16 @@ const ChatBot = {
             }
             message += '\n';
         });
-        
+
         const options = [
             { text: '🔄 Другие варианты', value: 'restart' },
             { text: '💾 Сохранить маршрут', value: 'save' },
             { text: '🗺️ Показать на карте', value: 'show_map' }
         ];
-        
+
         this.sendBotMessage(message, options);
     },
-    
+
     // Show place details
     showPlaceDetails(placeId) {
         const allPlaces = [
@@ -1249,44 +1249,44 @@ const ChatBot = {
             ...this.places.sports,
             ...this.places.transport
         ];
-        
+
         const place = allPlaces.find(p => p.name.toLowerCase().includes(placeId.toLowerCase()));
-        
+
         if (place) {
             let message = `📍 **${place.name}**\n\n`;
             message += `🏷️ Тип: ${place.type}\n`;
             message += `📍 Адрес: ${place.address}\n`;
             message += `⭐ Рейтинг: ${place.rating}\n`;
             message += `💬 ${place.description}\n`;
-            
+
             if (place.priceRange) {
                 message += `💰 Цены: ${place.priceRange}\n`;
             }
-            
+
             if (place.workingHours) {
                 message += `🕒 Часы работы: ${place.workingHours}\n`;
             }
-            
+
             if (place.specialties) {
                 message += `🍽️ Специализация: ${place.specialties.join(', ')}\n`;
             }
-            
+
             if (place.features) {
                 message += `✨ Особенности: ${place.features.join(', ')}\n`;
             }
-            
+
             const options = [
                 { text: '🗺️ Показать на карте', value: 'show_map' },
                 { text: '📞 Позвонить', value: 'call' },
                 { text: '🔄 Другие места', value: 'more' }
             ];
-            
+
             this.sendBotMessage(message, options);
         } else {
             this.sendBotMessage("Извините, не удалось найти информацию об этом месте. Попробуйте выбрать другое место.", []);
         }
     },
-    
+
     // Restart chat
     restart() {
         this.currentState = 'greeting';
@@ -1591,12 +1591,12 @@ let chatbotInitialized = false;
 
 window.handleChatMessage = function(message) {
     if (!message || !message.trim()) return;
-    
+
     if (window.ChatBot && !chatbotInitialized) {
         chatbotInitialized = true;
         ChatBot.init();
     }
-    
+
     setTimeout(() => {
         if (window.ChatBot) {
             ChatBot.processUserResponse(message.trim(), 'text');

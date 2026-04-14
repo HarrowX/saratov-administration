@@ -15,7 +15,7 @@
         </div>
     </section>
 
-    @livewire('sara-ai')
+    @livewire('saratov-ai')
 
     <!-- Section with filter and card-vebue -->
     <section class="bg-white pb-5 md:pb-10 xl:pb-20 3xl:pb-26">

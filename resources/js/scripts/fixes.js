@@ -57,7 +57,7 @@ function fixChatbot() {
                         <i class="fas fa-robot text-white text-sm"></i>
                     </div>
                     <div class="bg-gray-100 rounded-lg px-4 py-2 max-w-xs">
-                        <p class="font-semibold text-sm mb-1">Сара</p>
+                        <p class="font-semibold text-sm mb-1">Саратов</p>
                         <p class="text-gray-700">${escapeHtml(response)}</p>
                     </div>
                 </div>
@@ -80,7 +80,7 @@ function getBotResponse(message) {
     const lowerMessage = message.toLowerCase().trim();
     
     const responses = {
-        'привет': 'Привет! Я Сара - ваш виртуальный гид по Саратову. Чем могу помочь?',
+        'привет': 'Привет! Я Саратов - ваш виртуальный гид по Саратову. Чем могу помочь?',
         'start': 'Отлично! Давайте начнём знакомство с Саратовом. Что вас интересует: достопримечательности, рестораны, музеи или развлечения?',
         'достопримечательности': 'В Саратове множество интересных мест! Рекомендую посетить Набережную Космонавтов, Саратовскую консерваторию, Парк Победы. Хотите узнать больше о конкретном месте?',
         'рестораны': 'Отличный выбор! Рекомендую: "Волга" - панорамный ресторан, "Кофейня Гагарин" - уютное кафе в центре, "Дружба" - традиционная кухня. Что предпочитаете?',
@@ -120,8 +120,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         <i class="fas fa-robot text-white text-sm"></i>
                     </div>
                     <div class="bg-gray-100 rounded-lg px-4 py-2 max-w-xs">
-                        <p class="font-semibold text-sm mb-1">Сара</p>
-                        <p class="text-gray-700">Добрый вечер! 👋 Я Сара - ваш виртуальный гид по Саратову. Я помогу вам спланировать идеальный день в нашем городе. Готовы начать?</p>
+                        <p class="font-semibold text-sm mb-1">Саратов</p>
+                        <p class="text-gray-700">Добрый вечер! 👋 Я Саратов - ваш виртуальный гид по Саратову. Я помогу вам спланировать идеальный день в нашем городе. Готовы начать?</p>
                     </div>
                 </div>
             `;

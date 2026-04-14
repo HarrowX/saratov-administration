@@ -32,7 +32,7 @@
         </div>
     </section>
 
-    @livewire('sara-ai')
+    @livewire('saratov-ai')
 
     <!-- Section with filter and card-vebue -->
     <section class="bg-white pb-10 md:pb-15 xl:pb-20 3xl:pb-26 px-4 sm:px-10">

@@ -3,7 +3,6 @@ import './bootstrap';
 import './scripts/journey'
 import './scripts/innovations'
 import './scripts/notification';
-import './scripts/attractions';
 import './scripts/profile-modal';
 import './scripts/user-profile';
 import './scripts/achievements';

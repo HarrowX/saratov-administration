@@ -22,7 +22,7 @@
         </div>
     </section>
 
-    @livewire('sara-ai')
+    @livewire('saratov-ai')
 
     <!-- Section with tour cards -->
     <section class="bg-white pb-10 sm:pb-15 xl:pb-20 3xl:pb-26">
