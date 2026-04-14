@@ -73,8 +73,8 @@ class AttractionFormPage extends FormPage
             Number::make('Время посещения (мин)', 'visit_duration')->required(),
             Switcher::make('Доступность', 'accessibility'),
             Switcher::make('Парковка', 'parking'),
-            Number::make('Долгота','latitude'),
-            Number::make('Широта','longitude'),
+            Text::make('Долгота','latitude'),
+            Text::make('Широта','longitude'),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),
@@ -95,7 +95,11 @@ class AttractionFormPage extends FormPage
 
     protected function rules(DataWrapperContract $item): array
     {
-        return [];
+        return [
+            'latitude' => 'required|numeric|between:-90,90',
+            'longitude' => 'required|numeric|between:-180,180',
+
+        ];
     }
 
     /**

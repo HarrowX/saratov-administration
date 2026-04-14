@@ -60,13 +60,13 @@ class HotelFormPage extends FormPage
             Number::make('Количество звезд','stars'),
             Phone::make('Номер телефона', 'phone'),
             Text::make('Адрес', 'address')->unescape()->required(),
-            Text::make('Район', 'district')->required(),
+            Text::make('Район', 'district'),
             Text::make('Email', 'email'),
             Url::make('Сайт', 'website'),
             Number::make('Максимальная цена', 'max_price'),
             Number::make('Минимальная цена', 'min_price'),
-            Number::make('Долгота','latitude')->required(),
-            Number::make('Широта','longitude')->required(),
+            Text::make('Долгота','latitude')->required(),
+            Text::make('Широта','longitude')->required(),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),
@@ -88,7 +88,10 @@ class HotelFormPage extends FormPage
 
     protected function rules(DataWrapperContract $item): array
     {
-        return [];
+        return [
+            'latitude' => 'required|numeric|between:-90,90',
+            'longitude' => 'required|numeric|between:-180,180',
+        ];
     }
 
     /**

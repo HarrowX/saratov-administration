@@ -66,8 +66,8 @@ class RestaurantFormPage extends FormPage
                 Text::make('Район', 'district'),
                 Text::make('Email', 'email'),
                 Url::make('Сайт', 'website'),
-                Number::make('Долгота','latitude'),
-                Number::make('Широта','longitude'),
+                Text::make('Долгота','latitude'),
+                Text::make('Широта','longitude'),
                 RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                     ->fields([
                         ID::make(),
@@ -90,7 +90,10 @@ class RestaurantFormPage extends FormPage
 
     protected function rules(DataWrapperContract $item): array
     {
-        return [];
+        return [
+            'latitude' => 'required|numeric|between:-90,90',
+            'longitude' => 'required|numeric|between:-180,180',
+        ];
     }
 
     /**

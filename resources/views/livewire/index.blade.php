@@ -194,7 +194,7 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2">{{ $attraction->name }}</h3>
+                                <h3 class="text-xl font-bold mb-2 h-10 md:h-15 xl:h-21">{{ $attraction->name }}</h3>
                                 <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $attraction->short_description }}</p>
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center text-gray-500 text-sm">

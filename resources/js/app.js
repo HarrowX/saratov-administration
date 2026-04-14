@@ -3,13 +3,11 @@ import './bootstrap';
 import './scripts/journey'
 import './scripts/innovations'
 import './scripts/notification';
-import './scripts/attractions';
 import './scripts/profile-modal';
 import './scripts/user-profile';
 import './scripts/achievements';
 import './scripts/chatbot';
 import './scripts/fixes';
-import './scripts/innovations';
 import './scripts/map-fixes';
 import './scripts/slider';
 import './scripts/social-features';
