@@ -13,7 +13,22 @@ class Attraction extends Model
         'description',
         'worktime',
         'phone',
-        'address'
+        'address',
+        'slug',
+        'district',
+        'latitude',
+        'longitude',
+        'email',
+        'website',
+        'status',
+        'ticket_price',
+        'visit_duration',
+        'accessibility',
+        'parking',
+        'rating',
+        'views_count',
+        'favorites_count',
+        'created_by',
     ];
     protected $casts = [
         'worktime' => 'array',
