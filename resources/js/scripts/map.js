@@ -6,126 +6,44 @@ let userLocation = null;
 
 // Saratov landmarks data
 const landmarks = [
-    {
-        id: 1,
-        name: 'Саратовская государственная консерватория',
-        lat: 51.5339,
-        lng: 46.0345,
-        category: 'culture',
-        description: 'Первая консерватория в российской провинции, основана в 1912 году',
-        image: 'https://www.tursar.ru/image/img424_0.jpg',
-        rating: 4.9,
-        visitTime: '30 мин',
-        tags: ['история', 'архитектура', 'музыка']
-    },
-    {
-        id: 2,
-        name: 'Набережная Космонавтов',
-        lat: 51.5250,
-        lng: 46.0000,
-        category: 'landmark',
-        description: 'Место приземления Юрия Гагарина после первого космического полета',
-        image: 'https://saratov.travel/upload/resize_cache/iblock/a24/800_800_1/zdaz5dsiak6svkfvbkaen7umeuroj1sx.jpg',
-        rating: 4.8,
-        visitTime: '1 час',
-        tags: ['космос', 'прогулки', 'Гагарин']
-    },
-    {
-        id: 3,
-        name: 'Саратовский цирк',
-        lat: 51.5289,
-        lng: 46.0478,
-        category: 'entertainment',
-        description: 'Первый стационарный цирк в России, основан в 1876 году',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/%D0%A6%D0%B8%D1%80%D0%BA_%D0%B2_%D0%A1%D0%B0%D1%80%D0%B0%D1%82%D0%BE%D0%B2%D0%B5.jpg/1200px-%D0%A6%D0%B8%D1%80%D0%BA_%D0%B2_%D0%A1%D0%B0%D1%80%D0%B0%D1%82%D0%BE%D0%B2%D0%B5.jpg',
-        rating: 4.7,
-        visitTime: '2 часа',
-        tags: ['развлечения', 'история', 'дети']
-    },
-    {
-        id: 4,
-        name: 'Парк Победы',
-        lat: 51.5553,
-        lng: 46.0733,
-        category: 'park',
-        description: 'Мемориальный комплекс с музеем военной техники под открытым небом',
-        image: 'https://saratov.travel/upload/resize_cache/iblock/18c/8glui7vh5ldyyw0g7m2e4xcc3530vuzk/800_800_1/photo_2022-11-14_16-25-54.jpg',
-        rating: 4.8,
-        visitTime: '1.5 часа',
-        tags: ['парк', 'история', 'военная техника']
-    },
-    {
-        id: 5,
-        name: 'Театр драмы им. И.А. Слонова',
-        lat: 51.5333,
-        lng: 46.0422,
-        category: 'culture',
-        description: 'Один из старейших театров России, основан в 1803 году',
-        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400',
-        rating: 4.9,
-        visitTime: '2 часа',
-        tags: ['театр', 'культура', 'искусство']
-    },
-    {
-        id: 6,
-        name: 'Свято-Троицкий собор',
-        lat: 51.5283,
-        lng: 46.0444,
-        category: 'religious',
-        description: 'Главный православный храм Саратова, памятник архитектуры XVII века',
-        image: 'https://images.unsplash.com/photo-1588943211346-0908a1fb0b01?w=400',
-        rating: 4.8,
-        visitTime: '45 мин',
-        tags: ['храм', 'архитектура', 'история']
-    },
-    {
-        id: 7,
-        name: 'Музей-усадьба Н.Г. Чернышевского',
-        lat: 51.5306,
-        lng: 46.0236,
-        category: 'museum',
-        description: 'Дом-музей великого русского писателя и философа',
-        image: 'https://images.unsplash.com/photo-1583346840863-b85e8e0ae656?w=400',
-        rating: 4.6,
-        visitTime: '1 час',
-        tags: ['музей', 'литература', 'история']
-    },
-    {
-        id: 8,
-        name: 'Мост через Волгу',
-        lat: 51.5450,
-        lng: 45.9567,
-        category: 'landmark',
-        description: 'Один из самых длинных мостов в Европе - 2,8 км',
-        image: 'https://photocentra.ru/images/main19/192962_main.jpg',
-        rating: 4.7,
-        visitTime: '30 мин',
-        tags: ['архитектура', 'Волга', 'виды']
-    },
-    {
-        id: 9,
-        name: 'Лимонарий',
-        lat: 51.5372,
-        lng: 46.0089,
-        category: 'nature',
-        description: 'Уникальный питомник экзотических растений с коллекцией цитрусовых',
-        image: 'https://images.unsplash.com/photo-1563741494-7c5f6eb11bd0?w=400',
-        rating: 4.5,
-        visitTime: '1 час',
-        tags: ['природа', 'растения', 'экзотика']
-    },
-    {
-        id: 10,
-        name: 'Радищевский музей',
-        lat: 51.5275,
-        lng: 46.0411,
-        category: 'museum',
-        description: 'Первый общедоступный музей в провинции, основан в 1885 году',
-        image: 'https://images.unsplash.com/photo-1565402895794-0e7c60e67571?w=400',
-        rating: 4.8,
-        visitTime: '1.5 часа',
-        tags: ['музей', 'искусство', 'живопись']
-    }
+    ...(window.mapData?.attractions || []).map(item => ({
+        id: item.id,
+        name: item.name,
+        lat: parseFloat(item.latitude),
+        lng: parseFloat(item.longitude),
+        category: 'attraction',
+        description: item.short_description,
+        image: item.image ?? '',
+        rating: item.rating ?? 0,
+        visitTime: item.visit_duration + ' мин',
+        tags: ['достопримечательность']
+    })),
+
+    ...(window.mapData?.hotels || []).map(item => ({
+        id: item.id,
+        name: item.name,
+        lat: parseFloat(item.latitude),
+        lng: parseFloat(item.longitude),
+        category: 'hotel',
+        description: item.description,
+        image: item.image ?? '',
+        rating: item.rating ?? 0,
+        visitTime: 'проживание',
+        tags: ['отель']
+    })),
+
+    ...(window.mapData?.restaurants || []).map(item => ({
+        id: item.id,
+        name: item.name,
+        lat: parseFloat(item.latitude),
+        lng: parseFloat(item.longitude),
+        category: 'restaurant',
+        description: item.description,
+        image: item.image ?? '',
+        rating: item.rating ?? 0,
+        visitTime: 'еда',
+        tags: ['ресторан']
+    }))
 ];
 
 // Initialize map
@@ -133,22 +51,22 @@ function initMap() {
     // Check if map container exists
     const mapContainer = document.getElementById('map');
     if (!mapContainer) return;
-    
+
     // Initialize Leaflet map centered on Saratov
     map = L.map('map').setView([51.5339, 46.0345], 13);
-    
+
     // Add OpenStreetMap tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '',
         maxZoom: 19
     }).addTo(map);
-    
+
     // Add landmarks to map
     addLandmarksToMap();
-    
+
     // Try to get user location
     getUserLocation();
-    
+
     // Add map controls
     addMapControls();
 }
@@ -165,7 +83,7 @@ function addLandmarksToMap() {
         museum: '🏛️',
         nature: '🌿'
     };
-    
+
     // Define category colors
     const categoryColors = {
         culture: '#9333EA',
@@ -176,7 +94,7 @@ function addLandmarksToMap() {
         museum: '#8B5CF6',
         nature: '#22C55E'
     };
-    
+
     landmarks.forEach(landmark => {
         // Create custom icon
         const customIcon = L.divIcon({
@@ -187,11 +105,11 @@ function addLandmarksToMap() {
             iconSize: [30, 30],
             iconAnchor: [15, 15]
         });
-        
+
         // Create marker
         const marker = L.marker([landmark.lat, landmark.lng], { icon: customIcon })
             .addTo(map);
-        
+
         // Create popup content
         const popupContent = `
             <div class="popup-content">
@@ -217,12 +135,12 @@ function addLandmarksToMap() {
                 </div>
             </div>
         `;
-        
+
         marker.bindPopup(popupContent, {
             maxWidth: 300,
             className: 'custom-popup'
         });
-        
+
         markers.push({
             marker: marker,
             data: landmark
@@ -239,7 +157,7 @@ function getUserLocation() {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
-                
+
                 // Add user marker
                 const userIcon = L.divIcon({
                     html: '<div style="background: #3B82F6; width: 15px; height: 15px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>',
@@ -247,7 +165,7 @@ function getUserLocation() {
                     iconSize: [15, 15],
                     iconAnchor: [7.5, 7.5]
                 });
-                
+
                 L.marker([userLocation.lat, userLocation.lng], { icon: userIcon })
                     .addTo(map)
                     .bindPopup('Вы здесь');
@@ -266,7 +184,7 @@ function addMapControls() {
         options: {
             position: 'topright'
         },
-        
+
         onAdd: function() {
             const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
             container.innerHTML = `
@@ -283,12 +201,12 @@ function addMapControls() {
                     </select>
                 </div>
             `;
-            
+
             L.DomEvent.disableClickPropagation(container);
             return container;
         }
     });
-    
+
     // map.addControl(new FilterControl()); // Отключено по запросу пользователя
 }
 
@@ -364,16 +282,16 @@ const routes = [
 function showRouteOnMap(routeId) {
     const route = routes.find(r => r.id === routeId);
     if (!route || !map) return;
-    
+
     // Clear existing route
     clearRoute();
-    
+
     // Get coordinates for route places
     const routeCoords = route.places.map(placeId => {
         const place = landmarks.find(l => l.id === placeId);
         return place ? [place.lat, place.lng] : null;
     }).filter(coord => coord !== null);
-    
+
     // Draw polyline
     const routeLine = L.polyline(routeCoords, {
         color: '#3B82F6',
@@ -381,13 +299,13 @@ function showRouteOnMap(routeId) {
         opacity: 0.7,
         smoothFactor: 1
     }).addTo(map);
-    
+
     // Fit map to show entire route
     map.fitBounds(routeLine.getBounds(), { padding: [50, 50] });
-    
+
     // Store route line for later removal
     map.routeLine = routeLine;
-    
+
     // Highlight route places
     route.places.forEach(placeId => {
         const markerItem = markers.find(m => m.data.id === placeId);

@@ -32,7 +32,7 @@
             document.addEventListener('DOMContentLoaded', function() {
                 // Initialize chatbot
                 ChatBot.init();
-                
+
                 // Show app download modal
                 window.showAppDownload = function() {
                     const modal = document.createElement('div');
@@ -42,18 +42,18 @@
                             <button onclick="this.closest('.fixed').remove()" class="float-right text-gray-400 hover:text-gray-600">
                                 <i class="fas fa-times text-xl"></i>
                             </button>
-                            
+
                             <div class="w-20 h-20 rounded-2xl mx-auto mb-4 overflow-hidden">
                                 <img src="images/gerb-goroda-saratov.jpg" alt="Герб Саратова">
                             </div>
-                            
+
                             <h3 class="text-2xl font-bold mb-2">Скачайте приложение</h3>
                             <p class="text-gray-600 mb-6">Получите полный доступ ко всем функциям</p>
-                            
+
                             <div class="w-48 h-48 mx-auto rounded-lg overflow-hidden mb-4">
                                 <img src="images/qrprila.jpg" alt="QR-код для скачивания">
                             </div>
-                            
+
                             <div class="flex flex-col space-y-3">
                                 <a href="#" class="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition flex items-center justify-center space-x-3">
                                     <i class="fab fa-apple text-2xl"></i>
@@ -70,13 +70,13 @@
                                     </div>
                                 </a>
                             </div>
-                            
+
                             <p class="text-sm text-gray-500 mt-4">Или перейдите по ссылке: saratov-435.ru/app</p>
                         </div>
                     `;
                     document.body.appendChild(modal);
                 };
-                
+
                 // Send user message in chatbot
                 window.sendUserMessage = function() {
                     const input = document.getElementById('aiChatInput');
@@ -85,14 +85,14 @@
                         input.value = '';
                     }
                 };
-                
+
                 // // Handle chat message (for quick actions and general input)
                 // window.handleChatMessage = function(message) {
                 //     if (message && message.trim()) {
                 //         ChatBot.processUserResponse(message.trim(), 'text');
                 //     }
                 // };
-                
+
                 // Show profile function
                 window.showProfile = function(userId) {
                     const profiles = {
@@ -118,10 +118,10 @@
                             bio: "Дружная семья, которая любит проводить время вместе, изучая город."
                         }
                     };
-                    
+
                     const profile = profiles[userId];
                     if (!profile) return;
-                    
+
                     const modal = document.createElement('div');
                     modal.className = 'fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4';
                     modal.innerHTML = `
@@ -131,7 +131,7 @@
                                 <h3 class="text-2xl font-bold">${profile.name}</h3>
                                 <p class="text-gray-600">${profile.stats}</p>
                             </div>
-                            
+
                             <div class="mb-6">
 
                                 <h4 class="font-semibold mb-3">🏆 Достижения</h4>
@@ -143,61 +143,62 @@
                                     `).join('')}
                                 </div>
                             </div>
-                            
+
                             <div class="mb-6">
                                 <h4 class="font-semibold mb-3">📝 О себе</h4>
                                 <p class="text-gray-600 text-sm">${profile.bio}</p>
                             </div>
-                            
+
                             <button onclick="this.closest('.fixed').remove()" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
                                 Закрыть
                             </button>
                         </div>
                     `;
-                    
+
                     document.body.appendChild(modal);
                 };
-                
+
                 // Voice input function
                 window.voiceInput = function() {
                     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
                         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
                         const recognition = new SpeechRecognition();
-                        
+
                         recognition.lang = 'ru-RU';
                         recognition.continuous = false;
                         recognition.interimResults = false;
-                        
+
                         recognition.onstart = function() {
                             document.getElementById('aiChatInput').placeholder = 'Слушаю...';
                         };
-                        
+
                         recognition.onresult = function(event) {
                             const transcript = event.results[0][0].transcript;
                             document.getElementById('aiChatInput').value = transcript;
                             ChatBot.processUserResponse(transcript, 'text');
                         };
-                        
+
                         recognition.onerror = function(event) {
                             console.log('Ошибка распознавания речи:', event.error);
                             document.getElementById('aiChatInput').placeholder = 'Напишите сообщение...';
                         };
-                        
+
                         recognition.onend = function() {
                             document.getElementById('aiChatInput').placeholder = 'Напишите сообщение...';
                         };
-                        
+
                         recognition.start();
                     } else {
                         alert('Ваш браузер не поддерживает распознавание речи');
                     }
                 };
-                
+
             });
         </script>
     </body>
 
     @livewireScripts()
+
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/js/app.js'])
     @endif
