@@ -48,7 +48,7 @@ class HotelFormPage extends FormPage
             }),
             Textarea::make('Описание', 'description')->unescape()->required(),
             Textarea::make('Второе описание', 'second_description')->unescape()->required(),
-            Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы')->required(),
+            Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы'),
             Select::make('Тип размещения', 'type')
                 ->options([
                     'Отель' => 'Отель',
@@ -65,14 +65,14 @@ class HotelFormPage extends FormPage
             Url::make('Сайт', 'website'),
             Number::make('Максимальная цена', 'max_price'),
             Number::make('Минимальная цена', 'min_price'),
-            Text::make('Долгота','latitude')->required(),
-            Text::make('Широта','longitude')->required(),
+            Text::make('Долгота','latitude'),
+            Text::make('Широта','longitude'),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),
                     Image::make('Файл', 'link'),
                     Number::make('Порядковый номер', 'order')->default(0),
-                ])->removable()->required(),
+                ])->removable(),
         ];
     }
 
@@ -88,10 +88,7 @@ class HotelFormPage extends FormPage
 
     protected function rules(DataWrapperContract $item): array
     {
-        return [
-            'latitude' => 'required|numeric|between:-90,90',
-            'longitude' => 'required|numeric|between:-180,180',
-        ];
+        return [];
     }
 
     /**

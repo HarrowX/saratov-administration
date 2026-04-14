@@ -49,7 +49,7 @@ class AttractionFormPage extends FormPage
             }),
             Text::make('Краткое описание', 'short_description')->unescape()->required(),
             Textarea::make('Описание', 'description')->unescape()->required(),
-            Json::make('Рабочее время', 'worktime')->keyValue('День', 'Время')->required(),
+            Json::make('Рабочее время', 'worktime')->keyValue('День', 'Время'),
             Phone::make('Номер телефона', 'phone')->required(),
             Text::make('Адрес', 'address')->unescape()->required(),
             Select::make('Отображение на главной', 'display_location')
@@ -70,7 +70,7 @@ class AttractionFormPage extends FormPage
                     'archived' => 'Архив',
                 ]),
             Number::make('Цена билета', 'ticket_price'),
-            Number::make('Время посещения (мин)', 'visit_duration')->required(),
+            Number::make('Время посещения (мин)', 'visit_duration'),
             Switcher::make('Доступность', 'accessibility'),
             Switcher::make('Парковка', 'parking'),
             Text::make('Долгота','latitude'),
@@ -95,11 +95,7 @@ class AttractionFormPage extends FormPage
 
     protected function rules(DataWrapperContract $item): array
     {
-        return [
-            'latitude' => 'required|numeric|between:-90,90',
-            'longitude' => 'required|numeric|between:-180,180',
-
-        ];
+        return [];
     }
 
     /**

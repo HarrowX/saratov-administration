@@ -51,7 +51,7 @@ class RestaurantFormPage extends FormPage
                     return $item && $item->exists;
                 }),
                 Textarea::make('Описание', 'description')->unescape()->required(),
-                Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы')->required(),
+                Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы'),
                 Phone::make('Номер телефона', 'phone')->required(),
                 Text::make('Кухня', 'kitchen')->unescape()->required(),
                 Select::make('Ценовая категория','price_category')
@@ -73,7 +73,7 @@ class RestaurantFormPage extends FormPage
                         ID::make(),
                         Image::make('Файл', 'link'),
                         Number::make('Порядковый номер', 'order')->default(0),
-                ])->removable()->required(),
+                ])->removable(),
             ]),
         ];
     }
@@ -90,10 +90,7 @@ class RestaurantFormPage extends FormPage
 
     protected function rules(DataWrapperContract $item): array
     {
-        return [
-            'latitude' => 'required|numeric|between:-90,90',
-            'longitude' => 'required|numeric|between:-180,180',
-        ];
+        return [];
     }
 
     /**
