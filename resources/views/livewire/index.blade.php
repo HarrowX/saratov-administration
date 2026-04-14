@@ -281,7 +281,7 @@
     <section id="ar-experience" class="pt-10 sm:pt-15 xl:pt-20 3xl:pt-26 bg-white overflow-hidden">
         <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4">
             <div class="flex flex-col items-center mb-5 md:mb-12" data-aos="fade-up">
-                <span class="flex justify-center gap-2 bg-linear-to-r from-purple-600 to-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-4">
+                <span class="flex justify-center gap-2 bg-linear-to-r from-purple-600 to-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-4 text-nowrap">
                      <img src="/images/Symbol.svg" alt="Иконка" class="icon">НОВАЯ ФУНКЦИЯ
                 </span>
                 <h2>Путешествие во времени с AR</h2>

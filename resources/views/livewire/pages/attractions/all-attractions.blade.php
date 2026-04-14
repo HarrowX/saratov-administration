@@ -54,7 +54,7 @@
         </div>
     </section>
 
-    @livewire('sara-ai')
+    @livewire('saratov-ai')
 
     <section class="bg-white pb-10 sm:pb-15 xl:pb-20 3xl:pb-26">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 xl:px-20">

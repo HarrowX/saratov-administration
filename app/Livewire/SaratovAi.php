@@ -4,10 +4,10 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class SaraAi extends Component
+class SaratovAi extends Component
 {
     public function render()
     {
-        return view('livewire.sara-ai');
+        return view('livewire.saratov-ai');
     }
 }
