@@ -169,7 +169,7 @@
                                             <img src="/images/image 7.svg" alt="" class="icon size-2.5 sm:size-4 md:size-7 mt-2 sm:mt-5 shrink-0">
                                             <span class="text-[8px] sm:text-xs xl:text-sm text-[#505050] pt-1 sm:pt-4">{{ $attraction->address }}</span>
                                         </div>
-                                        <form action="{{ route('single-attraction', ['attraction' => $attraction->id]) }}">
+                                        <form action="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}">
                                             <button class="shrink-0 size-5 sm:size-10 xl:size-11 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
                                                 <img src="/images/Arrow 2.png" alt="" class="icon w-1 sm:w-2 xl:w-3 h-2.5 sm:h-4.5 xl:h-6">
                                             </button>

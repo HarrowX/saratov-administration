@@ -6,6 +6,7 @@ namespace App\MoonShine\Resources\Attraction\Pages;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
+use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FormBuilderContract;
@@ -41,12 +42,24 @@ class AttractionFormPage extends FormPage
     {
         return [
             ID::make(),
-            Text::make('Название', 'name')->unescape(),
-            Text::make('Краткое описание', 'short_description')->unescape(),
-            Textarea::make('Описание', 'description')->unescape(),
+            Text::make('Название', 'name')->unescape()->required(),
+            Slug::make('Слаг','slug')->from('name')->unique()->canSee(function () {
+                $item = $this->getResource()?->getItem();
+                return $item && $item->exists;
+            }),
+            Text::make('Краткое описание', 'short_description')->unescape()->required(),
+            Textarea::make('Описание', 'description')->unescape()->required(),
             Json::make('Рабочее время', 'worktime')->keyValue('День', 'Время'),
-            Phone::make('Номер телефона', 'phone'),
-            Text::make('Адрес', 'address')->unescape(),
+            Phone::make('Номер телефона', 'phone')->required(),
+            Text::make('Адрес', 'address')->unescape()->required(),
+            Select::make('Отображение на главной', 'display_location')
+                ->options([
+                    'null' => 'Не показывать',
+                    'carousel' => 'В карусели',
+                    'featured' => 'В больших карточках',
+                ])
+                ->default('')
+                ->required(),
             Text::make('Район', 'district'),
             Text::make('Email', 'email'),
             Url::make('Сайт', 'website'),
@@ -55,12 +68,13 @@ class AttractionFormPage extends FormPage
                     'active' => 'Активный',
                     'draft' => 'Черновик',
                     'archived' => 'Архив',
-                ])
-                ->required(),
+                ]),
             Number::make('Цена билета', 'ticket_price'),
             Number::make('Время посещения (мин)', 'visit_duration'),
             Switcher::make('Доступность', 'accessibility'),
             Switcher::make('Парковка', 'parking'),
+            Text::make('Долгота','latitude'),
+            Text::make('Широта','longitude'),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),

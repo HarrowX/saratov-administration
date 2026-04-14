@@ -31,14 +31,19 @@ class HotelSeeder extends Seeder
         $hotels = [];
 
         for ($i = 0; $i < 8; $i++) {
+            $name = $names[$i];
             $hotels[] = [
-                'name' => fake()->randomElement($names),
+                'name' => $name,
                 'type' => fake()->randomElement(['Отель', 'Гостевой дом', 'Глэмпинг', 'Курорт']),
                 'description' => fake()->realText(),
                 'second_description' => fake()->realText(),
 //                'worktime' => '[]', //'c ' . fake()->time('H:i') . ' до ' . fake()->time('H:i'),
                 'phone' => fake()->phoneNumber(),
                 'address' => fake()->address(),
+                'website' => fake()->url(),
+                'latitude' => fake()->latitude(),
+                'longitude' => fake()->longitude(),
+                'slug' => Str::slug($name),
             ];
         }
         Hotel::query()->insert($hotels);

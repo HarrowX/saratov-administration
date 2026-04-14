@@ -9,6 +9,7 @@ use MoonShine\Laravel\Fields\Relationships\HasMany;
 use MoonShine\Laravel\Fields\Relationships\MorphMany;
 use MoonShine\Laravel\Fields\Relationships\MorphToMany;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
+use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FormBuilderContract;
@@ -44,12 +45,15 @@ class RestaurantFormPage extends FormPage
         return [
             Box::make([
                 ID::make(),
-                Text::make('Название', 'name')->unescape(),
-                Textarea::make('Описание', 'description')->unescape(),
-                Text::make('Адрес', 'address')->unescape(),
+                Text::make('Название', 'name')->unescape()->required(),
+                Slug::make('Слаг','slug')->from('name')->unique()->canSee(function () {
+                    $item = $this->getResource()?->getItem();
+                    return $item && $item->exists;
+                }),
+                Textarea::make('Описание', 'description')->unescape()->required(),
                 Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы'),
-                Phone::make('Номер телефона', 'phone'),
-                Text::make('Кухня', 'kitchen')->unescape(),
+                Phone::make('Номер телефона', 'phone')->required(),
+                Text::make('Кухня', 'kitchen')->unescape()->required(),
                 Select::make('Ценовая категория','price_category')
                     ->options([
                         'budget' => 'Дешево',
@@ -58,10 +62,12 @@ class RestaurantFormPage extends FormPage
                         'luxury' => 'Люкс'
                     ]),
                 Number::make('Количество посадочных мест','capacity'),
-                Text::make('Адрес', 'address')->unescape(),
+                Text::make('Адрес', 'address')->unescape()->required(),
                 Text::make('Район', 'district'),
                 Text::make('Email', 'email'),
                 Url::make('Сайт', 'website'),
+                Text::make('Долгота','latitude'),
+                Text::make('Широта','longitude'),
                 RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                     ->fields([
                         ID::make(),

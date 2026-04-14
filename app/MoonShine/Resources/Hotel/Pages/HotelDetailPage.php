@@ -6,6 +6,7 @@ namespace App\MoonShine\Resources\Hotel\Pages;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
+use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\DetailPage;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Components\Table\TableBuilder;
@@ -40,6 +41,7 @@ class HotelDetailPage extends DetailPage
         return [
             ID::make(),
             Text::make('Название', 'name')->unescape(),
+            Slug::make('Слаг','slug')->from('name')->unique(),
             Textarea::make('Описание', 'description')->unescape(),
             Textarea::make('Второе описание', 'second_description')->unescape(),
             Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы'),
@@ -59,6 +61,8 @@ class HotelDetailPage extends DetailPage
             Url::make('Сайт', 'website'),
             Number::make('Максимальная цена', 'max_price'),
             Number::make('Минимальная цена', 'min_price'),
+            Number::make('Долгота','latitude'),
+            Number::make('Широта','longitude'),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),

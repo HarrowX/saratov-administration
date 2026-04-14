@@ -227,7 +227,7 @@ function initYandexMap() {
 
             // Добавляем достопримечательности на карту
             addLandmarksToYandexMap();
-            
+
             // Добавляем геолокацию
             addGeolocation();
         } catch (error) {
@@ -246,7 +246,7 @@ function addLandmarksToYandexMap() {
     console.log('Добавление маркеров на карту...');
 
     saratovLandmarks.forEach((landmark, index) => {
-        try {            
+        try {
             // Создаем маркер с простой иконкой
             const marker = new ymaps.Placemark(
                 [landmark.lat, landmark.lng],
@@ -255,19 +255,19 @@ function addLandmarksToYandexMap() {
                     balloonContentBody: createBalloonContent(landmark),
                     balloonContentFooter: `<div style="text-align: center; margin-top: 10px;">
                         <button onclick="visitPlace(${landmark.id})" style="
-                            background: #3B82F6; 
-                            color: white; 
-                            border: none; 
-                            padding: 8px 16px; 
-                            border-radius: 4px; 
+                            background: #3B82F6;
+                            color: white;
+                            border: none;
+                            padding: 8px 16px;
+                            border-radius: 4px;
                             margin-right: 8px;
                             cursor: pointer;
                         ">Отметить визит</button>
                         <button onclick="showRouteToPlace(${landmark.lat}, ${landmark.lng})" style="
-                            background: #10B981; 
-                            color: white; 
-                            border: none; 
-                            padding: 8px 16px; 
+                            background: #10B981;
+                            color: white;
+                            border: none;
+                            padding: 8px 16px;
                             border-radius: 4px;
                             cursor: pointer;
                         ">Маршрут</button>
@@ -283,7 +283,7 @@ function addLandmarksToYandexMap() {
             // Добавляем маркер на карту
             yandexMap.geoObjects.add(marker);
             mapObjects.push(marker);
-            
+
             console.log(`Маркер ${index + 1} добавлен: ${landmark.name}`);
         } catch (error) {
             console.error(`Ошибка при добавлении маркера ${landmark.name}:`, error);
@@ -298,8 +298,8 @@ function createBalloonContent(landmark) {
     return `
         <div style="max-width: 300px;">
             <div style="width: 100%; height: 150px; border-radius: 8px; margin-bottom: 10px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; position: relative;">
-                <img src="${landmark.image}" 
-                     alt="${landmark.name}" 
+                <img src="${landmark.image}"
+                     alt="${landmark.name}"
                      style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                      onload="this.nextElementSibling.style.display='none';">
@@ -395,19 +395,19 @@ function addLandmarkToMap(landmark) {
             balloonContentBody: createBalloonContent(landmark),
             balloonContentFooter: `<div style="text-align: center; margin-top: 10px;">
                 <button onclick="visitPlace(${landmark.id})" style="
-                    background: #3B82F6; 
-                    color: white; 
-                    border: none; 
-                    padding: 8px 16px; 
-                    border-radius: 4px; 
+                    background: #3B82F6;
+                    color: white;
+                    border: none;
+                    padding: 8px 16px;
+                    border-radius: 4px;
                     margin-right: 8px;
                     cursor: pointer;
                 ">Отметить визит</button>
                 <button onclick="showRouteToPlace(${landmark.lat}, ${landmark.lng})" style="
-                    background: #10B981; 
-                    color: white; 
-                    border: none; 
-                    padding: 8px 16px; 
+                    background: #10B981;
+                    color: white;
+                    border: none;
+                    padding: 8px 16px;
                     border-radius: 4px;
                     cursor: pointer;
                 ">Маршрут</button>
@@ -446,7 +446,7 @@ function showRouteToPlace(lat, lng) {
             function(position) {
                 const userLat = position.coords.latitude;
                 const userLng = position.coords.longitude;
-                
+
                 // Открываем маршрут в Яндекс.Картах
                 const url = `https://yandex.ru/maps/?rtext=${userLat},${userLng}~${lat},${lng}&rtt=auto`;
                 window.open(url, '_blank');
@@ -470,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Принудительная инициализация карты
 function forceInitMap() {
     console.log('Принудительная инициализация карты...');
-    
+
     // Очищаем старую карту если она есть
     if (yandexMap) {
         console.log('Очищаем старую карту...');
@@ -478,13 +478,13 @@ function forceInitMap() {
         yandexMap = null;
         mapObjects = [];
     }
-    
+
     // Очищаем контейнер карты
     const mapContainer = document.getElementById('map');
     if (mapContainer) {
         mapContainer.innerHTML = '';
     }
-    
+
     // Инициализируем новую карту
     initYandexMap();
 }

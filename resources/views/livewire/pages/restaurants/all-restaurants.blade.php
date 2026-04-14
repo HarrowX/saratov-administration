@@ -118,10 +118,6 @@
                             <div class="absolute top-4 right-3.5 sm:top-10 sm:right-9.5 size-5 sm:size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-[3px] sm:rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-xl xl:text-2xl shadow-lg">
                                 <i class="fa-sharp fa-solid fa-heart"></i>
                             </div>
-                            <div class="absolute top-4 sm:top-10 left-3.5 sm:left-9.5 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5">
-                                <i class="fas fa-star text-yellow-500"></i>
-                                <span class="text-sm font-semibold text-black">4.9</span>
-                            </div>
                         </div>
                         <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">
                             <h1 class="text-center text-xs sm:text-lg lg:text-xl xl:text-3xl font-bold">{{ $restaurant->name }}</h1>
@@ -137,7 +133,7 @@
                                         {{ $restaurant->address }}
                                     </span>
                                 </div>
-                                <a href="{{ route('single-restaurant', ['restaurant' => $restaurant->id]) }}" class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity text-center">
+                                <a href="{{ route('single-restaurant', ['restaurant' => $restaurant->slug]) }}" class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity text-center">
                                     Подробнее
                                 </a>
                             </div>

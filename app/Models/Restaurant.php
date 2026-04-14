@@ -9,11 +9,22 @@ class Restaurant extends Model
 {
     protected $fillable = [
         'name',
+        'slug',
         'description',
         'address',
+        'district',
+        'latitude',
+        'longitude',
         'worktime',
         'phone',
         'kitchen',
+        'email',
+        'website',
+        'price_category',
+        'capacity',
+        'rating',
+        'reviews_count',
+        'views_count',
     ];
 
     protected $casts = [
@@ -22,5 +33,10 @@ class Restaurant extends Model
 
     public function attachments(): MorphMany {
         return $this->morphMany(Attachment::class, 'attachable');
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 }

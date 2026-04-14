@@ -6,6 +6,7 @@ namespace App\MoonShine\Resources\Hotel\Pages;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
+use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FormBuilderContract;
@@ -40,26 +41,32 @@ class HotelFormPage extends FormPage
     {
         return [
             ID::make(),
-            Text::make('Название', 'name')->unescape(),
-            Textarea::make('Описание', 'description')->unescape(),
-            Textarea::make('Второе описание', 'second_description')->unescape(),
+            Text::make('Название', 'name')->unescape()->required(),
+            Slug::make('Слаг','slug')->from('name')->unique()->canSee(function () {
+                $item = $this->getResource()?->getItem();
+                return $item && $item->exists;
+            }),
+            Textarea::make('Описание', 'description')->unescape()->required(),
+            Textarea::make('Второе описание', 'second_description')->unescape()->required(),
             Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы'),
             Select::make('Тип размещения', 'type')
                 ->options([
-                    'hostel' => 'Хостел',
-                    'guesthouse' => 'Гостевой дом',
-                    'glamping' => 'Глэмпинг',
-                    'resort' => 'Курорт'
+                    'Отель' => 'Отель',
+                    'Гостевой дом' => 'Гостевой дом',
+                    'Глэмпинг' => 'Глэмпинг',
+                    'Курорт' => 'Курорт'
                 ])
-                ->required(),
+                ->required()->required(),
             Number::make('Количество звезд','stars'),
             Phone::make('Номер телефона', 'phone'),
-            Text::make('Адрес', 'address')->unescape(),
+            Text::make('Адрес', 'address')->unescape()->required(),
             Text::make('Район', 'district'),
             Text::make('Email', 'email'),
             Url::make('Сайт', 'website'),
             Number::make('Максимальная цена', 'max_price'),
             Number::make('Минимальная цена', 'min_price'),
+            Text::make('Долгота','latitude'),
+            Text::make('Широта','longitude'),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),

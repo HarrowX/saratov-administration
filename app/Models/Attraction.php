@@ -36,4 +36,8 @@ class Attraction extends Model
     public function attachments(): MorphMany {
         return $this->morphMany(Attachment::class, 'attachable');
     }
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }

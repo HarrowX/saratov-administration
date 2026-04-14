@@ -123,4 +123,8 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'attractions' => [
+        'radius' => env('ATTRACTIONS_RADIUS', 10000000000000)
+    ],
+
 ];

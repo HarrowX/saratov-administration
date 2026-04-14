@@ -6,6 +6,7 @@ namespace App\MoonShine\Resources\Attraction\Pages;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
+use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\DetailPage;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Components\Table\TableBuilder;
@@ -38,11 +39,19 @@ class AttractionDetailPage extends DetailPage
         return [
             ID::make(),
             Text::make('Название', 'name')->unescape(),
+            Slug::make('Слаг','slug')->from('name')->unique(),
             Text::make('Краткое описание', 'short_description')->unescape(),
             Textarea::make('Описание', 'description')->unescape(),
             Json::make('Рабочее время', 'worktime')->keyValue('День', 'Время'),
             Phone::make('Номер телефона', 'phone'),
             Text::make('Адрес', 'address')->unescape(),
+            Select::make('Отображение на главной', 'display_location')
+                ->options([
+                    'null' => 'Не показывать',
+                    'carousel' => 'В карусели',
+                    'featured' => 'В больших карточках',
+                ])
+                ->default(''),
             Text::make('Район', 'district'),
             Text::make('Email', 'email'),
             Url::make('Сайт', 'website'),
@@ -57,6 +66,8 @@ class AttractionDetailPage extends DetailPage
             Number::make('Время посещения (мин)', 'visit_duration'),
             Switcher::make('Доступность', 'accessibility'),
             Switcher::make('Парковка', 'parking'),
+            Number::make('Долгота','latitude'),
+            Number::make('Широта','longitude'),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),
