@@ -36,9 +36,9 @@ class AttachmentFormPage extends FormPage
         return [
             Box::make([
                 ID::make(),
-                Number::make('ID сущности', 'attachable_id'),
-                Text::make('Тип сущности', 'attachable_type'),
-                Image::make('Файл', 'link'),
+                Number::make('ID сущности', 'attachable_id')->required(),
+                Text::make('Тип сущности', 'attachable_type')->required(),
+                Image::make('Файл', 'link')->required(),
                 Number::make('Порядковый номер', 'order')->default(0),
             ]),
         ];
