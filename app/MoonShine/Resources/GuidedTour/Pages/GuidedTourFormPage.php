@@ -37,17 +37,17 @@ class GuidedTourFormPage extends FormPage
     {
         return [
             ID::make(),
-            Text::make('ФИО', 'name'),
-            Textarea::make('Краткое описание', 'short_description'),
-            Textarea::make('Описание', 'description'),
-            Text::make('Опыт', 'experience'),
-            Phone::make('Номер телефона', 'phone'),
-            Email::make('Почта', 'email'),
+            Text::make('ФИО', 'name')->required(),
+            Textarea::make('Краткое описание', 'short_description')->required(),
+            Textarea::make('Описание', 'description')->required(),
+            Text::make('Опыт', 'experience')->required(),
+            Phone::make('Номер телефона', 'phone')->required(),
+            Email::make('Почта', 'email')->required(),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),
                     Image::make('Файл', 'link'),
-                    Number::make('Порядковый номер', 'order')->default(0),
+                    Number::make('Порядковый номер', 'order')->default(0)->required(),
             ]),
         ];
     }
