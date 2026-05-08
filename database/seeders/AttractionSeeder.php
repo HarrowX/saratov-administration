@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Attraction;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -21,7 +20,7 @@ class AttractionSeeder extends Seeder
             'Синагога',
             'Пукек',
             'Кумысная поляна',
-            'Журавли'
+            'Журавли',
         ];
 
         $attractions = [];

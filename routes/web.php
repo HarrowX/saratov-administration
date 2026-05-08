@@ -13,7 +13,6 @@ use App\Livewire\Pages\Restaurants\AllRestaurants;
 use App\Livewire\Pages\Restaurants\SingleRestaurant;
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/', Index::class)->name('index');
 
 Route::prefix('/excurtions')->group(function () {
@@ -40,5 +39,3 @@ Route::prefix('/hotels')->group(function () {
     Route::get('/', AllHotels::class)->name('all-hotels');
     Route::get('/{hotel}', SingleHotel::class)->name('single-hotel');
 });
-
-

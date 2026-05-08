@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use MoonShine\Laravel\DependencyInjection\MoonShine;
 use MoonShine\Laravel\Models\MoonshineUser;
 
 class DatabaseSeeder extends Seeder
@@ -21,7 +19,7 @@ class DatabaseSeeder extends Seeder
         MoonshineUser::create([
             'name' => 'admin',
             'email' => 'admin',
-            'password' => Hash::make('12345678')
+            'password' => Hash::make('12345678'),
         ]);
 
         $this->call(RestaurantSeeder::class);

@@ -3,9 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Restaurant;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
 
 class RestaurantSeeder extends Seeder
@@ -25,7 +23,7 @@ class RestaurantSeeder extends Seeder
             'Итальянская',
             'Турецкая',
             'Индийская',
-            'Узбекская'
+            'Узбекская',
         ];
 
         $names = [
@@ -37,7 +35,7 @@ class RestaurantSeeder extends Seeder
             'Тут Харчо Большой',
             'PORT',
             'Старик Хинкалыч',
-            'Узбечка'
+            'Узбечка',
         ];
 
         $latitude = [
@@ -54,7 +52,7 @@ class RestaurantSeeder extends Seeder
                 'address' => fake()->address(),
                 'latitude' => fake()->latitude(),
                 'longitude' => fake()->longitude(),
-//                'worktime' => [], //'c ' . fake()->time('H:i') . ' до ' . fake()->time('H:i'),
+                //                'worktime' => [], //'c ' . fake()->time('H:i') . ' до ' . fake()->time('H:i'),
                 'phone' => fake()->phoneNumber(),
                 'website' => fake()->url(),
                 'kitchen' => fake()->randomElement($kitchens),

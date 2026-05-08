@@ -3,9 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Hotel;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
 
 class HotelSeeder extends Seeder
@@ -25,7 +23,7 @@ class HotelSeeder extends Seeder
             'Глэмпинги «The Chan»',
             'Берег мечты',
             'Горный воздух',
-            'Берег солнца'
+            'Берег солнца',
         ];
 
         $hotels = [];
@@ -37,7 +35,7 @@ class HotelSeeder extends Seeder
                 'type' => fake()->randomElement(['Отель', 'Гостевой дом', 'Глэмпинг', 'Курорт']),
                 'description' => fake()->realText(),
                 'second_description' => fake()->realText(),
-//                'worktime' => '[]', //'c ' . fake()->time('H:i') . ' до ' . fake()->time('H:i'),
+                //                'worktime' => '[]', //'c ' . fake()->time('H:i') . ' до ' . fake()->time('H:i'),
                 'phone' => fake()->phoneNumber(),
                 'address' => fake()->address(),
                 'website' => fake()->url(),

@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\GuidedTour;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class GuidedTourSeeder extends Seeder
@@ -21,7 +20,7 @@ class GuidedTourSeeder extends Seeder
                 'name' => fake()->name(),
                 'short_description' => fake()->realText(30),
                 'description' => fake()->realText(),
-                'experience' => fake()->numberBetween(1, 15) . ' лет',
+                'experience' => fake()->numberBetween(1, 15).' лет',
                 'phone' => fake()->phoneNumber(),
                 'email' => fake()->email(),
             ];

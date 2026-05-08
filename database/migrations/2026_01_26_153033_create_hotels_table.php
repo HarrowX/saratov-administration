@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->string('second_description');
-            $table->enum('type',['Отель','Гостевой дом','Глэмпинг','Курорт']);
+            $table->enum('type', ['Отель', 'Гостевой дом', 'Глэмпинг', 'Курорт']);
             $table->tinyInteger('stars')->unsigned()->nullable();
             $table->json('worktime')->nullable();
             $table->string('phone')->nullable();
