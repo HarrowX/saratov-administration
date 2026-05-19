@@ -57,8 +57,8 @@
 
                 </div>
             </div>
-            <div data-aos="fade-right" class="font-['FindSansPro'] flex flex-col items-center lg:items-start">
-                <h3>Достижения</h3>
+            <div data-aos="fade-right" class="flex flex-col items-center lg:items-start">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">Достижения</h2>
                 <p class="text-lg md:text-2xl text-center lg:text-left">За посещение достопримечательности “{{$attraction->name}}” вы получите:</p>
                 <div class="flex flex-row flex-wrap gap-4 lg:gap-10 justify-center lg:justify-start items-center text-sm pt-4 lg:pt-5 3xl:pt-7 md:text-xl">
                     <div class="text-white rounded-4xl bg-linear-to-r from-green-500 to-teal-600 py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Знатоку города” </div>
@@ -66,6 +66,12 @@
                     <a href="#" class="text-[#636363]">перейти к другим квестам и достижениям ></a>
                 </div>
             </div>
+        </div>
+    </section>
+    <section class="py-10 xl:py-26 bg-white max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto  px-5 xl:px-20">
+        <div data-aos="fade-right" class="text-center font-['FindSansPro'] w-full flex flex-col items-center">
+            <h3>Отзывы на Яндекс Картах</h3>
+            <div>{!! $attraction->yandex_review_code !!}</div>
         </div>
     </section>
 
