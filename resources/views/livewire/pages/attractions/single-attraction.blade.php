@@ -68,12 +68,14 @@
             </div>
         </div>
     </section>
-    <section class="py-10 xl:py-26 bg-white max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto  px-5 xl:px-20">
-        <div data-aos="fade-right" class="text-center font-['FindSansPro'] w-full flex flex-col items-center">
-            <h3>Отзывы на Яндекс Картах</h3>
-            <div>{!! $attraction->yandex_review_code !!}</div>
-        </div>
-    </section>
+    @if(!is_null($attraction->yandex_review_code) && ($attraction->yandex_review_code != ""))
+        <section class="py-10 xl:py-26 bg-white max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto  px-5 xl:px-20">
+            <div data-aos="fade-right" class="text-center font-['FindSansPro'] w-full flex flex-col items-center">
+                <h3>Отзывы на Яндекс Картах</h3>
+                <div>{!! $attraction->yandex_review_code !!}</div>
+            </div>
+        </section>
+    @endif
 
     @livewire('attraction-component', ['latitude' => $attraction->latitude, 'longitude' => $attraction->longitude])
 </div>
