@@ -60,11 +60,11 @@ class AttractionDetailPage extends DetailPage
             Text::make('Email', 'email'),
             Url::make('Сайт', 'website'),
             Text::make('Виджет отзывов', 'yandex_review_widget')->changePreview(
-                fn ($value) => ActionButton::make('Посмотреть')->inModal(
+                fn ($value) => $value ?  ActionButton::make('Посмотреть')->inModal(
                     title: 'Виджет отзывов',
-                    content: $value ?? 'Отсутствует',
+                    content: $value,
                     builder: fn($component) => $component->auto(),
-                )
+                ) : 'Отсутствует'
             ),
             Select::make('Статус', 'status')
                 ->options([
