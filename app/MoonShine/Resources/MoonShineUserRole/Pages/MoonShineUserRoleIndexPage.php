@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources\Restaurant\MoonShineUserRole\Pages;
+namespace App\MoonShine\Resources\MoonShineUserRole\Pages;
 
-use App\MoonShine\Resources\Restaurant\MoonShineUserRole\MoonShineUserRoleResource;
+use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
 use MoonShine\UI\Fields\ID;
