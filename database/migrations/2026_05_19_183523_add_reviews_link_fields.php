@@ -12,7 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('attractions', function (Blueprint $table) {
-            $table->text('yandex_review_code')->nullable();
+            $table->text('yandex_review_widget')->nullable();
+        });
+        Schema::table('hotels', function (Blueprint $table) {
+            $table->text('yandex_review_widget')->nullable();
+        });
+        Schema::table('restaurants', function (Blueprint $table) {
+            $table->text('yandex_review_widget')->nullable();
         });
     }
 
@@ -22,7 +28,13 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('attractions', function (Blueprint $table) {
-            $table->dropColumn('yandex_review_code');
+            $table->dropColumn('yandex_review_widget');
+        });
+        Schema::table('hotels', function (Blueprint $table) {
+            $table->dropColumn('yandex_review_widget');
+        });
+        Schema::table('restaurants', function (Blueprint $table) {
+            $table->dropColumn('yandex_review_widget');
         });
     }
 };

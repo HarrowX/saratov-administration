@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources\MoonShineUser\Pages;
 
 use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
-use App\MoonShine\Resources\Restaurant\MoonShineUserRole\MoonShineUserRoleResource;
+use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password as PasswordRule;

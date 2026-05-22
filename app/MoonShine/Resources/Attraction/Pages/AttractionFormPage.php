@@ -65,7 +65,7 @@ class AttractionFormPage extends FormPage
             Text::make('Район', 'district'),
             Text::make('Email', 'email'),
             Url::make('Сайт', 'website'),
-            Textarea::make('Код виджета отзывов яндекс карт', 'yandex_review_code')->unescape(),
+            Textarea::make('Код виджета отзывов яндекс карт', 'yandex_review_widget')->unescape(),
             ActionButton::make('Инструкция')
                 ->inModal('Инструкция',<<<HTML
                 <div style="line-height: 1.6; display: flex; flex-direction: column; gap: 0.25rem;">
