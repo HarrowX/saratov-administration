@@ -19,6 +19,7 @@ use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
 use App\MoonShine\Resources\Hotel\HotelResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
+use App\MoonShine\Resources\Excursion\ExcursionResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -43,6 +44,7 @@ final class MoonShineLayout extends AppLayout
             MenuItem::make(GuidedTourResource::class, 'Экскурсоводы'),
             MenuItem::make(HotelResource::class, 'Отели'),
             MenuItem::make(AttractionResource::class, 'Достопремечательности'),
+            MenuItem::make(ExcursionResource::class, 'Экскурсии'),
         ];
     }
 

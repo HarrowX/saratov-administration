@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attraction;
+use App\Models\Excursion;
 use App\Models\Hotel;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
@@ -24,6 +25,11 @@ class ContentController extends Controller {
     public function attractions() {
         return response()->json(
             Attraction::with('attachments')->get()->toArray(), 200
+        );
+    }
+    public function excursions() {
+        return response()->json(
+            Excursion::with('attachments')->get()->toArray(), 200
         );
     }
 }

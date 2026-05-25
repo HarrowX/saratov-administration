@@ -3,8 +3,8 @@
 use App\Livewire\Index;
 use App\Livewire\Pages\Attractions\AllAttractions;
 use App\Livewire\Pages\Attractions\SingleAttraction;
-use App\Livewire\Pages\Excurtions\AllExcurtions;
-use App\Livewire\Pages\Excurtions\SingleExcurtion;
+use App\Livewire\Pages\Excursions\AllExcursions;
+use App\Livewire\Pages\Excursions\SingleExcursion;
 use App\Livewire\Pages\GuidedTours\AllGuidedTours;
 use App\Livewire\Pages\GuidedTours\SingleGuidedTour;
 use App\Livewire\Pages\Hotels\AllHotels;
@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Index::class)->name('index');
 
-Route::prefix('/excurtions')->group(function () {
-    Route::get('/', AllExcurtions::class)->name('all-excurtions');
-    Route::get('/{excurtion}', SingleExcurtion::class)->name('single-excurtion');
+Route::prefix('/excursions')->group(function () {
+    Route::get('/', AllExcursions::class)->name('all-excursions');
+    Route::get('/{excursion}', SingleExcursion::class)->name('single-excursion');
 });
 
 Route::prefix('/guided-tours')->group(function () {

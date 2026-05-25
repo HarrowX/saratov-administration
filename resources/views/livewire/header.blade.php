@@ -10,7 +10,7 @@
 
             <div class="hidden 3xl:flex items-center md:space-x-4 lg:space-x-5 3xl:space-x-6 transition text-xs 3xl:text-sm">
                 <a href="{{ route('index') }}" class="{{ request()->is('/') ? "nav-link-active nav-link" : "nav-link" }}">Главная</a>
-                <a href="{{ route('all-excurtions') }}" class="{{ request()->is('excurtions*') ? "nav-link-active nav-link" : "nav-link" }}">Туры и экскурсии</a>
+                <a href="{{ route('all-excursions') }}" class="{{ request()->is('excursions*') ? "nav-link-active nav-link" : "nav-link" }}">Туры и экскурсии</a>
                 <a href="{{ route('all-guided-tours') }}" class="{{ request()->is('guided-tours*') ? "nav-link-active nav-link" : "nav-link" }}">Экскурсоводы</a>
                 <a href="{{ route('all-restaurants') }}" class="{{ request()->is('restaurants*') ? "nav-link-active nav-link" : "nav-link" }}">Заведения</a>
                 <a href="{{ route('all-attractions') }}" class="{{ request()->is('attractions*') ? "nav-link-active nav-link" : "nav-link" }}">Достопримечательности</a>
@@ -41,7 +41,7 @@
                                 <span>Главная</span>
                             </a>
 
-                            <a href="{{ route('all-excurtions') }}" class="{{ request()->is('excurtions*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
+                            <a href="{{ route('all-excursions') }}" class="{{ request()->is('excursions*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
                                 <i class="fa-solid fa-map w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
                                 <span>Туры и экскурсии</span>
                                 <span class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">→</span>

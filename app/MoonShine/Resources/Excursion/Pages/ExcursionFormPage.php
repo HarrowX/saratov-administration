@@ -1,0 +1,180 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\MoonShine\Resources\Excursion\Pages;
+
+use App\MoonShine\Resources\Attachment\AttachmentResource;
+use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
+use MoonShine\Laravel\Fields\Slug;
+use MoonShine\Laravel\Pages\Crud\FormPage;
+use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Contracts\UI\FormBuilderContract;
+use MoonShine\UI\Components\FormBuilder;
+use MoonShine\Contracts\UI\FieldContract;
+use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
+use App\MoonShine\Resources\Excursion\ExcursionResource;
+use MoonShine\Support\ListOf;
+use MoonShine\UI\Fields\Checkbox;
+use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Fields\Image;
+use MoonShine\UI\Fields\Json;
+use MoonShine\UI\Fields\Number;
+use MoonShine\UI\Fields\Phone;
+use MoonShine\UI\Fields\Select;
+use MoonShine\UI\Fields\Text;
+use MoonShine\UI\Fields\Textarea;
+use MoonShine\UI\Fields\Url;
+use Throwable;
+
+
+/**
+ * @extends FormPage<ExcursionResource>
+ */
+class ExcursionFormPage extends FormPage
+{
+    /**
+     * @return list<ComponentContract|FieldContract>
+     */
+    protected function fields(): iterable
+    {
+        return [
+            ID::make(),
+            Text::make('Название', 'name')->unescape()->required(),
+            Slug::make('Слаг','slug')->from('name')->unique()->canSee(function () {
+                $item = $this->getResource()?->getItem();
+                return $item && $item->exists;
+            }),
+            Textarea::make('Описание', 'description')->unescape()->required(),
+            Select::make('Тип экскурсии', 'type')
+                ->options([
+                    'Пеший' => 'Пеший',
+                    'Автобусный' => 'Автобусный',
+                    'Велосипедный' => 'Велосипедный',
+                    'Водный' => 'Водный',
+                    'Комбинированный' => 'Комбинированный'
+                ])
+                ->required(),
+            Number::make('Длительность (минут)', 'duration')
+                ->min(1)
+                ->required(),
+            Number::make('Дистанция (км)', 'distance')
+                ->min(0)
+                ->step(0.1),
+            Select::make('Сложность', 'difficulty')
+                ->options([
+                    'Легко' => 'Легко',
+                    'Средне' => 'Средне',
+                    'Тяжело' => 'Тяжело'
+                ]),
+            Number::make('Мин. размер группы', 'group_size_min')
+                ->min(1),
+            Number::make('Макс. размер группы', 'group_size_max')
+                ->min(1),
+            Number::make('Цена взрослый', 'price_adult')
+                ->min(0)
+                ->step(1)
+                ->buttons(),
+
+            Number::make('Цена детский', 'price_child')
+                ->min(0)
+                ->step(1)
+                ->buttons(),
+
+            Number::make('Цена группа', 'price_group')
+                ->min(0)
+                ->step(1)
+                ->buttons(),
+            Checkbox::make('Бесплатно', 'is_free'),
+            Text::make('Возрастное ограничение', 'age_restriction')
+                ->placeholder('12+'),
+            Text::make('Место встречи', 'meeting_point')
+                ->required(),
+            Text::make('Адрес встречи', 'meeting_address')
+                ->required(),
+            Select::make('Тип расписания', 'schedule_type')
+                ->options([
+                    'По расписанию' => 'По расписанию',
+                    'По запросу' => 'По запросу'
+                ])
+                ->required(),
+            Text::make('Оператор', 'operator_name')
+                ->required(),
+            Text::make('Телефон оператора', 'operator_phone')
+                ->required(),
+            Checkbox::make('Бронирование включено', 'booking_enabled'),
+            Select::make('Статус', 'status')
+                ->options([
+                    'Активный' => 'Активный',
+                    'Неактивный' => 'Неактивный',
+                    'Сезонный' => 'Сезонный'
+                ])
+                ->required(),
+            RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
+                ->fields([
+                    ID::make(),
+                    Image::make('Файл', 'link'),
+                    Number::make('Порядковый номер', 'order')->default(0),
+                ])->removable(),
+        ];
+    }
+
+    protected function buttons(): ListOf
+    {
+        return parent::buttons();
+    }
+
+    protected function formButtons(): ListOf
+    {
+        return parent::formButtons();
+    }
+
+    protected function rules(DataWrapperContract $item): array
+    {
+        return [];
+    }
+
+    /**
+     * @param  FormBuilder  $component
+     *
+     * @return FormBuilder
+     */
+    protected function modifyFormComponent(FormBuilderContract $component): FormBuilderContract
+    {
+        return $component;
+    }
+
+    /**
+     * @return list<ComponentContract>
+     * @throws Throwable
+     */
+    protected function topLayer(): array
+    {
+        return [
+            ...parent::topLayer()
+        ];
+    }
+
+    /**
+     * @return list<ComponentContract>
+     * @throws Throwable
+     */
+    protected function mainLayer(): array
+    {
+        return [
+            ...parent::mainLayer()
+        ];
+    }
+
+    /**
+     * @return list<ComponentContract>
+     * @throws Throwable
+     */
+    protected function bottomLayer(): array
+    {
+        return [
+            ...parent::bottomLayer()
+        ];
+    }
+}

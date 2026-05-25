@@ -12,6 +12,8 @@ Route::prefix('content')->group(function () {
     Route::get('hotels', [ContentController::class, 'hotels']);
     Route::get('restaurants', [ContentController::class, 'restaurants']);
     Route::get('attractions', [ContentController::class, 'attractions']);
+    Route::get('excursions', [ContentController::class, 'excursions']);
+
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {

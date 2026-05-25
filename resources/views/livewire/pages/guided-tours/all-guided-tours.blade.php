@@ -28,7 +28,7 @@
         <div class="max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto flex flex-col gap-7 md:gap-12 items-center px-4 sm:px-10">
             <form wire:submit="loadGuidedTours" class="relative w-114">
                 <input type="search"
-                    wire:model="searchString" 
+                    wire:model="searchString"
                     id="search" placeholder="Найти экскурсовода"
                     class="w-full border-2 border-black rounded-3xl py-3 pl-5 pr-12
                             text-base outline-none appearance-none
@@ -46,10 +46,10 @@
                     <div class="group relative rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full">
                         <div class="flex flex-col h-full">
                             <div class="relative aspect-4/3 rounded-2xl overflow-hidden shrink-0">
-                                <img src="{{ $guidedTour->attachments?->get(0)?->url() ?? "" }}" 
-                                    alt="Изображение {{ $guidedTour->name }}" 
+                                <img src="{{ $guidedTour->attachments?->get(0)?->url() ?? "" }}"
+                                    alt="Изображение {{ $guidedTour->name }}"
                                     class="img-guid w-full h-full group-hover:scale-105 transition-transform duration-500">
-                                
+
                                 <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5">
                                     <i class="fas fa-star text-yellow-500"></i>
                                     <span class="text-sm font-semibold text-black">4.9</span>
@@ -62,11 +62,9 @@
                                     {{ $guidedTour->short_description }}
                                 </p>
                                 <div class="flex justify-center mt-auto pt-5">
-                                    <form action="{{ route('single-guided-tour', ['guidedTour' => $guidedTour->id]) }}">
-                                        <button class="px-19 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition cursor-pointer text-[10px] md:text-xs 3xl:text-sm">
-                                            Подробнее <i class="fas fa-arrow-right ml-1"></i>
-                                        </button>
-                                    </form>
+                                    <a href="{{ route('single-guided-tour', ['guidedTour' => $guidedTour->id]) }}" class="px-19 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition cursor-pointer text-[10px] md:text-xs 3xl:text-sm">
+                                        Подробнее <i class="fas fa-arrow-right ml-1"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
