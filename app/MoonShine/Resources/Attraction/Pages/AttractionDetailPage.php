@@ -9,6 +9,10 @@ use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\DetailPage;
 use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\UI\Components\ActionButton;
+use MoonShine\UI\Components\Components;
+use MoonShine\UI\Components\FlexibleRender;
+use MoonShine\UI\Components\Modal;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\Contracts\UI\FieldContract;
 use App\MoonShine\Resources\Attraction\AttractionResource;
@@ -55,6 +59,13 @@ class AttractionDetailPage extends DetailPage
             Text::make('Район', 'district'),
             Text::make('Email', 'email'),
             Url::make('Сайт', 'website'),
+            Text::make('Виджет отзывов', 'yandex_review_widget')->changePreview(
+                fn ($value) => $value ?  ActionButton::make('Посмотреть')->inModal(
+                    title: 'Виджет отзывов',
+                    content: $value,
+                    builder: fn($component) => $component->auto(),
+                ) : 'Отсутствует'
+            ),
             Select::make('Статус', 'status')
                 ->options([
                     'active' => 'Активный',

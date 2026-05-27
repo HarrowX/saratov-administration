@@ -9,6 +9,7 @@ use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\DetailPage;
 use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\UI\Components\ActionButton;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\Contracts\UI\FieldContract;
 use App\MoonShine\Resources\Hotel\HotelResource;
@@ -59,6 +60,13 @@ class HotelDetailPage extends DetailPage
             Text::make('Район', 'district'),
             Text::make('Email', 'email'),
             Url::make('Сайт', 'website'),
+            Text::make('Виджет отзывов', 'yandex_review_widget')->changePreview(
+                fn ($value) => $value ?  ActionButton::make('Посмотреть')->inModal(
+                    title: 'Виджет отзывов',
+                    content: $value,
+                    builder: fn($component) => $component->auto(),
+                ) : 'Отсутствует'
+            ),
             Number::make('Максимальная цена', 'max_price'),
             Number::make('Минимальная цена', 'min_price'),
             Number::make('Долгота','latitude'),

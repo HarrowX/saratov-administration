@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources\Restaurant\MoonShineUserRole;
+namespace App\MoonShine\Resources\MoonShineUserRole;
 
-use App\MoonShine\Resources\Restaurant\MoonShineUserRole\Pages\MoonShineUserRoleFormPage;
-use App\MoonShine\Resources\Restaurant\MoonShineUserRole\Pages\MoonShineUserRoleIndexPage;
+use App\MoonShine\Resources\MoonShineUserRole\Pages\MoonShineUserRoleFormPage;
+use App\MoonShine\Resources\MoonShineUserRole\Pages\MoonShineUserRoleIndexPage;
 use MoonShine\Laravel\Models\MoonshineUserRole;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\MenuManager\Attributes\Group;

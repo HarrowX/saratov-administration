@@ -10,11 +10,13 @@ use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FormBuilderContract;
+use MoonShine\UI\Components\ActionButton;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use App\MoonShine\Resources\Attraction\AttractionResource;
 use MoonShine\Support\ListOf;
+use MoonShine\UI\Components\Title;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\Image;
@@ -63,6 +65,19 @@ class AttractionFormPage extends FormPage
             Text::make('Район', 'district'),
             Text::make('Email', 'email'),
             Url::make('Сайт', 'website'),
+            Textarea::make('Код виджета отзывов яндекс карт', 'yandex_review_widget')->unescape(),
+            ActionButton::make('Инструкция')
+                ->inModal('Инструкция',<<<HTML
+                <div style="line-height: 1.6; display: flex; flex-direction: column; gap: 0.25rem;">
+                    <p style="margin: 0;">1. На Яндекс Картах откройте карточку точки</p>
+                    <p style="margin: 0;">2. Справа сверху нажмите троеточие</p>
+                    <p style="margin: 0;">3. Скопируйте виджет с отзывами</p>
+                    <p style="margin: 0;">4. Вставьте в поле выше</p>
+                    <div style="display: flex; justify-content: flex-end; margin-top: 0.25rem;">
+                        <a target="_blank" href="https://yandex.ru/support/maps/ru/concept/get-map-reference#concept4" style="font-size: 0.9em;">Подробнее</a>
+                    </div>
+                </div>
+                HTML),
             Select::make('Статус', 'status')
                 ->options([
                     'active' => 'Активный',
