@@ -20,7 +20,7 @@ class AttractionResource extends ModelResource
 {
     protected string $model = Attraction::class;
 
-    protected string $title = 'Достопремечательности';
+    protected string $title = 'Достопримечательности';
 
     /**
      * @return list<class-string<PageContract>>
