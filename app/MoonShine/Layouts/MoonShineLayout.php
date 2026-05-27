@@ -42,7 +42,7 @@ final class MoonShineLayout extends AppLayout
             MenuItem::make(AttachmentResource::class, 'Прикрепляемое'),
             MenuItem::make(GuidedTourResource::class, 'Экскурсоводы'),
             MenuItem::make(HotelResource::class, 'Отели'),
-            MenuItem::make(AttractionResource::class, 'Достопремечательности'),
+            MenuItem::make(AttractionResource::class, 'Достопримечательности'),
         ];
     }
 
