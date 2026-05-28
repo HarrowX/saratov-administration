@@ -24,10 +24,18 @@
                 <button id="" class="">
                     <img src="/images/image 21.svg" alt="поиск" class="icon size-7 3xl:size-11">
                 </button>
-                <button id="profileBtn" class="relative cursor-pointer">
-                    <img src="/images/image 18.svg" alt="мой профиль" class="icon size-6 3xl:size-10">
-                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full size-4 sm:size-5 flex items-center justify-center achievement-count">0</span>
-                </button>
+                @auth
+                    <button id="profileBtn" class="relative cursor-pointer">
+                        <img src="/images/image 18.svg" alt="мой профиль" class="icon size-6 3xl:size-10">
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full size-4 sm:size-5 flex items-center justify-center achievement-count">0</span>
+                    </button>
+                @endauth
+
+                @guest
+                    <a href="{{route('login')}}">Войти</a>
+                    <a href="{{route('register')}}">Зарегистрироваться</a>
+                @endguest
+
                 <div class="relative">
                     <button id="mobileMenuBtn" class="flex 3xl:hidden cursor-pointer">
                         <i class="fas fa-bars text-2xl sm:text-4xl text-gray-600"></i>
