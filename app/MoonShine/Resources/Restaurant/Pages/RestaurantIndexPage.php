@@ -68,9 +68,9 @@ class RestaurantIndexPage extends IndexPage
                     builder: fn($component) => $component->auto(),
                 ) : 'Отсутствует'
             ),
+            Text::make('Координаты', 'coordinates')
+                ->changeFill(fn ($data) => "{$data->longitude}, {$data->latitude}"),
 
-            Number::make('Долгота','latitude'),
-            Number::make('Широта','longitude'),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),
