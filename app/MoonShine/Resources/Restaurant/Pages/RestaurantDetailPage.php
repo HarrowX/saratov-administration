@@ -56,6 +56,7 @@ class RestaurantDetailPage extends DetailPage
             Text::make('Район', 'district'),
             Text::make('Email', 'email'),
             Url::make('Сайт', 'website'),
+
             Text::make('Виджет отзывов', 'yandex_review_widget')->changePreview(
                 fn ($value) => $value ?  ActionButton::make('Посмотреть')->inModal(
                     title: 'Виджет отзывов',
@@ -63,8 +64,10 @@ class RestaurantDetailPage extends DetailPage
                     builder: fn($component) => $component->auto(),
                 ) : 'Отсутствует'
             ),
-            Number::make('Долгота','latitude'),
-            Number::make('Широта','longitude'),
+
+            Text::make('Координаты', 'coordinates')
+                ->changeFill(fn ($data) => "{$data->longitude}, {$data->latitude}"),
+
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),

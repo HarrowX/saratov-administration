@@ -19,6 +19,7 @@ use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use App\MoonShine\Resources\Restaurant\RestaurantResource;
 use MoonShine\Support\ListOf;
+use MoonShine\UI\Components\Layout\Div;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\Image;
@@ -80,8 +81,12 @@ class RestaurantFormPage extends FormPage
                     </div>
                 </div>
                 HTML),
-                Text::make('Долгота','latitude'),
-                Text::make('Широта','longitude'),
+                Box::make('Координаты',[
+                    Div::make([
+                        Text::make('Широта','longitude'),
+                        Text::make('Долгота','latitude'),
+                    ])->style('display: flex; gap: 1rem;')
+                ]),
                 RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                     ->fields([
                         ID::make(),

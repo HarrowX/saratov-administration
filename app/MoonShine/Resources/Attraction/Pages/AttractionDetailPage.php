@@ -77,8 +77,10 @@ class AttractionDetailPage extends DetailPage
             Number::make('Время посещения (мин)', 'visit_duration'),
             Switcher::make('Доступность', 'accessibility'),
             Switcher::make('Парковка', 'parking'),
-            Number::make('Долгота','latitude'),
-            Number::make('Широта','longitude'),
+
+            Text::make('Координаты', 'coordinates')
+                ->changeFill(fn ($data) => "{$data->longitude}, {$data->latitude}"),
+
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),
