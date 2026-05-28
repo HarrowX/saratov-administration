@@ -1,4 +1,3 @@
-
 <x-layouts.app>
     @section('title')
         Welcome page
