@@ -16,6 +16,7 @@ use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use App\MoonShine\Resources\Hotel\HotelResource;
 use MoonShine\Support\ListOf;
+use MoonShine\UI\Components\Layout\Div;
 use MoonShine\UI\Fields\Email;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Components\Layout\Box;
@@ -79,8 +80,12 @@ class HotelFormPage extends FormPage
                 HTML),
             Number::make('Максимальная цена', 'max_price'),
             Number::make('Минимальная цена', 'min_price'),
-            Text::make('Долгота','latitude'),
-            Text::make('Широта','longitude'),
+            Box::make('Координаты',[
+                Div::make([
+                    Text::make('Широта','longitude'),
+                    Text::make('Долгота','latitude'),
+                ])->style('display: flex; gap: 1rem;')
+            ]),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),

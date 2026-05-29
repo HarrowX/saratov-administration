@@ -16,6 +16,7 @@ use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use App\MoonShine\Resources\Attraction\AttractionResource;
 use MoonShine\Support\ListOf;
+use MoonShine\UI\Components\Layout\Div;
 use MoonShine\UI\Components\Title;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Components\Layout\Box;
@@ -88,8 +89,12 @@ class AttractionFormPage extends FormPage
             Number::make('Время посещения (мин)', 'visit_duration'),
             Switcher::make('Доступность', 'accessibility'),
             Switcher::make('Парковка', 'parking'),
-            Text::make('Долгота','latitude'),
-            Text::make('Широта','longitude'),
+            Box::make('Координаты',[
+                Div::make([
+                    Text::make('Широта','longitude'),
+                    Text::make('Долгота','latitude'),
+                ])->style('display: flex; gap: 1rem;')
+            ]),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),
