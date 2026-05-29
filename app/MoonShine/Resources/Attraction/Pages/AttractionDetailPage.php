@@ -75,8 +75,9 @@ class AttractionDetailPage extends DetailPage
                 ->required(),
             Number::make('Цена билета', 'ticket_price'),
             Number::make('Время посещения (мин)', 'visit_duration'),
-            Switcher::make('Доступность', 'accessibility'),
-            Switcher::make('Парковка', 'parking'),
+
+            Switcher::make('Доступность', 'is_accessible'),
+            Switcher::make('Парковка', 'has_parking'),
 
             Text::make('Координаты', 'coordinates')
                 ->changeFill(fn ($data) => "{$data->longitude}, {$data->latitude}"),

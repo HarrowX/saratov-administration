@@ -18,6 +18,7 @@ class RestaurantResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
+
             'description' => $this->description,
             'address' => $this->address,
             'district' => $this->district,
@@ -25,12 +26,16 @@ class RestaurantResource extends JsonResource
             'latitude' => $this->latitude,
             'worktime' => $this->worktime,
             'phone' => $this->phone,
+            'kitchen' => $this->kitchen,
             'email' => $this->email,
             "website" => $this->website,
-            "price_category" => $this->price_category,
+
+            "priceCategory" => $this->price_category,
             "capacity" => $this->capipacity,
             "rating" => $this->rating,
-            'attachments' => $this->attachments,
+
+            "createdAt" => $this->created_at,
+            'attachments' => AttachmentResource::collection($this->attachments),
         ];
     }
 }

@@ -4,8 +4,15 @@ namespace App\DTOs;
 
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
-class LoginRequestDTO extends ValidatedDTO
+class LoginDTO extends ValidatedDTO
 {
+    public bool $lazyValidation = true;
+
+
+    public string $email;
+    public string $password;
+
+
     protected function rules(): array
     {
         return [
