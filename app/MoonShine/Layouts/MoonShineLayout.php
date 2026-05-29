@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\MoonShine\Layouts;
 
 use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\Crud\Components\Layout\Search;
 use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\ColorManager\Palettes\GrayPalette;
 use MoonShine\ColorManager\ColorManager;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
 use MoonShine\Contracts\ColorManager\PaletteContract;
+use MoonShine\MenuManager\MenuGroup;
 use MoonShine\UI\Components\Layout\Div;
 use Override;
 use App\MoonShine\Resources\Restaurant\RestaurantResource;
@@ -38,11 +38,13 @@ final class MoonShineLayout extends AppLayout
     {
         return [
             ...parent::menu(),
-            MenuItem::make(RestaurantResource::class, 'Заведения'),
-            MenuItem::make(AttachmentResource::class, 'Прикрепляемое'),
-            MenuItem::make(GuidedTourResource::class, 'Экскурсоводы'),
-            MenuItem::make(HotelResource::class, 'Отели'),
-            MenuItem::make(AttractionResource::class, 'Достопримечательности'),
+            MenuGroup::make('Места', [
+                MenuItem::make(AttractionResource::class, 'Достопримечательности')->icon('building-library'),
+                MenuItem::make(HotelResource::class, 'Отели')->icon('home-modern'),
+                MenuItem::make(RestaurantResource::class, 'Заведения')->icon('building-storefront'),
+            ])->icon('map'),
+            MenuItem::make(AttachmentResource::class, 'Прикрепляемое')->icon('paper-clip'),
+            MenuItem::make(GuidedTourResource::class, 'Экскурсоводы')->icon('user-circle'),
         ];
     }
 
