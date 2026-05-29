@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AttachmentResource extends JsonResource
+class ProfileResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,11 +15,12 @@ class AttachmentResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id" => $this->id,
-            "attachableType" => $this->attachable_type,
-            "attachableId" => $this->attachable_id,
-            "order" => $this->order,
-            "link" => $this->link,
+            'id' => $this->id,
+            'name' => $this->name,
+            'surname' => $this->surname,
+            'patronymic' => $this->patronymic,
+            'email' => $this->email,
+            'phone' => $this->phone,
             "createdAt" => $this->created_at,
         ];
     }

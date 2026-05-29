@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resourc120es\HotelResource;
+use App\Http\Resources\AttractionResource;
+use App\Http\Resources\HotelResource;
+use App\Http\Resources\RestaurantResource;
 use App\Models\Attraction;
 use App\Models\Hotel;
 use App\Models\Restaurant;
@@ -10,19 +12,27 @@ use Illuminate\Http\Request;
 
 class ContentController extends Controller {
 
-    public function hotels() {
-        return HotelResource::collection(Hotel::all());
+    public function hotels(Request $request) {
+        $query = Hotel::query()->with('attachments');
+
+        $perPage = $request->integer('per_page', 15);
+
+        return HotelResource::collection($query->paginate($perPage));
     }
 
-    public function restaurants() {
-        return response()->json(
-            Restaurant::with('attachments')->get()->toArray(), 200
-        );
+    public function restaurants(Request $request) {
+        $query = Restaurant::query()->with('attachments');
+
+        $perPage = $request->integer('per_page', 15);
+
+        return RestaurantResource::collection($query->paginate($perPage));
     }
 
-    public function attractions() {
-        return response()->json(
-            Attraction::with('attachments')->get()->toArray(), 200
-        );
+    public function attractions(Request $request) {
+        $query = Attraction::query()->with('attachments');
+
+        $perPage = $request->integer('per_page', 15);
+
+        return AttractionResource::collection($query->paginate($perPage));
     }
 }

@@ -71,8 +71,8 @@ class AttractionFormPage extends FormPage
                 ]),
             Number::make('Цена билета', 'ticket_price'),
             Number::make('Время посещения (мин)', 'visit_duration'),
-            Switcher::make('Доступность', 'accessibility'),
-            Switcher::make('Парковка', 'parking'),
+            Switcher::make('Доступность', 'is_accessible'),
+            Switcher::make('Парковка', 'has_parking'),
             Text::make('Долгота','latitude'),
             Text::make('Широта','longitude'),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)

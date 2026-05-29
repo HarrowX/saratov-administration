@@ -17,7 +17,8 @@ class HotelResource extends JsonResource
         return [
             "id" => $this->id,
             "name" =>  $this->name,
-            "short_description" =>  $this->short_description,
+            'slug' => $this->slug,
+            "shortDescription" =>  $this->short_description,
             "description" => $this->description,
             "type" => $this->type,
             "stars" => $this->stars,
@@ -29,9 +30,10 @@ class HotelResource extends JsonResource
             "latitude" => $this->latitude,
             "email" => $this->email,
             "website" => $this->website,
-            "max_price" => $this->max_price,
-            "min_price" => $this->min_pirce,
-            "created_at" => $this->created_at,
+            "maxPrice" => $this->max_price,
+            "minPrice" => $this->min_pirce,
+
+            "createdAt" => $this->created_at,
             "attachments" => AttachmentResource::collection($this->attachments),
         ];
     }
