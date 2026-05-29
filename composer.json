@@ -15,7 +15,8 @@
         "livewire/livewire": "^3.6.4",
         "livewire/volt": "^1.7.0",
         "moonshine/moonshine": "^4.0",
-        "moonshine/ru": "^1.0"
+        "moonshine/ru": "^1.0",
+        "wendelladriel/laravel-validated-dto": "^4.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
