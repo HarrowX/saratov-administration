@@ -22,6 +22,8 @@ class ProfileController extends Controller
 
     public function update(UpdateProfileDTO $request)
     {
+        $request->validate();
+
         return ProfileResource::make($this->userService->updateProfile($request));
     }
 }

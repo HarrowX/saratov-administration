@@ -21,6 +21,17 @@ class LoginDTO extends ValidatedDTO
         ];
     }
 
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'Требуется адрес электронной почты.',
+            'email.email'    => 'Неверный формат адреса электронной почты.',
+            'password.required' => 'Требуется пароль.',
+            'password.string'   => 'Пароль должен быть строкой.',
+        ];
+    }
+
+
     protected function defaults(): array
     {
         return [];

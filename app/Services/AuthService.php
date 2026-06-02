@@ -6,6 +6,7 @@ use App\DTOs\LoginDTO;
 use App\DTOs\RegisterDTO;
 use App\Exceptions\Auth\BadCredentialsException;
 use App\Models\User;
+use App\Models\UserName;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -48,12 +49,16 @@ class AuthService
     public function store(RegisterDTO $dto)
     {
         $user = User::create([
-            'name' => $dto->name,
-            'surname' => $dto->surname,
-            'patronymic' => $dto->patronymic,
             'email' => $dto->email,
             'phone' => $dto->phone,
             'password' => Hash::make($dto->password),
+        ]);
+
+        $name = UserName::create([
+            'user_id' => $user->id,
+            'name' => $dto->name,
+            'surname' => $dto->surname,
+            'patronymic' => $dto->patronymic,
         ]);
 
         event(new Registered($user));
