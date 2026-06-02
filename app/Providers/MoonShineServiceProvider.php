@@ -16,6 +16,9 @@ use Illuminate\Support\ServiceProvider;
 use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
 use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
 use App\MoonShine\Resources\Excursion\ExcursionResource;
+use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
+use App\MoonShine\Resources\CustomPoint\CustomPointResoursResource;
+use App\MoonShine\Resources\CustomPoint\CustomPointResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -34,6 +37,8 @@ class MoonShineServiceProvider extends ServiceProvider
                 HotelResource::class,
                 AttractionResource::class,
                 ExcursionResource::class,
+                ExcursionPointResource::class,
+                CustomPointResource::class,
             ])
             ->pages([
                 ...$core->getConfig()->getPages(),

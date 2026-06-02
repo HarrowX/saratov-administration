@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Excursion extends Model
@@ -23,6 +24,7 @@ class Excursion extends Model
     {
         return $this->hasMany(ExcursionPoint::class)->orderBy('order');
     }
+
     public function getRouteKeyName(): string
     {
         return 'slug';

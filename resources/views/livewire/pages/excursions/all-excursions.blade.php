@@ -157,7 +157,7 @@
                                     </span>
                                         <span class="flex items-center gap-2">
                                         <i class="fas fa-map-marker-alt"></i>
-                                        6 точек
+                                            {{$excursion->points->count()}} точек
                                     </span>
                                     </div>
                                     <a href="{{ route('single-excursion', ['excursion' => $excursion->slug]) }}" class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity text-center">

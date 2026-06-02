@@ -727,7 +727,7 @@ select option:checked {
 
 /* Стили для свайпера */
 .swiper-pagination {
-    @apply bottom-0! lg:bottom-12! 3xl:bottom-0! ;
+    @apply bottom-0! lg:bottom-1! 3xl:bottom-0! ;
   position: absolute;
 }
 

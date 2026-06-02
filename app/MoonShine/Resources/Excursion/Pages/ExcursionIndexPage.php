@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources\Excursion\Pages;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
+use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
+use MoonShine\Laravel\Fields\Relationships\HasMany;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
@@ -114,6 +116,11 @@ class ExcursionIndexPage extends IndexPage
                     Image::make('Файл', 'link'),
                     Number::make('Порядковый номер', 'order')->default(0),
                 ])->removable(),
+
+            RelationRepeater::make('Точки маршрута', 'points', resource: ExcursionPointResource::class)
+                ->creatable()
+                ->removable()
+                ->sortable('order'),
         ];
     }
 

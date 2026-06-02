@@ -20,6 +20,9 @@ use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
 use App\MoonShine\Resources\Hotel\HotelResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
 use App\MoonShine\Resources\Excursion\ExcursionResource;
+use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
+use App\MoonShine\Resources\CustomPoint\CustomPointResoursResource;
+use App\MoonShine\Resources\CustomPoint\CustomPointResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -27,12 +30,14 @@ final class MoonShineLayout extends AppLayout
      * @var null|class-string<PaletteContract>
      */
     protected ?string $palette = GrayPalette::class;
+    private $arr;
 
     protected function assets(): array
     {
-        return [
+        $this->arr = [
             ...parent::assets(),
         ];
+        return $this->arr;
     }
 
     protected function menu(): array
@@ -45,6 +50,8 @@ final class MoonShineLayout extends AppLayout
             MenuItem::make(HotelResource::class, 'Отели'),
             MenuItem::make(AttractionResource::class, 'Достопремечательности'),
             MenuItem::make(ExcursionResource::class, 'Экскурсии'),
+            MenuItem::make(ExcursionPointResource::class, 'Точки экскурсии'),
+            MenuItem::make(CustomPointResource::class, 'CustomPoints'),
         ];
     }
 
