@@ -22,10 +22,11 @@ class RegistrationTest extends TestCase
     public function test_new_users_can_register(): void
     {
         $component = Volt::test('pages.auth.register')
-            ->set('name', 'Test User')
-            ->set('email', 'test@example.com')
-            ->set('password', 'password')
-            ->set('password_confirmation', 'password');
+            ->set('dto.name', 'Test User')
+            ->set('dto.surname', 'Test User')
+            ->set('dto.email', 'test@example.com')
+            ->set('dto.password', 'password')
+            ->set('dto.password_confirmation', 'password');
 
         $component->call('register');
 

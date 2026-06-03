@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\UserName;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthService
@@ -48,20 +49,24 @@ class AuthService
 
     public function store(RegisterDTO $dto)
     {
-        $user = User::create([
-            'email' => $dto->email,
-            'phone' => $dto->phone,
-            'password' => Hash::make($dto->password),
-        ]);
+        $user = null;
 
-        $name = UserName::create([
-            'user_id' => $user->id,
-            'name' => $dto->name,
-            'surname' => $dto->surname,
-            'patronymic' => $dto->patronymic,
-        ]);
+        DB::transaction(function () use ($dto, &$user) {
+            $user = User::create([
+                'email' => $dto->email,
+                'phone' => $dto->phone,
+                'password' => Hash::make($dto->password),
+            ]);
 
-        event(new Registered($user));
+             UserName::create([
+                'user_id' => $user->id,
+                'name' => $dto->name,
+                'surname' => $dto->surname,
+                'patronymic' => $dto->patronymic,
+            ]);
+
+            event(new Registered($user));
+        });
 
         return $user;
     }

@@ -9,6 +9,9 @@ use Livewire\Volt\Component;
 new class extends Component
 {
     public string $name = '';
+    public string $surname = '';
+    public ?string $patronymic = null;
+    public ?string $phone = null;
     public string $email = '';
 
     /**
@@ -16,7 +19,10 @@ new class extends Component
      */
     public function mount(): void
     {
-        $this->name = Auth::user()->name;
+        $this->name = auth()->user()->username->name;
+        $this->surname = auth()->user()->username->surname;
+        $this->patronymic = auth()->user()->username->patronymic;
+        $this->phone = auth()->user()->phone;
         $this->email = Auth::user()->email;
     }
 
@@ -29,10 +35,22 @@ new class extends Component
 
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
+            'surname' => ['required', 'string', 'max:255'],
+            'patronymic' => ['nullable', 'string', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique(User::class)->ignore(auth()->user()->id)],
         ]);
 
-        $user->fill($validated);
+        $user->username->update([
+            'name' => $validated['name'],
+            'surname' => $validated['surname'],
+            'patronymic' => $validated['patronymic'],
+        ]);
+
+        $user->fill([
+            'phone' => $validated['phone'] ?? $user->phone,
+            'email' => $validated['email'],
+        ]);
 
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
@@ -40,7 +58,7 @@ new class extends Component
 
         $user->save();
 
-        $this->dispatch('profile-updated', name: $user->name);
+        $this->dispatch('profile-updated', name: $user->username->name);
     }
 
     /**
@@ -75,34 +93,30 @@ new class extends Component
 
     <form wire:submit="updateProfileInformation" class="mt-6 space-y-6">
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
+            <x-input-label for="surname"> Фамилия </x-input-label>
+            <x-text-input wire:model="surname" id="surname" name="surname" type="text" class="mt-1 block w-full" required autofocus autocomplete="surname" placeholder="Иванов" />
+            <x-input-error class="mt-2" :messages="$errors->get('surname')" />
+        </div>
+
+        <div>
+            <x-input-label for="name"> Имя </x-input-label>
+            <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" placeholder="Иван" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" name="email" type="email" class="mt-1 block w-full" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
-            @if (auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! auth()->user()->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800">
-                        {{ __('Your email address is unverified.') }}
-
-                        <button wire:click.prevent="sendVerification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
-                    @endif
-                </div>
-            @endif
+            <x-input-label for="patronymic"> Отчество </x-input-label>
+            <x-text-input wire:model="patronymic" id="patronymic" name="patronymic" type="text" class="mt-1 block w-full" autofocus autocomplete="patronymic" placeholder="Иванович" />
+            <x-input-error class="mt-2" :messages="$errors->get('patronymic')" />
         </div>
+
+        <div>
+            <x-input-label for="phone"> Телефон </x-input-label>
+            <x-text-input wire:model="phone" id="phone" name="phone" type="text" class="mt-1 block w-full" autofocus autocomplete="phone" placeholder="+7 (999) 99-99-99"/>
+            <x-input-error class="mt-2" :messages="$errors->get('phone')" />
+        </div>
+
+
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
