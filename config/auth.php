@@ -67,19 +67,19 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', MoonshineUser::class),
-        ],
+//        'users' => [
+//            'driver' => 'eloquent',
+//            'model' => env('AUTH_MODEL', MoonshineUser::class),
+//        ],
         'api-users' => [
             'driver' => 'eloquent',
             'model' => env('API_AUTH_MODEL', User::class),
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+         'users' => [
+             'driver' => 'eloquent',
+             'model' => env('AUTH_MODEL', User::class),
+         ],
     ],
 
     /*

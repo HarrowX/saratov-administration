@@ -1,21 +1,33 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ContentController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
+Route::prefix('v1')->group(function () {
 
-Route::prefix('content')->group(function () {
-    Route::get('hotels', [ContentController::class, 'hotels']);
-    Route::get('restaurants', [ContentController::class, 'restaurants']);
-    Route::get('attractions', [ContentController::class, 'attractions']);
-});
+    Route::prefix('auth')->controller(AuthController::class)
+        ->group(function () {
+            Route::post('login', 'login');
+            Route::post('register', 'register');
+            Route::post('logout', 'logout')->middleware(['auth:sanctum']);
+        });
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/user', function (Request $request) {
-        return $request->user();
+    Route::prefix('users')->group(function () {
+
+
+        Route::middleware(['auth:sanctum'])->controller(ProfileController::class)
+            ->group(function () {
+                Route::get('me', 'show');
+                Route::put('me', 'update');
+            });
     });
+
+    Route::prefix('places')->controller(ContentController::class)
+        ->group(function () {
+            Route::get('hotels', 'hotels');
+            Route::get('restaurants', 'restaurants');
+            Route::get('attractions', 'attractions');
+        });
 });

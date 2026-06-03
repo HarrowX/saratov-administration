@@ -12,12 +12,16 @@
         "laravel/sanctum": "^4.0",
         "laravel/telescope": "^5.15",
         "laravel/tinker": "^2.10.1",
+        "livewire/livewire": "^3.6.4",
+        "livewire/volt": "^1.7.0",
         "moonshine/moonshine": "^4.0",
-        "moonshine/ru": "^1.0"
+        "moonshine/ru": "^1.0",
+        "wendelladriel/laravel-validated-dto": "^4.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
         "friendsofphp/php-cs-fixer": "^3.91",
+        "laravel/breeze": "^2.4",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.24",
         "laravel/sail": "^1.41",
