@@ -14,8 +14,7 @@ return new class extends Migration
     {
         Schema::create('excursion_points', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('excursion_id')->constrained()->onDelete('cascade');
-
+            $table->foreignId('excursion_id')->nullable()->constrained();
             $table->morphs('pointable');
             $table->integer('order')->default(0);
             $table->integer('duration_minutes')->nullable();

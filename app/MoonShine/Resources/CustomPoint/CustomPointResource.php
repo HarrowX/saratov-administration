@@ -20,8 +20,8 @@ class CustomPointResource extends ModelResource
 {
     protected string $model = CustomPoint::class;
 
-    protected string $title = 'CustomPoints';
-    
+    protected string $title = 'Дополнительная точка экскурсии';
+
     /**
      * @return list<class-string<PageContract>>
      */

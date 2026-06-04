@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\CustomPoint\Pages;
 
+use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Components\Table\TableBuilder;
@@ -34,6 +35,7 @@ class CustomPointIndexPage extends IndexPage
         return [
             ID::make()->sortable(),
             Text::make('Название', 'name')->required(),
+            Slug::make('Слаг','slug')->from('name')->unique(),
             Textarea::make('Описание', 'description')->nullable(),
             Number::make('Время на точке', 'duration_minutes')->min(0)->nullable(),
             Number::make('Широта', 'latitude')->nullable(),

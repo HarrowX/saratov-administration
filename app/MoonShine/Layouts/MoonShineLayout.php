@@ -21,7 +21,6 @@ use App\MoonShine\Resources\Hotel\HotelResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
 use App\MoonShine\Resources\Excursion\ExcursionResource;
 use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
-use App\MoonShine\Resources\CustomPoint\CustomPointResoursResource;
 use App\MoonShine\Resources\CustomPoint\CustomPointResource;
 
 final class MoonShineLayout extends AppLayout
@@ -51,7 +50,7 @@ final class MoonShineLayout extends AppLayout
             MenuItem::make(AttractionResource::class, 'Достопремечательности'),
             MenuItem::make(ExcursionResource::class, 'Экскурсии'),
             MenuItem::make(ExcursionPointResource::class, 'Точки экскурсии'),
-            MenuItem::make(CustomPointResource::class, 'CustomPoints'),
+            MenuItem::make(CustomPointResource::class, 'Дополнительная точка экскурсии'),
         ];
     }
 

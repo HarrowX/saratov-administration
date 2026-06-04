@@ -4,9 +4,17 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Excursion\Pages;
 
+use App\Models\Attraction;
+use App\Models\CustomPoint;
+use App\Models\Hotel;
+use App\Models\Restaurant;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
+use App\MoonShine\Resources\CustomPoint\CustomPointResource;
 use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
+use Faker\Provider\Company;
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Fields\Relationships\HasMany;
+use MoonShine\Laravel\Fields\Relationships\MorphTo;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\FormPage;
@@ -124,6 +132,7 @@ class ExcursionFormPage extends FormPage
                 ->creatable()
                 ->removable()
                 ->sortable('order'),
+
         ];
     }
 

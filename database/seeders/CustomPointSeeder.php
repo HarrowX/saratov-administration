@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\CustomPoint;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class CustomPointSeeder extends Seeder
 {
@@ -35,6 +36,7 @@ class CustomPointSeeder extends Seeder
             $name = $names[$i];
             $customPoints[] = [
                 'name' => $name,
+                'slug' => Str::slug($name),
                 'description' => fake()->realText(),
                 'latitude' => fake()->latitude(),
                 'longitude' => fake()->longitude(),

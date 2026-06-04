@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\ExcursionPoint\Pages;
 
+use App\Models\Attraction;
+use App\Models\CustomPoint;
+use App\Models\Hotel;
+use App\Models\Restaurant;
 use App\MoonShine\Resources\Excursion\ExcursionResource;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use MoonShine\Laravel\Fields\Relationships\MorphTo;
+use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FormBuilderContract;
@@ -14,6 +20,7 @@ use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
 use MoonShine\Support\ListOf;
+use MoonShine\UI\Fields\Field;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\Number;
@@ -40,16 +47,19 @@ class ExcursionPointFormPage extends FormPage
                 ->required(),
 
             Number::make('Порядок', 'order')->default(0),
-            Number::make('ID объекта', 'pointable_id')->nullable(),
-            Select::make('Тип объекта', 'pointable_type')
-                ->options([
-                    'App\Models\Attraction' => 'Достопримечательность',
-                    'App\Models\Hotel' => 'Отель',
-                    'App\Models\Restaurant' => 'Ресторан',
-                    'App\Models\CustomPoint' => 'Кастомная точка',
+            Slug::make('Слаг','slug')->from('name')->unique()->unescape()->canSee(function () {
+                $item = $this->getResource()?->getItem();
+                return $item && $item->exists;
+            }),
+            MorphTo::make('Связанный объект', 'pointable')
+                ->types([
+                    Attraction::class => [ 'name', 'Достопримечательности'],
+                    Hotel::class => [ 'name', 'Отели'],
+                    Restaurant::class => [ 'name', 'Рестораны'],
+                    CustomPoint::class => [ 'name', 'Дополнительные точки'],
                 ])
-                ->reactive()  // ← обновляет поле pointable_id при изменении
-                ->nullable(),
+                ->required(),
+
             Number::make('Время на точке', 'duration_minutes')->nullable(),
         ];
     }

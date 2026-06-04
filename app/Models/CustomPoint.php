@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 class CustomPoint extends Model
 {
     protected $fillable = [
-        'name', 'description', 'latitude', 'longitude'
+        'name', 'description', 'latitude', 'longitude', 'slug', 'order', 'duration_minutes',
     ];
 
     public function excursionPoints(): MorphMany

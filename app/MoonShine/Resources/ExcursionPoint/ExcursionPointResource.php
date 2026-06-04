@@ -20,8 +20,8 @@ class ExcursionPointResource extends ModelResource
 {
     protected string $model = ExcursionPoint::class;
 
-    protected string $title = 'ExcursionPoints';
-    
+    protected string $title = 'Точки экскурсии';
+
     /**
      * @return list<class-string<PageContract>>
      */

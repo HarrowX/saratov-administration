@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\CustomPoint\Pages;
 
+use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FormBuilderContract;
@@ -34,6 +35,10 @@ class CustomPointFormPage extends FormPage
             Box::make([
                 ID::make()->sortable(),
                 Text::make('Название', 'name')->required(),
+                Slug::make('Слаг','slug')->from('name')->unique()->canSee(function () {
+                    $item = $this->getResource()?->getItem();
+                    return $item && $item->exists;
+                }),
                 Textarea::make('Описание', 'description')->nullable(),
                 Number::make('Время на точке', 'duration_minutes')->min(0)->nullable(),
                 Number::make('Широта', 'latitude')->nullable(),
@@ -41,6 +46,8 @@ class CustomPointFormPage extends FormPage
             ]),
         ];
     }
+
+
 
     protected function buttons(): ListOf
     {

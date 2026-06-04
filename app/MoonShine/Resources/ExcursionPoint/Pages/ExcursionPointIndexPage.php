@@ -6,6 +6,7 @@ namespace App\MoonShine\Resources\ExcursionPoint\Pages;
 
 use App\MoonShine\Resources\Excursion\ExcursionResource;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Components\Table\TableBuilder;
@@ -39,10 +40,18 @@ class ExcursionPointIndexPage extends IndexPage
 
             BelongsTo::make('Экскурсия', 'excursion', resource: ExcursionResource::class)
                 ->required(),
-
+            Slug::make('Слаг','slug')->from('name')->unique()->unescape(),
             Number::make('Порядок', 'order')->default(0),
             Number::make('ID объекта', 'pointable_id')->nullable(),
-            Number::make('Тип объекта', 'pointable_type')->nullable(),
+            Select::make('Тип объекта', 'pointable_type')
+                ->options([
+                    'App\Models\Attraction' => 'Достопримечательность',
+                    'App\Models\Hotel' => 'Отель',
+                    'App\Models\Restaurant' => 'Ресторан',
+                    'App\Models\CustomPoint' => 'Кастомная точка',
+                ])
+                ->reactive()
+                ->nullable(),
             Number::make('Время на точке', 'duration_minutes')->nullable(),
         ];
     }

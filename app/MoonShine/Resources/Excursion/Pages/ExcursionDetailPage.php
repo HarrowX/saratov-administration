@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Excursion\Pages;
 
+use App\Models\Attraction;
+use App\Models\CustomPoint;
+use App\Models\Hotel;
+use App\Models\Restaurant;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
 use MoonShine\Laravel\Fields\Relationships\HasMany;
@@ -40,10 +44,7 @@ class ExcursionDetailPage extends DetailPage
         return [
             ID::make(),
             Text::make('Название', 'name')->unescape()->required(),
-            Slug::make('Слаг','slug')->from('name')->unique()->canSee(function () {
-                $item = $this->getResource()?->getItem();
-                return $item && $item->exists;
-            }),
+            Slug::make('Слаг','slug')->from('name')->unique(),
             Textarea::make('Описание', 'description')->unescape()->required(),
             Select::make('Тип экскурсии', 'type')
                 ->options([
@@ -117,6 +118,44 @@ class ExcursionDetailPage extends DetailPage
                 ])->removable(),
 
             RelationRepeater::make('Точки маршрута', 'points', resource: ExcursionPointResource::class)
+                ->fields([
+                    Number::make('Порядок', 'order')->default(0),
+                    Select::make('Тип', 'pointable_type')
+                        ->options([
+                            'App\Models\Attraction' => 'Достопримечательность',
+                            'App\Models\Hotel' => 'Отель',
+                            'App\Models\Restaurant' => 'Ресторан',
+                            'App\Models\CustomPoint' => 'Кастомная точка',
+                        ])
+                        ->reactive()
+                        ->nullable(),
+                    Select::make('Объект', 'pointable_id')
+                        ->options(function() {
+                            $options = [];
+
+                            foreach (Attraction::all() as $item) {
+                                $options['attraction_' . $item->id] = 'Достопримечательность: ' . $item->name . ' (' . $item->slug . ')';
+                            }
+
+                            foreach (Hotel::all() as $item) {
+                                $options['hotel_' . $item->id] = 'Отель: ' . $item->name . ' (' . $item->slug . ')';
+                            }
+
+                            foreach (Restaurant::all() as $item) {
+                                $options['restaurant_' . $item->id] = 'Ресторан: ' . $item->name . ' (' . $item->slug . ')';
+                            }
+
+                            foreach (CustomPoint::all() as $item) {
+                                $slug = $item->slug ?? 'id:' . $item->id;
+                                $options['custom_' . $item->id] = 'Дополнительная: ' . $item->name . ' (' . $slug . ')';
+                            }
+
+                            return $options;
+                        })
+                        ->searchable(),
+
+                    Number::make('Время на точке', 'duration_minutes')->nullable(),
+                ])
                 ->creatable()
                 ->removable()
                 ->sortable('order'),
