@@ -86,7 +86,6 @@
                         <p class="text-base xl:text-lg 3xl:text-2xl lg:text-nowrap">За прохождение “{{$hotel->name}}” вы получите:</p>
                         <div class="flex flex-row md:flex-col flex-wrap gap-2 lg:gap-4 justify-between md:justify-start items-center md:items-start pt-4 lg:pt-5 3xl:pt-7 text-[9px] sm:text-[13px] lg:text-base xl:text-lg 3xl:text-xl">
                             <div class="text-white rounded-4xl gradient-button py-3 lg:py-4.5 px-8 lg:px-15">+1 к “Исследователю”</div>
-                            <a href="#" class="text-[#636363] text-nowrap"> перейти к другим квестам и достижениям ></a>
                         </div>
                     </div>
                     <button class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 xl:py-6 rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-lg xl:text-xl 3xl:text-3xl md:mt-4">Показать на карте</button>
