@@ -39,4 +39,9 @@ class Restaurant extends Model
     {
         return 'slug';
     }
+
+    public function favorites(): MorphMany
+    {
+        return $this->morphMany(Favorite::class, 'favoriteable');
+    }
 }
