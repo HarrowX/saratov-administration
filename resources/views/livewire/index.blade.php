@@ -11,7 +11,7 @@
     };
 </script>
 <div class="bg-gray-50">
-   <section id="home" class="hero-section flex flex-col items-center justify-around relative bg-[url('/images/bg-image.png')] bg-center bg-no-repeat bg-cover mb-0 md:mb-15 xl:mb-23" style="min-height: calc(100dvh - 80px); margin-top: 80px;" xl:style="min-height: calc(100dvh - 96px); margin-top: 96px;">
+   <section id="home" class="hero-section flex flex-col items-center justify-around relative bg-[url('/images/bg-image.png')] bg-center bg-no-repeat bg-cover " style="min-height: calc(100dvh - 80px); margin-top: 80px;" xl:style="min-height: calc(100dvh - 96px); margin-top: 96px;">
         <div class="max-w-6xl 3xl:max-w-7xl mx-auto flex flex-col h-full w-full px-1 xs:px-4 sm:px-10">
 
             <div class="flex flex-col items-center md:items-end justify-center flex-1 gap-10 3xl:gap-15 pt-15 pb-7 lg:pb-10 3xl:pb-15">
@@ -452,12 +452,11 @@
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <!-- Row 1 -->
-                <div data-aos="zoom-in" class="col-span-2 row-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/Saratovskiy-Krytyy-rynok.jpg"  data-caption="Набережная Космонавтов - любимое место отдыха горожан">
-                    <img src="/images/Saratovskiy-Krytyy-rynok.jpg" alt="Набережная Космонавтов" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" class="col-span-2 row-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/Saratovskiy-Krytyy-rynok.jpg"  data-caption="Крытый рынок">
+                    <img src="/images/Saratovskiy-Krytyy-rynok.jpg" alt="Крытый рынок" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
-                            <h1 class="font-bold text-lg">Набережная Космонавтов</h1>
-                            <p class="text-sm">Любимое место отдыха горожан</p>
+                            <h1 class="font-bold text-lg">Крытый рынок</h1>
                         </div>
                     </div>
                 </div>
@@ -545,11 +544,11 @@
                         </div>
                     </div>
                 </div>
-                <div data-aos="zoom-in" data-aos-delay="450" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.png" data-caption="Набережная космонавтов">
-                    <img src="/images/image 22.png" alt="Набережная космонавтов" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="450" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.png" data-caption="Крытый рынок">
+                    <img src="/images/image 22.png" alt="Крытый рынок" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
-                            <h1 class="font-bold">Набережная космонавтов</h1>
+                            <h1 class="font-bold">Крытый рынок</h1>
                         </div>
                     </div>
                 </div>
@@ -564,7 +563,7 @@
             </div>
             <!-- Скрытая fancybox галерея -->
             <div style="display: none;">
-                <a href="/images/Saratovskiy-Krytyy-rynok.jpg" data-fancybox="full-gallery" data-caption="Набережная Космонавтов - любимое место отдыха горожан"></a>
+                <a href="/images/Saratovskiy-Krytyy-rynok.jpg" data-fancybox="full-gallery" data-caption="Крытый рынок"></a>
                 <a href="/images/img424_0.jpg" data-fancybox="full-gallery" data-caption="Консерватория"></a>
                 <a href="/images/07458c68242fb8524be00a45a7df919ea6e65e78.png" data-fancybox="full-gallery"
                 data-caption="Первый цирк России"></a>
