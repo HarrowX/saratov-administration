@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->morphs('favoriteable');
             $table->timestamps();
-            $table->unique(['favoriteable_id', 'user_id']);
+            $table->unique(['favoriteable_id', 'favoriteable_type', 'user_id']);
         });
     }
 
