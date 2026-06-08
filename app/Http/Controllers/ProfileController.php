@@ -8,12 +8,9 @@ use App\Services\UserService;
 
 class ProfileController extends Controller
 {
-    private UserService $userService;
-
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
-    }
+    public function __construct(
+        protected UserService $userService
+    ) { }
 
     public function show()
     {
