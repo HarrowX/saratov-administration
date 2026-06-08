@@ -33,7 +33,7 @@ class HotelResource extends JsonResource
             "maxPrice" => $this->max_price,
             "minPrice" => $this->min_pirce,
 
-            'favoritesCount' => $this->favorites->count(),
+            'favoritesCount' => $this->favorites?->count(),
 
             "createdAt" => $this->created_at,
             "attachments" => AttachmentResource::collection($this->attachments),

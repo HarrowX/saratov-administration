@@ -34,7 +34,7 @@ class RestaurantResource extends JsonResource
             "capacity" => $this->capipacity,
             "rating" => $this->rating,
 
-            'favoritesCount' => $this->favorites->count(),
+            'favoritesCount' => $this->favorites?->count(),
 
             "createdAt" => $this->created_at,
             'attachments' => AttachmentResource::collection($this->attachments),

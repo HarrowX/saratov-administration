@@ -11,13 +11,9 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-
-    private AuthService $authService;
-
-    public function __construct(AuthService $authService)
-    {
-        $this->authService = $authService;
-    }
+    public function __construct(
+        protected AuthService $authService,
+    ){}
 
     public function register(RegisterDTO $request)
     {

@@ -41,7 +41,7 @@ class AttractionResource extends JsonResource
 
             'displayLocation' => $this->display_location,
 //            'viewsCount' => $this->views_count,
-            'favoritesCount' => $this->favorites->count(),
+            'favoritesCount' => $this->favorites?->count(),
 
             "createdAt" => $this->created_at,
             'attachments' => AttachmentResource::collection($this->attachments),
