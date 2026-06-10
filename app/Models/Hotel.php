@@ -12,6 +12,7 @@ class Hotel extends Model
         'type',
         'description',
         'second_description',
+        'map_link',
         'worktime',
         'phone',
         'address',

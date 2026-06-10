@@ -62,6 +62,7 @@ class HotelIndexPage extends IndexPage
             Text::make('Район', 'district'),
             Text::make('Email', 'email'),
             Url::make('Сайт', 'website'),
+            Url::make('Ссылка на карту', 'map_link'),
             Text::make('Виджет отзывов', 'yandex_review_widget')->changePreview(
                 fn ($value) => $value ?  ActionButton::make('Посмотреть')->inModal(
                     title: 'Виджет отзывов',

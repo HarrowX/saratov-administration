@@ -7,18 +7,17 @@
     <section class="features-section pt-28 md:pt-30 lg:pt-41.5 bg-white">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 sm:px-10">
             <div class="flex flex-col-reverse lg:flex-row items-center gap-5 sm:gap-10 3xl:gap-22.5">
-                <div data-aos="fade-right" class="flex flex-col gap-5 w-full lg:w-auto">
-
-                    <div class="min-w-full sm:min-w-140 xl:min-w-180 3xl:min-w-197">
-                        <img src="{{ $restaurant->attachments?->get(0)?->url() ?? "" }}" class="photo w-full h-auto rounded-md sm:rounded-lg lg:rounded-2xl object-cover">
+                <div data-aos="fade-right" class="flex flex-col gap-5 w-full lg:w-auto lg:min-w-118 xl:min-w-150 3xl:min-w-197">
+                    <div class="min-w-full">
+                        <img src="{{ $restaurant->attachments?->get(0)?->url() ?? "" }}" class="photo w-full rounded-md sm:rounded-lg lg:rounded-2xl object-cover h-57.5 lg:h-100 xl:h-114">
                     </div>
 
-                    <div class="grid grid-cols-3 gap-5 w-full">
+                    <div class="flex flex-row gap-5">
                         @foreach ($restaurant->attachments as $attachment)
                             @if ($loop->first)
                                 @continue
                             @endif
-                            <img src="{{ $attachment?->url() ?? "" }}" class="photo w-full h-auto rounded-md sm:rounded-lg lg:rounded-2xl object-cover">
+                            <img src="{{ $attachment?->url() ?? "" }}" class="photo w-full h-33 3xl:h-67 rounded-md sm:rounded-lg lg:rounded-2xl object-cover">
                         @endforeach
                     </div>
                 </div>
@@ -31,15 +30,19 @@
         </div>
     </section>
 
-    <section class="pt-13 bg-white">
-        <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 xl:px-20 flex flex-col gap-5 md:gap-12">
+    <section class="pt-5 sm:pt-10 bg-white">
+        <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 sm:px-10 flex flex-col gap-5 md:gap-12">
             <div class="flex flex-col md:flex-row gap-2.5 md:gap-10 3xl:gap-33.5">
                 <div class="flex flex-col w-full justify-around bg-[#E5E6F6] gap-3 md:gap-6.75 px-6 md:px-11 py-6 3xl:py-8 rounded-[20px] font-['FindSansPro'] text-sm sm:text-lg 3xl:text-2xl">
                     <div class="flex items-center gap-5">
                         <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/значок локации.svg">
                         <p>{{ $restaurant->address }}</p>
                     </div>
-                    <div class="flex items-start gap-5">
+                    <div class="flex items-center gap-3 xl:gap-5">
+                        <i class="fa-solid fa-globe text-blue sm:text-2xl md:text-3xl"></i>
+                        <p>{{ $restaurant->website}}</p>
+                    </div>
+                    <div class="flex items-start gap-2 md:gap-5">
                         <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/image 8.svg">
                         <div class="flex flex-col gap-2">
                             @forelse($restaurant->worktime ?? [] as $day => $time)
@@ -59,7 +62,15 @@
                         <h3>Кухня</h3>
                         <p class="text-[#5F5F5F]">{{ $restaurant->kitchen }}</p>
                     </div>
-                    <button class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-5 md:py-6 rounded-[20px] lg:rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-xl 3xl:text-3xl">Показать на карте</button>
+                    @if($restaurant->map_link)
+                        <a href="{{ $restaurant->map_link }}" target="_blank" class="flex justify-center  bg-linear-to-r from-green-500 to-teal-600 text-white py-3 xl:py-6 rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-lg xl:text-xl 3xl:text-3xl md:mt-4">
+                            Показать на карте
+                        </a>
+                    @else
+                        <button class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 xl:py-6 rounded-[30px] hover:shadow-lg transition font-['FindSansPro'] text-lg sm:text-lg xl:text-xl 3xl:text-3xl md:mt-4 opacity-50 cursor-not-allowed" disabled>
+                            Показать на карте
+                        </button>
+                    @endif
                 </div>
             </div>
             <div class="font-['FindSansPro'] flex flex-col items-center lg:items-start">

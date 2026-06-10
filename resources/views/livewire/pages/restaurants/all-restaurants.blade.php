@@ -109,20 +109,21 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-2 xl:grid-cols-3 gap-1 lg:gap-5 3xl:gap-7.5 p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 lg:p-6 gap-y-2 xl:gap-y-12">
                 @foreach ($restaurants as $restaurant)
-                <div class="card bg-white rounded-[7px] sm:rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mb-2 xl:mb-12">
-                    <div class="card-content p-2 sm:p-5 relative">
-                        <div class="">
-                            <img src="{{ $restaurant->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $restaurant->name }}" class="photo rounded-[7px] sm:rounded-[19px]">
-                            <div class="absolute top-4 right-3.5 sm:top-10 sm:right-9.5 size-5 sm:size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-[3px] sm:rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-xl xl:text-2xl shadow-lg">
-                                <i class="fa-sharp fa-solid fa-heart"></i>
+                <div class="card bg-white rounded-[7px] sm:rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="card-content p-5 relative grid grid-rows-subgrid content-between row-span-2 gap-3 h-full">
+                        <div class="flex flex-col gap-5">
+                            <div class="">
+                                <img src="{{ $restaurant->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $restaurant->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover">
+                                <div class="absolute top-7 right-6.5 sm:top-10 sm:right-9.5 size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-md xl:rounded-xl flex items-center justify-center text-white text-xl xl:text-2xl shadow-lg">
+                                    <i class="fa-sharp fa-solid fa-heart"></i>
+                                </div>
                             </div>
+                                <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold">{{ $restaurant->name}}</h2>
                         </div>
-                        <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">
-                            <h1 class="text-center text-xs sm:text-lg lg:text-xl xl:text-3xl font-bold">{{ $restaurant->name }}</h1>
-                            <div class="flex flex-col">
-                                <div class="flex flex-col text-[8px] sm:text-sm lg:text-base xl:text-lg 3xl:text-2xl font-light gap-3 text-[#5F5F5F] mt-2 lg:mt-5 mb-0 sm:mb-2 lg:mb-6">
+                            <div class="flex Tary-Bary flex-col justify-between h-full">
+                                <div class="flex flex-col justify-end text-sm lg:text-base xl:text-lg 3xl:text-2xl font-light gap-3 text-[#5F5F5F] mb-2 lg:mb-6">
                                     <p class="text-center">{{ $restaurant->kitchen }} кухня</p>
                                     <span class="flex items-center gap-3.5">
                                         <i class="fas fa-phone"></i>
@@ -132,12 +133,22 @@
                                         <i class="fas fa-map-marker-alt"></i>
                                         {{ $restaurant->address }}
                                     </span>
+                                    <span class="flex items-center gap-3.5">
+                                        <i class="fa-solid fa-clock"></i>
+                                        <div class="flex flex-col gap-2">
+                                            @forelse($restaurant->worktime ?? [] as $day => $time)
+                                                <p>{{ $day }}: {{ $time }}</p>
+                                            @empty
+                                                    <p>Не указано</p>
+                                            @endforelse
+                                        </div>
+                                    </span>
+
                                 </div>
-                                <a href="{{ route('single-restaurant', ['restaurant' => $restaurant->slug]) }}" class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity text-center">
+                                <a href="{{ route('single-restaurant', ['restaurant' => $restaurant->slug]) }}" class="w-full gradient-button text-white text-sm sm:text-base xl:text-xl py-1 lg:py-2 rounded-lg hover:opacity-90 transition-opacity text-center">
                                     Подробнее
                                 </a>
                             </div>
-                        </div>
                     </div>
                 </div>
                 @endforeach
