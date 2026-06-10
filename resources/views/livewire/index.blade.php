@@ -264,7 +264,7 @@
                         <button onclick="forceInitMap()" class="map-button bg-purple-100 text-purple-600 hover:bg-purple-200">
                             <i class="fas fa-sync mr-2"></i>Загрузить карту
                         </button>
-                        <button onclick="document.querySelector('.map-filter[data-category=all]').click()" class="map-button bg-blue-100 text-blue-600 hover:bg-blue-200">
+                        <button onclick="toggleFilterPanel()" class="map-button bg-blue-100 text-blue-600 hover:bg-blue-200">
                             <i class="fas fa-filter mr-2"></i>Фильтры
                         </button>
 {{--                        <button onclick="showRoute(1)" class="map-button bg-green-100 text-green-600 hover:bg-green-200">--}}

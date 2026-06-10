@@ -8,7 +8,6 @@ import './scripts/user-profile';
 import './scripts/achievements';
 import './scripts/chatbot';
 import './scripts/fixes';
-import './scripts/map-fixes';
 import './scripts/slider';
 import './scripts/social-features';
 import './scripts/swiper';
