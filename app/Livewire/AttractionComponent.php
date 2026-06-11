@@ -17,7 +17,7 @@ class AttractionComponent extends Component
                 return static::vincentyGreatCircleDistance(
                     $this->latitude , $this->longitude,
                     $attraction->latitude, $attraction->longitude)
-                    <= config('app.attractions.radius');;
+                    <= config('app.attractions.radius');
             });
     }
 

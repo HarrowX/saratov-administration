@@ -20,6 +20,21 @@
             <span class="text-xl xl:text-3xl pl-4">Достопримечательности</span>
         </a>
 
+        <button
+            wire:click="toggleFavorite"
+            class="absolute top-10 right-10 xl:top-18 xl:right-20 z-20 hidden md:flex items-center gap-3 px-5 py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group"
+        >
+            <i class="fa-regular fa-heart text-2xl xl:text-3xl group-hover:scale-110 group-hover:animate-pulse transition-transform {{ $isFavorite ? 'fa-solid text-red-400' : 'fa-regular' }}"></i>
+
+            <span class="text-xl xl:text-3xl font-medium">
+                {{ $isFavorite ? 'В избранном' : 'В избранное' }}
+            </span>
+
+                    <span class="favorite-count ml-2 text-base xl:text-xl font-bold px-2.5 py-1 rounded-full {{ $isFavorite ? 'bg-red-500 text-white' : 'bg-red-500/80 text-white' }} transition-colors shadow-lg">
+                {{ $favoritesCount }}
+            </span>
+        </button>
+
         <div class="absolute h-full pb-8 sm:pb-15 md:pb-0 md:h-screen w-full px-20 flex justify-center items-end md:-top-32 z-10 text-center text-white">
             <h1 class="text-3xl xl:text-6xl font-extrabold">{{$attraction->name}}</h1>
         </div>
