@@ -42,11 +42,16 @@ Route::prefix('/hotels')->group(function () {
 
 // Route::view('/', 'welcome');
 //
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-
 Route::view('profile', 'profile')
-    ->middleware(['auth'])
+    ->middleware(['auth', 'verified'])
     ->name('profile');
+
+Route::view('profile/settings', 'profile-settings')
+    ->middleware(['auth'])
+    ->name('profile-settings');
+
+Route::view('profile/favorites', 'favorites')
+    ->middleware(['auth', 'verified'])
+    ->name('profile-favorites');
+
 require __DIR__.'/auth.php';
