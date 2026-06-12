@@ -10,7 +10,9 @@ use Livewire\Component;
 class SingleAttraction extends Component
 {
     public $attraction;
+
     public int $favoritesCount = 0;
+
     public $isFavorite = false;
 
     protected FavoritableService $favoritableService;
@@ -20,7 +22,8 @@ class SingleAttraction extends Component
         $this->favoritableService = $favoritableService;
     }
 
-    public function mount(Attraction $attraction) {
+    public function mount(Attraction $attraction)
+    {
         $this->attraction = $attraction;
         $this->attraction->load('attachments');
         $this->favoritesCount = $attraction->favorites?->count() ?? 0;
@@ -31,7 +34,7 @@ class SingleAttraction extends Component
 
     public function toggleFavorite()
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return redirect()->route('login');
         }
 

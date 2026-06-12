@@ -30,9 +30,9 @@ class FavoriteSection extends Component
 
     public function getItemsProperty()
     {
-        return  $this->selectedType::query()->whereHas('favorites', function ($query) {
-                $query->where('user_id', auth()->user()->id);
-            })->paginate(5);
+        return $this->selectedType::query()->whereHas('favorites', function ($query) {
+            $query->where('user_id', auth()->user()->id);
+        })->paginate(5);
     }
 
     public function getUrl($slug)

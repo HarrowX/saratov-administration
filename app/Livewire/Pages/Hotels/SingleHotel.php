@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Pages\Hotels;
 
-use App\Models\Attraction;
 use App\Models\Hotel;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -10,9 +9,13 @@ use Livewire\Component;
 class SingleHotel extends Component
 {
     public $hotel;
+
     public int $favoritesCount = 0;
+
     public $isFavorite = false;
-    public function mount(Hotel $hotel) {
+
+    public function mount(Hotel $hotel)
+    {
         $this->hotel = $hotel;
         $this->hotel->load('attachments');
         $this->favoritesCount = $hotel->favorites?->count() ?? 0;
@@ -23,7 +26,7 @@ class SingleHotel extends Component
 
     public function toggleFavorite()
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return redirect()->route('login');
         }
 
