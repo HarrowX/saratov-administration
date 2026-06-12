@@ -7,13 +7,12 @@ use App\DTOs\RegisterDTO;
 use App\Exceptions\Auth\BadCredentialsException;
 use App\Http\Controllers\Controller;
 use App\Services\AuthService;
-use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
     public function __construct(
         protected AuthService $authService,
-    ){}
+    ) {}
 
     public function register(RegisterDTO $request)
     {
@@ -33,7 +32,7 @@ class AuthController extends Controller
 
             return response()->json($token, 200);
         } catch (BadCredentialsException $exception) {
-            return response()->json(['error' => $exception->getMessage()],  $exception->getCode());
+            return response()->json(['error' => $exception->getMessage()], $exception->getCode());
         }
     }
 

@@ -124,7 +124,7 @@ return [
     ],
 
     'attractions' => [
-        'radius' => env('ATTRACTIONS_RADIUS', 10000000000000)
+        'radius' => env('ATTRACTIONS_RADIUS', 10000000000000),
     ],
 
 ];

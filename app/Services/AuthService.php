@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthService
 {
-
     /**
      * @throws BadCredentialsException
      */
@@ -22,7 +21,7 @@ class AuthService
     {
         $user = User::where('email', $dto->email)->first();
 
-        if ($user === null || !Hash::check($dto->password, $user->password)) {
+        if ($user === null || ! Hash::check($dto->password, $user->password)) {
             throw new BadCredentialsException('Неверные данные для входа');
         }
 
@@ -58,7 +57,7 @@ class AuthService
                 'password' => Hash::make($dto->password),
             ]);
 
-             UserName::create([
+            UserName::create([
                 'user_id' => $user->id,
                 'name' => $dto->name,
                 'surname' => $dto->surname,
@@ -73,6 +72,6 @@ class AuthService
 
     private function createToken($user)
     {
-        return $user->createToken('api-user', ['*'], now()->addMinutes((int)config('sanctum.expiration')))->toArray();
+        return $user->createToken('api-user', ['*'], now()->addMinutes((int) config('sanctum.expiration')))->toArray();
     }
 }

@@ -5,29 +5,28 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources\Attraction\Pages;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
+use App\MoonShine\Resources\Attraction\AttractionResource;
+use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
-use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\UI\Components\ActionButton;
-use MoonShine\UI\Components\Table\TableBuilder;
-use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\QueryTags\QueryTag;
-use MoonShine\UI\Components\Metrics\Wrapped\Metric;
-use MoonShine\UI\Fields\ID;
-use App\MoonShine\Resources\Attraction\AttractionResource;
 use MoonShine\Support\ListOf;
+use MoonShine\UI\Components\ActionButton;
+use MoonShine\UI\Components\Metrics\Wrapped\Metric;
+use MoonShine\UI\Components\Table\TableBuilder;
+use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Json;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Phone;
-use MoonShine\UI\Fields\Text;
-use MoonShine\UI\Fields\Textarea;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Switcher;
+use MoonShine\UI\Fields\Text;
+use MoonShine\UI\Fields\Textarea;
 use MoonShine\UI\Fields\Url;
 use Throwable;
-
 
 /**
  * @extends IndexPage<AttractionResource>
@@ -44,7 +43,7 @@ class AttractionIndexPage extends IndexPage
         return [
             ID::make(),
             Text::make('Название', 'name')->unescape(),
-            Slug::make('Слаг','slug')->from('name')->unique(),
+            Slug::make('Слаг', 'slug')->from('name')->unique(),
             Text::make('Краткое описание', 'short_description')->unescape(),
             Textarea::make('Описание', 'description')->unescape(),
             Json::make('Рабочее время', 'worktime')->keyValue('День', 'Время'),
@@ -62,10 +61,10 @@ class AttractionIndexPage extends IndexPage
             Url::make('Сайт', 'website'),
             Url::make('Ссылка на карту', 'map_link'),
             Text::make('Виджет отзывов', 'yandex_review_widget')->changePreview(
-                fn ($value) => $value ?  ActionButton::make('Посмотреть')->inModal(
+                fn ($value) => $value ? ActionButton::make('Посмотреть')->inModal(
                     title: 'Виджет отзывов',
                     content: $value,
-                    builder: fn($component) => $component->auto(),
+                    builder: fn ($component) => $component->auto(),
                 ) : 'Отсутствует'
             ),
             Select::make('Статус', 'status')
@@ -122,7 +121,6 @@ class AttractionIndexPage extends IndexPage
 
     /**
      * @param  TableBuilder  $component
-     *
      * @return TableBuilder
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
@@ -132,34 +130,37 @@ class AttractionIndexPage extends IndexPage
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function topLayer(): array
     {
         return [
-            ...parent::topLayer()
+            ...parent::topLayer(),
         ];
     }
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function mainLayer(): array
     {
         return [
-            ...parent::mainLayer()
+            ...parent::mainLayer(),
         ];
     }
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function bottomLayer(): array
     {
         return [
-            ...parent::bottomLayer()
+            ...parent::bottomLayer(),
         ];
     }
 }

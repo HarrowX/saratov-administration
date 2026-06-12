@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Hotel;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Hotel;
-use App\MoonShine\Resources\Hotel\Pages\HotelIndexPage;
-use App\MoonShine\Resources\Hotel\Pages\HotelFormPage;
 use App\MoonShine\Resources\Hotel\Pages\HotelDetailPage;
-
-use MoonShine\Laravel\Resources\ModelResource;
+use App\MoonShine\Resources\Hotel\Pages\HotelFormPage;
+use App\MoonShine\Resources\Hotel\Pages\HotelIndexPage;
 use MoonShine\Contracts\Core\PageContract;
+use MoonShine\Laravel\Resources\ModelResource;
 
 /**
  * @extends ModelResource<Hotel, HotelIndexPage, HotelFormPage, HotelDetailPage>

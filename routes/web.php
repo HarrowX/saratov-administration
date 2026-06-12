@@ -40,7 +40,7 @@ Route::prefix('/hotels')->group(function () {
     Route::get('/{hotel}', SingleHotel::class)->name('single-hotel');
 });
 
-//Route::view('/', 'welcome');
+// Route::view('/', 'welcome');
 //
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -50,4 +50,3 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 require __DIR__.'/auth.php';
-

@@ -6,7 +6,6 @@ use App\DTOs\UpdateProfileDTO;
 
 class UserService
 {
-
     public function updateProfile(UpdateProfileDTO $dto)
     {
         $data = $dto->toArray();

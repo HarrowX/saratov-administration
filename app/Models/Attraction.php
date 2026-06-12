@@ -31,12 +31,16 @@ class Attraction extends Model
         'favorites_count',
         'created_by',
     ];
+
     protected $casts = [
         'worktime' => 'array',
     ];
-    public function attachments(): MorphMany {
+
+    public function attachments(): MorphMany
+    {
         return $this->morphMany(Attachment::class, 'attachable');
     }
+
     public function getRouteKeyName(): string
     {
         return 'slug';

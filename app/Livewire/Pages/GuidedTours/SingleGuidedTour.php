@@ -7,10 +7,10 @@ use Livewire\Component;
 
 class SingleGuidedTour extends Component
 {
-
     public $guidedTour;
 
-    public function mount(GuidedTour $guidedTour) {
+    public function mount(GuidedTour $guidedTour)
+    {
         $this->guidedTour = $guidedTour;
         $this->guidedTour->load('attachments');
     }

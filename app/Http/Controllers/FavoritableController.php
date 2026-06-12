@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Exceptions\AlreadyExistsException;
 use App\Exceptions\NotFoundException;
 use App\Http\Resources\AttractionResource;
 use App\Http\Resources\HotelResource;
@@ -10,22 +10,21 @@ use App\Http\Resources\RestaurantResource;
 use App\Models\Attraction;
 use App\Models\Hotel;
 use App\Models\Restaurant;
-use App\Exceptions\AlreadyExistsException;
 use App\Services\FavoritableService;
 use Illuminate\Http\Request;
 
 class FavoritableController extends Controller
 {
-
     public function __construct(
         protected FavoritableService $favoritableService,
-    ){}
+    ) {}
 
     public function favoriteHotel(Request $request)
     {
         try {
             $favorite = $this->favoritableService->save(auth()->id(), $request->id, Hotel::class);
-            return  HotelResource::make($favorite->favoriteable)->response()->setStatusCode(201);
+
+            return HotelResource::make($favorite->favoriteable)->response()->setStatusCode(201);
         } catch (AlreadyExistsException $e) {
             return response(null, 409);
         }
@@ -35,7 +34,8 @@ class FavoritableController extends Controller
     {
         try {
             $favorite = $this->favoritableService->save(auth()->id(), $request->id, Restaurant::class);
-            return  RestaurantResource::make($favorite->favoriteable)->response()->setStatusCode(201);
+
+            return RestaurantResource::make($favorite->favoriteable)->response()->setStatusCode(201);
         } catch (AlreadyExistsException $e) {
             return response(null, 409);
         }
@@ -45,7 +45,8 @@ class FavoritableController extends Controller
     {
         try {
             $favorite = $this->favoritableService->save(auth()->id(), $request->id, Attraction::class);
-            return  AttractionResource::make($favorite->favoriteable)->response()->setStatusCode(201);
+
+            return AttractionResource::make($favorite->favoriteable)->response()->setStatusCode(201);
         } catch (AlreadyExistsException $e) {
             return response(null, 409);
         }
@@ -55,7 +56,8 @@ class FavoritableController extends Controller
     {
         try {
             $this->favoritableService->delete(auth()->id(), $request->id, Hotel::class);
-            return  response(null, 204);
+
+            return response(null, 204);
         } catch (NotFoundException $e) {
             return response(null, 404);
         }
@@ -65,7 +67,8 @@ class FavoritableController extends Controller
     {
         try {
             $this->favoritableService->delete(auth()->id(), $request->id, Restaurant::class);
-            return  response(null, 204);
+
+            return response(null, 204);
         } catch (NotFoundException $e) {
             return response(null, 404);
         }
@@ -75,7 +78,8 @@ class FavoritableController extends Controller
     {
         try {
             $this->favoritableService->delete(auth()->id(), $request->id, Attraction::class);
-            return  response(null, 204);
+
+            return response(null, 204);
         } catch (NotFoundException $e) {
             return response(null, 404);
         }
@@ -102,6 +106,7 @@ class FavoritableController extends Controller
             ->whereHas('favorites', function ($query) use ($request) {
                 $query->where('user_id', $request->user()->id);
             });
+
         return RestaurantResource::collection($query->paginate($perPage));
     }
 

@@ -18,7 +18,6 @@ Route::prefix('v1')->group(function () {
 
     Route::prefix('users')->group(function () {
 
-
         Route::middleware(['auth:sanctum'])->controller(ProfileController::class)
             ->group(function () {
                 Route::get('me', 'show');

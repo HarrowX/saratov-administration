@@ -34,7 +34,6 @@ class MoonShineServiceProvider extends ServiceProvider
             ])
             ->pages([
                 ...$core->getConfig()->getPages(),
-            ])
-        ;
+            ]);
     }
 }
