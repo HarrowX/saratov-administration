@@ -7,17 +7,18 @@ use Livewire\Component;
 
 class AllGuidedTours extends Component
 {
-
     public $guidedTours;
 
     // TODO: Добавить синхронизацию поиска с поисковой строкой браузера
     public $searchString;
 
-    public function mount() {
+    public function mount()
+    {
         $this->loadGuidedTours();
     }
 
-    public function loadGuidedTours() {
+    public function loadGuidedTours()
+    {
         $builder = GuidedTour::with('attachments');
 
         if (trim($this->searchString)) {

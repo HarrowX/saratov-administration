@@ -10,9 +10,10 @@ use App\Models\Hotel;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
-class ContentController extends Controller {
-
-    public function hotels(Request $request) {
+class ContentController extends Controller
+{
+    public function hotels(Request $request)
+    {
         $query = Hotel::query()->with('attachments');
 
         $perPage = $request->integer('per_page', 15);
@@ -20,7 +21,8 @@ class ContentController extends Controller {
         return HotelResource::collection($query->paginate($perPage));
     }
 
-    public function restaurants(Request $request) {
+    public function restaurants(Request $request)
+    {
         $query = Restaurant::query()->with('attachments');
 
         $perPage = $request->integer('per_page', 15);
@@ -28,7 +30,8 @@ class ContentController extends Controller {
         return RestaurantResource::collection($query->paginate($perPage));
     }
 
-    public function attractions(Request $request) {
+    public function attractions(Request $request)
+    {
         $query = Attraction::query()->with('attachments');
 
         $perPage = $request->integer('per_page', 15);

@@ -1,0 +1,24 @@
+name: "Auto Label PR"
+
+on:
+  - pull_request
+
+jobs:
+  label:
+    name: "Auto Label"
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Label PR
+        uses: actions/labeler@v6
+        with:
+          repo-token: ${{ secrets.GITEA_TOKEN }}
+          configuration-path: .github/labeler.config.yml
+          sync-labels: true
+          dot: 'true'

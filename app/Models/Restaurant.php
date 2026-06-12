@@ -32,7 +32,8 @@ class Restaurant extends Model
         'worktime' => 'array',
     ];
 
-    public function attachments(): MorphMany {
+    public function attachments(): MorphMany
+    {
         return $this->morphMany(Attachment::class, 'attachable');
     }
 

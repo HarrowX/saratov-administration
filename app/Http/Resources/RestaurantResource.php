@@ -28,15 +28,15 @@ class RestaurantResource extends JsonResource
             'phone' => $this->phone,
             'kitchen' => $this->kitchen,
             'email' => $this->email,
-            "website" => $this->website,
+            'website' => $this->website,
 
-            "priceCategory" => $this->price_category,
-            "capacity" => $this->capipacity,
-            "rating" => $this->rating,
+            'priceCategory' => $this->price_category,
+            'capacity' => $this->capipacity,
+            'rating' => $this->rating,
 
             'favoritesCount' => $this->favorites?->count(),
 
-            "createdAt" => $this->created_at,
+            'createdAt' => $this->created_at,
             'attachments' => AttachmentResource::collection($this->attachments),
         ];
     }

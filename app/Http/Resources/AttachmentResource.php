@@ -15,12 +15,12 @@ class AttachmentResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id" => $this->id,
-            "attachableType" => $this->attachable_type,
-            "attachableId" => $this->attachable_id,
-            "order" => $this->order,
-            "link" => $this->link,
-            "createdAt" => $this->created_at,
+            'id' => $this->id,
+            'attachableType' => $this->attachable_type,
+            'attachableId' => $this->attachable_id,
+            'order' => $this->order,
+            'link' => $this->link,
+            'createdAt' => $this->created_at,
         ];
     }
 }

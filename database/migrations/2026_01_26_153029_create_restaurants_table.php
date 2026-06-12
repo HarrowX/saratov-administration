@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('map_link')->nullable();
             $table->string('website')->nullable();
-            $table->enum('price_category',['budget','medium','premium','luxury'])->nullable();
+            $table->enum('price_category', ['budget', 'medium', 'premium', 'luxury'])->nullable();
             $table->integer('capacity')->nullable();
             $table->decimal('rating')->nullable();
             $table->integer('reviews_count')->default(0)->nullable();

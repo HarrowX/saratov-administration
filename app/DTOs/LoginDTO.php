@@ -8,10 +8,9 @@ class LoginDTO extends ValidatedDTO
 {
     public bool $lazyValidation = true;
 
-
     public string $email;
-    public string $password;
 
+    public string $password;
 
     protected function rules(): array
     {
@@ -25,12 +24,11 @@ class LoginDTO extends ValidatedDTO
     {
         return [
             'email.required' => 'Требуется адрес электронной почты.',
-            'email.email'    => 'Неверный формат адреса электронной почты.',
+            'email.email' => 'Неверный формат адреса электронной почты.',
             'password.required' => 'Требуется пароль.',
-            'password.string'   => 'Пароль должен быть строкой.',
+            'password.string' => 'Пароль должен быть строкой.',
         ];
     }
-
 
     protected function defaults(): array
     {

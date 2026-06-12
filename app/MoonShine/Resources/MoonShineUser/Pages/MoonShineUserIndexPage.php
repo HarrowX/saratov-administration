@@ -47,7 +47,7 @@ final class MoonShineUserIndexPage extends IndexPage
             ): string => $raw ?? ''),
 
             Date::make(__('moonshine::ui.resource.created_at'), 'created_at')
-                ->format("d.m.Y")
+                ->format('d.m.Y')
                 ->sortable(),
 
             Email::make(__('moonshine::ui.resource.email'), 'email')
@@ -71,8 +71,6 @@ final class MoonShineUserIndexPage extends IndexPage
 
     /**
      * @param  TableBuilder  $component
-     *
-     * @return TableBuilder
      */
     protected function modifyListComponent(ComponentContract $component): TableBuilder
     {

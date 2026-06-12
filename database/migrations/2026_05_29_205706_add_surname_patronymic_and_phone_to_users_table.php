@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up(): void
     {
         Schema::create('user_names', function (Blueprint $table) {
@@ -22,10 +23,10 @@ return new class extends Migration {
             });
         }
 
-        DB::statement("
+        DB::statement('
             INSERT INTO `user_names` (`user_id`,  `name`, `created_at`, `updated_at`)
             SELECT `id`, `name`, `created_at`, `updated_at` FROM `users`
-            ");
+            ');
 
         Schema::table('users', function (Blueprint $table) {
             if (Schema::hasColumn('users', 'surname')) {
@@ -40,20 +41,18 @@ return new class extends Migration {
         });
     }
 
-
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('name')->nullable();
         });
 
-        DB::statement("
+        DB::statement('
             UPDATE `users` u
             JOIN `user_names` un ON u.id = un.user_id
             SET u.name = un.name
-        ");
+        ');
 
         Schema::dropIfExists('user_names');
     }
-
 };

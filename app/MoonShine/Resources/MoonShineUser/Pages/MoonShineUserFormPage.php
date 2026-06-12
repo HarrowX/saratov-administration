@@ -68,7 +68,7 @@ final class MoonShineUserFormPage extends FormPage
                             ->allowedExtensions(['jpg', 'png', 'jpeg', 'gif']),
 
                         Date::make(__('moonshine::ui.resource.created_at'), 'created_at')
-                            ->format("d.m.Y")
+                            ->format('d.m.Y')
                             ->default(now()->toDateTimeString()),
                     ])->icon('user-circle'),
 

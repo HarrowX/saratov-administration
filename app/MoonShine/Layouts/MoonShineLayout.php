@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Layouts;
 
-use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\Laravel\Layouts\AppLayout;
-use MoonShine\ColorManager\Palettes\GrayPalette;
-use MoonShine\ColorManager\ColorManager;
-use MoonShine\Contracts\ColorManager\ColorManagerContract;
-use MoonShine\Contracts\ColorManager\PaletteContract;
-use MoonShine\MenuManager\MenuGroup;
-use MoonShine\UI\Components\Layout\Div;
-use Override;
-use App\MoonShine\Resources\Restaurant\RestaurantResource;
-use MoonShine\MenuManager\MenuItem;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
+use App\MoonShine\Resources\Attraction\AttractionResource;
 use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
 use App\MoonShine\Resources\Hotel\HotelResource;
-use App\MoonShine\Resources\Attraction\AttractionResource;
+use App\MoonShine\Resources\Restaurant\RestaurantResource;
+use MoonShine\ColorManager\ColorManager;
+use MoonShine\ColorManager\Palettes\GrayPalette;
+use MoonShine\Contracts\ColorManager\ColorManagerContract;
+use MoonShine\Contracts\ColorManager\PaletteContract;
+use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Laravel\Layouts\AppLayout;
+use MoonShine\MenuManager\MenuGroup;
+use MoonShine\MenuManager\MenuItem;
+use MoonShine\UI\Components\Layout\Div;
+use Override;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -51,7 +51,7 @@ final class MoonShineLayout extends AppLayout
     #[Override]
     protected function getFooterCopyright(): string
     {
-        return "";
+        return '';
     }
 
     #[Override]
@@ -67,7 +67,7 @@ final class MoonShineLayout extends AppLayout
     }
 
     /**
-     * @param ColorManager $colorManager
+     * @param  ColorManager  $colorManager
      */
     protected function colors(ColorManagerContract $colorManager): void
     {

@@ -18,7 +18,6 @@ class UserFactory extends Factory
      */
     protected static ?string $password;
 
-
     /**
      * Configure the model factory.
      */

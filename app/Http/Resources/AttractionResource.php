@@ -17,35 +17,34 @@ class AttractionResource extends JsonResource
         return [
             'id' => $this->id,
 
-            "name" =>  $this->name,
+            'name' => $this->name,
             'slug' => $this->slug,
-            "shortDescription" =>  $this->short_description,
-            "description" => $this->description,
+            'shortDescription' => $this->short_description,
+            'description' => $this->description,
 
-            "worktime" => $this->worktime,
-            "phone" => $this->phone,
-            "address" => $this->addres,
-            "district" => $this->district,
-            "longitude" => $this->longitude,
-            "latitude" => $this->latitude,
+            'worktime' => $this->worktime,
+            'phone' => $this->phone,
+            'address' => $this->addres,
+            'district' => $this->district,
+            'longitude' => $this->longitude,
+            'latitude' => $this->latitude,
 
             'email' => $this->email,
-            "website" => $this->website,
+            'website' => $this->website,
 
-            "status" => $this->status,
+            'status' => $this->status,
             'ticketPrice' => $this->ticket_price,
             'visitDuration' => $this->visit_duration,
 
             'isAccessible' => (bool) $this->is_accessible,
-            'hasParking'   => (bool) $this->has_parking,
+            'hasParking' => (bool) $this->has_parking,
 
             'displayLocation' => $this->display_location,
-//            'viewsCount' => $this->views_count,
+            //            'viewsCount' => $this->views_count,
             'favoritesCount' => $this->favorites?->count(),
 
-            "createdAt" => $this->created_at,
+            'createdAt' => $this->created_at,
             'attachments' => AttachmentResource::collection($this->attachments),
         ];
     }
 }
-

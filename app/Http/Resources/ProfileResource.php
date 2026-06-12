@@ -21,7 +21,7 @@ class ProfileResource extends JsonResource
             'patronymic' => $this->username->patronymic,
             'email' => $this->email,
             'phone' => $this->phone,
-            "createdAt" => $this->created_at,
+            'createdAt' => $this->created_at,
         ];
     }
 }

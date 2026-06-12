@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Pages\Restaurants;
 
-use App\Models\Attraction;
 use App\Models\Restaurant;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -10,9 +9,13 @@ use Livewire\Component;
 class SingleRestaurant extends Component
 {
     public $restaurant;
+
     public int $favoritesCount = 0;
+
     public $isFavorite = false;
-    public function mount(Restaurant $restaurant) {
+
+    public function mount(Restaurant $restaurant)
+    {
         $this->restaurant = $restaurant;
         $this->restaurant->load('attachments');
         $this->favoritesCount = $restaurant->favorites?->count() ?? 0;
@@ -23,7 +26,7 @@ class SingleRestaurant extends Component
 
     public function toggleFavorite()
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return redirect()->route('login');
         }
 
@@ -57,6 +60,7 @@ class SingleRestaurant extends Component
         $this->isFavorite = false;
         $this->favoritesCount--;
     }
+
     public function render()
     {
         return view('livewire.pages.restaurants.single-restaurant');

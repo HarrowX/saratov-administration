@@ -1,0 +1,86 @@
+# 🎨 Frontend
+frontend:
+  - changed-files:
+      - any-glob-to-any-file: ['resources/js/**/*','resources/css/**/*','app/livewire/**/*','*.js','*.ts','*.jsx','*.tsx','*.css','*.scss','*.sass','*.vue']
+
+# ⚙️ Backend
+backend:
+  - changed-files:
+      - any-glob-to-any-file: ['app/**/*','database/**/*','routes/**','config/**','*.php','*.blade.php']
+
+# 🎛️ Admin Panel
+admin-panel:
+  - changed-files:
+      - any-glob-to-any-file: [
+        'app/Filament/**/*',
+        'app/Orchid/**/*',
+        'app/MoonShine/**/*',
+        'vendor/filament/**/*',
+        'vendor/orchid/**/*',
+        'vendor/moonshine/**/*',
+        'resources/views/vendor/filament/**/*',
+        'resources/views/vendor/orchid/**/*',
+        'resources/views/vendor/moonshine/**/*',
+        'config/filament.php',
+        'config/orchid.php',
+        'config/moonshine.php',
+        'database/migrations/*filament*',
+        'database/migrations/*orchid*',
+        'database/migrations/*moonshine*'
+      ]
+
+# 🔨 Сборка и CI/CD
+build:
+  - changed-files:
+      - any-glob-to-any-file: ['.github/**/*','.coveralls.yml','.gitignore','ecs.yml','phpcs.xml','*.yml','*.yaml','Makefile','Dockerfile']
+
+# 📦 Зависимости
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file: ['composer.json', 'composer.lock', 'package.json','package-lock.json']
+
+# 🗄️ Database
+database:
+  - changed-files:
+      - any-glob-to-any-file: ['database/migrations/**/*','database/seeders/**/*','database/factories/**/*']
+
+# ⚙️ Config
+config:
+  - changed-files:
+      - any-glob-to-any-file: ['config/**','*.env*','*.ini']
+
+# ✅ Тесты
+tests:
+  - changed-files:
+      - any-glob-to-any-file: ['tests/**/*','phpunit.xml.dist','phpunit.xml','tests.sh','*.test.*','*.spec.*','phpunit*','pest.php']
+
+# 📚 Документация
+docs:
+  - changed-files:
+      - any-glob-to-any-file: ['*.md','*.txt','docs/**']
+
+# 🔒 Security
+security:
+  - changed-files:
+      - any-glob-to-any-file: ['app/Http/Middleware/**/*','app/Policies/**/*','auth/**']
+
+
+# 🔄 Типы по ветке
+"type: bugfix":
+  - head-branch: ['fix/*','bugfix/*','hotfix/*']
+
+"type: feature":
+  - head-branch: ['feature/*','feat/*']
+
+
+"type: chore":
+  - head-branch: ['chore/*','ci/*','cd/*']
+
+"type: refactor":
+  - head-branch: ['refactor/*']
+
+"type: test":
+  - head-branch: ['test/*']
+
+"type: docs":
+  - head-branch: ['docs/*']

@@ -8,28 +8,33 @@ use Livewire\Component;
 class AttractionComponent extends Component
 {
     public $attractions;
+
     public $longitude;
+
     public $latitude;
-    public function mount() {
+
+    public function mount()
+    {
         $this->attractions = Attraction::with('attachments')
             ->get()
-            ->filter(function(Attraction $attraction) {
+            ->filter(function (Attraction $attraction) {
                 return static::vincentyGreatCircleDistance(
-                    $this->latitude , $this->longitude,
+                    $this->latitude, $this->longitude,
                     $attraction->latitude, $attraction->longitude)
                     <= config('app.attractions.radius');
             });
     }
 
-//    public function mount($latitude = null, $longitude = null) {
-//        $this->latitude = $latitude;
-//        $this->longitude = $longitude;
-//        $this->attractions = Attraction::with('attachments')->get();
-//    }
+    //    public function mount($latitude = null, $longitude = null) {
+    //        $this->latitude = $latitude;
+    //        $this->longitude = $longitude;
+    //        $this->attractions = Attraction::with('attachments')->get();
+    //    }
     public function render()
     {
         return view('livewire.attraction-component');
     }
+
     public static function vincentyGreatCircleDistance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000)
     {
         // convert from degrees to radians
@@ -42,6 +47,7 @@ class AttractionComponent extends Component
             pow(cos($latFrom) * sin($latTo) - sin($latFrom) * cos($latTo) * cos($lonDelta), 2);
         $b = sin($latFrom) * sin($latTo) + cos($latFrom) * cos($latTo) * cos($lonDelta);
         $angle = atan2(sqrt($a), $b);
+
         return $angle * $earthRadius;
     }
 }

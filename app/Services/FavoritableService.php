@@ -18,8 +18,9 @@ class FavoritableService
             'favoriteable_id' => $favoriteableId,
             'favoriteable_type' => $class,
         ])->exists()) {
-            throw new AlreadyExistsException( 'Conflict');
+            throw new AlreadyExistsException('Conflict');
         }
+
         return Favorite::query()->create([
             'user_id' => $userId,
             'favoriteable_id' => $favoriteableId,
@@ -27,18 +28,17 @@ class FavoritableService
         ]);
     }
 
-
     /**
      * @throws NotFoundException
      */
     public function delete($userId, $favoriteableId, $class)
     {
-        if (!Favorite::query()->where([
+        if (! Favorite::query()->where([
             'user_id' => $userId,
             'favoriteable_id' => $favoriteableId,
             'favoriteable_type' => $class,
         ])->exists()) {
-            throw new NotFoundException( "record not found where user_id: {$userId}, favoriteable_id: {$favoriteableId}, favoriteable_type: {$class}");
+            throw new NotFoundException("record not found where user_id: {$userId}, favoriteable_id: {$favoriteableId}, favoriteable_type: {$class}");
         }
         Favorite::query()->where([
             'user_id' => $userId,
