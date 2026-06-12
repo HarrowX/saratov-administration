@@ -166,13 +166,13 @@ jobs:
 
             /opt/php84/bin/php artisan migrate --force
 
+            chown -R www-data:www-data storage bootstrap/cache
+            chmod -R 775 storage bootstrap/cache
+
             /opt/php84/bin/php artisan optimize:clear
             /opt/php84/bin/php artisan config:cache
             /opt/php84/bin/php artisan route:cache
             /opt/php84/bin/php artisan view:cache
-
-            chown -R www-data:www-data storage bootstrap/cache
-            chmod -R 775 storage bootstrap/cache
 
             /opt/php84/bin/php artisan queue:restart
 
