@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Http\Resources\AttractionResource;
+use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
+#[UseResource(AttractionResource::class)]
 class Attraction extends Model
 {
     protected $fillable = [
@@ -49,5 +52,10 @@ class Attraction extends Model
     public function favorites(): MorphMany
     {
         return $this->morphMany(Favorite::class, 'favoriteable');
+    }
+
+    public function visits(): MorphMany
+    {
+        return $this->morphMany(PlaceVisit::class, 'visitable');
     }
 }

@@ -54,4 +54,8 @@ Route::view('profile/favorites', 'favorites')
     ->middleware(['auth', 'verified'])
     ->name('profile-favorites');
 
+Route::view('profile/place-visits', 'place-visits')
+    ->middleware(['auth', 'verified'])
+    ->name('place-visits');
+
 require __DIR__.'/auth.php';

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Services\AuthService;
 use App\Services\FavoritableService;
+use App\Services\PlaceVisitService;
 use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;
 
@@ -17,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(AuthService::class);
         $this->app->singleton(UserService::class);
         $this->app->singleton(FavoritableService::class);
+        $this->app->singleton(PlaceVisitService::class);
     }
 
     /**
