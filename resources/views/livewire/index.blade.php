@@ -544,11 +544,11 @@
                         </div>
                     </div>
                 </div>
-                <div data-aos="zoom-in" data-aos-delay="450" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.png" data-caption="Крытый рынок">
-                    <img src="/images/image 22.png" alt="Крытый рынок" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="450" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.png" data-caption="Набережная Космонавтов ">
+                    <img src="/images/image 22.png" alt="Набережная Космонавтов " class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
-                            <h1 class="font-bold">Крытый рынок</h1>
+                            <h1 class="font-bold">Набережная Космонавтов</h1>
                         </div>
                     </div>
                 </div>
