@@ -544,11 +544,11 @@
                         </div>
                     </div>
                 </div>
-                <div data-aos="zoom-in" data-aos-delay="450" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.png" data-caption="Крытый рынок">
-                    <img src="/images/image 22.png" alt="Крытый рынок" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="450" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="/images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.png" data-caption="Набережная Космонавтов ">
+                    <img src="/images/image 22.png" alt="Набережная Космонавтов " class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
-                            <h1 class="font-bold">Крытый рынок</h1>
+                            <h1 class="font-bold">Набережная Космонавтов</h1>
                         </div>
                     </div>
                 </div>
@@ -583,172 +583,6 @@
                 data-caption="Церковь иконы Божией Матери"></a>
                 <a href="/images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.png" data-fancybox="full-gallery"
                 data-caption="Набережная космонавтов"></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- City Quests Section (New!) -->
-    <section id="quests" class="py-10 sm:py-15 xl:py-20 3xl:py-26 bg-gray-50">
-        <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10">
-            <div class="text-center mb-12" data-aos="fade-up">
-                <span class="bg-linear-to-r from-red-600 to-orange-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
-                    <i class="fas fa-treasure-chest mr-2"></i>ГОРОДСКИЕ КВЕСТЫ
-                </span>
-                <h2>Квесты с реальными призами</h2>
-                <p class="text text-gray-600">Исследуйте город играючи и получайте награды от партнеров</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- Active Quest 1 -->
-                <div data-aos="fade-up" class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition flex flex-col h-full">
-                    <div class="relative h-48 shrink-0">
-                        <img src="/images/photo_2022-11-14_16-25-54.jpg"
-                            alt="Квест Тайны старого города" class="w-full h-full object-cover">
-                        <div class="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                            <i class="fas fa-fire mr-1"></i>Активен
-                        </div>
-                        <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                            <i class="fas fa-users text-gray-700 mr-1"></i>
-                            <span class="font-semibold">234 участника</span>
-                        </div>
-                    </div>
-
-                    <div class="p-6 flex flex-col grow">
-                        <h1 class="text-xl font-bold mb-2 min-h-14">Тайны старого города</h1>
-                        <p class="text-gray-600 mb-4">Разгадайте исторические загадки и найдите спрятанные QR-коды</p>
-
-                        <div class="flex items-center justify-between mb-4 shrink-0">
-                            <div class="flex items-center space-x-3 text-sm">
-                                <span class="text-gray-500"><i class="fas fa-map-marked-alt mr-1"></i>7 точек</span>
-                                <span class="text-gray-500"><i class="fas fa-clock mr-1"></i>2 часа</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-auto">
-                            <div class="bg-yellow-50 rounded-lg p-3 mb-4">
-                                <p class="text-sm font-semibold text-yellow-800">🎁 Приз: Ужин на двоих в ресторане "Волга"</p>
-                            </div>
-
-                            <button onclick="startQuest('old-city')" class="w-full bg-linear-to-r from-red-500 to-orange-500 text-white px-4 py-2 rounded-lg hover:shadow-lg transition">
-                                Начать квест
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Active Quest 2 -->
-                <div data-aos="fade-up" data-aos-delay="100" class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition flex flex-col h-full">
-                    <div class="relative h-48 shrink-0">
-                        <img src="/images/07458c68242fb8524be00a45a7df919ea6e65e78.png"
-                            alt="Квест По следам Никитиных" class="w-full h-full object-cover">
-                        <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                            <i class="fas fa-child mr-1"></i>Семейный
-                        </div>
-                        <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                            <i class="fas fa-star text-yellow-500 mr-1"></i>
-                            <span class="font-semibold">4.9</span>
-                        </div>
-                    </div>
-
-                    <div class="p-6 flex flex-col grow">
-                        <h1 class="text-xl font-bold mb-2 min-h-14">По следам братьев Никитиных</h1>
-                        <p class="text-gray-600 mb-4">Семейное приключение по истории первого русского цирка</p>
-
-                        <div class="flex items-center justify-between mb-4 shrink-0">
-                            <div class="flex items-center space-x-3 text-sm">
-                                <span class="text-gray-500"><i class="fas fa-map-marked-alt mr-1"></i>5 точек</span>
-                                <span class="text-gray-500"><i class="fas fa-clock mr-1"></i>1.5 часа</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-auto">
-                            <div class="bg-blue-50 rounded-lg p-3 mb-4">
-                                <p class="text-sm font-semibold text-blue-800">🎁 Приз: Билеты в цирк для всей семьи</p>
-                            </div>
-
-                            <button onclick="startQuest('circus')" class="w-full bg-linear-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-lg hover:shadow-lg transition">
-                                Начать квест
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Active Quest 3 -->
-                <div data-aos="fade-up" data-aos-delay="200" class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition flex flex-col h-full">
-                    <div class="relative h-48 shrink-0">
-                        <img src="/images/Саратов легендарный и мистический.png"
-                            alt="Квест Космическая одиссея" class="w-full h-full object-cover">
-                        <div class="absolute top-4 left-4 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                            <i class="fas fa-rocket mr-1"></i>Космос
-                        </div>
-                        <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
-                            <i class="fas fa-trophy text-gold-500 mr-1"></i>
-                            <span class="font-semibold">Главный приз</span>
-                        </div>
-                    </div>
-
-                    <div class="p-6 flex flex-col grow">
-                        <h1 class="text-xl font-bold mb-2 min-h-14">Космическая одиссея Гагарина</h1>
-                        <p class="text-gray-600 mb-4">Пройдите путь первого космонавта в Саратове</p>
-
-                        <div class="flex items-center justify-between mb-4 shrink-0">
-                            <div class="flex items-center space-x-3 text-sm">
-                                <span class="text-gray-500"><i class="fas fa-map-marked-alt mr-1"></i>10 точек</span>
-                                <span class="text-gray-500"><i class="fas fa-clock mr-1"></i>3 часа</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-auto">
-                            <div class="bg-purple-50 rounded-lg p-3 mb-4">
-                                <p class="text-sm font-semibold text-purple-800">🎁 Приз: Полет на воздушном шаре над Волгой</p>
-                            </div>
-
-                            <button onclick="startQuest('space')" class="w-full bg-linear-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg hover:shadow-lg transition">
-                                Начать квест
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quest Leaderboard -->
-            <div class="mt-12 bg-white rounded-2xl p-8" data-aos="fade-up">
-                <h3 class="text-2xl font-bold mb-6 text-center">🏆 Лидеры недели</h3>
-                <div class="grid md:grid-cols-3 gap-4">
-                    <div class="flex items-center space-x-4 bg-linear-to-r from-yellow-50 to-yellow-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition" onclick="showProfile('alexander')">
-                        <div class="text-3xl font-bold text-yellow-600">1</div>
-                        <div class="w-12 h-12 rounded-full overflow-hidden bg-linear-to-r from-blue-400 to-purple-500 flex items-center justify-center">
-                            <img src="/images/0d5da6ab018faf09b0940ac3e0ab4d6d514c431f.jpg" alt="Александр М.">
-                        </div>
-                        <div class="flex-1">
-                            <p class="font-semibold">Александр М.</p>
-                            <p class="text-sm text-gray-600">15 квестов • 3,450 баллов</p>
-                        </div>
-                        <i class="fas fa-medal text-yellow-500 text-2xl"></i>
-                    </div>
-                    <div class="flex items-center space-x-4 bg-linear-to-r from-gray-50 to-gray-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition" onclick="showProfile('maria')">
-                        <div class="text-3xl font-bold text-gray-600">2</div>
-                        <div class="w-12 h-12 rounded-full overflow-hidden bg-linear-to-r from-pink-400 to-red-500 flex items-center justify-center">
-                            <img src="/images/ff36dbfb2cd08696fa0f4b58af223c7dd6f39c0d.jpg" alt="Мария К.">
-                        </div>
-                        <div class="flex-1">
-                            <p class="font-semibold">Мария К.</p>
-                            <p class="text-sm text-gray-600">12 квестов • 2,890 баллов</p>
-                        </div>
-                        <i class="fas fa-medal text-gray-400 text-2xl"></i>
-                    </div>
-                    <div class="flex items-center space-x-4 bg-linear-to-r from-orange-50 to-orange-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition" onclick="showProfile('ivanov')">
-                        <div class="text-3xl font-bold text-orange-600">3</div>
-                        <div class="w-12 h-12 rounded-full overflow-hidden bg-linear-to-r from-green-400 to-teal-500 flex items-center justify-center">
-                            <img src="/images/9bbdfb06a5eae3ca01387e38cee556cb0ba93eb3.jpg" alt="Семья Ивановых">
-                        </div>
-                        <div class="flex-1">
-                            <p class="font-semibold">Семья Ивановых</p>
-                            <p class="text-sm text-gray-600">10 квестов • 2,340 баллов</p>
-                        </div>
-                        <i class="fas fa-medal text-orange-400 text-2xl"></i>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
