@@ -44,6 +44,4 @@ class Hotel extends Model
     {
         return $this->morphMany(PlaceVisit::class, 'visitable');
     }
-
-
 }

@@ -6,7 +6,6 @@ use App\DTOs\ChangeVisitStatusDTO;
 use App\DTOs\CoordinatesDTO;
 use App\Enums\VisitedStatus;
 use App\Http\Resources\PlaceVisitResource;
-use App\Models\Favorite;
 use App\Services\PlaceVisitService;
 use Illuminate\Http\Request;
 
@@ -14,7 +13,7 @@ class PlaceVisitController extends Controller
 {
     public function __construct(
         protected PlaceVisitService $placeVisitService,
-    ) { }
+    ) {}
 
     public function findRecentlyVisits(Request $request)
     {
@@ -35,6 +34,7 @@ class PlaceVisitController extends Controller
         if ($flag) {
             return response()->json(['message' => 'found'], 201);
         }
+
         return response()->json(['message' => 'none'], 200);
     }
 

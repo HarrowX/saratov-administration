@@ -2,7 +2,6 @@
 
 namespace App\DTOs;
 
-use App\Enums\VisitedStatus;
 use App\Models\Attraction;
 use App\Models\Hotel;
 use App\Models\Restaurant;
@@ -13,7 +12,7 @@ class ChangeVisitStatusDTO extends ValidatedDTO
     protected function rules(): array
     {
         return [
-            'visitable_type' => ['required', 'string', 'in:' . implode(',', $this->getAllowedVisitableTypes())],
+            'visitable_type' => ['required', 'string', 'in:'.implode(',', $this->getAllowedVisitableTypes())],
             'visitable_id' => ['required', 'integer'],
         ];
     }

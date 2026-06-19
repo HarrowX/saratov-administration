@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Enums;
+
 enum VisitedStatus: string
 {
     case Visited = 'visited';

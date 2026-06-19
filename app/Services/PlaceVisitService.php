@@ -19,6 +19,7 @@ class PlaceVisitService
             'user_id' => $userId,
         ])->firstOrFail()->fill(['status' => $status])->save();
     }
+
     public function findRecentlyVisits($userId)
     {
         return PlaceVisit::query()->where([
@@ -34,7 +35,6 @@ class PlaceVisitService
             $hotelIds = $this->getNearbyWithoutUserVisit(Hotel::class, $latitude, $longitude, $userId);
             $attractionIds = $this->getNearbyWithoutUserVisit(Attraction::class, $latitude, $longitude, $userId);
             $restaurantIds = $this->getNearbyWithoutUserVisit(Restaurant::class, $latitude, $longitude, $userId);
-
 
             $models = [];
             $placeVisits = [];
@@ -70,7 +70,7 @@ class PlaceVisitService
                 ];
             }
 
-            if (!empty($placeVisits)) {
+            if (! empty($placeVisits)) {
                 PlaceVisit::insert($placeVisits);
                 $flag = true;
             }
@@ -78,7 +78,6 @@ class PlaceVisitService
             $hotelIds = $this->getNearbyWithHasNotVisit(Hotel::class, $latitude, $longitude, $userId);
             $attractionIds = $this->getNearbyWithHasNotVisit(Attraction::class, $latitude, $longitude, $userId);
             $restaurantIds = $this->getNearbyWithHasNotVisit(Restaurant::class, $latitude, $longitude, $userId);
-
 
             $flag = $flag || $this->updateNotVisited(Hotel::class, $hotelIds, $userId);
             $flag = $flag || $this->updateNotVisited(Attraction::class, $attractionIds, $userId);
@@ -90,40 +89,41 @@ class PlaceVisitService
 
     private function updateNotVisited($class, $ids, $userId)
     {
-        if (!empty($ids)) {
+        if (! empty($ids)) {
             PlaceVisit::query()
                 ->where('user_id', $userId)
                 ->whereIn('visitable_id', $ids)
                 ->where('visitable_type', $class)
                 ->where('status', VisitedStatus::NotVisited)
                 ->update(['status' => VisitedStatus::SemiVisited]);
+
             return true;
         }
 
         return false;
     }
 
-    private function getNearbyWithoutUserVisit ($class, $latitude, $longitude, $userId)
+    private function getNearbyWithoutUserVisit($class, $latitude, $longitude, $userId)
     {
         return $class::query()
-                    ->whereDoesntHave('visits', function ($q) use ($userId) {
-                        $q->where('user_id', $userId);
-                    })
-                    ->whereRaw('ST_Distance_Sphere(point(longitude, latitude), point(?, ?)) <= ?', [
-                        $longitude, $latitude, config('app.visits.search_radius')
-                    ])
-                    ->pluck('id')
-                    ->all();
+            ->whereDoesntHave('visits', function ($q) use ($userId) {
+                $q->where('user_id', $userId);
+            })
+            ->whereRaw('ST_Distance_Sphere(point(longitude, latitude), point(?, ?)) <= ?', [
+                $longitude, $latitude, config('app.visits.search_radius'),
+            ])
+            ->pluck('id')
+            ->all();
     }
 
-    private function getNearbyWithHasNotVisit ($class, $latitude, $longitude, $userId)
+    private function getNearbyWithHasNotVisit($class, $latitude, $longitude, $userId)
     {
         return $class::query()
             ->whereHas('visits', function ($q) use ($userId) {
                 $q->where('user_id', $userId)->where('status', VisitedStatus::NotVisited);
             })
             ->whereRaw('ST_Distance_Sphere(point(longitude, latitude), point(?, ?)) <= ?', [
-                $longitude, $latitude, config('app.visits.search_radius')
+                $longitude, $latitude, config('app.visits.search_radius'),
             ])
             ->pluck('id')
             ->all();

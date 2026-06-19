@@ -7,7 +7,6 @@ use App\Models\Attraction;
 use App\Models\Hotel;
 use App\Models\PlaceVisit;
 use App\Models\Restaurant;
-use App\Services\FavoritableService;
 use App\Services\PlaceVisitService;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -16,8 +15,8 @@ class VisitsSection extends Component
 {
     use WithPagination;
 
-
     protected PlaceVisitService $placeVisitService;
+
     public $selectedStatus = VisitedStatus::SemiVisited->value;
 
     public function boot(PlaceVisitService $placeVisitService): void
