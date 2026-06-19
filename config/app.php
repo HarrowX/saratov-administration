@@ -127,4 +127,7 @@ return [
         'radius' => env('ATTRACTIONS_RADIUS', 10000000000000),
     ],
 
+    'visits' => [
+        'search_radius' => env('VISITS_RADIUS', 500),
+    ],
 ];

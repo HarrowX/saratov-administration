@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\FavoritableController;
+use App\Http\Controllers\PlaceVisitController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,5 +49,15 @@ Route::prefix('v1')->group(function () {
             Route::delete('hotels/{id}', 'unfavoriteHotel');
             Route::delete('restaurants/{id}', 'unfavoriteRestaurant');
             Route::delete('attractions/{id}', 'unfavoriteAttraction');
+        });
+
+    Route::prefix('visits')
+        ->controller(PlaceVisitController::class)
+        ->middleware(['auth:sanctum'])
+        ->group(function () {
+            Route::get('recently', 'findRecentlyVisits');
+            Route::post('around', 'around');
+            Route::patch('approve', 'approve');
+            Route::patch('disapprove', 'disapprove');
         });
 });

@@ -46,12 +46,7 @@ class FavoriteSection extends Component
 
     public function unfavorite($id)
     {
-        $class = match ($this->selectedType) {
-            'attractions' => Attraction::class,
-            'hotels' => Hotel::class,
-            'restaurants' => Restaurant::class,
-        };
-        $this->favoritableService->delete(auth()->user()->id, $id, $class);
+        $this->favoritableService->delete(auth()->user()->id, $id, $this->selectedType);
         $this->resetPage();
     }
 

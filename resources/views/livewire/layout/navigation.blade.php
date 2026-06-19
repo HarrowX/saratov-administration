@@ -36,6 +36,9 @@ new class extends Component
                     <x-nav-link :href="route('profile-favorites')" :active="request()->routeIs('profile-favorites')" wire:navigate>
                         Избранное
                     </x-nav-link>
+                    <x-nav-link :href="route('place-visits')" :active="request()->routeIs('place-visits')" wire:navigate>
+                        Посещенные места
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -86,6 +89,12 @@ new class extends Component
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('profile')" :active="request()->routeIs('profile')" wire:navigate>
                 Профиль
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('profile-favorites')" :active="request()->routeIs('profile-favorites')" wire:navigate>
+                Избранное
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('place-visits')" :active="request()->routeIs('place-visits')" wire:navigate>
+                Посещенные места
             </x-responsive-nav-link>
         </div>
 
