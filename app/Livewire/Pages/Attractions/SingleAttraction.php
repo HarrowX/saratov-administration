@@ -3,7 +3,9 @@
 namespace App\Livewire\Pages\Attractions;
 
 use App\Models\Attraction;
+use App\Models\HistoryView;
 use App\Services\FavoritableService;
+use App\Services\ViewService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -16,20 +18,27 @@ class SingleAttraction extends Component
     public $isFavorite = false;
 
     protected FavoritableService $favoritableService;
+    protected ViewService $viewService;
 
-    public function boot(FavoritableService $favoritableService): void
+    public function boot(FavoritableService $favoritableService, ViewService $viewService): void
     {
         $this->favoritableService = $favoritableService;
+        $this->viewService = $viewService;
     }
 
     public function mount(Attraction $attraction)
     {
+
         $this->attraction = $attraction;
         $this->attraction->load('attachments');
         $this->favoritesCount = $attraction->favorites?->count() ?? 0;
+
         if (Auth::check()) {
             $this->isFavorite = $attraction->favorites->contains('user_id', auth()->id());
         }
+
+        $this->viewService->calculate($this->attraction->id, Attraction::class);
+
     }
 
     public function toggleFavorite()
