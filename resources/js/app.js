@@ -5,7 +5,6 @@ import './scripts/innovations'
 import './scripts/notification';
 import './scripts/profile-modal';
 import './scripts/user-profile';
-import './scripts/achievements';
 import './scripts/chatbot';
 import './scripts/fixes';
 import './scripts/slider';
