@@ -146,16 +146,21 @@
                                             <i class="fas fa-phone"></i>
                                             {{ $hotel->phone }}
                                         </span>
+                                    </div>
+                                    <div class="flex flex-row justify-between items-center gap-3.5">
                                         <span class="flex items-center gap-3.5">
                                             <i class="fas fa-map-marker-alt"></i>
                                             {{ $hotel->address }}
                                         </span>
+                                        <a href="{{ route('single-hotel', ['hotel' => $hotel->slug]) }}" class="shrink-0 size-5 sm:size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
+                                            <img src="/images/Arrow 2.png" alt="" class="icon w-1 sm:w-2 xl:w-3 3xl:w-4 h-2.5 sm:h-4.5 xl:h-6 3xl:h-7.5">
+                                        </a>
                                     </div>
-                                    <form action="{{ route('single-hotel', ['hotel' => $hotel->slug]) }}">
-                                        <button class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity">
-                                            Подробнее
-                                        </button>
-                                    </form>
+{{--                                    <form action="{{ route('single-hotel', ['hotel' => $hotel->slug]) }}">--}}
+{{--                                        <button class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity">--}}
+{{--                                            Подробнее--}}
+{{--                                        </button>--}}
+{{--                                    </form>--}}
                                 </div>
                             </div>
                         </div>

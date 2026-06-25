@@ -207,9 +207,8 @@
                                         <i class="fas fa-clock mr-2"></i>
                                         <span>{{ $attraction->visit_duration }} мин</span>
                                     </div>
-                                    <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}"
-                                       class="bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm py-2 px-4 rounded-lg transition">
-                                        Подробнее →
+                                    <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="shrink-0 size-5 sm:size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
+                                        <img src="/images/Arrow 2.png" alt="" class="icon w-1 sm:w-2 xl:w-3 3xl:w-4 h-2.5 sm:h-4.5 xl:h-6 3xl:h-7.5">
                                     </a>
                                 </div>
                             </div>
@@ -243,13 +242,12 @@
                         <div class="p-6">
                             <h3 class="text-2xl font-bold mb-3">{{ $attraction->name }}</h3>
                             <p class="text-gray-600 mb-4">{{ $attraction->short_description }}</p>
-                            <div class="space-y-3">
-                                <div class="flex items-center space-x-4 text-sm text-gray-500">
+                            <div class=" flex items-center justify-between">
+                                <div class="flex items-center text-sm text-gray-500">
                                     <span><i class="fas fa-walking mr-1"></i>{{ $attraction->visit_duration }} мин</span>
                                 </div>
-                                <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}"
-                                   class="block w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition text-center">
-                                    Подробнее <i class="fas fa-arrow-right ml-1"></i>
+                                <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="shrink-0 size-5 sm:size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
+                                    <img src="/images/Arrow 2.png" alt="иконка" class="icon w-1 sm:w-2 xl:w-3 3xl:w-4 h-2.5 sm:h-4.5 xl:h-6 3xl:h-7.5">
                                 </a>
                             </div>
                         </div>

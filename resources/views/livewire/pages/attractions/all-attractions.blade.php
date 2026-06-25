@@ -23,8 +23,8 @@
 
                     <div class="hidden lg:block sm:w-92 md:w-60 2xl:w-92 bg-white rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 absolute -top-15 2xl:-top-12">
                         <div class="p-2 sm:p-4 3xl:p-5 flex flex-col">
-                            <div class="w-full mb-4 overflow-hidden rounded-[20px] shrink-0">
-                                <img src="/images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.png" alt="Дом книги">
+                            <div class="w-full mb-4 overflow-hidden rounded-[20px] shrink-0 h-37.5 sm:h-53.75 3xl:h-78.75">
+                                <img src="/images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.png" alt="Дом книги" class="photo">
                             </div>
 
                             <div class="font-['FindSansPro'] flex flex-col">
@@ -35,7 +35,7 @@
 
                                 <div class="mt-2 mb-3">
                                     <div class="flex items-end justify-between gap-2">
-                                        <div class="flex gap-1 flex-1 max-w-37 sm:max-w-67">
+                                        <div class="flex gap-1 flex-1 max-w-37 sm:max-w-67 ">
                                             <img src="/images/image 7.svg" alt="" class="icon size-2.5 sm:size-4 2xl:size-7 mt-5 2xl:mt-4 shrink-0">
                                             <span class="text-[8px] sm:text-[10px] 2xl:text-xs text-[#505050] pt-1 sm:pt-4">Саратов, Фрунзенский район, ул. Вольская, 81</span>
                                         </div>
@@ -149,18 +149,18 @@
             </div>
 
             <!-- Сетка карточек -->
-            <div class="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 xl:gap-10 3xl:gap-21">
+            <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 xl:gap-10 3xl:gap-21">
                 @foreach ($attractions as $attraction)
                     <div class="bg-white rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div class="p-2 sm:p-4 3xl:p-5 h-full flex flex-col">
-                            <div class="w-full mb-4 overflow-hidden rounded-lg shrink-0">
+                            <div class="w-full mb-4 overflow-hidden rounded-lg md:rounded-[20px] shrink-0 h-37.5 sm:h-53.75 3xl:h-78.75">
                                 <img src="{{ $attraction->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $attraction->name }}" class="w-full h-full object-cover">
                             </div>
 
                             <div class="font-['FindSansPro'] flex flex-col h-26 sm:h-50 md:h-60">
                                 <div class="grow">
-                                    <h4 class="">{{ $attraction->name }}</h4>
-                                    <p class="text-[7px] sm:text-base text-[#888888] line-clamp-4">{{ $attraction->short_description }}</p>
+                                    <h4>{{ $attraction->name }}</h4>
+                                    <p class="text-[10px] sm:text-base text-[#888888] line-clamp-4">{{ $attraction->short_description }}</p>
                                 </div>
 
                                 <div class="shrink-0 mt-2 mb-3">
@@ -169,11 +169,9 @@
                                             <img src="/images/image 7.svg" alt="" class="icon size-2.5 sm:size-4 md:size-7 mt-2 sm:mt-5 shrink-0">
                                             <span class="text-[8px] sm:text-xs xl:text-sm text-[#505050] pt-1 sm:pt-4">{{ $attraction->address }}</span>
                                         </div>
-                                        <form action="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}">
-                                            <button class="shrink-0 size-5 sm:size-10 xl:size-11 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
-                                                <img src="/images/Arrow 2.png" alt="" class="icon w-1 sm:w-2 xl:w-3 h-2.5 sm:h-4.5 xl:h-6">
-                                            </button>
-                                        </form>
+                                        <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="arrow-link shrink-0 size-7 sm:size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-70 transition-opacity">
+                                            <img src="/images/Arrow 2.png" alt="Стрелка" class="arrow-link-img icon w-2 xl:w-3 3xl:w-4 h-3 sm:h-4.5 xl:h-6 3xl:h-7.5">
+                                        </a>
                                     </div>
                                 </div>
                             </div>

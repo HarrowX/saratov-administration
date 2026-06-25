@@ -9,7 +9,7 @@
             <div class="flex flex-col-reverse lg:flex-row items-center gap-5 sm:gap-10 3xl:gap-22.5">
                 <div data-aos="fade-right" class="flex flex-col gap-5 w-full lg:w-auto lg:min-w-118 xl:min-w-150 3xl:min-w-197">
                     <div class="min-w-full">
-                        <img src="{{ $restaurant->attachments?->get(0)?->url() ?? "" }}" class="photo w-full rounded-md sm:rounded-lg lg:rounded-2xl object-cover h-57.5 lg:h-100 xl:h-114">
+                        <img src="{{ $restaurant->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $restaurant->name }}" class="photo w-full rounded-md sm:rounded-lg lg:rounded-2xl object-cover h-57.5 lg:h-100 xl:h-114">
                     </div>
 
                     <div class="flex flex-row gap-5">
@@ -17,7 +17,7 @@
                             @if ($loop->first)
                                 @continue
                             @endif
-                            <img src="{{ $attachment?->url() ?? "" }}" class="photo w-full h-33 3xl:h-67 rounded-md sm:rounded-lg lg:rounded-2xl object-cover">
+                            <img src="{{ $attachment?->url() ?? "" }}" class="photo w-full h-33 3xl:h-67 rounded-md sm:rounded-lg lg:rounded-2xl object-cover" alt="Изображение {{ $restaurant->name }}">
                         @endforeach
                     </div>
                 </div>
@@ -35,7 +35,7 @@
             <div class="flex flex-col md:flex-row gap-2.5 md:gap-10 3xl:gap-33.5">
                 <div class="flex flex-col w-full justify-around bg-[#E5E6F6] gap-3 md:gap-6.75 px-6 md:px-11 py-6 3xl:py-8 rounded-[20px] font-['FindSansPro'] text-sm sm:text-lg 3xl:text-2xl">
                     <div class="flex items-center gap-5">
-                        <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/значок локации.svg">
+                        <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/значок локации.svg" alt="иконка">
                         <p>{{ $restaurant->address }}</p>
                     </div>
                     <div class="flex items-center gap-3 xl:gap-5">
@@ -43,7 +43,7 @@
                         <p>{{ $restaurant->website}}</p>
                     </div>
                     <div class="flex items-start gap-2 md:gap-5">
-                        <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/image 8.svg">
+                        <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/image 8.svg" alt="иконка">
                         <div class="flex flex-col gap-2">
                             @forelse($restaurant->worktime ?? [] as $day => $time)
                                 <p>{{ $day }}: {{ $time }}</p>
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-5">
-                        <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/image 15.svg">
+                        <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/image 15.svg" alt="иконка">
                         <p>{{ $restaurant->phone }}</p>
                     </div>
                 </div>
@@ -67,9 +67,9 @@
                             Показать на карте
                         </a>
                     @else
-                        <button class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 xl:py-6 rounded-[30px] hover:shadow-lg transition font-['FindSansPro'] text-lg sm:text-lg xl:text-xl 3xl:text-3xl md:mt-4 opacity-50 cursor-not-allowed" disabled>
+                        <div class="w-full flex justify-center bg-linear-to-r from-green-500 to-teal-600 text-white py-3 xl:py-6 rounded-[30px] text-lg sm:text-lg xl:text-xl 3xl:text-3xl md:mt-4 opacity-50 cursor-not-allowed content-center" disabled>
                             Показать на карте
-                        </button>
+                        </div>
                     @endif
                 </div>
             </div>

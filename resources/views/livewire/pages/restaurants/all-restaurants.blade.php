@@ -129,25 +129,27 @@
                                         <i class="fas fa-phone"></i>
                                         {{ $restaurant->phone }}
                                     </span>
-                                    <span class="flex items-center gap-3.5">
+{{--                                    <span class="flex items-center gap-3.5">--}}
+{{--                                        <i class="fa-solid fa-clock"></i>--}}
+{{--                                        <div class="flex flex-col gap-2">--}}
+{{--                                            @forelse($restaurant->worktime ?? [] as $day => $time)--}}
+{{--                                                <p>{{ $day }}: {{ $time }}</p>--}}
+{{--                                            @empty--}}
+{{--                                                    <p>Не указано</p>--}}
+{{--                                            @endforelse--}}
+{{--                                        </div>--}}
+{{--                                    </span>--}}
+
+                                </div>
+                                <div class="w-full flex flex-row justify-between items-end gap-3">
+                                    <span class="flex items-center gap-3.5 text-[#5F5F5F]">
                                         <i class="fas fa-map-marker-alt"></i>
                                         {{ $restaurant->address }}
                                     </span>
-                                    <span class="flex items-center gap-3.5">
-                                        <i class="fa-solid fa-clock"></i>
-                                        <div class="flex flex-col gap-2">
-                                            @forelse($restaurant->worktime ?? [] as $day => $time)
-                                                <p>{{ $day }}: {{ $time }}</p>
-                                            @empty
-                                                    <p>Не указано</p>
-                                            @endforelse
-                                        </div>
-                                    </span>
-
+                                    <a href="{{ route('single-restaurant', ['restaurant' => $restaurant->slug]) }}" class="shrink-0 size-5 sm:size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
+                                        <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-1 sm:w-2 xl:w-3 3xl:w-4 h-2.5 sm:h-4.5 xl:h-6 3xl:h-7.5">
+                                    </a>
                                 </div>
-                                <a href="{{ route('single-restaurant', ['restaurant' => $restaurant->slug]) }}" class="w-full gradient-button text-white text-sm sm:text-base xl:text-xl py-1 lg:py-2 rounded-lg hover:opacity-90 transition-opacity text-center">
-                                    Подробнее
-                                </a>
                             </div>
                     </div>
                 </div>
