@@ -8,7 +8,7 @@
 
                 VKID.Config.init({
                     app: 54650748,
-                    redirectUrl: 'http://localhost/auth/vk/callback',
+                    redirectUrl: '{{config('app.url')}}' + '/auth/vk/callback',
                     responseMode: VKID.ConfigResponseMode.Callback,
                     source: VKID.ConfigSource.LOWCODE,
                     scope: '',
