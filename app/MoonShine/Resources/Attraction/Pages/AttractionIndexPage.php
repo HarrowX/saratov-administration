@@ -79,7 +79,7 @@ class AttractionIndexPage extends IndexPage
             Switcher::make('Доступность', 'is_accessible'),
             Switcher::make('Парковка', 'has_parking'),
             Text::make('Координаты', 'coordinates')
-                ->changeFill(fn ($data) => "{$data->longitude}, {$data->latitude}"),
+                ->changeFill(fn ($data) => "{$data->latitude}, {$data->longitude}"),
 
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([

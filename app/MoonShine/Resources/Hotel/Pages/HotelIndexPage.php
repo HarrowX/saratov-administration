@@ -71,7 +71,7 @@ class HotelIndexPage extends IndexPage
             Number::make('Максимальная цена', 'max_price'),
             Number::make('Минимальная цена', 'min_price'),
             Text::make('Координаты', 'coordinates')
-                ->changeFill(fn ($data) => "{$data->longitude}, {$data->latitude}"),
+                ->changeFill(fn ($data) => "{$data->latitude}, {$data->longitude}"),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),

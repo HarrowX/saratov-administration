@@ -65,7 +65,7 @@ class RestaurantDetailPage extends DetailPage
             ),
 
             Text::make('Координаты', 'coordinates')
-                ->changeFill(fn ($data) => "{$data->longitude}, {$data->latitude}"),
+                ->changeFill(fn ($data) => "{$data->latitude}, {$data->longitude}"),
 
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
