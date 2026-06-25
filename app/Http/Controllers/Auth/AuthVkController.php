@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\UserName;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -87,7 +86,6 @@ class AuthVkController extends Controller
 
         return redirect()->route('profile-settings')->with('status', 'Аккаунт VK успешно привязан!');
     }
-
 
     private function findUser($userData, $tokenData)
     {
