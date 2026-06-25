@@ -56,17 +56,11 @@ class AuthVkController extends Controller
         }
     }
 
-    /**
-     * Редирект на VK для привязки
-     */
     public function redirectToConnect()
     {
         return Socialite::driver('vk')->redirect();
     }
 
-    /**
-     * Обработка callback после привязки
-     */
     public function handleConnectCallback()
     {
         try {
@@ -94,19 +88,12 @@ class AuthVkController extends Controller
         return redirect()->route('profile-settings')->with('status', 'Аккаунт VK успешно привязан!');
     }
 
-    /**
-     * Поиск или создание пользователя
-     */
+
     private function findUser($userData, $tokenData)
     {
         $vkId = $userData['id'];
-        $email = $tokenData['email'] ?? null;
         $avatar = $userData['photo_100'] ?? null;
-        $firstName = $userData['first_name'] ?? '';
-        $lastName = $userData['last_name'] ?? '';
-        $patronymic = $userData['patronymic'] ?? '';
 
-        // Ищем пользователя по vk_id
         $user = User::where('vk_id', $vkId)->first();
 
         if ($user) {
@@ -117,46 +104,12 @@ class AuthVkController extends Controller
             return $user;
         }
 
-        if ($email) {
-            $user = User::where('email', $email)->first();
-
-            if ($user) {
-                // Привязываем VK к существующему аккаунту
-                $user->update([
-                    'vk_id' => $vkId,
-                    'vk_avatar' => $avatar,
-                ]);
-
-                // Если у пользователя нет имени, добавляем из VK
-                $userName = UserName::where('user_id', $user->id)->first();
-                if (! $userName || empty($userName->name)) {
-                    UserName::updateOrCreate(
-                        ['user_id' => $user->id],
-                        [
-                            'name' => $firstName,
-                            'surname' => $lastName,
-                            'patronymic' => $patronymic,
-                        ]
-                    );
-                }
-
-                return $user;
-            }
-        }
-
         return null;
     }
 
-    /**
-     * Отвязка VK
-     */
     public function disconnect()
     {
         $user = Auth::user();
-
-        if (empty($user->password) && empty($user->email)) {
-            return back()->with('error', 'Вы не можете отвязать VK, это единственный способ входа');
-        }
 
         $user->update([
             'vk_id' => null,
