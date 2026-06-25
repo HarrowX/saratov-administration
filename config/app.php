@@ -130,4 +130,8 @@ return [
     'visits' => [
         'search_radius' => env('VISITS_RADIUS', 500),
     ],
+
+    'admin' => [
+        'ymap_api_key' => env('YMAP_API_KEY'),
+    ]
 ];
