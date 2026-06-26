@@ -124,35 +124,35 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 xs:grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-3 3xl:gap-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 lg:p-6 gap-y-2 xl:gap-y-12">
                 @foreach ($hotels as $hotel)
-                    <div class="card bg-white rounded-[7px] sm:rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mb-2 xl:mb-12">
-                        <div class="card-content p-2 sm:p-5 relative">
-                            <div class="rounded-lg md:rounded-[20px] shrink-0 h-37.5 sm:h-53.75 3xl:h-78.75">
-                                <img src="{{ $hotel->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $hotel->name }}" class="phone rounded-[7px] sm:rounded-[20px]">
-                                <div class="absolute top-4 right-3.5 sm:top-10 sm:right-9.5 size-5 sm:size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-[3px] sm:rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-xl xl:text-2xl shadow-lg">
-                                    <i class="fa-sharp fa-solid fa-heart"></i>
+                    <div class="card bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="card-content p-5 relative grid grid-rows-subgrid content-between row-span-2 gap-3 h-full font-['FindSansPro']">
+                            <div class="flex flex-col gap-5">
+                                <div class="">
+                                    <img src="{{ $hotel->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $hotel->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover">
+                                    <div class="absolute top-7 right-6.5 sm:top-10 sm:right-9.5 size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-md xl:rounded-xl flex items-center justify-center text-white text-xl xl:text-2xl shadow-lg">
+                                        <i class="fa-sharp fa-solid fa-heart"></i>
+                                    </div>
+                                </div>
+                                <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold">{{ $hotel->name}}</h2>
+                                <div class="flex flex-col justify-end text-sm lg:text-base 3xl:text-2xl font-light gap-3 text-[#5F5F5F]">
+                                    <p class="text-center mb-2 ">{{ $hotel->type}}</p>
+                                    <span class="flex items-center gap-3.5">
+                                    <i class="fas fa-phone text-lg xl:text-xl"></i>
+                                    {{ $hotel->phone }}
+                                </span>
                                 </div>
                             </div>
-                            <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">
-                                <h4 class="text-center">{{ $hotel->name }}</h4>
-                                <div class="flex flex-col text-xs lg:text-base xl:text-lg 3xl:text-xl">
-                                    <div class="flex flex-col font-light gap-3 text-[#5F5F5F] mt-2 lg:mt-5 mb-0 sm:mb-2 lg:mb-6">
-                                        <p class="text-center">{{ $hotel->type}}</p>
-                                        <span class="flex items-center gap-3.5">
-                                            <i class="fas fa-phone text-lg xs:text-3xl"></i>
-                                            {{ $hotel->phone }}
-                                        </span>
-                                    </div>
-                                    <div class="flex flex-row justify-between items-end gap-3.5">
-                                        <span class="flex items-center gap-3.5 text-[#5F5F5F]">
-                                            <i class="fas fa-map-marker-alt text-lg xs:text-3xl"></i>
-                                            {{ $hotel->address }}
-                                        </span>
-                                        <a href="{{ route('single-hotel', ['hotel' => $hotel->slug]) }}" class="arrow-link shrink-0 size-7 sm:size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-70 transition-opacity">
-                                            <img src="/images/Arrow 2.png" alt="Стрелка" class="arrow-link-img icon w-2 xl:w-3 3xl:w-4 h-3 sm:h-4.5 xl:h-6 3xl:h-7.5">
-                                        </a>
-                                    </div>
+                            <div class="flex flex-col justify-between h-full font-['FindSansPro']">
+                                <div class="flex flex-row justify-between items-end gap-3.5 text-sm lg:text-base 3xl:text-2xl font-light">
+                                <span class="flex items-center gap-3.5 text-[#5F5F5F]">
+                                    <i class="fas fa-map-marker-alt text-xl xl:text-2xl"></i>
+                                    {{ $hotel->address }}
+                                </span>
+                                    <a href="{{ route('single-hotel', ['hotel' => $hotel->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
+                                        <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover:translate-x-1">
+                                    </a>
                                 </div>
                             </div>
                         </div>

@@ -2,7 +2,6 @@
     Саратов 435 - Заведения
 @endsection
 
-
 <div>
     <!--Hero Section-->
     <section id="home" class="hero-section pt-21 min-h-100 md:min-h-screen flex flex-col gap-17 items-center justify-center relative">
@@ -111,8 +110,8 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 lg:p-6 gap-y-2 xl:gap-y-12">
                 @foreach ($restaurants as $restaurant)
-                <div class="card bg-white rounded-[7px] sm:rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="card-content p-5 relative grid grid-rows-subgrid content-between row-span-2 gap-3 h-full">
+                <div class="card bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="card-content p-5 relative grid grid-rows-subgrid content-between row-span-2 gap-3 h-full font-['FindSansPro']">
                         <div class="flex flex-col gap-5">
                             <div class="">
                                 <img src="{{ $restaurant->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $restaurant->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover">
@@ -120,26 +119,26 @@
                                     <i class="fa-sharp fa-solid fa-heart"></i>
                                 </div>
                             </div>
-                                <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold">{{ $restaurant->name}}</h2>
-                        </div>
-                            <div class="flex flex-col justify-between h-full font-['FindSansPro']">
-                                <div class="flex flex-col justify-end text-sm lg:text-base xl:text-lg 3xl:text-2xl font-light gap-3 text-[#5F5F5F] mb-2 lg:mb-6">
-                                    <p class="text-center">{{ $restaurant->kitchen }} кухня</p>
-                                    <span class="flex items-center gap-3.5">
-                                        <i class="fas fa-phone"></i>
-                                        {{ $restaurant->phone }}
-                                    </span>
-                                </div>
-                                <div class="flex flex-row justify-between items-end gap-3.5">
-                                    <span class="flex items-center gap-3.5 text-[#5F5F5F]">
-                                        <i class="fas fa-map-marker-alt text-lg xs:text-2xl"></i>
-                                        {{ $restaurant->address }}
-                                    </span>
-                                    <a href="{{ route('single-restaurant', ['restaurant' => $restaurant->slug]) }}" class="arrow-link shrink-0 size-5 sm:size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
-                                        <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-1 sm:w-2 xl:w-3 3xl:w-4 h-2.5 sm:h-4.5 xl:h-6 3xl:h-7.5">
-                                    </a>
-                                </div>
+                            <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold">{{ $restaurant->name}}</h2>
+                            <div class="flex flex-col justify-end text-sm lg:text-base 3xl:text-2xl font-light gap-3 text-[#5F5F5F]">
+                                <p class="text-center mb-2 ">{{ $restaurant->kitchen }} кухня</p>
+                                <span class="flex items-center gap-3.5">
+                                    <i class="fas fa-phone text-lg xl:text-xl"></i>
+                                    {{ $restaurant->phone }}
+                                </span>
                             </div>
+                        </div>
+                        <div class="flex flex-col justify-between h-full font-['FindSansPro']">
+                            <div class="flex flex-row justify-between items-end gap-3.5 text-sm lg:text-base 3xl:text-2xl font-light">
+                                <span class="flex items-center gap-3.5 text-[#5F5F5F]">
+                                    <i class="fas fa-map-marker-alt text-xl xl:text-2xl"></i>
+                                    {{ $restaurant->address }}
+                                </span>
+                                <a href="{{ route('single-restaurant', ['restaurant' => $restaurant->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
+                                    <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover:translate-x-1">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 @endforeach

@@ -186,7 +186,7 @@
                 <p class="text text-gray-600">Откройте для себя уникальные места Саратова</p>
             </div>
 
-                <!-- Карусель -->
+            <!-- Карусель -->
             <div class="relative group">
                 <div class="flex overflow-x-auto gap-6 pb-16 scrollbar-hide scroll-smooth"
                      style="scrollbar-width: none; -ms-overflow-style: none;">
