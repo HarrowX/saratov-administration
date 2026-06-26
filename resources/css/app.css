@@ -105,6 +105,9 @@ html {
 .nav-link-active{
     @apply relative text-blue-500 font-['FindSansPro'] border-b-2 border-b-(--primary-blue);
 }
+.nav-link-active.nav-link:hover::after {
+    width: 0 !important;
+}
 
 .stats-card{
     @apply flex flex-col items-center
@@ -748,7 +751,6 @@ select option:checked {
 .button-navigation--job-right {
   transition: all 0.3s ease;
 }
-
 
 
 

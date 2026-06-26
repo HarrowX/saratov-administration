@@ -13,7 +13,7 @@
         </div>
 
         <div class="flex-1 relative z-20">
-            <div class="absolute inset-0 bg-[url('/images/мост.png')] bg-no-repeat bg-cover"></div>
+            <div class="absolute inset-0 bg-[url('/images/Airbrush.png')] bg-no-repeat bg-cover bg-center"></div>
 
             <div class="relative max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 xl:px-20 h-full">
                 <div class="flex flex-col items-end h-full relative">
@@ -39,11 +39,9 @@
                                             <img src="/images/image 7.svg" alt="" class="icon size-2.5 sm:size-4 2xl:size-7 mt-5 2xl:mt-4 shrink-0">
                                             <span class="text-[8px] sm:text-[10px] 2xl:text-xs text-[#505050] pt-1 sm:pt-4">Саратов, Фрунзенский район, ул. Вольская, 81</span>
                                         </div>
-                                        <form action="{{ route('all-attractions') }}">
-                                            <button class="shrink-0 size-5 sm:size-10 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
-                                                <img src="/images/Arrow 2.png" alt="" class="icon w-1 sm:w-2 h-2.5 sm:h-4.5">
-                                            </button>
-                                        </form>
+                                        <a href="{{ route('all-attractions') }}" class="arrow-link shrink-0 size-5 sm:size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-70 transition-opacity">
+                                            <img src="/images/Arrow 2.png" alt="Стрелка" class="arrow-link-img icon w-1 sm:w-2 xl:w-3 3xl:w-4 h-2.5 sm:h-4.5 xl:h-6 3xl:h-7.5">
+                                        </a>
                                     </div>
                                 </div>
                             </div>

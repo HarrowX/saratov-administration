@@ -8,17 +8,33 @@
                 </a>
             </div>
 
-            <div class="hidden 3xl:flex items-center md:space-x-4 lg:space-x-5 3xl:space-x-6 transition text-xs 3xl:text-sm">
-                <a href="{{ route('index') }}" class="{{ request()->is('/') ? "nav-link-active nav-link" : "nav-link" }}">Главная</a>
-                <a href="{{ route('all-excurtions') }}" class="{{ request()->is('excurtions*') ? "nav-link-active nav-link" : "nav-link" }}">Туры и экскурсии</a>
-                <a href="{{ route('all-guided-tours') }}" class="{{ request()->is('guided-tours*') ? "nav-link-active nav-link" : "nav-link" }}">Экскурсоводы</a>
-                <a href="{{ route('all-restaurants') }}" class="{{ request()->is('restaurants*') ? "nav-link-active nav-link" : "nav-link" }}">Заведения</a>
-                <a href="{{ route('all-attractions') }}" class="{{ request()->is('attractions*') ? "nav-link-active nav-link" : "nav-link" }}">Достопримечательности</a>
-                <a href="{{ route('all-hotels') }}" class="{{ request()->is('hotels*') ? "nav-link-active nav-link" : "nav-link" }}">Где остановиться</a>
-            </div>
+            <ul class="hidden lg:flex items-center md:space-x-4 lg:space-x-3 3xl:space-x-6 transition text-xs 3xl:text-sm pt-1">
+                <li>
+                    <a href="{{ route('index') }}" class="{{ request()->is('/') ? "nav-link-active nav-link" : "nav-link" }}">Главная</a>
+                </li>
+                <li>
+                    <a href="{{ route('all-excurtions') }}" class="{{ request()->is('excurtions*') ? "nav-link-active nav-link" : "nav-link" }}">Туры и экскурсии</a>
+                </li>
+                <li>
+                    <a href="{{ route('all-guided-tours') }}" class="{{ request()->is('guided-tours*') ? "nav-link-active nav-link" : "nav-link" }}">Экскурсоводы</a>
+                </li>
+                <li class="nav-link group">Места
+                    <ul class="absolute top-4.5 3xl:top-5.5 -translate-x-5 invisible hidden opacity-0 group-hover:flex group-hover:flex-col group-hover:opacity-100 group-hover:visible gap-5 p-5 bg-white z-1 rounded-xl transition-all duration-700 shadow-2xl">
+                        <li class="block">
+                            <a href="{{ route('all-restaurants') }}" class="{{ request()->is('restaurants*') ? "nav-link-active nav-link" : "nav-link" }}">Заведения</a>
+                        </li>
+                        <li class="block">
+                            <a href="{{ route('all-attractions') }}" class="{{ request()->is('attractions*') ? "nav-link-active nav-link" : "nav-link" }}">Достопримечательности</a>
+                        </li>
+                        <li class="block">
+                            <a href="{{ route('all-hotels') }}" class="{{ request()->is('hotels*') ? "nav-link-active nav-link" : "nav-link" }}">Где остановиться</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
 
-            <div class="flex items-center space-x-5 sm:space-x-8">
-                <button onclick="showAppDownload()" class="hidden md:flex items-center bg-linear-to-r from-green-500 to-teal-600 text-white px-5 py-2 rounded-lg hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-sm 3xl:text-base">
+            <div class="flex items-center space-x-3 2xl:space-x-8">
+                <button onclick="showAppDownload()" class="hidden md:flex items-center bg-linear-to-r from-green-500 to-teal-600 text-white px-5 py-2 rounded-lg hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-sm 3xl:text-base z-2">
                     <i class="fas fa-download mr-3"></i>Приложение
                 </button>
                 <button id="" class="">
@@ -31,7 +47,7 @@
                 </button>
 
                 <div class="relative">
-                    <button id="mobileMenuBtn" class="flex 3xl:hidden cursor-pointer">
+                    <button id="mobileMenuBtn" class="flex lg:hidden cursor-pointer">
                         <i class="fas fa-bars text-2xl sm:text-4xl text-gray-600"></i>
                     </button>
 

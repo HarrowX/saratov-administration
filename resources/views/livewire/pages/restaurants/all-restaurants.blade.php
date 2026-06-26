@@ -6,7 +6,7 @@
 <div>
     <!--Hero Section-->
     <section id="home" class="hero-section pt-21 min-h-100 md:min-h-screen flex flex-col gap-17 items-center justify-center relative">
-        <div class="absolute inset-0 bg-[url('/images/5f27bd4403328a4ff674a7c90c938d56b200c299.jpg')] bg-no-repeat bg-cover">
+        <div class="absolute inset-0 bg-[url('/images/bg-restaurants.jpg')] bg-no-repeat bg-cover">
             <div class="absolute inset-0 bg-[rgba(239,230,215,0.73)]"></div>
         </div>
         <div class="relative z-10 text-center text-black">
@@ -122,31 +122,20 @@
                             </div>
                                 <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold">{{ $restaurant->name}}</h2>
                         </div>
-                            <div class="flex Tary-Bary flex-col justify-between h-full">
+                            <div class="flex flex-col justify-between h-full font-['FindSansPro']">
                                 <div class="flex flex-col justify-end text-sm lg:text-base xl:text-lg 3xl:text-2xl font-light gap-3 text-[#5F5F5F] mb-2 lg:mb-6">
                                     <p class="text-center">{{ $restaurant->kitchen }} кухня</p>
                                     <span class="flex items-center gap-3.5">
                                         <i class="fas fa-phone"></i>
                                         {{ $restaurant->phone }}
                                     </span>
-{{--                                    <span class="flex items-center gap-3.5">--}}
-{{--                                        <i class="fa-solid fa-clock"></i>--}}
-{{--                                        <div class="flex flex-col gap-2">--}}
-{{--                                            @forelse($restaurant->worktime ?? [] as $day => $time)--}}
-{{--                                                <p>{{ $day }}: {{ $time }}</p>--}}
-{{--                                            @empty--}}
-{{--                                                    <p>Не указано</p>--}}
-{{--                                            @endforelse--}}
-{{--                                        </div>--}}
-{{--                                    </span>--}}
-
                                 </div>
-                                <div class="w-full flex flex-row justify-between items-end gap-3">
+                                <div class="flex flex-row justify-between items-end gap-3.5">
                                     <span class="flex items-center gap-3.5 text-[#5F5F5F]">
-                                        <i class="fas fa-map-marker-alt"></i>
+                                        <i class="fas fa-map-marker-alt text-lg xs:text-2xl"></i>
                                         {{ $restaurant->address }}
                                     </span>
-                                    <a href="{{ route('single-restaurant', ['restaurant' => $restaurant->slug]) }}" class="shrink-0 size-5 sm:size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
+                                    <a href="{{ route('single-restaurant', ['restaurant' => $restaurant->slug]) }}" class="arrow-link shrink-0 size-5 sm:size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
                                         <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-1 sm:w-2 xl:w-3 3xl:w-4 h-2.5 sm:h-4.5 xl:h-6 3xl:h-7.5">
                                     </a>
                                 </div>
