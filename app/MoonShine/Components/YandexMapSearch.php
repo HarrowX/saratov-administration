@@ -15,8 +15,6 @@ final class YandexMapSearch extends MoonShineComponent
 
     protected bool $isMapOpen = false;
 
-    protected bool $isModalOpen = false;
-
     protected array $selectedPoint = [];
 
     public function __construct(ModelResource $resource)
@@ -43,7 +41,6 @@ final class YandexMapSearch extends MoonShineComponent
         return [
             'points' => $this->points,
             'isMapOpen' => $this->isMapOpen,
-            'isModalOpen' => $this->isModalOpen,
             'selectedPoint' => $this->selectedPoint,
         ];
     }
