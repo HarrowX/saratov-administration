@@ -11,9 +11,7 @@ use App\MoonShine\Resources\Hotel\HotelResource;
 use App\MoonShine\Resources\Restaurant\RestaurantResource;
 use MoonShine\AssetManager\Raw;
 use MoonShine\ColorManager\ColorManager;
-use MoonShine\ColorManager\Palettes\GrayPalette;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
-use MoonShine\Contracts\ColorManager\PaletteContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\MenuManager\MenuGroup;
@@ -23,16 +21,11 @@ use Override;
 
 final class MoonShineLayout extends AppLayout
 {
-    /**
-     * @var null|class-string<PaletteContract>
-     */
-    protected ?string $palette = GrayPalette::class;
-
     protected function assets(): array
     {
         return [
             ...parent::assets(),
-            Raw::make('<script src="https://api-maps.yandex.ru/v3/?apikey=' . config('app.admin.ymap_api_key') . '&lang=ru_RU"></script>')
+            Raw::make('<script src="https://api-maps.yandex.ru/v3/?apikey='.config('app.admin.ymap_api_key').'&lang=ru_RU"></script>'),
         ];
     }
 

@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Components;
 
-
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\MoonShineComponent;
 
-/**
- * @method static static make()
- */
 final class YandexMapSearch extends MoonShineComponent
 {
     protected string $view = 'admin.components.yandex-map-search';
 
     protected array $points;
 
-    protected bool $isOpen = false;
+    protected bool $isMapOpen = false;
+
+    protected bool $isModalOpen = false;
+
+    protected array $selectedPoint = [];
 
     public function __construct(ModelResource $resource)
     {
@@ -38,14 +38,13 @@ final class YandexMapSearch extends MoonShineComponent
             ->toArray();
     }
 
-    /*
-     * @return array<string, mixed>
-     */
     protected function viewData(): array
     {
         return [
             'points' => $this->points,
-            'isOpen' => $this->isOpen,
+            'isMapOpen' => $this->isMapOpen,
+            'isModalOpen' => $this->isModalOpen,
+            'selectedPoint' => $this->selectedPoint,
         ];
     }
 }

@@ -133,5 +133,5 @@ return [
 
     'admin' => [
         'ymap_api_key' => env('YMAP_API_KEY'),
-    ]
+    ],
 ];

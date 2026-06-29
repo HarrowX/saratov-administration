@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Attraction\Pages;
 
+use App\MoonShine\Components\YandexMapSearch;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
 use MoonShine\Contracts\UI\ComponentContract;
@@ -137,6 +138,7 @@ class AttractionIndexPage extends IndexPage
     {
         return [
             ...parent::topLayer(),
+            YandexMapSearch::make($this->getResource()),
         ];
     }
 
