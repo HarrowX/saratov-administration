@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\CustomPoint;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\CustomPoint;
-use App\MoonShine\Resources\CustomPoint\Pages\CustomPointIndexPage;
-use App\MoonShine\Resources\CustomPoint\Pages\CustomPointFormPage;
 use App\MoonShine\Resources\CustomPoint\Pages\CustomPointDetailPage;
-
-use MoonShine\Laravel\Resources\ModelResource;
+use App\MoonShine\Resources\CustomPoint\Pages\CustomPointFormPage;
+use App\MoonShine\Resources\CustomPoint\Pages\CustomPointIndexPage;
 use MoonShine\Contracts\Core\PageContract;
+use MoonShine\Laravel\Resources\ModelResource;
 
 /**
  * @extends ModelResource<CustomPoint, CustomPointIndexPage, CustomPointFormPage, CustomPointDetailPage>

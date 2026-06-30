@@ -39,7 +39,9 @@ class ContentController extends Controller
 
         return AttractionResource::collection($query->paginate($perPage));
     }
-    public function excursions() {
+
+    public function excursions()
+    {
         return response()->json(
             Excursion::with('attachments')->get()->toArray(), 200
         );

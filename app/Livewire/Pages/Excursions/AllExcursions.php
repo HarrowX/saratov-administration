@@ -9,7 +9,8 @@ class AllExcursions extends Component
 {
     public $excursions;
 
-    public function mount() {
+    public function mount()
+    {
         $this->excursions = Excursion::with('attachments')->get();
     }
 

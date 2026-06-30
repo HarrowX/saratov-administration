@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->enum('type', ['Пеший', 'Автобусный', 'Велосипедный', 'Водный', 'Комбинированный']);
-            $table->integer('duration'); //продолжительность в минутах
-            $table->decimal('distance', 10, 2)->nullable(); //протяженность маршрута в км
+            $table->integer('duration'); // продолжительность в минутах
+            $table->decimal('distance', 10, 2)->nullable(); // протяженность маршрута в км
             $table->enum('difficulty', ['Легко', 'Средне', 'Тяжело']);
             $table->integer('group_size_min')->nullable();
             $table->integer('group_size_max')->nullable();
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->enum('schedule_type', ['По расписанию', 'По запросу'])->nullable();
             $table->string('operator_name')->nullable();
             $table->string('operator_phone')->nullable();
-            $table->boolean('booking_enabled')->nullable();  //бронирование
+            $table->boolean('booking_enabled')->nullable();  // бронирование
             $table->decimal('rating')->nullable();
             $table->integer('views_count')->nullable();
             $table->enum('status', ['Активный', 'Неактивный', 'Сезонный'])->nullable();

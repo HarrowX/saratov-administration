@@ -9,29 +9,25 @@ use App\Models\CustomPoint;
 use App\Models\Hotel;
 use App\Models\Restaurant;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
+use App\MoonShine\Resources\Excursion\ExcursionResource;
 use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
-use MoonShine\Laravel\Fields\Relationships\HasMany;
+use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
-use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\UI\Components\Table\TableBuilder;
-use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\QueryTags\QueryTag;
+use MoonShine\Support\ListOf;
 use MoonShine\UI\Components\Metrics\Wrapped\Metric;
+use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\UI\Fields\Checkbox;
 use MoonShine\UI\Fields\ID;
-use App\MoonShine\Resources\Excursion\ExcursionResource;
-use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Number;
-use MoonShine\UI\Fields\Phone;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
-use MoonShine\UI\Fields\Url;
 use Throwable;
-
 
 /**
  * @extends IndexPage<ExcursionResource>
@@ -48,7 +44,7 @@ class ExcursionIndexPage extends IndexPage
         return [
             ID::make(),
             Text::make('Название', 'name')->unescape()->required(),
-            Slug::make('Слаг','slug')->from('name')->unique(),
+            Slug::make('Слаг', 'slug')->from('name')->unique(),
             Textarea::make('Описание', 'description')->unescape()->required(),
             Select::make('Тип экскурсии', 'type')
                 ->options([
@@ -56,7 +52,7 @@ class ExcursionIndexPage extends IndexPage
                     'автобусный' => 'Автобусный',
                     'велосипедный' => 'Велосипедный',
                     'водный' => 'Водный',
-                    'комбинированный' => 'Комбинированный'
+                    'комбинированный' => 'Комбинированный',
                 ])
                 ->required(),
             Number::make('Длительность (минут)', 'duration')
@@ -69,7 +65,7 @@ class ExcursionIndexPage extends IndexPage
                 ->options([
                     'Легко' => 'Легко',
                     'Средне' => 'Средне',
-                    'Тяжело' => 'Тяжело'
+                    'Тяжело' => 'Тяжело',
                 ]),
             Number::make('Мин. размер группы', 'group_size_min')
                 ->min(1),
@@ -99,7 +95,7 @@ class ExcursionIndexPage extends IndexPage
             Select::make('Тип расписания', 'schedule_type')
                 ->options([
                     'По расписанию' => 'По расписанию',
-                    'По запросу' => 'По запросу'
+                    'По запросу' => 'По запросу',
                 ])
                 ->required(),
             Text::make('Оператор', 'operator_name')
@@ -111,7 +107,7 @@ class ExcursionIndexPage extends IndexPage
                 ->options([
                     'Активный' => 'Активный',
                     'Неактивный' => 'Неактивный',
-                    'Сезонный' => 'Сезонный'
+                    'Сезонный' => 'Сезонный',
                 ])
                 ->required(),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
@@ -134,24 +130,24 @@ class ExcursionIndexPage extends IndexPage
                         ->reactive()
                         ->nullable(),
                     Select::make('Объект', 'pointable_id')
-                        ->options(function() {
+                        ->options(function () {
                             $options = [];
 
                             foreach (Attraction::all() as $item) {
-                                $options['attraction_' . $item->id] = 'Достопримечательность: ' . $item->name . ' (' . $item->slug . ')';
+                                $options['attraction_'.$item->id] = 'Достопримечательность: '.$item->name.' ('.$item->slug.')';
                             }
 
                             foreach (Hotel::all() as $item) {
-                                $options['hotel_' . $item->id] = 'Отель: ' . $item->name . ' (' . $item->slug . ')';
+                                $options['hotel_'.$item->id] = 'Отель: '.$item->name.' ('.$item->slug.')';
                             }
 
                             foreach (Restaurant::all() as $item) {
-                                $options['restaurant_' . $item->id] = 'Ресторан: ' . $item->name . ' (' . $item->slug . ')';
+                                $options['restaurant_'.$item->id] = 'Ресторан: '.$item->name.' ('.$item->slug.')';
                             }
 
                             foreach (CustomPoint::all() as $item) {
-                                $slug = $item->slug ?? 'id:' . $item->id;
-                                $options['custom_' . $item->id] = 'Дополнительная: ' . $item->name . ' (' . $slug . ')';
+                                $slug = $item->slug ?? 'id:'.$item->id;
+                                $options['custom_'.$item->id] = 'Дополнительная: '.$item->name.' ('.$slug.')';
                             }
 
                             return $options;
@@ -197,7 +193,6 @@ class ExcursionIndexPage extends IndexPage
 
     /**
      * @param  TableBuilder  $component
-     *
      * @return TableBuilder
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
@@ -207,34 +202,37 @@ class ExcursionIndexPage extends IndexPage
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function topLayer(): array
     {
         return [
-            ...parent::topLayer()
+            ...parent::topLayer(),
         ];
     }
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function mainLayer(): array
     {
         return [
-            ...parent::mainLayer()
+            ...parent::mainLayer(),
         ];
     }
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function bottomLayer(): array
     {
         return [
-            ...parent::bottomLayer()
+            ...parent::bottomLayer(),
         ];
     }
 }

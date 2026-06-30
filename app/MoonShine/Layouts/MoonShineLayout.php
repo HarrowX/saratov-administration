@@ -6,6 +6,9 @@ namespace App\MoonShine\Layouts;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
+use App\MoonShine\Resources\CustomPoint\CustomPointResource;
+use App\MoonShine\Resources\Excursion\ExcursionResource;
+use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
 use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
 use App\MoonShine\Resources\Hotel\HotelResource;
 use App\MoonShine\Resources\Restaurant\RestaurantResource;
@@ -18,9 +21,6 @@ use MoonShine\MenuManager\MenuGroup;
 use MoonShine\MenuManager\MenuItem;
 use MoonShine\UI\Components\Layout\Div;
 use Override;
-use App\MoonShine\Resources\Excursion\ExcursionResource;
-use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
-use App\MoonShine\Resources\CustomPoint\CustomPointResource;
 
 final class MoonShineLayout extends AppLayout
 {

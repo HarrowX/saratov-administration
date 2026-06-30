@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\CustomPoint\Pages;
 
+use App\MoonShine\Resources\CustomPoint\CustomPointResource;
+use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
-use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\UI\Components\Table\TableBuilder;
-use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\QueryTags\QueryTag;
-use MoonShine\UI\Components\Metrics\Wrapped\Metric;
-use MoonShine\UI\Fields\ID;
-use App\MoonShine\Resources\CustomPoint\CustomPointResource;
 use MoonShine\Support\ListOf;
+use MoonShine\UI\Components\Metrics\Wrapped\Metric;
+use MoonShine\UI\Components\Table\TableBuilder;
+use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 use Throwable;
-
 
 /**
  * @extends IndexPage<CustomPointResource>
@@ -35,7 +34,7 @@ class CustomPointIndexPage extends IndexPage
         return [
             ID::make()->sortable(),
             Text::make('Название', 'name')->required(),
-            Slug::make('Слаг','slug')->from('name')->unique(),
+            Slug::make('Слаг', 'slug')->from('name')->unique(),
             Textarea::make('Описание', 'description')->nullable(),
             Number::make('Время на точке', 'duration_minutes')->min(0)->nullable(),
             Number::make('Широта', 'latitude')->nullable(),
@@ -74,7 +73,6 @@ class CustomPointIndexPage extends IndexPage
 
     /**
      * @param  TableBuilder  $component
-     *
      * @return TableBuilder
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
@@ -84,34 +82,37 @@ class CustomPointIndexPage extends IndexPage
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function topLayer(): array
     {
         return [
-            ...parent::topLayer()
+            ...parent::topLayer(),
         ];
     }
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function mainLayer(): array
     {
         return [
-            ...parent::mainLayer()
+            ...parent::mainLayer(),
         ];
     }
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function bottomLayer(): array
     {
         return [
-            ...parent::bottomLayer()
+            ...parent::bottomLayer(),
         ];
     }
 }

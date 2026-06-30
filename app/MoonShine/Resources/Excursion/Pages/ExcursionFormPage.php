@@ -9,35 +9,26 @@ use App\Models\CustomPoint;
 use App\Models\Hotel;
 use App\Models\Restaurant;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
-use App\MoonShine\Resources\CustomPoint\CustomPointResource;
+use App\MoonShine\Resources\Excursion\ExcursionResource;
 use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
-use Faker\Provider\Company;
-use MoonShine\Laravel\Fields\Relationships\BelongsTo;
-use MoonShine\Laravel\Fields\Relationships\HasMany;
+use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
+use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Contracts\UI\FieldContract;
+use MoonShine\Contracts\UI\FormBuilderContract;
 use MoonShine\Laravel\Fields\Relationships\MorphTo;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\FormPage;
-use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\Contracts\UI\FormBuilderContract;
-use MoonShine\UI\Components\FormBuilder;
-use MoonShine\Contracts\UI\FieldContract;
-use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
-use App\MoonShine\Resources\Excursion\ExcursionResource;
 use MoonShine\Support\ListOf;
+use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Fields\Checkbox;
 use MoonShine\UI\Fields\ID;
-use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\Image;
-use MoonShine\UI\Fields\Json;
 use MoonShine\UI\Fields\Number;
-use MoonShine\UI\Fields\Phone;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
-use MoonShine\UI\Fields\Url;
 use Throwable;
-
 
 /**
  * @extends FormPage<ExcursionResource>
@@ -52,8 +43,9 @@ class ExcursionFormPage extends FormPage
         return [
             ID::make(),
             Text::make('Название', 'name')->unescape()->required(),
-            Slug::make('Слаг','slug')->from('name')->unique()->canSee(function () {
+            Slug::make('Слаг', 'slug')->from('name')->unique()->canSee(function () {
                 $item = $this->getResource()?->getItem();
+
                 return $item && $item->exists;
             }),
             Textarea::make('Описание', 'description')->unescape()->required(),
@@ -63,7 +55,7 @@ class ExcursionFormPage extends FormPage
                     'Автобусный' => 'Автобусный',
                     'Велосипедный' => 'Велосипедный',
                     'Водный' => 'Водный',
-                    'Комбинированный' => 'Комбинированный'
+                    'Комбинированный' => 'Комбинированный',
                 ])
                 ->required(),
             Number::make('Длительность (минут)', 'duration')
@@ -76,7 +68,7 @@ class ExcursionFormPage extends FormPage
                 ->options([
                     'Легко' => 'Легко',
                     'Средне' => 'Средне',
-                    'Тяжело' => 'Тяжело'
+                    'Тяжело' => 'Тяжело',
                 ]),
             Number::make('Мин. размер группы', 'group_size_min')
                 ->min(1),
@@ -106,7 +98,7 @@ class ExcursionFormPage extends FormPage
             Select::make('Тип расписания', 'schedule_type')
                 ->options([
                     'По расписанию' => 'По расписанию',
-                    'По запросу' => 'По запросу'
+                    'По запросу' => 'По запросу',
                 ])
                 ->required(),
             Text::make('Оператор', 'operator_name')
@@ -118,7 +110,7 @@ class ExcursionFormPage extends FormPage
                 ->options([
                     'Активный' => 'Активный',
                     'Неактивный' => 'Неактивный',
-                    'Сезонный' => 'Сезонный'
+                    'Сезонный' => 'Сезонный',
                 ])
                 ->required(),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
@@ -166,7 +158,6 @@ class ExcursionFormPage extends FormPage
 
     /**
      * @param  FormBuilder  $component
-     *
      * @return FormBuilder
      */
     protected function modifyFormComponent(FormBuilderContract $component): FormBuilderContract
@@ -176,34 +167,37 @@ class ExcursionFormPage extends FormPage
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function topLayer(): array
     {
         return [
-            ...parent::topLayer()
+            ...parent::topLayer(),
         ];
     }
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function mainLayer(): array
     {
         return [
-            ...parent::mainLayer()
+            ...parent::mainLayer(),
         ];
     }
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function bottomLayer(): array
     {
         return [
-            ...parent::bottomLayer()
+            ...parent::bottomLayer(),
         ];
     }
 }

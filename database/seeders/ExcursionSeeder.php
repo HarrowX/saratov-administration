@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Excursion;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class ExcursionSeeder extends Seeder
 {
@@ -45,7 +44,7 @@ class ExcursionSeeder extends Seeder
                 'price_group' => fake()->numberBetween(2000, 20000),
                 'is_free' => fake()->boolean(10),
                 'age_restriction' => fake()->randomElement(['0+', '3+', '6+', '12+', '16+', null]),
-                'meeting_point' => fake()->streetName() . ', ' . fake()->randomElement(['У фонтана', 'У входа', 'У памятника', 'У метро', 'У парковки']),
+                'meeting_point' => fake()->streetName().', '.fake()->randomElement(['У фонтана', 'У входа', 'У памятника', 'У метро', 'У парковки']),
                 'meeting_address' => fake()->address(),
                 'schedule_type' => fake()->randomElement(['По расписанию', 'По запросу']),
                 'operator_name' => fake()->company(),

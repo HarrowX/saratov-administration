@@ -8,9 +8,7 @@ use App\Models\Excursion;
 use App\Models\ExcursionPoint;
 use App\Models\Hotel;
 use App\Models\Restaurant;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class ExcursionPointSeeder extends Seeder
 {
