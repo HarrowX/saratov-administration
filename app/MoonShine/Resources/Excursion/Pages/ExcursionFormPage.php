@@ -130,6 +130,22 @@ class ExcursionFormPage extends FormPage
 
             RelationRepeater::make('Точки маршрута', 'points', resource: ExcursionPointResource::class)
                 ->creatable()
+                ->fields([
+                    ID::make(),
+                    Number::make('Порядок', 'order')->default(0),
+                    Slug::make('Слаг','slug')->from('name')->unique()->unescape()->canSee(function () {
+                        $item = $this->getResource()?->getItem();
+                        return $item && $item->exists;
+                    }),
+                    MorphTo::make('Точка', 'pointable', resource: ExcursionPointResource::class)
+                        ->types([
+                            Attraction::class => ['name', 'Достопримечательность'],
+                            Restaurant::class => ['name', 'Ресторан'],
+                            Hotel::class => ['name', 'Отель'],
+                            CustomPoint::class => ['name', 'Дополнительная точка экскурсии'],
+                        ]),
+                    Number::make('Время на точке', 'duration_minutes')->nullable(),
+                ])
                 ->removable()
                 ->sortable('order'),
 
