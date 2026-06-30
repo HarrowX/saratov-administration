@@ -58,4 +58,8 @@ Route::view('profile/place-visits', 'place-visits')
     ->middleware(['auth', 'verified'])
     ->name('place-visits');
 
+Route::view('profile/history-views', 'history-views')
+    ->middleware(['auth', 'verified'])
+    ->name('history-views');
+
 require __DIR__.'/auth.php';
