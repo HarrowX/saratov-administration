@@ -18,7 +18,11 @@ class AuthVkController extends Controller
             $tokenData = $request->all();
 
             if (empty($tokenData['access_token'])) {
-                return response()->json(['error' => 'No access token provided'], 400);
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Токен не был предоставлен',
+                    'redirect' => null,
+                ], 400);
             }
 
             $userInfo = Http::get('https://api.vk.com/method/users.get', [
@@ -30,7 +34,11 @@ class AuthVkController extends Controller
             $userData = $userInfo->json()['response'][0] ?? null;
 
             if (! $userData) {
-                return response()->json(['error' => 'Failed to get user data'], 400);
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Не получилось получить данные пользователя',
+                    'redirect' => null,
+                ], 400);
             }
 
             $user = $this->findUserAndUpdateAvatar($userData['id'], $userData['photo_100']);
@@ -56,7 +64,7 @@ class AuthVkController extends Controller
 
             return response()->json([
                 'success' => false,
-                'error' => 'Authorization error code: '.$e->getCode(),
+                'error' => 'Ошибка на сервере, код ошибки: '.$e->getCode(),
                 'redirect' => null,
             ], 500);
         }
