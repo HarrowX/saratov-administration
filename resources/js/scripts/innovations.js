@@ -210,6 +210,7 @@ function voiceInput() {
 // }
 
 window.startARExperience = startARExperience;
+
 // window.startQuest = startQuest;
 // window.QuestModule = QuestModule;
 window.ARModule = ARModule;
@@ -236,6 +237,5 @@ document.addEventListener('DOMContentLoaded', initInnovations);
 window.innovationsModule = {
     ARModule,
     // AIGuideModule,
-    // QuestModule,
     VoiceModule
 };

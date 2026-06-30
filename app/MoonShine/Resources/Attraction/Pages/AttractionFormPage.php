@@ -90,8 +90,8 @@ class AttractionFormPage extends FormPage
             Switcher::make('Парковка', 'has_parking'),
             Box::make('Координаты', [
                 Div::make([
-                    Text::make('Широта', 'longitude'),
-                    Text::make('Долгота', 'latitude'),
+                    Text::make('Широта', 'latitude'),
+                    Text::make('Долгота', 'longitude'),
                 ])->style('display: flex; gap: 1rem;'),
             ]),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)

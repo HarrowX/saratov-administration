@@ -43,5 +43,20 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('place_visits');
+
+        Schema::table('attractions', function (Blueprint $table) {
+            $table->decimal('latitude')->nullable()->change();
+            $table->decimal('longitude')->nullable()->change();
+        });
+
+        Schema::table('hotels', function (Blueprint $table) {
+            $table->decimal('latitude')->nullable()->change();
+            $table->decimal('longitude')->nullable()->change();
+        });
+
+        Schema::table('restaurants', function (Blueprint $table) {
+            $table->decimal('latitude')->nullable()->change();
+            $table->decimal('longitude')->nullable()->change();
+        });
     }
 };

@@ -21,18 +21,15 @@ function updateProfileData() {
 function unlockAchievement(achievementId, name, description) {
     // Check if already unlocked
     const unlockedAchievements = JSON.parse(localStorage.getItem('unlockedAchievements') || '[]');
-    
+
     if (!unlockedAchievements.includes(achievementId)) {
         unlockedAchievements.push(achievementId);
         localStorage.setItem('unlockedAchievements', JSON.stringify(unlockedAchievements));
-        
+
         // Update user profile
         userProfile.achievements++;
         updateProfileData();
-        
-        // Show achievement notification
-        showAchievementNotification(name, description);
-        
+
         // Add bonus points
         addBonusPoints(50);
     }
@@ -46,14 +43,14 @@ function addBonusPoints(points) {
 // Check for visited places
 function checkVisitedPlace(placeId) {
     const visitedPlaces = JSON.parse(localStorage.getItem('visitedPlaces') || '[]');
-    
+
     if (!visitedPlaces.includes(placeId)) {
         visitedPlaces.push(placeId);
         localStorage.setItem('visitedPlaces', JSON.stringify(visitedPlaces));
-        
+
         userProfile.placesVisited++;
         updateProfileData();
-        
+
         // Check for achievements
         if (visitedPlaces.length === 1) {
             unlockAchievement('first_place', 'Первооткрыватель', 'Посетите первую достопримечательность');
@@ -62,7 +59,7 @@ function checkVisitedPlace(placeId) {
         } else if (visitedPlaces.length === 20) {
             unlockAchievement('city_expert', 'Знаток города', 'Посетите 20 мест');
         }
-        
+
         return true;
     }
     return false;

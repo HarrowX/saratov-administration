@@ -80,8 +80,8 @@ class RestaurantFormPage extends FormPage
                 HTML),
                 Box::make('Координаты', [
                     Div::make([
-                        Text::make('Широта', 'longitude'),
-                        Text::make('Долгота', 'latitude'),
+                        Text::make('Широта', 'latitude'),
+                        Text::make('Долгота', 'longitude'),
                     ])->style('display: flex; gap: 1rem;'),
                 ]),
                 RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
