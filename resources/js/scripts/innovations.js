@@ -211,7 +211,6 @@ function startQuest(questId) {
 
 window.startARExperience = startARExperience;
 window.startQuest = startQuest;
-window.QuestModule = QuestModule;
 window.ARModule = ARModule;
 window.VoiceModule = VoiceModule;
 
@@ -236,6 +235,5 @@ document.addEventListener('DOMContentLoaded', initInnovations);
 window.innovationsModule = {
     ARModule,
     // AIGuideModule,
-    QuestModule,
     VoiceModule
 };
