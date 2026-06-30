@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Restaurant\Pages;
 
+use App\MoonShine\Components\YandexMapSearch;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Restaurant\RestaurantResource;
 use MoonShine\Contracts\UI\ComponentContract;
@@ -126,6 +127,7 @@ class RestaurantIndexPage extends IndexPage
     {
         return [
             ...parent::topLayer(),
+            YandexMapSearch::make($this->getResource()),
         ];
     }
 
