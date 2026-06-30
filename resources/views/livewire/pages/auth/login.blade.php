@@ -80,5 +80,8 @@ new #[Layout('layouts.guest')] class extends Component
                 Войти
             </x-primary-button>
         </div>
+        <div class="mt-6">
+            <x-vk-one-tap />
+        </div>
     </form>
 </div>

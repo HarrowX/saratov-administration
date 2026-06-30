@@ -26,6 +26,9 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
+        'vk_id',
+        'vk_avatar',
+        'email_verified_at',
     ];
 
     /**

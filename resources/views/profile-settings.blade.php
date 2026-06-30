@@ -15,6 +15,19 @@
 
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
+                    <h2 class="text-lg font-medium text-gray-900">Социальные сети</h2>
+                    <p class="mt-1 text-sm text-gray-600">
+                        Привяжите аккаунт ВКонтакте для быстрого входа.
+                    </p>
+
+                    <div class="mt-6">
+                        <livewire:profile.vk-connect />
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="max-w-xl">
                     <livewire:profile.update-password-form />
                 </div>
             </div>
