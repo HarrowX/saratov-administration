@@ -205,12 +205,14 @@ function voiceInput() {
     VoiceModule.startListening();
 }
 
-function startQuest(questId) {
-    QuestModule.startQuest(questId);
-}
+// function startQuest(questId) {
+//     QuestModule.startQuest(questId);
+// }
 
 window.startARExperience = startARExperience;
-window.startQuest = startQuest;
+
+// window.startQuest = startQuest;
+// window.QuestModule = QuestModule;
 window.ARModule = ARModule;
 window.VoiceModule = VoiceModule;
 
