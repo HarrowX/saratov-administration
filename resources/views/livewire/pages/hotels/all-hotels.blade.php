@@ -124,38 +124,35 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-3 3xl:gap-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 lg:p-6 xl:gap-y-12">
                 @foreach ($hotels as $hotel)
-                    <div class="card bg-white rounded-[7px] sm:rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mb-2 xl:mb-12">
-                        <div class="card-content p-2 sm:p-5 relative">
-                            <div class="">
-                                <img src="{{ $hotel->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $hotel->name }}" class="phone rounded-[7px] sm:rounded-[19px]">
-                                <div class="absolute top-4 right-3.5 sm:top-10 sm:right-9.5 size-5 sm:size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-[3px] sm:rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-xl xl:text-2xl shadow-lg">
-                                    <i class="fa-sharp fa-solid fa-heart"></i>
+                    <div class="card bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="card-content group p-5 relative grid grid-rows-subgrid content-between row-span-2 gap-3 h-full font-['FindSansPro']">
+                            <div class="flex flex-col gap-5">
+                                <div class="overflow-hidden rounded-[7px] sm:rounded-[19px]">
+                                    <img src="{{ $hotel->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $hotel->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <div class="absolute top-7 right-6.5 sm:top-10 sm:right-9.5 size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-md xl:rounded-xl flex items-center justify-center text-white text-xl xl:text-2xl shadow-lg">
+                                        <i class="fa-sharp fa-solid fa-heart"></i>
+                                    </div>
+                                </div>
+                                <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold">{{ $hotel->name}}</h2>
+                                <div class="flex flex-col justify-end text-sm lg:text-base 3xl:text-2xl font-light gap-3 text-[#5F5F5F]">
+                                    <p class="text-center mb-2 ">{{ $hotel->type}}</p>
+                                    <span class="flex items-center gap-3.5">
+                                    <i class="fas fa-phone text-lg xl:text-xl"></i>
+                                    {{ $hotel->phone }}
+                                </span>
                                 </div>
                             </div>
-                            <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">
-                                <h1 class="text-center text-xs sm:text-lg lg:text-xl xl:text-3xl font-bold">{{ $hotel->name }}</h1>
-                                <div class="flex flex-col">
-                                    <div class="flex flex-col text-[8px] sm:text-sm lg:text-base xl:text-lg 3xl:text-xl font-light gap-3 text-[#5F5F5F] mt-2 lg:mt-5 mb-0 sm:mb-2 lg:mb-6">
-                                        <p class="text-center">{{ $hotel->type}}</p>
-{{--                                        <span class="flex items-center gap-3.5">--}}
-{{--                                            <i class="fa-solid fa-clock"></i>--}}
-{{--                                        </span>--}}
-                                        <span class="flex items-center gap-3.5">
-                                            <i class="fas fa-phone"></i>
-                                            {{ $hotel->phone }}
-                                        </span>
-                                        <span class="flex items-center gap-3.5">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            {{ $hotel->address }}
-                                        </span>
-                                    </div>
-                                    <form action="{{ route('single-hotel', ['hotel' => $hotel->slug]) }}">
-                                        <button class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity">
-                                            Подробнее
-                                        </button>
-                                    </form>
+                            <div class="flex flex-col justify-between h-full font-['FindSansPro']">
+                                <div class="flex flex-row justify-between items-end gap-3.5 text-sm lg:text-base 3xl:text-2xl font-light">
+                                <span class="flex items-center gap-3.5 text-[#5F5F5F]">
+                                    <i class="fas fa-map-marker-alt text-xl xl:text-2xl"></i>
+                                    {{ $hotel->address }}
+                                </span>
+                                    <a href="{{ route('single-hotel', ['hotel' => $hotel->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
+                                        <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
+                                    </a>
                                 </div>
                             </div>
                         </div>

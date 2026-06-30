@@ -5,42 +5,38 @@
             <h2 class="text-2xl md:text-3xl font-bold mb-4">Места рядом</h2>
             <p class="text-gray-600 max-w-2xl mx-auto">Интересные локации, которые удобно посетить по пути: знаковые точки, уютные уголки и лучшие места для фото.</p>
         </div>
-
         <!-- Карусель -->
         <div class="relative group">
             <div class="flex overflow-x-auto gap-4 md:gap-6 pb-6 scrollbar-hide scroll-smooth snap-x snap-mandatory"
                  style="scrollbar-width: none; -ms-overflow-style: none;">
                 @forelse ($attractions as $attraction)
-                    <div class="snap-start shrink-0 w-[calc(50%-8px)] sm:w-80 lg:w-[calc(33.333%-16px)] bg-white rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                        <div class="p-2 sm:p-4 3xl:p-5 h-full flex flex-col">
-                            <div class="w-full mb-4 overflow-hidden rounded-lg shrink-0">
-                                <img src="{{ $attraction->attachments?->get(0)?->url() ?? '' }}" alt="Изображение {{ $attraction->name }}">
-                            </div>
-
-                            <div class="font-['FindSansPro'] flex flex-col h-26 sm:h-50 md:h-60">
-                                <div class="grow">
-                                    <h4 class="">{{ $attraction->name }}</h4>
-                                    <p class="text-[7px] sm:text-base text-[#888888] line-clamp-4">{{ $attraction->short_description }}</p>
-                                </div>
-
-                                <div class="shrink-0 mt-2 mb-3">
-                                    <div class="flex items-end justify-between gap-2">
-                                        <div class="flex gap-1 sm:gap-4 flex-1 max-w-37 sm:max-w-75">
-                                            <img src="/images/image 7.svg" alt="" class="icon size-2.5 sm:size-4 md:size-7 mt-2 sm:mt-5 shrink-0">
-                                            <span class="text-[8px] sm:text-xs xl:text-sm text-[#505050] pt-1 sm:pt-4">{{ $attraction->address }}</span>
-                                        </div>
-                                        <form action="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}">
-                                            <button class="shrink-0 size-5 sm:size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
-                                                <img src="/images/Arrow 2.png" alt="" class="icon w-1 sm:w-2 xl:w-3 3xl:w-4 h-2.5 sm:h-4.5 xl:h-6 3xl:h-7.5">
-                                            </button>
-                                        </form>
+                    <div class="card snap-start shrink-0 w-[calc(80%-8px)] sm:w-80 lg:w-[calc(33.333%-16px)] bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="card-content group/img p-5 h-full font-['FindSansPro'] relative grid grid-rows-subgrid content-between row-span-2 gap-3">
+                            <div class="flex flex-col gap-5">
+                                <div class="overflow-hidden rounded-[7px] sm:rounded-[19px]">
+                                    <img src="{{ $attraction->attachments?->get(0)?->url() ?? '' }}" alt="Изображение {{ $attraction->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover/img:scale-110 transition-transform duration-500">
+                                    <div class="absolute top-7 right-6.5 sm:top-10 sm:right-9.5 size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-md xl:rounded-xl flex items-center justify-center text-white text-xl xl:text-2xl shadow-lg">
+                                        <i class="fa-sharp fa-solid fa-heart"></i>
                                     </div>
+                                </div>
+                                <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold ">{{ $attraction->name }}</h2>
+                                <p class="text-xs sm:text-sm lg:text-base 3xl:text-2xl font-light mb-2 text-[#5F5F5F]">{{ $attraction->short_description }}</p>
+                            </div>
+                            <div class="flex flex-col justify-between h-full font-['FindSansPro']">
+                                <div class="flex flex-row justify-between items-end gap-3.5 text-xs sm:text-sm lg:text-base 3xl:text-2xl font-light">
+                                    <span class="flex items-center gap-3.5 text-[#5F5F5F]">
+                                        <i class="fas fa-map-marker-alt text-xl xl:text-2xl"></i>
+                                        {{ $attraction->address }}
+                                    </span>
+                                    <a href="{{route('single-attraction', ['attraction' => $attraction->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
+                                        <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 @empty
-                    <div class="w-full text-center py-8">
+                    <div class="w-full text-center py-8 font-['FindSansPro']">
                         <p class="text-gray-500 text-lg">Рядом нет достопримечательностей</p>
                     </div>
                 @endforelse
@@ -48,25 +44,16 @@
                 <!-- Стрелки навигации (только на десктопе) -->
                 <div class="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
                     <button onclick="this.closest('.group').querySelector('.overflow-x-auto').scrollBy({left: -400, behavior: 'smooth'})"
-                            class="scroll-button hover:text-blue-500 transition-colors">
+                            class="scroll-button hover:text-[#2663EB] transition-colors">
                         <i class="fas fa-chevron-left"></i>
                     </button>
                 </div>
 
                 <div class="absolute top-1/2 -translate-y-1/2 right-12 translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
                     <button onclick="this.closest('.group').querySelector('.overflow-x-auto').scrollBy({left: 400, behavior: 'smooth'})"
-                            class="scroll-button hover:text-blue-500 transition-colors">
+                            class="scroll-button hover:text-[#2663EB] transition-colors">
                         <i class="fas fa-chevron-right"></i>
                     </button>
-                </div>
-
-                <!-- Пагинация для мобильных -->
-                <div class="flex justify-center gap-2 mt-4 lg:hidden">
-                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                    <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
-                    <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
-                    <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
-                    <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
                 </div>
             </div>
         </div>
