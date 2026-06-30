@@ -52,7 +52,7 @@
                         </div>
                         <div class="flex items-center gap-2 xl:gap-5">
                             <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 8.svg">
-                            <p>{{ $excursion->duration }} минут</p>
+                            <p>{{num_word($excursion->duration, ['минута', 'минуты', 'минут'])}}</p>
                         </div>
                         <div class="flex items-center gap-2 xl:gap-5">
                             <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 17.svg">
@@ -105,7 +105,7 @@
     </section>
 
 <!--Achievements Section-->
-    <section class="features-section pt-6 md:pt-10 xl:pt-15 2xl:pt-25 bg-white">
+    <section class="features-section py-6 md:py-10 xl:py-15 2xl:py-25 bg-white">
         <div class="max-w-6xl xl:max-w-7xl 3xl:max-w-398.25 px-4 sm:px-20 mx-auto flex flex-col gap-12">
             <div data-aos="fade-right" class="font-['FindSansPro'] flex flex-col items-center lg:items-start">
                 <h3>Достижения</h3>
@@ -120,7 +120,7 @@
     @if(isset($nearbyLatitude) && isset($nearbyLongitude))
         @livewire('attraction-component', [
             'latitude' => $nearbyLatitude,
-            'longitude' => $nearbyLongitude
+            'longitude' => $nearbyLongitude,
         ])
     @endif
 </div>

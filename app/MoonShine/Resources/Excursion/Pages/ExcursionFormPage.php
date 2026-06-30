@@ -133,10 +133,7 @@ class ExcursionFormPage extends FormPage
                 ->fields([
                     ID::make(),
                     Number::make('Порядок', 'order')->default(0),
-                    Slug::make('Слаг','slug')->from('name')->unique()->unescape()->canSee(function () {
-                        $item = $this->getResource()?->getItem();
-                        return $item && $item->exists;
-                    }),
+
                     MorphTo::make('Точка', 'pointable', resource: ExcursionPointResource::class)
                         ->types([
                             Attraction::class => ['name', 'Достопримечательность'],

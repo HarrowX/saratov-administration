@@ -47,10 +47,7 @@ class ExcursionPointFormPage extends FormPage
                 ->required(),
 
             Number::make('Порядок', 'order')->default(0),
-            Slug::make('Слаг','slug')->from('name')->unique()->unescape()->canSee(function () {
-                $item = $this->getResource()?->getItem();
-                return $item && $item->exists;
-            }),
+
             MorphTo::make('Связанный объект', 'pointable')
                 ->types([
                     Attraction::class => [ 'name', 'Достопримечательности'],

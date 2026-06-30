@@ -153,11 +153,11 @@
                                     <div class="flex flex-row text-[8px] sm:text-sm lg:text-base xl:text-[22px] font-light gap-6 text-[#5F5F5F] mt-5 mb-0 sm:mb-2 lg:mb-6">
                                     <span class="flex items-center gap-2">
                                         <i class="fa-solid fa-clock"></i>
-                                        2 часа
+                                            {{num_word($excursion->duration, ['минута', 'минуты', 'минут'])}}
                                     </span>
                                         <span class="flex items-center gap-2">
                                         <i class="fas fa-map-marker-alt"></i>
-                                            {{$excursion->points->count()}} точек
+                                            {{num_word($excursion->points->count(), ['точка', 'точки', 'точек'])}}
                                     </span>
                                     </div>
                                     <a href="{{ route('single-excursion', ['excursion' => $excursion->slug]) }}" class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity text-center">
