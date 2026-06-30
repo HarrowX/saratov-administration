@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Socialite;
 
 class AuthVkController extends Controller
@@ -51,6 +52,7 @@ class AuthVkController extends Controller
             ]);
 
         } catch (\Exception $e) {
+            Log::error($e);
             return response()->json([
                 'success' => false,
                 'error' => 'Authorization error code: '.$e->getCode(),
@@ -96,7 +98,7 @@ class AuthVkController extends Controller
         $user = User::where('vk_id', $vkId)->first();
 
         if ($user) {
-            if ($avatar & ($user->avatar != $avatar)) {
+            if ($avatar && ($user->avatar != $avatar)) {
                 $user->update([
                     'vk_avatar' => $avatar,
                 ]);
