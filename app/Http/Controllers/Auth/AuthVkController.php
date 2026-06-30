@@ -32,12 +32,13 @@ class AuthVkController extends Controller
                 return response()->json(['error' => 'Failed to get user data'], 400);
             }
 
-            $user = $this->findUser($userData, $tokenData);
+            $user = $this->findUserAndUpdateAvatar($userData['id'], $userData['photo_100']);
 
             if (! $user) {
                 return response()->json([
                     'success' => false,
-                    'error' => 'Пользователь не найден, зарегестрируйтесь и привяжите аккаунт',
+                    'error' => 'Пользователь не найден, зарегистрируйтесь и привяжите аккаунт',
+                    'redirect' => null,
                 ], 404);
             }
 
@@ -45,12 +46,15 @@ class AuthVkController extends Controller
 
             return response()->json([
                 'success' => true,
+                'error' => null,
                 'redirect' => route('profile'),
             ]);
 
         } catch (\Exception $e) {
             return response()->json([
-                'error' => 'Authorization error: '.$e->getMessage(),
+                'success' => false,
+                'error' => 'Authorization error code: '.$e->getCode(),
+                'redirect' => null,
             ], 500);
         }
     }
@@ -87,17 +91,16 @@ class AuthVkController extends Controller
         return redirect()->route('profile-settings')->with('status', 'Аккаунт VK успешно привязан!');
     }
 
-    private function findUser($userData, $tokenData)
+    private function findUserAndUpdateAvatar($vkId, $avatar)
     {
-        $vkId = $userData['id'];
-        $avatar = $userData['photo_100'] ?? null;
-
         $user = User::where('vk_id', $vkId)->first();
 
         if ($user) {
-            $user->update([
-                'vk_avatar' => $avatar,
-            ]);
+            if ($avatar & ($user->avatar != $avatar)) {
+                $user->update([
+                    'vk_avatar' => $avatar,
+                ]);
+            }
 
             return $user;
         }
