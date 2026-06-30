@@ -18,7 +18,7 @@ class ViewAggregationScheduler
 
         DB::transaction(function () use ($guestViews) {
             $groupedViews = collect($guestViews)->groupBy(function ($item) {
-                return $item['viewable_type'] . '|' . $item['viewable_id'];
+                return $item['viewable_type'].'|'.$item['viewable_id'];
             });
 
             $groupedViews->each(function ($items, $key) {
@@ -45,8 +45,8 @@ class ViewAggregationScheduler
                     $viewableIds = [];
 
                     foreach ($views as $view) {
-                        $key = get_class($view->viewable) . '|' . $view->viewable_id;
-                        if (!isset($viewableIds[$key])) {
+                        $key = get_class($view->viewable).'|'.$view->viewable_id;
+                        if (! isset($viewableIds[$key])) {
                             $viewableIds[$key] = 0;
                         }
                         $viewableIds[$key]++;

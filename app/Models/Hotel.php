@@ -44,4 +44,9 @@ class Hotel extends Model
     {
         return $this->morphMany(PlaceVisit::class, 'visitable');
     }
+
+    public function views(): MorphMany
+    {
+        return $this->morphMany(HistoryView::class, 'viewable');
+    }
 }

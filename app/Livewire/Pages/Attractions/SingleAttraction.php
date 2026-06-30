@@ -3,7 +3,6 @@
 namespace App\Livewire\Pages\Attractions;
 
 use App\Models\Attraction;
-use App\Models\HistoryView;
 use App\Services\FavoritableService;
 use App\Services\ViewService;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +17,7 @@ class SingleAttraction extends Component
     public $isFavorite = false;
 
     protected FavoritableService $favoritableService;
+
     protected ViewService $viewService;
 
     public function boot(FavoritableService $favoritableService, ViewService $viewService): void
