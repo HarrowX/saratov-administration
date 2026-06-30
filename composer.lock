@@ -2567,24 +2567,24 @@
         },
         {
             "name": "moonshine/moonshine",
-            "version": "4.0.9",
+            "version": "4.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moonshine-software/moonshine.git",
-                "reference": "0108b966d2c06273cdcbf4ef0cceb03d68e375a0"
+                "reference": "209870723a0ed054e8c09f2edbfaa627107d1c9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moonshine-software/moonshine/zipball/0108b966d2c06273cdcbf4ef0cceb03d68e375a0",
-                "reference": "0108b966d2c06273cdcbf4ef0cceb03d68e375a0",
+                "url": "https://api.github.com/repos/moonshine-software/moonshine/zipball/209870723a0ed054e8c09f2edbfaa627107d1c9a",
+                "reference": "209870723a0ed054e8c09f2edbfaa627107d1c9a",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "illuminate/contracts": "^10|^11|^12",
-                "illuminate/filesystem": "^10|^11|^12",
-                "illuminate/support": "^10|^11|^12",
-                "illuminate/view": "^10|^11|^12",
+                "illuminate/contracts": "^10|^11|^12|^13",
+                "illuminate/filesystem": "^10|^11|^12|^13",
+                "illuminate/support": "^10|^11|^12|^13",
+                "illuminate/view": "^10|^11|^12|^13",
                 "lee-to/fast-attributes": "^0.3",
                 "lee-to/laravel-package-command": "^0.9",
                 "nyholm/psr7": "^1.8",
@@ -2592,8 +2592,8 @@
                 "psr/container": "^2.0",
                 "psr/http-message": "^2.0",
                 "psr/simple-cache": "^3.0",
-                "symfony/http-foundation": "^7.1|^7.2|^7.3",
-                "symfony/psr-http-message-bridge": "^7.1|^7.2|^7.3"
+                "symfony/http-foundation": "^6.2|^7.1|^7.2|^7.3|^8.0",
+                "symfony/psr-http-message-bridge": "^6.2|^7.1|^7.2|^7.3|^8.0"
             },
             "replace": {
                 "moonshine/asset-manager": "self.version",
@@ -2610,14 +2610,17 @@
                 "friendsofphp/php-cs-fixer": "^3.89",
                 "larastan/larastan": "^3.4",
                 "moonshine/import-export": "^2.0",
-                "orchestra/testbench": "^9.9",
+                "orchestra/testbench": "^11",
                 "pestphp/pest": "^4",
                 "pestphp/pest-plugin-laravel": "^4",
-                "rector/rector": "~2.2.0",
+                "rector/rector": "^2.3",
                 "symplify/monorepo-builder": "^11.2"
             },
             "type": "library",
             "extra": {
+                "skills": {
+                    "source": "skills"
+                },
                 "laravel": {
                     "providers": [
                         "MoonShine\\Laravel\\Providers\\MoonShineServiceProvider"
@@ -2650,7 +2653,7 @@
             "authors": [
                 {
                     "name": "Danil Shutsky",
-                    "email": "info@cutcode.ru",
+                    "email": "info@cutcode.dev",
                     "homepage": "https://cutcode.dev"
                 }
             ],
@@ -2668,15 +2671,11 @@
             },
             "funding": [
                 {
-                    "url": "https://github.com/moonshine-software",
-                    "type": "github"
-                },
-                {
-                    "url": "https://opencollective.com/moonshine",
-                    "type": "open_collective"
+                    "url": "https://boosty.to/cutcode",
+                    "type": "boosty"
                 }
             ],
-            "time": "2025-12-02T15:48:21+00:00"
+            "time": "2026-06-29T14:29:20+00:00"
         },
         {
             "name": "moonshine/ru",
@@ -10462,5 +10461,5 @@
         "php": "^8.2"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
