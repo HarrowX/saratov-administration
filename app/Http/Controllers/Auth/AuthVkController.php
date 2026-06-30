@@ -53,6 +53,7 @@ class AuthVkController extends Controller
 
         } catch (\Exception $e) {
             Log::error($e);
+
             return response()->json([
                 'success' => false,
                 'error' => 'Authorization error code: '.$e->getCode(),
