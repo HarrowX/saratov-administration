@@ -14,6 +14,7 @@ use App\MoonShine\Resources\Restaurant\RestaurantResource;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
 use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
+use App\MoonShine\Resources\Event\EventResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 GuidedTourResource::class,
                 HotelResource::class,
                 AttractionResource::class,
+                EventResource::class,
             ])
             ->pages([
                 ...$core->getConfig()->getPages(),
