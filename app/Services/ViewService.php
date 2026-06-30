@@ -16,7 +16,7 @@ class ViewService
 
     private function calculateAuth($id, $type)
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return;
         }
 
@@ -49,7 +49,7 @@ class ViewService
 
         $guestViews = Cache::get('guest_views', []);
 
-        $sessionKey = 'viewed_' . $type . '_' . $id;
+        $sessionKey = 'viewed_'.$type.'_'.$id;
         if (session()->has($sessionKey)) {
             return;
         }
@@ -60,7 +60,7 @@ class ViewService
             'session_id' => session()->id(),
             'ip' => request()->ip(),
             'user_agent' => request()->userAgent(),
-            'created_at' => now()->toDateTimeString()
+            'created_at' => now()->toDateTimeString(),
         ];
 
         Cache::put('guest_views', $guestViews, now()->addHours(2));
