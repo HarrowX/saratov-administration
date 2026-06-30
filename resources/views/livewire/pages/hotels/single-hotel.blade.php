@@ -93,7 +93,7 @@
                             Показать на карте
                         </a>
                     @else
-                        <div class="w-full flex justify-center bg-linear-to-r from-green-500 to-teal-600 text-white py-3 xl:py-6 rounded-[30px] text-lg sm:text-lg xl:text-xl 3xl:text-3xl md:mt-4 opacity-50 cursor-not-allowed content-center" disabled>
+                        <div class="w-full flex justify-center bg-linear-to-r from-green-500 to-teal-600 text-white py-3 xl:py-6 rounded-[30px] text-lg sm:text-lg xl:text-xl 3xl:text-3xl md:mt-4 opacity-50 cursor-not-allowed content-center font-['FindSansPro']" disabled>
                             Показать на карте
                         </div>
                     @endif

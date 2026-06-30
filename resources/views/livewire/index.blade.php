@@ -192,12 +192,11 @@
                      style="scrollbar-width: none; -ms-overflow-style: none;">
 
                     @foreach($carouselAttractions as $attraction)
-                        <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group">
+                        <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group group/image">
                             <div class="relative h-48 overflow-hidden">
                                 <img src="{{ $attraction->attachments?->get(0)?->url() ?? "" }}"
-                                     alt="Изображение {{ $attraction->name }}"
-                                     class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                     alt="Изображение {{ $attraction->name }}" class="photo w-full h-full object-cover group-hover/image:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
                             </div>
                             <div class="p-6">
                                 <h3 class="text-xl font-bold mb-2 h-10 md:h-15 xl:h-21">{{ $attraction->name }}</h3>
@@ -207,8 +206,8 @@
                                         <i class="fas fa-clock mr-2"></i>
                                         <span>{{ $attraction->visit_duration }} мин</span>
                                     </div>
-                                    <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="shrink-0 size-5 sm:size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
-                                        <img src="/images/Arrow 2.png" alt="" class="icon w-1 sm:w-2 xl:w-3 3xl:w-4 h-2.5 sm:h-4.5 xl:h-6 3xl:h-7.5">
+                                    <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="shrink-0 size-10 xl:size-11 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity hover:scale-110 group/button overflow-hidden relative">
+                                        <img src="/images/Arrow 2.png" alt="" class="icon w-2 xl:w-3 h-4.5 xl:h-6 transition-transform duration-300 group-hover/button:translate-x-1">
                                     </a>
                                 </div>
                             </div>
@@ -233,7 +232,7 @@
 
             <div class="grid md:grid-cols-2 gap-8 mb-12">
                 @foreach($featuredAttractions as $attraction)
-                    <div data-aos="fade-right" class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition">
+                    <div data-aos="fade-right" class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl duration-500 transition-shadow">
                         <div class="relative h-64 overflow-hidden">
                             <img src="{{ $attraction->attachments?->get(0)?->url() ?? "" }}"
                                  alt="Изображение {{ $attraction->name }}"
@@ -246,8 +245,8 @@
                                 <div class="flex items-center text-sm text-gray-500">
                                     <span><i class="fas fa-walking mr-1"></i>{{ $attraction->visit_duration }} мин</span>
                                 </div>
-                                <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="shrink-0 size-5 sm:size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
-                                    <img src="/images/Arrow 2.png" alt="иконка" class="icon w-1 sm:w-2 xl:w-3 3xl:w-4 h-2.5 sm:h-4.5 xl:h-6 3xl:h-7.5">
+                                <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
+                                    <img src="/images/Arrow 2.png" alt="иконка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
                                 </a>
                             </div>
                         </div>
