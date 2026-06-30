@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Attraction\Pages;
 
+use App\MoonShine\Components\YandexMapSearch;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
 use MoonShine\Contracts\UI\ComponentContract;
@@ -79,7 +80,7 @@ class AttractionIndexPage extends IndexPage
             Switcher::make('Доступность', 'is_accessible'),
             Switcher::make('Парковка', 'has_parking'),
             Text::make('Координаты', 'coordinates')
-                ->changeFill(fn ($data) => "{$data->longitude}, {$data->latitude}"),
+                ->changeFill(fn ($data) => "{$data->latitude}, {$data->longitude}"),
 
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
@@ -137,6 +138,7 @@ class AttractionIndexPage extends IndexPage
     {
         return [
             ...parent::topLayer(),
+            YandexMapSearch::make($this->getResource()),
         ];
     }
 
