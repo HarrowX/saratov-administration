@@ -31,7 +31,6 @@ class Attraction extends Model
         'has_parking',
         'rating',
         'views_count',
-        'favorites_count',
         'created_by',
     ];
 
