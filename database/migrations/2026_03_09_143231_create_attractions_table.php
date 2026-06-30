@@ -24,13 +24,14 @@ return new class extends Migration
             $table->decimal('latitude')->nullable();
             $table->decimal('longitude')->nullable();
             $table->string('email')->nullable();
+            $table->string('map_link')->nullable();
             $table->string('website')->nullable();
-            $table->enum('status',['active','draft','archived'])->default('active');
+            $table->enum('status', ['active', 'draft', 'archived'])->default('active');
             $table->decimal('ticket_price', 10, 2)->nullable();
             $table->integer('visit_duration')->nullable();
             $table->boolean('accessibility')->nullable();
             $table->boolean('parking')->nullable();
-            $table->enum('display_location',['null','carousel','featured'])->default('null');
+            $table->enum('display_location', ['null', 'carousel', 'featured'])->default('null');
             $table->integer('views_count')->default(0)->nullable();
             $table->integer('favorites_count')->default(0)->nullable();
             $table->integer('created_by')->nullable();

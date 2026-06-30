@@ -1,19 +1,12 @@
-
 let yandexMap;
 let mapObjects = [];
+let currentFilter = 'all';
 
 const categoryColors = {
     attraction: '#3B82F6',
     hotel: '#F59E0B',
     restaurant: '#EF4444'
 };
-
-const categoryIcons = {
-    attraction: '🏛️',
-    hotel: '🏨',
-    restaurant: '🍽️'
-};
-
 
 function getLandmarks() {
     return [
@@ -24,10 +17,8 @@ function getLandmarks() {
             lng: parseFloat(item.longitude),
             category: 'attraction',
             description: item.short_description || '',
-            image: item.image ?? '',
-            rating: item.rating ?? 0,
-            visitTime: item.visit_duration ? item.visit_duration + ' мин' : '',
-            tags: ['достопримечательность']
+            tags: ['достопримечательность'],
+            url: `/attractions/${item.slug || item.id}`,
         })),
 
         ...(window.mapData?.hotels || []).map(item => ({
@@ -37,10 +28,8 @@ function getLandmarks() {
             lng: parseFloat(item.longitude),
             category: 'hotel',
             description: item.description || '',
-            image: item.image ?? '',
-            rating: item.rating ?? 0,
-            visitTime: 'проживание',
-            tags: ['отель']
+            tags: ['отель'],
+            url: `/hotels/${item.slug || item.id}`,
         })),
 
         ...(window.mapData?.restaurants || []).map(item => ({
@@ -50,15 +39,11 @@ function getLandmarks() {
             lng: parseFloat(item.longitude),
             category: 'restaurant',
             description: item.description || '',
-            image: item.image ?? '',
-            rating: item.rating ?? 0,
-            visitTime: 'еда',
-            tags: ['ресторан']
+            tags: ['ресторан'],
+            url: `/restaurants/${item.slug || item.id}`,
         }))
     ];
 }
-
-
 function initYandexMap() {
     if (yandexMap) return;
 
@@ -66,7 +51,6 @@ function initYandexMap() {
     if (!mapContainer) return;
 
     if (typeof ymaps === 'undefined') {
-        console.log('Yandex API не готов, ждём...');
         setTimeout(initYandexMap, 500);
         return;
     }
@@ -75,63 +59,181 @@ function initYandexMap() {
             center: [51.5339, 46.0345],
             zoom: 13
         });
-
+        window.yandexMap = yandexMap;
         addMarkers();
+        window.mapObjects = mapObjects;
     });
 }
 
 function addMarkers() {
     const landmarks = getLandmarks();
 
-    console.log('LANDMARKS:', landmarks);
-
     landmarks.forEach(item => {
         const placemark = new ymaps.Placemark(
             [item.lat, item.lng],
-            { balloonContent: item.name }
+            {
+                balloonContent: createBalloonContent(item),
+                hintContent: item.name,
+                category: item.category
+            },
+            {
+                preset: 'islands#circleIcon',
+                iconColor: categoryColors[item.category] || '#3B82F6'
+            }
         );
 
         yandexMap.geoObjects.add(placemark);
+        mapObjects.push(placemark);
     });
 }
 
 
 function createBalloonContent(item) {
+    const categoryText = {
+        attraction: 'Достопримечательность',
+        hotel: 'Отель',
+        restaurant: 'Ресторан'
+    }[item.category] || 'Место';
     return `
-        <div style="max-width: 250px;">
-            <h4 style="margin:0 0 8px 0;">${item.name}</h4>
-            <p style="margin:0 0 6px 0;color:#666;">${item.description}</p>
-            <div style="font-size:12px;">
-                ⭐ ${item.rating} <br>
-                🕐 ${item.visitTime}
+        <div class="max-w-[250px]">
+            <h4 class="font-bold text-base mb-2 text-gray-800">${item.name}</h4>
+            <p class="text-xs text-gray-400 mb-2">${categoryText}</p>
+            <p class="text-sm text-gray-500 mb-2 leading-relaxed">${item.description || 'Описание отсутствует'}</p>
+            <div class="flex items-center justify-between text-xs text-gray-400 pt-1 border-t border-gray-100">
+            <a href="${item.url}"
+               target="_blank"
+               class="block w-full text-center bg-blue-500 hover:bg-blue-600 transition-colors duration-300 text-white text-sm font-medium py-1 rounded-lg">
+                <i class="fas fa-external-link-alt mr-1"></i>Подробнее
+            </a>
             </div>
         </div>
     `;
 }
-
-
-function addGeolocation() {
-    if (!navigator.geolocation) return;
-
-    navigator.geolocation.getCurrentPosition(pos => {
-        const marker = new ymaps.Placemark([
-            pos.coords.latitude,
-            pos.coords.longitude
-        ], {
-            balloonContent: 'Вы здесь'
-        }, {
-            preset: 'islands#blueCircleDotIcon'
-        });
-
-        yandexMap.geoObjects.add(marker);
-        mapObjects.push(marker);
-    });
+function forceInitMap() {
+    const btn = document.querySelector('.map-button');
+    const originalHtml = btn?.innerHTML || 'Загрузить карту';
+    if (btn) {
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Загрузка...';
+        btn.disabled = true;
+    }
+    setTimeout(() => {
+        try {
+            if (yandexMap) {
+                yandexMap.destroy();
+                yandexMap = null;
+            }
+            mapObjects = [];
+            const container = document.getElementById('map');
+            if (container) {
+                container.innerHTML = '';
+            }
+            initYandexMap();
+            if (btn) {
+                btn.innerHTML = originalHtml;
+                btn.disabled = false;
+            }
+        } catch (error) {
+            console.error('Ошибка перезагрузки карты:', error);
+            if (btn) {
+                btn.innerHTML = '<i class="fas fa-exclamation-triangle mr-2"></i>Ошибка';
+                setTimeout(() => {
+                    btn.innerHTML = originalHtml;
+                    btn.disabled = false;
+                }, 2000);
+            }
+        }
+    }, 100);
 }
 
+//функция фильтров
+function filterMapByCategory(category) {
+    if (!yandexMap) {
+        console.error('Карта не найдена');
+        return;
+    }
+    currentFilter = category;
 
+    window.mapObjects.forEach(marker => {
+        try {
+            window.yandexMap.geoObjects.remove(marker);
+        } catch(e) {}
+    });
+
+    let shown = 0;
+    if (category === 'all') {
+        mapObjects.forEach(marker => {
+            window.yandexMap.geoObjects.add(marker);
+            shown++;
+        });
+    } else {
+        mapObjects.forEach(marker => {
+            if (marker.properties.get('category') === category) {
+                window.yandexMap.geoObjects.add(marker);
+                shown++;
+            }
+        });
+    }
+}
+function toggleFilterPanel() {
+    let panel = document.getElementById('filterPanel');
+
+    if (panel) {
+        panel.remove();
+        return;
+    }
+
+    panel = document.createElement('div');
+    panel.id = 'filterPanel';
+    panel.className = 'absolute top-4 right-4 bg-white rounded-lg shadow-xl p-4 z-[1000] min-w-[220px] text-blue-600';
+
+    panel.innerHTML = `
+        <label class="block font-medium mb-2">
+            <i class="fas fa-filter mr-1 "></i>Фильтр по категориям
+        </label>
+        <select id="categorySelect" class="w-full px-3 py-2 border border-blue-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-200 bg-white cursor-pointer">
+            <option value="all" ${currentFilter === 'all' ? 'selected' : ''}>Все категории</option>
+            <option value="attraction" ${currentFilter === 'attraction' ? 'selected' : ''}> Достопримечательности</option>
+            <option value="hotel" ${currentFilter === 'hotel' ? 'selected' : ''}>Отели</option>
+            <option value="restaurant" ${currentFilter === 'restaurant' ? 'selected' : ''}>Рестораны</option>
+        </select>
+    `;
+    const style = document.createElement('style');
+    style.textContent = `
+        #filterPanel select {
+            transition: all 0.2s ease;
+        }
+        #filterPanel option:checked {
+            background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+            color: white;
+        }
+    `;
+    panel.appendChild(style);
+
+    const mapContainer = document.getElementById('map');
+    if (mapContainer && getComputedStyle(mapContainer).position === 'static') {
+        mapContainer.style.position = 'relative';
+    }
+    mapContainer.appendChild(panel);
+
+    const select = panel.querySelector('#categorySelect');
+    select.addEventListener('change', function(e) {
+        filterMapByCategory(e.target.value);
+        panel.remove();
+    });
+
+    setTimeout(() => {
+        document.addEventListener('click', function closePanel(e) {
+            if (!panel.contains(e.target) && !e.target.closest('.map-button')) {
+                panel.remove();
+                document.removeEventListener('click', closePanel);
+            }
+        });
+    }, 100);
+}
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(initYandexMap, 500);
 });
-
-
 window.initYandexMap = initYandexMap;
+window.forceInitMap = forceInitMap;
+window.toggleFilterPanel = toggleFilterPanel;
+window.filterMapByCategory = filterMapByCategory;

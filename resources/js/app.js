@@ -5,10 +5,8 @@ import './scripts/innovations'
 import './scripts/notification';
 import './scripts/profile-modal';
 import './scripts/user-profile';
-import './scripts/achievements';
 import './scripts/chatbot';
 import './scripts/fixes';
-import './scripts/map-fixes';
 import './scripts/slider';
 import './scripts/social-features';
 import './scripts/swiper';
@@ -27,8 +25,35 @@ mobileMenuBtn?.addEventListener('click', () => {
     mobileMenu.classList.toggle('hidden');
     console.log(1123)
 });
+function closeMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    if (menu && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        const hamIcon = menuBtn?.querySelector('.ham');
+        if (hamIcon) {
+            hamIcon.classList.remove('active');
+        }
+    }
+}
+document.addEventListener('click', function(e) {
+    const menu = document.getElementById('mobileMenu');
+    const menuBtn = document.getElementById('mobileMenuBtn');
 
+    if (menu && !menu.classList.contains('hidden')) {
+        const isClickInsideMenu = menu.contains(e.target);
+        const isClickOnButton = menuBtn && menuBtn.contains(e.target);
 
+        if (!isClickInsideMenu && !isClickOnButton) {
+            closeMobileMenu();
+        }
+    }
+});
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeMobileMenu();
+    }
+});
 
 // Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -42,15 +67,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 top: targetPosition,
                 behavior: 'smooth'
             });
-
-            // Close mobile menu if open
-            if (!mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-            }
+            closeMobileMenu();
         }
     });
 });
-
 
 // Counter animation
 function animateCounter(element, start, end, duration) {

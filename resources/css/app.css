@@ -69,7 +69,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Merriweather', serif;
 }
-h2{
+h2:not(.card-title){
     @apply text-3xl lg:text-3xl 3xl:text-4xl font-bold mb-4 tracking-[1px]
 }
 h3{
@@ -104,6 +104,9 @@ html {
 }
 .nav-link-active{
     @apply relative text-blue-500 font-['FindSansPro'] border-b-2 border-b-(--primary-blue);
+}
+.nav-link-active.nav-link:hover::after {
+    width: 0 !important;
 }
 
 .stats-card{
@@ -749,6 +752,41 @@ select option:checked {
   transition: all 0.3s ease;
 }
 
+/*кнопка закрывающегося бургер меню*/
+.ham {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 400ms;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.hamRotate.active {
+    transform: rotate(45deg);
+}
+.hamRotate180.active {
+    transform: rotate(180deg);
+}
+.line {
+    fill:none;
+    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+    stroke:oklch(37.3% 0.034 259.733);
+    stroke-width:5.5;
+    stroke-linecap:round;
+}
+.ham1 .top {
+    stroke-dasharray: 40 139;
+}
+.ham1 .bottom {
+    stroke-dasharray: 40 180;
+}
+.ham1.active .top {
+    stroke-dashoffset: -98px;
+}
+.ham1.active .bottom {
+    stroke-dashoffset: -138px;
+}
 
 
 

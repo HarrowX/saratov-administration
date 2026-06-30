@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources\MoonShineUser\Pages;
 
 use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
-use App\MoonShine\Resources\Restaurant\MoonShineUserRole\MoonShineUserRoleResource;
+use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
@@ -47,7 +47,7 @@ final class MoonShineUserIndexPage extends IndexPage
             ): string => $raw ?? ''),
 
             Date::make(__('moonshine::ui.resource.created_at'), 'created_at')
-                ->format("d.m.Y")
+                ->format('d.m.Y')
                 ->sortable(),
 
             Email::make(__('moonshine::ui.resource.email'), 'email')
@@ -71,8 +71,6 @@ final class MoonShineUserIndexPage extends IndexPage
 
     /**
      * @param  TableBuilder  $component
-     *
-     * @return TableBuilder
      */
     protected function modifyListComponent(ComponentContract $component): TableBuilder
     {

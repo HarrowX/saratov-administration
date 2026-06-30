@@ -39,3 +39,27 @@ Route::prefix('/hotels')->group(function () {
     Route::get('/', AllHotels::class)->name('all-hotels');
     Route::get('/{hotel}', SingleHotel::class)->name('single-hotel');
 });
+
+// Route::view('/', 'welcome');
+//
+Route::view('profile', 'profile')
+    ->middleware(['auth', 'verified'])
+    ->name('profile');
+
+Route::view('profile/settings', 'profile-settings')
+    ->middleware(['auth'])
+    ->name('profile-settings');
+
+Route::view('profile/favorites', 'favorites')
+    ->middleware(['auth', 'verified'])
+    ->name('profile-favorites');
+
+Route::view('profile/place-visits', 'place-visits')
+    ->middleware(['auth', 'verified'])
+    ->name('place-visits');
+
+Route::view('profile/history-views', 'history-views')
+    ->middleware(['auth', 'verified'])
+    ->name('history-views');
+
+require __DIR__.'/auth.php';

@@ -124,7 +124,14 @@ return [
     ],
 
     'attractions' => [
-        'radius' => env('ATTRACTIONS_RADIUS', 10000000000000)
+        'radius' => env('ATTRACTIONS_RADIUS', 10000000000000),
     ],
 
+    'visits' => [
+        'search_radius' => env('VISITS_RADIUS', 500),
+    ],
+
+    'admin' => [
+        'ymap_api_key' => env('YMAP_API_KEY'),
+    ],
 ];

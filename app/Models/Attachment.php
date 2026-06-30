@@ -15,19 +15,23 @@ class Attachment extends Model
         'attachable_type',
     ];
 
-    public function attachable(): MorphTo {
+    public function attachable(): MorphTo
+    {
         return $this->morphTo();
     }
 
-    protected static function boot() {
+    protected static function boot()
+    {
         parent::boot();
         static::addGlobalScope(new OrderedScope);
     }
 
-    public function url(): string {
+    public function url(): string
+    {
         if ($this->link) {
-            return "/storage/" . $this->link;
+            return '/storage/'.$this->link;
         }
-        return "";
+
+        return '';
     }
 }

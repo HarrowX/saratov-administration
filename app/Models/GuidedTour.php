@@ -33,10 +33,11 @@ class GuidedTour extends Model
         'created_at',
         'experience',
         'phone',
-        'email'
+        'email',
     ];
 
-    public function attachments(): MorphMany {
+    public function attachments(): MorphMany
+    {
         return $this->morphMany(Attachment::class, 'attachable');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -20,8 +21,14 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'surname',
+        'patronymic',
         'email',
+        'phone',
         'password',
+        'vk_id',
+        'vk_avatar',
+        'email_verified_at',
     ];
 
     /**
@@ -33,6 +40,18 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    protected static function booted(): void
+    {
+        static::deleting(function (User $user) {
+            $user->username()->delete();
+        });
+    }
+
+    public function username(): HasOne
+    {
+        return $this->hasOne(UserName::class, 'user_id');
+    }
 
     /**
      * Get the attributes that should be cast.

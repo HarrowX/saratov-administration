@@ -159,24 +159,6 @@ btn.addEventListener('click', function(e) {
 });
 
 // ========================================
-// 7. ПОСТРОЕНИЕ МАРШРУТА
-// ========================================
-function buildRoute(attractionId) {
-    const attraction = attractionsData.find(a => a.id === attractionId);
-    if (!attraction) return;
-
-    // Закрыть модальное окно если открыто
-    const modal = document.querySelector('[data-modal="attraction"]');
-    if (modal) modal.remove();
-
-    // Показать уведомление
-    showNotification(`Маршрут до "${attraction.title}" построен! Следуйте указаниям на карте.`, 'success');
-
-    // Перейти к карте
-    showOnMap(attractionId);
-}
-
-// ========================================
 // ИНИЦИАЛИЗАЦИЯ ВСЕХ ИСПРАВЛЕНИЙ
 // ========================================
 document.addEventListener('DOMContentLoaded', function() {
@@ -184,8 +166,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // createAttractionsCarousel();
     fixChatbot();
 
-    // Добавляем глобальные функции
-    window.buildRoute = buildRoute;
 });
 
 // ========================================
@@ -419,7 +399,6 @@ window.copyPromoCode = copyPromoCode;
 // Экспорт для использования в других модулях
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
-        buildRoute,
         // fixChatbot,
         // showAllPhotos,
         showOfferDetails,

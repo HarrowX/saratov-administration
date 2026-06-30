@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\MoonShine\Pages\Attraction;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
 use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
 use App\MoonShine\Resources\Hotel\HotelResource;
 use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
-use App\MoonShine\Resources\Restaurant\MoonShineUserRole\MoonShineUserRoleResource;
+use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
 use App\MoonShine\Resources\Restaurant\RestaurantResource;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
@@ -41,8 +40,6 @@ class MoonShineServiceProvider extends ServiceProvider
             ])
             ->pages([
                 ...$core->getConfig()->getPages(),
-                Attraction::class,
-            ])
-        ;
+            ]);
     }
 }

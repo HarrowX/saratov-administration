@@ -61,9 +61,9 @@
                                 <p class="text-gray-600 text-sm leading-relaxed grow mt-4">
                                     {{ $guidedTour->short_description }}
                                 </p>
-                                <div class="flex justify-center mt-auto pt-5">
-                                    <a href="{{ route('single-guided-tour', ['guidedTour' => $guidedTour->id]) }}" class="px-19 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition cursor-pointer text-[10px] md:text-xs 3xl:text-sm">
-                                        Подробнее <i class="fas fa-arrow-right ml-1"></i>
+                                <div class="flex justify-center mt-auto pt-5 justify-end">
+                                    <a href="{{ route('single-guided-tour', ['guidedTour' => $guidedTour->id]) }}" class="shrink-0 size-5 sm:size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
+                                        <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-1 sm:w-2 xl:w-3 3xl:w-4 h-2.5 sm:h-4.5 xl:h-6 3xl:h-7.5">
                                     </a>
                                 </div>
                             </div>

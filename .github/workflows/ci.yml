@@ -1,0 +1,181 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [develop, master]
+  pull_request:
+    branches: [develop, master]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Code Quality (Pint)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring
+          coverage: none
+          tools: composer:v2
+        env:
+          fail-fast: true
+
+      - name: Install Composer Dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader --no-scripts
+
+      - name: Run Laravel Pint Check
+        run: vendor/bin/pint --test
+
+      - name: Show Fix Instructions
+        if: failure()
+        run: |
+          echo "## ❌ Code style issues found" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "### To fix locally:" >> $GITHUB_STEP_SUMMARY
+            echo '```bash' >> $GITHUB_STEP_SUMMARY
+            echo '# Fetch the latest changes' >> $GITHUB_STEP_SUMMARY
+            echo 'git fetch origin ${{ github.head_ref }}' >> $GITHUB_STEP_SUMMARY
+            echo 'git checkout ${{ github.head_ref }}' >> $GITHUB_STEP_SUMMARY
+            echo '' >> $GITHUB_STEP_SUMMARY
+            echo '# Apply Pint fixes' >> $GITHUB_STEP_SUMMARY
+            echo './vendor/bin/pint' >> $GITHUB_STEP_SUMMARY
+            echo '' >> $GITHUB_STEP_SUMMARY
+            echo '# Commit and push' >> $GITHUB_STEP_SUMMARY
+            echo 'git add .' >> $GITHUB_STEP_SUMMARY
+            echo 'git commit -m "style: apply pint fixes"' >> $GITHUB_STEP_SUMMARY
+            echo 'git push' >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### To fix locally:" >> $GITHUB_STEP_SUMMARY
+            echo '```bash' >> $GITHUB_STEP_SUMMARY
+            echo '# Apply Pint fixes' >> $GITHUB_STEP_SUMMARY
+            echo './vendor/bin/pint' >> $GITHUB_STEP_SUMMARY
+            echo '' >> $GITHUB_STEP_SUMMARY
+            echo '# Amend commit if fixing the last commit' >> $GITHUB_STEP_SUMMARY
+            echo 'git add .' >> $GITHUB_STEP_SUMMARY
+            echo 'git commit --amend --no-edit' >> $GITHUB_STEP_SUMMARY
+            echo 'git push --force-with-lease' >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo '' >> $GITHUB_STEP_SUMMARY
+            echo '**Note:** Use `--amend` only for the latest commit.' >> $GITHUB_STEP_SUMMARY
+          fi
+
+  tests:
+    name: Tests (Pest)
+    runs-on: ubuntu-latest
+    environment: Testing
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: sqlite, pdo_sqlite, zip
+          coverage: none
+          tools: composer:v2
+          ini-values: opcache.enable_cli=1, opcache.jit=tracing, opcache.jit_buffer_size=64M, memory_limit=512M
+        env:
+          fail-fast: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist --optimize-autoloader --no-scripts
+
+      - name: Install Node dependencies
+        run: npm ci --no-audit --prefer-offline --no-fund
+
+      - name: Prepare Testing Environment
+        run: |
+          cp .env.testing .env
+          php artisan key:generate --ansi
+          APP_KEY_LINE=$(grep "^APP_KEY=" .env)
+          awk -v new="$APP_KEY_LINE" '/^APP_KEY=/{print new; next} 1' .env.testing > .env.testing.tmp
+          mv .env.testing.tmp .env.testing
+
+      - name: Build Assets
+        run: npm run build
+
+      - name: Run Tests
+        run: ./vendor/bin/pest --parallel --processes=4
+
+  deploy:
+    name: Deploy to Test Server
+    needs: [lint, tests]
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: test
+
+    concurrency:
+      group: deploy-test
+      cancel-in-progress: false
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v6
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ vars.SSH_HOST }}
+          username: ${{ vars.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          debug: true
+          envs: MAINTENANCE_SECRET
+          script: |
+            set -e
+            cd /var/www/www-root/data/www/test.administration.creatrix-digital.ru/
+
+            PREV_SHA=$(git rev-parse HEAD)
+            echo "Previous SHA: $PREV_SHA"
+
+            # Enable maintenance mode (with optional secret for smoke testing)
+            if [ -n "${MAINTENANCE_SECRET}" ]; then
+              /opt/php84/bin/php artisan down --secret="${MAINTENANCE_SECRET}" --render="errors::503" || true
+            else
+              /opt/php84/bin/php artisan down --render="errors::503" || true
+            fi
+
+            git pull origin master
+
+            /opt/php84/bin/php /usr/bin/composer install --no-interaction --no-dev --optimize-autoloader
+
+            npm ci && npm run build
+
+            /opt/php84/bin/php artisan migrate --force
+
+            chown -R www-root:www-root .
+            chmod -R 775 storage bootstrap/cache
+
+            /opt/php84/bin/php artisan optimize:clear
+            /opt/php84/bin/php artisan config:cache
+            /opt/php84/bin/php artisan route:cache
+            /opt/php84/bin/php artisan view:cache
+
+            /opt/php84/bin/php artisan queue:restart
+
+            /opt/php84/bin/php artisan up
+        env:
+          MAINTENANCE_SECRET: ${{ secrets.MAINTENANCE_SECRET }}

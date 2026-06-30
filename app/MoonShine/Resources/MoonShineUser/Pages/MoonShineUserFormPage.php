@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources\MoonShineUser\Pages;
 
 use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
-use App\MoonShine\Resources\Restaurant\MoonShineUserRole\MoonShineUserRoleResource;
+use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password as PasswordRule;
@@ -68,7 +68,7 @@ final class MoonShineUserFormPage extends FormPage
                             ->allowedExtensions(['jpg', 'png', 'jpeg', 'gif']),
 
                         Date::make(__('moonshine::ui.resource.created_at'), 'created_at')
-                            ->format("d.m.Y")
+                            ->format('d.m.Y')
                             ->default(now()->toDateTimeString()),
                     ])->icon('user-circle'),
 

@@ -86,14 +86,30 @@
                         <p class="text-base xl:text-lg 3xl:text-2xl lg:text-nowrap">За прохождение “{{$hotel->name}}” вы получите:</p>
                         <div class="flex flex-row md:flex-col flex-wrap gap-2 lg:gap-4 justify-between md:justify-start items-center md:items-start pt-4 lg:pt-5 3xl:pt-7 text-[9px] sm:text-[13px] lg:text-base xl:text-lg 3xl:text-xl">
                             <div class="text-white rounded-4xl gradient-button py-3 lg:py-4.5 px-8 lg:px-15">+1 к “Исследователю”</div>
-                            <a href="#" class="text-[#636363] text-nowrap"> перейти к другим квестам и достижениям ></a>
                         </div>
                     </div>
-                    <button class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 xl:py-6 rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-lg xl:text-xl 3xl:text-3xl md:mt-4">Показать на карте</button>
+                    @if($hotel->map_link)
+                        <a href="{{ $hotel->map_link }}" target="_blank" class="flex justify-center w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 xl:py-6 rounded-[30px] hover:shadow-lg transition cursor-pointer text-lg sm:text-lg xl:text-xl 3xl:text-3xl md:mt-4">
+                            Показать на карте
+                        </a>
+                    @else
+                        <div class="w-full flex justify-center bg-linear-to-r from-green-500 to-teal-600 text-white py-3 xl:py-6 rounded-[30px] text-lg sm:text-lg xl:text-xl 3xl:text-3xl md:mt-4 opacity-50 cursor-not-allowed content-center font-['FindSansPro']" disabled>
+                            Показать на карте
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
     </section>
 
     @livewire('attraction-component', ['latitude' => $hotel->latitude, 'longitude' => $hotel->longitude])
+
+    @if(!is_null($hotel->yandex_review_widget) && ($hotel?->yandex_review_widget != ""))
+        <section class="py-10 xl:py-26 bg-white max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto  px-5 xl:px-20">
+            <div data-aos="fade-right" class="text-center font-['FindSansPro'] w-full flex flex-col items-center">
+                <h3>Отзывы на Яндекс Картах</h3>
+                <div>{!! $hotel->yandex_review_widget !!}</div>
+            </div>
+        </section>
+    @endif
 </div>

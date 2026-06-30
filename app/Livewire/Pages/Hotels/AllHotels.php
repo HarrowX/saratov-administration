@@ -9,9 +9,11 @@ class AllHotels extends Component
 {
     public $hotels;
 
-    public function mount() {
+    public function mount()
+    {
         $this->hotels = Hotel::with('attachments')->get();
     }
+
     public function render()
     {
         return view('livewire.pages.hotels.all-hotels');

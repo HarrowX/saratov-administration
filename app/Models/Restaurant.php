@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Http\Resources\RestaurantResource;
+use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
+#[UseResource(RestaurantResource::class)]
 class Restaurant extends Model
 {
     protected $fillable = [
@@ -19,6 +22,7 @@ class Restaurant extends Model
         'phone',
         'kitchen',
         'email',
+        'map_link',
         'website',
         'price_category',
         'capacity',
@@ -31,7 +35,8 @@ class Restaurant extends Model
         'worktime' => 'array',
     ];
 
-    public function attachments(): MorphMany {
+    public function attachments(): MorphMany
+    {
         return $this->morphMany(Attachment::class, 'attachable');
     }
 
@@ -43,5 +48,20 @@ class Restaurant extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    public function favorites(): MorphMany
+    {
+        return $this->morphMany(Favorite::class, 'favoriteable');
+    }
+
+    public function visits(): MorphMany
+    {
+        return $this->morphMany(PlaceVisit::class, 'visitable');
+    }
+
+    public function views(): MorphMany
+    {
+        return $this->morphMany(HistoryView::class, 'viewable');
     }
 }
