@@ -3,6 +3,8 @@
 use App\Livewire\Index;
 use App\Livewire\Pages\Attractions\AllAttractions;
 use App\Livewire\Pages\Attractions\SingleAttraction;
+use App\Livewire\Pages\Events\AllEvents;
+use App\Livewire\Pages\Events\SingleEvent;
 use App\Livewire\Pages\Excurtions\AllExcurtions;
 use App\Livewire\Pages\Excurtions\SingleExcurtion;
 use App\Livewire\Pages\GuidedTours\AllGuidedTours;
@@ -40,8 +42,16 @@ Route::prefix('/hotels')->group(function () {
     Route::get('/{hotel}', SingleHotel::class)->name('single-hotel');
 });
 
+Route::prefix('/events')->group(function () {
+    Route::get('/', AllEvents::class)->name('all-events');
+    Route::get('/{event}', SingleEvent::class)->name('single-event');
+});
+
+Route::view('profile', 'profile')
+    ->middleware(['auth', 'verified'])
+    ->name('profile');
+
 // Route::view('/', 'welcome');
-//
 Route::view('profile', 'profile')
     ->middleware(['auth', 'verified'])
     ->name('profile');

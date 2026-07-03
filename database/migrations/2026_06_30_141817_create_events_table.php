@@ -14,6 +14,15 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug')->unique();
+            $table->text('description');
+            $table->enum('category', [
+                'Концерт', 'Выставка', 'Фестиваль', 'Спорт', 'Культура',
+                'Театр', 'Кино', 'Мастер-класс', 'Лекция', 'Ярмарка', 'Детское',
+                'Городское', 'Музыка', 'Образование', 'Еда',
+            ])->nullable();
+            $table->string('address')->nullable();
+            $table->string('age_restriction')->nullable();
             $table->dateTime('start_date');
             $table->dateTime('end_date')->nullable();
             $table->decimal('latitude')->nullable();
