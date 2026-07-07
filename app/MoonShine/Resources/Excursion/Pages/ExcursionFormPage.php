@@ -135,8 +135,7 @@ class ExcursionFormPage extends FormPage
                         ]),
                     Number::make('Время на точке', 'duration_minutes')->min(0)->default(0),
                 ])
-                ->removable()
-                ->sortable('order'),
+                ->removable(),
 
         ];
     }
