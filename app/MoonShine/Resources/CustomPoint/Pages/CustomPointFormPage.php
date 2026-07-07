@@ -14,6 +14,7 @@ use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Components\Layout\Div;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Text;
@@ -41,8 +42,12 @@ class CustomPointFormPage extends FormPage
                 }),
                 Textarea::make('Описание', 'description')->nullable(),
                 Number::make('Время на точке', 'duration_minutes')->min(0)->nullable(),
-                Number::make('Широта', 'latitude')->nullable(),
-                Number::make('Долгота', 'longitude')->nullable(),
+                Box::make('Координаты', [
+                    Div::make([
+                        Text::make('Широта', 'latitude'),
+                        Text::make('Долгота', 'longitude'),
+                    ])->style('display: flex; gap: 1rem;'),
+                ]),
             ]),
         ];
     }

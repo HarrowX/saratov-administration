@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('slug');
             $table->text('description')->nullable();
             $table->integer('duration_minutes')->default(0);
-            $table->decimal('latitude')->nullable();
-            $table->decimal('longitude')->nullable();
+            $table->decimal('latitude', 10, 6)->nullable();
+            $table->decimal('longitude', 10, 6)->nullable();
             $table->timestamps();
         });
     }

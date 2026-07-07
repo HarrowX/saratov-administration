@@ -44,8 +44,8 @@ final class MoonShineLayout extends AppLayout
             MenuItem::make(AttachmentResource::class, 'Прикрепляемое')->icon('paper-clip'),
             MenuItem::make(GuidedTourResource::class, 'Экскурсоводы')->icon('user-circle'),
             MenuItem::make(ExcursionResource::class, 'Экскурсии'),
-            MenuItem::make(ExcursionPointResource::class, 'Точки экскурсии'),
-            MenuItem::make(CustomPointResource::class, 'Дополнительная точка экскурсии'),
+            MenuItem::make(ExcursionPointResource::class, 'Точки экскурсий'),
+            MenuItem::make(CustomPointResource::class, 'Дополнительные точки экскурсий'),
         ];
     }
 
