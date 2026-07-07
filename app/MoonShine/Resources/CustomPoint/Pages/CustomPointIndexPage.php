@@ -36,7 +36,7 @@ class CustomPointIndexPage extends IndexPage
             Text::make('Название', 'name')->required(),
             Slug::make('Слаг', 'slug')->from('name')->unique(),
             Textarea::make('Описание', 'description')->nullable(),
-            Number::make('Время на точке', 'duration_minutes')->min(0)->nullable(),
+            Number::make('Время на точке', 'duration_minutes'),
             Text::make('Координаты', 'coordinates')
                 ->changeFill(fn ($data) => "{$data->latitude}, {$data->longitude}"),
         ];

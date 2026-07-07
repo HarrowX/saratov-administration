@@ -133,7 +133,7 @@ class ExcursionFormPage extends FormPage
                             Hotel::class => ['name', 'Отель'],
                             CustomPoint::class => ['name', 'Дополнительная точка экскурсии'],
                         ]),
-                    Number::make('Время на точке', 'duration_minutes')->nullable(),
+                    Number::make('Время на точке', 'duration_minutes')->min(0)->default(0),
                 ])
                 ->removable()
                 ->sortable('order'),

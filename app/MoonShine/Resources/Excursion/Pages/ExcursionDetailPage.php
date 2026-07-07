@@ -13,6 +13,7 @@ use App\MoonShine\Resources\Excursion\ExcursionResource;
 use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
+use MoonShine\Laravel\Fields\Relationships\MorphTo;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\DetailPage;
@@ -116,45 +117,18 @@ class ExcursionDetailPage extends DetailPage
             RelationRepeater::make('Точки маршрута', 'points', resource: ExcursionPointResource::class)
                 ->fields([
                     Number::make('Порядок', 'order')->default(0),
-                    Select::make('Тип', 'pointable_type')
-                        ->options([
-                            'App\Models\Attraction' => 'Достопримечательность',
-                            'App\Models\Hotel' => 'Отель',
-                            'App\Models\Restaurant' => 'Ресторан',
-                            'App\Models\CustomPoint' => 'Кастомная точка',
-                        ])
-                        ->reactive()
-                        ->nullable(),
-                    Select::make('Объект', 'pointable_id')
-                        ->options(function () {
-                            $options = [];
-
-                            foreach (Attraction::all() as $item) {
-                                $options['attraction_'.$item->id] = 'Достопримечательность: '.$item->name.' ('.$item->slug.')';
-                            }
-
-                            foreach (Hotel::all() as $item) {
-                                $options['hotel_'.$item->id] = 'Отель: '.$item->name.' ('.$item->slug.')';
-                            }
-
-                            foreach (Restaurant::all() as $item) {
-                                $options['restaurant_'.$item->id] = 'Ресторан: '.$item->name.' ('.$item->slug.')';
-                            }
-
-                            foreach (CustomPoint::all() as $item) {
-                                $slug = $item->slug ?? 'id:'.$item->id;
-                                $options['custom_'.$item->id] = 'Дополнительная: '.$item->name.' ('.$slug.')';
-                            }
-
-                            return $options;
-                        })
-                        ->searchable(),
+                    MorphTo::make('Точка', 'pointable', resource: ExcursionPointResource::class)
+                        ->types([
+                            Attraction::class => ['name', 'Достопримечательность'],
+                            Restaurant::class => ['name', 'Ресторан'],
+                            Hotel::class => ['name', 'Отель'],
+                            CustomPoint::class => ['name', 'Дополнительная точка экскурсии'],
+                        ]),
 
                     Number::make('Время на точке', 'duration_minutes')->nullable(),
                 ])
                 ->creatable()
-                ->removable()
-                ->sortable('order'),
+                ->removable(),
         ];
     }
 

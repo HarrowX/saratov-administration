@@ -28,11 +28,11 @@ class CustomPointDetailPage extends DetailPage
     protected function fields(): iterable
     {
         return [
-            ID::make()->sortable(),
-            Text::make('Название', 'name')->required(),
+            ID::make(),
+            Text::make('Название', 'name'),
             Slug::make('Слаг', 'slug')->from('name')->unique(),
-            Textarea::make('Описание', 'description')->nullable(),
-            Number::make('Время на точке', 'duration_minutes')->min(0)->nullable(),
+            Textarea::make('Описание', 'description'),
+            Number::make('Время на точке', 'duration_minutes'),
             Text::make('Координаты', 'coordinates')
                 ->changeFill(fn ($data) => "{$data->latitude}, {$data->longitude}"),
         ];

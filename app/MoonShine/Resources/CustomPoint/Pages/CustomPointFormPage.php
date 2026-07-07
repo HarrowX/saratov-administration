@@ -41,7 +41,7 @@ class CustomPointFormPage extends FormPage
                     return $item && $item->exists;
                 }),
                 Textarea::make('Описание', 'description')->nullable(),
-                Number::make('Время на точке', 'duration_minutes')->min(0)->nullable(),
+                Number::make('Время на точке', 'duration_minutes')->min(0)->default(0),
                 Box::make('Координаты', [
                     Div::make([
                         Text::make('Широта', 'latitude'),
