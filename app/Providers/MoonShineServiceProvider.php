@@ -15,6 +15,7 @@ use Illuminate\Support\ServiceProvider;
 use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
 use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
 use App\MoonShine\Resources\Event\EventResource;
+use App\MoonShine\Resources\EventCategory\EventCategoryResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -33,6 +34,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 HotelResource::class,
                 AttractionResource::class,
                 EventResource::class,
+                EventCategoryResource::class,
             ])
             ->pages([
                 ...$core->getConfig()->getPages(),

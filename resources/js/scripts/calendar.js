@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 month === new Date().getMonth() &&
                 year === new Date().getFullYear();
 
-            const eventCount = events[month]?.[day] || 0;
+            const eventCount = events[year]?.[month]?.[day] || 0;
             const hasEvent = eventCount > 0;
 
             const dayCell = document.createElement('span');

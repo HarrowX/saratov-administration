@@ -2,36 +2,29 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources\Event\Pages;
+namespace App\MoonShine\Resources\EventCategory\Pages;
 
-use App\MoonShine\Resources\Attachment\AttachmentResource;
-use App\MoonShine\Resources\EventCategory\EventCategoryResource;
+use App\MoonShine\Resources\Event\EventResource;
 use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
-use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
-use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
 use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\UI\Components\Layout\Box;
-use MoonShine\UI\Components\Layout\Div;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\QueryTags\QueryTag;
 use MoonShine\UI\Components\Metrics\Wrapped\Metric;
-use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\ID;
-use App\MoonShine\Resources\Event\EventResource;
+use App\MoonShine\Resources\EventCategory\EventCategoryResource;
 use MoonShine\Support\ListOf;
-use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Number;
+use MoonShine\UI\Fields\Switcher;
 use MoonShine\UI\Fields\Text;
-use MoonShine\UI\Fields\Textarea;
 use Throwable;
 
 
 /**
- * @extends IndexPage<EventResource>
+ * @extends IndexPage<EventCategoryResource>
  */
-class EventIndexPage extends IndexPage
+class EventCategoryIndexPage extends IndexPage
 {
     protected bool $isLazy = true;
 
@@ -42,24 +35,9 @@ class EventIndexPage extends IndexPage
     {
         return [
             ID::make(),
-            Text::make('Название','name')->unescape(),
-            Slug::make('Слаг', 'slug')->from('name')->unique(),
-            Textarea::make('Описание', 'description')->unescape(),
-            Text::make('Адрес', 'address')->nullable(),
-            Text::make('Возрастное ограничение', 'age_restriction'),
-            BelongsToMany::make('Категории', 'categories', resource: EventCategoryResource::class)
-                ->selectMode()
-                ->searchable(),
-            Date::make('Начало', 'start_date')->withTime(),
-            Date::make('Конец', 'end_date')->withTime(),
-            Text::make('Координаты', 'coordinates')
-                ->changeFill(fn ($data) => "{$data->latitude}, {$data->longitude}"),
-            RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
-                ->fields([
-                    ID::make(),
-                    Image::make('Файл', 'link'),
-                    Number::make('Порядковый номер', 'order')->default(0),
-                ]),
+            Text::make('Название', 'name'),
+            Switcher::make('Активна', 'is_active')->default(true),
+            BelongsToMany::make('События', 'events', resource: EventResource::class)->selectMode()->searchable()
         ];
     }
 

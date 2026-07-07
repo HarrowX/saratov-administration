@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources\Event\Pages;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
+use App\MoonShine\Resources\EventCategory\EventCategoryResource;
+use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\FormPage;
@@ -45,16 +47,14 @@ class EventFormPage extends FormPage
                     $item = $this->getResource()?->getItem();
                     return $item && $item->exists;
                 }),
-                Textarea::make('Описание', 'description')->unescape(),
+                Textarea::make('Описание', 'description')->unescape()->required(),
                 Text::make('Адрес', 'address')->nullable(),
                 Text::make('Возрастное ограничение', 'age_restriction'),
-                Select::make('Категория', 'category')
-                    ->options([
-                        'Выставка', 'Фестиваль', 'Спорт', 'Культура',
-                        'Театр', 'Кино', 'Мастер-класс', 'Лекция', 'Ярмарка', 'Детское',
-                        'Городское', 'Музыка', 'Образование', 'Еда',
-                    ])
-                    ->required()->required(),
+                BelongsToMany::make('Категории', 'categories', formatted: 'name', resource: EventCategoryResource::class)
+                    ->selectMode()
+                    ->searchable()
+                    ->valuesQuery(function($query) {
+                    return $query->where('is_active', true);}),
                 Date::make('Начало', 'start_date')->withTime()->required(),
                 Date::make('Конец', 'end_date')->withTime(),
                 Box::make('Координаты', [

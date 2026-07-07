@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Event extends Model
@@ -23,6 +24,10 @@ class Event extends Model
         'start_date' => 'datetime',
         'end_date' => 'datetime',
     ];
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(EventCategory::class, 'event_categories', 'event_id', 'category_id');
+    }
     public function attachments(): MorphMany
     {
         return $this->morphMany(Attachment::class, 'attachable');

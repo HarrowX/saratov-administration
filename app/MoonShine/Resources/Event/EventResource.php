@@ -22,6 +22,8 @@ class EventResource extends ModelResource
 
     protected string $title = 'События';
 
+    protected string $column = 'name';
+
     /**
      * @return list<class-string<PageContract>>
      */

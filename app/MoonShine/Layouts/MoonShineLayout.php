@@ -18,6 +18,7 @@ use MoonShine\MenuManager\MenuGroup;
 use MoonShine\MenuManager\MenuItem;
 use MoonShine\UI\Components\Layout\Div;
 use App\MoonShine\Resources\Event\EventResource;
+use App\MoonShine\Resources\EventCategory\EventCategoryResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -40,7 +41,11 @@ final class MoonShineLayout extends AppLayout
             ])->icon('map'),
             MenuItem::make(AttachmentResource::class, 'Прикрепляемое')->icon('paper-clip'),
             MenuItem::make(GuidedTourResource::class, 'Экскурсоводы')->icon('user-circle'),
-            MenuItem::make(EventResource::class, 'События'),
+            MenuGroup::make('События', [
+                MenuItem::make(EventResource::class,'События'),
+                MenuItem::make(EventCategoryResource::class, 'Категории событий'),
+            ])->icon('calendar-days'),
+
         ];
     }
 
