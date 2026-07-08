@@ -36,7 +36,6 @@ class AllEvents extends Component
     public function render()
     {
         $categories = Category::where('is_active', true)
-            ->orderBy('order')
             ->get();
         $events = Event::query()
             ->with('categories', 'attachments')
