@@ -68,7 +68,7 @@
                                             6 точек
                                         </span>
                                     </div>
-                                    <form action="{{ route('single-excurtion', ['excurtion' => 1]) }}">
+                                    <form action="{{ route('single-excursion', ['excursion' => 1]) }}">
                                         <button class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity">
                                             Подробнее
                                         </button>
@@ -100,7 +100,7 @@
                                             6 точек
                                         </span>
                                     </div>
-                                    <form action="{{ route('single-excurtion', ['excurtion' => 1]) }}">
+                                    <form action="{{ route('single-excursion', ['excusion' => 1]) }}">
                                         <button class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity">
                                             Подробнее
                                         </button>
@@ -132,7 +132,7 @@
                                             6 точек
                                         </span>
                                     </div>
-                                    <form action="{{ route('single-excurtion', ['excurtion' => 1]) }}">
+                                    <form action="{{ route('single-excursion', ['excursion' => 1]) }}">
                                         <button class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity">
                                             Подробнее
                                         </button>
@@ -164,7 +164,7 @@
                                             6 точек
                                         </span>
                                     </div>
-                                    <form action="{{ route('single-excurtion', ['excurtion' => 1]) }}">
+                                    <form action="{{ route('single-excursion', ['excursion' => 1]) }}">
                                         <button class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity">
                                             Подробнее
                                         </button>
@@ -196,7 +196,7 @@
                                             6 точек
                                         </span>
                                     </div>
-                                    <form action="{{ route('single-excurtion', ['excurtion' => 1]) }}">
+                                    <form action="{{ route('single-excursion', ['excursion' => 1]) }}">
                                         <button class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity">
                                             Подробнее
                                         </button>

@@ -28,5 +28,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AttractionSeeder::class);
         $this->call(EventCategorySeeder::class);
         $this->call(EventSeeder::class);
+        $this->call(ExcursionSeeder::class);
+        $this->call(CustomPointSeeder::class);
+        $this->call(ExcursionPointSeeder::class);
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Livewire\Pages\Restaurants;
 
 use App\Models\Restaurant;
+use App\Services\FavoritableService;
+use App\Services\ViewService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -14,6 +16,16 @@ class SingleRestaurant extends Component
 
     public $isFavorite = false;
 
+    protected FavoritableService $favoritableService;
+
+    protected ViewService $viewService;
+
+    public function boot(FavoritableService $favoritableService, ViewService $viewService): void
+    {
+        $this->favoritableService = $favoritableService;
+        $this->viewService = $viewService;
+    }
+
     public function mount(Restaurant $restaurant)
     {
         $this->restaurant = $restaurant;
@@ -22,6 +34,8 @@ class SingleRestaurant extends Component
         if (Auth::check()) {
             $this->isFavorite = $restaurant->favorites->contains('user_id', auth()->id());
         }
+        $this->viewService->calculate($this->restaurant->id, Restaurant::class);
+
     }
 
     public function toggleFavorite()

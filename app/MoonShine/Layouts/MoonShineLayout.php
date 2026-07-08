@@ -6,8 +6,11 @@ namespace App\MoonShine\Layouts;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
+use App\MoonShine\Resources\CustomPoint\CustomPointResource;
 use App\MoonShine\Resources\Event\EventResource;
 use App\MoonShine\Resources\EventCategory\EventCategoryResource;
+use App\MoonShine\Resources\Excursion\ExcursionResource;
+use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
 use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
 use App\MoonShine\Resources\Hotel\HotelResource;
 use App\MoonShine\Resources\Restaurant\RestaurantResource;
@@ -45,6 +48,9 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make(EventResource::class, 'События'),
                 MenuItem::make(EventCategoryResource::class, 'Категории событий'),
             ])->icon('calendar-days'),
+            MenuItem::make(ExcursionResource::class, 'Экскурсии'),
+            MenuItem::make(ExcursionPointResource::class, 'Точки экскурсий'),
+            MenuItem::make(CustomPointResource::class, 'Дополнительные точки экскурсий'),
 
         ];
     }

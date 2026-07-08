@@ -3,6 +3,8 @@
 namespace App\Livewire\Pages\Hotels;
 
 use App\Models\Hotel;
+use App\Services\FavoritableService;
+use App\Services\ViewService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -14,6 +16,16 @@ class SingleHotel extends Component
 
     public $isFavorite = false;
 
+    protected FavoritableService $favoritableService;
+
+    protected ViewService $viewService;
+
+    public function boot(FavoritableService $favoritableService, ViewService $viewService): void
+    {
+        $this->favoritableService = $favoritableService;
+        $this->viewService = $viewService;
+    }
+
     public function mount(Hotel $hotel)
     {
         $this->hotel = $hotel;
@@ -22,6 +34,8 @@ class SingleHotel extends Component
         if (Auth::check()) {
             $this->isFavorite = $hotel->favorites->contains('user_id', auth()->id());
         }
+        $this->viewService->calculate($this->hotel->id, Hotel::class);
+
     }
 
     public function toggleFavorite()

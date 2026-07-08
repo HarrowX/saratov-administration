@@ -30,6 +30,11 @@ class Hotel extends Model
         return $this->morphMany(Attachment::class, 'attachable');
     }
 
+    public function excursionPoints(): MorphMany
+    {
+        return $this->morphMany(ExcursionPoint::class, 'pointable');
+    }
+
     public function getRouteKeyName(): string
     {
         return 'slug';
@@ -43,5 +48,10 @@ class Hotel extends Model
     public function visits(): MorphMany
     {
         return $this->morphMany(PlaceVisit::class, 'visitable');
+    }
+
+    public function views(): MorphMany
+    {
+        return $this->morphMany(HistoryView::class, 'viewable');
     }
 }

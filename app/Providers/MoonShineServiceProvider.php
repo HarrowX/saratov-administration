@@ -6,8 +6,11 @@ namespace App\Providers;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
+use App\MoonShine\Resources\CustomPoint\CustomPointResource;
 use App\MoonShine\Resources\Event\EventResource;
 use App\MoonShine\Resources\EventCategory\EventCategoryResource;
+use App\MoonShine\Resources\Excursion\ExcursionResource;
+use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
 use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
 use App\MoonShine\Resources\Hotel\HotelResource;
 use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
@@ -35,6 +38,9 @@ class MoonShineServiceProvider extends ServiceProvider
                 AttractionResource::class,
                 EventResource::class,
                 EventCategoryResource::class,
+                ExcursionResource::class,
+                ExcursionPointResource::class,
+                CustomPointResource::class,
             ])
             ->pages([
                 ...$core->getConfig()->getPages(),

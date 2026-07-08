@@ -43,7 +43,7 @@ class RestaurantFormPage extends FormPage
             Box::make([
                 ID::make(),
                 Text::make('Название', 'name')->unescape()->required(),
-                Slug::make('Слаг', 'slug')->from('name')->unique()->canSee(function () {
+                Slug::make('Слаг', 'slug')->from('name')->unique()->unescape()->canSee(function () {
                     $item = $this->getResource()?->getItem();
 
                     return $item && $item->exists;

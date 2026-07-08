@@ -43,7 +43,7 @@ class RestaurantIndexPage extends IndexPage
         return [
             ID::make(),
             Text::make('Название', 'name')->unescape(),
-            Slug::make('Слаг', 'slug')->from('name')->unique(),
+            Slug::make('Слаг', 'slug')->from('name')->unique()->unescape(),
             Textarea::make('Описание', 'description')->unescape(),
             Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы'),
             Phone::make('Номер телефона', 'phone'),

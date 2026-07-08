@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('excurtions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('vk_id')->nullable()->unique();
+            $table->text('vk_avatar')->nullable();
         });
     }
 
@@ -22,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('excurtions');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn(['vk_id', 'vk_avatar']);
+        });
     }
 };

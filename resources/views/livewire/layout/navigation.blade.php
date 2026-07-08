@@ -39,6 +39,9 @@ new class extends Component
                     <x-nav-link :href="route('place-visits')" :active="request()->routeIs('place-visits')" wire:navigate>
                         Посещенные места
                     </x-nav-link>
+                    <x-nav-link :href="route('history-views')" :active="request()->routeIs('history-views')" wire:navigate>
+                        История просмотров
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -95,6 +98,9 @@ new class extends Component
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('place-visits')" :active="request()->routeIs('place-visits')" wire:navigate>
                 Посещенные места
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('history-views')" :active="request()->routeIs('history-views')" wire:navigate>
+                История просмотров
             </x-responsive-nav-link>
         </div>
 
