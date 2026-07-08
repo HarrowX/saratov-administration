@@ -7,6 +7,8 @@ namespace App\MoonShine\Layouts;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
 use App\MoonShine\Resources\CustomPoint\CustomPointResource;
+use App\MoonShine\Resources\Event\EventResource;
+use App\MoonShine\Resources\EventCategory\EventCategoryResource;
 use App\MoonShine\Resources\Excursion\ExcursionResource;
 use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
 use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
@@ -20,7 +22,6 @@ use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\MenuManager\MenuGroup;
 use MoonShine\MenuManager\MenuItem;
 use MoonShine\UI\Components\Layout\Div;
-use Override;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -43,9 +44,14 @@ final class MoonShineLayout extends AppLayout
             ])->icon('map'),
             MenuItem::make(AttachmentResource::class, 'Прикрепляемое')->icon('paper-clip'),
             MenuItem::make(GuidedTourResource::class, 'Экскурсоводы')->icon('user-circle'),
+            MenuGroup::make('События', [
+                MenuItem::make(EventResource::class, 'События'),
+                MenuItem::make(EventCategoryResource::class, 'Категории событий'),
+            ])->icon('calendar-days'),
             MenuItem::make(ExcursionResource::class, 'Экскурсии'),
             MenuItem::make(ExcursionPointResource::class, 'Точки экскурсий'),
             MenuItem::make(CustomPointResource::class, 'Дополнительные точки экскурсий'),
+
         ];
     }
 

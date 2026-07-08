@@ -1,4 +1,4 @@
-<section id="achievements" class="pb-17.5 xl:pb-28.5 bg-white">
+<section id="achievements" class="pb-17.5 xl:pb-28.5 bg-white" data-events="{{ $eventsData }}">
     <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10" data-aos="zoom-in" data-aos-delay="250">
         <div class="text-center mb-4 sm:mb-12">
             <h2>Календарь событий</h2>

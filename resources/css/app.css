@@ -663,7 +663,7 @@ button{
 }
 
 .calendar-day.today .day-number {
-    @apply bg-[#A855F7] md:bg-[#352AA2] text-white font-bold hover:bg-[#64269f] hover:md:bg-[#281f82];
+    @apply bg-[#352AA2]! text-white! font-bold hover:bg-[#352AA2] hover:text-purple-100 transform duration-300
 }
 
 .calendar-days-hidden {
@@ -671,8 +671,31 @@ button{
 }
 
 .event-label {
-    @apply absolute -bottom-2 sm:-bottom-1 md:-bottom-3 rounded-xl px-0.5 sm:px-2 text-[8px] lg:text-xs tracking-normal ;
+    @apply absolute -bottom-2 sm:-bottom-1 md:-bottom-3 rounded-xl px-0.5 sm:px-2 text-[8px] lg:text-xs tracking-normal;
     font-family: 'Inter', sans-serif;
+}
+.calendar-day.has-event .day-number {
+    @apply font-bold text-[#352AA2] bg-blue-50 rounded-full
+}
+.calendar-day .event-label {
+    @apply text-[9px] xl:text-xs py-px px-1 mt-0.5 overflow-hidden text-ellipsis whitespace-normal bg-[#E0E7FF] text-[#4338CA]
+}
+
+/* Точки событий */
+.event-dots {
+    @apply flex gap-1 justify-center mt-1 flex-wrap
+}
+
+.event-dot {
+    @apply inline-block w-1 h-1 md:w-1.5 md:h-1.5 bg-[#352AA2] rounded-full transition-transform duration-300
+}
+
+.calendar-day:hover .event-dot {
+    transform: scale(1.3);
+}
+
+.event-plus {
+    @apply text-[7px] text-[#352AA2] font-bold ml-px
 }
 
 /* Карточки экскурсий */
