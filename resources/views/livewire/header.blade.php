@@ -13,7 +13,7 @@
                     <a href="{{ route('index') }}" class="{{ request()->is('/') ? "nav-link-active nav-link" : "nav-link" }}">Главная</a>
                 </li>
                 <li>
-                    <a href="{{ route('all-excurtions') }}" class="{{ request()->is('excurtions*') ? "nav-link-active nav-link" : "nav-link" }}">Туры и экскурсии</a>
+                    <a href="{{ route('all-excursions') }}" class="{{ request()->is('excursions*') ? "nav-link-active nav-link" : "nav-link" }}">Туры и экскурсии</a>
                 </li>
                 <li>
                     <a href="{{ route('all-guided-tours') }}" class="{{ request()->is('guided-tours*') ? "nav-link-active nav-link" : "nav-link" }}">Экскурсоводы</a>
@@ -62,7 +62,7 @@
                                 <span>Главная</span>
                             </a>
 
-                            <a href="{{ route('all-excurtions') }}" class="{{ request()->is('excurtions*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
+                            <a href="{{ route('all-excursions') }}" class="{{ request()->is('excursions*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
                                 <i class="fa-solid fa-map w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
                                 <span>Туры и экскурсии</span>
                             </a>

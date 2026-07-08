@@ -11,9 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('excurtions', function (Blueprint $table) {
+        Schema::create('excursion_points', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('excursion_id')->nullable()->constrained();
+            $table->morphs('pointable');
+            $table->integer('order')->default(0);
+            $table->integer('duration_minutes')->nullable();
             $table->timestamps();
+
+            $table->index(['excursion_id', 'order']);
         });
     }
 
@@ -22,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('excurtions');
+        Schema::dropIfExists('excursion_points');
     }
 };

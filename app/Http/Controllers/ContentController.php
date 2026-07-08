@@ -6,6 +6,7 @@ use App\Http\Resources\AttractionResource;
 use App\Http\Resources\HotelResource;
 use App\Http\Resources\RestaurantResource;
 use App\Models\Attraction;
+use App\Models\Excursion;
 use App\Models\Hotel;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
@@ -37,5 +38,12 @@ class ContentController extends Controller
         $perPage = $request->integer('per_page', 15);
 
         return AttractionResource::collection($query->paginate($perPage));
+    }
+
+    public function excursions()
+    {
+        return response()->json(
+            Excursion::with('attachments')->get()->toArray(), 200
+        );
     }
 }
