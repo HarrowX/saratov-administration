@@ -6,6 +6,8 @@ namespace App\MoonShine\Layouts;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
+use App\MoonShine\Resources\Event\EventResource;
+use App\MoonShine\Resources\EventCategory\EventCategoryResource;
 use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
 use App\MoonShine\Resources\Hotel\HotelResource;
 use App\MoonShine\Resources\Restaurant\RestaurantResource;
@@ -17,8 +19,6 @@ use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\MenuManager\MenuGroup;
 use MoonShine\MenuManager\MenuItem;
 use MoonShine\UI\Components\Layout\Div;
-use App\MoonShine\Resources\Event\EventResource;
-use App\MoonShine\Resources\EventCategory\EventCategoryResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -42,7 +42,7 @@ final class MoonShineLayout extends AppLayout
             MenuItem::make(AttachmentResource::class, 'Прикрепляемое')->icon('paper-clip'),
             MenuItem::make(GuidedTourResource::class, 'Экскурсоводы')->icon('user-circle'),
             MenuGroup::make('События', [
-                MenuItem::make(EventResource::class,'События'),
+                MenuItem::make(EventResource::class, 'События'),
                 MenuItem::make(EventCategoryResource::class, 'Категории событий'),
             ])->icon('calendar-days'),
 

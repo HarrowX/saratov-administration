@@ -18,23 +18,26 @@ class Event extends Model
         'start_date',
         'end_date',
         'latitude',
-        'longitude'
+        'longitude',
     ];
+
     protected $casts = [
         'start_date' => 'datetime',
         'end_date' => 'datetime',
     ];
+
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(EventCategory::class, 'event_categories', 'event_id', 'category_id');
+        return $this->belongsToMany(Category::class, 'event_categories', 'event_id', 'category_id');
     }
+
     public function attachments(): MorphMany
     {
         return $this->morphMany(Attachment::class, 'attachable');
     }
+
     public function getRouteKeyName(): string
     {
         return 'slug';
     }
-
 }

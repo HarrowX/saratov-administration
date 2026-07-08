@@ -50,7 +50,6 @@ class AttractionSeeder extends Seeder
                 'is_accessible' => fake()->boolean(),
                 'has_parking' => fake()->boolean(),
                 'views_count' => fake()->numberBetween(0, 10000),
-                'favorites_count' => fake()->numberBetween(0, 500),
                 'created_by' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),

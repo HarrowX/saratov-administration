@@ -47,10 +47,6 @@ Route::prefix('/events')->group(function () {
     Route::get('/{event}', SingleEvent::class)->name('single-event');
 });
 
-Route::view('profile', 'profile')
-    ->middleware(['auth', 'verified'])
-    ->name('profile');
-
 // Route::view('/', 'welcome');
 Route::view('profile', 'profile')
     ->middleware(['auth', 'verified'])

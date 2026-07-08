@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Event;
-use App\Models\EventCategory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -23,17 +22,17 @@ class EventSeeder extends Seeder
             'Выставка',
             'Выступление',
             'Ярмарка',
-            'Конкурс'
+            'Конкурс',
         ];
         $events = [];
 
-        for($i = 1; $i < 8; $i++){
+        for ($i = 1; $i < 8; $i++) {
             $name = $names[$i];
             $events[] = [
                 'name' => $name,
                 'description' => fake()->realText(),
                 'address' => fake()->address(),
-                'age_restriction' => fake()->numberBetween(1,18),
+                'age_restriction' => fake()->numberBetween(1, 18),
                 'start_date' => fake()->dateTime(),
                 'end_date' => fake()->dateTime(),
                 'latitude' => fake()->latitude(),
@@ -44,7 +43,7 @@ class EventSeeder extends Seeder
         Event::query()->insert($events);
 
         $allEvents = Event::all();
-        $categories = EventCategory::all();
+        $categories = Category::all();
 
         foreach ($allEvents as $event) {
             $randomCategories = $categories->random(rand(1, min(3, $categories->count())));

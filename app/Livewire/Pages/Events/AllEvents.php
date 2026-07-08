@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Pages\Events;
 
+use App\Models\Category;
 use App\Models\Event;
-use App\Models\EventCategory;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -12,7 +12,9 @@ class AllEvents extends Component
     use WithPagination;
 
     public $date = '';
+
     public $search = '';
+
     public $categoryId = '';
 
     protected $queryString = [
@@ -20,6 +22,7 @@ class AllEvents extends Component
         'search' => ['except' => ''],
         'categoryId' => ['except' => ''],
     ];
+
     public function mount()
     {
         if (request()->has('date')) {
@@ -29,9 +32,10 @@ class AllEvents extends Component
             $this->categoryId = request('category');
         }
     }
+
     public function render()
     {
-        $categories = EventCategory::where('is_active', true)
+        $categories = Category::where('is_active', true)
             ->orderBy('order')
             ->get();
         $events = Event::query()
@@ -40,7 +44,7 @@ class AllEvents extends Component
                 return $query->whereDate('start_date', $this->date);
             })
             ->when($this->search, function ($query) {
-                return $query->where('name', 'like', '%' . $this->search . '%');
+                return $query->where('name', 'like', '%'.$this->search.'%');
             })
             ->when($this->categoryId, function ($query) {
                 return $query->whereHas('categories', function ($q) {
@@ -53,6 +57,7 @@ class AllEvents extends Component
             'categories' => $categories,
         ]);
     }
+
     public function clearFilters()
     {
         $this->date = '';
@@ -60,11 +65,13 @@ class AllEvents extends Component
         $this->categoryId = '';
         $this->resetPage();
     }
+
     public function getFormattedDateAttribute()
     {
         if ($this->date) {
             return \Carbon\Carbon::parse($this->date)->format('d.m.Y');
         }
+
         return null;
     }
 }

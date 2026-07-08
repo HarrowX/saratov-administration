@@ -6,6 +6,8 @@ namespace App\Providers;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
+use App\MoonShine\Resources\Event\EventResource;
+use App\MoonShine\Resources\EventCategory\EventCategoryResource;
 use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
 use App\MoonShine\Resources\Hotel\HotelResource;
 use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
@@ -14,8 +16,6 @@ use App\MoonShine\Resources\Restaurant\RestaurantResource;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
 use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
-use App\MoonShine\Resources\Event\EventResource;
-use App\MoonShine\Resources\EventCategory\EventCategoryResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {

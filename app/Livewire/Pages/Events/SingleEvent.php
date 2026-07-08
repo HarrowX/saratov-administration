@@ -14,6 +14,7 @@ class SingleEvent extends Component
         $this->event = $event;
         $this->event->load('categories', 'attachments');
     }
+
     public function render()
     {
         return view('livewire.pages.events.single-event');

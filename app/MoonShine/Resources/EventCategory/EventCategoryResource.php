@@ -4,21 +4,19 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\EventCategory;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Models\EventCategory;
-use App\MoonShine\Resources\EventCategory\Pages\EventCategoryIndexPage;
-use App\MoonShine\Resources\EventCategory\Pages\EventCategoryFormPage;
+use App\Models\Category;
 use App\MoonShine\Resources\EventCategory\Pages\EventCategoryDetailPage;
-
-use MoonShine\Laravel\Resources\ModelResource;
+use App\MoonShine\Resources\EventCategory\Pages\EventCategoryFormPage;
+use App\MoonShine\Resources\EventCategory\Pages\EventCategoryIndexPage;
 use MoonShine\Contracts\Core\PageContract;
+use MoonShine\Laravel\Resources\ModelResource;
 
 /**
- * @extends ModelResource<EventCategory, EventCategoryIndexPage, EventCategoryFormPage, EventCategoryDetailPage>
+ * @extends ModelResource<Category, EventCategoryIndexPage, EventCategoryFormPage, EventCategoryDetailPage>
  */
 class EventCategoryResource extends ModelResource
 {
-    protected string $model = EventCategory::class;
+    protected string $model = Category::class;
 
     protected string $title = 'Категории событий';
 

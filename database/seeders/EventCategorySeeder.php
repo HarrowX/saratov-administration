@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\EventCategory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class EventCategorySeeder extends Seeder
@@ -42,6 +41,6 @@ class EventCategorySeeder extends Seeder
             ];
         }
 
-        EventCategory::query()->insert($categories);
+        Category::query()->insert($categories);
     }
 }
