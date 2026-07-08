@@ -47,12 +47,12 @@
                             <p>{{ $excursion->meeting_address }}</p>
                         </div>
                         <div class="flex items-center gap-2 xl:gap-5">
-                            <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 15.svg">
-                            <p>{{ $excursion->operator_phone }}</p>
+                            <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 18.svg">
+                            <a href="{{ route('single-guided-tour', $excursion->guide) }}">{{ $excursion->guide->name }}</a>
                         </div>
                         <div class="flex items-center gap-2 xl:gap-5">
                             <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 8.svg">
-                            <p>{{num_word($excursion->duration, ['минута', 'минуты', 'минут'])}}</p>
+                            <p>{{num_word($excursion->getDuration(), ['минута', 'минуты', 'минут'])}}</p>
                         </div>
                         <div class="flex items-center gap-2 xl:gap-5">
                             <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 17.svg">

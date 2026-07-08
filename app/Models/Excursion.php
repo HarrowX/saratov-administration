@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Excursion extends Model
@@ -28,5 +29,15 @@ class Excursion extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    public function guide(): BelongsTo
+    {
+        return $this->belongsTo(GuidedTour::class, 'guided_tour_id');
+    }
+
+    public function getDuration(): int
+    {
+        return $this->duration ?? $this->points->sum('duration_minutes');
     }
 }
