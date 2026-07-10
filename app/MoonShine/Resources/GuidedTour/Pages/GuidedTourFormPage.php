@@ -21,6 +21,7 @@ use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Phone;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
+use MoonShine\UI\Fields\Url;
 use Throwable;
 
 /**
@@ -41,6 +42,8 @@ class GuidedTourFormPage extends FormPage
             Text::make('Опыт', 'experience')->required(),
             Phone::make('Номер телефона', 'phone')->required(),
             Email::make('Почта', 'email')->required(),
+            Url::make('ВК', 'vk')->nullable(),
+            Url::make('Макс', 'max')->nullable(),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),

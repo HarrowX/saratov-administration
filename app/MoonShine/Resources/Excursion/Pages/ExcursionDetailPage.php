@@ -11,8 +11,10 @@ use App\Models\Restaurant;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Excursion\ExcursionResource;
 use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
+use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Fields\Relationships\MorphTo;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
 use MoonShine\Laravel\Fields\Slug;
@@ -42,6 +44,7 @@ class ExcursionDetailPage extends DetailPage
             ID::make(),
             Text::make('Название', 'name')->unescape()->required(),
             Slug::make('Слаг', 'slug')->from('name')->unique(),
+            BelongsTo::make('Оператор', 'guide', 'name', GuidedTourResource::class),
             Textarea::make('Описание', 'description')->unescape()->required(),
             Select::make('Тип экскурсии', 'type')
                 ->options([
@@ -94,10 +97,6 @@ class ExcursionDetailPage extends DetailPage
                     'По расписанию' => 'По расписанию',
                     'По запросу' => 'По запросу',
                 ])
-                ->required(),
-            Text::make('Оператор', 'operator_name')
-                ->required(),
-            Text::make('Телефон оператора', 'operator_phone')
                 ->required(),
             Checkbox::make('Бронирование включено', 'booking_enabled'),
             Select::make('Статус', 'status')

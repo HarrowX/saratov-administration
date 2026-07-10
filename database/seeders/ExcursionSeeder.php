@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Excursion;
+use App\Models\GuidedTour;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -47,8 +48,7 @@ class ExcursionSeeder extends Seeder
                 'meeting_point' => fake()->streetName().', '.fake()->randomElement(['У фонтана', 'У входа', 'У памятника', 'У метро', 'У парковки']),
                 'meeting_address' => fake()->address(),
                 'schedule_type' => fake()->randomElement(['По расписанию', 'По запросу']),
-                'operator_name' => fake()->company(),
-                'operator_phone' => fake()->phoneNumber(),
+                'guided_tour_id' => GuidedTour::query()->inRandomOrder()->first()->id,
                 'booking_enabled' => fake()->boolean(80),
                 'status' => fake()->randomElement(['Активный', 'Неактивный', 'Сезонный']),
             ];

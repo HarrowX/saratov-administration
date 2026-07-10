@@ -21,10 +21,20 @@
                 <span class="text-xl 3xl:text-3xl pl-4">Экскурсии</span>
             </a>
 
-{{--            <button class="absolute top-5 md:top-10 right-26 md:right-28 xl:top-15 flex items-center text-white transition-colors font-['FindSansPro'] bg-[#A855F7] rounded-lg px-4 py-4 cursor-pointer">--}}
-{{--                <i class="fa-sharp fa-solid fa-heart text-base sm:text-xl lg:text-2xl xl:text-4xl"></i>--}}
-{{--                <span class="text-xs sm:text-sm lg:text-base xl:text-xl pl-4 text-nowrap">Добавить в избранное</span>--}}
-{{--            </button>--}}
+            <button
+                wire:click="toggleFavorite"
+                class="absolute top-10 right-10 xl:top-18 xl:right-20 z-20 hidden md:flex items-center gap-3 px-5 py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group"
+            >
+                <i class="fa-regular fa-heart text-2xl xl:text-3xl group-hover:scale-110 group-hover:animate-pulse transition-transform {{ $isFavorite ? 'fa-solid text-red-400' : 'fa-regular' }}"></i>
+
+                <span class="text-xl xl:text-3xl font-medium">
+                {{ $isFavorite ? 'В избранном' : 'В избранное' }}
+            </span>
+
+                <span class="favorite-count ml-2 text-base xl:text-xl font-bold px-2.5 py-1 rounded-full {{ $isFavorite ? 'bg-red-500 text-white' : 'bg-red-500/80 text-white' }} transition-colors shadow-lg">
+                {{ $favoritesCount }}
+            </span>
+            </button>
         </div>
     </section>
 
@@ -47,12 +57,12 @@
                             <p>{{ $excursion->meeting_address }}</p>
                         </div>
                         <div class="flex items-center gap-2 xl:gap-5">
-                            <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 15.svg">
-                            <p>{{ $excursion->operator_phone }}</p>
+                            <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 18.svg">
+                            <a href="{{ route('single-guided-tour', $excursion->guide) }}">{{ $excursion->guide->name }}</a>
                         </div>
                         <div class="flex items-center gap-2 xl:gap-5">
                             <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 8.svg">
-                            <p>{{num_word($excursion->duration, ['минута', 'минуты', 'минут'])}}</p>
+                            <p>{{num_word($excursion->getDuration(), ['минута', 'минуты', 'минут'])}}</p>
                         </div>
                         <div class="flex items-center gap-2 xl:gap-5">
                             <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 17.svg">

@@ -153,7 +153,7 @@
                                     <div class="flex flex-row text-[8px] sm:text-sm lg:text-base xl:text-[22px] font-light gap-6 text-[#5F5F5F] mt-5 mb-0 sm:mb-2 lg:mb-6">
                                     <span class="flex items-center gap-2">
                                         <i class="fa-solid fa-clock"></i>
-                                            {{num_word($excursion->duration, ['минута', 'минуты', 'минут'])}}
+                                            {{num_word($excursion->getDuration(), ['минута', 'минуты', 'минут'])}}
                                     </span>
                                         <span class="flex items-center gap-2">
                                         <i class="fas fa-map-marker-alt"></i>

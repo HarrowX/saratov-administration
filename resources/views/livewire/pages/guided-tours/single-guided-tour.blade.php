@@ -3,6 +3,31 @@
 @endsection
 
 <div>
+    <section id="home" class="relative mt-25 md:mt-35 xl:mt-40 3xl:mt-50 ">
+        <div class="max-w-6xl xl:max-w-7xl 3xl:max-w-398.25 px-4 sm:px-20 mx-auto relative">
+
+            <a href="{{ route('all-guided-tours') }}"
+               class="absolute left-14 -top-10 3xl:-top-15 hidden md:flex items-center xl:gap-2 text-[#5F5F5F] hover:text-blue-900 transition-colors font-['FindSansPro']">
+                <i class="fa-solid fa-chevron-left text-xl xl:text-xl 3xl:text-3xl"></i>
+                <span class="text-xl 3xl:text-3xl pl-4">Экскурсоводы</span>
+            </a>
+
+            <button
+                wire:click="toggleFavorite"
+                class="absolute right-10 -top-10 3xl:-top-15 xl:right-20 z-20 hidden md:flex items-center gap-3 px-5 py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group"
+            >
+                <i class="fa-regular fa-heart text-2xl xl:text-3xl group-hover:scale-110 group-hover:animate-pulse transition-transform {{ $isFavorite ? 'fa-solid text-red-400' : 'fa-regular' }}"></i>
+
+                <span class="text-xl xl:text-3xl font-medium">
+                {{ $isFavorite ? 'В избранном' : 'В избранное' }}
+            </span>
+
+                <span class="favorite-count ml-2 text-base xl:text-xl font-bold px-2.5 py-1 rounded-full {{ $isFavorite ? 'bg-red-500 text-white' : 'bg-red-500/80 text-white' }} transition-colors shadow-lg">
+                {{ $favoritesCount }}
+            </span>
+            </button>
+        </div>
+    </section>
     <!--Hero Section-->
     <section class="features-section flex justify-center pt-28 md:pt-35 xl:pt-31 3xl:pt-41.5 md:pb-15 xl:pb-20 3xl:pb-26 bg-white">
         <div class="flex flex-col md:flex-row gap-2.5 sm:gap-5 md:gap-7 3xl:gap-17.5 max-w-6xl 3xl:max-w-421 mx-auto px-4 sm:px-10">
@@ -14,7 +39,7 @@
                 </div>
             </div>
             <div>
-                <h1 class="font-black text-3xl 3xl:text-5xl text-center pb-4 3xl:pb-12">Фёдорова Елена</h1>
+                <h1 class="font-black text-3xl 3xl:text-5xl text-center pb-4 3xl:pb-12">{{ $guidedTour->name }}</h1>
                 <div class="text-base xl:text-xl flex flex-col gap-4 md:gap-2 lg:gap-4 3xl:gap-8">
                     <p>{{ $guidedTour->short_description }}</p>
                     <p>Стаж работы: {{ $guidedTour->experience }}</p>
@@ -24,13 +49,21 @@
                        <p>{{ $guidedTour->phone }}</p>
                     </div>
                     <div class="flex flex-row gap-5 3xl:gap-10 3xl:ml-3">
-                       <img src="/images/gues.png" class="icon w-4 h-6 3xl:w-4.5 3xl:h-8">
+                       <img src="{{asset('images/gues.png')}}" class="icon w-4 h-6 3xl:w-4.5 3xl:h-8">
                        <p>Задать вопрос: {{ $guidedTour->email }}</p>
                     </div>
-                    <div class="flex flex-row gap-11 xl:gap-17.5 justify-center md:justify-start">
-                        <img src="/images/telegram.png" class="icon">
-                        <img src="/images/vk.png" class="icon">
-                        <img src="/images/whatsapp.png" class="icon">
+                    <div class="w-12 h-12 flex flex-row gap-11 xl:gap-17.5 justify-center md:justify-start">
+                        @if($guidedTour->max)
+                            <a href="{{$guidedTour->max}}" target="_blank">
+                                <img src="{{asset('images/max-dark.svg')}}" class="icon">
+                            </a>
+                        @endif
+                        @if($guidedTour->vk)
+                            <a href="{{$guidedTour->vk}}" target="_blank">
+                                <img src="{{asset('images/vk.png')}}" class="icon">
+                            </a>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -45,178 +78,55 @@
             <!-- Карусель -->
             <div class="relative group">
                 <div class="flex overflow-x-auto gap-6 pb-6 scrollbar-hide scroll-smooth"
-                    style="scrollbar-width: none; -ms-overflow-style: none;">
+                     style="scrollbar-width: none; -ms-overflow-style: none;">
 
-                    <div class="shrink-0 w-[85%] sm:w-100 lg:w-[calc(33.333%-16px)] card bg-white rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                        <div class="card-content p-2 sm:p-6 relative">
-                            <div>
-                                <img src="/images/Саратов легендарный и мистический.png" alt="Обзорная экскурсия по Саратову" class="rounded-2xl">
-                                <div class="absolute top-4 right-3.5 sm:top-10 sm:right-9.5 size-5 sm:size-10 xl:size-15 bg-[#A855F7] rounded-[3px] sm:rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-xl xl:text-3xl shadow-lg">
-                                    <i class="fa-sharp fa-solid fa-heart"></i>
-                                </div>
-                            </div>
-                            <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">
-                                <h1 class="text-xs sm:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl font-bold md:pt-3 line-clamp-2 sm:line-clamp-3 h-8 sm:h-22 md:h-25 xl:h-28 3xl:h-32">Обзорная экскурсия по Саратову</h1>
-                                <div class="flex flex-col">
-                                    <div class="flex flex-row text-[8px] sm:text-sm lg:text-base xl:text-[22px] font-light gap-6 text-[#5F5F5F] mt-5 mb-0 sm:mb-2 lg:mb-6">
-                                        <span class="flex items-center gap-2">
-                                            <i class="fa-solid fa-clock"></i>
-                                            2 часа
-                                        </span>
-                                        <span class="flex items-center gap-2">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            6 точек
-                                        </span>
+                    @foreach ($guidedTour->excursions as $excursion)
+                        <div class="shrink-0 w-[85%] sm:w-100 lg:w-[calc(33.333%-16px)]">
+                            <div class="card bg-white rounded-[7px] sm:rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                                <div class="card-content p-2 sm:p-6 relative">
+                                    <div>
+                                        <img src="{{ $excursion->attachments?->get(0)?->url() ?? asset('images/default.jpg') }}"
+                                             alt="Изображение {{ $excursion->name }}"
+                                             class="rounded-[7px] sm:rounded-[19px] w-full h-48 object-cover">
                                     </div>
-                                    <form action="{{ route('single-excursion', ['excursion' => 1]) }}">
-                                        <button class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity">
-                                            Подробнее
-                                        </button>
-                                    </form>
+                                    <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">
+                                        <h3 class="text-xs sm:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl font-bold md:pt-3 line-clamp-2 sm:line-clamp-3 h-8 sm:h-22 md:h-25 xl:h-28 3xl:h-32">{{ $excursion->name }}</h3>
+                                        <div class="flex flex-col">
+                                            <div class="flex flex-row text-[8px] sm:text-sm lg:text-base xl:text-[22px] font-light gap-6 text-[#5F5F5F] mt-5 mb-0 sm:mb-2 lg:mb-6">
+                                    <span class="flex items-center gap-2">
+                                        <i class="fa-solid fa-clock"></i>
+                                        {{ num_word($excursion->getDuration(), ['минута', 'минуты', 'минут']) }}
+                                    </span>
+                                                <span class="flex items-center gap-2">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        {{ num_word($excursion->points->count(), ['точка', 'точки', 'точек']) }}
+                                    </span>
+                                            </div>
+                                            <a href="{{ route('single-excursion', ['excursion' => $excursion->slug]) }}"
+                                               class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity text-center">
+                                                Подробнее
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Карточка 2 -->
-                    <div class="shrink-0 w-[85%] sm:w-100 lg:w-[calc(33.333%-16px)] card bg-white rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                        <div class="card-content p-2 sm:p-6 relative">
-                            <div class="">
-                                <img src="/images/консерватория (1).png" alt="Темная сторона Саратова: легенды и мистика" class="rounded-2xl">
-                                <div class="absolute top-4 right-3.5 sm:top-10 sm:right-9.5 size-5 sm:size-10 xl:size-15 bg-[#A855F7] rounded-[3px] sm:rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-xl xl:text-3xl shadow-lg">
-                                    <i class="fa-sharp fa-solid fa-heart"></i>
-                                </div>
-                            </div>
-                            <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">
-                                <h1 class="text-xs sm:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl font-bold md:pt-3 line-clamp-2 sm:line-clamp-3 h-8 sm:h-22 md:h-25 xl:h-28 3xl:h-32">Темная сторона Саратова: легенды и мистика</h1>
-                                <div class="flex flex-col">
-                                    <div class="flex flex-row text-[8px] sm:text-sm lg:text-base xl:text-[22px] font-light gap-6 text-[#5F5F5F] mt-5 mb-0 sm:mb-2 lg:mb-6">
-                                        <span class="flex items-center gap-2">
-                                            <i class="fa-solid fa-clock"></i>
-                                            2 часа
-                                        </span>
-                                        <span class="flex items-center gap-2">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            6 точек
-                                        </span>
-                                    </div>
-                                    <form action="{{ route('single-excursion', ['excusion' => 1]) }}">
-                                        <button class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity">
-                                            Подробнее
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+                </div>
 
-                    <!-- Карточка 3 -->
-                    <div class="shrink-0 w-[85%] sm:w-100 lg:w-[calc(33.333%-16px)] card bg-white rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                        <div class="card-content p-2 sm:p-6 relative">
-                            <div class="">
-                                <img src="/images/трамвай (4).png" alt="Саратов легендарный и мистический" class="">
-                                <div class="absolute top-4 right-3.5 sm:top-10 sm:right-9.5 size-5 sm:size-10 xl:size-15 bg-[#A855F7] rounded-[3px] sm:rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-xl xl:text-3xl shadow-lg">
-                                    <i class="fa-sharp fa-solid fa-heart"></i>
-                                </div>
-                            </div>
-                            <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">
-                                <h1 class="text-xs sm:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl font-bold md:pt-3 line-clamp-2 sm:line-clamp-3 h-8 sm:h-22 md:h-25 xl:h-28 3xl:h-32">Саратов легендарный и мистический</h1>
-                                <div class="flex flex-col">
-                                    <div class="flex flex-row text-[8px] sm:text-sm lg:text-base xl:text-[22px] font-light gap-6 text-[#5F5F5F] mt-5 mb-0 sm:mb-2 lg:mb-6">
-                                        <span class="flex items-center gap-2">
-                                            <i class="fa-solid fa-clock"></i>
-                                            2 часа
-                                        </span>
-                                        <span class="flex items-center gap-2">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            6 точек
-                                        </span>
-                                    </div>
-                                    <form action="{{ route('single-excursion', ['excursion' => 1]) }}">
-                                        <button class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity">
-                                            Подробнее
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 4 -->
-                    <div class="shrink-0 w-[85%] sm:w-100 lg:w-[calc(33.333%-16px)] card bg-white rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                        <div class="card-content p-2 sm:p-6 relative">
-                            <div class="">
-                                <img src="/images/трамвай.png" alt="Мистический Саратов" class="">
-                                <div class="absolute top-4 right-3.5 sm:top-10 sm:right-9.5 size-5 sm:size-10 xl:size-15 bg-[#A855F7] rounded-[3px] sm:rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-xl xl:text-3xl shadow-lg">
-                                    <i class="fa-sharp fa-solid fa-heart"></i>
-                                </div>
-                            </div>
-                            <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">
-                                <h1 class="text-xs sm:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl font-bold md:pt-3 line-clamp-2 sm:line-clamp-3 h-8 sm:h-22 md:h-25 xl:h-28 3xl:h-32">Мистический Саратов</h1>
-                                <div class="flex flex-col">
-                                    <div class="flex flex-row text-[8px] sm:text-sm lg:text-base xl:text-[22px] font-light gap-6 text-[#5F5F5F] mt-5 mb-0 sm:mb-2 lg:mb-6">
-                                        <span class="flex items-center gap-2">
-                                            <i class="fa-solid fa-clock"></i>
-                                            2 часа
-                                        </span>
-                                        <span class="flex items-center gap-2">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            6 точек
-                                        </span>
-                                    </div>
-                                    <form action="{{ route('single-excursion', ['excursion' => 1]) }}">
-                                        <button class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity">
-                                            Подробнее
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 5 -->
-                    <div class="shrink-0 w-[85%] sm:w-100 lg:w-[calc(33.333%-16px)] card bg-white rounded-[19px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                        <div class="card-content p-2 sm:p-6 relative">
-                            <div class="">
-                                <img src="/images/трамвай.png" alt="Мистический Саратов" class="">
-                                <div class="absolute top-4 right-3.5 sm:top-10 sm:right-9.5 size-5 sm:size-10 xl:size-15 bg-[#A855F7] rounded-[3px] sm:rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-xl xl:text-3xl shadow-lg">
-                                    <i class="fa-sharp fa-solid fa-heart"></i>
-                                </div>
-                            </div>
-                            <div class="flex flex-col font-['FindSansPro'] mt-3 sm:mt-4">
-                                <h1 class="text-xs sm:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl font-bold md:pt-3 line-clamp-2 sm:line-clamp-3 h-8 sm:h-22 md:h-25 xl:h-28 3xl:h-32">Саратов легендарный и мистический</h1>
-                                <div class="flex flex-col">
-                                    <div class="flex flex-row text-[8px] sm:text-sm lg:text-base xl:text-[22px] font-light gap-6 text-[#5F5F5F] mt-5 mb-0 sm:mb-2 lg:mb-6">
-                                        <span class="flex items-center gap-2">
-                                            <i class="fa-solid fa-clock"></i>
-                                            2 часа
-                                        </span>
-                                        <span class="flex items-center gap-2">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            6 точек
-                                        </span>
-                                    </div>
-                                    <form action="{{ route('single-excursion', ['excursion' => 1]) }}">
-                                        <button class="w-full gradient-button text-white text-[8px] sm:text-base xl:text-xl py-1 lg:py-2 rounded-[3px] sm:rounded-lg hover:opacity-90 transition-opacity">
-                                            Подробнее
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
-                        <button onclick="document.querySelector('.overflow-x-auto').scrollBy({left: -400, behavior: 'smooth'})"
-                                class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-blue-500 transition-colors">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                    </div>
-                    <div class="absolute top-1/2 -translate-y-1/2 right-0 translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
-                        <button onclick="document.querySelector('.overflow-x-auto').scrollBy({left: 400, behavior: 'smooth'})"
-                                class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-blue-500 transition-colors">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
+                <!-- Кнопки навигации -->
+                <div class="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
+                    <button onclick="document.querySelector('.overflow-x-auto').scrollBy({left: -400, behavior: 'smooth'})"
+                            class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-blue-500 transition-colors">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
+                <div class="absolute top-1/2 -translate-y-1/2 right-0 translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
+                    <button onclick="document.querySelector('.overflow-x-auto').scrollBy({left: 400, behavior: 'smooth'})"
+                            class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-blue-500 transition-colors">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </div>

@@ -55,7 +55,7 @@ class SingleHotel extends Component
     {
         $this->favoritableService->save(
             auth()->user()->id,
-            $this->attraction->id,
+            $this->hotel->id,
             Hotel::class
         );
 
@@ -67,7 +67,7 @@ class SingleHotel extends Component
     {
         $this->favoritableService->delete(
             auth()->user()->id,
-            $this->attraction->id,
+            $this->hotel->id,
             Hotel::class
         );
 

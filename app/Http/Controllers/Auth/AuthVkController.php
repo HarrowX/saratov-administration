@@ -14,6 +14,36 @@ class AuthVkController extends Controller
 {
     public function handleProviderCallback(Request $request)
     {
+        $res = $this->handleCallback($request, config('services.vk.client_id'));
+
+        if ($res instanceof User) {
+            Auth::login($res, true);
+
+            return response()->json([
+                'success' => true,
+                'error' => null,
+                'redirect' => route('profile'),
+            ]);
+        }
+
+        return $res;
+    }
+
+    public function handleMobileProviderCallback(Request $request)
+    {
+        $res = $this->handleCallback($request, config('services.vk.mobile.client_id'));
+
+        if ($res instanceof User) {
+            $token = $this->createToken($res);
+
+            return response()->json($token, 200);
+        }
+
+        return $res;
+    }
+
+    private function handleCallback(Request $request, $clientId)
+    {
         try {
             $tokenData = $request->all();
 
@@ -34,6 +64,8 @@ class AuthVkController extends Controller
             $userData = $userInfo->json()['response'][0] ?? null;
 
             if (! $userData) {
+                Log::error($userInfo);
+
                 return response()->json([
                     'success' => false,
                     'error' => 'Не получилось получить данные пользователя',
@@ -51,13 +83,7 @@ class AuthVkController extends Controller
                 ], 404);
             }
 
-            Auth::login($user, true);
-
-            return response()->json([
-                'success' => true,
-                'error' => null,
-                'redirect' => route('profile'),
-            ]);
+            return $user;
 
         } catch (\Exception $e) {
             Log::error($e);
@@ -129,5 +155,10 @@ class AuthVkController extends Controller
         ]);
 
         return redirect()->route('profile-settings')->with('status', 'Аккаунт VK отвязан');
+    }
+
+    private function createToken($user)
+    {
+        return $user->createToken('api-user', ['*'], now()->addMinutes((int) config('sanctum.expiration')))->toArray();
     }
 }

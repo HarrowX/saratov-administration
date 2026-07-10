@@ -28,7 +28,6 @@ class SingleAttraction extends Component
 
     public function mount(Attraction $attraction)
     {
-
         $this->attraction = $attraction;
         $this->attraction->load('attachments');
         $this->favoritesCount = $attraction->favorites?->count() ?? 0;
@@ -38,7 +37,6 @@ class SingleAttraction extends Component
         }
 
         $this->viewService->calculate($this->attraction->id, Attraction::class);
-
     }
 
     public function toggleFavorite()

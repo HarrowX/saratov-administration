@@ -3,6 +3,31 @@
 @endsection
 
 <div>
+    <section id="home" class="relative mt-25 md:mt-35 xl:mt-40 3xl:mt-50 ">
+        <div class="max-w-6xl xl:max-w-7xl 3xl:max-w-398.25 px-4 sm:px-20 mx-auto relative">
+
+            <a href="{{ route('all-restaurants') }}"
+               class="absolute left-14 -top-10 3xl:-top-15 hidden md:flex items-center xl:gap-2 text-[#5F5F5F] hover:text-blue-900 transition-colors font-['FindSansPro']">
+                <i class="fa-solid fa-chevron-left text-xl xl:text-xl 3xl:text-3xl"></i>
+                <span class="text-xl 3xl:text-3xl pl-4">Рестораны</span>
+            </a>
+
+            <button
+                wire:click="toggleFavorite"
+                class="absolute right-10 -top-10 3xl:-top-15 xl:right-20 z-20 hidden md:flex items-center gap-3 px-5 py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group"
+            >
+                <i class="fa-regular fa-heart text-2xl xl:text-3xl group-hover:scale-110 group-hover:animate-pulse transition-transform {{ $isFavorite ? 'fa-solid text-red-400' : 'fa-regular' }}"></i>
+
+                <span class="text-xl xl:text-3xl font-medium">
+                {{ $isFavorite ? 'В избранном' : 'В избранное' }}
+            </span>
+
+                <span class="favorite-count ml-2 text-base xl:text-xl font-bold px-2.5 py-1 rounded-full {{ $isFavorite ? 'bg-red-500 text-white' : 'bg-red-500/80 text-white' }} transition-colors shadow-lg">
+                {{ $favoritesCount }}
+            </span>
+            </button>
+        </div>
+    </section>
     <!--Hero Section-->
     <section class="features-section pt-28 md:pt-30 lg:pt-41.5 bg-white">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 sm:px-10">
