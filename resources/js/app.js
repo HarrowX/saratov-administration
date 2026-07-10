@@ -1,30 +1,20 @@
 
 import './bootstrap';
 import './scripts/journey'
-import './scripts/innovations'
 import './scripts/notification';
-import './scripts/profile-modal';
-import './scripts/user-profile';
-import './scripts/chatbot';
-import './scripts/fixes';
+import './scripts/gallery';
 import './scripts/slider';
-import './scripts/social-features';
-import './scripts/swiper';
-import './scripts/user-content';
 import './scripts/yandex-map';
 
 import './scripts/calendar';
 
-
-
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
 
-
 mobileMenuBtn?.addEventListener('click', () => {
     mobileMenu.classList.toggle('hidden');
-    console.log(1123)
 });
+
 function closeMobileMenu() {
     const menu = document.getElementById('mobileMenu');
     const menuBtn = document.getElementById('mobileMenuBtn');
@@ -36,6 +26,7 @@ function closeMobileMenu() {
         }
     }
 }
+
 document.addEventListener('click', function(e) {
     const menu = document.getElementById('mobileMenu');
     const menuBtn = document.getElementById('mobileMenuBtn');
@@ -48,14 +39,14 @@ document.addEventListener('click', function(e) {
             closeMobileMenu();
         }
     }
-});
+})
+
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         closeMobileMenu();
     }
 });
 
-// Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -72,7 +63,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Counter animation
 function animateCounter(element, start, end, duration) {
     let startTimestamp = null;
     const step = (timestamp) => {
@@ -109,8 +99,5 @@ document.addEventListener('DOMContentLoaded', () => {
     counters.forEach(counter => {
         counterObserver.observe(counter);
     });
-
-    // Initialize user data
-    updateProfileData();
 });
 
