@@ -23,6 +23,17 @@ class AttractionSeeder extends Seeder
             'Журавли',
         ];
 
+        $coords = [
+            [51.533922, 46.021164],
+            [51.529806, 46.034167],
+            [51.532515, 46.024274],
+            [51.525057, 46.049600],
+            [51.517357, 46.070288],
+            [51.516337, 46.002929],
+            [51.538486, 46.026426],
+            [-45.090000, 113.740000],
+        ];
+
         $attractions = [];
 
         for ($i = 0; $i < 8; $i++) {
@@ -39,8 +50,8 @@ class AttractionSeeder extends Seeder
                 'phone' => fake()->phoneNumber(),
                 'address' => fake()->address(),
                 'district' => fake()->city(),
-                'latitude' => fake()->latitude(),
-                'longitude' => fake()->longitude(),
+                'latitude' => $coords[$i][0],
+                'longitude' => $coords[$i][1],
                 'email' => fake()->safeEmail(),
                 'website' => fake()->url(),
                 'status' => fake()->randomElement(['active', 'draft', 'archived']),
