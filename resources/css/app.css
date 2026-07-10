@@ -581,6 +581,16 @@ footer .flex {
     100% { width: 0; }
 }
 
+/* from innovations.js */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.3s ease;
+}
+
 .animate-bounce {
     animation: bounce 1s infinite;
 }
@@ -788,7 +798,22 @@ select option:checked {
     stroke-dashoffset: -138px;
 }
 
+/* from slider.js */
+.slider-slide {
+    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+}
 
+.slider-slide.active {
+    opacity: 1;
+    visibility: visible;
+}
 
+.slider-dot {
+    transition: all 0.3s ease;
+}
 
-
+.slider-dot:hover {
+    transform: scale(1.2);
+}

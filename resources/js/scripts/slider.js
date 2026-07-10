@@ -6,31 +6,32 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-const swiper = new Swiper('.job-swiper__swiper', {
-    modules: [Navigation, Pagination],
+document.addEventListener('DOMContentLoaded', () => {
+    const swiper = new Swiper('.job-swiper__swiper', {
+        modules: [Navigation, Pagination],
 
-    slidesPerView: 1,
-    spaceBetween: 24,
+        slidesPerView: 1,
+        spaceBetween: 24,
 
-    loop: true,
+        loop: true,
 
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-        dynamicBullets: true,
-    },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            dynamicBullets: true,
+        },
 
-    navigation: {
-        nextEl: '.button-navigation--job-right',
-        prevEl: '.button-navigation--job-left',
-    },
+        navigation: {
+            nextEl: '.button-navigation--job-right',
+            prevEl: '.button-navigation--job-left',
+        },
 
-    autoplay: {
-        delay: 3000,
-        disableOnInteraction: false,
-    },
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+    });
 });
-
 
 
 let currentSlide = 0;
@@ -112,30 +113,6 @@ function resetAutoSlide() {
     clearInterval(slideInterval);
     startAutoSlide();
 }
-
-// Add CSS for smooth transitions
-const sliderStyles = document.createElement('style');
-sliderStyles.textContent = `
-    .slider-slide {
-        transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
-        opacity: 0;
-        visibility: hidden;
-    }
-    
-    .slider-slide.active {
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    .slider-dot {
-        transition: all 0.3s ease;
-    }
-    
-    .slider-dot:hover {
-        transform: scale(1.2);
-    }
-`;
-document.head.appendChild(sliderStyles);
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', initSlider);

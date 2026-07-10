@@ -52,4 +52,21 @@
             </div>
         </div>
     </div>
+    <script>
+        const profileModal = document.getElementById('profileModal');
+        const profileBtn = document.getElementById('profileBtn');
+
+        function showProfileModal() {
+            profileModal.classList.remove('hidden');
+            profileModal.querySelector('.bg-white').classList.add('modal-enter');
+        }
+        
+        function closeProfileModal() {
+            profileModal.classList.add('hidden');
+        }
+
+        profileBtn?.addEventListener('click', () => {
+            showProfileModal();
+        });
+    </script>
 </div>
