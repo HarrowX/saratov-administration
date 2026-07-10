@@ -9,7 +9,6 @@ class SaratovAi extends Component
     public bool $authorized = false;
 
     /**
-     * 
      * @var array[array]
      */
     public array $chatMessages = [];
@@ -30,6 +29,7 @@ class SaratovAi extends Component
     {
         if (empty($this->prompt)) {
             $this->addError('prompt', 'Запрос не должен быть пустым');
+
             return;
         }
 
@@ -37,13 +37,13 @@ class SaratovAi extends Component
 
         $message = [
             'fromBot' => false,
-            'text' => $this->prompt
+            'text' => $this->prompt,
         ];
         $botReply = [
             'fromBot' => true,
             'text' => $this->prompt,
         ];
-        $this->prompt = "";
+        $this->prompt = '';
 
         $this->chatMessages[] = $message;
         $this->chatMessages[] = $botReply;
