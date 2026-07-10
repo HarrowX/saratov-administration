@@ -18,7 +18,6 @@ Route::prefix('v1')->group(function () {
         });
 
     Route::prefix('users')->group(function () {
-
         Route::middleware(['auth:sanctum'])->controller(ProfileController::class)
             ->group(function () {
                 Route::get('me', 'show');
@@ -26,29 +25,52 @@ Route::prefix('v1')->group(function () {
             });
     });
 
-    Route::prefix('places')->group(function () {
-        Route::controller(ContentController::class)->group(function () {
+    Route::controller(ContentController::class)->group(function () {
+        Route::prefix('places')->group(function () {
             Route::get('hotels', 'hotels');
+            Route::get('hotels/{id}', 'hotel');
+
             Route::get('restaurants', 'restaurants');
+            Route::get('restaurants/{id}', 'restaurant');
+
             Route::get('attractions', 'attractions');
+            Route::get('attractions/{id}', 'attraction');
         });
+
+        Route::get('excursions', 'excursions');
+        Route::get('excursions/{id}', 'excursion');
+
+        Route::get('guide-tours', 'guideTours');
+        Route::get('guide-tours/{id}', 'guideTour');
     });
 
-    Route::prefix('favorites/places')
+    Route::prefix('favorites')
         ->controller(FavoritableController::class)
         ->middleware(['auth:sanctum'])
         ->group(function () {
-            Route::get('hotels', 'indexHotel');
-            Route::get('restaurants', 'indexRestaurant');
-            Route::get('attractions', 'indexAttraction');
+            Route::prefix('places')->group(function () {
+                Route::get('hotels', 'indexHotel');
+                Route::get('restaurants', 'indexRestaurant');
+                Route::get('attractions', 'indexAttraction');
 
-            Route::post('hotels/{id}', 'favoriteHotel');
-            Route::post('restaurants/{id}', 'favoriteRestaurant');
-            Route::post('attractions/{id}', 'favoriteAttraction');
+                Route::post('hotels/{id}', 'favoriteHotel');
+                Route::post('restaurants/{id}', 'favoriteRestaurant');
+                Route::post('attractions/{id}', 'favoriteAttraction');
 
-            Route::delete('hotels/{id}', 'unfavoriteHotel');
-            Route::delete('restaurants/{id}', 'unfavoriteRestaurant');
-            Route::delete('attractions/{id}', 'unfavoriteAttraction');
+                Route::delete('hotels/{id}', 'unfavoriteHotel');
+                Route::delete('restaurants/{id}', 'unfavoriteRestaurant');
+                Route::delete('attractions/{id}', 'unfavoriteAttraction');
+            });
+
+            Route::get('excursions', 'indexExcursion');
+            Route::get('guide-tours', 'indexGuideTour');
+
+            Route::post('excursions/{id}', 'favoriteExcursion');
+            Route::post('guide-tours/{id}', 'favoriteGuideTour');
+
+            Route::delete('excursions/{id}', 'unfavoriteExcursion');
+            Route::delete('guide-tours/{id}', 'unfavoriteGuideTour');
+
         });
 
     Route::prefix('visits')

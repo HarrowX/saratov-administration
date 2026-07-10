@@ -26,6 +26,24 @@
                : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
             Рестораны
         </button>
+
+        <button
+            wire:click="selectType('App\\Models\\Excursion')"
+            class="px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200
+           {{ $selectedType === 'App\\Models\\Excursion'
+               ? 'bg-blue-600 text-white shadow-sm'
+               : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
+            Экскурсии
+        </button>
+
+        <button
+            wire:click="selectType('App\\Models\\GuidedTour')"
+            class="px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200
+           {{ $selectedType === 'App\\Models\\GuidedTour'
+               ? 'bg-blue-600 text-white shadow-sm'
+               : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
+            Экскурсоводы
+        </button>
     </div>
 
     <div class="p-6 space-y-4">
@@ -67,7 +85,7 @@
                     </div>
 
                     <div class="flex justify-between items-center pt-3 border-t border-gray-100">
-                        <a href="{{ $this->getUrl($item->slug) }}"
+                        <a href="{{ $this->getUrl($item) }}"
                            class="inline-flex items-center gap-2 font-medium transition-colors">
                             <span>Подробнее</span>
                         </a>

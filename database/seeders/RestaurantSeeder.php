@@ -28,10 +28,10 @@ class RestaurantSeeder extends Seeder
 
         $names = [
             'Ресторан «Москва»',
-            'Tary-Bary',
+            'Тары-Бары',
             'DURAN Bar&Grill',
-            'Khvanch',
-            'Kumushka',
+            'Хванч',
+            'Кумушка',
             'Тут Харчо Большой',
             'PORT',
             'Старик Хинкалыч',

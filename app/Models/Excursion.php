@@ -40,4 +40,9 @@ class Excursion extends Model
     {
         return $this->duration ?? $this->points->sum('duration_minutes');
     }
+
+    public function favorites(): MorphMany
+    {
+        return $this->morphMany(Favorite::class, 'favoriteable');
+    }
 }

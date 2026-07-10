@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\Attraction;
+use App\Models\Excursion;
+use App\Models\GuidedTour;
 use App\Models\Hotel;
 use App\Models\Restaurant;
 use App\Services\FavoritableService;
@@ -35,12 +37,14 @@ class FavoriteSection extends Component
         })->paginate(5);
     }
 
-    public function getUrl($slug)
+    public function getUrl($item)
     {
         return match ($this->selectedType) {
-            Attraction::class => route('single-attraction', $slug),
-            Hotel::class => route('single-hotel', $slug),
-            Restaurant::class => route('single-restaurant', $slug),
+            Attraction::class => route('single-attraction', $item),
+            Hotel::class => route('single-hotel', $item),
+            Restaurant::class => route('single-restaurant', $item),
+            Excursion::class => route('single-excursion', $item),
+            GuidedTour::class => route('single-guided-tour', $item),
         };
     }
 

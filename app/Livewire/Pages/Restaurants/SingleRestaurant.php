@@ -55,7 +55,7 @@ class SingleRestaurant extends Component
     {
         $this->favoritableService->save(
             auth()->user()->id,
-            $this->attraction->id,
+            $this->restaurant->id,
             Restaurant::class
         );
 
@@ -67,7 +67,7 @@ class SingleRestaurant extends Component
     {
         $this->favoritableService->delete(
             auth()->user()->id,
-            $this->attraction->id,
+            $this->restaurant->id,
             Restaurant::class
         );
 

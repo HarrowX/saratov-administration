@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\AttractionResource;
+use App\Http\Resources\ExcursionResource;
+use App\Http\Resources\GuidedTourResource;
 use App\Http\Resources\HotelResource;
 use App\Http\Resources\RestaurantResource;
 use App\Models\Attraction;
 use App\Models\Excursion;
+use App\Models\GuidedTour;
 use App\Models\Hotel;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
@@ -22,6 +25,19 @@ class ContentController extends Controller
         return HotelResource::collection($query->paginate($perPage));
     }
 
+    public function hotel(Request $request)
+    {
+        $query = Hotel::query()->with('attachments');
+
+        $model = $query->find($request->id);
+
+        if (! $model) {
+            return response()->json(status: 404);
+        }
+
+        return HotelResource::make($model);
+    }
+
     public function restaurants(Request $request)
     {
         $query = Restaurant::query()->with('attachments');
@@ -29,6 +45,19 @@ class ContentController extends Controller
         $perPage = $request->integer('per_page', 15);
 
         return RestaurantResource::collection($query->paginate($perPage));
+    }
+
+    public function restaurant(Request $request)
+    {
+        $query = Restaurant::query()->with('attachments');
+
+        $model = $query->find($request->id);
+
+        if (! $model) {
+            return response()->json(status: 404);
+        }
+
+        return RestaurantResource::make($model);
     }
 
     public function attractions(Request $request)
@@ -40,10 +69,60 @@ class ContentController extends Controller
         return AttractionResource::collection($query->paginate($perPage));
     }
 
-    public function excursions()
+    public function attraction(Request $request)
     {
-        return response()->json(
-            Excursion::with('attachments')->get()->toArray(), 200
-        );
+        $query = Attraction::query()->with('attachments');
+
+        $model = $query->find($request->id);
+
+        if (! $model) {
+            return response()->json(status: 404);
+        }
+
+        return RestaurantResource::make($model);
+    }
+
+    public function excursions(Request $request)
+    {
+        $query = Excursion::query()->with('attachments');
+
+        $perPage = $request->integer('per_page', 15);
+
+        return ExcursionResource::collection($query->paginate($perPage));
+    }
+
+    public function excursion(Request $request)
+    {
+        $query = Excursion::query()->with('attachments');
+
+        $model = $query->find($request->id);
+
+        if (! $model) {
+            return response()->json(status: 404);
+        }
+
+        return ExcursionResource::make($model);
+    }
+
+    public function guideTours(Request $request)
+    {
+        $query = GuidedTour::query()->with('attachments');
+
+        $perPage = $request->integer('per_page', 15);
+
+        return GuidedTourResource::collection($query->paginate($perPage));
+    }
+
+    public function guideTour(Request $request)
+    {
+        $query = GuidedTour::query()->with('attachments');
+
+        $model = $query->find($request->id);
+
+        if (! $model) {
+            return response()->json(status: 404);
+        }
+
+        return GuidedTourResource::make($model);
     }
 }
