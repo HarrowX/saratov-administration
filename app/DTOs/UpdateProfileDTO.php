@@ -12,7 +12,7 @@ class UpdateProfileDTO extends ValidatedDTO
 
     public string $surname;
 
-    public string $patronymic;
+    public ?string $patronymic;
 
     public ?string $phone;
 
