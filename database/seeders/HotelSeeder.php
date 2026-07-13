@@ -26,6 +26,17 @@ class HotelSeeder extends Seeder
             'Берег солнца',
         ];
 
+        $coords = [
+            [51.565446, 45.878625],
+            [51.549611, 46.024757],
+            [51.530037, 46.033332],
+            [51.529371, 46.058044],
+            [51.526435, 46.053908],
+            [51.614352, 46.201173],
+            [52.122639, 45.914634],
+            [51.070616, 45.909364],
+        ];
+
         $hotels = [];
 
         for ($i = 0; $i < 8; $i++) {
@@ -39,8 +50,8 @@ class HotelSeeder extends Seeder
                 'phone' => fake()->phoneNumber(),
                 'address' => fake()->address(),
                 'website' => fake()->url(),
-                'latitude' => fake()->latitude(),
-                'longitude' => fake()->longitude(),
+                'latitude' => $coords[$i][0],
+                'longitude' => $coords[$i][1],
                 'slug' => Str::slug($name),
             ];
         }

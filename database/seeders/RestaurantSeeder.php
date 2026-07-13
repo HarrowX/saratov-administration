@@ -38,8 +38,15 @@ class RestaurantSeeder extends Seeder
             'Узбечка',
         ];
 
-        $latitude = [
-
+        $coords = [
+            [51.534808, 46.031979],
+            [51.533145, 46.021524],
+            [51.530275, 46.033911],
+            [51.525903, 46.054624],
+            [51.530593, 46.014345],
+            [51.531736, 46.025822],
+            [51.531103, 46.025938],
+            [51.532161, 46.020288],
         ];
 
         $restaurants = [];
@@ -50,8 +57,8 @@ class RestaurantSeeder extends Seeder
                 'name' => $name,
                 'description' => fake()->realText(),
                 'address' => fake()->address(),
-                'latitude' => fake()->latitude(),
-                'longitude' => fake()->longitude(),
+                'latitude' => $coords[$i][0],
+                'longitude' => $coords[$i][1],
                 //                'worktime' => [], //'c ' . fake()->time('H:i') . ' до ' . fake()->time('H:i'),
                 'phone' => fake()->phoneNumber(),
                 'website' => fake()->url(),
