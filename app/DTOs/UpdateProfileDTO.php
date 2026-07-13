@@ -12,18 +12,18 @@ class UpdateProfileDTO extends ValidatedDTO
 
     public string $surname;
 
-    public string $patronymic;
+    public ?string $patronymic;
 
-    public string $phone;
+    public ?string $phone;
 
     protected function rules(): array
     {
         return [
             'name' => ['string', 'required', 'max:255'],
             'surname' => ['string', 'required', 'max:255'],
-            'patronymic' => ['string', 'nullable', 'max:255'],
+            'patronymic' => ['sometimes', 'string', 'nullable', 'max:255'],
 
-            'phone' => ['string', 'nullable', 'max:255'],
+            'phone' => ['sometimes', 'string', 'nullable', 'max:255'],
         ];
     }
 

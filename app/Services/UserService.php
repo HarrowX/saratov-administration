@@ -10,9 +10,11 @@ class UserService
     {
         $data = $dto->toArray();
 
-        auth()->user()->update([
-            'phone' => $data['phone'],
-        ]);
+        if ($data['phone']) {
+            auth()->user()->update([
+                'phone' => $data['phone'],
+            ]);
+        }
 
         auth()->user()->username()->update([
             'name' => $data['name'],
