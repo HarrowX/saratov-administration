@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\DTOs\UpdateProfileDTO;
-use Illuminate\Support\Arr;
 
 class UserService
 {
