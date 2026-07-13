@@ -31,9 +31,9 @@ class RegisterDTO extends ValidatedDTO implements \Livewire\Wireable
         return [
             'name' => ['string', 'required', 'max:255'],
             'surname' => ['string', 'required', 'max:255'],
-            'patronymic' => ['string', 'nullable', 'max:255'],
+            'patronymic' => ['sometimes', 'string', 'nullable', 'max:255'],
 
-            'phone' => ['string', 'nullable', 'max:255'],
+            'phone' => ['sometimes', 'string', 'nullable', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
 
             'password' => ['required', Password::defaults(), 'confirmed:password_confirmation'],
