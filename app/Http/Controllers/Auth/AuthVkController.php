@@ -29,9 +29,10 @@ class AuthVkController extends Controller
         return $res;
     }
 
-    public function handleMobileProviderCallback(Request $request)
+    public function exchangeToken(Request $request)
     {
-        $res = $this->handleCallback($request, config('services.vk.mobile.client_id'));
+        $res = $this->handleCallback($request, config('services.vk.mobile.client_id'), $request->boolean('invalidate') ?? true);
+
 
         if ($res instanceof User) {
             $token = $this->createToken($res);
@@ -42,7 +43,7 @@ class AuthVkController extends Controller
         return $res;
     }
 
-    private function handleCallback(Request $request, $clientId)
+    private function handleCallback(Request $request, $clientId, $invalidate = true)
     {
         try {
             $tokenData = $request->all();
@@ -55,13 +56,21 @@ class AuthVkController extends Controller
                 ], 400);
             }
 
-            $userInfo = Http::get('https://api.vk.com/method/users.get', [
+
+            $userInfo = Http::post('https://id.vk.ru/oauth2/user_info', [
                 'access_token' => $tokenData['access_token'],
-                'v' => '5.131',
-                'fields' => 'photo_100,first_name,last_name, pat',
+                'client_id' => $clientId,
             ]);
 
-            $userData = $userInfo->json()['response'][0] ?? null;
+
+            if ($invalidate) {
+                Http::post('https://id.vk.ru/oauth2/logout', [
+                    'access_token' => $tokenData['access_token'],
+                    'client_id' => $clientId,
+                ]);
+            }
+
+            $userData = $userInfo->json()['user'] ?? null;
 
             if (! $userData) {
                 Log::error($userInfo);
@@ -73,7 +82,8 @@ class AuthVkController extends Controller
                 ], 400);
             }
 
-            $user = $this->findUserAndUpdateAvatar($userData['id'], $userData['photo_100']);
+
+            $user = $this->findUserAndUpdateAvatar($userData['user_id'], $userData['avatar']);
 
             if (! $user) {
                 return response()->json([
