@@ -33,7 +33,6 @@ class AuthVkController extends Controller
     {
         $res = $this->handleCallback($request, config('services.vk.mobile.client_id'), $request->boolean('invalidate') ?? true);
 
-
         if ($res instanceof User) {
             $token = $this->createToken($res);
 
@@ -56,12 +55,10 @@ class AuthVkController extends Controller
                 ], 400);
             }
 
-
             $userInfo = Http::post('https://id.vk.ru/oauth2/user_info', [
                 'access_token' => $tokenData['access_token'],
                 'client_id' => $clientId,
             ]);
-
 
             if ($invalidate) {
                 Http::post('https://id.vk.ru/oauth2/logout', [
@@ -81,7 +78,6 @@ class AuthVkController extends Controller
                     'redirect' => null,
                 ], 400);
             }
-
 
             $user = $this->findUserAndUpdateAvatar($userData['user_id'], $userData['avatar']);
 

@@ -18,7 +18,7 @@ Route::prefix('v1')->group(function () {
             Route::post('logout', 'logout')->middleware(['auth:sanctum']);
         });
 
-    Route::post('auth/vk/token/exchange', [AuthVkController::class,'exchangeToken']);
+    Route::post('auth/vk/token/exchange', [AuthVkController::class, 'exchangeToken']);
 
     Route::prefix('users')->group(function () {
         Route::middleware(['auth:sanctum'])->controller(ProfileController::class)
