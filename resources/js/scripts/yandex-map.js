@@ -44,6 +44,11 @@ function getLandmarks() {
         }))
     ];
 }
+
+function setMapCenter(lat, lng) {
+    yandexMap.center = [lat, lng];
+}
+
 function initYandexMap() {
     if (yandexMap) return;
 
@@ -56,7 +61,7 @@ function initYandexMap() {
     }
     ymaps.ready(() => {
         yandexMap = new ymaps.Map('map', {
-            center: [51.5339, 46.0345],
+            center: window.mapCenter || [51.5339, 46.0345],
             zoom: 13
         });
         window.yandexMap = yandexMap;
@@ -237,3 +242,4 @@ window.initYandexMap = initYandexMap;
 window.forceInitMap = forceInitMap;
 window.toggleFilterPanel = toggleFilterPanel;
 window.filterMapByCategory = filterMapByCategory;
+window.setMapCenter = setMapCenter;

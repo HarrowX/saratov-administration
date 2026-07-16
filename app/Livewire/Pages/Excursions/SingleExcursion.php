@@ -2,7 +2,10 @@
 
 namespace App\Livewire\Pages\Excursions;
 
+use App\Models\Attraction;
 use App\Models\Excursion;
+use App\Models\Hotel;
+use App\Models\Restaurant;
 use App\Services\FavoritableService;
 use App\Services\ViewService;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +27,12 @@ class SingleExcursion extends Component
 
     protected ViewService $viewService;
 
+    public array $attractions;
+
+    public array $hotels;
+
+    public array $restaurants;
+
     public function boot(FavoritableService $favoritableService, ViewService $viewService): void
     {
         $this->favoritableService = $favoritableService;
@@ -34,6 +43,25 @@ class SingleExcursion extends Component
     {
         $this->excursion = $excursion;
         $this->excursion->load('attachments');
+
+        $this->attractions = $excursion->points
+            ->where('pointable_type', Attraction::class)
+            ->map(fn ($point) => $point->pointable)
+            ->values()
+            ->toArray();
+
+        $this->hotels = $excursion->points
+            ->where('pointable_type', Hotel::class)
+            ->map(fn ($point) => $point->pointable)
+            ->values()
+            ->toArray();
+
+        $this->restaurants = $excursion->points
+            ->where('pointable_type', Restaurant::class)
+            ->map(fn ($point) => $point->pointable)
+            ->values()
+            ->toArray();
+
         $this->favoritesCount = $excursion->favorites?->count() ?? 0;
 
         if (Auth::check()) {

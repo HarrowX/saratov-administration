@@ -3,6 +3,17 @@
 @endsection
 
 <div>
+    <script>
+        window.mapData = {
+            attractions: [],
+            hotels: [],
+            restaurants: @js([$restaurant]),
+        };
+        window.mapCenter = @js([$restaurant->latitude , $restaurant->longitude]);
+    </script>
+
+    <x-map-modal />
+
     <section id="home" class="relative mt-25 md:mt-35 xl:mt-40 3xl:mt-50 ">
         <div class="max-w-6xl xl:max-w-7xl 3xl:max-w-398.25 px-4 sm:px-20 mx-auto relative">
 
@@ -87,15 +98,11 @@
                         <h3>Кухня</h3>
                         <p class="text-[#5F5F5F]">{{ $restaurant->kitchen }}</p>
                     </div>
-                    @if($restaurant->map_link)
-                        <a href="{{ $restaurant->map_link }}" target="_blank" class="flex justify-center  bg-linear-to-r from-green-500 to-teal-600 text-white py-3 xl:py-6 rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-lg xl:text-xl 3xl:text-3xl md:mt-4">
-                            Показать на карте
-                        </a>
-                    @else
-                        <div class="w-full flex justify-center bg-linear-to-r from-green-500 to-teal-600 text-white py-3 xl:py-6 rounded-[30px] text-lg sm:text-lg xl:text-xl 3xl:text-3xl md:mt-4 opacity-50 cursor-not-allowed content-center font-['FindSansPro']" disabled>
-                            Показать на карте
-                        </div>
-                    @endif
+
+                    <button onclick="document.getElementById('map-modal').classList.remove(['hidden'])" class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] 2xl:rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-xl 3xl:text-3xl">
+                        Показать на карте
+                    </button>
+
                 </div>
             </div>
             <div class="font-['FindSansPro'] flex flex-col items-center lg:items-start">
