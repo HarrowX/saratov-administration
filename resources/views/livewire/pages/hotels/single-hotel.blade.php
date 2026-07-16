@@ -125,7 +125,7 @@
                         </div>
                     </div>
 
-                    <button onclick="document.getElementById('map-modal').classList.remove(['hidden'])" class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] 2xl:rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-xl 3xl:text-3xl">
+                    <button onclick="document.getElementById('map-modal').classList.remove(['hidden'])" class="flex justify-center w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 xl:py-6 rounded-[30px] hover:shadow-lg transition cursor-pointer text-lg sm:text-lg xl:text-xl 3xl:text-3xl md:mt-4">
                         Показать на карте
                     </button>
                 </div>
