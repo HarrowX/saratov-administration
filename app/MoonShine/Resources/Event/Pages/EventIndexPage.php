@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Event\Pages;
 
+use App\MoonShine\Components\YandexMapSearch;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Event\EventResource;
 use App\MoonShine\Resources\EventCategory\EventCategoryResource;
@@ -107,6 +108,7 @@ class EventIndexPage extends IndexPage
     {
         return [
             ...parent::topLayer(),
+            YandexMapSearch::make($this->getResource()),
         ];
     }
 
