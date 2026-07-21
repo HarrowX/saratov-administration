@@ -12,15 +12,18 @@ class AllEvents extends Component
     use WithPagination;
 
     public $date = '';
-
     public $search = '';
-
     public $categoryId = '';
+    public $ageRestriction = '';
+    public $location = '';
 
     protected $queryString = [
         'date' => ['except' => ''],
         'search' => ['except' => ''],
         'categoryId' => ['except' => ''],
+        'ageRestriction' => ['except' => ''],
+        'location' => ['except' => ''],
+
     ];
 
     public function mount()
@@ -30,6 +33,12 @@ class AllEvents extends Component
         }
         if (request()->has('category')) {
             $this->categoryId = request('category');
+        }
+        if (request()->has('age')) {
+            $this->ageRestriction = request('age');
+        }
+        if (request()->has('location')) {
+            $this->location = request('location');
         }
     }
 
@@ -49,7 +58,19 @@ class AllEvents extends Component
                 return $query->whereHas('categories', function ($q) {
                     $q->where('categories.id', $this->categoryId);
                 });
-            })->orderBy('start_date')->paginate(12);
+            })
+            ->when($this->ageRestriction, function ($query) {
+                if ($this->ageRestriction === '0') {
+                    return $query->whereNull('age_restriction')
+                        ->orWhere('age_restriction', '0');
+                }
+                return $query->where('age_restriction', $this->ageRestriction);
+            })
+            ->when($this->location, function ($query) {
+                return $query->where('address', 'like', '%' . $this->location . '%');
+            })
+            ->orderBy('start_date')
+            ->paginate(12);
 
         return view('livewire.pages.events.all-events', [
             'events' => $events,
@@ -62,6 +83,8 @@ class AllEvents extends Component
         $this->date = '';
         $this->search = '';
         $this->categoryId = '';
+        $this->ageRestriction = '';
+        $this->location = '';
         $this->resetPage();
     }
 
