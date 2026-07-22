@@ -4,6 +4,8 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class AttractionResource extends JsonResource
 {
@@ -14,6 +16,8 @@ class AttractionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $attachment = $this->attachments()->orderBy('order')->first();
+
         return [
             'id' => $this->id,
 
@@ -21,6 +25,8 @@ class AttractionResource extends JsonResource
             'slug' => $this->slug,
             'shortDescription' => $this->short_description,
             'description' => $this->description,
+
+            'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
 
             'worktime' => $this->worktime,
             'phone' => $this->phone,

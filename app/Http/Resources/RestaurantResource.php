@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class RestaurantResource extends JsonResource
 {
@@ -14,10 +15,14 @@ class RestaurantResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $attachment = $this->attachments()->orderBy('order')->first();
+
         return [
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
+
+            'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
 
             'description' => $this->description,
             'address' => $this->address,

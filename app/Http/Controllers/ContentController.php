@@ -81,7 +81,7 @@ class ContentController extends Controller
             return response()->json(status: 404);
         }
 
-        return RestaurantResource::make($model);
+        return AttractionResource::make($model);
     }
 
     public function excursions(Request $request)
