@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\AuthVkController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\FavoritableController;
 use App\Http\Controllers\PlaceVisitController;
@@ -16,6 +17,8 @@ Route::prefix('v1')->group(function () {
             Route::post('register', 'register');
             Route::post('logout', 'logout')->middleware(['auth:sanctum']);
         });
+
+    Route::post('auth/vk/token/exchange', [AuthVkController::class, 'exchangeToken']);
 
     Route::prefix('users')->group(function () {
         Route::middleware(['auth:sanctum'])->controller(ProfileController::class)
