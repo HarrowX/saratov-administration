@@ -3,6 +3,17 @@
 @endsection
 
 <div>
+    <script>
+        window.mapData = {
+            attractions: @js([$attraction]),
+            hotels: [],
+            restaurants: [],
+        };
+        window.mapCenter = @js([$attraction->latitude , $attraction->longitude]);
+    </script>
+
+    <x-map-modal />
+
     <!-- Hero Section -->
     <section id="home" class="relative h-68.5 md:min-h-screen overflow-hidden rounded-b-xl sm:rounded-b-3xl lg:rounded-b-[50px] mt-20">
         <div class="absolute inset-0">
@@ -68,16 +79,10 @@
                         <h3>Категории</h3>
                         <p class="text-[#5F5F5F]">{{$attraction->short_description}}</p>
                     </div>
-                    @if($attraction->map_link)
-                        <a href="{{ $attraction->map_link }}" target="_blank" class="flex justify-center w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 xl:py-6 rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-lg xl:text-xl 3xl:text-3xl md:mt-4">
-                            Показать на карте
-                        </a>
-                    @else
-                        <div class="w-full flex justify-center bg-linear-to-r from-green-500 to-teal-600 text-white py-3 xl:py-6 rounded-[30px] text-lg sm:text-lg xl:text-xl 3xl:text-3xl md:mt-4 opacity-50 cursor-not-allowed content-center font-['FindSansPro']" disabled>
-                            Показать на карте
-                        </div>
-                    @endif
 
+                    <button onclick="document.getElementById('map-modal').classList.remove(['hidden'])" class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] 2xl:rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-xl 3xl:text-3xl">
+                        Показать на карте
+                    </button>
                 </div>
             </div>
             <div data-aos="fade-right" class="flex flex-col items-center lg:items-start">

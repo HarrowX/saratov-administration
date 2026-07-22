@@ -2,6 +2,19 @@
     Саратов 435 - Модерн в Саратове
 @endsection
 <div>
+    <script>
+        window.mapData = {
+            attractions: @js($attractions),
+            hotels: @js($hotels),
+            restaurants: @js($restaurants),
+        };
+
+        window.mapZoom = 20;
+
+        window.mapCenter = @js($startPosition);
+    </script>
+
+    <x-map-modal />
 
     <section id="home" class="relative mt-25 md:mt-35 xl:mt-40 3xl:mt-50 ">
         <div class="max-w-6xl xl:max-w-7xl 3xl:max-w-398.25 px-4 sm:px-20 mx-auto relative">
@@ -69,7 +82,9 @@
                             <p>{{ $excursion->type }}</p>
                         </div>
                     </div>
-                    <button class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] 2xl:rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-xl 3xl:text-3xl">Показать на карте</button>
+                    <button onclick="document.getElementById('map-modal').classList.remove(['hidden'])" class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] 2xl:rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-xl 3xl:text-3xl">
+                        Показать на карте
+                    </button>
                 </div>
             </div>
         </div>
