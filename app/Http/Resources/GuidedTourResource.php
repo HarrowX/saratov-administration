@@ -16,6 +16,7 @@ class GuidedTourResource extends JsonResource
     public function toArray(Request $request): array
     {
         $attachment = $this->attachments()->orderBy('order')->first();
+        $isFavorite = $this->favorites->where('user_id', $request->user()->id)->isNotEmpty() || false;
 
         return [
             'id' => $this->id,
@@ -24,6 +25,7 @@ class GuidedTourResource extends JsonResource
             'shortDescription' => $this->second_description,
 
             'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
+            'isFavorite' => $isFavorite,
 
             'experience' => $this->experience,
             'phone' => $this->phone,

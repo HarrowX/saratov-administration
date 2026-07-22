@@ -16,6 +16,7 @@ class HotelResource extends JsonResource
     public function toArray(Request $request): array
     {
         $attachment = $this->attachments()->orderBy('order')->first();
+        $isFavorite = $this->favorites->where('user_id', $request->user()->id)->isNotEmpty() || false;
 
         return [
             'id' => $this->id,
@@ -25,6 +26,7 @@ class HotelResource extends JsonResource
             'description' => $this->description,
 
             'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
+            'isFavorite' => $isFavorite,
 
             'type' => $this->type,
             'stars' => $this->stars,

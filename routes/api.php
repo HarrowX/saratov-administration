@@ -21,14 +21,17 @@ Route::prefix('v1')->group(function () {
     Route::post('auth/vk/token/exchange', [AuthVkController::class, 'exchangeToken']);
 
     Route::prefix('users')->group(function () {
-        Route::middleware(['auth:sanctum'])->controller(ProfileController::class)
+        Route::middleware(['auth:sanctum'])
+            ->controller(ProfileController::class)
             ->group(function () {
                 Route::get('me', 'show');
                 Route::put('me', 'update');
             });
     });
 
-    Route::controller(ContentController::class)->group(function () {
+    Route::controller(ContentController::class)
+        ->middleware(['auth:sanctum'])
+        ->group(function () {
         Route::prefix('places')->group(function () {
             Route::get('hotels', 'hotels');
             Route::get('hotels/{id}', 'hotel');
