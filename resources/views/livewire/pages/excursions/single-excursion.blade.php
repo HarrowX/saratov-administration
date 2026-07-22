@@ -8,6 +8,10 @@
             hotels: @js($hotels),
             restaurants: @js($restaurants),
         };
+
+        window.mapZoom = 20;
+
+        window.mapCenter = @js($startPosition);
     </script>
 
     <x-map-modal />

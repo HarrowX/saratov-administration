@@ -33,6 +33,8 @@ class SingleExcursion extends Component
 
     public array $restaurants;
 
+    public array $startPosition;
+
     public function boot(FavoritableService $favoritableService, ViewService $viewService): void
     {
         $this->favoritableService = $favoritableService;
@@ -61,6 +63,10 @@ class SingleExcursion extends Component
             ->map(fn ($point) => $point->pointable)
             ->values()
             ->toArray();
+
+        $firstPlace = $excursion->points()->orderBy('order')->first();
+
+        $this->startPosition = [$firstPlace->pointable->latitude, $firstPlace->pointable->longitude];
 
         $this->favoritesCount = $excursion->favorites?->count() ?? 0;
 
