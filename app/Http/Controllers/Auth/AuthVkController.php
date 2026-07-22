@@ -42,7 +42,7 @@ class AuthVkController extends Controller
         return $res;
     }
 
-    private function handleCallback(Request $request, $clientId, $invalidate = true)
+    private function handleCallback(Request $request, string $clientId, bool $invalidate = true)
     {
         try {
             $tokenData = $request->all();
