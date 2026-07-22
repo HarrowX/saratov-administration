@@ -346,7 +346,7 @@
 {{--        </div>--}}
 {{--    </section>--}}
 
-{{--    @livewire('saratov-ai')--}}
+    @livewire('saratov-ai')
 
     <!-- Photo Gallery Section -->
     <section id="gallery-section" class="pb-10 sm:pb-15 xl:pb-20 3xl:pb-26 bg-white">
