@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\AttractionResource;
+use App\Http\Resources\EventResource;
 use App\Http\Resources\ExcursionResource;
 use App\Http\Resources\GuidedTourResource;
 use App\Http\Resources\HotelResource;
 use App\Http\Resources\RestaurantResource;
 use App\Models\Attraction;
+use App\Models\Event;
 use App\Models\Excursion;
 use App\Models\GuidedTour;
 use App\Models\Hotel;
@@ -124,5 +126,27 @@ class ContentController extends Controller
         }
 
         return GuidedTourResource::make($model);
+    }
+
+    public function events(Request $request)
+    {
+        $query = Event::query()->with('attachments');
+
+        $perPage = $request->integer('per_page', 15);
+
+        return EventResource::collection($query->paginate($perPage));
+    }
+
+    public function event(Request $request)
+    {
+        $query = Event::query()->with('attachments');
+
+        $model = $query->find($request->id);
+
+        if (! $model) {
+            return response()->json(status: 404);
+        }
+
+        return EventResource::make($model);
     }
 }

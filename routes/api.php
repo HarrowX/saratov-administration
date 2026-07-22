@@ -42,6 +42,9 @@ Route::prefix('v1')->group(function () {
 
         Route::get('guide-tours', 'guideTours');
         Route::get('guide-tours/{id}', 'guideTour');
+
+        Route::get('events', 'events');
+        Route::get('events/{id}', 'event');
     });
 
     Route::prefix('favorites')

@@ -12,7 +12,6 @@ class Event extends Model
         'name',
         'slug',
         'description',
-        'category',
         'address',
         'age_restriction',
         'start_date',
