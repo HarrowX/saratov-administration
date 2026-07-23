@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Attraction;
+use App\Models\Hotel;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
@@ -24,6 +26,8 @@ class HotelResource extends JsonResource
             'slug' => $this->slug,
             'shortDescription' => $this->short_description,
             'description' => $this->description,
+
+            'class' => Hotel::class,
 
             'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
             'isFavorite' => $isFavorite,

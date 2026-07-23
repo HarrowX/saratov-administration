@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Attraction;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
@@ -25,6 +26,8 @@ class AttractionResource extends JsonResource
             'slug' => $this->slug,
             'shortDescription' => $this->short_description,
             'description' => $this->description,
+
+            'class' => Attraction::class,
 
             'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
             'isFavorite' => $isFavorite,

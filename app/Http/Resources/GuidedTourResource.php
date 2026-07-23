@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Attraction;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
@@ -23,6 +24,8 @@ class GuidedTourResource extends JsonResource
             'name' => $this->name,
             'slug' => $this->slug,
             'shortDescription' => $this->second_description,
+
+            'class' => Attraction::class,
 
             'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
             'isFavorite' => $isFavorite,
