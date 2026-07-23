@@ -40,7 +40,12 @@ return [
         'redirect' => env('VK_REDIRECT_URI', 'http://localhost/auth/vk/sdk-callback'),
 
         'mobile' => [
-            'client_id' => env('VK_MOBILE_CLIENT_ID'),
+            'android' => [
+                'client_id' => env('VK_ANDROID_CLIENT_ID'),
+            ],
+            'ios' => [
+                'client_id' => env('VK_IOS_CLIENT_ID'),
+            ],
         ],
     ],
 ];
