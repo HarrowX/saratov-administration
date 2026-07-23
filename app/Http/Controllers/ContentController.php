@@ -20,7 +20,12 @@ class ContentController extends Controller
 {
     public function hotels(Request $request)
     {
+        $term = $request->string('term', '');
         $query = Hotel::query()->with('attachments');
+
+        if ($term != '') {
+            $query->where('name', 'LIKE','%'.$term.'%');
+        }
 
         $perPage = $request->integer('per_page', 15);
 
@@ -42,7 +47,12 @@ class ContentController extends Controller
 
     public function restaurants(Request $request)
     {
+        $term = $request->string('term', '');
         $query = Restaurant::query()->with('attachments');
+
+        if ($term != '') {
+            $query->where('name', 'LIKE','%'.$term.'%');
+        }
 
         $perPage = $request->integer('per_page', 15);
 
@@ -64,7 +74,12 @@ class ContentController extends Controller
 
     public function attractions(Request $request)
     {
+        $term = $request->string('term', '');
         $query = Attraction::query()->with('attachments');
+
+        if ($term != '') {
+            $query->where('name', 'LIKE','%'.$term.'%');
+        }
 
         $perPage = $request->integer('per_page', 15);
 
@@ -108,7 +123,12 @@ class ContentController extends Controller
 
     public function guideTours(Request $request)
     {
+        $term = $request->string('term', '');
         $query = GuidedTour::query()->with('attachments');
+
+        if ($term != '') {
+            $query->where('name', 'LIKE','%'.$term.'%');
+        }
 
         $perPage = $request->integer('per_page', 15);
 
@@ -130,7 +150,12 @@ class ContentController extends Controller
 
     public function events(Request $request)
     {
+        $term = $request->string('term', '');
         $query = Event::query()->with('attachments');
+
+        if ($term != '') {
+            $query->where('name', 'LIKE','%'.$term.'%');
+        }
 
         $perPage = $request->integer('per_page', 15);
 
