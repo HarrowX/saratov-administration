@@ -53,10 +53,12 @@ Route::prefix('v1')->group(function () {
             Route::get('events/{id}', 'event');
         });
 
+
     Route::prefix('favorites')
         ->controller(FavoritableController::class)
         ->middleware(['auth:sanctum'])
         ->group(function () {
+            Route::get('', 'index');
             Route::prefix('places')->group(function () {
                 Route::get('hotels', 'indexHotel');
                 Route::get('restaurants', 'indexRestaurant');

@@ -6,11 +6,13 @@ use App\Exceptions\AlreadyExistsException;
 use App\Exceptions\NotFoundException;
 use App\Http\Resources\AttractionResource;
 use App\Http\Resources\ExcursionResource;
+use App\Http\Resources\FavoriteResource;
 use App\Http\Resources\GuidedTourResource;
 use App\Http\Resources\HotelResource;
 use App\Http\Resources\RestaurantResource;
 use App\Models\Attraction;
 use App\Models\Excursion;
+use App\Models\Favorite;
 use App\Models\GuidedTour;
 use App\Models\Hotel;
 use App\Models\Restaurant;
@@ -133,6 +135,14 @@ class FavoritableController extends Controller
         }
     }
 
+    public function index(Request $request)
+    {
+        $perPage = $request->integer('per_page', 15);
+
+        $query = Favorite::query()->where('user_id', $request->user()->id);
+
+        return FavoriteResource::collection($query->paginate($perPage));
+    }
     public function indexHotel(Request $request)
     {
         $perPage = $request->integer('per_page', 15);
