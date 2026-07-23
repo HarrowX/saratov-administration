@@ -2,8 +2,12 @@
 
 namespace App\Livewire\Pages\Events;
 
+use App\Models\Attraction;
 use App\Models\Category;
+use App\Models\CustomLocation;
 use App\Models\Event;
+use App\Models\Hotel;
+use App\Models\Restaurant;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,14 +19,17 @@ class AllEvents extends Component
     public $search = '';
     public $categoryId = '';
     public $ageRestriction = '';
-    public $location = '';
+
+    public $locationSearch = '';
+    public $locationResults = [];
+    public $selectedLocation = null;
 
     protected $queryString = [
         'date' => ['except' => ''],
         'search' => ['except' => ''],
         'categoryId' => ['except' => ''],
         'ageRestriction' => ['except' => ''],
-        'location' => ['except' => ''],
+        'selectedLocation' => ['except' => ''],
 
     ];
 
@@ -37,17 +44,43 @@ class AllEvents extends Component
         if (request()->has('age')) {
             $this->ageRestriction = request('age');
         }
-        if (request()->has('location')) {
-            $this->location = request('location');
+        if (request()->has('selectedLocation')) {
+            $this->selectedLocation = request('selectedLocation');
         }
     }
+    public function updatedLocationSearch()
+    {
+        if (strlen($this->locationSearch) >= 2) {
+            $this->locationResults = collect()
+                ->merge(Attraction::where('name', 'like', '%' . $this->locationSearch . '%')->get())
+                ->merge(Hotel::where('name', 'like', '%' . $this->locationSearch . '%')->get())
+                ->merge(Restaurant::where('name', 'like', '%' . $this->locationSearch . '%')->get())
+                ->merge(CustomLocation::where('name', 'like', '%' . $this->locationSearch . '%')->get());
+        } else {
+            $this->locationResults = collect();
+        }
+    }
+    public function selectLocation($id)
+    {
+        $location = collect()
+            ->merge(Attraction::all())
+            ->merge(Hotel::all())
+            ->merge(Restaurant::all())
+            ->merge(CustomLocation::all())
+            ->firstWhere('id', $id);
+
+        $this->selectedLocation = $id;
+        $this->locationSearch = $location?->name ?? '';
+        $this->locationResults = collect();
+    }
+
 
     public function render()
     {
         $categories = Category::where('is_active', true)
             ->get();
         $events = Event::query()
-            ->with('categories', 'attachments')
+            ->with('categories', 'attachments', 'location')
             ->when($this->date, function ($query) {
                 return $query->whereDate('start_date', $this->date);
             })
@@ -66,8 +99,10 @@ class AllEvents extends Component
                 }
                 return $query->where('age_restriction', $this->ageRestriction);
             })
-            ->when($this->location, function ($query) {
-                return $query->where('address', 'like', '%' . $this->location . '%');
+            ->when($this->selectedLocation, function ($query) {
+                return $query->whereHas('location', function ($q) {
+                    $q->where('id', $this->selectedLocation);
+                });
             })
             ->orderBy('start_date')
             ->paginate(12);
@@ -84,7 +119,9 @@ class AllEvents extends Component
         $this->search = '';
         $this->categoryId = '';
         $this->ageRestriction = '';
-        $this->location = '';
+        $this->selectedLocation = null;
+        $this->locationSearch = '';
+        $this->locationResults = collect();
         $this->resetPage();
     }
 

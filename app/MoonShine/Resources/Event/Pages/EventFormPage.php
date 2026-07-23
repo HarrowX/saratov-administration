@@ -4,14 +4,21 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Event\Pages;
 
+use App\Models\Attraction;
+use App\Models\CustomLocation;
+use App\Models\CustomPoint;
+use App\Models\Hotel;
+use App\Models\Restaurant;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Event\EventResource;
 use App\MoonShine\Resources\EventCategory\EventCategoryResource;
+use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\FormBuilderContract;
 use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
+use MoonShine\Laravel\Fields\Relationships\MorphTo;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\FormPage;
@@ -20,11 +27,13 @@ use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Components\Layout\Div;
 use MoonShine\UI\Fields\Date;
+use MoonShine\UI\Fields\Email;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
+use MoonShine\UI\Fields\Url;
 use Throwable;
 
 /**
@@ -47,7 +56,6 @@ class EventFormPage extends FormPage
                     return $item && $item->exists;
                 }),
                 Textarea::make('Описание', 'description')->unescape()->required(),
-                Text::make('Адрес', 'address')->nullable(),
                 Text::make('Возрастное ограничение', 'age_restriction'),
                 BelongsToMany::make('Категории', 'categories', formatted: 'name', resource: EventCategoryResource::class)
                     ->selectMode()
@@ -57,12 +65,19 @@ class EventFormPage extends FormPage
                     }),
                 Date::make('Начало', 'start_date')->withTime()->required(),
                 Date::make('Конец', 'end_date')->withTime(),
-                Box::make('Координаты', [
-                    Div::make([
-                        Text::make('Широта', 'latitude'),
-                        Text::make('Долгота', 'longitude'),
-                    ])->style('display: flex; gap: 1rem;'),
+                Box::make('Организатор', [
+                    Text::make('Название организации', 'organizer_name')->nullable(),
+                    Text::make('Телефон организатора', 'organizer_phone')->nullable(),
+                    Email::make('Email организатора', 'organizer_email')->nullable(),
+                    Url::make('Сайт организатора', 'organizer_website')->nullable(),
                 ]),
+                MorphTo::make('Локация', 'location')
+                    ->types([
+                        Attraction::class => ['name', 'Достопримечательность'],
+                        Hotel::class => ['name', 'Отель'],
+                        Restaurant::class => ['name', 'Ресторан'],
+                        CustomLocation::class => ['name', 'Своя локация'],
+                    ])->searchable()->nullable(),
                 RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                     ->fields([
                         ID::make(),

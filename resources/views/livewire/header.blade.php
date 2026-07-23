@@ -8,7 +8,7 @@
                 </a>
             </div>
 
-            <ul class="hidden lg:flex items-center md:space-x-4 3xl:space-x-6 transition text-xs 3xl:text-sm pt-1">
+            <ul class="hidden lg:flex items-center md:space-x-2 xl:space-x-4 3xl:space-x-6 transition text-xs 3xl:text-sm pt-1">
                 <li>
                     <a href="{{ route('index') }}" class="{{ request()->is('/') ? "nav-link-active nav-link" : "nav-link" }}">Главная</a>
                 </li>
@@ -17,6 +17,9 @@
                 </li>
                 <li>
                     <a href="{{ route('all-guided-tours') }}" class="{{ request()->is('guided-tours*') ? "nav-link-active nav-link" : "nav-link" }}">Экскурсоводы</a>
+                </li>
+                <li>
+                    <a href="{{ route('all-events') }}" class="{{ request()->is('events*') ? "nav-link-active nav-link" : "nav-link" }}">События</a>
                 </li>
                 <li class="nav-link group">Места
                     <ul class="absolute top-4.5 3xl:top-5.5 -translate-x-5 invisible hidden opacity-0 group-hover:flex group-hover:flex-col group-hover:opacity-100 group-hover:visible gap-5 p-5 bg-white z-1 rounded-xl transition-all duration-300 ease-in-out shadow-2xl group-hover:translate-y-0">

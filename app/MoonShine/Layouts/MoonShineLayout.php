@@ -22,6 +22,7 @@ use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\MenuManager\MenuGroup;
 use MoonShine\MenuManager\MenuItem;
 use MoonShine\UI\Components\Layout\Div;
+use App\MoonShine\Resources\CustomLocation\CustomLocationResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -47,11 +48,11 @@ final class MoonShineLayout extends AppLayout
             MenuGroup::make('События', [
                 MenuItem::make(EventResource::class, 'События'),
                 MenuItem::make(EventCategoryResource::class, 'Категории событий'),
+                MenuItem::make(CustomLocationResource::class, 'Дополнительная локация'),
             ])->icon('calendar-days'),
             MenuItem::make(ExcursionResource::class, 'Экскурсии'),
             MenuItem::make(ExcursionPointResource::class, 'Точки экскурсий'),
             MenuItem::make(CustomPointResource::class, 'Дополнительные точки экскурсий'),
-
         ];
     }
 

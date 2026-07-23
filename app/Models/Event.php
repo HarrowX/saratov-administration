@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Event extends Model
 {
@@ -13,12 +14,9 @@ class Event extends Model
         'slug',
         'description',
         'category',
-        'address',
         'age_restriction',
         'start_date',
         'end_date',
-        'latitude',
-        'longitude',
     ];
 
     protected $casts = [
@@ -34,6 +32,10 @@ class Event extends Model
     public function attachments(): MorphMany
     {
         return $this->morphMany(Attachment::class, 'attachable');
+    }
+    public function location(): MorphTo
+    {
+        return $this->morphTo();
     }
 
     public function getRouteKeyName(): string

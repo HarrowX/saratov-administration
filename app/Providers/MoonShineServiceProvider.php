@@ -19,6 +19,7 @@ use App\MoonShine\Resources\Restaurant\RestaurantResource;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
 use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
+use App\MoonShine\Resources\CustomLocation\CustomLocationResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -41,6 +42,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 ExcursionResource::class,
                 ExcursionPointResource::class,
                 CustomPointResource::class,
+                CustomLocationResource::class,
             ])
             ->pages([
                 ...$core->getConfig()->getPages(),
