@@ -24,7 +24,7 @@ class ContentController extends Controller
         $query = Hotel::query()->with('attachments');
 
         if ($term != '') {
-            $query->where('name', 'LIKE','%'.$term.'%');
+            $query->where('name', 'LIKE', '%'.$term.'%');
         }
 
         $perPage = $request->integer('per_page', 15);
@@ -51,7 +51,7 @@ class ContentController extends Controller
         $query = Restaurant::query()->with('attachments');
 
         if ($term != '') {
-            $query->where('name', 'LIKE','%'.$term.'%');
+            $query->where('name', 'LIKE', '%'.$term.'%');
         }
 
         $perPage = $request->integer('per_page', 15);
@@ -78,7 +78,7 @@ class ContentController extends Controller
         $query = Attraction::query()->with('attachments');
 
         if ($term != '') {
-            $query->where('name', 'LIKE','%'.$term.'%');
+            $query->where('name', 'LIKE', '%'.$term.'%');
         }
 
         $perPage = $request->integer('per_page', 15);
@@ -127,7 +127,7 @@ class ContentController extends Controller
         $query = GuidedTour::query()->with('attachments');
 
         if ($term != '') {
-            $query->where('name', 'LIKE','%'.$term.'%');
+            $query->where('name', 'LIKE', '%'.$term.'%');
         }
 
         $perPage = $request->integer('per_page', 15);
@@ -154,7 +154,7 @@ class ContentController extends Controller
         $query = Event::query()->with('attachments');
 
         if ($term != '') {
-            $query->where('name', 'LIKE','%'.$term.'%');
+            $query->where('name', 'LIKE', '%'.$term.'%');
         }
 
         $perPage = $request->integer('per_page', 15);

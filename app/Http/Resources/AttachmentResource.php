@@ -20,7 +20,7 @@ class AttachmentResource extends JsonResource
             'attachableType' => $this->attachable_type,
             'attachableId' => $this->attachable_id,
             'order' => $this->order,
-            'link' =>  asset(Storage::url($this->link)),
+            'link' => asset(Storage::url($this->link)),
             'createdAt' => $this->created_at,
         ];
     }

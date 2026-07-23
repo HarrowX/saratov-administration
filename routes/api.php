@@ -32,26 +32,26 @@ Route::prefix('v1')->group(function () {
     Route::controller(ContentController::class)
         ->middleware(['auth:sanctum'])
         ->group(function () {
-        Route::prefix('places')->group(function () {
-            Route::get('hotels', 'hotels');
-            Route::get('hotels/{id}', 'hotel');
+            Route::prefix('places')->group(function () {
+                Route::get('hotels', 'hotels');
+                Route::get('hotels/{id}', 'hotel');
 
-            Route::get('restaurants', 'restaurants');
-            Route::get('restaurants/{id}', 'restaurant');
+                Route::get('restaurants', 'restaurants');
+                Route::get('restaurants/{id}', 'restaurant');
 
-            Route::get('attractions', 'attractions');
-            Route::get('attractions/{id}', 'attraction');
+                Route::get('attractions', 'attractions');
+                Route::get('attractions/{id}', 'attraction');
+            });
+
+            Route::get('excursions', 'excursions');
+            Route::get('excursions/{id}', 'excursion');
+
+            Route::get('guide-tours', 'guideTours');
+            Route::get('guide-tours/{id}', 'guideTour');
+
+            Route::get('events', 'events');
+            Route::get('events/{id}', 'event');
         });
-
-        Route::get('excursions', 'excursions');
-        Route::get('excursions/{id}', 'excursion');
-
-        Route::get('guide-tours', 'guideTours');
-        Route::get('guide-tours/{id}', 'guideTour');
-
-        Route::get('events', 'events');
-        Route::get('events/{id}', 'event');
-    });
 
     Route::prefix('favorites')
         ->controller(FavoritableController::class)
