@@ -31,7 +31,24 @@ class AuthVkController extends Controller
 
     public function exchangeToken(Request $request)
     {
-        $res = $this->handleCallback($request, config('services.vk.mobile.client_id'), $request->boolean('invalidate') ?? true);
+        $deviceType = $request->string('device_type');
+        $clientId = null;
+
+        if ($deviceType == 'android') {
+            $clientId = config('services.vk.mobile.ios.client_id');
+        }
+
+        if ($deviceType == 'ios') {
+            $clientId = config('services.vk.mobile.ios.client_id');
+        }
+
+        if (! $clientId) {
+            return response()->json([
+                'device_type' => 'must be "android" or "ios"',
+            ], 400);
+        }
+
+        $res = $this->handleCallback($request, $clientId, $request->boolean('invalidate') ?? true);
 
         if ($res instanceof User) {
             $token = $this->createToken($res);
