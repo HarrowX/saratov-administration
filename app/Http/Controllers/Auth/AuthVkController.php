@@ -42,14 +42,13 @@ class AuthVkController extends Controller
             $clientId = config('services.vk.mobile.ios.client_id');
         }
 
-        if (!$clientId) {
+        if (! $clientId) {
             return response()->json([
                 'device_type' => 'must be "android" or "ios"',
             ], 400);
         }
 
         $res = $this->handleCallback($request, $clientId, $request->boolean('invalidate') ?? true);
-
 
         if ($res instanceof User) {
             $token = $this->createToken($res);
