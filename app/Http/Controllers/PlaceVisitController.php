@@ -21,10 +21,10 @@ class PlaceVisitController extends Controller
 
         $status = $request->string('status');
 
-        if ($status != '' && !VisitedStatus::tryFrom($status)) {
+        if ($status != '' && ! VisitedStatus::tryFrom($status)) {
             return response()
-                ->json('status must be: ' . VisitedStatus::Visited->value . ', '
-                    . VisitedStatus::SemiVisited->value . ', ' . VisitedStatus::NotVisited->value, 400);
+                ->json('status must be: '.VisitedStatus::Visited->value.', '
+                    .VisitedStatus::SemiVisited->value.', '.VisitedStatus::NotVisited->value, 400);
         }
 
         $visits = $this->placeVisitService->findRecentlyVisits($userId, $status);

@@ -28,8 +28,9 @@ class PlaceVisitService
         ]);
 
         if ($status != '') {
-          $query->where('status', $status);
+            $query->where('status', $status);
         }
+
         return $query->get();
     }
 
