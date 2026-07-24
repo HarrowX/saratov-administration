@@ -23,7 +23,7 @@ class UpdateProfileDTO extends ValidatedDTO
             'surname' => ['string', 'required', 'max:255'],
             'patronymic' => ['sometimes', 'string', 'nullable', 'max:255'],
 
-            'phone' => ['sometimes', 'string', 'nullable', 'max:255'],
+            'phone' => ['phone:RU', 'sometimes', 'string', 'nullable', 'max:255'],
         ];
     }
 
@@ -43,6 +43,7 @@ class UpdateProfileDTO extends ValidatedDTO
 
             'phone.string' => 'Телефон должен быть строкой.',
             'phone.max' => 'Телефон не должен превышать :max символов.',
+            'phone' => 'Номер должен быть в формате +7 999 99-99-99',
         ];
     }
 
