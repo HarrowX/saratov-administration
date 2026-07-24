@@ -20,11 +20,17 @@ class PlaceVisitService
         ])->firstOrFail()->fill(['status' => $status])->save();
     }
 
-    public function findRecentlyVisits($userId)
+    public function findRecentlyVisits($userId, $status)
     {
-        return PlaceVisit::query()->where([
+
+        $query = PlaceVisit::query()->where([
             'user_id' => $userId,
-        ])->where('status', '!=', VisitedStatus::Visited)->get();
+        ]);
+
+        if ($status != '') {
+          $query->where('status', $status);
+        }
+        return $query->get();
     }
 
     public function semiApproveByLocation($userId, $latitude, $longitude)
