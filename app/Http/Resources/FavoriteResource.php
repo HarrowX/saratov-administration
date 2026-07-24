@@ -27,7 +27,8 @@ class FavoriteResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $resource =  self::$mapper[$this->favoriteable_type];
+        $resource = self::$mapper[$this->favoriteable_type];
+
         return $resource::make($this->favoriteable)->toArray($request);
     }
 }

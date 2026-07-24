@@ -143,6 +143,7 @@ class FavoritableController extends Controller
 
         return FavoriteResource::collection($query->paginate($perPage));
     }
+
     public function indexHotel(Request $request)
     {
         $perPage = $request->integer('per_page', 15);
