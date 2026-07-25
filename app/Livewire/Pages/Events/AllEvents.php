@@ -9,17 +9,13 @@ use App\Models\Event;
 use App\Models\Hotel;
 use App\Models\Restaurant;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 class AllEvents extends Component
 {
-    use WithPagination;
-
     public $date = '';
     public $search = '';
     public $categoryId = '';
     public $ageRestriction = '';
-
     public $locationSearch = '';
     public $locationResults = [];
     public $selectedLocation = null;
@@ -32,7 +28,6 @@ class AllEvents extends Component
         'selectedLocation' => ['except' => ''],
 
     ];
-
     public function mount()
     {
         if (request()->has('date')) {
@@ -52,33 +47,50 @@ class AllEvents extends Component
     {
         if (strlen($this->locationSearch) >= 2) {
             $this->locationResults = collect()
-                ->merge(Attraction::where('name', 'like', '%' . $this->locationSearch . '%')->get())
-                ->merge(Hotel::where('name', 'like', '%' . $this->locationSearch . '%')->get())
-                ->merge(Restaurant::where('name', 'like', '%' . $this->locationSearch . '%')->get())
-                ->merge(CustomLocation::where('name', 'like', '%' . $this->locationSearch . '%')->get());
+                ->merge(Attraction::where('name', 'like', '%' . $this->locationSearch . '%')->get()->map(function($item) {
+                    $item->type = 'attraction';
+                    return $item;
+                }))
+                ->merge(Hotel::where('name', 'like', '%' . $this->locationSearch . '%')->get()->map(function($item) {
+                    $item->type = 'hotel';
+                    return $item;
+                }))
+                ->merge(Restaurant::where('name', 'like', '%' . $this->locationSearch . '%')->get()->map(function($item) {
+                    $item->type = 'restaurant';
+                    return $item;
+                }))
+                ->merge(CustomLocation::where('name', 'like', '%' . $this->locationSearch . '%')->get()->map(function($item) {
+                    $item->type = 'custom';
+                    return $item;
+                }));
         } else {
             $this->locationResults = collect();
         }
     }
-    public function selectLocation($id)
+    public function selectLocation($value)
     {
-        $location = collect()
-            ->merge(Attraction::all())
-            ->merge(Hotel::all())
-            ->merge(Restaurant::all())
-            ->merge(CustomLocation::all())
-            ->firstWhere('id', $id);
+        $parts = explode('_', $value);
+        $type = $parts[0];
+        $id = $parts[1];
 
-        $this->selectedLocation = $id;
-        $this->locationSearch = $location?->name ?? '';
-        $this->locationResults = collect();
+        $models = [
+            'attraction' => Attraction::class,
+            'hotel' => Hotel::class,
+            'restaurant' => Restaurant::class,
+            'custom' => CustomLocation::class,
+        ];
+
+        $location = $models[$type]::find($id);
+
+        if ($location) {
+            $this->selectedLocation = $id;
+            $this->locationSearch = $location->name;
+            $this->locationResults = collect();
+        }
     }
-
-
     public function render()
     {
-        $categories = Category::where('is_active', true)
-            ->get();
+        $categories = Category::where('is_active', true)->get();
         $events = Event::query()
             ->with('categories', 'attachments', 'location')
             ->when($this->date, function ($query) {
@@ -104,8 +116,7 @@ class AllEvents extends Component
                     $q->where('id', $this->selectedLocation);
                 });
             })
-            ->orderBy('start_date')
-            ->paginate(12);
+            ->orderBy('start_date')->get();
 
         return view('livewire.pages.events.all-events', [
             'events' => $events,
@@ -122,15 +133,5 @@ class AllEvents extends Component
         $this->selectedLocation = null;
         $this->locationSearch = '';
         $this->locationResults = collect();
-        $this->resetPage();
-    }
-
-    public function getFormattedDateAttribute()
-    {
-        if ($this->date) {
-            return \Carbon\Carbon::parse($this->date)->format('d.m.Y');
-        }
-
-        return null;
     }
 }

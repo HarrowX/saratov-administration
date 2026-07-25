@@ -120,37 +120,46 @@
         </div>
     </section>
     <section class="py-8 md:py-10 xl:py-15 2xl:py-25 bg-gray-50">
-        <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-438.5 mx-auto px-5 xl:px-20 grid grid-cols-2 md:grid-cols-4 gap-4">
-            @foreach($event->attachments->take(5) as $index => $attachment)
-                @php
-                    $colSpan = '';
-                    $rowSpan = '';
-                    if ($index === 0) {
-                        $colSpan = 'col-span-2 row-span-2';
-                    }
-                    if ($index === 4 && $event->attachments->count() > 5) {
-                    }
-                @endphp
-                <div data-aos="zoom-in"
-                     data-aos-delay="{{ $index * 100 }}"
-                     class="relative group overflow-hidden rounded-lg {{ $colSpan }} {{ $rowSpan }}"
-                     data-fancybox="gallery"
-                     data-src="{{ $attachment->url() }}"
-                     data-caption="{{ $attachment->title ?? 'Фото ' . ($index + 1) }}">
-                    <img src="{{ $attachment->url() }}"
-                         alt="{{ $attachment->title ?? 'Фото ' . ($index + 1) }}"
-                         class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
+        <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-438.5 mx-auto px-5 xl:px-20">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                @foreach($event->attachments->take(5) as $index => $attachment)
+                    @php
+                        $colSpan = '';
+                        $rowSpan = '';
+                        if ($event->attachments->count() === 1) {
+                            $colSpan = 'col-span-2 md:col-span-4 row-span-2';
+                        }
+                        elseif ($event->attachments->count() === 2) {
+                            if ($index === 0) $colSpan = 'col-span-2 md:col-span-2 row-span-2';
+                            if ($index === 1) $colSpan = 'col-span-2 md:col-span-2 row-span-2';
+                        }
+                        elseif ($event->attachments->count() === 3) {
+                            if ($index === 0) $colSpan = 'col-span-2 md:col-span-2 row-span-2';
+                            if ($index === 1 || $index === 2) $colSpan = 'col-span-1 md:col-span-1';
+                        }
+                        elseif ($event->attachments->count() === 4) {
+                            if ($index === 0) $colSpan = 'col-span-2 md:col-span-2 row-span-2';
+                        }
+                        else {
+                            if ($index === 0) $colSpan = 'col-span-2 row-span-2';
+                        }
+                    @endphp
+                    <div data-aos="zoom-in" data-aos-delay="{{ $index * 100 }}" class="relative group overflow-hidden rounded-lg {{ $colSpan }} {{ $rowSpan }}" data-fancybox="gallery" data-src="{{ $attachment->url() }}" data-caption="{{ $attachment->title ?? 'Фото ' . ($index + 1) }}">
+                        <img src="{{ $attachment->url() }}"
+                             alt="{{ $attachment->title ?? 'Фото ' . ($index + 1) }}"
+                             class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
 
         @if($event->attachments->count() > 5)
             <div class="text-center mt-8">
                 <button onclick="openFullGallery()" class="btn-gallery bg-linear-to-r from-pink-500 to-red-500 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg transition transform hover:-translate-y-1">
                     <i class="fas fa-images mr-2"></i>
-                    Смотреть все фотографии ({{ $event->attachments->count() }})
+                    Смотреть все фотографии
                 </button>
             </div>
         @endif
