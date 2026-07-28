@@ -30,6 +30,8 @@ class GuidedTourResource extends JsonResource
             'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
             'isFavorite' => $isFavorite,
 
+            'favoritesCount' => $this->favorites?->count() ?? 0,
+
             'experience' => $this->experience,
             'phone' => $this->phone,
             'email' => $this->email,

@@ -28,7 +28,7 @@ class PlaceVisitService
             'user_id' => $userId,
         ]);
 
-        if ($status !== 'fallback') {
+        if ($status !== '') {
             if (VisitedStatus::tryFrom($status) == null) {
                 $validStatuses = implode(', ', array_column(VisitedStatus::cases(), 'value'));
                 throw new HttpResponseException(

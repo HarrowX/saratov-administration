@@ -30,6 +30,8 @@ class ExcursionResource extends JsonResource
             'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
             'isFavorite' => $isFavorite,
 
+            'favoritesCount' => $this->favorites?->count() ?? 0,
+
             'guide_id' => $this->guided_tour_id,
             'type' => $this->type,
             'duration' => $this->getDuration(),
