@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
+use App\MoonShine\Resources\ContactUs\ContactUsResource;
 use App\MoonShine\Resources\CustomPoint\CustomPointResource;
 use App\MoonShine\Resources\Event\EventResource;
 use App\MoonShine\Resources\EventCategory\EventCategoryResource;
@@ -16,6 +17,7 @@ use App\MoonShine\Resources\Hotel\HotelResource;
 use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
 use App\MoonShine\Resources\Restaurant\RestaurantResource;
+use App\MoonShine\Resources\User\UserResource;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
 use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
@@ -41,6 +43,8 @@ class MoonShineServiceProvider extends ServiceProvider
                 ExcursionResource::class,
                 ExcursionPointResource::class,
                 CustomPointResource::class,
+                ContactUsResource::class,
+                UserResource::class,
             ])
             ->pages([
                 ...$core->getConfig()->getPages(),

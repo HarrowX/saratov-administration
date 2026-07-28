@@ -6,6 +6,7 @@ namespace App\MoonShine\Layouts;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
+use App\MoonShine\Resources\ContactUs\ContactUsResource;
 use App\MoonShine\Resources\CustomPoint\CustomPointResource;
 use App\MoonShine\Resources\Event\EventResource;
 use App\MoonShine\Resources\EventCategory\EventCategoryResource;
@@ -14,6 +15,7 @@ use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
 use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
 use App\MoonShine\Resources\Hotel\HotelResource;
 use App\MoonShine\Resources\Restaurant\RestaurantResource;
+use App\MoonShine\Resources\User\UserResource;
 use MoonShine\AssetManager\Raw;
 use MoonShine\ColorManager\ColorManager;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
@@ -52,6 +54,8 @@ final class MoonShineLayout extends AppLayout
             MenuItem::make(ExcursionPointResource::class, 'Точки экскурсий'),
             MenuItem::make(CustomPointResource::class, 'Дополнительные точки экскурсий'),
 
+            MenuItem::make(ContactUsResource::class, 'Связаться с нами')->icon('envelope'),
+            MenuItem::make(UserResource::class, 'Пользователи')->icon('user'),
         ];
     }
 
