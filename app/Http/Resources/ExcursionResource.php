@@ -2,8 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Excursion;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class ExcursionResource extends JsonResource
 {
@@ -14,11 +16,22 @@ class ExcursionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $attachment = $this->attachments()->first();
+        $isFavorite = $this->favorites->where('user_id', $request->user()->id)->isNotEmpty() || false;
+
         return [
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
             'description' => $this->description,
+
+            'class' => Excursion::class,
+
+            'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
+            'isFavorite' => $isFavorite,
+
+            'favoritesCount' => $this->favorites?->count() ?? 0,
+
             'guide_id' => $this->guided_tour_id,
             'type' => $this->type,
             'duration' => $this->getDuration(),
@@ -40,7 +53,7 @@ class ExcursionResource extends JsonResource
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'attachments' => $this->attachments,
+            'attachments' => AttachmentResource::collection($this->attachments),
         ];
     }
 }

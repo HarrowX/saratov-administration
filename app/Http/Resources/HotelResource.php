@@ -2,8 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Hotel;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class HotelResource extends JsonResource
 {
@@ -14,17 +16,26 @@ class HotelResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $attachment = $this->attachments()->first();
+        $isFavorite = $this->favorites->where('user_id', $request->user()->id)->isNotEmpty() || false;
+
         return [
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
             'shortDescription' => $this->short_description,
             'description' => $this->description,
+
+            'class' => Hotel::class,
+
+            'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
+            'isFavorite' => $isFavorite,
+
             'type' => $this->type,
             'stars' => $this->stars,
             'worktime' => $this->worktime,
             'phone' => $this->phone,
-            'address' => $this->addres,
+            'address' => $this->address,
             'district' => $this->district,
             'longitude' => $this->longitude,
             'latitude' => $this->latitude,
@@ -33,7 +44,7 @@ class HotelResource extends JsonResource
             'maxPrice' => $this->max_price,
             'minPrice' => $this->min_pirce,
 
-            'favoritesCount' => $this->favorites?->count(),
+            'favoritesCount' => $this->favorites?->count() ?? 0,
 
             'createdAt' => $this->created_at,
             'attachments' => AttachmentResource::collection($this->attachments),

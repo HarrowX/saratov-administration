@@ -7,6 +7,7 @@ use App\Models\Attraction;
 use App\Models\Hotel;
 use App\Models\PlaceVisit;
 use App\Models\Restaurant;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\DB;
 
 class PlaceVisitService
@@ -20,11 +21,25 @@ class PlaceVisitService
         ])->firstOrFail()->fill(['status' => $status])->save();
     }
 
-    public function findRecentlyVisits($userId)
+    public function findRecentlyVisits($userId, $status)
     {
-        return PlaceVisit::query()->where([
+
+        $query = PlaceVisit::query()->where([
             'user_id' => $userId,
-        ])->where('status', '!=', VisitedStatus::Visited)->get();
+        ]);
+
+        if ($status !== '') {
+            if (VisitedStatus::tryFrom($status) == null) {
+                $validStatuses = implode(', ', array_column(VisitedStatus::cases(), 'value'));
+                throw new HttpResponseException(
+                    response()->json('status must be: '.$validStatuses, 400)
+                );
+            }
+
+            $query->where('status', $status);
+        }
+
+        return $query->get();
     }
 
     public function semiApproveByLocation($userId, $latitude, $longitude)
