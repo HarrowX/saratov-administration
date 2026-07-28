@@ -16,7 +16,7 @@ class ExcursionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $attachment = $this->attachments()->orderBy('order')->first();
+        $attachment = $this->attachments()->first();
         $isFavorite = $this->favorites->where('user_id', $request->user()->id)->isNotEmpty() || false;
 
         return [

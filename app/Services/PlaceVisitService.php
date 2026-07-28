@@ -7,6 +7,7 @@ use App\Models\Attraction;
 use App\Models\Hotel;
 use App\Models\PlaceVisit;
 use App\Models\Restaurant;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\DB;
 
 class PlaceVisitService
@@ -27,7 +28,14 @@ class PlaceVisitService
             'user_id' => $userId,
         ]);
 
-        if ($status != '') {
+        if ($status !== 'fallback') {
+            if (VisitedStatus::tryFrom($status) == null) {
+                $validStatuses = implode(', ', array_column(VisitedStatus::cases(), 'value'));
+                throw new HttpResponseException(
+                    response()->json('status must be: '.$validStatuses, 400)
+                );
+            }
+
             $query->where('status', $status);
         }
 

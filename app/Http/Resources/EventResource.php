@@ -15,7 +15,7 @@ class EventResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $attachment = $this->attachments()->orderBy('order')->first();
+        $attachment = $this->attachments()->first();
 
         return [
             'id' => $this->id,

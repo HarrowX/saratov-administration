@@ -27,6 +27,11 @@ class FavoriteResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+
+        if (! array_key_exists($this->favoriteable_type, self::$mapper)) {
+            throw new \InvalidArgumentException('Unknown favoriteable type in favorite resource: '.$this->favoriteable_type);
+        }
+
         $resource = self::$mapper[$this->favoriteable_type];
 
         return $resource::make($this->favoriteable)->toArray($request);

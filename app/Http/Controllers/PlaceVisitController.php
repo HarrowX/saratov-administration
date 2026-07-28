@@ -19,13 +19,7 @@ class PlaceVisitController extends Controller
     {
         $userId = auth()->id();
 
-        $status = $request->string('status');
-
-        if ($status != '' && ! VisitedStatus::tryFrom($status)) {
-            return response()
-                ->json('status must be: '.VisitedStatus::Visited->value.', '
-                    .VisitedStatus::SemiVisited->value.', '.VisitedStatus::NotVisited->value, 400);
-        }
+        $status = $request->string('status', 'fallback');
 
         $visits = $this->placeVisitService->findRecentlyVisits($userId, $status);
 

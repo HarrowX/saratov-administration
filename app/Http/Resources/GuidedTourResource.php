@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Attraction;
+use App\Models\GuidedTour;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +16,7 @@ class GuidedTourResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $attachment = $this->attachments()->orderBy('order')->first();
+        $attachment = $this->attachments()->first();
         $isFavorite = $this->favorites->where('user_id', $request->user()->id)->isNotEmpty() || false;
 
         return [
@@ -25,7 +25,7 @@ class GuidedTourResource extends JsonResource
             'slug' => $this->slug,
             'shortDescription' => $this->second_description,
 
-            'class' => Attraction::class,
+            'class' => GuidedTour::class,
 
             'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
             'isFavorite' => $isFavorite,
