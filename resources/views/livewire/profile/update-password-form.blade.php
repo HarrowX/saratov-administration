@@ -38,41 +38,49 @@ new class extends Component
     }
 }; ?>
 
-<section>
+<section class="font-['FindSansPro']">
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
+        <h2 class="text-xl font-bold text-gray-900">
             Обновление пароля
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
+        <p class="mt-1 text-sm text-gray-500">
             Убедитесь, что вы используете длинный, случайный пароль, чтобы оставаться в безопасности
         </p>
     </header>
 
-    <form wire:submit="updatePassword" class="mt-6 space-y-6">
+    @php
+        $inputClass = 'w-full rounded-xl border border-gray-200 bg-gray-50/60 px-4 py-3 text-gray-900 shadow-sm transition focus:border-[#A855F7] focus:bg-white focus:ring-2 focus:ring-[#A855F7]/25 focus:outline-none';
+    @endphp
+
+    <form wire:submit="updatePassword" class="mt-6 space-y-5">
         <div>
-            <x-input-label for="update_password_current_password"> Текущий пароль </x-input-label>
-            <x-text-input wire:model="current_password" id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
+            <label for="update_password_current_password" class="block text-sm font-medium text-gray-600 mb-1.5">Текущий пароль</label>
+            <input wire:model="current_password" id="update_password_current_password" name="current_password" type="password" class="{{ $inputClass }}" autocomplete="current-password" placeholder="••••••••" />
             <x-input-error :messages="$errors->get('current_password')" class="mt-2" />
         </div>
 
         <div>
-            <x-input-label for="update_password_password"> Новый пароль </x-input-label>
-            <x-text-input wire:model="password" id="update_password_password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
+            <label for="update_password_password" class="block text-sm font-medium text-gray-600 mb-1.5">Новый пароль</label>
+            <input wire:model="password" id="update_password_password" name="password" type="password" class="{{ $inputClass }}" autocomplete="new-password" placeholder="••••••••" />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <div>
-            <x-input-label for="update_password_password_confirmation" > Подтвердите пароль </x-input-label>
-            <x-text-input wire:model="password_confirmation" id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
+            <label for="update_password_password_confirmation" class="block text-sm font-medium text-gray-600 mb-1.5">Подтвердите пароль</label>
+            <input wire:model="password_confirmation" id="update_password_password_confirmation" name="password_confirmation" type="password" class="{{ $inputClass }}" autocomplete="new-password" placeholder="••••••••" />
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>Сохранить</x-primary-button>
+        <div class="flex items-center gap-4 pt-2">
+            <button type="submit"
+                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-linear-to-r from-[#A556F7] to-[#2663EB] text-white text-sm font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-200 cursor-pointer">
+                <i class="fas fa-shield-halved"></i>
+                Сохранить пароль
+            </button>
 
-            <x-action-message class="me-3" on="password-updated">
-                Сохранено
+            <x-action-message class="text-green-600 font-medium" on="password-updated">
+                ✓ Сохранено
             </x-action-message>
         </div>
     </form>

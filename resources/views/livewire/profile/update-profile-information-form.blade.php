@@ -80,49 +80,76 @@ new class extends Component
     }
 }; ?>
 
-<section>
+<section class="font-['FindSansPro']">
+    @php
+        $initials = mb_strtoupper(mb_substr($surname ?? '', 0, 1) . mb_substr($name ?? '', 0, 1));
+    @endphp
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
+        <h2 class="text-xl font-bold text-gray-900">
             Личная информация
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
+        <p class="mt-1 text-sm text-gray-500">
             Здесь вы можете обновить свои личные данные
         </p>
     </header>
 
-    <form wire:submit="updateProfileInformation" class="mt-6 space-y-6">
+    <div class="mt-6 flex items-center gap-5">
+        <div class="size-20 rounded-full bg-linear-to-br from-[#A556F7] to-[#2663EB] flex items-center justify-center text-white text-2xl font-bold shrink-0 shadow-lg">
+            {{ $initials ?: '👤' }}
+        </div>
         <div>
-            <x-input-label for="surname"> Фамилия </x-input-label>
-            <x-text-input wire:model="surname" id="surname" name="surname" type="text" class="mt-1 block w-full" required autofocus autocomplete="surname" placeholder="Иванов" />
-            <x-input-error class="mt-2" :messages="$errors->get('surname')" />
+            <div class="text-gray-900 font-semibold">{{ trim("$surname $name") ?: 'Пользователь' }}</div>
+            <div class="text-sm text-gray-400">{{ $email }}</div>
+        </div>
+    </div>
+
+    <form wire:submit="updateProfileInformation" class="mt-8 space-y-5">
+        @php
+            $inputClass = 'w-full rounded-xl border border-gray-200 bg-gray-50/60 px-4 py-3 text-gray-900 shadow-sm transition focus:border-[#A855F7] focus:bg-white focus:ring-2 focus:ring-[#A855F7]/25 focus:outline-none';
+        @endphp
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+                <label for="surname" class="block text-sm font-medium text-gray-600 mb-1.5">Фамилия</label>
+                <input wire:model="surname" id="surname" name="surname" type="text" class="{{ $inputClass }}" required autocomplete="family-name" placeholder="Иванов" />
+                <x-input-error class="mt-2" :messages="$errors->get('surname')" />
+            </div>
+
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-600 mb-1.5">Имя</label>
+                <input wire:model="name" id="name" name="name" type="text" class="{{ $inputClass }}" required autocomplete="given-name" placeholder="Иван" />
+                <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            </div>
         </div>
 
         <div>
-            <x-input-label for="name"> Имя </x-input-label>
-            <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" placeholder="Иван" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
-        </div>
-
-        <div>
-            <x-input-label for="patronymic"> Отчество </x-input-label>
-            <x-text-input wire:model="patronymic" id="patronymic" name="patronymic" type="text" class="mt-1 block w-full" autofocus autocomplete="patronymic" placeholder="Иванович" />
+            <label for="patronymic" class="block text-sm font-medium text-gray-600 mb-1.5">Отчество</label>
+            <input wire:model="patronymic" id="patronymic" name="patronymic" type="text" class="{{ $inputClass }}" autocomplete="additional-name" placeholder="Иванович" />
             <x-input-error class="mt-2" :messages="$errors->get('patronymic')" />
         </div>
 
         <div>
-            <x-input-label for="phone"> Телефон </x-input-label>
-            <x-text-input wire:model="phone" id="phone" name="phone" type="text" class="mt-1 block w-full" autofocus autocomplete="phone" placeholder="+7 (999) 99-99-99"/>
+            <label for="phone" class="block text-sm font-medium text-gray-600 mb-1.5">Телефон</label>
+            <input wire:model="phone" id="phone" name="phone" type="text" class="{{ $inputClass }}" autocomplete="tel" placeholder="+7 (999) 999-99-99" />
             <x-input-error class="mt-2" :messages="$errors->get('phone')" />
         </div>
 
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-600 mb-1.5">Электронная почта</label>
+            <input wire:model="email" id="email" name="email" type="email" class="{{ $inputClass }}" autocomplete="email" placeholder="ivanov@mail.ru" />
+            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+        </div>
 
+        <div class="flex items-center gap-4 pt-2">
+            <button type="submit"
+                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-linear-to-r from-[#A556F7] to-[#2663EB] text-white text-sm font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-200 cursor-pointer">
+                <i class="fas fa-floppy-disk"></i>
+                Сохранить изменения
+            </button>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>Сохранить</x-primary-button>
-
-            <x-action-message class="me-3" on="profile-updated">
-                Сохранено
+            <x-action-message class="text-green-600 font-medium" on="profile-updated">
+                ✓ Сохранено
             </x-action-message>
         </div>
     </form>
