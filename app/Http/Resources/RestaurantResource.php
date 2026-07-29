@@ -41,7 +41,7 @@ class RestaurantResource extends JsonResource
             'website' => $this->website,
 
             'priceCategory' => $this->price_category,
-            'capacity' => $this->capipacity,
+            'capacity' => $this->capacity,
             'rating' => $this->rating,
 
             'favoritesCount' => $this->favorites?->count() ?? 0,
