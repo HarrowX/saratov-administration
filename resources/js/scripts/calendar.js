@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 dayCell.style.cursor = 'pointer';
                 dayCell.addEventListener('click', function() {
                     const date = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                    window.location.href = `/events?date=${date}`;
+                    window.location.href = `/events?date=${date}#events`;
                 });
             }
 

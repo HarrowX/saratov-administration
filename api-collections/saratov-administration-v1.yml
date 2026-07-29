@@ -682,6 +682,25 @@ items:
           timeout: 0
           followRedirects: true
           maxRedirects: 5
+  - info:
+      name: Send contact us
+      type: http
+      seq: 4
+    http:
+      method: POST
+      url: '{{base_url}}/api/v1/contact-us/send'
+      body:
+        type: json
+        data: |-
+          {
+            "message": "HIT ME"
+          }
+      auth: inherit
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
 request:
   auth:
     type: bearer

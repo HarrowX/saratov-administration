@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import '@fortawesome/fontawesome-free/css/all.css';
+
+[x-cloak] { display: none !important; }
 /* Custom styles for Saratov 435 */
 /*кнопки по центру
 картинку по центру */
@@ -665,7 +667,7 @@ button{
 }
 
 .calendar-day .day-number {
-    @apply flex items-center justify-center size-5 xs:size-6 sm:size-9 lg:size-11 xl:size-12 3xl:size-16 rounded-full text-gray-700 transition-colors mx-auto;
+    @apply flex items-center justify-center size-9 lg:size-11 xl:size-12 3xl:size-16 rounded-full text-gray-700 transition-colors mx-auto;
 }
 
 .calendar-day:hover .day-number {
