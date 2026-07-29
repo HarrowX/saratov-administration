@@ -20,7 +20,7 @@
                         <div class="flex flex-row gap-1">
                             <div class="relative flex text-black w-full">
                                 <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
-                                <input type="text" wire:model.live="search" placeholder="Поиск..." class="pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none hover:ring-2 hover:ring-[#352AA2] w-full hover:border-transparent focus:ring-2 focus:ring-[#352AA2] focus:border-transparent bg-gray-50 hover:bg-white transition placeholder-gray-500">
+                                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Поиск..." class="pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none hover:ring-2 hover:ring-[#352AA2] w-full hover:border-transparent focus:ring-2 focus:ring-[#352AA2] focus:border-transparent bg-gray-50 hover:bg-white transition placeholder-gray-500">
                             </div>
                             <button wire:click="clearFilters" class="md:hidden gradient-button items-center justify-center text-white px-2 xl:px-3 py-2 rounded-xl hover:opacity-80 transition-opacity text-nowrap">
                                 Все события
@@ -28,10 +28,10 @@
                         </div>
                         <div class="grid grid-cols-2 md:grid-cols-5 justify-between 3xl:justify-center gap-1 xs:gap-2 xl:gap-3">
                             <div class="relative w-full flex">
-                                <input type="date" wire:model.live="date" class="text-black not-focus:text-gray-500 focus:text-black pl-4 w-full pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none hover:ring-2 hover:ring-[#352AA2] hover:border-transparent focus:ring-2 focus:ring-[#352AA2] focus:border-transparent bg-gray-50 hover:bg-white transition ">
+                                <input type="date" wire:model.live.debounce.500ms="date" class="text-black not-focus:text-gray-500 focus:text-black pl-4 w-full pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none hover:ring-2 hover:ring-[#352AA2] hover:border-transparent focus:ring-2 focus:ring-[#352AA2] focus:border-transparent bg-gray-50 hover:bg-white transition ">
                             </div>
                             <div class="relative flex w-full">
-                                <select wire:model.live="categoryId" class="pl-4 pr-4 xl:pr-10 py-2.5 text-black not-focus:text-gray-500 border border-gray-200 rounded-xl focus:outline-none hover:ring-2 hover:ring-[#352AA2] hover:border-transparent focus:ring-2 focus:ring-[#352AA2] focus:border-transparent bg-gray-50 hover:bg-white transition appearance-none cursor-pointer text-gray-700 w-full">
+                                <select wire:model.live.debounce.500ms="categoryId" class="pl-4 pr-4 xl:pr-10 py-2.5 text-black not-focus:text-gray-500 border border-gray-200 rounded-xl focus:outline-none hover:ring-2 hover:ring-[#352AA2] hover:border-transparent focus:ring-2 focus:ring-[#352AA2] focus:border-transparent bg-gray-50 hover:bg-white transition appearance-none cursor-pointer text-gray-700 w-full">
                                     <option value="">Категория</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name}}</option>
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <div class="relative w-full flex">
-                                <select wire:model.live="ageRestriction" class="pl-4 pr-4 xl:pr-10 py-2.5 text-black not-focus:text-gray-500 border border-gray-200 rounded-xl focus:outline-none hover:ring-2 hover:ring-[#352AA2] hover:border-transparent focus:ring-2 focus:ring-[#352AA2] focus:border-transparent bg-gray-50 hover:bg-white transition appearance-none cursor-pointer text-gray-700 w-full">
+                                <select wire:model.live.debounce.500ms="ageRestriction" class="pl-4 pr-4 xl:pr-10 py-2.5 text-black not-focus:text-gray-500 border border-gray-200 rounded-xl focus:outline-none hover:ring-2 hover:ring-[#352AA2] hover:border-transparent focus:ring-2 focus:ring-[#352AA2] focus:border-transparent bg-gray-50 hover:bg-white transition appearance-none cursor-pointer text-gray-700 w-full">
                                     <option value="">Возраст</option>
                                     <option value="0+">0+</option>
                                     <option value="6+">6+</option>
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="relative w-full flex">
-                                <input type="text" wire:model.live="locationSearch" placeholder="Локация" class="w-full pl-4 pr-4 xl:pr-10 py-2.5 text-black not-focus:text-gray-500 border border-gray-200 rounded-xl focus:outline-none hover:ring-2 hover:ring-[#352AA2] hover:border-transparent focus:ring-2 focus:ring-[#352AA2] focus:border-transparent bg-gray-50 hover:bg-white transition placeholder-gray-500">
+                                <input type="text" wire:model.live.debounce.500ms="locationSearch" placeholder="Локация" class="w-full pl-4 pr-4 xl:pr-10 py-2.5 text-black not-focus:text-gray-500 border border-gray-200 rounded-xl focus:outline-none hover:ring-2 hover:ring-[#352AA2] hover:border-transparent focus:ring-2 focus:ring-[#352AA2] focus:border-transparent bg-gray-50 hover:bg-white transition placeholder-gray-500">
 
                                 @if(!empty($locationSearch) && $locationResults->count() > 0)
                                     <div class="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 w-full"

@@ -20,6 +20,8 @@ class AllEvents extends Component
     public $locationResults = [];
     public $selectedLocation = null;
 
+    // TODO: непонятно, зачем нужен этот массив, 
+    // стоит удалить его, если он ни на что не влияет
     protected $queryString = [
         'date' => ['except' => ''],
         'search' => ['except' => ''],
@@ -45,7 +47,7 @@ class AllEvents extends Component
     }
     public function updatedLocationSearch()
     {
-        if (strlen($this->locationSearch) >= 2) {
+        if (mb_strlen($this->locationSearch) >= 2) {
             $this->locationResults = collect()
                 ->merge(Attraction::where('name', 'like', '%' . $this->locationSearch . '%')->get()->map(function($item) {
                     $item->type = 'attraction';
@@ -67,6 +69,10 @@ class AllEvents extends Component
             $this->locationResults = collect();
         }
     }
+
+    // TODO: стоит переделать выбор локации, 
+    // сделать вместо поля поиска обычный селект, 
+    // которым проще управлять 
     public function selectLocation($value)
     {
         $parts = explode('_', $value);
@@ -90,6 +96,8 @@ class AllEvents extends Component
     }
     public function render()
     {
+        // TODO: необходима оптимизация: 
+        // стоит вынести тяжелые запросы из render()
         $categories = Category::where('is_active', true)->get();
         $events = Event::query()
             ->with('categories', 'attachments', 'location')
