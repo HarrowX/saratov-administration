@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\AuthVkController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\FavoritableController;
 use App\Http\Controllers\PlaceVisitController;
@@ -92,4 +93,6 @@ Route::prefix('v1')->group(function () {
             Route::patch('approve', 'approve');
             Route::patch('disapprove', 'disapprove');
         });
+    Route::post('contact-us/send', [ContactUsController::class, 'store'])
+        ->middleware(['auth:sanctum']);
 });
