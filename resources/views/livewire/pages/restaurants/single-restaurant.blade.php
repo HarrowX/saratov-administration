@@ -105,13 +105,13 @@
 
                 </div>
             </div>
-            <div class="font-['FindSansPro'] flex flex-col items-center lg:items-start">
-                <h3>Достижения</h3>
-                <p class="text-lg md:text-2xl text-center lg:text-left">За посещение ресторана “{{ $restaurant->name }}” вы получите:</p>
-                <div class="flex flex-row flex-wrap gap-4 lg:gap-10 justify-center lg:justify-start items-center text-sm pt-4 lg:pt-5 3xl:pt-7 md:text-xl">
-                    <div class="text-white rounded-4xl bg-linear-to-r from-green-500 to-teal-600 py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Знатоку города” </div>
-                    <div class="gradient-button text-white rounded-4xl py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Первооткрывателю” </div></div>
-            </div>
+{{--            <div class="font-['FindSansPro'] flex flex-col items-center lg:items-start">--}}
+{{--                <h3>Достижения</h3>--}}
+{{--                <p class="text-lg md:text-2xl text-center lg:text-left">За посещение ресторана “{{ $restaurant->name }}” вы получите:</p>--}}
+{{--                <div class="flex flex-row flex-wrap gap-4 lg:gap-10 justify-center lg:justify-start items-center text-sm pt-4 lg:pt-5 3xl:pt-7 md:text-xl">--}}
+{{--                    <div class="text-white rounded-4xl bg-linear-to-r from-green-500 to-teal-600 py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Знатоку города” </div>--}}
+{{--                    <div class="gradient-button text-white rounded-4xl py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Первооткрывателю” </div></div>--}}
+{{--            </div>--}}
         </div>
     </section>
 
