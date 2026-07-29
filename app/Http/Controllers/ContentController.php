@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\AttractionResource;
+use App\Http\Resources\EventResource;
 use App\Http\Resources\ExcursionResource;
 use App\Http\Resources\GuidedTourResource;
 use App\Http\Resources\HotelResource;
 use App\Http\Resources\RestaurantResource;
 use App\Models\Attraction;
+use App\Models\Event;
 use App\Models\Excursion;
 use App\Models\GuidedTour;
 use App\Models\Hotel;
@@ -18,7 +20,12 @@ class ContentController extends Controller
 {
     public function hotels(Request $request)
     {
+        $term = $request->string('term', '');
         $query = Hotel::query()->with('attachments');
+
+        if ($term != '') {
+            $query->where('name', 'LIKE', '%'.$term.'%');
+        }
 
         $perPage = $request->integer('per_page', 15);
 
@@ -40,7 +47,12 @@ class ContentController extends Controller
 
     public function restaurants(Request $request)
     {
+        $term = $request->string('term', '');
         $query = Restaurant::query()->with('attachments');
+
+        if ($term != '') {
+            $query->where('name', 'LIKE', '%'.$term.'%');
+        }
 
         $perPage = $request->integer('per_page', 15);
 
@@ -62,7 +74,12 @@ class ContentController extends Controller
 
     public function attractions(Request $request)
     {
+        $term = $request->string('term', '');
         $query = Attraction::query()->with('attachments');
+
+        if ($term != '') {
+            $query->where('name', 'LIKE', '%'.$term.'%');
+        }
 
         $perPage = $request->integer('per_page', 15);
 
@@ -79,7 +96,7 @@ class ContentController extends Controller
             return response()->json(status: 404);
         }
 
-        return RestaurantResource::make($model);
+        return AttractionResource::make($model);
     }
 
     public function excursions(Request $request)
@@ -106,7 +123,12 @@ class ContentController extends Controller
 
     public function guideTours(Request $request)
     {
+        $term = $request->string('term', '');
         $query = GuidedTour::query()->with('attachments');
+
+        if ($term != '') {
+            $query->where('name', 'LIKE', '%'.$term.'%');
+        }
 
         $perPage = $request->integer('per_page', 15);
 
@@ -124,5 +146,32 @@ class ContentController extends Controller
         }
 
         return GuidedTourResource::make($model);
+    }
+
+    public function events(Request $request)
+    {
+        $term = $request->string('term', '');
+        $query = Event::query()->with('attachments');
+
+        if ($term != '') {
+            $query->where('name', 'LIKE', '%'.$term.'%');
+        }
+
+        $perPage = $request->integer('per_page', 15);
+
+        return EventResource::collection($query->paginate($perPage));
+    }
+
+    public function event(Request $request)
+    {
+        $query = Event::query()->with('attachments');
+
+        $model = $query->find($request->id);
+
+        if (! $model) {
+            return response()->json(status: 404);
+        }
+
+        return EventResource::make($model);
     }
 }

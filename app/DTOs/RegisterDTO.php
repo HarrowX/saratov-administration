@@ -33,7 +33,7 @@ class RegisterDTO extends ValidatedDTO implements \Livewire\Wireable
             'surname' => ['string', 'required', 'max:255'],
             'patronymic' => ['sometimes', 'string', 'nullable', 'max:255'],
 
-            'phone' => ['sometimes', 'string', 'nullable', 'max:255'],
+            'phone' => ['phone:RU', 'sometimes', 'string', 'nullable', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
 
             'password' => ['required', Password::defaults(), 'confirmed:password_confirmation'],
@@ -57,6 +57,7 @@ class RegisterDTO extends ValidatedDTO implements \Livewire\Wireable
 
             'phone.string' => 'Телефон должен быть строкой.',
             'phone.max' => 'Телефон не должен превышать :max символов.',
+            'phone' => 'Номер должен быть в формате +7 999 99-99-99',
 
             'email.required' => 'Требуется электронная почта.',
             'email.email' => 'Неверный формат электронного адреса.',

@@ -2,8 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Attraction;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class AttractionResource extends JsonResource
 {
@@ -14,6 +16,9 @@ class AttractionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $attachment = $this->attachments()->first();
+        $isFavorite = $this->favorites->where('user_id', $request->user()->id)->isNotEmpty() || false;
+
         return [
             'id' => $this->id,
 
@@ -22,9 +27,14 @@ class AttractionResource extends JsonResource
             'shortDescription' => $this->short_description,
             'description' => $this->description,
 
+            'class' => Attraction::class,
+
+            'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
+            'isFavorite' => $isFavorite,
+
             'worktime' => $this->worktime,
             'phone' => $this->phone,
-            'address' => $this->addres,
+            'address' => $this->address,
             'district' => $this->district,
             'longitude' => $this->longitude,
             'latitude' => $this->latitude,
@@ -41,7 +51,7 @@ class AttractionResource extends JsonResource
 
             'displayLocation' => $this->display_location,
             //            'viewsCount' => $this->views_count,
-            'favoritesCount' => $this->favorites?->count(),
+            'favoritesCount' => $this->favorites?->count() ?? 0,
 
             'createdAt' => $this->created_at,
             'attachments' => AttachmentResource::collection($this->attachments),

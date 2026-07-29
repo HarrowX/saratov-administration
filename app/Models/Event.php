@@ -13,10 +13,13 @@ class Event extends Model
         'name',
         'slug',
         'description',
-        'category',
         'age_restriction',
         'start_date',
         'end_date',
+        'organizer_name',	
+        'organizer_phone',	
+        'organizer_email',	
+        'organizer_website',
     ];
 
     protected $casts = [
