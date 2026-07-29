@@ -665,7 +665,7 @@ button{
 }
 
 .calendar-day .day-number {
-    @apply flex items-center justify-center size-5 xs:size-6 sm:size-9 lg:size-11 xl:size-12 3xl:size-16 rounded-full text-gray-700 transition-colors mx-auto;
+    @apply flex items-center justify-center size-9 lg:size-11 xl:size-12 3xl:size-16 rounded-full text-gray-700 transition-colors mx-auto;
 }
 
 .calendar-day:hover .day-number {
