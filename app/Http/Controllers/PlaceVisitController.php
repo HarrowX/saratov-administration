@@ -19,7 +19,7 @@ class PlaceVisitController extends Controller
     {
         $userId = auth()->id();
 
-        $status = $request->string('status', '');
+        $status = $request->string('status', '')->value;
 
         $visits = $this->placeVisitService->findRecentlyVisits($userId, $status);
 
