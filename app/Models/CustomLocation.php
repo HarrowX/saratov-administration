@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 class CustomLocation extends Model
 {
     protected $fillable = [
-        'name', 'address', 'latitude', 'longitude', 'description'
+        'name', 'address', 'latitude', 'longitude', 'description',
     ];
 
     public function events(): MorphMany

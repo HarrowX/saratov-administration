@@ -16,9 +16,9 @@ class Event extends Model
         'age_restriction',
         'start_date',
         'end_date',
-        'organizer_name',	
-        'organizer_phone',	
-        'organizer_email',	
+        'organizer_name',
+        'organizer_phone',
+        'organizer_email',
         'organizer_website',
     ];
 
@@ -36,6 +36,7 @@ class Event extends Model
     {
         return $this->morphMany(Attachment::class, 'attachable');
     }
+
     public function location(): MorphTo
     {
         return $this->morphTo();

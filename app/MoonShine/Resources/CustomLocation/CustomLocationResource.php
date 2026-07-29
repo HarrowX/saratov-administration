@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\CustomLocation;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\CustomLocation;
-use App\MoonShine\Resources\CustomLocation\Pages\CustomLocationIndexPage;
-use App\MoonShine\Resources\CustomLocation\Pages\CustomLocationFormPage;
 use App\MoonShine\Resources\CustomLocation\Pages\CustomLocationDetailPage;
-
-use MoonShine\Laravel\Resources\ModelResource;
+use App\MoonShine\Resources\CustomLocation\Pages\CustomLocationFormPage;
+use App\MoonShine\Resources\CustomLocation\Pages\CustomLocationIndexPage;
 use MoonShine\Contracts\Core\PageContract;
+use MoonShine\Laravel\Resources\ModelResource;
 
 /**
  * @extends ModelResource<CustomLocation, CustomLocationIndexPage, CustomLocationFormPage, CustomLocationDetailPage>

@@ -13,14 +13,20 @@ use Livewire\Component;
 class AllEvents extends Component
 {
     public $date = '';
+
     public $search = '';
+
     public $categoryId = '';
+
     public $ageRestriction = '';
+
     public $locationSearch = '';
+
     public $locationResults = [];
+
     public $selectedLocation = null;
 
-    // TODO: непонятно, зачем нужен этот массив, 
+    // TODO: непонятно, зачем нужен этот массив,
     // стоит удалить его, если он ни на что не влияет
     protected $queryString = [
         'date' => ['except' => ''],
@@ -30,6 +36,7 @@ class AllEvents extends Component
         'selectedLocation' => ['except' => ''],
 
     ];
+
     public function mount()
     {
         if (request()->has('date')) {
@@ -45,24 +52,29 @@ class AllEvents extends Component
             $this->selectedLocation = request('selectedLocation');
         }
     }
+
     public function updatedLocationSearch()
     {
         if (mb_strlen($this->locationSearch) >= 2) {
             $this->locationResults = collect()
-                ->merge(Attraction::where('name', 'like', '%' . $this->locationSearch . '%')->get()->map(function($item) {
+                ->merge(Attraction::where('name', 'like', '%'.$this->locationSearch.'%')->get()->map(function ($item) {
                     $item->type = 'attraction';
+
                     return $item;
                 }))
-                ->merge(Hotel::where('name', 'like', '%' . $this->locationSearch . '%')->get()->map(function($item) {
+                ->merge(Hotel::where('name', 'like', '%'.$this->locationSearch.'%')->get()->map(function ($item) {
                     $item->type = 'hotel';
+
                     return $item;
                 }))
-                ->merge(Restaurant::where('name', 'like', '%' . $this->locationSearch . '%')->get()->map(function($item) {
+                ->merge(Restaurant::where('name', 'like', '%'.$this->locationSearch.'%')->get()->map(function ($item) {
                     $item->type = 'restaurant';
+
                     return $item;
                 }))
-                ->merge(CustomLocation::where('name', 'like', '%' . $this->locationSearch . '%')->get()->map(function($item) {
+                ->merge(CustomLocation::where('name', 'like', '%'.$this->locationSearch.'%')->get()->map(function ($item) {
                     $item->type = 'custom';
+
                     return $item;
                 }));
         } else {
@@ -70,9 +82,9 @@ class AllEvents extends Component
         }
     }
 
-    // TODO: стоит переделать выбор локации, 
-    // сделать вместо поля поиска обычный селект, 
-    // которым проще управлять 
+    // TODO: стоит переделать выбор локации,
+    // сделать вместо поля поиска обычный селект,
+    // которым проще управлять
     public function selectLocation($value)
     {
         $parts = explode('_', $value);
@@ -94,9 +106,10 @@ class AllEvents extends Component
             $this->locationResults = collect();
         }
     }
+
     public function render()
     {
-        // TODO: необходима оптимизация: 
+        // TODO: необходима оптимизация:
         // стоит вынести тяжелые запросы из render()
         $categories = Category::where('is_active', true)->get();
         $events = Event::query()
@@ -117,6 +130,7 @@ class AllEvents extends Component
                     return $query->whereNull('age_restriction')
                         ->orWhere('age_restriction', '0');
                 }
+
                 return $query->where('age_restriction', $this->ageRestriction);
             })
             ->when($this->selectedLocation, function ($query) {

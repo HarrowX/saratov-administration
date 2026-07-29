@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Event\Pages;
 
-
 use App\Models\Attraction;
 use App\Models\CustomLocation;
 use App\Models\Hotel;

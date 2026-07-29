@@ -6,6 +6,7 @@ namespace App\MoonShine\Layouts;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
+use App\MoonShine\Resources\CustomLocation\CustomLocationResource;
 use App\MoonShine\Resources\CustomPoint\CustomPointResource;
 use App\MoonShine\Resources\Event\EventResource;
 use App\MoonShine\Resources\EventCategory\EventCategoryResource;
@@ -22,7 +23,6 @@ use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\MenuManager\MenuGroup;
 use MoonShine\MenuManager\MenuItem;
 use MoonShine\UI\Components\Layout\Div;
-use App\MoonShine\Resources\CustomLocation\CustomLocationResource;
 
 final class MoonShineLayout extends AppLayout
 {
