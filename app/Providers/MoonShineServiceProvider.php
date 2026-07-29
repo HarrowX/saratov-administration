@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
+use App\MoonShine\Resources\CustomLocation\CustomLocationResource;
 use App\MoonShine\Resources\CustomPoint\CustomPointResource;
 use App\MoonShine\Resources\Event\EventResource;
 use App\MoonShine\Resources\EventCategory\EventCategoryResource;
@@ -41,6 +42,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 ExcursionResource::class,
                 ExcursionPointResource::class,
                 CustomPointResource::class,
+                CustomLocationResource::class,
             ])
             ->pages([
                 ...$core->getConfig()->getPages(),

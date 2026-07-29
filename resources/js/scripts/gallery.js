@@ -20,3 +20,16 @@ document.addEventListener('DOMContentLoaded', function () {
     Fancybox.bind('[data-fancybox="gallery"]',{});
     Fancybox.bind('[data-fancybox="full-gallery"]',{});
 });
+
+
+window.openFullGallery = function() {
+    const firstLink = document.querySelector('[data-fancybox="full-gallery"]');
+    if (firstLink) {
+        const clickEvent = new MouseEvent('click', {
+            view: window,
+            bubbles: true,
+            cancelable: true
+        });
+        firstLink.dispatchEvent(clickEvent);
+    }
+};

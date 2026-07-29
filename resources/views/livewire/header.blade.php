@@ -8,7 +8,7 @@
                 </a>
             </div>
 
-            <ul class="hidden lg:flex items-center md:space-x-4 3xl:space-x-6 transition text-xs 3xl:text-sm pt-1">
+            <ul class="hidden lg:flex items-center md:space-x-3 xl:space-x-4 3xl:space-x-6 transition text-xs 3xl:text-sm pt-1">
                 <li>
                     <a href="{{ route('index') }}" class="{{ request()->is('/') ? "nav-link-active nav-link" : "nav-link" }}">Главная</a>
                 </li>
@@ -17,6 +17,9 @@
                 </li>
                 <li>
                     <a href="{{ route('all-guided-tours') }}" class="{{ request()->is('guided-tours*') ? "nav-link-active nav-link" : "nav-link" }}">Экскурсоводы</a>
+                </li>
+                <li>
+                    <a href="{{ route('all-events') }}" class="{{ request()->is('events*') ? "nav-link-active nav-link" : "nav-link" }}">События</a>
                 </li>
                 <li class="nav-link group">Места
                     <ul class="absolute top-4.5 3xl:top-5.5 -translate-x-5 invisible hidden opacity-0 group-hover:flex group-hover:flex-col group-hover:opacity-100 group-hover:visible gap-5 p-5 bg-white z-1 rounded-xl transition-all duration-300 ease-in-out shadow-2xl group-hover:translate-y-0">
@@ -48,7 +51,7 @@
 
                 <div class="relative">
                     <button id="mobileMenuBtn" class="flex lg:hidden cursor-pointer stroke-gray-500">
-                        <svg class="ham hamRotate ham1" viewBox="0 0 100 100" width="80" onclick="this.classList.toggle('active')">
+                        <svg class="ham hamRotate ham1 w-16 md:w-20" viewBox="0 0 100 100" onclick="this.classList.toggle('active')">
                             <path class="line top" d="m 30,33 h 40 c 0,0 9.044436,-0.654587 9.044436,-8.508902 0,-7.854315 -8.024349,-11.958003 -14.89975,-10.85914 -6.875401,1.098863 -13.637059,4.171617 -13.637059,16.368042 v 40"/>
                             <path class="line middle" d="m 30,50 h 40"/>
                             <path class="line bottom" d="m 30,67 h 40 c 12.796276,0 15.357889,-11.717785 15.357889,-26.851538 0,-15.133752 -4.786586,-27.274118 -16.667516,-27.274118 -11.88093,0 -18.499247,6.994427 -18.435284,17.125656 l 0.252538,40"/>
@@ -70,6 +73,11 @@
                             <a href="{{ route('all-guided-tours') }}" class="{{ request()->is('guided-tours*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
                                 <i class="fa-solid fa-users w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
                                 <span>Экскурсоводы</span>
+                            </a>
+
+                            <a href="{{ route('all-events') }}" class="{{ request()->is('events*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
+                                <i class="fas fa-calendar w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
+                                <span>События</span>
                             </a>
 
                             <a href="{{ route('all-restaurants') }}" class="{{ request()->is('restaurants*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
