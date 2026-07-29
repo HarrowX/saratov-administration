@@ -44,7 +44,7 @@ class VisitsSection extends Component
     {
         return PlaceVisit::query()->where([
             'user_id' => auth()->id(),
-        ])->latest('updated_at')->where('status', '=', $this->selectedStatus)->paginate(5);
+        ])->latest('updated_at')->where('status', '=', $this->selectedStatus)->paginate(9);
     }
 
     public function getUrl($slug, $class)

@@ -23,13 +23,13 @@ new class extends Component
     }
 }; ?>
 
-<section class="space-y-6">
+<section class="space-y-6 font-['FindSansPro']">
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
+        <h2 class="text-xl font-bold text-gray-900">
             Удалить аккаунт
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
+        <p class="mt-1 text-sm text-gray-500">
             После удаления аккаунта все его ресурсы и данные будут навсегда удалены. Перед удалением аккаунта, пожалуйста, скачайте любые данные или информацию, которые вы хотите сохранить.
         </p>
     </header>
