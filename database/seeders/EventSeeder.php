@@ -31,12 +31,9 @@ class EventSeeder extends Seeder
             $events[] = [
                 'name' => $name,
                 'description' => fake()->realText(),
-                'address' => fake()->address(),
                 'age_restriction' => fake()->numberBetween(1, 18),
                 'start_date' => fake()->dateTime(),
                 'end_date' => fake()->dateTime(),
-                'latitude' => fake()->latitude(),
-                'longitude' => fake()->longitude(),
                 'slug' => Str::slug($name),
             ];
         }

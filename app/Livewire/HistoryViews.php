@@ -4,9 +4,11 @@ namespace App\Livewire;
 
 use App\Models\Attraction;
 use App\Models\Excursion;
+use App\Models\Favorite;
 use App\Models\GuidedTour;
 use App\Models\Hotel;
 use App\Models\Restaurant;
+use App\Services\FavoritableService;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -16,10 +18,35 @@ class HistoryViews extends Component
 
     public $selectedType = Attraction::class;
 
+    protected FavoritableService $favoritableService;
+
+    public function boot(FavoritableService $favoritableService): void
+    {
+        $this->favoritableService = $favoritableService;
+    }
+
     public function selectType($type)
     {
         $this->selectedType = $type;
         $this->resetPage();
+    }
+
+    public function favorite($id)
+    {
+        try {
+            $this->favoritableService->save(auth()->id(), $id, $this->selectedType);
+        } catch (\App\Exceptions\AlreadyExistsException $e) {
+            // Уже в избранном — просто перерисовываем состояние
+        }
+    }
+
+    public function getFavoritedIdsProperty(): array
+    {
+        return Favorite::query()
+            ->where('user_id', auth()->id())
+            ->where('favoriteable_type', $this->selectedType)
+            ->pluck('favoriteable_id')
+            ->all();
     }
 
     public function getItemsProperty()
@@ -32,7 +59,7 @@ class HistoryViews extends Component
             ->where('history_views.viewable_type', $this->selectedType)
             ->where('history_views.user_id', auth()->user()->id)
             ->orderBy('history_views.updated_at', 'desc')
-            ->paginate(5);
+            ->paginate(9);
     }
 
     public function getUrl($item)

@@ -18,6 +18,7 @@
         "livewire/volt": "^1.7.0",
         "moonshine/moonshine": "^4.0",
         "moonshine/ru": "^1.0",
+        "propaganistas/laravel-phone": "^6.0",
         "socialiteproviders/vkid": "^5.1",
         "wendelladriel/laravel-validated-dto": "^4.7"
     },

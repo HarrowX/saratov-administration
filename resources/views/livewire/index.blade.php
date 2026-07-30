@@ -275,76 +275,76 @@
     </section>
 
     <!-- AR Experience Section (New!) -->
-    <section id="ar-experience" class="pt-10 sm:pt-15 xl:pt-20 3xl:pt-26 bg-white overflow-hidden">
-        <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4">
-            <div class="flex flex-col items-center mb-5 md:mb-12" data-aos="fade-up">
-                <span class="flex justify-center gap-2 bg-linear-to-r from-purple-600 to-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-4 text-nowrap">
-                     <img src="/images/Symbol.svg" alt="Иконка" class="icon">НОВАЯ ФУНКЦИЯ
-                </span>
-                <h2>Путешествие во времени с AR</h2>
-                <p class="text text-gray-600">Увидьте, как выглядел Саратов 100 лет назад через камеру телефона</p>
-            </div>
+{{--    <section id="ar-experience" class="pt-10 sm:pt-15 xl:pt-20 3xl:pt-26 bg-white overflow-hidden">--}}
+{{--        <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4">--}}
+{{--            <div class="flex flex-col items-center mb-5 md:mb-12" data-aos="fade-up">--}}
+{{--                <span class="flex justify-center gap-2 bg-linear-to-r from-purple-600 to-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-4 text-nowrap">--}}
+{{--                     <img src="/images/Symbol.svg" alt="Иконка" class="icon">НОВАЯ ФУНКЦИЯ--}}
+{{--                </span>--}}
+{{--                <h2>Путешествие во времени с AR</h2>--}}
+{{--                <p class="text text-gray-600">Увидьте, как выглядел Саратов 100 лет назад через камеру телефона</p>--}}
+{{--            </div>--}}
 
-            <div class="grid md:grid-cols-2 gap-7 xl:gap-12 items-center">
-                <div data-aos="fade-right">
-                    <div class="relative xl:w-full md:h-99 xl:h-full shadow-xl">
-                        <img src="/images/a2180e30ceeba4a115385d68e52b22ba3e08df0f.jpg" alt="Саратовский мост" class="rounded-2xl">
-                        <div class="absolute inset-0 bg-linear-to-t from-black/50 to-transparent rounded-2xl"></div>
-                        <div class="absolute bottom-6 left-6 text-white">
-                            <div class="bg-white/20 backdrop-blur-sm rounded-lg p-4">
-                                <h1 class="font-bold md:text-base lg:text-lg mb-2">AR режим доступен</h1>
-                                <p class="text-sm">Наведите камеру на QR-код рядом с достопримечательностью</p>
-                            </div>
-                        </div>
-                        <!-- Floating AR elements -->
-                        <div class="absolute -top-4 -right-4 bg-linear-to-r from-purple-500 to-blue-500 text-white rounded-full p-4 animate-bounce">
-                            <i class="fas fa-vr-cardboard text-2xl"></i>
-                        </div>
-                    </div>
-                </div>
+{{--            <div class="grid md:grid-cols-2 gap-7 xl:gap-12 items-center">--}}
+{{--                <div data-aos="fade-right">--}}
+{{--                    <div class="relative xl:w-full md:h-99 xl:h-full shadow-xl">--}}
+{{--                        <img src="/images/a2180e30ceeba4a115385d68e52b22ba3e08df0f.jpg" alt="Саратовский мост" class="rounded-2xl">--}}
+{{--                        <div class="absolute inset-0 bg-linear-to-t from-black/50 to-transparent rounded-2xl"></div>--}}
+{{--                        <div class="absolute bottom-6 left-6 text-white">--}}
+{{--                            <div class="bg-white/20 backdrop-blur-sm rounded-lg p-4">--}}
+{{--                                <h1 class="font-bold md:text-base lg:text-lg mb-2">AR режим доступен</h1>--}}
+{{--                                <p class="text-sm">Наведите камеру на QR-код рядом с достопримечательностью</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <!-- Floating AR elements -->--}}
+{{--                        <div class="absolute -top-4 -right-4 bg-linear-to-r from-purple-500 to-blue-500 text-white rounded-full p-4 animate-bounce">--}}
+{{--                            <i class="fas fa-vr-cardboard text-2xl"></i>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
-                <div data-aos="fade-left" class="flex flex-col items-start">
-                    <h1 class="text-3xl font-bold mb-6">Оживите историю города</h1>
-                    <div class="space-y-4 mb-8">
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center shrink-0">
-                                <i class="fas fa-history text-purple-600"></i>
-                            </div>
-                            <div>
-                                <h5 class="font-semibold mb-1">Исторические реконструкции</h5>
-                                <p class="text-gray-600">Увидьте здания и улицы в их первоначальном виде</p>
-                            </div>
-                        </div>
+{{--                <div data-aos="fade-left" class="flex flex-col items-start">--}}
+{{--                    <h1 class="text-3xl font-bold mb-6">Оживите историю города</h1>--}}
+{{--                    <div class="space-y-4 mb-8">--}}
+{{--                        <div class="flex items-start space-x-4">--}}
+{{--                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center shrink-0">--}}
+{{--                                <i class="fas fa-history text-purple-600"></i>--}}
+{{--                            </div>--}}
+{{--                            <div>--}}
+{{--                                <h5 class="font-semibold mb-1">Исторические реконструкции</h5>--}}
+{{--                                <p class="text-gray-600">Увидьте здания и улицы в их первоначальном виде</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center shrink-0">
-                                <i class="fas fa-user-astronaut text-blue-600"></i>
-                            </div>
-                            <div>
-                                <h5 class="font-semibold mb-1">Встреча с Гагариным</h5>
-                                <p class="text-gray-600">AR-персонаж расскажет о своем приземлении в Саратове</p>
-                            </div>
-                        </div>
+{{--                        <div class="flex items-start space-x-4">--}}
+{{--                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center shrink-0">--}}
+{{--                                <i class="fas fa-user-astronaut text-blue-600"></i>--}}
+{{--                            </div>--}}
+{{--                            <div>--}}
+{{--                                <h5 class="font-semibold mb-1">Встреча с Гагариным</h5>--}}
+{{--                                <p class="text-gray-600">AR-персонаж расскажет о своем приземлении в Саратове</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
-                        <div class="flex items-start space-x-4">
-                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center shrink-0">
-                                <i class="fas fa-theater-masks text-green-600"></i>
-                            </div>
-                            <div>
-                                <h5 class="font-semibold mb-1">Виртуальные экскурсоводы</h5>
-                                <p class="text-gray-600">Известные личности города проведут персональную экскурсию</p>
-                            </div>
-                        </div>
-                    </div>
+{{--                        <div class="flex items-start space-x-4">--}}
+{{--                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center shrink-0">--}}
+{{--                                <i class="fas fa-theater-masks text-green-600"></i>--}}
+{{--                            </div>--}}
+{{--                            <div>--}}
+{{--                                <h5 class="font-semibold mb-1">Виртуальные экскурсоводы</h5>--}}
+{{--                                <p class="text-gray-600">Известные личности города проведут персональную экскурсию</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
-                    <button onclick="startARExperience()" class="bg-linear-to-r from-purple-500 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg transition transform hover:-translate-y-1 cursor-pointer">
-                        <i class="fas fa-play mr-2"></i>
-                        Попробовать AR
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
+{{--                    <button onclick="startARExperience()" class="bg-linear-to-r from-purple-500 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg transition transform hover:-translate-y-1 cursor-pointer">--}}
+{{--                        <i class="fas fa-play mr-2"></i>--}}
+{{--                        Попробовать AR--}}
+{{--                    </button>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
 
     @livewire('saratov-ai')
 

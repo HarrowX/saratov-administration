@@ -2,6 +2,9 @@ let yandexMap;
 let mapObjects = [];
 let currentFilter = 'all';
 
+const SARATOV_POSITION = [51.5339, 46.0345];
+const STANDARD_ZOOM = 13;
+
 const categoryColors = {
     attraction: '#3B82F6',
     hotel: '#F59E0B',
@@ -44,6 +47,11 @@ function getLandmarks() {
         }))
     ];
 }
+
+function setMapCenter(lat, lng) {
+    yandexMap.center = [lat, lng];
+}
+
 function initYandexMap() {
     if (yandexMap) return;
 
@@ -56,8 +64,8 @@ function initYandexMap() {
     }
     ymaps.ready(() => {
         yandexMap = new ymaps.Map('map', {
-            center: [51.5339, 46.0345],
-            zoom: 13
+            center: window.mapCenter || SARATOV_POSITION,
+            zoom: window.mapZoom || STANDARD_ZOOM,
         });
         window.yandexMap = yandexMap;
         addMarkers();
@@ -237,3 +245,4 @@ window.initYandexMap = initYandexMap;
 window.forceInitMap = forceInitMap;
 window.toggleFilterPanel = toggleFilterPanel;
 window.filterMapByCategory = filterMapByCategory;
+window.setMapCenter = setMapCenter;

@@ -36,91 +36,103 @@ class extends Component {
     }
 }; ?>
 
-<div>
+<div class="font-['FindSansPro']">
+    <div class="mb-8">
+        <h2 class="text-3xl font-bold text-gray-900">Создать аккаунт ✨</h2>
+        <p class="mt-2 text-gray-500">Зарегистрируйтесь, чтобы начать путешествие по Саратову</p>
+    </div>
 
-    <a href="{{route('index')}}"
-       class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
-        На главную
-    </a>
+    @php
+        $inputClass = 'w-full rounded-xl border border-gray-200 bg-gray-50/60 px-4 py-3 text-gray-900 shadow-sm transition focus:border-[#A855F7] focus:bg-white focus:ring-2 focus:ring-[#A855F7]/25 focus:outline-none';
+    @endphp
 
-    <form wire:submit="register" class="mt-4">
-        <div class="flex">
+    <form wire:submit="register" class="space-y-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <!-- Name -->
             <div>
-                <x-input-label for="name">Имя<span class='text-red-600'>*</span></x-input-label>
-                <x-text-input wire:model="dto.name" id="name" class="block mt-1 w-full" type="text"
-                              name="name" required autofocus autocomplete="name" placeholder="Иван"/>
-                <x-input-error :messages="$errors->get('name')" class="mt-2"/>
+                <label for="name" class="block text-sm font-medium text-gray-600 mb-1.5">Имя <span class="text-red-500">*</span></label>
+                <input wire:model="dto.name" id="name" type="text" name="name" required autofocus autocomplete="given-name"
+                       placeholder="Иван" class="{{ $inputClass }}" />
+                <x-input-error :messages="$errors->get('name')" class="mt-2" />
             </div>
             <!-- Surname -->
-            <div class="ml-4">
-                <x-input-label for="surname">Фамилия<span class='text-red-600'>*</span></x-input-label>
-                <x-text-input wire:model="dto.surname" id="surname" class="block mt-1 w-full" type="text"
-                              name="surname" required autofocus autocomplete="family-name" placeholder="Иванович"/>
-                <x-input-error :messages="$errors->get('name')" class="mt-2"/>
+            <div>
+                <label for="surname" class="block text-sm font-medium text-gray-600 mb-1.5">Фамилия <span class="text-red-500">*</span></label>
+                <input wire:model="dto.surname" id="surname" type="text" name="surname" required autocomplete="family-name"
+                       placeholder="Иванов" class="{{ $inputClass }}" />
+                <x-input-error :messages="$errors->get('surname')" class="mt-2" />
             </div>
         </div>
 
         <!-- Patronymic -->
-        <div class="mt-4">
-            <x-input-label for="patronymic">Отчество</x-input-label>
-            <x-text-input wire:model="dto.patronymic" id="patronymic" class="block mt-1 w-full" type="text"
-                          name="patronymic" autofocus placeholder="Иванов"/>
-            <x-input-error :messages="$errors->get('name')" class="mt-2"/>
+        <div>
+            <label for="patronymic" class="block text-sm font-medium text-gray-600 mb-1.5">Отчество</label>
+            <input wire:model="dto.patronymic" id="patronymic" type="text" name="patronymic" autocomplete="additional-name"
+                   placeholder="Иванович" class="{{ $inputClass }}" />
+            <x-input-error :messages="$errors->get('patronymic')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email">Почта<span class='text-red-600'>*</span></x-input-label>
-            <x-text-input wire:model="dto.email" id="email" class="block mt-1 w-full" type="email"
-                          name="email" required autocomplete="username" placeholder="example@mail.ru"/>
-            <x-input-error :messages="$errors->get('email')" class="mt-2"/>
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-600 mb-1.5">Почта <span class="text-red-500">*</span></label>
+            <div class="relative">
+                <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                <input wire:model="dto.email" id="email" type="email" name="email" required autocomplete="username"
+                       placeholder="example@mail.ru" class="{{ $inputClass }} pl-11" />
+            </div>
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Phone -->
-        <div class="mt-4">
-            <x-input-label for="phone">Телефон</x-input-label>
-            <x-text-input wire:model="dto.phone" id="phone" class="block mt-1 w-full" type="phone"
-                          name="phone" autofocus autocomplete="phone" placeholder="+7 (999)-99-99"/>
-            <x-input-error :messages="$errors->get('name')" class="mt-2"/>
+        <div>
+            <label for="phone" class="block text-sm font-medium text-gray-600 mb-1.5">Телефон</label>
+            <div class="relative">
+                <i class="fas fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                <input wire:model="dto.phone" id="phone" type="tel" name="phone" autocomplete="tel"
+                       placeholder="+7 (999) 999-99-99" class="{{ $inputClass }} pl-11" />
+            </div>
+            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
         </div>
 
-
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password">Пароль<span class='text-red-600'>*</span></x-input-label>
-
-            <x-text-input wire:model="dto.password" id="password" class="block mt-1 w-full"
-                          type="password"
-                          name="password"
-                          required autocomplete="new-password"
-                          placeholder="************"/>
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2"/>
+        <div x-data="{ show: false }">
+            <label for="password" class="block text-sm font-medium text-gray-600 mb-1.5">Пароль <span class="text-red-500">*</span></label>
+            <div class="relative">
+                <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                <input wire:model="dto.password" id="password" :type="show ? 'text' : 'password'" name="password" required autocomplete="new-password"
+                       placeholder="••••••••" class="{{ $inputClass }} pl-11 pr-11" />
+                <button type="button" @click="show = !show" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer">
+                    <i class="fas" :class="show ? 'fa-eye-slash' : 'fa-eye'"></i>
+                </button>
+            </div>
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation">Потвердите пароль <span class='text-red-600'>*</span></x-input-label>
-
-            <x-text-input wire:model="dto.password_confirmation" id="password_confirmation" class="block mt-1 w-full"
-                          type="password"
-                          name="password_confirmation" required autocomplete="new-password"
-                          placeholder="************"/>
-
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
+        <div x-data="{ show: false }">
+            <label for="password_confirmation" class="block text-sm font-medium text-gray-600 mb-1.5">Подтвердите пароль <span class="text-red-500">*</span></label>
+            <div class="relative">
+                <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                <input wire:model="dto.password_confirmation" id="password_confirmation" :type="show ? 'text' : 'password'" name="password_confirmation" required autocomplete="new-password"
+                       placeholder="••••••••" class="{{ $inputClass }} pl-11 pr-11" />
+                <button type="button" @click="show = !show" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer">
+                    <i class="fas" :class="show ? 'fa-eye-slash' : 'fa-eye'"></i>
+                </button>
+            </div>
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-               href="{{ route('login') }}" wire:navigate>
-                Уже зарегистрированы?
+        <button type="submit"
+                class="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-linear-to-r from-[#A556F7] to-[#2663EB] text-white font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-200 cursor-pointer">
+            Зарегистрироваться
+            <i class="fas fa-arrow-right text-sm"></i>
+        </button>
+
+        <p class="text-center text-sm text-gray-500">
+            Уже есть аккаунт?
+            <a href="{{ route('login') }}" wire:navigate class="font-semibold text-[#7c4fef] hover:text-[#2663EB] transition-colors">
+                Войти
             </a>
-
-            <x-primary-button class="ms-4">
-                Зарегистрироваться
-            </x-primary-button>
-        </div>
+        </p>
     </form>
 </div>

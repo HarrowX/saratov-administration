@@ -1,104 +1,106 @@
-<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-    <div class="border-b border-gray-200 px-4 py-3 flex gap-2 justify-center">
-        <button
-            wire:click="selectStatus('semi-visited')"
-            class="px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200
-           {{ $selectedStatus === 'semi-visited'
-               ? 'bg-blue-600 text-white shadow-sm'
-               : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
-            В проверке
-        </button>
-
-        <button
-            wire:click="selectStatus('visited')"
-            class="px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200
-           {{ $selectedStatus === 'visited'
-               ? 'bg-blue-600 text-white shadow-sm'
-               : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
-            Посещенные
-        </button>
+<div class="font-['FindSansPro']">
+    {{-- Status filter --}}
+    @php
+        $statuses = [
+            'semi-visited' => 'На проверке',
+            'visited'      => 'Уже посещали',
+        ];
+        $items = $this->items;
+    @endphp
+    <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8">
+        @foreach ($statuses as $status => $label)
+            <button
+                wire:click="selectStatus('{{ $status }}')"
+                class="px-4 py-2.5 text-sm font-medium rounded-full transition-all duration-200 cursor-pointer
+                {{ $selectedStatus === $status
+                    ? 'bg-linear-to-r from-[#A556F7] to-[#2663EB] text-white shadow-md shadow-purple-500/25'
+                    : 'bg-[#7676801F] text-gray-700 hover:bg-black hover:text-white' }}">
+                {{ $label }}
+            </button>
+        @endforeach
     </div>
 
-    <div class="p-6 space-y-4">
-        @forelse($this->items as $visit)
-            @php
-            $item = $visit->visitable;
-            @endphp
-            <div class="group bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 hover:border-b-gray-400 overflow-hidden">
-                <div class="p-5">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="flex items-start gap-3">
-
-                            <h3 class="text-lg font-semibold text-gray-900">{{ $item->name }}</h3>
-                        </div>
-                    </div>
-
-                    <div class="space-y-3 mb-5">
-                        <div class="flex gap-2">
-                            <svg class="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                            </svg>
-                            <span class="text-sm text-gray-600 line-clamp-2">{{ $item->description }}</span>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                                </svg>
-                                <a href="tel:{{ $item->phone }}" class="text-sm text-gray-600 hover:text-red-600 transition-colors">
-                                    {{ $item->phone }}
-                                </a>
+    {{-- Cards grid --}}
+    @if ($items->count())
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            @foreach ($items as $visit)
+                @php
+                    $item = $visit->visitable;
+                    $img = $item->attachments?->first()?->url();
+                @endphp
+                <div class="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_16px_44px_rgb(0,0,0,0.14)] transition-all duration-300">
+                    <div class="relative h-52 overflow-hidden">
+                        @if ($img)
+                            <img src="{{ $img }}" alt="{{ $item->name }}"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        @else
+                            <div class="w-full h-full bg-linear-to-br from-[#A556F7]/20 to-[#2663EB]/20 flex items-center justify-center">
+                                <i class="fas fa-image text-4xl text-white/70"></i>
                             </div>
+                        @endif
 
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                </svg>
-                                <span class="text-sm text-gray-600">{{ $item->address }}</span>
+                        @if (!is_null($item->rating))
+                            <div class="absolute top-3 right-3 flex items-center gap-1 bg-white/95 backdrop-blur px-2.5 py-1 rounded-full text-sm font-semibold text-gray-800 shadow">
+                                <i class="fas fa-star text-yellow-400"></i>{{ number_format($item->rating, 1) }}
                             </div>
-                        </div>
-                    </div>
+                        @endif
 
-                    <div class="flex justify-between items-center pt-3 border-t border-gray-100">
-                        <a href="{{ $this->getUrl($item->slug, $visit->visitable_type) }}"
-                           class="inline-flex items-center gap-2 font-medium transition-colors">
-                            <span>Подробнее</span>
-                        </a>
+                        @if ($selectedStatus === 'visited')
+                            <div class="absolute top-3 left-3 flex items-center gap-1.5 bg-green-500 px-2.5 py-1 rounded-full text-xs font-semibold text-white shadow-lg">
+                                <i class="fas fa-circle-check"></i>Посещено
+                            </div>
+                        @endif
 
-                        @if ($selectedStatus !== "visited")
-                            <div class="flex gap-3">
-                            <button type="button"
-                                    wire:click="confirmVisit({{ $item->id }}, '{{ addslashes(get_class($item)) }}')"
-                                    class="group/btn px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 border border-green-600 transition-all duration-200 flex items-center gap-2 shadow-sm hover:shadow-md">
-                                <svg class="w-4 h-4 group-hover/btn:scale-110 transition-transform" fill="none" stroke="currentColor"viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                                </svg>
-                                <span>Да посещал</span>
-                            </button>
-
-                            <button type="button"
-                                    wire:click="unconfirmVisit({{ $item->id }}, '{{ addslashes(get_class($item)) }}')"
-                                    class="group/btn px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 border border-gray-300 transition-all duration-200 flex items-center gap-2">
-                                <svg class="w-4 h-4 group-hover/btn:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                                </svg>
-                                <span>Нет, не посещал</span>
-                            </button>
-                        </div>
+                        @if (!empty($item->visit_duration))
+                            <div class="absolute bottom-3 left-3 flex items-center gap-1.5 bg-black/55 backdrop-blur px-2.5 py-1 rounded-full text-xs font-medium text-white">
+                                <i class="fas fa-person-walking"></i>{{ $item->visit_duration }} мин
+                            </div>
                         @endif
                     </div>
+
+                    <div class="flex flex-col grow p-5">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-1">{{ $item->name }}</h3>
+                        <p class="text-sm text-gray-500 line-clamp-2 mb-5">{{ $item->short_description ?? $item->description }}</p>
+
+                        <div class="mt-auto space-y-2.5">
+                            @if ($selectedStatus !== 'visited')
+                                <button type="button"
+                                        wire:click="confirmVisit({{ $item->id }}, '{{ addslashes(get_class($item)) }}')"
+                                        class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-green-500 text-white text-sm font-semibold hover:bg-green-600 transition-all duration-200 cursor-pointer">
+                                    <i class="fas fa-check"></i>
+                                    Отметить посещение
+                                </button>
+                            @endif
+
+                            <a href="{{ $this->getUrl($item->slug, $visit->visitable_type) }}"
+                               class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-linear-to-r from-[#A556F7] to-[#2663EB] text-white text-sm font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-200">
+                                Подробнее
+                                <i class="fas fa-arrow-right text-xs group-hover:translate-x-0.5 transition-transform"></i>
+                            </a>
+
+                            @if ($selectedStatus !== 'visited')
+                                <button type="button"
+                                        wire:click="unconfirmVisit({{ $item->id }}, '{{ addslashes(get_class($item)) }}')"
+                                        class="w-full text-center text-xs font-medium text-gray-400 hover:text-red-500 transition-colors cursor-pointer">
+                                    Я здесь не был
+                                </button>
+                            @endif
+                        </div>
+                    </div>
                 </div>
+            @endforeach
+        </div>
+    @else
+        <div class="text-center py-16 px-4">
+            <div class="inline-flex items-center justify-center size-16 bg-purple-50 rounded-full mb-4">
+                <i class="fas fa-map-location-dot text-2xl text-[#A855F7]"></i>
             </div>
-        @empty
-            <div class="text-center py-12 px-4">
-                <p class="text-gray-500 text-lg">Вы еще нигде небыли</p>
-                <p class="text-gray-400 text-sm mt-1">Зайдите в мобильное приложение, чтобы отобразились ближайшие места</p>
-            </div>
-        @endforelse
-    </div>
-    <div class="border-t border-gray-200 px-4 py-3 flex flex-col items-center gap-3">
-        {{ $this->items->links() }}
+            <p class="text-gray-700 text-lg font-semibold">Вы еще нигде не были</p>
+            <p class="text-gray-400 text-sm mt-1">Зайдите в мобильное приложение, чтобы отобразились ближайшие места</p>
+        </div>
+    @endif
+
+    <div class="mt-8">
+        {{ $items->links() }}
     </div>
 </div>
