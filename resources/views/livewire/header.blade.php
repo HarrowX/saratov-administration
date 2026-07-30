@@ -40,15 +40,38 @@
                 <button onclick="showAppDownload()" class="hidden md:flex items-center bg-linear-to-r from-green-500 to-teal-600 text-white px-5 py-2 rounded-lg hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-sm 3xl:text-base z-2">
                     <i class="fas fa-download mr-3"></i>Приложение
                 </button>
-                <button id="" class="">
-                    <img src="/images/image 21.svg" alt="поиск" class="icon size-7 3xl:size-11 hover:scale-125 transition duration-300">
-                </button>
+                @auth
+                    @php
+                        $u = auth()->user();
+                        $fn = optional($u->username)->name ?? '';
+                        $ln = optional($u->username)->surname ?? '';
+                        $initials = mb_strtoupper(mb_substr($ln, 0, 1) . mb_substr($fn, 0, 1));
+                        $fullName = trim("$fn $ln") ?: 'Профиль';
+                    @endphp
 
-                <button id="profileBtn" class="relative cursor-pointer">
-                    <img src="/images/image 18.svg" alt="мой профиль" class="icon size-6 3xl:size-10 hover:scale-125 transition duration-300">
-                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full size-4 sm:size-5 flex items-center justify-center achievement-count">0</span>
-                </button>
+                    <a href="{{ route('profile') }}"
+                       class="flex items-center gap-1.5 sm:gap-2.5 pl-1 pr-2 sm:pl-1.5 sm:pr-3 py-1 rounded-full hover:bg-gray-100 transition-colors cursor-pointer group">
+                        {{-- Аватар --}}
+                        <span class="size-7 sm:size-8 rounded-full bg-linear-to-br from-[#A556F7] to-[#2663EB] flex items-center justify-center text-white text-xs sm:text-sm font-bold flex-shrink-0">
+                            {{ $initials ?: '👤' }}
+                        </span>
 
+                        {{-- Имя пользователя --}}
+                        <span class="text-xs sm:text-sm font-medium text-gray-700 max-w-20 xs:max-w-24 sm:max-w-32 truncate hidden xs:inline">
+                            {{ $fullName }}
+                        </span>
+                    </a>
+                @else
+                    {{-- Кнопка "Войти" --}}
+                    <a href="{{ route('login') }}"
+                       class="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-300 text-xs sm:text-sm">
+                        {{-- Иконка только на десктопе --}}
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 hidden sm:block flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                        </svg>
+                        <span>Войти</span>
+                    </a>
+                @endauth
                 <div class="relative">
                     <button id="mobileMenuBtn" class="flex lg:hidden cursor-pointer stroke-gray-500">
                         <svg class="ham hamRotate ham1 w-16 md:w-20" viewBox="0 0 100 100" onclick="this.classList.toggle('active')">

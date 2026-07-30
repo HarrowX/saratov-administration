@@ -42,7 +42,7 @@ class HotelResource extends JsonResource
             'email' => $this->email,
             'website' => $this->website,
             'maxPrice' => $this->max_price,
-            'minPrice' => $this->min_pirce,
+            'minPrice' => $this->min_price,
 
             'favoritesCount' => $this->favorites?->count() ?? 0,
 
