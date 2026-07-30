@@ -9,8 +9,11 @@ use Livewire\Component;
 class FavoriteMiniButton extends Component
 {
     public $isFavorite = false;
+
     public $favoritesCount;
+
     public $object;
+
     public $position = 'top-7 right-6.5 sm:top-10 sm:right-9.5';
 
     private $favoritableService;
@@ -49,7 +52,7 @@ class FavoriteMiniButton extends Component
             }
         } catch (\Exception $e) {
             // Логируем ошибку
-            \Log::error('Favorite toggle error: ' . $e->getMessage());
+            \Log::error('Favorite toggle error: '.$e->getMessage());
         }
     }
 
