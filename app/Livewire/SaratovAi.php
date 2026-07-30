@@ -50,6 +50,7 @@ class SaratovAi extends Component
     {
         if (! $this->authorized) {
             $this->addError('prompt', 'Авторизуйтесь для использования чата');
+
             return;
         }
         $this->prompt = trim($this->prompt);
@@ -73,8 +74,8 @@ class SaratovAi extends Component
 
     public function pollModelResponse()
     {
-        if (! $this->authorized) { 
-            return; 
+        if (! $this->authorized) {
+            return;
         }
         if (! $this->isWaitingForResponse) {
             return;

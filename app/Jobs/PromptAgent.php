@@ -43,7 +43,7 @@ class PromptAgent implements ShouldQueue
                 'ok' => false,
                 'errorMessage' => $ex->getMessage(),
             ]);
-            Log::error('Unable to prompt model: '. $ex->getMessage(), ['user_id' => $this->user->id]);
+            Log::error('Unable to prompt model: '.$ex->getMessage(), ['user_id' => $this->user->id]);
         } finally {
             $modelConversationService->writeModelResultsToCache($dto);
         }
