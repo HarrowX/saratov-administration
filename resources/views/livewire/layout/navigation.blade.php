@@ -35,7 +35,7 @@ new class extends Component
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             {{-- Logo --}}
-            <a href="{{ route('profile') }}" wire:navigate class="flex items-center gap-2 shrink-0">
+            <a href="{{ route('index') }}" wire:navigate class="flex items-center gap-2 shrink-0">
                 <img src="/images/Photoroom 1.png" alt="Саратов" class="icon h-8 w-auto">
                 <span class="text-lg font-bold text-gray-900 hidden sm:block">Саратов</span>
             </a>
