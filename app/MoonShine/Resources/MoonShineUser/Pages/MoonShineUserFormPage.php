@@ -30,7 +30,7 @@ use MoonShine\UI\Fields\PasswordRepeat;
 use MoonShine\UI\Fields\Text;
 
 /**
- * @extends FormPage<MoonShineUserResource, MoonShineUser>
+ * @extends FormPage<MoonShineUserResource, MoonshineUser>
  */
 final class MoonShineUserFormPage extends FormPage
 {

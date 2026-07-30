@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Exceptions\AlreadyExistsException;
 use App\Models\Attraction;
 use App\Models\Excursion;
 use App\Models\Favorite;
@@ -35,7 +36,7 @@ class HistoryViews extends Component
     {
         try {
             $this->favoritableService->save(auth()->id(), $id, $this->selectedType);
-        } catch (\App\Exceptions\AlreadyExistsException $e) {
+        } catch (AlreadyExistsException $e) {
             // Уже в избранном — просто перерисовываем состояние
         }
     }
