@@ -1,8 +1,13 @@
 <?php
 
+use App\Providers\AppServiceProvider;
+use App\Providers\MoonShineServiceProvider;
+use App\Providers\TelescopeServiceProvider;
+use App\Providers\VoltServiceProvider;
+
 return [
-    App\Providers\AppServiceProvider::class,
-    App\Providers\MoonShineServiceProvider::class,
-    App\Providers\TelescopeServiceProvider::class,
-    App\Providers\VoltServiceProvider::class,
+    AppServiceProvider::class,
+    MoonShineServiceProvider::class,
+    TelescopeServiceProvider::class,
+    VoltServiceProvider::class,
 ];
