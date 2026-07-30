@@ -14,24 +14,22 @@
 
     <x-map-modal />
 
-    <section id="home" class="relative mt-25 md:mt-35 xl:mt-40 3xl:mt-50 ">
+    <section id="home" class="relative mt-25 md:mt-35 xl:mt-40 3xl:mt-50">
         <div class="max-w-6xl xl:max-w-7xl 3xl:max-w-398.25 px-4 sm:px-20 mx-auto relative">
 
             <a href="{{ route('all-restaurants') }}"
                class="absolute left-14 -top-10 3xl:-top-15 hidden md:flex items-center xl:gap-2 text-[#5F5F5F] hover:text-blue-900 transition-colors font-['FindSansPro']">
                 <i class="fa-solid fa-chevron-left text-xl xl:text-xl 3xl:text-3xl"></i>
-                <span class="text-xl 3xl:text-3xl pl-4">Рестораны</span>
+                <span class="text-xl 3xl:text-3xl pl-4">Заведения</span>
             </a>
 
             <button
                 wire:click="toggleFavorite"
-                class="absolute right-10 -top-10 3xl:-top-15 xl:right-20 z-20 hidden md:flex items-center gap-3 px-5 py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group"
-            >
+                class="flex absolute right-3 sm:right-10 top-10 xs:top-0 md:-top-10 3xl:-top-15 xl:right-20 z-20 items-center gap-1 sm:gap-3 px-5 py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group">
                 <i class="fa-regular fa-heart text-2xl xl:text-3xl group-hover:scale-110 group-hover:animate-pulse transition-transform {{ $isFavorite ? 'fa-solid text-red-400' : 'fa-regular' }}"></i>
-
-                <span class="text-xl xl:text-3xl font-medium">
-                {{ $isFavorite ? 'В избранном' : 'В избранное' }}
-            </span>
+                <span class="text-lg 2xl:text-3xl font-medium">
+                    {{ $isFavorite ? 'В избранном' : 'В избранное' }}
+                </span>
 
                 <span class="favorite-count ml-2 text-base xl:text-xl font-bold px-2.5 py-1 rounded-full {{ $isFavorite ? 'bg-red-500 text-white' : 'bg-red-500/80 text-white' }} transition-colors shadow-lg">
                 {{ $favoritesCount }}
@@ -40,22 +38,20 @@
         </div>
     </section>
     <!--Hero Section-->
-    <section class="features-section pt-28 md:pt-30 lg:pt-41.5 bg-white">
+    <section class="features-section pt-10 bg-white">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 sm:px-10">
-            <div class="flex flex-col-reverse lg:flex-row items-center gap-5 sm:gap-10 3xl:gap-22.5">
-                <div data-aos="fade-right" class="flex flex-col gap-5 w-full lg:w-auto lg:min-w-118 xl:min-w-150 3xl:min-w-197">
-                    <div class="min-w-full">
-                        <img src="{{ $restaurant->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $restaurant->name }}" class="photo w-full rounded-md sm:rounded-lg lg:rounded-2xl object-cover h-57.5 lg:h-100 xl:h-114">
+            <div class="flex flex-col-reverse lg:flex-row items-center gap-3 3xl:gap-22.5">
+                <div data-aos="fade-right" class="grid grid-cols-3 gap-5 w-full lg:w-auto lg:min-w-118 xl:min-w-150 3xl:min-w-197">
+                    <div class="min-w-full col-span-3">
+                        <img src="{{ $restaurant->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $restaurant->name }}" class="photo w-full rounded-md sm:rounded-lg lg:rounded-2xl object-cover h-full max-h-114">
                     </div>
 
-                    <div class="flex flex-row gap-5">
                         @foreach ($restaurant->attachments as $attachment)
                             @if ($loop->first)
                                 @continue
                             @endif
-                            <img src="{{ $attachment?->url() ?? "" }}" class="photo w-full h-33 3xl:h-67 rounded-md sm:rounded-lg lg:rounded-2xl object-cover" alt="Изображение {{ $restaurant->name }}">
+                            <img src="{{ $attachment?->url() ?? "" }}" class="photo w-full h-33 3xl:h-67 rounded-md sm:rounded-lg lg:rounded-2xl object-cover col-span-1" alt="Изображение {{ $restaurant->name }}">
                         @endforeach
-                    </div>
                 </div>
 
                 <div data-aos="fade-left" class="w-full lg:w-auto">
@@ -68,8 +64,8 @@
 
     <section class="pt-5 sm:pt-10 bg-white">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 sm:px-10 flex flex-col gap-5 md:gap-12">
-            <div class="flex flex-col md:flex-row gap-2.5 md:gap-10 3xl:gap-33.5">
-                <div class="flex flex-col w-full justify-around bg-[#E5E6F6] gap-3 md:gap-6.75 px-6 md:px-11 py-6 3xl:py-8 rounded-[20px] font-['FindSansPro'] text-sm sm:text-lg 3xl:text-2xl">
+            <div class="flex flex-col md:flex-row gap-2.5 lg:gap-10 3xl:gap-33.5">
+                <div class="flex flex-col w-full justify-around bg-[#E5E6F6] gap-3 md:gap-6.75 px-6 lg:px-11 py-6 3xl:py-8 rounded-[20px] font-['FindSansPro'] text-sm sm:text-lg 3xl:text-2xl">
                     <div class="flex items-center gap-5">
                         <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/значок локации.svg" alt="иконка">
                         <p>{{ $restaurant->address }}</p>
@@ -99,19 +95,19 @@
                         <p class="text-[#5F5F5F]">{{ $restaurant->kitchen }}</p>
                     </div>
 
-                    <button onclick="document.getElementById('map-modal').classList.remove(['hidden'])" class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] 2xl:rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-xl 3xl:text-3xl">
+                    <button onclick="document.getElementById('map-modal').classList.remove(['hidden'])" class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] 2xl:rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg lg:text-xl 3xl:text-3xl">
                         Показать на карте
                     </button>
 
                 </div>
             </div>
-            <div class="font-['FindSansPro'] flex flex-col items-center lg:items-start">
-                <h3>Достижения</h3>
-                <p class="text-lg md:text-2xl text-center lg:text-left">За посещение ресторана “{{ $restaurant->name }}” вы получите:</p>
-                <div class="flex flex-row flex-wrap gap-4 lg:gap-10 justify-center lg:justify-start items-center text-sm pt-4 lg:pt-5 3xl:pt-7 md:text-xl">
-                    <div class="text-white rounded-4xl bg-linear-to-r from-green-500 to-teal-600 py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Знатоку города” </div>
-                    <div class="gradient-button text-white rounded-4xl py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Первооткрывателю” </div></div>
-            </div>
+{{--            <div class="font-['FindSansPro'] flex flex-col items-center lg:items-start">--}}
+{{--                <h3>Достижения</h3>--}}
+{{--                <p class="text-lg md:text-2xl text-center lg:text-left">За посещение ресторана “{{ $restaurant->name }}” вы получите:</p>--}}
+{{--                <div class="flex flex-row flex-wrap gap-4 lg:gap-10 justify-center lg:justify-start items-center text-sm pt-4 lg:pt-5 3xl:pt-7 md:text-xl">--}}
+{{--                    <div class="text-white rounded-4xl bg-linear-to-r from-green-500 to-teal-600 py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Знатоку города” </div>--}}
+{{--                    <div class="gradient-button text-white rounded-4xl py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Первооткрывателю” </div></div>--}}
+{{--            </div>--}}
         </div>
     </section>
 

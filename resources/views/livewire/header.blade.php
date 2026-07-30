@@ -37,9 +37,9 @@
                 <button onclick="showAppDownload()" class="hidden md:flex items-center bg-linear-to-r from-green-500 to-teal-600 text-white px-5 py-2 rounded-lg hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-sm 3xl:text-base z-2">
                     <i class="fas fa-download mr-3"></i>Приложение
                 </button>
-                <button id="" class="">
-                    <img src="/images/image 21.svg" alt="поиск" class="icon size-7 3xl:size-11 hover:scale-125 transition duration-300">
-                </button>
+{{--                <button id="" class="">--}}
+{{--                    <img src="/images/image 21.svg" alt="поиск" class="icon size-7 3xl:size-11 hover:scale-125 transition duration-300">--}}
+{{--                </button>--}}
 
                 <button id="profileBtn" class="relative cursor-pointer">
                     <img src="/images/image 18.svg" alt="мой профиль" class="icon size-6 3xl:size-10 hover:scale-125 transition duration-300">

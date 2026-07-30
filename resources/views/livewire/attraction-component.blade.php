@@ -15,9 +15,6 @@
                             <div class="flex flex-col gap-5">
                                 <div class="overflow-hidden rounded-[7px] sm:rounded-[19px]">
                                     <img src="{{ $attraction->attachments?->get(0)?->url() ?? '' }}" alt="Изображение {{ $attraction->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover/img:scale-110 transition-transform duration-500">
-                                    <div class="absolute top-7 right-6.5 sm:top-10 sm:right-9.5 size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-md xl:rounded-xl flex items-center justify-center text-white text-xl xl:text-2xl shadow-lg">
-                                        <i class="fa-sharp fa-solid fa-heart"></i>
-                                    </div>
                                 </div>
                                 <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold ">{{ $attraction->name }}</h2>
                                 <p class="text-xs sm:text-sm lg:text-base 3xl:text-2xl font-light mb-2 text-[#5F5F5F]">{{ $attraction->short_description }}</p>

@@ -36,13 +36,12 @@
 
             <button
                 wire:click="toggleFavorite"
-                class="absolute top-10 right-10 xl:top-18 xl:right-20 z-20 hidden md:flex items-center gap-3 px-5 py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group"
-            >
+                class="absolute top-10 right-30 xl:top-18 xl:right-35 z-20 hidden md:flex items-center gap-3 px-5 py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group">
                 <i class="fa-regular fa-heart text-2xl xl:text-3xl group-hover:scale-110 group-hover:animate-pulse transition-transform {{ $isFavorite ? 'fa-solid text-red-400' : 'fa-regular' }}"></i>
 
                 <span class="text-xl xl:text-3xl font-medium">
                 {{ $isFavorite ? 'В избранном' : 'В избранное' }}
-            </span>
+                </span>
 
                 <span class="favorite-count ml-2 text-base xl:text-xl font-bold px-2.5 py-1 rounded-full {{ $isFavorite ? 'bg-red-500 text-white' : 'bg-red-500/80 text-white' }} transition-colors shadow-lg">
                 {{ $favoritesCount }}
@@ -62,7 +61,7 @@
                 <div data-aos="fade-left" class="flex flex-col gap-7 w-full lg:w-auto">
                     <div class="flex flex-col w-full justify-around bg-[#E5E6F6] gap-3 md:gap-6.75 px-6 xl:px-11 py-8 rounded-[20px] font-['FindSansPro'] text-sm sm:text-base xl:text-xl 3xl:text-2xl">
                         <div class="flex items-center gap-2 xl:gap-5">
-                            <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/значок локации.svg">
+                            <i class="fa-solid fa-location-arrow text-md md:text-2xl xl:text-3xl"></i>
                             <p>{{ $excursion->meeting_point }}</p>
                         </div>
                         <div class="flex items-center gap-2 xl:gap-5">
@@ -91,11 +90,11 @@
     </section>
 
     <!--Places Section-->
-    <section class="sm:py-2 md:py-15 3xl:py-25 md:bg-[#E5E6F6]">
+    <section class="sm:py-2 md:py-10 3xl:py-20 mb-2 md:mb-10 3xl:mb-20 md:bg-[#E5E6F6]">
         <div class="flex flex-col gap-5 md:gap-4 lg:flex-row max-w-6xl xl:max-w-7xl 3xl:max-w-398.25 px-4 sm:px-20 mx-auto">
-            <div class="flex flex-col items-center md:items-start justify-between font-['FindSansPro']">
+            <div class="flex flex-col items-start justify-between font-['FindSansPro']">
                 <h2>Места, которые  вы посетите</h2>
-                <div class="flex flex-col items-center md:items-start justify-center gap-3 3xl:gap-6 text-base xl:text-xl 3xl:text-2xl">
+                <div class="flex flex-col items-start justify-center gap-3 3xl:gap-6 text-base xl:text-xl 3xl:text-2xl">
                     @foreach($excursion->points as $point)
                         <div class="flex items-center">
                             <img class="icon max-w-3 max-h-3 lg:max-w-5 lg:max-h-7 2xl:max-w-[26px] 2xl:max-h-[31px] mr-2.5 lg:mr-6" src="/images/значок локации.svg">
@@ -130,18 +129,18 @@
     </section>
 
 <!--Achievements Section-->
-    <section class="features-section py-6 md:py-10 xl:py-15 2xl:py-25 bg-white">
-        <div class="max-w-6xl xl:max-w-7xl 3xl:max-w-398.25 px-4 sm:px-20 mx-auto flex flex-col gap-12">
-            <div data-aos="fade-right" class="font-['FindSansPro'] flex flex-col items-center lg:items-start">
-                <h3>Достижения</h3>
-                <p class="text-lg md:text-2xl text-center lg:text-left">За прохождение “{{$excursion->name}}” вы получите:</p>
-                <div class="flex flex-row flex-wrap gap-4 lg:gap-10 justify-center lg:justify-start items-center text-sm pt-4 lg:pt-5 3xl:pt-7 md:text-xl">
-                    <div class="text-white rounded-4xl bg-linear-to-r from-green-500 to-teal-600 py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Исследователю”</div>
-                    <div class="gradient-button text-white rounded-4xl py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Первооткрывателю” </div>
-                </div>
-            </div>
-        </div>
-    </section>
+{{--    <section class="features-section py-6 md:py-10 xl:py-15 2xl:py-25 bg-white">--}}
+{{--        <div class="max-w-6xl xl:max-w-7xl 3xl:max-w-398.25 px-4 sm:px-20 mx-auto flex flex-col gap-12">--}}
+{{--            <div data-aos="fade-right" class="font-['FindSansPro'] flex flex-col items-center lg:items-start">--}}
+{{--                <h3>Достижения</h3>--}}
+{{--                <p class="text-lg md:text-2xl text-center lg:text-left">За прохождение “{{$excursion->name}}” вы получите:</p>--}}
+{{--                <div class="flex flex-row flex-wrap gap-4 lg:gap-10 justify-center lg:justify-start items-center text-sm pt-4 lg:pt-5 3xl:pt-7 md:text-xl">--}}
+{{--                    <div class="text-white rounded-4xl bg-linear-to-r from-green-500 to-teal-600 py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Исследователю”</div>--}}
+{{--                    <div class="gradient-button text-white rounded-4xl py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Первооткрывателю” </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
     @if(isset($nearbyLatitude) && isset($nearbyLongitude))
         @livewire('attraction-component', [
             'latitude' => $nearbyLatitude,

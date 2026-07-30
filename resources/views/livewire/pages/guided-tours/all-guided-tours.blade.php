@@ -5,7 +5,7 @@
 
 <div>
     <!--Hero Section-->
-    <section class="features-section pt-28 md:pt-35 xl:pt-31 3xl:pt-41.5 lg:pb-10 3xl:pb-26 bg-white">
+    <section class="features-section pt-28 md:pt-35 xl:pt-31 3xl:pt-41.5 bg-white">
         <div class="max-w-6xl 3xl:max-w-421 mx-auto px-4 sm:px-10">
             <div class="text-center mb-4 md:mb-10 3xl:mb-25">
                 <h2>Экскурсоводы</h2>
@@ -25,8 +25,8 @@
 
     <!-- Section with guided cards -->
     <section class="bg-white pb-10  py-5 sm:py-10 md:py-15 xl:py-20 3xl:py-26">
-        <div class="max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto flex flex-col gap-7 md:gap-12 items-center px-4 sm:px-10">
-            <form wire:submit="loadGuidedTours" class="relative w-114">
+        <div class="max-w-6xl 3xl:max-w-421 mx-auto px-4 sm:px-10 flex flex-col gap-7 md:gap-12 items-center">
+            <form wire:submit="loadGuidedTours" class="relative w-67 sm:w-114">
                 <input type="search"
                     wire:model="searchString"
                     id="search" placeholder="Найти экскурсовода"
@@ -41,33 +41,40 @@
                     <i class="fas fa-search text-black transition-colors duration-200 hover:text-gray-900"></i>
                 </button>
             </form>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 3xl:gap-14 auto-rows-fr items-stretch">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 3xl:gap-14 auto-rows-fr items-stretch">
                 @foreach ($guidedTours as $guidedTour)
                     <div class="group relative rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full">
-                        <div class="flex flex-col h-full">
+                        <a href="{{ route('single-guided-tour', ['guidedTour' => $guidedTour->id]) }}" class="flex flex-col h-full">
                             <div class="relative aspect-4/3 rounded-2xl overflow-hidden shrink-0">
                                 <img src="{{ $guidedTour->attachments?->get(0)?->url() ?? "" }}"
                                     alt="Изображение {{ $guidedTour->name }}"
                                     class="img-guid w-full h-full group-hover:scale-105 transition-transform duration-500">
-
-                                <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5">
-                                    <i class="fas fa-star text-yellow-500"></i>
-                                    <span class="text-sm font-semibold text-black">4.9</span>
+{{--                                <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5">--}}
+{{--                                    <i class="fas fa-star text-yellow-500"></i>--}}
+{{--                                    <span class="text-sm font-semibold text-black">4.9</span>--}}
+{{--                                </div>--}}
+                                <div class="overflow-hidden rounded-[7px] sm:rounded-[19px]">
+                                    <img src="{{ $guidedTour->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $guidedTour->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <div class="absolute top-3 right-3 sm:top-5 sm:right-5 size-10 3xl:size-15 bg-[#A855F7] rounded-md 3xl:rounded-xl flex items-center justify-center text-white text-xl 3xl:text-2xl shadow-lg">
+                                        <i class="fa-sharp fa-solid fa-heart"></i>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="p-5 flex flex-col grow">
-                                <h1 class="text-xl font-bold text-black text-center">{{ $guidedTour->name }}</h1>
-                                <p class="text-gray-600 text-sm leading-relaxed grow mt-4">
-                                    {{ $guidedTour->short_description }}
-                                </p>
-                                <div class="flex justify-center mt-auto pt-5 justify-end">
-                                    <a href="{{ route('single-guided-tour', ['guidedTour' => $guidedTour->id]) }}" class="shrink-0 size-5 sm:size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity">
-                                        <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-1 sm:w-2 xl:w-3 3xl:w-4 h-2.5 sm:h-4.5 xl:h-6 3xl:h-7.5">
-                                    </a>
+                            <div class="p-3 3xl:p-5 flex flex-col grow h-full">
+                                <h1 class="text-base xl:text-xl font-bold text-black">{{ $guidedTour->name }}</h1>
+                                <div class="flex flex-col justify-end h-full font-['FindSansPro']">
+                                    <div class="flex flex-row justify-between items-end gap-3.5 text-xs 3xl:text-base font-light">
+                                        <span class="items-center justify-end gap-3.5 text-[#5F5F5F] leading-4 3xl:leading-5 line-clamp-2">
+                                            {{ $guidedTour->short_description }}
+                                        </span>
+                                        <a href="{{ route('single-guided-tour', ['guidedTour' => $guidedTour->id]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
+                                            <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
