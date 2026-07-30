@@ -90,7 +90,7 @@ class SaratovAi extends Component
                     $this->addMessageFromModel($dto->message);
                     $this->resetErrorBag();
                 } else {
-                    $this->addError('prompt', $dto->message);
+                    $this->addError('prompt', $dto->errorMessage);
                 }
                 $this->isWaitingForResponse = false;
             }

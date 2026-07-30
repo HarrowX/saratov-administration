@@ -38,9 +38,6 @@
                                     @endif
                                 @endforeach
 
-                                {{-- TYPING INDICATOR --}}
-                                {{-- Because the parent uses flex-col-reverse, placing this AFTER the loop 
-                                     puts it at the top of the DOM, which visually renders at the BOTTOM of the chat --}}
                                 @if($isWaitingForResponse)
                                     <div class="flex items-start space-x-3 animate-fadeIn">
                                         <div class="w-10 h-10 bg-linear-to-r from-green-400 to-teal-500 rounded-full flex items-center justify-center">
@@ -94,9 +91,6 @@
             </div>
         </div>
 
-        {{-- THE POLLING MAGIC --}}
-        {{-- This div only exists when waiting. Livewire will call pollModelResponse every 2 seconds. 
-             When the response arrives, isWaitingForResponse becomes false, this div is destroyed, and polling stops. --}}
         @if($isWaitingForResponse)
             <div wire:poll.2s="pollModelResponse"></div>
         @endif
