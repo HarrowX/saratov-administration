@@ -37,6 +37,26 @@
                                     </div>
                                     @endif
                                 @endforeach
+
+                                {{-- TYPING INDICATOR --}}
+                                {{-- Because the parent uses flex-col-reverse, placing this AFTER the loop 
+                                     puts it at the top of the DOM, which visually renders at the BOTTOM of the chat --}}
+                                @if($isWaitingForResponse)
+                                    <div class="flex items-start space-x-3 animate-fadeIn">
+                                        <div class="w-10 h-10 bg-linear-to-r from-green-400 to-teal-500 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-robot text-white"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="bg-gray-100 rounded-2xl rounded-tl-none p-4 max-w-md flex items-center space-x-3">
+                                                <div class="flex space-x-1 items-center">
+                                                    <div class="w-2 h-2 bg-green-500 rounded-full animate-bounce" style="animation-delay: 0s;"></div>
+                                                    <div class="w-2 h-2 bg-green-500 rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
+                                                    <div class="w-2 h-2 bg-green-500 rounded-full animate-bounce" style="animation-delay: 0.4s;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -44,13 +64,13 @@
                     <form wire:submit="postMessage">
                         <div class="flex space-x-3">
                             <input wire:model="prompt" type="text" id="aiChatInput" placeholder="Напишите сообщение..."
-                            class="flex-1 w-20 text-sm lg:text-base py-2 px-2 md:px-4 md:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500">
-                            <button type="submit" class="bg-linear-to-r from-green-500 to-teal-600 text-white px-2 py-3 md:px-6 md:py-3 rounded-lg hover:shadow-lg transition">
+                            class="flex-1 w-20 text-sm lg:text-base py-2 px-2 md:px-4 md:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                            @if($isWaitingForResponse) disabled @endif>
+                            
+                            <button type="submit" class="bg-linear-to-r from-green-500 to-teal-600 text-white px-2 py-3 md:px-6 md:py-3 rounded-lg hover:shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+                            @if($isWaitingForResponse) disabled @endif>
                                 <i class="fas fa-paper-plane"></i>
                             </button>
-                            {{-- <button onclick="voiceInput()" class="bg-gray-200 text-gray-700 px-2 py-3 md:px-6 md:py-3 rounded-lg hover:bg-gray-300 transition">
-                                <i class="fas fa-microphone"></i>
-                            </button> --}}
                         </div>
                         @error('prompt')
                         <div>
@@ -58,36 +78,27 @@
                         </div>
                         @enderror
                     </form>
-
+{{-- 
                     <!-- Quick actions -->
                     <div class="mt-4 flex flex-wrap gap-2">
-                        <button class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm hover:bg-blue-200 transition">
-                            🚀 Поехали!
-                        </button>
-                        <button class="bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm hover:bg-orange-200 transition">
-                            🍽️ Рестораны и кафе
-                        </button>
-                        <button class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm hover:bg-green-200 transition">
-                            🌳 Парки и прогулки
-                        </button>
-                        <button class="bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm hover:bg-purple-200 transition">
-                            🏛️ Музеи и культура
-                        </button>
-                        <button class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm hover:bg-yellow-200 transition">
-                            🌤️ Погода
-                        </button>
-                        <button class="bg-pink-100 text-pink-700 px-4 py-2 rounded-full text-sm hover:bg-pink-200 transition">
-                            🎭 События
-                        </button>
-                        <button class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full text-sm hover:bg-indigo-200 transition">
-                            📚 История города
-                        </button>
-                        <button class="bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm hover:bg-red-200 transition">
-                            🛍️ Шопинг
-                        </button>
-                    </div>
+                        <button class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm hover:bg-blue-200 transition">🚀 Поехали!</button>
+                        <button class="bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm hover:bg-orange-200 transition">🍽️ Рестораны и кафе</button>
+                        <button class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm hover:bg-green-200 transition">🌳 Парки и прогулки</button>
+                        <button class="bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm hover:bg-purple-200 transition">🏛️ Музеи и культура</button>
+                        <button class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm hover:bg-yellow-200 transition">🌤️ Погода</button>
+                        <button class="bg-pink-100 text-pink-700 px-4 py-2 rounded-full text-sm hover:bg-pink-200 transition">🎭 События</button>
+                        <button class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full text-sm hover:bg-indigo-200 transition">📚 История города</button>
+                        <button class="bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm hover:bg-red-200 transition">🛍️ Шопинг</button>
+                    </div> --}}
                 </div>
             </div>
         </div>
+
+        {{-- THE POLLING MAGIC --}}
+        {{-- This div only exists when waiting. Livewire will call pollModelResponse every 2 seconds. 
+             When the response arrives, isWaitingForResponse becomes false, this div is destroyed, and polling stops. --}}
+        @if($isWaitingForResponse)
+            <div wire:poll.2s="pollModelResponse"></div>
+        @endif
     </section>
 </div>

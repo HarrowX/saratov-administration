@@ -3,10 +3,13 @@
 namespace App\Services;
 
 use App\Ai\Agents\SaratovAiModel;
+use App\DTOs\ModelPendingResponseDTO;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Ai\Concerns\RemembersConversations;
 use Laravel\Ai\Contracts\Agent;
 use Laravel\Ai\Contracts\Conversational;
+use Laravel\Ai\Models\ConversationMessage;
 use Laravel\Ai\Promptable;
 
 class ModelConversationService
@@ -19,6 +22,8 @@ class ModelConversationService
     {
         return $this->maxUserMessageLength;
     }
+
+    protected const responsePrefix = 'user-model-response-content-';
 
     /**
      * @template T of Promptable|Agent|Conversational|RemembersConversations
@@ -64,9 +69,27 @@ class ModelConversationService
      * @template T of Promptable|Agent|Conversational|RemembersConversations
      *
      * @param  T  $promptable
+     * @return ConversationMessage[]
      */
     public function messagesFromCurrentConversation(User $user, $promptable = SaratovAiModel::class): iterable
     {
         return $promptable::make()->continueLastConversation($user)->messages();
+    }
+
+    public function writeModelResultsToCache(ModelPendingResponseDTO $dto)
+    {
+        Cache::set(self::responsePrefix.$dto->userId, $dto->toJson(), 30);
+    }
+
+    public function pullModelResultsFromCache(User $user, bool &$exists): ?ModelPendingResponseDTO
+    {
+        $exists = Cache::has(self::responsePrefix.$user->id);
+        if (! $exists) {
+            return null;
+        }
+
+        $response = Cache::pull(self::responsePrefix.$user->id);
+
+        return ModelPendingResponseDTO::fromJson($response);
     }
 }
