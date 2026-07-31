@@ -12,6 +12,7 @@ use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Excursion\ExcursionResource;
 use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
 use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
+use Chocoway\MoonshineCompressedImage\Fields\CompressedImage;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
@@ -25,7 +26,6 @@ use MoonShine\Support\ListOf;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Fields\Checkbox;
 use MoonShine\UI\Fields\ID;
-use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
@@ -115,7 +115,10 @@ class ExcursionFormPage extends FormPage
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),
-                    Image::make('Файл', 'link'),
+                    CompressedImage::make('Файл', 'link')
+                        ->format('webp')
+                        ->quality(config('app.admin.images.quality'))
+                        ->thumb(config('app.admin.images.thumb.width'), config('app.admin.images.thumb.height')),
                     Number::make('Порядковый номер', 'order')->default(0),
                 ])->removable(),
 

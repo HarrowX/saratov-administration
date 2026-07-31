@@ -32,7 +32,7 @@
                             <h3 class="text-2xl font-bold text-gray-900">{{ trim("$surname $name") ?: 'Пользователь' }}</h3>
                             <p class="text-gray-400 text-sm">{{ $email }}</p>
                         </div>
-                        <a href="{{ route('profile-settings') }}" wire:navigate
+                        <a href="{{ route('profile-settings') }}"
                            class="sm:ml-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-linear-to-r from-[#A556F7] to-[#2663EB] text-white text-sm font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-200">
                             <i class="fas fa-pen"></i>
                             Редактировать

@@ -20,7 +20,7 @@
                 <div class="absolute inset-0 bg-linear-to-br from-[#A556F7]/90 via-[#7c4fef]/85 to-[#2663EB]/90"></div>
 
                 <div class="relative">
-                    <a href="/" wire:navigate class="flex items-center gap-3">
+                    <a href="/" class="flex items-center gap-3">
                         <img src="/images/Photoroom 1.png" alt="Саратов" class="icon h-10 w-auto brightness-0 invert">
                         <span class="text-2xl font-bold text-white">Саратов</span>
                     </a>
@@ -58,7 +58,7 @@
             {{-- Form panel --}}
             <div class="flex flex-col justify-center items-center px-6 py-12 bg-gray-50 lg:bg-white">
                 {{-- Mobile logo --}}
-                <a href="/" wire:navigate class="flex lg:hidden items-center gap-2 mb-8">
+                <a href="/" class="flex lg:hidden items-center gap-2 mb-8">
                     <img src="/images/Photoroom 1.png" alt="Саратов" class="icon h-9 w-auto">
                     <span class="text-xl font-bold text-gray-900">Саратов</span>
                 </a>

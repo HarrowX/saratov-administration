@@ -130,7 +130,7 @@ class extends Component {
 
         <p class="text-center text-sm text-gray-500">
             Уже есть аккаунт?
-            <a href="{{ route('login') }}" wire:navigate class="font-semibold text-[#7c4fef] hover:text-[#2663EB] transition-colors">
+            <a href="{{ route('login') }}" class="font-semibold text-[#7c4fef] hover:text-[#2663EB] transition-colors">
                 Войти
             </a>
         </p>

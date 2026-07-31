@@ -36,26 +36,56 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+<div class="font-['FindSansPro']">
+    <div class="mb-8">
+        <h2 class="text-3xl font-bold text-gray-900">Восстановление пароля</h2>
+        <p class="mt-2 text-gray-500">Введите свой email, и мы пришлём вам ссылку для сброса пароля</p>
     </div>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    @php
+        $inputClass = 'w-full rounded-xl border border-gray-200 bg-gray-50/60 px-4 py-3 text-gray-900 shadow-sm transition focus:border-[#A855F7] focus:bg-white focus:ring-2 focus:ring-[#A855F7]/25 focus:outline-none';
+    @endphp
 
-    <form wire:submit="sendPasswordResetLink">
+        <!-- Session Status -->
+    @if (session('status'))
+        <div class="mb-4 p-4 rounded-xl bg-green-50 border border-green-200 text-green-700 text-sm">
+            {{ session('status') }}
+        </div>
+    @endif
+
+    <form wire:submit="sendPasswordResetLink" class="space-y-5">
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus />
+            <label for="email" class="block text-sm font-medium text-gray-600 mb-1.5">Почта <span class="text-red-500">*</span></label>
+            <div class="relative">
+                <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                <input
+                    wire:model="email"
+                    id="email"
+                    type="email"
+                    name="email"
+                    required
+                    autofocus
+                    placeholder="example@mail.ru"
+                    class="{{ $inputClass }} pl-11"
+                />
+            </div>
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
+        <button
+            type="submit"
+            class="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-linear-to-r from-[#A556F7] to-[#2663EB] text-white font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-200 cursor-pointer"
+        >
+            Отправить ссылку
+            <i class="fas fa-paper-plane text-sm"></i>
+        </button>
+
+        <p class="text-center text-sm text-gray-500">
+            Вспомнили пароль?
+            <a href="{{ route('login') }}" class="font-semibold text-[#7c4fef] hover:text-[#2663EB] transition-colors">
+                Войти
+            </a>
+        </p>
     </form>
 </div>
