@@ -36,6 +36,6 @@ class ContactUsResource extends ModelResource
 
     protected function activeActions(): ListOf
     {
-        return parent::activeActions()->except(Action::UPDATE, Action::CREATE);
+        return parent::activeActions()->except(Action::CREATE);
     }
 }
