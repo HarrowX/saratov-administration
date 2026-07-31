@@ -123,7 +123,6 @@ class EventIndexPage extends IndexPage
     {
         return [
             ...parent::topLayer(),
-            YandexMapSearch::make($this->getResource()),
         ];
     }
 
