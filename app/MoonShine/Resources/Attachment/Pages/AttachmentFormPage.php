@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources\Attachment\Pages;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
+use Chocoway\MoonshineCompressedImage\Fields\CompressedImage;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
@@ -34,7 +35,11 @@ class AttachmentFormPage extends FormPage
                 ID::make(),
                 Number::make('ID сущности', 'attachable_id')->required(),
                 Text::make('Тип сущности', 'attachable_type')->required(),
-                Image::make('Файл', 'link')->required(),
+                CompressedImage::make('Файл', 'link')
+                    ->format('webp')
+                    ->quality(85)
+                    ->thumb(500, 200)
+                    ->required(),
                 Number::make('Порядковый номер', 'order')->default(0),
             ]),
         ];

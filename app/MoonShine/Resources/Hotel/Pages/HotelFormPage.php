@@ -6,6 +6,7 @@ namespace App\MoonShine\Resources\Hotel\Pages;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Hotel\HotelResource;
+use Chocoway\MoonshineCompressedImage\Fields\CompressedImage;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
@@ -89,7 +90,10 @@ class HotelFormPage extends FormPage
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),
-                    Image::make('Файл', 'link'),
+                    CompressedImage::make('Файл', 'link')
+                        ->format('webp')
+                        ->quality(85)
+                        ->thumb(500, 200),
                     Number::make('Порядковый номер', 'order')->default(0),
                 ])->removable(),
         ];
