@@ -6,13 +6,14 @@ namespace App\MoonShine\Resources\User;
 
 use App\Models\User;
 use App\MoonShine\Resources\User\Pages\UserDetailPage;
-use App\MoonShine\Resources\User\Pages\UserFormPage;
 use App\MoonShine\Resources\User\Pages\UserIndexPage;
 use MoonShine\Contracts\Core\PageContract;
 use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\Support\Enums\Action;
+use MoonShine\Support\ListOf;
 
 /**
- * @extends ModelResource<User, UserIndexPage, UserFormPage, UserDetailPage>
+ * @extends ModelResource<User, UserIndexPage, UserDetailPage>
  */
 class UserResource extends ModelResource
 {
@@ -31,5 +32,10 @@ class UserResource extends ModelResource
             UserIndexPage::class,
             UserDetailPage::class,
         ];
+    }
+
+    protected function activeActions(): ListOf
+    {
+        return parent::activeActions()->except(Action::UPDATE, Action::CREATE);
     }
 }
