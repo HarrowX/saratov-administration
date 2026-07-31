@@ -44,7 +44,7 @@ new class extends Component
             <div class="hidden lg:flex items-center gap-1">
                 @foreach ($links as $link)
                     @php $isActive = request()->routeIs($link['active']); @endphp
-                    <a href="{{ route($link['route']) }}" wire:navigate
+                    <a href="{{ route($link['route']) }}"
                        class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
                        {{ $isActive
                            ? 'bg-linear-to-r from-[#A556F7] to-[#2663EB] text-white shadow-md shadow-purple-500/25'
@@ -72,7 +72,7 @@ new class extends Component
                         <div class="text-sm font-semibold text-gray-900 truncate">{{ $fullName }}</div>
                         <div class="text-xs text-gray-400 truncate">{{ $u->email }}</div>
                     </div>
-                    <a href="{{ route('profile-settings') }}" wire:navigate
+                    <a href="{{ route('profile-settings') }}"
                        class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
                         <i class="fas fa-gear text-gray-400 w-4"></i>
                         Настройки профиля
@@ -96,7 +96,7 @@ new class extends Component
         <div class="px-4 py-3 space-y-1">
             @foreach ($links as $link)
                 @php $isActive = request()->routeIs($link['active']); @endphp
-                <a href="{{ route($link['route']) }}" wire:navigate
+                <a href="{{ route($link['route']) }}"
                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors
                    {{ $isActive
                        ? 'bg-linear-to-r from-[#A556F7] to-[#2663EB] text-white'
@@ -117,7 +117,7 @@ new class extends Component
                     <div class="text-xs text-gray-400 truncate">{{ $u->email }}</div>
                 </div>
             </div>
-            <a href="{{ route('profile-settings') }}" wire:navigate
+            <a href="{{ route('profile-settings') }}"
                class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-gray-700 hover:bg-gray-100 transition-colors">
                 <i class="fas fa-gear w-5"></i>
                 Настройки профиля
