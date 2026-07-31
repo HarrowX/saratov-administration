@@ -37,9 +37,8 @@ class AttachmentFormPage extends FormPage
                 Text::make('Тип сущности', 'attachable_type')->required(),
                 CompressedImage::make('Файл', 'link')
                     ->format('webp')
-                    ->quality(85)
-                    ->thumb(500, 200)
-                    ->required(),
+                    ->quality(config('app.admin.images.quality'))
+                    ->thumb(config('app.admin.images.thumb.width'), config('app.admin.images.thumb.height')),
                 Number::make('Порядковый номер', 'order')->default(0),
             ]),
         ];
