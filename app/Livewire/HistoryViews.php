@@ -53,7 +53,7 @@ class HistoryViews extends Component
     public function getItemsProperty()
     {
 
-        $userId = auth()->user()->id();
+        $userId = auth()->user()->id;
 
         return $this->selectedType::query()
             ->with('views')
