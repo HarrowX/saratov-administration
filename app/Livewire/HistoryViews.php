@@ -52,14 +52,13 @@ class HistoryViews extends Component
 
     public function getItemsProperty()
     {
-        $model = new $this->selectedType;
-        $tableName = $model->getTable();
-
         return $this->selectedType::query()
-            ->join('history_views', 'history_views.viewable_id', '=', $tableName.'.id')
-            ->where('history_views.viewable_type', $this->selectedType)
-            ->where('history_views.user_id', auth()->user()->id)
-            ->orderBy('history_views.updated_at', 'desc')
+            ->with('views')
+            ->whereHas('views', function ($query) {
+                $query->where('user_id', auth()->id());
+            })
+            ->withMax('views', 'updated_at')
+            ->orderByDesc('views_max_updated_at')
             ->paginate(9);
     }
 
