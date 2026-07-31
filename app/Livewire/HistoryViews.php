@@ -54,6 +54,7 @@ class HistoryViews extends Component
     {
 
         $userId = auth()->user()->id();
+
         return $this->selectedType::query()
             ->with('views')
             ->whereHas('views', function ($query) use ($userId) {

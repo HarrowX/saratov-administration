@@ -138,7 +138,7 @@ return [
             'thumb' => [
                 'width' => env('IMAGE_THUMB_WIDTH', 500),
                 'height' => env('IMAGE_THUMB_HEIGHT', 200),
-            ]
-        ]
+            ],
+        ],
     ],
 ];
