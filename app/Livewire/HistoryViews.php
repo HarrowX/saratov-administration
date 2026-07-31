@@ -52,10 +52,12 @@ class HistoryViews extends Component
 
     public function getItemsProperty()
     {
+
+        $userId = auth()->user()->id();
         return $this->selectedType::query()
             ->with('views')
-            ->whereHas('views', function ($query) {
-                $query->where('user_id', auth()->id());
+            ->whereHas('views', function ($query) use ($userId) {
+                $query->where('user_id', $userId);
             })
             ->withMax('views', 'updated_at')
             ->orderByDesc('views_max_updated_at')
