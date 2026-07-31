@@ -25,10 +25,6 @@
             <div class="p-6 sm:p-8 bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
                 <livewire:profile.update-password-form />
             </div>
-
-            <div class="p-6 sm:p-8 bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
-                <livewire:profile.delete-user-form />
-            </div>
         </div>
     </div>
 </x-app-layout>
