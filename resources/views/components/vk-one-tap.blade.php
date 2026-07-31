@@ -7,7 +7,7 @@
                 const VKID = window.VKIDSDK;
 
                 VKID.Config.init({
-                    app: 54650748,
+                    app: {{config('services.vk.client_id')}},
                     redirectUrl: '{{config('app.url')}}' + '/auth/vk/callback',
                     responseMode: VKID.ConfigResponseMode.Callback,
                     source: VKID.ConfigSource.LOWCODE,

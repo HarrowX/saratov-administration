@@ -133,5 +133,12 @@ return [
 
     'admin' => [
         'ymap_api_key' => env('YMAP_API_KEY'),
+        'images' => [
+            'quality' => env('IMAGE_QUALITY', 85),
+            'thumb' => [
+                'width' => env('IMAGE_THUMB_WIDTH', 500),
+                'height' => env('IMAGE_THUMB_HEIGHT', 200),
+            ],
+        ],
     ],
 ];

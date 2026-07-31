@@ -72,7 +72,7 @@ new #[Layout('layouts.guest')] class extends Component
             </label>
 
             @if (Route::has('password.request'))
-                <a class="text-sm font-medium text-[#7c4fef] hover:text-[#2663EB] transition-colors" href="{{ route('password.request') }}" wire:navigate>
+                <a class="text-sm font-medium text-[#7c4fef] hover:text-[#2663EB] transition-colors" href="{{ route('password.request') }}">
                     Забыли пароль?
                 </a>
             @endif
@@ -93,7 +93,7 @@ new #[Layout('layouts.guest')] class extends Component
 
         <p class="text-center text-sm text-gray-500">
             Нет аккаунта?
-            <a href="{{ route('register') }}" wire:navigate class="font-semibold text-[#7c4fef] hover:text-[#2663EB] transition-colors">
+            <a href="{{ route('register') }}" class="font-semibold text-[#7c4fef] hover:text-[#2663EB] transition-colors">
                 Зарегистрироваться
             </a>
         </p>
