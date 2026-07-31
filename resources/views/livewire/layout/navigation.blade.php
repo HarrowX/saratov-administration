@@ -16,113 +16,116 @@ new class extends Component
     }
 }; ?>
 
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
-    <!-- Primary Navigation Menu -->
+@php
+    $u = auth()->user();
+    $fn = optional($u->username)->name ?? '';
+    $ln = optional($u->username)->surname ?? '';
+    $initials = mb_strtoupper(mb_substr($ln, 0, 1) . mb_substr($fn, 0, 1));
+    $fullName = trim("$fn $ln") ?: 'Профиль';
+
+    $links = [
+        ['route' => 'profile',           'active' => 'profile',           'label' => 'Профиль',            'icon' => 'fa-user'],
+        ['route' => 'profile-favorites', 'active' => 'profile-favorites', 'label' => 'Избранное',          'icon' => 'fa-heart'],
+        ['route' => 'place-visits',      'active' => 'place-visits',      'label' => 'Посещённые места',   'icon' => 'fa-map-location-dot'],
+        ['route' => 'history-views',     'active' => 'history-views',     'label' => 'История просмотров', 'icon' => 'fa-clock-rotate-left'],
+    ];
+@endphp
+
+<nav x-data="{ open: false, user: false }" class="bg-white/95 backdrop-blur border-b border-gray-100 sticky top-0 z-50 font-['FindSansPro']">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('profile') }}" wire:navigate>
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+        <div class="flex justify-between items-center h-16">
+            {{-- Logo --}}
+            <a href="{{ route('index') }}" wire:navigate class="flex items-center gap-2 shrink-0">
+                <img src="/images/Photoroom 1.png" alt="Саратов" class="icon h-8 w-auto">
+                <span class="text-lg font-bold text-gray-900 hidden sm:block">Саратов</span>
+            </a>
+
+            {{-- Desktop tabs --}}
+            <div class="hidden lg:flex items-center gap-1">
+                @foreach ($links as $link)
+                    @php $isActive = request()->routeIs($link['active']); @endphp
+                    <a href="{{ route($link['route']) }}" wire:navigate
+                       class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
+                       {{ $isActive
+                           ? 'bg-linear-to-r from-[#A556F7] to-[#2663EB] text-white shadow-md shadow-purple-500/25'
+                           : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100' }}">
+                        <i class="fas {{ $link['icon'] }} text-xs"></i>
+                        {{ $link['label'] }}
                     </a>
-                </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('profile')" :active="request()->routeIs('profile')" wire:navigate>
-                        Профиль
-                    </x-nav-link>
-                    <x-nav-link :href="route('profile-favorites')" :active="request()->routeIs('profile-favorites')" wire:navigate>
-                        Избранное
-                    </x-nav-link>
-                    <x-nav-link :href="route('place-visits')" :active="request()->routeIs('place-visits')" wire:navigate>
-                        Посещенные места
-                    </x-nav-link>
-                    <x-nav-link :href="route('history-views')" :active="request()->routeIs('history-views')" wire:navigate>
-                        История просмотров
-                    </x-nav-link>
-                </div>
+                @endforeach
             </div>
 
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
-
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile-settings')" wire:navigate>
-                            Настройка профиля
-                        </x-dropdown-link>
-
-                        <!-- Authentication -->
-                        <button wire:click="logout" class="w-full text-start">
-                            <x-dropdown-link>
-                                Выйти
-                            </x-dropdown-link>
-                        </button>
-                    </x-slot>
-                </x-dropdown>
-            </div>
-
-            <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+            {{-- User menu (desktop) --}}
+            <div class="hidden lg:flex items-center relative">
+                <button @click="user = !user" @click.outside="user = false"
+                        class="flex items-center gap-2.5 pl-1.5 pr-3 py-1.5 rounded-full hover:bg-gray-100 transition-colors cursor-pointer">
+                    <span class="size-8 rounded-full bg-linear-to-br from-[#A556F7] to-[#2663EB] flex items-center justify-center text-white text-sm font-bold">
+                        {{ $initials ?: '👤' }}
+                    </span>
+                    <span class="text-sm font-medium text-gray-700 max-w-32 truncate">{{ $fullName }}</span>
+                    <i class="fas fa-chevron-down text-xs text-gray-400 transition-transform" :class="user && 'rotate-180'"></i>
                 </button>
+
+                <div x-show="user" x-cloak x-transition
+                     class="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl shadow-[0_12px_40px_rgb(0,0,0,0.12)] border border-gray-100 overflow-hidden py-2">
+                    <div class="px-4 py-3 border-b border-gray-100">
+                        <div class="text-sm font-semibold text-gray-900 truncate">{{ $fullName }}</div>
+                        <div class="text-xs text-gray-400 truncate">{{ $u->email }}</div>
+                    </div>
+                    <a href="{{ route('profile-settings') }}" wire:navigate
+                       class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                        <i class="fas fa-gear text-gray-400 w-4"></i>
+                        Настройки профиля
+                    </a>
+                    <button wire:click="logout" class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors cursor-pointer">
+                        <i class="fas fa-arrow-right-from-bracket w-4"></i>
+                        Выйти
+                    </button>
+                </div>
             </div>
+
+            {{-- Hamburger --}}
+            <button @click="open = !open" class="lg:hidden inline-flex items-center justify-center size-10 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors cursor-pointer">
+                <i class="fas text-lg" :class="open ? 'fa-xmark' : 'fa-bars'"></i>
+            </button>
         </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('profile')" :active="request()->routeIs('profile')" wire:navigate>
-                Профиль
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('profile-favorites')" :active="request()->routeIs('profile-favorites')" wire:navigate>
-                Избранное
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('place-visits')" :active="request()->routeIs('place-visits')" wire:navigate>
-                Посещенные места
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('history-views')" :active="request()->routeIs('history-views')" wire:navigate>
-                История просмотров
-            </x-responsive-nav-link>
+    {{-- Mobile menu --}}
+    <div x-show="open" x-cloak x-transition class="lg:hidden border-t border-gray-100 bg-white">
+        <div class="px-4 py-3 space-y-1">
+            @foreach ($links as $link)
+                @php $isActive = request()->routeIs($link['active']); @endphp
+                <a href="{{ route($link['route']) }}" wire:navigate
+                   class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors
+                   {{ $isActive
+                       ? 'bg-linear-to-r from-[#A556F7] to-[#2663EB] text-white'
+                       : 'text-gray-700 hover:bg-gray-100' }}">
+                    <i class="fas {{ $link['icon'] }} w-5"></i>
+                    {{ $link['label'] }}
+                </a>
+            @endforeach
         </div>
 
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
-                <div class="font-medium text-sm text-gray-500">{{ auth()->user()->email }}</div>
+        <div class="px-4 py-4 border-t border-gray-100">
+            <div class="flex items-center gap-3 px-2 mb-3">
+                <span class="size-10 rounded-full bg-linear-to-br from-[#A556F7] to-[#2663EB] flex items-center justify-center text-white font-bold">
+                    {{ $initials ?: '👤' }}
+                </span>
+                <div class="min-w-0">
+                    <div class="text-sm font-semibold text-gray-900 truncate">{{ $fullName }}</div>
+                    <div class="text-xs text-gray-400 truncate">{{ $u->email }}</div>
+                </div>
             </div>
-
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile')" wire:navigate>
-                    Настройка профиля
-                </x-responsive-nav-link>
-
-                <!-- Authentication -->
-                <button wire:click="logout" class="w-full text-start">
-                    <x-responsive-nav-link>
-                        Выйти
-                    </x-responsive-nav-link>
-                </button>
-            </div>
+            <a href="{{ route('profile-settings') }}" wire:navigate
+               class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                <i class="fas fa-gear w-5"></i>
+                Настройки профиля
+            </a>
+            <button wire:click="logout" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-red-500 hover:bg-red-50 transition-colors cursor-pointer">
+                <i class="fas fa-arrow-right-from-bracket w-5"></i>
+                Выйти
+            </button>
         </div>
     </div>
 </nav>

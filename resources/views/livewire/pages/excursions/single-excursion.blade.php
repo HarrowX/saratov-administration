@@ -36,12 +36,13 @@
 
             <button
                 wire:click="toggleFavorite"
-                class="absolute top-10 right-30 xl:top-18 xl:right-35 z-20 hidden md:flex items-center gap-3 px-5 py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group">
+                class="absolute top-10 right-10 xl:top-18 xl:right-20 z-20 hidden md:flex items-center gap-3 px-5 py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group"
+            >
                 <i class="fa-regular fa-heart text-2xl xl:text-3xl group-hover:scale-110 group-hover:animate-pulse transition-transform {{ $isFavorite ? 'fa-solid text-red-400' : 'fa-regular' }}"></i>
 
                 <span class="text-xl xl:text-3xl font-medium">
                 {{ $isFavorite ? 'В избранном' : 'В избранное' }}
-                </span>
+            </span>
 
                 <span class="favorite-count ml-2 text-base xl:text-xl font-bold px-2.5 py-1 rounded-full {{ $isFavorite ? 'bg-red-500 text-white' : 'bg-red-500/80 text-white' }} transition-colors shadow-lg">
                 {{ $favoritesCount }}
@@ -61,7 +62,7 @@
                 <div data-aos="fade-left" class="flex flex-col gap-7 w-full lg:w-auto">
                     <div class="flex flex-col w-full justify-around bg-[#E5E6F6] gap-3 md:gap-6.75 px-6 xl:px-11 py-8 rounded-[20px] font-['FindSansPro'] text-sm sm:text-base xl:text-xl 3xl:text-2xl">
                         <div class="flex items-center gap-2 xl:gap-5">
-                            <i class="fa-solid fa-location-arrow text-md md:text-2xl xl:text-3xl"></i>
+                            <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/значок локации.svg">
                             <p>{{ $excursion->meeting_point }}</p>
                         </div>
                         <div class="flex items-center gap-2 xl:gap-5">

@@ -19,4 +19,9 @@ class UserName extends Model
     ];
 
     protected $primaryKey = 'user_id';
+
+    public function toFio(): string
+    {
+        return $this->surname.' '.$this->name.' '.$this->patronymic;
+    }
 }

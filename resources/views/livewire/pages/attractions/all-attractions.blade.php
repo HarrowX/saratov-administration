@@ -150,13 +150,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 lg:p-6 xl:gap-y-12">
                 @foreach ($attractions as $attraction)
                     <div class="card bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                        <div class="card-content group p-5 h-full font-['FindSansPro'] grid grid-rows-subgrid content-between row-span-2 gap-3">
+                        <div class="card-content group p-5 relative h-full font-['FindSansPro'] grid grid-rows-subgrid content-between row-span-2 gap-3">
                             <div class="flex flex-col gap-5">
                                 <div class="overflow-hidden rounded-[7px] sm:rounded-[19px]">
-                                    <img src="{{ $attraction->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $attraction->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 sm:h-100 md:h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
-                                    <div class="absolute top-7 right-6.5 sm:top-10 sm:right-9.5 size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-md xl:rounded-xl flex items-center justify-center text-white text-xl xl:text-2xl shadow-lg">
-                                        <i class="fa-sharp fa-solid fa-heart"></i>
-                                    </div>
+                                    <img src="{{ $attraction->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $attraction->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <livewire:favorite-mini-button :object="$attraction"/>
                                 </div>
                                 <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold">{{ $attraction->name }}</h2>
                                 <p class="text-sm lg:text-base 3xl:text-2xl text-[#5F5F5F] line-clamp-4">{{ $attraction->short_description }}</p>

@@ -45,6 +45,11 @@ class Restaurant extends Model
         return $this->morphMany(ExcursionPoint::class, 'pointable');
     }
 
+    public function events(): MorphMany
+    {
+        return $this->morphMany(Event::class, 'location');
+    }
+
     public function getRouteKeyName(): string
     {
         return 'slug';

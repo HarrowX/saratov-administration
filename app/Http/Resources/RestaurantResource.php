@@ -2,8 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class RestaurantResource extends JsonResource
 {
@@ -14,10 +16,18 @@ class RestaurantResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $attachment = $this->attachments()->first();
+        $isFavorite = $this->favorites->where('user_id', $request->user()->id)->isNotEmpty() || false;
+
         return [
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
+
+            'class' => Restaurant::class,
+
+            'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
+            'isFavorite' => $isFavorite,
 
             'description' => $this->description,
             'address' => $this->address,
@@ -31,10 +41,10 @@ class RestaurantResource extends JsonResource
             'website' => $this->website,
 
             'priceCategory' => $this->price_category,
-            'capacity' => $this->capipacity,
+            'capacity' => $this->capacity,
             'rating' => $this->rating,
 
-            'favoritesCount' => $this->favorites?->count(),
+            'favoritesCount' => $this->favorites?->count() ?? 0,
 
             'createdAt' => $this->created_at,
             'attachments' => AttachmentResource::collection($this->attachments),

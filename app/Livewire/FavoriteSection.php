@@ -34,7 +34,7 @@ class FavoriteSection extends Component
     {
         return $this->selectedType::query()->whereHas('favorites', function ($query) {
             $query->where('user_id', auth()->user()->id);
-        })->paginate(5);
+        })->paginate(9);
     }
 
     public function getUrl($item)

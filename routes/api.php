@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\AuthVkController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\FavoritableController;
 use App\Http\Controllers\PlaceVisitController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SaratovChatController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -21,39 +23,43 @@ Route::prefix('v1')->group(function () {
     Route::post('auth/vk/token/exchange', [AuthVkController::class, 'exchangeToken']);
 
     Route::prefix('users')->group(function () {
-        Route::middleware(['auth:sanctum'])->controller(ProfileController::class)
+        Route::middleware(['auth:sanctum'])
+            ->controller(ProfileController::class)
             ->group(function () {
                 Route::get('me', 'show');
                 Route::put('me', 'update');
             });
     });
 
-    Route::controller(ContentController::class)->group(function () {
-        Route::prefix('places')->group(function () {
-            Route::get('hotels', 'hotels');
-            Route::get('hotels/{id}', 'hotel');
+    Route::controller(ContentController::class)
+        ->middleware(['auth:sanctum'])
+        ->group(function () {
+            Route::prefix('places')->group(function () {
+                Route::get('hotels', 'hotels');
+                Route::get('hotels/{id}', 'hotel');
 
-            Route::get('restaurants', 'restaurants');
-            Route::get('restaurants/{id}', 'restaurant');
+                Route::get('restaurants', 'restaurants');
+                Route::get('restaurants/{id}', 'restaurant');
 
-            Route::get('attractions', 'attractions');
-            Route::get('attractions/{id}', 'attraction');
+                Route::get('attractions', 'attractions');
+                Route::get('attractions/{id}', 'attraction');
+            });
+
+            Route::get('excursions', 'excursions');
+            Route::get('excursions/{id}', 'excursion');
+
+            Route::get('guide-tours', 'guideTours');
+            Route::get('guide-tours/{id}', 'guideTour');
+
+            Route::get('events', 'events');
+            Route::get('events/{id}', 'event');
         });
-
-        Route::get('excursions', 'excursions');
-        Route::get('excursions/{id}', 'excursion');
-
-        Route::get('guide-tours', 'guideTours');
-        Route::get('guide-tours/{id}', 'guideTour');
-
-        Route::get('events', 'events');
-        Route::get('events/{id}', 'event');
-    });
 
     Route::prefix('favorites')
         ->controller(FavoritableController::class)
         ->middleware(['auth:sanctum'])
         ->group(function () {
+            Route::get('', 'index');
             Route::prefix('places')->group(function () {
                 Route::get('hotels', 'indexHotel');
                 Route::get('restaurants', 'indexRestaurant');
@@ -88,4 +94,15 @@ Route::prefix('v1')->group(function () {
             Route::patch('approve', 'approve');
             Route::patch('disapprove', 'disapprove');
         });
+
+    Route::prefix('ai-chat')
+        ->middleware(['auth:sanctum'])
+        ->group(function () {
+            Route::post('send', [SaratovChatController::class, 'processUserMessage']);
+            // TODO: not working
+            // Route::post('reset', [SaratovChatController::class, 'resetDialog']);
+            Route::get('messages', [SaratovChatController::class, 'getAllMessages']);
+        });
+    Route::post('contact-us/send', [ContactUsController::class, 'store'])
+        ->middleware(['auth:sanctum']);
 });
