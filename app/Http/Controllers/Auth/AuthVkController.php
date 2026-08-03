@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Socialite;
 
 class AuthVkController extends Controller
@@ -104,7 +105,7 @@ class AuthVkController extends Controller
             if (! $user) {
 
                 $email = $userData['email'] == '' ? 'vk_'.$userData['user_id'].'@'.config('app.domain_name') : $userData['email'];
-                $password = 'generated';
+                $password = Str::random(20);
 
                 $dto = new RegisterDTO([
                     'email' => $email,
