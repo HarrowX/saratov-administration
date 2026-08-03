@@ -45,7 +45,7 @@ class AuthVkController extends Controller
         $clientId = null;
 
         if ($deviceType == 'android') {
-            $clientId = config('services.vk.mobile.ios.client_id');
+            $clientId = config('services.vk.mobile.android.client_id');
         }
 
         if ($deviceType == 'ios') {
