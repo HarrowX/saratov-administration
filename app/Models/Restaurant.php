@@ -22,7 +22,7 @@ class Restaurant extends Model
         'phone',
         'kitchen',
         'email',
-//        'map_link',
+        //        'map_link',
         'website',
         'price_category',
         'capacity',

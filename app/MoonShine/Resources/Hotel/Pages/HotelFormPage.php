@@ -64,7 +64,7 @@ class HotelFormPage extends FormPage
             Text::make('Район', 'district'),
             Text::make('Email', 'email'),
             Url::make('Сайт', 'website'),
-//            Url::make('Ссылка на карту', 'map_link'),
+            //            Url::make('Ссылка на карту', 'map_link'),
             Textarea::make('Код виджета отзывов яндекс карт', 'yandex_review_widget')->unescape(),
             ActionButton::make('Инструкция')
                 ->inModal('Инструкция', <<<'HTML'

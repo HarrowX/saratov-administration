@@ -22,7 +22,7 @@ class Attraction extends Model
         'latitude',
         'longitude',
         'email',
-//        'map_link',
+        //        'map_link',
         'website',
         'status',
         'ticket_price',
