@@ -22,6 +22,12 @@ class UserService
             'patronymic' => $data['patronymic'],
         ]);
 
+        if (($data['email'] != '') && ($data['email'] != null)) {
+            auth()->user()->update([
+                'email' => $data['email'],
+            ]);
+        }
+
         return auth()->user();
     }
 }
