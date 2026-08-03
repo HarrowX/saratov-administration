@@ -61,6 +61,12 @@ class AuthVkController extends Controller
 
         $res = $this->handleCallback($request, $clientId, $request->boolean('invalidate') ?? true);
 
+        if ($res instanceof User) {
+            $token = $this->createToken($res);
+
+            return response()->json($token, 200);
+        }
+
         return $res;
     }
 
@@ -113,6 +119,7 @@ class AuthVkController extends Controller
                             $user->vk_id = $userData['user_id'];
                             $user->vk_avatar = $userData['avatar'] ?? null;
                             $user->save();
+
                             return $user;
                         }
 
