@@ -26,7 +26,7 @@
             <div class="absolute inset-x-0 bottom-0 h-40 sm:h-60 md:h-100 bg-linear-to-t from-black via-black/50 to-transparent"></div>
         </div>
 
-        <a href="{{ route('all-attractions') }}" class="absolute top-10 left-3 sm:left-10 xl:top-18 xl:left-20 z-20 flex items-center xl:gap-2 text-white hover:text-blue-300 transition-colors font-['FindSansPro']">
+        <a href="{{ route('all-attractions') }}" class="absolute top-10 left-3 sm:left-10 xl:top-18 xl:left-20 z-20 flex items-center xl:gap-2 text-white hover:text-blue-800 transition-colors font-['FindSansPro']">
             <i class="fa-solid fa-chevron-left text-base xs:text-xl xl:text-xl 3xl:text-3xl"></i>
             <span class="text-base xs:text-xl 2xl:text-3xl md:pl-4">Достопримечательности</span>
         </a>

@@ -52,15 +52,17 @@
                             </div>
 
                             <div class="flex flex-col space-y-3">
-                                <a href="#" class="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition flex items-center justify-center space-x-3">
-                                    <i class="fab fa-apple text-2xl"></i>
+                                <a href="#" class="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors duration-300 flex items-center justify-center space-x-3">
+                                    <div class="flex flex-wrap items-center content-center size-10">
+                                         <i class="fab fa-apple text-5xl"></i>
+                                    </div>
                                     <div class="text-left">
                                         <div class="text-xs">Загрузите в</div>
                                         <div class="font-semibold">App Store</div>
                                     </div>
                                 </a>
-                                <a href="#" class="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition flex items-center justify-center space-x-3">
-                                    <i class="fab fa-google-play text-2xl"></i>
+                                <a href="#" class="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors duration-300 flex items-center justify-center space-x-3">
+                                    <img src="/images/rustore.svg" alt="Иконка Rustore" class="icon size-10 rounded-md">
                                     <div class="text-left">
                                         <div class="text-xs">Доступно в</div>
                                         <div class="font-semibold">Google Play</div>

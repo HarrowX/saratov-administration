@@ -235,7 +235,7 @@
                 @endif
             </div>
 
-            <div class="flex flex-row gap-4 mb-12">
+            <div class="flex flex-col lg:flex-row gap-4 mb-12">
                 @foreach($featuredAttractions as $attraction)
                     <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}">
                         <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl duration-500 transition-shadow w-full">

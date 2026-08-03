@@ -12,9 +12,9 @@
         </div>
 
         <div class="relative z-10 flex flex-col justify-between h-full max-w-6xl 3xl:max-w-421 mx-auto px-4 sm:px-10 py-8 md:py-20 w-full">
-            <a href="{{ route('all-events') }}" class="z-20 hidden md:flex items-center gap-2 3xl:gap-6 text-white hover:text-blue-300 transition-colors font-['FindSansPro'] max-w-fit">
+            <a href="{{ route('all-events') }}" class="z-20 hidden md:flex items-center gap-2 3xl:gap-6 text-white hover:text-blue-800 transition-colors font-['FindSansPro'] max-w-fit">
                 <i class="fa-solid fa-chevron-left text-xl 3xl:text-3xl"></i>
-                <span class="text-xl xl:text-2xl 3xl:text-3xl">Все события</span>
+                <span class="text-xl xl:text-2xl 3xl:text-3xl">События</span>
             </a>
             <div class="flex flex-col justify-end h-full md:h-screen w-full z-10 text-white">
                 <h1 class="text-3xl xl:text-4xl 3xl:text-5xl font-extrabold leading-16 3xl:leading-24">{{$event->name}}</h1>

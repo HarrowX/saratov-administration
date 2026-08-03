@@ -18,7 +18,7 @@
         <div class="max-w-6xl xl:max-w-7xl 3xl:max-w-398.25 px-4 sm:px-20 mx-auto relative">
 
             <a href="{{ route('all-restaurants') }}"
-               class="absolute left-3 md:left-8 top-0 md:-top-10 3xl:-top-15 flex items-center xl:gap-2 text-[#5F5F5F] hover:text-blue-900 transition-colors font-['FindSansPro']">
+               class="absolute left-3 md:left-8 top-0 md:-top-10 3xl:-top-15 flex items-center xl:gap-2 text-[#5F5F5F] hover:text-blue-800 transition-colors font-['FindSansPro']">
                 <i class="fa-solid fa-chevron-left text-base xs:text-xl xl:text-xl 3xl:text-3xl"></i>
                 <span class="text-base xs:text-xl 3xl:text-3xl md:pl-4">Заведения</span>
             </a>

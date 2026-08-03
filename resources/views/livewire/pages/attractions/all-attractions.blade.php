@@ -24,15 +24,16 @@
                         @php
                             $attraction=$attractions->random()
                         @endphp
-                        <div class="hidden lg:block sm:w-92 md:w-60 2xl:w-92 bg-white rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 absolute -top-15 2xl:-top-12">
+                    <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}">
+                        <div class="hidden lg:block sm:w-92 md:w-60 2xl:w-92 bg-white rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 absolute -top-15 2xl:-top-12 group group/image">
                             <div class="p-2 sm:p-4 3xl:p-5 flex flex-col">
-                                <div class="w-full mb-4 overflow-hidden rounded-[20px] shrink-0 h-37.5 sm:h-53.75 3xl:h-78.75">
-                                    <img src="{{ asset($attraction->attachments?->get(0)?->url()) ?? "" }}" alt="Изображение {{ $attraction->name }}" class="photo">
+                                <div class="w-full mb-4 overflow-hidden rounded-[20px] shrink-0">
+                                    <img src="{{ asset($attraction->attachments?->get(0)?->url()) ?? "" }}" alt="Изображение {{ $attraction->name }}" class="photo h-37.5 sm:h-53.75 3xl:h-78.75 object-cover group-hover/image:scale-110 transition-transform duration-500">
                                 </div>
 
                                 <div class="font-['FindSansPro'] flex flex-col">
                                     <div>
-                                        <h1 class="text-xs sm:text-xl 2xl:text-2xl 3xl:text-[21px] font-extrabold mb-2 tracking-[1px]">{{ $attraction->name }}</h1>
+                                        <h2 class="card-title text-xs sm:text-xl 2xl:text-2xl 3xl:text-[21px] font-extrabold mb-2 tracking-[1px] group-hover:text-[#352AA2] transition-colors duration-300">{{ $attraction->name }}</h2>
                                         <p class="text-[7px] sm:text-xs text-[#888888] line-clamp-4">{{ $attraction->short_description}}</p>
                                     </div>
 
@@ -42,43 +43,16 @@
                                                 <img src="/images/image 7.svg" alt="" class="icon size-2.5 sm:size-4 2xl:size-7 mt-5 2xl:mt-4 shrink-0">
                                                 <span class="text-[8px] sm:text-[10px] 2xl:text-xs text-[#505050] pt-1 sm:pt-4">{{ $attraction->address }}</span>
                                             </div>
-                                            <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
-                                                <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover:translate-x-1">
+                                            <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
+                                                <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </a>
                     @endif
-{{--                    @foreach ($attractions->take(1) as $attraction)--}}
-{{--                        <div class="hidden lg:block sm:w-92 md:w-60 2xl:w-92 bg-white rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 absolute -top-15 2xl:-top-12">--}}
-{{--                            <div class="p-2 sm:p-4 3xl:p-5 flex flex-col">--}}
-{{--                                <div class="w-full mb-4 overflow-hidden rounded-[20px] shrink-0 h-37.5 sm:h-53.75 3xl:h-78.75">--}}
-{{--                                    <img src="{{ $attraction->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $attraction->name }}" class="photo">--}}
-{{--                                </div>--}}
-
-{{--                                <div class="font-['FindSansPro'] flex flex-col">--}}
-{{--                                    <div>--}}
-{{--                                        <h1 class="text-xs sm:text-xl 2xl:text-2xl 3xl:text-[21px] font-extrabold mb-2 tracking-[1px]">{{ $attraction->name }}</h1>--}}
-{{--                                        <p class="text-[7px] sm:text-xs text-[#888888] line-clamp-4">{{ $attraction->short_description}}</p>--}}
-{{--                                    </div>--}}
-
-{{--                                    <div class="mt-2 mb-3">--}}
-{{--                                        <div class="flex items-end justify-between gap-2">--}}
-{{--                                            <div class="flex gap-1 flex-1 max-w-37 sm:max-w-67 ">--}}
-{{--                                                <img src="/images/image 7.svg" alt="" class="icon size-2.5 sm:size-4 2xl:size-7 mt-5 2xl:mt-4 shrink-0">--}}
-{{--                                                <span class="text-[8px] sm:text-[10px] 2xl:text-xs text-[#505050] pt-1 sm:pt-4">{{ $attraction->address }}</span>--}}
-{{--                                            </div>--}}
-{{--                                            <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">--}}
-{{--                                                <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover:translate-x-1">--}}
-{{--                                            </a>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    @endforeach--}}
                 </div>
             </div>
         </div>
@@ -181,26 +155,28 @@
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 lg:p-6 xl:gap-y-12">
                 @foreach ($attractions as $attraction)
                     <div class="card bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                        <div class="card-content group p-5 relative h-full font-['FindSansPro'] grid grid-rows-subgrid content-between row-span-2 gap-3">
-                            <div class="flex flex-col gap-5">
+                        <div class="card-content group p-5 relative h-full font-['FindSansPro'] grid grid-rows-[auto_1fr_auto] content-between row-span-2 gap-3">
+                            <div>
                                 <div class="overflow-hidden rounded-[7px] sm:rounded-[19px]">
-                                    <img src="{{ $attraction->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $attraction->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <img src="{{asset($attraction->attachments?->get(0)?->url()) ?? ""}}" alt="Изображение {{ $attraction->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
                                     <livewire:favorite-mini-button :object="$attraction"/>
                                 </div>
-                                <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold">{{ $attraction->name }}</h2>
-                                <p class="text-sm lg:text-base 3xl:text-2xl text-[#5F5F5F] line-clamp-4">{{ $attraction->short_description }}</p>
                             </div>
-                            <div class="flex flex-col justify-between h-full font-['FindSansPro']">
-                                <div class="flex flex-row justify-between items-end gap-3.5 text-sm lg:text-base 3xl:text-2xl font-light">
+                            <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="flex-1 flex flex-col gap-5">
+                                <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold group-hover:text-[#352AA2] transition-colors duration-300 line-clamp-2">{{ $attraction->name }}</h2>
+                                <p class="text-sm lg:text-base 3xl:text-2xl text-[#5F5F5F] line-clamp-2">{{ $attraction->short_description }}</p>
+                                <div class="flex flex-col justify-between h-full font-['FindSansPro']">
+                                    <div class="flex flex-row justify-between items-end gap-3.5 text-sm lg:text-base 3xl:text-2xl font-light">
                                     <span class="flex items-center gap-3.5 text-[#5F5F5F]">
                                         <i class="fas fa-map-marker-alt text-xl xl:text-2xl"></i>
-                                        {{ $attraction->address }}
+                                        <p class="line-clamp-2"> {{ $attraction->address }}</p>
                                     </span>
-                                    <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
-                                    <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
-                                    </a>
+                                        <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
+                                            <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 @endforeach
