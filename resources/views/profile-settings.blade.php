@@ -21,11 +21,15 @@
                             <livewire:profile.vk-connect />
                         </div>
                 </div>
-            @endif
 
-            <div class="p-6 sm:p-8 bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
-                <livewire:profile.update-password-form />
-            </div>
+                <div class="p-6 sm:p-8 bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
+                    <livewire:profile.update-password-form />
+                </div>
+            @else
+                <div class="p-6 sm:p-8 bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
+                    <livewire:profile.post-registration-vk />
+                </div>
+            @endif
         </div>
     </div>
 </x-app-layout>
