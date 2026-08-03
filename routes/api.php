@@ -18,6 +18,10 @@ Route::prefix('v1')->group(function () {
             Route::post('login', 'login');
             Route::post('register', 'register');
             Route::post('logout', 'logout')->middleware(['auth:sanctum']);
+
+            Route::post('forgot-password', 'forgotPassword');
+            Route::post('reset-password', 'changePassword')->middleware(['auth:sanctum']);
+            Route::post('post-register', 'postRegister')->middleware(['auth:sanctum']);
         });
 
     Route::post('auth/vk/token/exchange', [AuthVkController::class, 'exchangeToken']);
@@ -30,6 +34,7 @@ Route::prefix('v1')->group(function () {
                 Route::put('me', 'update');
             });
     });
+
 
     Route::controller(ContentController::class)
         ->middleware(['auth:sanctum'])

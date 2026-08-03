@@ -19,7 +19,7 @@ class ProfileResource extends JsonResource
             'name' => $this->username->name,
             'surname' => $this->username->surname,
             'patronymic' => $this->username->patronymic,
-            'email' => $this->email,
+            'email' => auth()->user()->haveFakeVkEmail() ? '' : $this->email,
             'phone' => $this->phone,
             'createdAt' => $this->created_at,
         ];
