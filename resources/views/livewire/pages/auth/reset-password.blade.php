@@ -69,36 +69,56 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div>
-    <form wire:submit="resetPassword">
+@php
+    $inputClass = 'w-full rounded-xl border border-gray-200 bg-gray-50/60 px-4 py-3 text-gray-900 shadow-sm transition focus:border-[#A855F7] focus:bg-white focus:ring-2 focus:ring-[#A855F7]/25 focus:outline-none';
+@endphp
+
+
+<div class="flex flex-col gap-5 font-['FindSansPro']">
+    <div class="mb-8">
+        <h2 class="text-3xl font-bold text-gray-900">Смена пароля</h2>
+        <p class="mt-2 text-gray-500">Укажите почту для смены пароля</p>
+    </div>
+    <form wire:submit="resetPassword" class="flex-col gap-5 h-full">
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
+            <x-input-label for="email" :value="__('Почта')" />
+            <x-text-input wire:model="email" id="email" class="block mt-1 w-full " type="email" name="email" required autofocus autocomplete="username" class="{{$inputClass}}"/>
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input wire:model="password" id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+        <div class="mt-4" x-data="{ show: false }">
+            <x-input-label for="password" :value="__('Пароль')" class="block text-sm font-medium text-gray-600 mb-1.5"/>
+            <div class="relative">
+                <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                <input wire:model="password" id="password" type="password" name="password" :type="show ? 'text' : 'password'" required autocomplete="new-password"
+                       placeholder="••••••••" class="{{ $inputClass }} pl-11 pr-11" />
+                <button type="button" @click="show = !show" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer">
+                    <i class="fas" :class="show ? 'fa-eye-slash' : 'fa-eye'"></i>
+                </button>
+            </div>
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+        <div class="mt-4" x-data="{ show: false }">
+            <x-input-label for="password_confirmation" :value="__('Подтвердите пароль')" class="block text-sm font-medium text-gray-600 mb-1.5" />
 
-            <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
-                          type="password"
-                          name="password_confirmation" required autocomplete="new-password" />
-
+            <div class="relative">
+                <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                <input wire:model="password_confirmation" id="password_confirmation" type="password" name="password" :type="show ? 'text' : 'password'" required autocomplete="new-password"
+                       placeholder="••••••••" class="{{ $inputClass }} pl-11 pr-11" />
+                <button type="button" @click="show = !show" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer">
+                    <i class="fas" :class="show ? 'fa-eye-slash' : 'fa-eye'"></i>
+                </button>
+            </div>
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button>
-                {{ __('Reset Password') }}
+                {{ __('Сменить пароль') }}
             </x-primary-button>
         </div>
     </form>
