@@ -40,7 +40,7 @@
     <section class="features-section pt-5 md:pt-10 xl:pt-15 2xl:pt-25 bg-white">
         <div class="max-w-6xl 3xl:max-w-421 mx-auto px-4 sm:px-10 flex flex-col gap-12">
             <div class="flex flex-col lg:flex-row items-start justify-between gap-6 xl:gap-11">
-                <div data-aos="fade-right" class="lg:max-w-110 xl:max-w-130 3xl:max-w-190 lg:w-auto flex flex-col gap-5">
+                <div data-aos="fade-right" class="lg:max-w-130 3xl:max-w-190 lg:w-auto flex flex-col gap-5">
                     <p class="text-base xl:text-xl/relaxed 3xl:text-3xl/relaxed text-justify">
                         {{ $event->description }}
                     </p>
@@ -112,6 +112,8 @@
             </div>
         </div>
     </section>
+
+
     <section class="py-5 md:py-8 xl:py-10 3xl:py-18 bg-gray-50 my-5 md:my-8 xl:my-10 3xl:my-18">
         <div class="max-w-6xl 3xl:max-w-421 mx-auto px-4 sm:px-10">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">

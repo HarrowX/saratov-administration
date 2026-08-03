@@ -62,8 +62,7 @@
                     </span>
                     <h2 class="text-center md:text-left">Саратов всегда с вами</h2>
                     <p class="text text-white/90 text-center md:text-left mb-8">
-                        Скачайте наше приложение и получите доступ ко всем функциям офлайн,
-                        AR-навигации, эксклюзивным скидкам и персональным маршрутам
+                        Скачайте наше приложение и получите доступ ко всем функциям офлайн, экскурсиям и персональным маршрутам
                     </p>
 
                     <div class="flex flex-col flex-wrap content-center md:content-start space-y-4 mb-8">
@@ -77,15 +76,15 @@
                             </div>
                         </div>
 
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 bg-white/20 backdrop-blur rounded-lg flex items-center justify-center">
-                                <i class="fas fa-vr-cardboard text-white"></i>
-                            </div>
-                            <div>
-                                <p class="font-['Merriweather'] font-semibold">AR режим</p>
-                                <p class="text-white/80 text-sm">Путешествие во времени</p>
-                            </div>
-                        </div>
+{{--                        <div class="flex items-center space-x-3">--}}
+{{--                            <div class="w-12 h-12 bg-white/20 backdrop-blur rounded-lg flex items-center justify-center">--}}
+{{--                                <i class="fas fa-vr-cardboard text-white"></i>--}}
+{{--                            </div>--}}
+{{--                            <div>--}}
+{{--                                <p class="font-['Merriweather'] font-semibold">AR режим</p>--}}
+{{--                                <p class="text-white/80 text-sm">Путешествие во времени</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                         <div class="flex items-center space-x-3">
                             <div class="w-12 h-12 bg-white/20 backdrop-blur rounded-lg flex items-center justify-center">
@@ -121,62 +120,62 @@
     </section>
 
     <!-- Features Section -->
-    <section class="features-section py-10 sm:py-15 xl:py-20 3xl:py-26 bg-white">
-        <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10">
-            <div class="text-center mb-12" data-aos="fade-up">
-                <h2>Что вас ждет в приложении</h2>
-                <p class="text text-gray-600">Уникальные возможности для жителей и гостей города</p>
-            </div>
+{{--    <section class="features-section py-10 sm:py-15 xl:py-20 3xl:py-26 bg-white">--}}
+{{--        <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10">--}}
+{{--            <div class="text-center mb-12" data-aos="fade-up">--}}
+{{--                <h2>Что вас ждет в приложении</h2>--}}
+{{--                <p class="text text-gray-600">Уникальные возможности для жителей и гостей города</p>--}}
+{{--            </div>--}}
 
-            <div class="parent-grid">
+{{--            <div class="parent-grid">--}}
 
-                <!-- Карточка 1 -->
-                <div data-aos="fade-up" data-aos-delay="100" class="child-grid bg-linear-to-br from-blue-50 to-blue-100 rounded-xl p-5 3xl:p-8 hover:shadow-xl transition">
-                    <div class="size-16 bg-blue-500 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-map-marked-alt text-white text-2xl"></i>
-                    </div>
-                    <h3>Интерактивная карта</h3>
-                    <p>Все достопримечательности города на одной карте с подробной информацией и фотографиями</p>
-                    <ul>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>AR-навигация</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Аудиогиды</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>3D модели</li>
-                    </ul>
-                </div>
+{{--                <!-- Карточка 1 -->--}}
+{{--                <div data-aos="fade-up" data-aos-delay="100" class="child-grid bg-linear-to-br from-blue-50 to-blue-100 rounded-xl p-5 3xl:p-8 hover:shadow-xl transition">--}}
+{{--                    <div class="size-16 bg-blue-500 rounded-lg flex items-center justify-center mb-6">--}}
+{{--                        <i class="fas fa-map-marked-alt text-white text-2xl"></i>--}}
+{{--                    </div>--}}
+{{--                    <h3>Интерактивная карта</h3>--}}
+{{--                    <p>Все достопримечательности города на одной карте с подробной информацией и фотографиями</p>--}}
+{{--                    <ul>--}}
+{{--                        <li><i class="fas fa-check text-green-500 mr-2"></i>AR-навигация</li>--}}
+{{--                        <li><i class="fas fa-check text-green-500 mr-2"></i>Аудиогиды</li>--}}
+{{--                        <li><i class="fas fa-check text-green-500 mr-2"></i>3D модели</li>--}}
+{{--                    </ul>--}}
+{{--                </div>--}}
 
-                <!-- Карточка 2 -->
-                <div data-aos="fade-up" data-aos-delay="200" class="child-grid bg-linear-to-br from-purple-50 to-purple-100 rounded-xl p-5 3xl:p-8 hover:shadow-xl transition">
-                    <div class="size-16 bg-purple-500 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-trophy text-white text-2xl"></i>
-                    </div>
-                    <h3>Геймификация</h3>
-                    <p>Зарабатывайте достижения, открывайте новые маршруты и получайте бонусы</p>
-                    <ul>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>30+ достижений</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Рейтинг путешественников</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Еженедельные квесты</li>
-                    </ul>
-                </div>
+{{--                <!-- Карточка 2 -->--}}
+{{--                <div data-aos="fade-up" data-aos-delay="200" class="child-grid bg-linear-to-br from-purple-50 to-purple-100 rounded-xl p-5 3xl:p-8 hover:shadow-xl transition">--}}
+{{--                    <div class="size-16 bg-purple-500 rounded-lg flex items-center justify-center mb-6">--}}
+{{--                        <i class="fas fa-trophy text-white text-2xl"></i>--}}
+{{--                    </div>--}}
+{{--                    <h3>Геймификация</h3>--}}
+{{--                    <p>Зарабатывайте достижения, открывайте новые маршруты и получайте бонусы</p>--}}
+{{--                    <ul>--}}
+{{--                        <li><i class="fas fa-check text-green-500 mr-2"></i>30+ достижений</li>--}}
+{{--                        <li><i class="fas fa-check text-green-500 mr-2"></i>Рейтинг путешественников</li>--}}
+{{--                        <li><i class="fas fa-check text-green-500 mr-2"></i>Еженедельные квесты</li>--}}
+{{--                    </ul>--}}
+{{--                </div>--}}
 
-                <!-- Карточка 3 -->
-                <div data-aos="fade-up" data-aos-delay="300" class="child-grid bg-linear-to-br from-green-50 to-green-100 rounded-xl p-5 3xl:p-8 hover:shadow-xl transition">
-                    <div class="size-16 bg-green-500 rounded-lg flex items-center justify-center mb-6">
-                        <div class="w-7.5 h-7.5">
-                            <img src="/images/streamline-ultimate_concert-dj-bold.png" alt="иконка">
-                        </div>
-                    </div>
-                    <h3>Узнавай первым про мероприятия в городе</h3>
-                    <p>Все концерты, фестивали и события города в одном месте с описаниями, датами и локациями</p>
-                    <ul>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>До 30% скидок</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Кэшбэк программа</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Специальные акции</li>
-                    </ul>
-                </div>
+{{--                <!-- Карточка 3 -->--}}
+{{--                <div data-aos="fade-up" data-aos-delay="300" class="child-grid bg-linear-to-br from-green-50 to-green-100 rounded-xl p-5 3xl:p-8 hover:shadow-xl transition">--}}
+{{--                    <div class="size-16 bg-green-500 rounded-lg flex items-center justify-center mb-6">--}}
+{{--                        <div class="w-7.5 h-7.5">--}}
+{{--                            <img src="/images/streamline-ultimate_concert-dj-bold.png" alt="иконка">--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <h3>Узнавай первым про мероприятия в городе</h3>--}}
+{{--                    <p>Все концерты, фестивали и события города в одном месте с описаниями, датами и локациями</p>--}}
+{{--                    <ul>--}}
+{{--                        <li><i class="fas fa-check text-green-500 mr-2"></i>До 30% скидок</li>--}}
+{{--                        <li><i class="fas fa-check text-green-500 mr-2"></i>Кэшбэк программа</li>--}}
+{{--                        <li><i class="fas fa-check text-green-500 mr-2"></i>Специальные акции</li>--}}
+{{--                    </ul>--}}
+{{--                </div>--}}
 
-            </div>
-        </div>
-    </section>
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
 
     <!-- Attractions Section -->
     <section id="attractions" class="py-10 md:py-20 bg-gray-50 overflow-hidden">

@@ -37,7 +37,7 @@
     <!--Hero Section-->
     <section class="features-section pt-15 bg-white">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 sm:px-10">
-            <div class="flex flex-col-reverse lg:flex-row items-center gap-3 3xl:gap-22.5">
+            <div class="flex flex-col-reverse lg:flex-row items-center gap-4 3xl:gap-22.5">
                 <div class="grid grid-cols-3 gap-1 sm:gap-5 w-full lg:w-auto lg:min-w-118 xl:min-w-150 3xl:min-w-197">
                     <div class="min-w-full col-span-3">
                         <img src="{{ $restaurant->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $restaurant->name }}" class="photo w-full rounded-md sm:rounded-lg lg:rounded-2xl object-cover h-full max-h-114">

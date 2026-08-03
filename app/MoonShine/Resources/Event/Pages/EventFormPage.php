@@ -53,7 +53,7 @@ class EventFormPage extends FormPage
                     return $item && $item->exists;
                 }),
                 Textarea::make('Описание', 'description')->unescape()->required(),
-                Text::make('Возрастное ограничение', 'age_restriction'),
+                Number::make('Возрастное ограничение', 'age_restriction')->min(0)->max(18),
                 BelongsToMany::make('Категории', 'categories', formatted: 'name', resource: EventCategoryResource::class)
                     ->selectMode()
                     ->searchable()

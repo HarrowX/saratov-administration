@@ -66,7 +66,7 @@
                     </a>
                 @else
                 <a href="{{ route('login') }}"
-                   class="flex items-center gap-1.5 sm:gap-2 px-1.5 xs:px-5 py-2 text-white rounded-lg duration-300 text-xs sm:text-sm font-['FindSansPro'] bg-linear-to-r from-blue-500 to-purple-600 hover:shadow-lg transition cursor-pointer">
+                   class="flex items-center gap-1.5 sm:gap-2 px-1.5 xs:px-5 py-2 text-white rounded-lg duration-300 text-xs xl:text-sm 3xl:text-base font-['FindSansPro'] bg-linear-to-r from-blue-500 to-purple-600 hover:shadow-lg transition cursor-pointer">
                     <i class="fa-solid fa-arrow-right-to-bracket"></i>
                     <span>Войти</span>
                 </a>

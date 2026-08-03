@@ -45,7 +45,7 @@ class EventDetailPage extends DetailPage
             Text::make('Название', 'name')->unescape(),
             Slug::make('Слаг', 'slug')->from('name')->unique(),
             Textarea::make('Описание', 'description')->unescape(),
-            Text::make('Возрастное ограничение', 'age_restriction'),
+            Number::make('Возрастное ограничение', 'age_restriction'),
             BelongsToMany::make('Категории', 'categories', resource: EventCategoryResource::class)
                 ->selectMode()
                 ->searchable(),
