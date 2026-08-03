@@ -70,7 +70,10 @@ new class extends Component
                      class="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl shadow-[0_12px_40px_rgb(0,0,0,0.12)] border border-gray-100 overflow-hidden py-2">
                     <div class="px-4 py-3 border-b border-gray-100">
                         <div class="text-sm font-semibold text-gray-900 truncate">{{ $fullName }}</div>
-                        <div class="text-xs text-gray-400 truncate">{{ $u->email }}</div>
+
+                        @if(!(auth()->user()->haveFakeVkEmail()))
+                            <div class="text-xs text-gray-400 truncate">{{ $u->email }}</div>
+                        @endif
                     </div>
                     <a href="{{ route('profile-settings') }}"
                        class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
@@ -114,7 +117,9 @@ new class extends Component
                 </span>
                 <div class="min-w-0">
                     <div class="text-sm font-semibold text-gray-900 truncate">{{ $fullName }}</div>
-                    <div class="text-xs text-gray-400 truncate">{{ $u->email }}</div>
+                    @if(!(auth()->user()->haveFakeVkEmail()))
+                        <div class="text-xs text-gray-400 truncate">{{ $u->email }}</div>
+                    @endif
                 </div>
             </div>
             <a href="{{ route('profile-settings') }}"

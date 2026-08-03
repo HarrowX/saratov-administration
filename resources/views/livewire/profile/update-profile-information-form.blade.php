@@ -100,7 +100,9 @@ new class extends Component
         </div>
         <div>
             <div class="text-gray-900 font-semibold">{{ trim("$surname $name") ?: 'Пользователь' }}</div>
-            <div class="text-sm text-gray-400">{{ $email }}</div>
+            @if(!(auth()->user()->haveFakeVkEmail()))
+                <div class="text-sm text-gray-400">{{ $email }}</div>
+            @endif
         </div>
     </div>
 
@@ -134,12 +136,13 @@ new class extends Component
             <input wire:model="phone" id="phone" name="phone" type="text" class="{{ $inputClass }}" autocomplete="tel" placeholder="+7 (999) 999-99-99" />
             <x-input-error class="mt-2" :messages="$errors->get('phone')" />
         </div>
-
-        <div>
-            <label for="email" class="block text-sm font-medium text-gray-600 mb-1.5">Электронная почта</label>
-            <input wire:model="email" id="email" name="email" type="email" class="{{ $inputClass }}" autocomplete="email" placeholder="ivanov@mail.ru" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
-        </div>
+        @if(!(auth()->user()->haveFakeVkEmail()))
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-600 mb-1.5">Электронная почта</label>
+                <input wire:model="email" id="email" name="email" type="email" class="{{ $inputClass }}" autocomplete="email" placeholder="ivanov@mail.ru" />
+                <x-input-error class="mt-2" :messages="$errors->get('email')" />
+            </div>
+        @endif
 
         <div class="flex items-center gap-4 pt-2">
             <button type="submit"
