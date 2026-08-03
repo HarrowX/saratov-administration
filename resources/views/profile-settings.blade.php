@@ -11,16 +11,17 @@
                 <livewire:profile.update-profile-information-form />
             </div>
 
-            <div class="p-6 sm:p-8 bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
-                <h2 class="text-xl font-bold text-gray-900">Социальные сети</h2>
-                <p class="mt-1 text-sm text-gray-500">
-                    Привяжите аккаунт ВКонтакте для быстрого входа.
-                </p>
-
-                <div class="mt-6">
-                    <livewire:profile.vk-connect />
+            @if(!auth()->user()->haveFakeVkEmail())
+                <div class="p-6 sm:p-8 bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
+                    <h2 class="text-xl font-bold text-gray-900">Социальные сети</h2>
+                    <p class="mt-1 text-sm text-gray-500">
+                        Привяжите аккаунт ВКонтакте для быстрого входа.
+                    </p>
+                        <div class="mt-6">
+                            <livewire:profile.vk-connect />
+                        </div>
                 </div>
-            </div>
+            @endif
 
             <div class="p-6 sm:p-8 bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
                 <livewire:profile.update-password-form />

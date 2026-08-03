@@ -41,6 +41,8 @@ return [
 
     'debug' => (bool) env('APP_DEBUG', false),
 
+    'domain_name' => env('APP_DOMAIN_NAME', 'localhost'),
+
     /*
     |--------------------------------------------------------------------------
     | Application URL

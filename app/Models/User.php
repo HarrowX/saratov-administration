@@ -63,4 +63,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function haveFakeVkEmail()
+    {
+        return $this->email == 'vk_'.$this->vk_id.'@'.config('app.domain_name');
+    }
 }

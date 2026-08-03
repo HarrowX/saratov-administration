@@ -30,7 +30,9 @@
                         </div>
                         <div class="text-center sm:text-left">
                             <h3 class="text-2xl font-bold text-gray-900">{{ trim("$surname $name") ?: 'Пользователь' }}</h3>
-                            <p class="text-gray-400 text-sm">{{ $email }}</p>
+                            @if(!auth()->user()->haveFakeVkEmail())
+                                <p class="text-gray-400 text-sm">{{ $email }}</p>
+                            @endif
                         </div>
                         <a href="{{ route('profile-settings') }}"
                            class="sm:ml-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-linear-to-r from-[#A556F7] to-[#2663EB] text-white text-sm font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-200">
@@ -47,8 +49,10 @@
                                 ['Имя', $name, 'fa-user'],
                                 ['Отчество', $patronymic, 'fa-user'],
                                 ['Телефон', $phone, 'fa-phone'],
-                                ['Электронная почта', $email, 'fa-envelope'],
                             ];
+                            if (!$user->haveFakeVkEmail()) {
+                                $rows []= ['Электронная почта', $email, 'fa-envelope'];
+                            }
                         @endphp
                         @foreach ($rows as [$label, $value, $icon])
                             <div class="flex items-center gap-4 p-4 rounded-xl bg-gray-50/80 border border-gray-100">

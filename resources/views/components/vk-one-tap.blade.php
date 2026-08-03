@@ -11,7 +11,7 @@
                     redirectUrl: '{{config('app.url')}}' + '/auth/vk/callback',
                     responseMode: VKID.ConfigResponseMode.Callback,
                     source: VKID.ConfigSource.LOWCODE,
-                    scope: '',
+                    scope: 'vkid.personal_info email phone',
                 });
 
                 const oneTap = new VKID.OneTap();
