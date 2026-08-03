@@ -12,26 +12,24 @@
         </div>
 
         <div class="relative z-10 flex flex-col justify-between h-full max-w-6xl 3xl:max-w-421 mx-auto px-4 sm:px-10 py-8 md:py-20 w-full">
-            <a href="{{ route('all-events') }}" class="z-20 hidden md:flex items-center gap-2 3xl:gap-6 text-white hover:text-blue-300 transition-colors font-['FindSansPro'] max-w-fit">
+            <a href="{{ route('all-events') }}" class="z-20 hidden md:flex items-center gap-2 3xl:gap-6 text-white hover:text-blue-800 transition-colors font-['FindSansPro'] max-w-fit">
                 <i class="fa-solid fa-chevron-left text-xl 3xl:text-3xl"></i>
-                <span class="text-xl xl:text-2xl 3xl:text-3xl">Все события</span>
+                <span class="text-xl xl:text-2xl 3xl:text-3xl">События</span>
             </a>
             <div class="flex flex-col justify-end h-full md:h-screen w-full z-10 text-white">
-                <h1 class="text-3xl xl:text-4xl 3xl:text-6xl font-extrabold leading-16 xl:leading-24">{{$event->name}}</h1>
-                <div class="flex flex-row gap-3 items-center xl:pb-10 text-black">
+                <h1 class="text-3xl xl:text-4xl 3xl:text-5xl font-extrabold leading-16 3xl:leading-24">{{$event->name}}</h1>
+                <div class="flex flex-row gap-2 items-center rounded-xl xl:pb-10 text-black">
                     @if($event->categories && $event->categories->count() > 0)
-                        <div class="flex flex-wrap gap-2 xl:gap-4 pt-1 font-['FindSansPro']">
+                        <div class="flex flex-wrap items-center gap-2">
                             @foreach($event->categories as $category)
-                                <span class="inline-block p-0.5 rounded-xl bg-linear-to-r from-[#A556F7] to-[#2663EB]">
-                                    <span class="block px-4 py-1 sm:py-2 3xl:py-3 text-[10px] lg:text-xs xl:text-lg 3xl:text-2xl rounded-xl font-medium bg-white">
+                                <span class="inline-flex items-center py-1 sm:py-2 px-3 sm:px-3 3xl:px-6 border border-[rgba(197,139,255,0.72)] rounded-full bg-[rgba(22,18,30,0.38)] text-white text-xs sm:text-sm 3xl:text-2xl font-medium leading-none shadow-none backdrop-blur-[6px]">
                                         {{ $category->name }}
-                                    </span>
                                 </span>
                             @endforeach
                         </div>
                     @endif
                     @if($event->age_restriction)
-                        <span class="size-7 sm:size-8.5 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-sm xl:text-xl 3xl:text-2xl font-bold">
+                        <span class="inline-flex items-center py-1 sm:py-2 px-3 sm:px-3 3xl:px-6 border border-[rgba(197,139,255,0.72)] rounded-full bg-[rgba(109,67,193,0.38)] text-white text-xs sm:text-sm 3xl:text-2xl font-medium leading-none shadow-none backdrop-blur-[6px]">
                             {{ $event->age_restriction }}+
                         </span>
                     @endif
@@ -42,7 +40,7 @@
     <section class="features-section pt-5 md:pt-10 xl:pt-15 2xl:pt-25 bg-white">
         <div class="max-w-6xl 3xl:max-w-421 mx-auto px-4 sm:px-10 flex flex-col gap-12">
             <div class="flex flex-col lg:flex-row items-start justify-between gap-6 xl:gap-11">
-                <div data-aos="fade-right" class="lg:max-w-110 xl:max-w-130 3xl:max-w-190 lg:w-auto flex flex-col gap-5">
+                <div data-aos="fade-right" class="lg:max-w-130 3xl:max-w-190 lg:w-auto flex flex-col gap-5">
                     <p class="text-base xl:text-xl/relaxed 3xl:text-3xl/relaxed text-justify">
                         {{ $event->description }}
                     </p>
@@ -86,17 +84,17 @@
                                     </a>
                                 @endif
                                 @if($event->organizer_phone)
-                                    <span class="flex flex-row gap-2 3xl:gap-5 items-center">
-                                    <i class="fas fa-phone"></i>
-                                    <p>{{ $event->organizer_phone }}</p>
-                                </span>
+                                    <a href="tel:{{ $event->organizer_phone }}" class="flex flex-row gap-2 3xl:gap-5 items-center hover:text-green-500 transition-colors duration-300 max-w-fit">
+                                        <i class="fas fa-phone"></i>
+                                        <p>{{ $event->organizer_phone }}</p>
+                                    </a>
                                 @endif
 
                                 @if($event->organizer_email)
-                                    <span class="flex flex-row gap-2 3xl:gap-5 items-center">
-                                    <i class="fa-solid fa-envelope"></i>
-                                    <p>{{ $event->organizer_email }}</p>
-                                </span>
+                                    <a href="mailto:{{ $event->organizer_email }}" class="flex flex-row gap-2 3xl:gap-5 items-center hover:text-green-500 transition-colors duration-300 max-w-fit">
+                                        <i class="fa-solid fa-envelope"></i>
+                                        <p>{{ $event->organizer_email }}</p>
+                                    </a>
                                 @endif
                             </div>
                         @endif
@@ -114,6 +112,8 @@
             </div>
         </div>
     </section>
+
+
     <section class="py-5 md:py-8 xl:py-10 3xl:py-18 bg-gray-50 my-5 md:my-8 xl:my-10 3xl:my-18">
         <div class="max-w-6xl 3xl:max-w-421 mx-auto px-4 sm:px-10">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">

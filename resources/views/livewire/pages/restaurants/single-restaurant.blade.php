@@ -14,51 +14,44 @@
 
     <x-map-modal />
 
-    <section id="home" class="relative mt-25 md:mt-35 xl:mt-40 3xl:mt-50 ">
+    <section id="home" class="relative mt-25 md:mt-35 xl:mt-40 3xl:mt-50">
         <div class="max-w-6xl xl:max-w-7xl 3xl:max-w-398.25 px-4 sm:px-20 mx-auto relative">
 
             <a href="{{ route('all-restaurants') }}"
-               class="absolute left-14 -top-10 3xl:-top-15 hidden md:flex items-center xl:gap-2 text-[#5F5F5F] hover:text-blue-900 transition-colors font-['FindSansPro']">
-                <i class="fa-solid fa-chevron-left text-xl xl:text-xl 3xl:text-3xl"></i>
-                <span class="text-xl 3xl:text-3xl pl-4">Рестораны</span>
+               class="absolute left-3 md:left-8 top-0 md:-top-10 3xl:-top-15 flex items-center xl:gap-2 text-[#5F5F5F] hover:text-blue-800 transition-colors font-['FindSansPro']">
+                <i class="fa-solid fa-chevron-left text-base xs:text-xl xl:text-xl 3xl:text-3xl"></i>
+                <span class="text-base xs:text-xl 3xl:text-3xl md:pl-4">Заведения</span>
             </a>
 
-            <button
-                wire:click="toggleFavorite"
-                class="absolute right-10 -top-10 3xl:-top-15 xl:right-20 z-20 hidden md:flex items-center gap-3 px-5 py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group"
-            >
-                <i class="fa-regular fa-heart text-2xl xl:text-3xl group-hover:scale-110 group-hover:animate-pulse transition-transform {{ $isFavorite ? 'fa-solid text-red-400' : 'fa-regular' }}"></i>
-
-                <span class="text-xl xl:text-3xl font-medium">
-                {{ $isFavorite ? 'В избранном' : 'В избранное' }}
-            </span>
-
-                <span class="favorite-count ml-2 text-base xl:text-xl font-bold px-2.5 py-1 rounded-full {{ $isFavorite ? 'bg-red-500 text-white' : 'bg-red-500/80 text-white' }} transition-colors shadow-lg">
+            <button wire:click="toggleFavorite" class="flex absolute right-3 sm:right-10 top-0 md:-top-10 3xl:-top-15 xl:right-20 z-20 items-center gap-1 sm:gap-3 px-3 sm:px-5 py-1.5 lg:py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group">
+                <i class="fa-regular fa-heart text-lg sm:text-2xl xl:text-3xl group-hover:scale-110 group-hover:animate-pulse transition-transform {{ $isFavorite ? 'fa-solid text-red-400' : 'fa-regular' }}"></i>
+                <span class="text-xs xs:text-sm sm:text-lg 2xl:text-3xl font-medium">
+                    {{ $isFavorite ? 'В избранном' : 'В избранное' }}
+                </span>
+                <span class="favorite-count ml-2 text-xs sm:text-base 2xl:text-xl font-bold flex justify-center items-center size-5 sm:size-8 rounded-full {{ $isFavorite ? 'bg-red-400 text-white' : 'bg-red-400/80 text-white' }} transition-colors shadow-lg">
                 {{ $favoritesCount }}
-            </span>
+                </span>
             </button>
         </div>
     </section>
     <!--Hero Section-->
-    <section class="features-section pt-28 md:pt-30 lg:pt-41.5 bg-white">
+    <section class="features-section pt-15 bg-white">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 sm:px-10">
-            <div class="flex flex-col-reverse lg:flex-row items-center gap-5 sm:gap-10 3xl:gap-22.5">
-                <div data-aos="fade-right" class="flex flex-col gap-5 w-full lg:w-auto lg:min-w-118 xl:min-w-150 3xl:min-w-197">
-                    <div class="min-w-full">
-                        <img src="{{ $restaurant->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $restaurant->name }}" class="photo w-full rounded-md sm:rounded-lg lg:rounded-2xl object-cover h-57.5 lg:h-100 xl:h-114">
+            <div class="flex flex-col-reverse lg:flex-row items-center gap-4 3xl:gap-22.5">
+                <div class="grid grid-cols-3 gap-1 sm:gap-5 w-full lg:w-auto lg:min-w-118 xl:min-w-150 3xl:min-w-197">
+                    <div class="min-w-full col-span-3">
+                        <img src="{{ $restaurant->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $restaurant->name }}" class="photo w-full rounded-md sm:rounded-lg lg:rounded-2xl object-cover h-full max-h-114">
                     </div>
 
-                    <div class="flex flex-row gap-5">
                         @foreach ($restaurant->attachments as $attachment)
                             @if ($loop->first)
                                 @continue
                             @endif
-                            <img src="{{ $attachment?->url() ?? "" }}" class="photo w-full h-33 3xl:h-67 rounded-md sm:rounded-lg lg:rounded-2xl object-cover" alt="Изображение {{ $restaurant->name }}">
+                            <img src="{{ $attachment?->url() ?? "" }}" class="photo w-full h-33 3xl:h-67 rounded-md sm:rounded-lg lg:rounded-2xl object-cover col-span-1" alt="Изображение {{ $restaurant->name }}">
                         @endforeach
-                    </div>
                 </div>
 
-                <div data-aos="fade-left" class="w-full lg:w-auto">
+                <div class="w-full lg:w-auto">
                     <h2 class="text-center lg:pb-10">{{ $restaurant->name }}</h2>
                     <p class="text-base xl:text-xl 3xl:text-3xl">{{ $restaurant->description }}</p>
                 </div>
@@ -68,30 +61,49 @@
 
     <section class="pt-5 sm:pt-10 bg-white">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 sm:px-10 flex flex-col gap-5 md:gap-12">
-            <div class="flex flex-col md:flex-row gap-2.5 md:gap-10 3xl:gap-33.5">
-                <div class="flex flex-col w-full justify-around bg-[#E5E6F6] gap-3 md:gap-6.75 px-6 md:px-11 py-6 3xl:py-8 rounded-[20px] font-['FindSansPro'] text-sm sm:text-lg 3xl:text-2xl">
-                    <div class="flex items-center gap-5">
-                        <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/значок локации.svg" alt="иконка">
+            <div class="flex flex-col md:flex-row gap-2.5 lg:gap-10 3xl:gap-33.5">
+                <div class="flex flex-col w-full justify-around bg-[#E5E6F6] gap-3 xl:gap-6.75 px-6 lg:px-11 py-6 3xl:py-8 rounded-[20px] font-['FindSansPro'] text-sm sm:text-lg 3xl:text-2xl">
+                    <div class="flex items-center gap-2 sm:gap-4">
+                        <div class="flex flex-wrap content-center size-5 xl:size-7.5">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
                         <p>{{ $restaurant->address }}</p>
                     </div>
-                    <div class="flex items-center gap-3 xl:gap-5">
-                        <i class="fa-solid fa-globe text-blue sm:text-2xl md:text-3xl"></i>
-                        <p>{{ $restaurant->website}}</p>
-                    </div>
-                    <div class="flex items-start gap-2 md:gap-5">
-                        <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/image 8.svg" alt="иконка">
-                        <div class="flex flex-col gap-2">
-                            @forelse($restaurant->worktime ?? [] as $day => $time)
-                                <p>{{ $day }}: {{ $time }}</p>
-                            @empty
-                                <p>Не указано</p>
-                            @endforelse
+                    @if(!empty($restaurant->worktime))
+                        <div class="flex items-start gap-2 sm:gap-4">
+                            <div class="flex flex-wrap content-center size-5 xl:size-7.5">
+                                <i class=" fa-solid fa-clock"></i>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                @foreach($restaurant->worktime as $day => $time)
+                                    <p>{{ $day }}: {{ $time }}</p>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex items-center gap-5">
-                        <img class="size-4 sm:size-6 md:size-7.5 icon" src="/images/image 15.svg" alt="иконка">
+                    @endif
+                    <a href="tel:{{ $restaurant->phone }}" class="flex items-center gap-2 sm:gap-4 w-fit hover:text-green-500 transition-color duration-300">
+                        <div class="flex flex-wrap content-center size-5 xl:size-7.5">
+                            <i class="fa fa-phone"></i>
+                        </div>
                         <p>{{ $restaurant->phone }}</p>
-                    </div>
+                    </a>
+
+                    @if($restaurant->email)
+                        <a href="mailto:{{ $restaurant->email }}" class="flex items-center gap-2 sm:gap-4 w-fit hover:text-green-500 transition-color duration-300">
+                            <div class="flex flex-wrap content-center size-5 xl:size-7.5">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <p class="break-all">{{ $restaurant->email }}</p>
+                        </a>
+                    @endif
+                    @if($restaurant->website)
+                        <a href="{{ $restaurant->website }}" target="_blank" class="flex items-center gap-1 sm:gap-3 w-fit hover:text-green-500 transition-color duration-300">
+                            <div class="flex flex-wrap content-center size-5 xl:size-7.5">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            Перейти на сайт
+                        </a>
+                    @endif
                 </div>
                 <div class="w-full flex flex-col gap-2.5">
                     <div class="bg-[#E5E6F6] px-6 md:px-11 py-3 rounded-[20px] font-['FindSansPro'] text-xs md:text-lg 3xl:text-2xl">
@@ -99,7 +111,7 @@
                         <p class="text-[#5F5F5F]">{{ $restaurant->kitchen }}</p>
                     </div>
 
-                    <button onclick="document.getElementById('map-modal').classList.remove(['hidden'])" class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] 2xl:rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-xl 3xl:text-3xl">
+                    <button onclick="document.getElementById('map-modal').classList.remove(['hidden'])" class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg lg:text-xl 3xl:text-3xl">
                         Показать на карте
                     </button>
 
