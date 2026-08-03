@@ -71,7 +71,7 @@ new class extends Component
                     <div class="px-4 py-3 border-b border-gray-100">
                         <div class="text-sm font-semibold text-gray-900 truncate">{{ $fullName }}</div>
 
-                        @if(!auth()->user()->haveFakeVkEmail())
+                        @if(!(auth()->user()->haveFakeVkEmail()))
                             <div class="text-xs text-gray-400 truncate">{{ $u->email }}</div>
                         @endif
                     </div>
@@ -117,7 +117,7 @@ new class extends Component
                 </span>
                 <div class="min-w-0">
                     <div class="text-sm font-semibold text-gray-900 truncate">{{ $fullName }}</div>
-                    @if(!auth()->user()->haveFakeVkEmail())
+                    @if(!(auth()->user()->haveFakeVkEmail()))
                         <div class="text-xs text-gray-400 truncate">{{ $u->email }}</div>
                     @endif
                 </div>

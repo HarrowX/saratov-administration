@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -103,28 +104,48 @@ class AuthVkController extends Controller
             $user = $this->findUserAndUpdateAvatar($userData['user_id'], $userData['avatar']);
 
             if (! $user) {
+                $user = DB::transaction(function () use ($userData) {
+                    $user = null;
 
-                $email = $userData['email'] == '' ? 'vk_'.$userData['user_id'].'@'.config('app.domain_name') : $userData['email'];
-                $password = Str::random(20);
+                    try {
+                        $email = $userData['email'] == '' ? 'vk_'.$userData['user_id'].'@'.config('app.domain_name') : $userData['email'];
 
-                $dto = new RegisterDTO([
-                    'email' => $email,
-                    'password' => $password,
-                    'password_confirmation' => $password,
-                    'name' => $userData['first_name'],
-                    'surname' => $userData['last_name'],
-                ]);
+                        $password = Str::random(20);
+                        $dto = new RegisterDTO([
+                            'email' => $email,
+                            'password' => $password,
+                            'password_confirmation' => $password,
+                            'name' => $userData['first_name'],
+                            'surname' => $userData['last_name'],
+                        ]);
+                        $user = $this->authService->store($dto);
+                        $user->vk_id = $userData['user_id'];
+                        $user->vk_avatar = $userData['avatar'] ?? null;
+                        $user->save();
 
-                $user = $this->authService->store($dto);
+                        return $user;
 
-                $user->vk_id = $userData['user_id'];
-                $user->vk_avatar = $userData['avatar'] ?? null;
-                $user->save();
+                    } catch (\Throwable $e) {
+                        if ($user) {
+                            $user?->username?->delete();
+                            $user?->delete();
+                        }
+                        throw $e;
+                    }
+                });
             }
 
             return $user;
 
         } catch (\Exception $e) {
+            Log::error($e);
+
+            return response()->json([
+                'success' => false,
+                'error' => 'Ошибка на сервере, код ошибки: '.$e->getCode(),
+                'redirect' => null,
+            ], 500);
+        } catch (\Throwable $e) {
             Log::error($e);
 
             return response()->json([
@@ -188,7 +209,7 @@ class AuthVkController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->email == 'vk_'.$user->vk_id.'@'.config('app.domain_name')) {
+        if ($user->haveFakeVkEmail()) {
             return redirect()->route('profile-settings')->with('status', 'По техническим причинам аккаунт нельзя отвязать.');
         }
 
