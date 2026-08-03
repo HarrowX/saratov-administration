@@ -17,21 +17,19 @@
                 <span class="text-xl xl:text-2xl 3xl:text-3xl">Все события</span>
             </a>
             <div class="flex flex-col justify-end h-full md:h-screen w-full z-10 text-white">
-                <h1 class="text-3xl xl:text-4xl 3xl:text-6xl font-extrabold leading-16 xl:leading-24">{{$event->name}}</h1>
-                <div class="flex flex-row gap-3 items-center xl:pb-10 text-black">
+                <h1 class="text-3xl xl:text-4xl 3xl:text-5xl font-extrabold leading-16 3xl:leading-24">{{$event->name}}</h1>
+                <div class="flex flex-row gap-2 items-center rounded-xl xl:pb-10 text-black">
                     @if($event->categories && $event->categories->count() > 0)
-                        <div class="flex flex-wrap gap-2 xl:gap-4 pt-1 font-['FindSansPro']">
+                        <div class="flex flex-wrap items-center gap-2">
                             @foreach($event->categories as $category)
-                                <span class="inline-block p-0.5 rounded-xl bg-linear-to-r from-[#A556F7] to-[#2663EB]">
-                                    <span class="block px-4 py-1 sm:py-2 3xl:py-3 text-[10px] lg:text-xs xl:text-lg 3xl:text-2xl rounded-xl font-medium bg-white">
+                                <span class="inline-flex items-center py-1 sm:py-2 px-3 sm:px-3 3xl:px-6 border border-[rgba(197,139,255,0.72)] rounded-full bg-[rgba(22,18,30,0.38)] text-white text-xs sm:text-sm 3xl:text-2xl font-medium leading-none shadow-none backdrop-blur-[6px]">
                                         {{ $category->name }}
-                                    </span>
                                 </span>
                             @endforeach
                         </div>
                     @endif
                     @if($event->age_restriction)
-                        <span class="size-7 sm:size-8.5 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-md xl:rounded-xl flex items-center justify-center text-white text-xs sm:text-sm xl:text-xl 3xl:text-2xl font-bold">
+                        <span class="inline-flex items-center py-1 sm:py-2 px-3 sm:px-3 3xl:px-6 border border-[rgba(197,139,255,0.72)] rounded-full bg-[rgba(109,67,193,0.38)] text-white text-xs sm:text-sm 3xl:text-2xl font-medium leading-none shadow-none backdrop-blur-[6px]">
                             {{ $event->age_restriction }}+
                         </span>
                     @endif
@@ -86,17 +84,17 @@
                                     </a>
                                 @endif
                                 @if($event->organizer_phone)
-                                    <span class="flex flex-row gap-2 3xl:gap-5 items-center">
-                                    <i class="fas fa-phone"></i>
-                                    <p>{{ $event->organizer_phone }}</p>
-                                </span>
+                                    <a href="tel:{{ $event->organizer_phone }}" class="flex flex-row gap-2 3xl:gap-5 items-center hover:text-green-500 transition-colors duration-300 max-w-fit">
+                                        <i class="fas fa-phone"></i>
+                                        <p>{{ $event->organizer_phone }}</p>
+                                    </a>
                                 @endif
 
                                 @if($event->organizer_email)
-                                    <span class="flex flex-row gap-2 3xl:gap-5 items-center">
-                                    <i class="fa-solid fa-envelope"></i>
-                                    <p>{{ $event->organizer_email }}</p>
-                                </span>
+                                    <a href="mailto:{{ $event->organizer_email }}" class="flex flex-row gap-2 3xl:gap-5 items-center hover:text-green-500 transition-colors duration-300 max-w-fit">
+                                        <i class="fa-solid fa-envelope"></i>
+                                        <p>{{ $event->organizer_email }}</p>
+                                    </a>
                                 @endif
                             </div>
                         @endif

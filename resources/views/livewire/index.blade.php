@@ -19,11 +19,11 @@
                     Саратов на волне времени!
                 </h1>
                 <div class="flex flex-wrap gap-3.5 sm:gap-7.5 justify-center md:justify-start">
-                    <button onclick="showAppDownload()" class="hero-section-button text-xs sm:text-sm lg:text-base from-green-500 to-teal-600">
+                    <button onclick="showAppDownload()" class="hero-section-button text-sm lg:text-base from-green-500 to-teal-600">
                         <i class="fas fa-mobile-alt mr-2 group-hover:animate-bounce"></i>
                         Скачать приложение
                     </button>
-                    <button onclick="startJourney()" class="hero-section-button text-xs sm:text-sm lg:text-base from-blue-500 to-purple-600">
+                    <button onclick="startJourney()" class="hero-section-button text-sm lg:text-base from-blue-500 to-purple-600">
                         <i class="fas fa-compass mr-2"></i>
                         Начать путешествие
                     </button>
@@ -72,7 +72,7 @@
                                 <i class="fas fa-map-marked-alt text-white"></i>
                             </div>
                             <div>
-                                <h1 class="font-semibold">Офлайн карты</h1>
+                                <p class="font-['Merriweather'] font-semibold">Офлайн карты</p>
                                 <p class="text-white/80 text-sm">Работает без интернета</p>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                                 <i class="fas fa-vr-cardboard text-white"></i>
                             </div>
                             <div>
-                                <h1 class="font-semibold">AR режим</h1>
+                                <p class="font-['Merriweather'] font-semibold">AR режим</p>
                                 <p class="text-white/80 text-sm">Путешествие во времени</p>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                                 <i class="fas fa-bell text-white"></i>
                             </div>
                             <div>
-                                <h1 class="font-semibold">Push-уведомления</h1>
+                                <p class="font-['Merriweather'] font-semibold">Push-уведомления</p>
                                 <p class="text-white/80 text-sm">Не пропустите события</p>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
 
                 <div data-aos="fade-left" class="text-center">
                     <div class="bg-white rounded-2xl p-8 inline-block">
-                        <h1 class="text-gray-900 font-bold text-xl mb-4">Сканируйте QR-код</h1>
+                        <p class="text-gray-900 font-['Merriweather'] font-bold text-xl mb-4">Сканируйте QR-код</p>
                         <!-- QR Code image -->
                         <div class="w-64 h-64 rounded-lg overflow-hidden mb-4">
                             <img src="/images/qrprila.jpg" alt="QR-код приложения">
@@ -182,81 +182,91 @@
     <section id="attractions" class="py-10 md:py-20 bg-gray-50 overflow-hidden">
         <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10">
             <div class="text-center mb-12" data-aos="fade-up">
-                <h1 class="text-2xl sm:text-3xl lg:text-3xl 3xl:text-4x font-bold mb-4 tracking-[1px]">Главные достопримечательности</h1>
+                <h5 class="font-['Merriweather'] text-2xl sm:text-3xl lg:text-3xl 3xl:text-4x font-bold mb-4 tracking-[1px]">Главные достопримечательности</h5>
                 <p class="text text-gray-600">Откройте для себя уникальные места Саратова</p>
             </div>
 
             <!-- Карусель -->
             <div class="relative group">
-                <div class="flex overflow-x-auto gap-6 pb-16 scrollbar-hide scroll-smooth"
+                <div class="flex overflow-x-auto gap-3 pb-16 scrollbar-hide scroll-smooth"
                      style="scrollbar-width: none; -ms-overflow-style: none;">
 
                     @foreach($carouselAttractions as $attraction)
-                        <div class="min-w-87.5 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group group/image">
-                            <div class="relative h-48 overflow-hidden">
+                        <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}">
+                            <div class="min-w-70 xl:min-w-80 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group group/image group/color">
+                                <div class="relative h-48 overflow-hidden">
+                                    <img src="{{ $attraction->attachments?->get(0)?->url() ?? "" }}"
+                                         alt="Изображение {{ $attraction->name }}" class="photo w-full h-full object-cover group-hover/image:scale-110 transition-transform duration-500">
+                                    <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
+                                </div>
+                                <div class="p-6">
+                                    <h2 class="card-title text-xl font-bold mb-2 line-clamp-1 group-hover/color:text-[#352AA2] transition-colors duration-300">{{ $attraction->name }}</h2>
+                                    <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $attraction->short_description }}</p>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center text-gray-500 text-sm">
+                                            @if ($attraction->visit_duration)
+                                                <i class="fas fa-clock mr-2"></i>
+                                                <span>{{ $attraction->visit_duration }} мин</span>
+                                            @endif
+                                        </div>
+                                        <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="shrink-0 size-10 xl:size-11 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity hover:scale-110 group/button overflow-hidden relative">
+                                            <img src="/images/Arrow 2.png" alt="" class="icon w-2 xl:w-3 h-4.5 xl:h-6 transition-transform duration-300 group-hover/button:translate-x-1">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+
+                @if($carouselAttractions->count() > 3)
+                    <div class="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
+                        <button onclick="this.closest('.relative').querySelector('.overflow-x-auto').scrollBy({left: -400, behavior: 'smooth'})"
+                                class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-blue-500 transition-colors">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                    </div>
+                    <div class="absolute top-1/2 -translate-y-1/2 right-0 translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
+                        <button onclick="this.closest('.relative').querySelector('.overflow-x-auto').scrollBy({left: 400, behavior: 'smooth'})"
+                                class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-blue-500 transition-colors">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                @endif
+            </div>
+
+            <div class="flex flex-row gap-4 mb-12">
+                @foreach($featuredAttractions as $attraction)
+                    <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}">
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl duration-500 transition-shadow w-full">
+                            <div class="relative h-64 overflow-hidden">
                                 <img src="{{ $attraction->attachments?->get(0)?->url() ?? "" }}"
-                                     alt="Изображение {{ $attraction->name }}" class="photo w-full h-full object-cover group-hover/image:scale-110 transition-transform duration-500">
-                                <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
+                                     alt="Изображение {{ $attraction->name }}"
+                                     class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2 h-10 md:h-15 xl:h-21">{{ $attraction->name }}</h3>
-                                <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $attraction->short_description }}</p>
-                                <div class="flex items-center justify-between">
+                                <h2 class="card-title text-2xl font-bold mb-3 line-clamp-1 group-hover:text-[#352AA2] transition-colors duration-300">{{ $attraction->name }}</h2>
+                                <p class="text-gray-600 mb-4">{{ $attraction->short_description }}</p>
+                                <div class=" flex items-center justify-between">
                                     <div class="flex items-center text-gray-500 text-sm">
-                                        <i class="fas fa-clock mr-2"></i>
-                                        <span>{{ $attraction->visit_duration }} мин</span>
+                                        @if ($attraction->visit_duration)
+                                            <i class="fas fa-clock mr-2"></i>
+                                            <span>{{ $attraction->visit_duration }} мин</span>
+                                        @endif
                                     </div>
-                                    <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="shrink-0 size-10 xl:size-11 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity hover:scale-110 group/button overflow-hidden relative">
-                                        <img src="/images/Arrow 2.png" alt="" class="icon w-2 xl:w-3 h-4.5 xl:h-6 transition-transform duration-300 group-hover/button:translate-x-1">
+                                    <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
+                                        <img src="/images/Arrow 2.png" alt="иконка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
                                     </a>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
-
-                <!-- Кнопки навигации -->
-                <div class="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
-                    <button onclick="this.closest('.relative').querySelector('.overflow-x-auto').scrollBy({left: -400, behavior: 'smooth'})"
-                            class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-blue-500 transition-colors">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                </div>
-                <div class="absolute top-1/2 -translate-y-1/2 right-0 translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
-                    <button onclick="this.closest('.relative').querySelector('.overflow-x-auto').scrollBy({left: 400, behavior: 'smooth'})"
-                            class="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-blue-500 transition-colors">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8 mb-12">
-                @foreach($featuredAttractions as $attraction)
-                    <div data-aos="fade-right" class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl duration-500 transition-shadow">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="{{ $attraction->attachments?->get(0)?->url() ?? "" }}"
-                                 alt="Изображение {{ $attraction->name }}"
-                                 class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold mb-3">{{ $attraction->name }}</h3>
-                            <p class="text-gray-600 mb-4">{{ $attraction->short_description }}</p>
-                            <div class=" flex items-center justify-between">
-                                <div class="flex items-center text-sm text-gray-500">
-                                    <span><i class="fas fa-walking mr-1"></i>{{ $attraction->visit_duration }} мин</span>
-                                </div>
-                                <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
-                                    <img src="/images/Arrow 2.png" alt="иконка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    </a>
                 @endforeach
             </div>
             <!-- Map Container -->
             <div data-aos="fade-up" class="bg-white rounded-xl shadow-lg p-6">
                 <div class="flex flex-col sm:flex-row gap-4 lg:flex-row items-center justify-between mb-4">
-                    <h1 class="text-2xl font-bold mb-3">Интерактивная карта</h1>
+                    <p class="font-['Merriweather'] text-2xl font-bold mb-3">Интерактивная карта</p>
                     <div class="flex space-x-4">
                         <button onclick="forceInitMap()" class="map-button bg-purple-100 text-purple-600 hover:bg-purple-200">
                             <i class="fas fa-sync mr-2"></i>Загрузить карту
@@ -365,7 +375,7 @@
                     <img src="/images/Saratovskiy-Krytyy-rynok.jpg" alt="Крытый рынок" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
-                            <h1 class="font-bold text-lg">Крытый рынок</h1>
+                            <p class="font-['Merriweather'] font-bold text-lg">Крытый рынок</p>
                         </div>
                     </div>
                 </div>
@@ -374,7 +384,7 @@
                     <img src="/images/img424_0.jpg" alt="Консерватория" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
-                            <h1 class="font-bold">Консерватория</h1>
+                            <p class="font-['Merriweather'] font-bold">Консерватория</p>
                         </div>
                     </div>
                 </div>
@@ -383,7 +393,7 @@
                     <img src="/images/07458c68242fb8524be00a45a7df919ea6e65e78.png" alt="Цирк" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
-                            <h1 class="font-bold">Первый цирк России</h1>
+                            <p class="font-['Merriweather'] font-bold">Первый цирк России</p>
                         </div>
                     </div>
                 </div>
@@ -393,7 +403,7 @@
                     <img src="/images/photo_2022-11-14_16-25-54.jpg" alt="Парк Победы" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
-                            <h1 class="font-bold">Парк Победы</h1>
+                            <p class="font-['Merriweather'] font-bold">Парк Победы</p>
                         </div>
                     </div>
                 </div>
@@ -402,7 +412,7 @@
                     <img src="/images/8356339c970afc2d070e74f08f8a05505a083931.png" alt="Мост через Волгу" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
-                            <h1 class="font-bold">Саратовский мост</h1>
+                            <p class="font-['Merriweather'] font-bold">Саратовский мост</p>
                         </div>
                     </div>
                 </div>
@@ -411,7 +421,7 @@
                     <img src="/images/Saratov-3.jpg" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-lineart-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
-                            <h1 class="font-bold text-lg">Вечерний Саратов</h1>
+                            <p class="font-['Merriweather'] font-bold text-lg">Вечерний Саратов</p>
                             <p class="text-sm">Романтические виды на Волгу</p>
                         </div>
                     </div>
@@ -422,7 +432,7 @@
                     <img src="/images/ato58r5xh7sog4k40swwg0ksw.jpg" alt="Консерватория фасад" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
-                            <h1 class="font-bold text-lg">Архитектурное наследие</h1>
+                            <p class="font-['Merriweather'] font-bold text-lg">Архитектурное наследие</p>
                             <p class="text-sm">Памятники архитектуры XIX-XX веков</p>
                         </div>
                     </div>
@@ -432,7 +442,7 @@
                     <img src="/images/6whi7saljzocs40kwoo8okksg.jpg" alt="Волга" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
-                            <h1 class="font-bold">Великая Волга</h1>
+                            <p class="font-['Merriweather'] font-bold">Великая Волга</p>
                         </div>
                     </div>
                 </div>
@@ -441,7 +451,7 @@
                     <img src="https://fs.tonkosti.ru/30/ls/30lsy6fot9s0o04g4wow8wkgc.jpg" alt="Набережная летом" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
-                            <h1 class="font-bold">Летний Саратов</h1>
+                            <p class="font-['Merriweather'] font-bold">Летний Саратов</p>
                         </div>
                     </div>
                 </div>
@@ -449,7 +459,7 @@
                     <img src="/images/image 3.png" alt="Церковь иконы Божией Матери" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
-                            <h1 class="font-bold">Церковь иконы Божией Матери</h1>
+                            <p class="font-['Merriweather'] font-bold">Церковь иконы Божией Матери</p>
                         </div>
                     </div>
                 </div>
@@ -457,7 +467,7 @@
                     <img src="/images/image 22.png" alt="Набережная Космонавтов " class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
-                            <h1 class="font-bold">Набережная Космонавтов</h1>
+                            <p class="font-['Merriweather'] font-bold">Набережная Космонавтов</p>
                         </div>
                     </div>
                 </div>

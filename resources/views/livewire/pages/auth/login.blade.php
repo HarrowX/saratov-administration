@@ -29,7 +29,7 @@ new #[Layout('layouts.guest')] class extends Component
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <div class="mb-8">
-        <h2 class="text-3xl font-bold text-gray-900">С возвращением 👋</h2>
+        <h2 class="text-3xl font-bold text-gray-900">С возвращением</h2>
         <p class="mt-2 text-gray-500">Войдите, чтобы продолжить путешествие по Саратову</p>
     </div>
 
@@ -43,7 +43,7 @@ new #[Layout('layouts.guest')] class extends Component
             <label for="email" class="block text-sm font-medium text-gray-600 mb-1.5">Почта</label>
             <div class="relative">
                 <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-                <input wire:model="form.email" id="email" type="email" name="email" required autofocus autocomplete="username"
+                <input wire:model="form.email" id="email" type="email" name="email" required autofocus autocomplete="given-name"
                        placeholder="example@mail.ru" class="{{ $inputClass }} pl-11" />
             </div>
             <x-input-error :messages="$errors->get('form.email')" class="mt-2" />

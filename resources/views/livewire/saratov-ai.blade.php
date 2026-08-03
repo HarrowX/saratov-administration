@@ -8,7 +8,7 @@
             </div>
 
             <div class="max-w-4xl mx-auto">
-                <div class="bg-linear-to-br from-green-50 to-teal-50 rounded-2xl p-4 md:p-8">
+                <div class="bg-linear-to-br from-green-50 to-teal-50 rounded-2xl p-2 pb-4 md:pb-8 xs:p-4 md:p-8">
                     <!-- Chat interface -->
                     <div class="bg-white flex flex-col rounded-xl shadow-inner h-125 p-2 md:p-6 mb-6" id="chatContainer">
                         <div class="flex-1 overflow-y-auto min-h-0 flex flex-col-reverse">
@@ -63,19 +63,19 @@
                             <input wire:model="prompt" type="text" id="aiChatInput" placeholder="Напишите сообщение..."
                             class="flex-1 w-20 text-sm lg:text-base py-2 px-2 md:px-4 md:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
                             @if($isWaitingForResponse) disabled @endif>
-                            
-                            <button type="submit" class="bg-linear-to-r from-green-500 to-teal-600 text-white px-2 py-3 md:px-6 md:py-3 rounded-lg hover:shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+
+                            <button type="submit" class="bg-linear-to-r from-green-500 to-teal-600 text-white px-3 py-3 md:px-6 md:py-3 rounded-lg hover:shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
                             @if($isWaitingForResponse) disabled @endif>
                                 <i class="fas fa-paper-plane"></i>
                             </button>
                         </div>
                         @error('prompt')
                         <div>
-                            <p class="text-red-700">{{ $message }}</p>
+                            <p class="font-['Inter'] text-red-700 pt-2 text-sm lg:text-base">{{ $message }}</p>
                         </div>
                         @enderror
                     </form>
-{{-- 
+{{--
                     <!-- Quick actions -->
                     <div class="mt-4 flex flex-wrap gap-2">
                         <button class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm hover:bg-blue-200 transition">🚀 Поехали!</button>

@@ -10,7 +10,7 @@
             <div class="flex overflow-x-auto gap-4 md:gap-6 pb-6 scrollbar-hide scroll-smooth snap-x snap-mandatory"
                  style="scrollbar-width: none; -ms-overflow-style: none;">
                 @forelse ($attractions as $attraction)
-                    <div class="card snap-start shrink-0 w-[calc(80%-8px)] sm:w-80 lg:w-[calc(33.333%-16px)] bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="card snap-start shrink-0 w-[calc(90%-8px)] sm:w-80 lg:w-[calc(33.333%-16px)] bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div class="card-content group/img p-5 h-full font-['FindSansPro'] relative grid grid-rows-subgrid content-between row-span-2 gap-3">
                             <div class="flex flex-col gap-5">
                                 <div class="overflow-hidden rounded-[7px] sm:rounded-[19px]">
@@ -39,19 +39,21 @@
                 @endforelse
 
                 <!-- Стрелки навигации (только на десктопе) -->
-                <div class="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
-                    <button onclick="this.closest('.group').querySelector('.overflow-x-auto').scrollBy({left: -400, behavior: 'smooth'})"
-                            class="scroll-button hover:text-[#2663EB] transition-colors">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                </div>
+                @if($attractions->count() > 3)
+                    <div class="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
+                        <button onclick="this.closest('.group').querySelector('.overflow-x-auto').scrollBy({left: -400, behavior: 'smooth'})"
+                                class="scroll-button hover:text-[#2663EB] transition-colors">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                    </div>
 
-                <div class="absolute top-1/2 -translate-y-1/2 right-12 translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
-                    <button onclick="this.closest('.group').querySelector('.overflow-x-auto').scrollBy({left: 400, behavior: 'smooth'})"
-                            class="scroll-button hover:text-[#2663EB] transition-colors">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
+                    <div class="absolute top-1/2 -translate-y-1/2 right-12 translate-x-4 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block">
+                        <button onclick="this.closest('.group').querySelector('.overflow-x-auto').scrollBy({left: 400, behavior: 'smooth'})"
+                                class="scroll-button hover:text-[#2663EB] transition-colors">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

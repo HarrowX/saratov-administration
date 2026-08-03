@@ -38,7 +38,7 @@ class extends Component {
 
 <div class="font-['FindSansPro']">
     <div class="mb-8">
-        <h2 class="text-3xl font-bold text-gray-900">Создать аккаунт ✨</h2>
+        <h2 class="text-3xl font-bold text-gray-900">Создать аккаунт</h2>
         <p class="mt-2 text-gray-500">Зарегистрируйтесь, чтобы начать путешествие по Саратову</p>
     </div>
 

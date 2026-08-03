@@ -2,13 +2,13 @@
     <div class="max-w-6xl 3xl:max-w-427 mx-auto px-4 sm:px-10">
         <div class="flex justify-between items-center h-20 3xl:h-24">
             <div class="flex items-center">
-                <a href="{{ route('index') }}" class="flex items-center space-x-3">
-                    <img src="/images/Photoroom 1.png" alt="Логотип" class="icon h-7 xs:h-10">
-                    <span class="md:text-base lg:text-xl 3xl:text-2xl text-black font-['FindSansPro']">Саратов</span>
+                <a href="{{ route('index') }}" class="flex items-center space-x-1 3xl:space-x-3">
+                    <img src="/images/logo.svg" alt="Логотип" class="icon h-7 3xl:h-10">
+                    <span class="md:text-base xl:text-lg 3xl:text-2xl text-black font-['FindSansPro']">Саратов</span>
                 </a>
             </div>
 
-            <ul class="hidden lg:flex items-center md:space-x-4 3xl:space-x-6 transition text-xs 3xl:text-sm pt-1">
+            <ul class="hidden lg:flex items-center md:space-x-3 lg:space-x-2.5 xl:space-x-4 3xl:space-x-6 transition text-xs 3xl:text-sm pt-1">
                 <li>
                     <a href="{{ route('index') }}" class="{{ request()->is('/') ? "nav-link-active nav-link" : "nav-link" }}">Главная</a>
                 </li>
@@ -36,38 +36,44 @@
                 </li>
             </ul>
 
-            <div class="flex items-center space-x-3 2xl:space-x-8">
-                <button onclick="showAppDownload()" class="hidden md:flex items-center bg-linear-to-r from-green-500 to-teal-600 text-white px-5 py-2 rounded-lg hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-sm 3xl:text-base z-2">
+            <div class="flex items-center gap-0 xs:gap-3 3xl:gap-8">
+                <button onclick="showAppDownload()" class="hidden md:flex items-center bg-linear-to-r from-green-500 to-teal-600 text-white px-2 xl:px-5 py-2 rounded-lg hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-xs xl:text-sm 3xl:text-base z-2">
                     <i class="fas fa-download mr-3"></i>Приложение
                 </button>
+                @auth
 {{--                <button id="" class="">--}}
 {{--                    <img src="/images/image 21.svg" alt="поиск" class="icon size-7 3xl:size-11 hover:scale-125 transition duration-300">--}}
 {{--                </button>--}}
+                    @php
+                        $u = auth()->user();
+                        $fn = optional($u->username)->name ?? '';
+                        $ln = optional($u->username)->surname ?? '';
+                        $initials = mb_strtoupper(mb_substr($ln, 0, 1) . mb_substr($fn, 0, 1));
+                        $fullName = trim("$fn $ln") ?: 'Профиль';
 
-                <button id="profileBtn" class="relative cursor-pointer">
-                    <img src="/images/image 18.svg" alt="мой профиль" class="icon size-6 3xl:size-10 hover:scale-125 transition duration-300">
-                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full size-4 sm:size-5 flex items-center justify-center achievement-count">0</span>
-                </button>
+                    @endphp
+                    <a href="{{ route('profile') }}"
+                       class="flex items-center gap-1.5 xl:gap-2.5 pl-1 sm:pl-1.5 sm:pr-3 py-1 rounded-full hover:bg-gray-100 transition-colors cursor-pointer group">
+                        {{-- Аватар --}}
+                        <span class="size-8 xl:size-10 rounded-full bg-linear-to-br from-[#A556F7] to-[#2663EB] font-['FindSansPro'] flex items-center justify-center text-white text-xs xl:text-sm font-bold shrink-0">
+                            {{ $initials ?: '👤' }}
+                        </span>
 
                         {{-- Имя пользователя --}}
-                        <span class="text-xs sm:text-sm font-medium text-gray-700 max-w-20 xs:max-w-24 sm:max-w-32 truncate hidden xs:inline">
+                        <span class="text-xs xl:text-sm font-medium text-gray-700 max-w-20 xs:max-w-24 sm:max-w-32 truncate hidden xs:inline font-['FindSansPro'] text-wrap">
                             {{ $fullName }}
                         </span>
                     </a>
                 @else
-                    {{-- Кнопка "Войти" --}}
-                    <a href="{{ route('login') }}"
-                       class="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-300 text-xs sm:text-sm">
-                        {{-- Иконка только на десктопе --}}
-                        <svg class="w-4 h-4 sm:w-5 sm:h-5 hidden sm:block flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-
-                        </svg>
-                        <span>Войти</span>
-                    </a>
+                <a href="{{ route('login') }}"
+                   class="flex items-center gap-1.5 sm:gap-2 px-1.5 xs:px-5 py-2 text-white rounded-lg duration-300 text-xs sm:text-sm font-['FindSansPro'] bg-linear-to-r from-blue-500 to-purple-600 hover:shadow-lg transition cursor-pointer">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    <span>Войти</span>
+                </a>
                 @endauth
                 <div class="relative">
                     <button id="mobileMenuBtn" class="flex lg:hidden cursor-pointer stroke-gray-500">
-                        <svg class="ham hamRotate ham1 w-16 md:w-20" viewBox="0 0 100 100" onclick="this.classList.toggle('active')">
+                        <svg class="ham hamRotate ham1 w-16 md:w-16" viewBox="0 0 100 100" onclick="this.classList.toggle('active')">
                             <path class="line top" d="m 30,33 h 40 c 0,0 9.044436,-0.654587 9.044436,-8.508902 0,-7.854315 -8.024349,-11.958003 -14.89975,-10.85914 -6.875401,1.098863 -13.637059,4.171617 -13.637059,16.368042 v 40"/>
                             <path class="line middle" d="m 30,50 h 40"/>
                             <path class="line bottom" d="m 30,67 h 40 c 12.796276,0 15.357889,-11.717785 15.357889,-26.851538 0,-15.133752 -4.786586,-27.274118 -16.667516,-27.274118 -11.88093,0 -18.499247,6.994427 -18.435284,17.125656 l 0.252538,40"/>

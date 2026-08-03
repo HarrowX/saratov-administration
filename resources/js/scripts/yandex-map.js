@@ -192,27 +192,36 @@ function toggleFilterPanel() {
 
     panel = document.createElement('div');
     panel.id = 'filterPanel';
-    panel.className = 'absolute top-4 right-4 bg-white rounded-lg shadow-xl p-4 z-[1000] min-w-[220px] text-blue-600';
+    panel.className = 'absolute top-4 right-4 bg-white rounded-lg shadow-xl p-4 z-[1000] min-w-[220px] text-blue-800';
 
     panel.innerHTML = `
         <label class="block font-medium mb-2">
-            <i class="fas fa-filter mr-1 "></i>Фильтр по категориям
+            <i class="fas fa-filter mr-1"></i>Фильтр по категориям
         </label>
-        <select id="categorySelect" class="w-full px-3 py-2 border border-blue-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-200 bg-white cursor-pointer">
-            <option value="all" ${currentFilter === 'all' ? 'selected' : ''}>Все категории</option>
-            <option value="attraction" ${currentFilter === 'attraction' ? 'selected' : ''}> Достопримечательности</option>
-            <option value="hotel" ${currentFilter === 'hotel' ? 'selected' : ''}>Отели</option>
-            <option value="restaurant" ${currentFilter === 'restaurant' ? 'selected' : ''}>Рестораны</option>
-        </select>
+        <div class="relative">
+            <select id="categorySelect"
+                    class="w-full px-3 py-2 border border-blue-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600/10 focus:border-blue-200  cursor-pointer appearance-none pr-10">
+                <option value="all" ${currentFilter === 'all' ? 'selected' : ''}>Все категории</option>
+                <option value="attraction" ${currentFilter === 'attraction' ? 'selected' : ''}>Достопримечательности</option>
+                <option value="hotel" ${currentFilter === 'hotel' ? 'selected' : ''}>Отели</option>
+                <option value="restaurant" ${currentFilter === 'restaurant' ? 'selected' : ''}>Рестораны</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 select-arrow transition-transform duration-200 peer-focus:rotate-180 text-blue-800">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
     `;
     const style = document.createElement('style');
     style.textContent = `
         #filterPanel select {
             transition: all 0.2s ease;
         }
-        #filterPanel option:checked {
-            background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
-            color: white;
+        #categorySelect {
+                appearance: none;
+                -webkit-appearance: none;
+        }
+        #categorySelect:focus + .select-arrow i {
+            transform: rotate(180deg);
         }
     `;
     panel.appendChild(style);

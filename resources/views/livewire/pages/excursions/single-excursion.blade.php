@@ -16,9 +16,9 @@
 
     <x-map-modal />
 
-    <section id="home" class="relative mt-25 md:mt-35 xl:mt-40 3xl:mt-50 ">
+    <section id="home" class="relative mt-35 xl:mt-40 3xl:mt-50 ">
         <div class="max-w-6xl xl:max-w-7xl 3xl:max-w-398.25 px-4 sm:px-20 mx-auto relative">
-            <div class="relative overflow-hidden rounded-lg sm:rounded-2xl md:rounded-[30px] h-54 md:h-100 xl:h-125 3xl:h-200">
+            <div class="relative overflow-hidden rounded-lg sm:rounded-2xl md:rounded-[30px] h-70 md:h-100 xl:h-125 3xl:h-200">
                 <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
                      style="background-image: url('{{ $excursion->attachments->get(0)?->url() ?? "" }}')">
                 </div>
@@ -29,24 +29,19 @@
             </div>
 
             <a href="{{ route('all-excursions') }}"
-               class="absolute left-14 -top-10 3xl:-top-15 hidden md:flex items-center xl:gap-2 text-[#5F5F5F] hover:text-blue-900 transition-colors font-['FindSansPro']">
-                <i class="fa-solid fa-chevron-left text-xl xl:text-xl 3xl:text-3xl"></i>
-                <span class="text-xl 3xl:text-3xl pl-4">Экскурсии</span>
+               class="absolute left-3 sm:left-14 -top-10 3xl:-top-15 items-center xl:gap-2 text-[#5F5F5F] hover:text-blue-900 transition-colors font-['FindSansPro']">
+                <i class="fa-solid fa-chevron-left text-base xs:text-xl xl:text-xl 3xl:text-3xl"></i>
+                <span class="text-base xs:text-xl 3xl:text-3xl md:pl-4">Экскурсии</span>
             </a>
 
-            <button
-                wire:click="toggleFavorite"
-                class="absolute top-10 right-10 xl:top-18 xl:right-20 z-20 hidden md:flex items-center gap-3 px-5 py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group"
-            >
-                <i class="fa-regular fa-heart text-2xl xl:text-3xl group-hover:scale-110 group-hover:animate-pulse transition-transform {{ $isFavorite ? 'fa-solid text-red-400' : 'fa-regular' }}"></i>
-
-                <span class="text-xl xl:text-3xl font-medium">
-                {{ $isFavorite ? 'В избранном' : 'В избранное' }}
-            </span>
-
-                <span class="favorite-count ml-2 text-base xl:text-xl font-bold px-2.5 py-1 rounded-full {{ $isFavorite ? 'bg-red-500 text-white' : 'bg-red-500/80 text-white' }} transition-colors shadow-lg">
+            <button wire:click="toggleFavorite" class="flex absolute top-2 right-7.5 sm:top-4 sm:right-25 z-20 items-center gap-1 sm:gap-3 px-3 sm:px-5 py-1.5 sm:py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group">
+                <i class="fa-regular fa-heart text-lg sm:text-2xl xl:text-3xl group-hover:scale-110 group-hover:animate-pulse transition-transform {{ $isFavorite ? 'fa-solid text-red-400' : 'fa-regular' }}"></i>
+                <span class="text-xs xs:text-sm sm:text-lg 2xl:text-3xl font-medium">
+                    {{ $isFavorite ? 'В избранном' : 'В избранное' }}
+                </span>
+                <span class="favorite-count ml-2 text-xs sm:text-base 2xl:text-xl font-bold flex justify-center items-center size-5 sm:size-8 rounded-full {{ $isFavorite ? 'bg-red-400 text-white' : 'bg-red-400/80 text-white' }} transition-colors shadow-lg">
                 {{ $favoritesCount }}
-            </span>
+                </span>
             </button>
         </div>
     </section>
@@ -54,7 +49,7 @@
     <section class="features-section pt-8 md:pt-10 xl:pt-15 2xl:pt-26 pb-4 sm:pb-10 lg:pb-20 2xl:pb-26 3xl:pb-36 bg-white">
         <div class="max-w-6xl xl:max-w-7xl 3xl:max-w-398.25 px-4 sm:px-20 mx-auto">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-5 xl:gap-11">
-                <div data-aos="fade-right" class="max-w-full lg:max-w-120 xl:max-w-150 3xl:max-w-206 lg:w-auto">
+                <div class="max-w-full lg:max-w-120 xl:max-w-150 3xl:max-w-206 lg:w-auto">
                     <p class="text-base lg:text-lg/relaxed xl:text-2xl 3xl:text-3xl/relaxed">
                         {{$excursion->description}}
                     </p>
@@ -62,24 +57,32 @@
                 <div data-aos="fade-left" class="flex flex-col gap-7 w-full lg:w-auto">
                     <div class="flex flex-col w-full justify-around bg-[#E5E6F6] gap-3 md:gap-6.75 px-6 xl:px-11 py-8 rounded-[20px] font-['FindSansPro'] text-sm sm:text-base xl:text-xl 3xl:text-2xl">
                         <div class="flex items-center gap-2 xl:gap-5">
-                            <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/значок локации.svg">
+                            <img class="size-4.5 xl:size-7 icon" src="/images/image 17.svg">
+                            <p>{{ $excursion->type }}</p>
+                        </div>
+                        <a href="{{ route('single-guided-tour', $excursion->guide) }}" class="flex items-center gap-2 xl:gap-5 w-fit hover:text-green-500 transition-color duration-300">
+                            <div class="flex flex-wrap content-center size-5 xl:size-7.5">
+                                <i class="fas fa-user-alt"></i>
+                            </div>
+                            <p>{{ $excursion->guide->name }}</p>
+                        </a>
+                        <div class="flex items-center gap-2 xl:gap-5">
+                            <div class="flex flex-wrap content-center size-5 xl:size-7.5">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
                             <p>{{ $excursion->meeting_point }}</p>
                         </div>
                         <div class="flex items-center gap-2 xl:gap-5">
-                            <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/значок локации.svg">
+                            <div class="flex flex-wrap content-center size-5 xl:size-7.5">
+                                <i class="fa fa-map"></i>
+                            </div>
                             <p>{{ $excursion->meeting_address }}</p>
                         </div>
                         <div class="flex items-center gap-2 xl:gap-5">
-                            <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 18.svg">
-                            <a href="{{ route('single-guided-tour', $excursion->guide) }}">{{ $excursion->guide->name }}</a>
-                        </div>
-                        <div class="flex items-center gap-2 xl:gap-5">
-                            <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 8.svg">
+                            <div class="flex flex-wrap content-center size-5 xl:size-7.5">
+                                <i class=" fa-solid fa-clock"></i>
+                            </div>
                             <p>{{num_word($excursion->getDuration(), ['минута', 'минуты', 'минут'])}}</p>
-                        </div>
-                        <div class="flex items-center gap-2 xl:gap-5">
-                            <img class="size-4 sm:size-6 xl:size-7.5 icon" src="/images/image 17.svg">
-                            <p>{{ $excursion->type }}</p>
                         </div>
                     </div>
                     <button onclick="document.getElementById('map-modal').classList.remove(['hidden'])" class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] 2xl:rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-xl 3xl:text-3xl">
@@ -103,7 +106,7 @@
                         </div>
                     @endforeach
                 </div>
-                <a href="" class="w-full bg-linear-to-r from-purple-500 to-blue-600 text-white px-4 rounded-[30px] hover:shadow-lg transition text-center cursor-pointer mt-7 py-4 max-w-full md:max-w-[585px]">
+                <a href="{{ route('all-excursions') }}#ai-guide" class="w-full bg-linear-to-r from-purple-500 to-blue-600 text-white px-4 rounded-[30px] hover:shadow-lg transition text-center cursor-pointer mt-7 py-4 max-w-full md:max-w-[585px]">
                     <div class="text-[16px] lg:text-[18px] xl:text-xl 3xl:text-2xl">Задать вопрос AI Ассистенту Саре</div>
                 </a>
             </div>

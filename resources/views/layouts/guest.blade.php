@@ -20,9 +20,13 @@
                 <div class="absolute inset-0 bg-linear-to-br from-[#A556F7]/90 via-[#7c4fef]/85 to-[#2663EB]/90"></div>
 
                 <div class="relative">
-                    <a href="/" class="flex items-center gap-3">
-                        <img src="/images/Photoroom 1.png" alt="Саратов" class="icon h-10 w-auto brightness-0 invert">
-                        <span class="text-2xl font-bold text-white">Саратов</span>
+{{--                    <a href="/" wire:navigate class="flex items-center gap-3">--}}
+{{--                        <img src="/images/Photoroom 1.png" alt="Саратов" class="icon h-10 w-auto brightness-0 invert">--}}
+{{--                        <span class="text-2xl font-bold text-white">Саратов</span>--}}
+{{--                    </a>--}}
+                    <a href="{{ route('index') }}" class="flex items-center space-x-1 xl:space-x-3">
+                        <img src="/images/Photoroom 1.png" alt="Логотип" class="icon h-7 xl:h-10">
+                        <span class="text-base xl:text-xl 3xl:text-2xl text-white font-['FindSansPro']">Саратов</span>
                     </a>
                 </div>
 
@@ -60,7 +64,7 @@
                 {{-- Mobile logo --}}
                 <a href="/" class="flex lg:hidden items-center gap-2 mb-8">
                     <img src="/images/Photoroom 1.png" alt="Саратов" class="icon h-9 w-auto">
-                    <span class="text-xl font-bold text-gray-900">Саратов</span>
+                    <span class="text-xl text-gray-900 font-['FindSansPro']">Саратов</span>
                 </a>
 
                 <div class="w-full max-w-md">

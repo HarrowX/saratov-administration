@@ -29,7 +29,7 @@
         </div>
 
         <div class="border-t border-gray-800 mt-4 pt-4 text-center text-gray-400 text-sm">
-            <p>&copy; 2025 Саратов 435. Все права защищены.</p>
+            <p>&copy; 2026 Саратов. Все права защищены.</p>
         </div>
     </div>
 </footer>

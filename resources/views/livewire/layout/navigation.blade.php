@@ -35,9 +35,9 @@ new class extends Component
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             {{-- Logo --}}
-            <a href="{{ route('index') }}" class="flex items-center gap-2 shrink-0">
-                <img src="/images/Photoroom 1.png" alt="Саратов" class="icon h-8 w-auto">
-                <span class="text-lg font-bold text-gray-900 hidden sm:block">Саратов</span>
+            <a href="{{ route('index') }}" class="flex items-center space-x-1 3xl:space-x-3">
+                <img src="/images/logo.svg" alt="Логотип" class="icon h-7 3xl:h-10">
+                <span class="md:text-base xl:text-lg 3xl:text-2xl text-black font-['FindSansPro']">Саратов</span>
             </a>
 
             {{-- Desktop tabs --}}
@@ -45,7 +45,7 @@ new class extends Component
                 @foreach ($links as $link)
                     @php $isActive = request()->routeIs($link['active']); @endphp
                     <a href="{{ route($link['route']) }}"
-                       class="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
+                       class="flex items-center gap-1 xl:gap-2 px-1.5 xl:px-4 py-2 rounded-full text-xs 2xl:text-sm font-medium transition-all duration-200
                        {{ $isActive
                            ? 'bg-linear-to-r from-[#A556F7] to-[#2663EB] text-white shadow-md shadow-purple-500/25'
                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100' }}">
@@ -59,10 +59,10 @@ new class extends Component
             <div class="hidden lg:flex items-center relative">
                 <button @click="user = !user" @click.outside="user = false"
                         class="flex items-center gap-2.5 pl-1.5 pr-3 py-1.5 rounded-full hover:bg-gray-100 transition-colors cursor-pointer">
-                    <span class="size-8 rounded-full bg-linear-to-br from-[#A556F7] to-[#2663EB] flex items-center justify-center text-white text-sm font-bold">
+                    <span class="size-8 xl:size-10 rounded-full bg-linear-to-br from-[#A556F7] to-[#2663EB] font-['FindSansPro'] flex items-center justify-center text-white text-xs xl:text-sm font-bold shrink-0">
                         {{ $initials ?: '👤' }}
                     </span>
-                    <span class="text-sm font-medium text-gray-700 max-w-32 truncate">{{ $fullName }}</span>
+                    <span class="text-xs xl:text-sm font-medium text-left text-gray-700 max-w-20 xs:max-w-24 sm:max-w-32 truncate hidden xs:inline font-['FindSansPro'] text-wrap">{{ $fullName }}</span>
                     <i class="fas fa-chevron-down text-xs text-gray-400 transition-transform" :class="user && 'rotate-180'"></i>
                 </button>
 
@@ -86,7 +86,7 @@ new class extends Component
 
             {{-- Hamburger --}}
             <button @click="open = !open" class="lg:hidden inline-flex items-center justify-center size-10 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors cursor-pointer">
-                <i class="fas text-lg" :class="open ? 'fa-xmark' : 'fa-bars'"></i>
+                <i class="fas text-2xl" :class="open ? 'fa-xmark' : 'fa-bars'"></i>
             </button>
         </div>
     </div>

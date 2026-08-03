@@ -40,11 +40,6 @@
                             </div>
                         @endif
 
-                        {{-- Favorite marker --}}
-                        <div class="absolute top-3 left-3 size-10 bg-[#A855F7] rounded-xl flex items-center justify-center text-white shadow-lg">
-                            <i class="fas fa-heart"></i>
-                        </div>
-
                         {{-- Rating --}}
                         @if (!is_null($item->rating))
                             <div class="absolute top-3 right-3 flex items-center gap-1 bg-white/95 backdrop-blur px-2.5 py-1 rounded-full text-sm font-semibold text-gray-800 shadow">
@@ -67,7 +62,7 @@
 
                         <div class="mt-auto space-y-2.5">
                             <a href="{{ $this->getUrl($item) }}"
-                               class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-linear-to-r from-[#A556F7] to-[#2663EB] text-white text-sm font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-200">
+                               class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-linear-to-r from-[#A556F7] to-[#2663EB] text-white text-sm hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-200">
                                 Подробнее
                                 <i class="fas fa-arrow-right text-xs group-hover:translate-x-0.5 transition-transform"></i>
                             </a>
@@ -75,7 +70,7 @@
                             <form wire:submit="unfavorite({{ $item->id }})">
                                 @csrf
                                 <button type="submit"
-                                        class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white text-red-500 text-sm font-semibold border border-red-200 hover:bg-red-50 transition-all duration-200 cursor-pointer">
+                                        class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white text-red-500 text-sm border border-red-200 hover:bg-red-50 transition-all duration-200 cursor-pointer">
                                     <i class="fas fa-trash-can"></i>
                                     Удалить из избранного
                                 </button>

@@ -35,13 +35,13 @@
                     const modal = document.createElement('div');
                     modal.className = 'fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4';
                     modal.innerHTML = `
-                        <div class="bg-white rounded-2xl max-w-md w-full p-6 text-center">
-                            <button onclick="this.closest('.fixed').remove()" class="float-right text-gray-400 hover:text-gray-600">
+                        <div class="flex flex-col bg-white rounded-2xl max-w-md w-full p-6 text-center">
+                            <button onclick="this.closest('.fixed').remove()" class="flex justify-end float-right text-gray-400 hover:text-gray-600">
                                 <i class="fas fa-times text-xl"></i>
                             </button>
 
-                            <div class="w-20 h-20 rounded-2xl mx-auto mb-4 overflow-hidden">
-                                <img src="images/gerb-goroda-saratov.jpg" alt="Герб Саратова">
+                            <div class="flex justify-center rounded-2xl mb-4 overflow-hidden">
+                                <img src="/images/logo.svg" alt="Логотип" class="icon size-20">
                             </div>
 
                             <h3 class="text-2xl font-bold mb-2">Скачайте приложение</h3>
@@ -67,8 +67,6 @@
                                     </div>
                                 </a>
                             </div>
-
-                            <p class="text-sm text-gray-500 mt-4">Или перейдите по ссылке: saratov-435.ru/app</p>
                         </div>
                     `;
                     document.body.appendChild(modal);

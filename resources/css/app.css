@@ -473,12 +473,6 @@ footer .flex {
     border: 0;
 }
 
-/* Focus visible styles */
-*:focus-visible {
-    outline: 2px solid var(--primary-blue);
-    outline-offset: 2px;
-}
-
 /* Dark mode support (optional) */
 @media (prefers-color-scheme: dark) {
     :root {
@@ -740,23 +734,6 @@ button{
     .filter {
         position: relative;
     }
-}
-
-select option {
-    background-color: white;
-    color: black;
-}
-
-select option:hover,
-select option:checked {
-    background: linear-gradient(0deg, black 0%, black 100%);
-    color: white;
-}
-
-/* Для Firefox */
-select option:checked {
-    background-color: black;
-    color: white;
 }
 @theme {
     --breakpoint-xs: 25rem;
