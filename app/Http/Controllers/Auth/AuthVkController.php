@@ -105,10 +105,16 @@ class AuthVkController extends Controller
 
             if (! $user) {
                 $user = DB::transaction(function () use ($userData) {
-                    $user = null;
-
                     try {
-                        $email = $userData['email'] == '' ? 'vk_'.$userData['user_id'].'@'.config('app.domain_name') : $userData['email'];
+                        $email = 'vk_'.$userData['user_id'].'@'.config('app.domain_name');
+
+                        $user = User::query()->where('email', $userData['email'])->first();
+                        if ($user) {
+                            $user->vk_id = $userData['user_id'];
+                            $user->vk_avatar = $userData['avatar'] ?? null;
+                            $user->save();
+                            return $user;
+                        }
 
                         $password = Str::random(20);
                         $dto = new RegisterDTO([
