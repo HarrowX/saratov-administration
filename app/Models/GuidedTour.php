@@ -17,6 +17,7 @@ class GuidedTour extends Model
         'email',
         'vk',
         'max',
+        'views_count',
     ];
 
     public function attachments(): MorphMany
@@ -32,5 +33,10 @@ class GuidedTour extends Model
     public function favorites(): MorphMany
     {
         return $this->morphMany(Favorite::class, 'favoriteable');
+    }
+
+    public function views(): MorphMany
+    {
+        return $this->morphMany(HistoryView::class, 'viewable');
     }
 }
