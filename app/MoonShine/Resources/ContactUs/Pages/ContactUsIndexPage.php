@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources\ContactUs\Pages;
 
 use App\MoonShine\Resources\ContactUs\ContactUsResource;
+use App\MoonShine\Resources\User\UserResource;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
@@ -34,7 +35,7 @@ class ContactUsIndexPage extends IndexPage
     {
         return [
             ID::make(),
-            BelongsTo::make('Пользователь', 'user', fn ($user) => $user->username->toFio()),
+            BelongsTo::make('Пользователь', 'user', fn ($user) => $user->username->toFio(), UserResource::class),
             Email::make('Почта', 'email')->changeFill(fn ($c) => $c->user->email),
             Phone::make('Номер', 'phone')->changeFill(fn ($c) => $c->user->phone),
             Checkbox::make('Обработано?', 'is_processed')->updateOnPreview(),

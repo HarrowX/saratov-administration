@@ -27,7 +27,7 @@
                         <div class="hidden lg:block sm:w-92 md:w-60 2xl:w-92 bg-white rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 absolute -top-15 2xl:-top-12">
                             <div class="p-2 sm:p-4 3xl:p-5 flex flex-col">
                                 <div class="w-full mb-4 overflow-hidden rounded-[20px] shrink-0 h-37.5 sm:h-53.75 3xl:h-78.75">
-                                    <img src="{{ $attraction->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $attraction->name }}" class="photo">
+                                    <img src="{{ asset($attraction->attachments?->get(0)?->url()) ?? "" }}" alt="Изображение {{ $attraction->name }}" class="photo">
                                 </div>
 
                                 <div class="font-['FindSansPro'] flex flex-col">

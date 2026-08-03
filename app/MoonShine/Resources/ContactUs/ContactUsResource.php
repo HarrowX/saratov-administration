@@ -9,6 +9,8 @@ use App\MoonShine\Resources\ContactUs\Pages\ContactUsDetailPage;
 use App\MoonShine\Resources\ContactUs\Pages\ContactUsIndexPage;
 use MoonShine\Contracts\Core\PageContract;
 use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\Support\Enums\Action;
+use MoonShine\Support\ListOf;
 
 /**
  * @extends ModelResource<ContactUs, ContactUsIndexPage, ContactUsDetailPage>
@@ -30,5 +32,10 @@ class ContactUsResource extends ModelResource
             ContactUsIndexPage::class,
             ContactUsDetailPage::class,
         ];
+    }
+
+    protected function activeActions(): ListOf
+    {
+        return parent::activeActions()->except(Action::CREATE);
     }
 }
