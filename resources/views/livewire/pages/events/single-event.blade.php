@@ -101,15 +101,15 @@
                             </div>
                         @endif
                     </div>
-                    @if($event->map_link)
-                        <a href="{{$event->map_link}}" target="_blank" class="flex justify-center w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] xl:rounden-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-base sm:text-lg xl:text-xl 3xl:text-3xl">
-                            Показать на карте
-                        </a>
-                    @else
+{{--                    @if($event->map_link)--}}
+{{--                        <a href="{{$event->map_link}}" target="_blank" class="flex justify-center w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] xl:rounden-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-base sm:text-lg xl:text-xl 3xl:text-3xl">--}}
+{{--                            Показать на карте--}}
+{{--                        </a>--}}
+{{--                    @else--}} TODO change
                         <div class="w-full flex justify-center bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] xl:rounden-[30px] text-base sm:text-lg xl:text-xl 3xl:text-3xl opacity-50 cursor-not-allowed content-center font-['FindSansPro']" disabled>
                             Показать на карте
                         </div>
-                    @endif
+{{--                    @endif--}}
                 </div>
             </div>
         </div>
