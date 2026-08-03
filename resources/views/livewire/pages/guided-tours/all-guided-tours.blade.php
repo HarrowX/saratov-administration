@@ -69,38 +69,16 @@
                     </div>
                 @endforeach
             </div>
-
-{{--            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 lg:p-6 xl:gap-y-12 items-stretch">--}}
-{{--                @foreach ($guidedTours as $guidedTour)--}}
-{{--                    <div class="group relative rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full">--}}
-{{--                        <div class="flex flex-col h-full p-3 3xl:p-5">--}}
-{{--                            <div class="relative aspect-4/3 rounded-2xl overflow-hidden shrink-0">--}}
-{{--                                <img src="{{ $guidedTour->attachments?->get(0)?->url() ?? "" }}"--}}
-{{--                                    alt="Изображение {{ $guidedTour->name }}"--}}
-{{--                                    class="img-guid w-full h-full group-hover:scale-105 transition-transform duration-500">--}}
-{{--                                <div class="overflow-hidden rounded-[7px] sm:rounded-[19px]">--}}
-{{--                                    <img src="{{ $guidedTour->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $guidedTour->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">--}}
-{{--                                    <livewire:favorite-mini-button :object="$guidedTour"/>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <a href="{{ route('single-guided-tour', ['guidedTour' => $guidedTour->id]) }}" class="flex flex-col grow h-full">--}}
-{{--                                <h1 class="text-base xs:text-xl font-bold text-black">{{ $guidedTour->name }}</h1>--}}
-{{--                                <div class="flex flex-col justify-end h-full font-['FindSansPro']">--}}
-{{--                                    <div class="flex flex-row justify-between items-end gap-3.5 text-xs 3xl:text-base font-light">--}}
-{{--                                        <span class="items-center justify-end gap-3.5 text-[#5F5F5F] leading-4 3xl:leading-5 line-clamp-2">--}}
-{{--                                            {{ $guidedTour->short_description }}--}}
-{{--                                        </span>--}}
-{{--                                        <div href="{{ route('single-guided-tour', ['guidedTour' => $guidedTour->id]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">--}}
-{{--                                            <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                @endforeach--}}
-{{--            </div>--}}
+            @if($guidedTours->isEmpty())
+                <div class="text-center">
+                    <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa fa-compass text-4xl text-[#352AA2]"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-2">Экскурсоводов нет</h3>
+                    <p class="text-gray-500">Попробуйте изменить фильтр или загляните позднее!</p>
+                </div>
+            @else
+            @endif
         </div>
     </section>
 </div>

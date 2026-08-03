@@ -62,7 +62,7 @@
                     </span>
                     <h2 class="text-center md:text-left">Саратов всегда с вами</h2>
                     <p class="text text-white/90 text-center md:text-left mb-8">
-                        Скачайте наше приложение и получите доступ ко всем функциям офлайн, экскурсиям и персональным маршрутам
+                        Скачайте наше приложение и получите доступ ко всем функциям в телефоне
                     </p>
 
                     <div class="flex flex-col flex-wrap content-center md:content-start space-y-4 mb-8">

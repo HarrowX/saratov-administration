@@ -181,6 +181,15 @@
                     </div>
                 @endforeach
             </div>
+            @if($attractions->isEmpty())
+                <div class="text-center">
+                    <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-magnifying-glass text-4xl text-[#352AA2]"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-2">Достопримечательностей нет</h3>
+                    <p class="text-gray-500">Загляните позже!</p>
+                </div>
+           @endif
         </div>
     </section>
 </div>
