@@ -102,7 +102,7 @@ class AuthController extends Controller
 
         if (!(auth()->user()->haveFakeVkEmail()))
         {
-            return response()->json(['success' => false, 'error' => 'У вас уже есть валидная почтав и пароль'], 400);
+            return response()->json(['success' => false, 'error' => 'У вас уже есть валидная почта и пароль'], 400);
         }
 
         $password = $request->password;
