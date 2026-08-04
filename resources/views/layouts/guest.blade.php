@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <link rel="icon" type="image/jpeg" href="/images/gerb-goroda-saratov.jpg">
+        <link rel="icon" type="image/jpeg" href="{{asset('/images/logo.svg')}}">
 
         <title>{{ config('app.name', 'Саратов') }}</title>
 

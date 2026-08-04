@@ -104,7 +104,7 @@
                         <p class="text-gray-900 font-['Merriweather'] font-bold text-xl mb-4">Сканируйте QR-код</p>
                         <!-- QR Code image -->
                         <div class="w-64 h-64 rounded-lg overflow-hidden mb-4">
-                            <img src="/images/qrprila.jpg" alt="QR-код приложения">
+                            <img src="{{asset('/images/qrprila.jpg')}}" alt="QR-код приложения">
                         </div>
                         <p class="text-gray-600">Наведите камеру телефона</p>
                     </div>
@@ -416,7 +416,7 @@
                     </div>
                 </div>
 
-                <div data-aos="zoom-in" data-aos-delay="300" class="col-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/Saratov-3.jpg')}}" data-caption="Веречний саратов">
+                <div data-aos="zoom-in" data-aos-delay="300" class="col-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/Saratov-3.jpg')}}" data-caption="Вечерний Саратов">
                     <img src="{{asset('/images/Saratov-3.jpg')}}" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-lineart-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
@@ -427,7 +427,7 @@
                 </div>
 
                 <!-- Row 3 -->
-                <div data-aos="zoom-in" data-aos-delay="350" class="col-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/ato58r5xh7sog4k40swwg0ksw.jpg')}}" data-caption="Архитекртурное наследие">
+                <div data-aos="zoom-in" data-aos-delay="350" class="col-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/ato58r5xh7sog4k40swwg0ksw.jpg')}}" data-caption="Архитектурное наследие">
                     <img src="{{asset('/images/ato58r5xh7sog4k40swwg0ksw.jpg')}}" alt="Консерватория фасад" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
