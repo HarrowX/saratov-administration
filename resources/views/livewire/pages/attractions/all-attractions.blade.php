@@ -18,40 +18,40 @@
             <div class="relative max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 xl:px-20 h-full">
                 <div class="flex flex-col items-end h-full relative">
                     @if($attractions->isNotEmpty())
-                        <p class="hidden lg:block font-['FindSansPro'] md:text-xs 2xl:text-lg text-[#374559] absolute -top-19 2xl:-top-20 right-5 xl:right-6">
+                        <p class="hidden lg:block font-['FindSansPro'] md:text-xs 2xl:text-lg text-[#374559] absolute -top-19 2xl:-top-20 right-32 2xl:right-12">
                             Пользователи рекомендуют:
                         </p>
                         @php
                             $attraction=$attractions->random()
                         @endphp
-                    <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}">
-                        <div class="hidden lg:block sm:w-92 md:w-60 2xl:w-92 bg-white rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 absolute -top-15 2xl:-top-12 group group/image">
-                            <div class="p-2 sm:p-4 3xl:p-5 flex flex-col">
-                                <div class="w-full mb-4 overflow-hidden rounded-[20px] shrink-0">
-                                    <img src="{{ asset($attraction->attachments?->get(0)?->url()) ?? "" }}" alt="Изображение {{ $attraction->name }}" class="photo h-37.5 sm:h-53.75 3xl:h-78.75 object-cover group-hover/image:scale-110 transition-transform duration-500">
-                                </div>
-
-                                <div class="font-['FindSansPro'] flex flex-col">
-                                    <div>
-                                        <h2 class="card-title text-xs sm:text-xl 2xl:text-2xl 3xl:text-[21px] font-extrabold mb-2 tracking-[1px] group-hover:text-[#352AA2] transition-colors duration-300">{{ $attraction->name }}</h2>
-                                        <p class="text-[7px] sm:text-xs text-[#888888] line-clamp-4">{{ $attraction->short_description}}</p>
+                        <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}">
+                            <div class="hidden lg:block sm:min-w-92 md:min-w-60 2xl:min-w-92 w-fit max-w-90  bg-white rounded-[20px] shadow-lg hover:shadow-xl transition-shadow duration-300 absolute -top-15 2xl:-top-12 group group/image">
+                                <div class="p-2 sm:p-4 3xl:p-5 flex flex-col">
+                                    <div class="w-full mb-4 overflow-hidden rounded-[20px] shrink-0">
+                                        <img src="{{ asset($attraction->attachments?->get(0)?->url()) ?? "" }}" alt="Изображение {{ $attraction->name }}" class="photo h-37.5 sm:h-53.75 3xl:h-78.75 object-cover group-hover/image:scale-110 transition-transform duration-500">
                                     </div>
 
-                                    <div class="mt-2 mb-3">
-                                        <div class="flex items-end justify-between gap-2">
-                                            <div class="flex gap-1 flex-1 max-w-37 sm:max-w-67 ">
-                                                <img src="/images/image 7.svg" alt="" class="icon size-2.5 sm:size-4 2xl:size-7 mt-5 2xl:mt-4 shrink-0">
-                                                <span class="text-[8px] sm:text-[10px] 2xl:text-xs text-[#505050] pt-1 sm:pt-4">{{ $attraction->address }}</span>
+                                    <div class="font-['FindSansPro'] flex flex-col">
+                                        <div>
+                                            <h2 class="card-title text-xs sm:text-xl 2xl:text-2xl 3xl:text-[21px] font-extrabold mb-2 tracking-[1px] group-hover:text-[#352AA2] transition-colors duration-300 max-w-90">{{ $attraction->name}}</h2>
+                                            <p class="text-sm 2xl:text-base text-[#5F5F5F] line-clamp-4">{{ $attraction->short_description}}</p>
+                                        </div>
+
+                                        <div class="mt-2 mb-3">
+                                            <div class="flex items-end justify-between gap-2">
+                                                <div class="flex items-center gap-2 flex-1 max-w-37 sm:max-w-67 text-[#5F5F5F]">
+                                                    <i class="fas fa-map-marker-alt text-xl xl:text-2xl"></i>
+                                                    <span class="text-sm 2xl:text-base">{{ $attraction->address }}</span>
+                                                </div>
+                                                <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
+                                                    <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
+                                                </a>
                                             </div>
-                                            <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
-                                                <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
-                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
                     @endif
                 </div>
             </div>

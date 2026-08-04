@@ -60,7 +60,7 @@
             </div>
 
             {{-- Form panel --}}
-            <div class="flex flex-col justify-center items-center px-6 py-12 bg-gray-50 lg:bg-white">
+            <div class="flex flex-col justify-center items-center px-6 py-12 lg:bg-white">
                 {{-- Mobile logo --}}
                 <a href="/" class="flex lg:hidden items-center gap-2 mb-8">
                     <img src="/images/Photoroom 1.png" alt="Саратов" class="icon h-9 w-auto">

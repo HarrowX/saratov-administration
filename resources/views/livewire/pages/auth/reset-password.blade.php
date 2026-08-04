@@ -82,7 +82,7 @@ new #[Layout('layouts.guest')] class extends Component
     <form wire:submit="resetPassword" class="flex-col gap-5 h-full">
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Почта')" />
+            <x-input-label for="email" :value="__('Почта')" class="block font-medium text-gray-600 mb-1.5" />
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full " type="email" name="email" required autofocus autocomplete="username" class="{{$inputClass}}"/>
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>

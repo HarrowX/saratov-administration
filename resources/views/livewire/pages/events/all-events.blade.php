@@ -35,7 +35,7 @@
                                         class="pl-4 pr-4 xl:pr-10 py-2.5 not-focus:text-gray-500 border border-gray-200 rounded-xl focus:outline-none hover:ring-2 hover:ring-[#352AA2] hover:border-transparent focus:ring-2 focus:ring-[#352AA2] focus:border-transparent bg-gray-50 hover:bg-white transition appearance-none cursor-pointer text-gray-700 w-full [&_option]:text-ellipsis [&_option]:overflow-hidden [&_option]:whitespace-nowrap [&_option]:max-w-37.5">
                                     <option value="" class="hidden">Категория</option>
                                     @foreach($categories as $category)
-                                        <option value="{{ $category->id }}" class="truncate max-w-[150px]">{{ $category->name }}</option>
+                                        <option value="{{ $category->id }}" class="truncate max-w-37.5">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                                 <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-400">
@@ -105,7 +105,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 xl:gap-y-12">
                 @foreach ($events as $event)
                     <div class="card bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                        <div class="card-content group p-2 sm:p-5 h-full font-['FindSansPro'] grid grid-rows-subgrid row-span-2 gap-3">
+                        <div class="card-content group p-2 sm:p-5 h-full font-['FindSansPro'] grid grid-rows-[auto_1fr_auto] row-span-2 gap-3">
                             <div class="flex flex-col gap-3 xl:gap-5">
                                 <div class="relative overflow-hidden rounded-[7px] sm:rounded-[19px]">
                                     <img src="{{ $event->attachments?->get(0)?->url() ?? "" }}" alt="{{ $event->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 sm:h-70 md:h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
@@ -115,13 +115,13 @@
                                         </span>
                                     @endif
                                 </div>
-                                <a href="{{route('single-event', ['event' => $event->slug])}}">
-                                    <h2 class="card-title text-start text-lg lg:text-base xl:text-xl 3xl:text-3xl group-hover:text-[#352AA2] transition-colors duration-300 font-bold">
+                                <a href="{{route('single-event', ['event' => $event->slug])}}" class="flex flex-col gap-2">
+                                    <h2 class="card-title text-start text-lg xl:text-xl 3xl:text-3xl group-hover:text-[#352AA2] transition-colors duration-300 font-bold">
                                         {{$event->name}}</h2>
-                                    <p class="text-sm xl:text-base text-[#888888] font-light line-clamp-2 h-10 xl:h-12">
+                                    <p class="text-sm xl:text-base text-[#5F5F5F] font-light line-clamp-2 h-10 xl:h-12">
                                         {{ $event->description }}
                                     </p>
-                                    <span class="flex items-center text-xs xl:text-sm gap-2 font-medium text-[#5F5F5F]">
+                                    <span class="flex items-center text-xs xl:text-sm gap-2 font-light text-[#5F5F5F]">
                                         <i class="fas fa-calendar"></i>
                                         {{ $event->start_date->translatedFormat('j F Y')}}
                                     </span>
