@@ -119,6 +119,14 @@ img {
     width: 75px;
 }
 
+/* Logo container */
+
+.logo_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 /* Body */
 
 .body {
