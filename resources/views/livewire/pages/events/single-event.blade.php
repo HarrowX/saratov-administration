@@ -114,7 +114,7 @@
     </section>
 
 
-    <section class="py-5 md:py-8 xl:py-10 3xl:py-18 bg-gray-50 my-5 md:my-8 xl:my-10 3xl:my-18">
+    <section class="py-5 md:py-8 xl:py-10 3xl:py-18 my-5 md:my-8 xl:my-10 3xl:my-18">
         <div class="max-w-6xl 3xl:max-w-421 mx-auto px-4 sm:px-10">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 @foreach($event->attachments->take(5) as $index => $attachment)

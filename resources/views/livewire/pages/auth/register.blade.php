@@ -113,7 +113,7 @@ class extends Component {
             <label for="password_confirmation" class="block text-sm font-medium text-gray-600 mb-1.5">Подтвердите пароль <span class="text-red-500">*</span></label>
             <div class="relative">
                 <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-                <input wire:model="password_confirmation" id="password_confirmation" :type="show ? 'text' : 'password'" name="password_confirmation" required autocomplete="new-password"
+                <input wire:model="dto.password_confirmation" id="password_confirmation" :type="show ? 'text' : 'password'" name="password_confirmation" required autocomplete="new-password"
                        placeholder="••••••••" class="{{ $inputClass }} pl-11 pr-11" />
                 <button type="button" @click="show = !show" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer">
                     <i class="fas" :class="show ? 'fa-eye-slash' : 'fa-eye'"></i>
