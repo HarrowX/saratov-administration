@@ -74,10 +74,12 @@
                         color:white;font-weight:bold;font-size:14px;transition:transform .2s;
                     `;
 
+                    el.style.transform = 'scale(1) translate(-18px, -18px)';
+
                     el.textContent = point.name ? point.name.charAt(0).toUpperCase() : '•';
 
-                    el.addEventListener('mouseenter', () => el.style.transform = 'scale(1.2)');
-                    el.addEventListener('mouseleave', () => el.style.transform = 'scale(1)');
+                    el.addEventListener('mouseenter', () => el.style.transform = 'scale(1.2) translate(-15px, -15px)');
+                    el.addEventListener('mouseleave', () => el.style.transform = 'scale(1) translate(-18px, -18px)');
 
                     el.addEventListener('click', function() {
 
