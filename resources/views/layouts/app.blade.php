@@ -7,7 +7,7 @@
 
         <link rel="icon" type="image/jpeg" href="{{asset('/images/gerb-goroda-saratov.jpg')}}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Саратов') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
