@@ -4,9 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="icon" type="image/jpeg" href="{{asset('/images/gerb-goroda-saratov.jpg')}}">
-        <link rel="shortcut icon" type="image/jpeg" href="{{asset('/images/gerb-goroda-saratov.jpg')}}">
-        <link rel="apple-touch-icon" href="{{asset('/images/gerb-goroda-saratov.jpg')}}">
+        <link rel="icon" type="image/jpeg" href="{{asset('/images/logo.svg')}}">
+        <link rel="shortcut icon" type="image/jpeg" href="{{asset('/images/logo.svg')}}">
+        <link rel="apple-touch-icon" href="{{asset('/images/logo.svg')}}">
 
         <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 
