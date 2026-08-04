@@ -416,7 +416,7 @@
                     </div>
                 </div>
 
-                <div data-aos="zoom-in" data-aos-delay="300" class="col-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/Saratov-3.jpg')}}" data-caption="Вечерний саратов">
+                <div data-aos="zoom-in" data-aos-delay="300" class="col-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/Saratov-3.jpg')}}" data-caption="Вечерний Саратов">
                     <img src="{{asset('/images/Saratov-3.jpg')}}" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-lineart-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
