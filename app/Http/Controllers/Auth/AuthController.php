@@ -11,7 +11,6 @@ use App\Exceptions\Auth\BadCredentialsException;
 use App\Http\Controllers\Controller;
 use App\Services\AuthService;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
@@ -61,22 +60,22 @@ class AuthController extends Controller
             Password::RESET_LINK_SENT => response()->json([
                 'success' => true,
                 'error' => null,
-                'message' => 'Ссылка для сброса пароля отправлена на ваш email'
+                'message' => 'Ссылка для сброса пароля отправлена на ваш email',
             ], 200),
 
             Password::RESET_THROTTLED => response()->json([
                 'success' => false,
-                'error' => 'Слишком много попыток. Попробуйте позже'
+                'error' => 'Слишком много попыток. Попробуйте позже',
             ], 429),
 
             Password::INVALID_USER => response()->json([
                 'success' => false,
-                'error' => 'Пользователь с таким email не найден'
+                'error' => 'Пользователь с таким email не найден',
             ], 404),
 
             default => response()->json([
                 'success' => false,
-                'error' => 'Произошла ошибка при отправке ссылки'
+                'error' => 'Произошла ошибка при отправке ссылки',
             ], 500)
         };
     }
@@ -100,8 +99,7 @@ class AuthController extends Controller
 
         $email = $request->email;
 
-        if (!(auth()->user()->haveFakeVkEmail()))
-        {
+        if (! (auth()->user()->haveFakeVkEmail())) {
             return response()->json(['success' => false, 'error' => 'У вас уже есть валидная почта и пароль'], 400);
         }
 

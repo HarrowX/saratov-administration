@@ -15,10 +15,6 @@ return new class extends Migration
             $table->integer('views_count')->default(0);
         });
 
-        Schema::table('excursions', function (Blueprint $table) {
-            $table->integer('views_count')->default(0);
-        });
-
         Schema::table('events', function (Blueprint $table) {
             $table->integer('views_count')->default(0);
         });
@@ -30,10 +26,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('guided_tours', function (Blueprint $table) {
-            $table->removeColumn('views_count');
-        });
-
-        Schema::table('excursions', function (Blueprint $table) {
             $table->removeColumn('views_count');
         });
 
