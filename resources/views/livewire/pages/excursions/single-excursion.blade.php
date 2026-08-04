@@ -107,7 +107,7 @@
                     @endforeach
                 </div>
                 <a href="{{ route('all-excursions') }}#ai-guide" class="w-full bg-linear-to-r from-purple-500 to-blue-600 text-white px-4 rounded-[30px] hover:shadow-lg transition text-center cursor-pointer mt-7 py-4 max-w-full md:max-w-[585px]">
-                    <div class="text-[16px] lg:text-[18px] xl:text-xl 3xl:text-2xl">Задать вопрос AI Ассистенту Саре</div>
+                    <div class="text-[16px] lg:text-[18px] xl:text-xl 3xl:text-2xl">Задать вопрос персональному гиду</div>
                 </a>
             </div>
             <div class="job-swiper__swiper swiper mx-auto max-w-full lg:max-w-100 xl:max-w-150 3xl:max-w-200 h-80 lg:h-100 3xl:h-129.5 relative rounded-xl">
