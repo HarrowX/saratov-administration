@@ -13,7 +13,7 @@ class Excursion extends Model
         'distance', 'difficulty', 'group_size_min', 'group_size_max',
         'price_adult', 'price_child', 'price_group', 'is_free',
         'age_restriction', 'meeting_point', 'meeting_address', 'schedule_type',
-        'operator_name', 'operator_phone', 'booking_enabled', 'rating', 'views_count', 'status', 'views_count'
+        'operator_name', 'operator_phone', 'booking_enabled', 'rating', 'views_count', 'status', 'views_count',
     ];
 
     public function attachments(): MorphMany
