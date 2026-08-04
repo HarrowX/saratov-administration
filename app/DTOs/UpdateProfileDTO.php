@@ -19,8 +19,8 @@ class UpdateProfileDTO extends ValidatedDTO
     protected function rules(): array
     {
         return [
-            'name' => ['string', 'required', 'max:255'],
-            'surname' => ['string', 'required', 'max:255'],
+            'name' => ['string', 'required', 'min:2', 'max:255'],
+            'surname' => ['string', 'required', 'min:2', 'max:255'],
             'patronymic' => ['sometimes', 'string', 'nullable', 'max:255'],
 
             'phone' => ['phone:RU', 'sometimes', 'string', 'nullable', 'max:255'],
