@@ -14,7 +14,7 @@
                     </p>
 
                     <div class="mmin-w-full sm:min-w-110 xl:min-w-140 3xl:min-w-197">
-                        <img src="/images/Rectangle 12224702 (1).png" class="photo w-full h-auto object-cover">
+                        <img src="/images/Rectangle 12224702 (1).webp" class="photo w-full h-auto object-cover">
                     </div>
 
                     <div class="grid grid-cols-3 gap-5 w-full">

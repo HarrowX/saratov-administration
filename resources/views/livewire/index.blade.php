@@ -370,8 +370,8 @@
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <!-- Row 1 -->
-                <div data-aos="zoom-in" class="col-span-2 row-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/Saratovskiy-Krytyy-rynok.jpg')}}"  data-caption="Крытый рынок">
-                    <img src="{{asset('/images/Saratovskiy-Krytyy-rynok.jpg')}}" alt="Крытый рынок" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" class="col-span-2 row-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/Saratovskiy-Krytyy-rynok.webp')}}"  data-caption="Крытый рынок">
+                    <img src="{{asset('/images/Saratovskiy-Krytyy-rynok.webp')}}" alt="Крытый рынок" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <p class="font-['Merriweather'] font-bold text-lg">Крытый рынок</p>
@@ -379,8 +379,8 @@
                     </div>
                 </div>
 
-                <div data-aos="zoom-in" data-aos-delay="100" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/img424_0.jpg')}}" data-caption="Консерватория">
-                    <img src="{{asset('/images/img424_0.jpg')}}" alt="Консерватория" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="100" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/img424_0.webp')}}" data-caption="Консерватория">
+                    <img src="{{asset('/images/img424_0.webp')}}" alt="Консерватория" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <p class="font-['Merriweather'] font-bold">Консерватория</p>
@@ -481,8 +481,8 @@
             </div>
             <!-- Скрытая fancybox галерея -->
             <div style="display: none;">
-                <a href="{{asset('/images/Saratovskiy-Krytyy-rynok.jpg')}}" data-fancybox="full-gallery" data-caption="Крытый рынок"></a>
-                <a href="{{asset('/images/img424_0.jpg" data-fancybox="full-gallery')}}" data-caption="Консерватория"></a>
+                <a href="{{asset('/images/Saratovskiy-Krytyy-rynok.webp')}}" data-fancybox="full-gallery" data-caption="Крытый рынок"></a>
+                <a href="{{asset('/images/img424_0.webp" data-fancybox="full-gallery')}}" data-caption="Консерватория"></a>
                 <a href="{{asset('/images/07458c68242fb8524be00a45a7df919ea6e65e78.webp')}}" data-fancybox="full-gallery"
                 data-caption="Первый цирк России"></a>
                 <a href="{{asset('/images/photo_2022-11-14_16-25-54.jpg')}}" data-fancybox="full-gallery"
