@@ -24,13 +24,13 @@ class AttractionResource extends JsonResource
 
             'name' => $this->name,
             'slug' => $this->slug,
-            'shortDescription' => $this->short_description,
+            'short_description' => $this->short_description,
             'description' => $this->description,
 
             'class' => Attraction::class,
 
             'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
-            'isFavorite' => $isFavorite,
+            'is_favorite' => $isFavorite,
 
             'worktime' => $this->worktime,
             'phone' => $this->phone,
@@ -43,17 +43,17 @@ class AttractionResource extends JsonResource
             'website' => $this->website,
 
             'status' => $this->status,
-            'ticketPrice' => $this->ticket_price,
-            'visitDuration' => $this->visit_duration,
+            'ticket_price' => $this->ticket_price,
+            'visit_duration' => $this->visit_duration,
 
-            'isAccessible' => (bool) $this->is_accessible,
-            'hasParking' => (bool) $this->has_parking,
+            'is_accessible' => (bool) $this->is_accessible,
+            'has_parking' => (bool) $this->has_parking,
 
-            'displayLocation' => $this->display_location,
-            //            'viewsCount' => $this->views_count,
-            'favoritesCount' => $this->favorites?->count() ?? 0,
+            'display_location' => $this->display_location,
+            //            'views_count' => $this->views_count,
+            'favorites_count' => $this->favorites?->count() ?? 0,
 
-            'createdAt' => $this->created_at,
+            'created_at' => $this->created_at,
             'attachments' => AttachmentResource::collection($this->attachments),
         ];
     }

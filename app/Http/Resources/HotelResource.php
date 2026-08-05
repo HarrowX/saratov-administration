@@ -23,13 +23,13 @@ class HotelResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'shortDescription' => $this->short_description,
+            'short_description' => $this->short_description,
             'description' => $this->description,
 
             'class' => Hotel::class,
 
             'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
-            'isFavorite' => $isFavorite,
+            'is_favorite' => $isFavorite,
 
             'type' => $this->type,
             'stars' => $this->stars,
@@ -44,9 +44,9 @@ class HotelResource extends JsonResource
             'maxPrice' => $this->max_price,
             'minPrice' => $this->min_price,
 
-            'favoritesCount' => $this->favorites?->count() ?? 0,
+            'favorites_count' => $this->favorites?->count() ?? 0,
 
-            'createdAt' => $this->created_at,
+            'created_at' => $this->created_at,
             'attachments' => AttachmentResource::collection($this->attachments),
         ];
     }
