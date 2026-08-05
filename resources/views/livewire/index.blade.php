@@ -437,8 +437,8 @@
                     </div>
                 </div>
 
-                <div data-aos="zoom-in" data-aos-delay="400" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/6whi7saljzocs40kwoo8okksg.jpg')}}" data-caption="Великая Волга">
-                    <img src="{{asset('/images/6whi7saljzocs40kwoo8okksg.jpg')}}" alt="Волга" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="400" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/6whi7saljzocs40kwoo8okksg.webp')}}" data-caption="Великая Волга">
+                    <img src="{{asset('/images/6whi7saljzocs40kwoo8okksg.webp')}}" alt="Волга" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <p class="font-['Merriweather'] font-bold">Великая Волга</p>
@@ -462,7 +462,7 @@
                         </div>
                     </div>
                 </div>
-                <div data-aos="zoom-in" data-aos-delay="450" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.png')}}" data-caption="Набережная Космонавтов ">
+                <div data-aos="zoom-in" data-aos-delay="450" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.webp')}}" data-caption="Набережная Космонавтов ">
                     <img src="{{asset('/images/image 22.png')}}" alt="Набережная Космонавтов " class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
@@ -493,13 +493,13 @@
                 data-caption="Вечерний Саратов"></a>
                 <a href="{{asset('/images/ato58r5xh7sog4k40swwg0ksw.jpg')}}" data-fancybox="full-gallery"
                 data-caption="Архитектурное наследие"></a>
-                <a href="{{asset('/images/6whi7saljzocs40kwoo8okksg.jpg')}}" data-fancybox="full-gallery"
+                <a href="{{asset('/images/6whi7saljzocs40kwoo8okksg.webp')}}" data-fancybox="full-gallery"
                 data-caption="Великая волга"></a>
                 <a href="{{asset('https://fs.tonkosti.ru/30/ls/30lsy6fot9s0o04g4wow8wkgc.jpg')}}" data-fancybox="full-gallery"
                 data-caption="Летний Саратов"></a>
                 <a href="{{asset('/images/d6e40fb855b389b4827ce14c2652cfc3c5295f12.png')}}" data-fancybox="full-gallery"
                 data-caption="Церковь иконы Божией Матери"></a>
-                <a href="{{asset('/images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.png')}}" data-fancybox="full-gallery"
+                <a href="{{asset('/images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.webp')}}" data-fancybox="full-gallery"
                 data-caption="Набережная космонавтов"></a>
             </div>
         </div>

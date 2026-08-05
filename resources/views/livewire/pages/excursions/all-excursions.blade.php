@@ -16,7 +16,7 @@
                     </p>
                 </div>
                 <div data-aos="fade-left" class="min-w-full md:min-w-88 lg:min-w-146 h-88 xl:h-90 3xl:h-auto 3xl:min-w-237.5">
-                    <img src="{{asset('/images/4fe8539f70401070351fe8228c84deaf619dded8.jpg')}}" class="rounded-md md:rounded-2xl">
+                    <img src="{{asset('/images/4fe8539f70401070351fe8228c84deaf619dded8.webp')}}" class="rounded-md md:rounded-2xl">
                 </div>
             </div>
         </div>
