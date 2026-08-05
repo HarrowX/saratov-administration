@@ -5,7 +5,7 @@
 <div>
     <!--Hero Section-->
     <section id="home" class="hero-section pt-21 min-h-100 md:min-h-screen flex flex-col gap-17 items-center justify-center relative">
-        <div class="absolute inset-0 bg-[url('/images/bg-restaurants.jpg')] bg-no-repeat bg-cover">
+        <div class="absolute inset-0 bg-[url('/images/bg-restaurants.webp')] bg-no-repeat bg-cover">
             <div class="absolute inset-0 bg-[rgba(239,230,215,0.73)]"></div>
         </div>
         <div class="relative z-10 text-center text-black">

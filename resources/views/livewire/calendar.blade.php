@@ -8,7 +8,7 @@
         <div class="flex flex-col sm:flex-row justify-center font-['Centurygothic'] tracking-widest">
             <div class="w-full sm:w-50 lg:w-70 xl:w-75 3xl:w-88">
                 <div class="relative w-full h-50 sm:h-full rounded-t-xl sm:rounded-tr-none sm:rounded-l-xl lg:rounded-l-4xl overflow-hidden shadow-xl">
-                    <img src="/images/f3429762a6cc1d6808382c4abeff79f593da9f61.jpg" class="w-full h-full object-cover">
+                    <img src="{{asset('/images/f3429762a6cc1d6808382c4abeff79f593da9f61.webp')}}" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black/50"></div>
                     <div class="absolute top-0 right-0 px-1 py-0.5 lg:px-2 lg:py-1 m-2 text-[#FFFFFFB2] border-[#FFFFFF66] border xl:border-2 text-xs sm:text-base rounded-sm">СЕГОДНЯ</div>
                     <div class="absolute inset-0 flex flex-col items-center justify-center text-white">

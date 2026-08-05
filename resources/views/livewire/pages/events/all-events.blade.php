@@ -4,7 +4,7 @@
 
 <div>
     <section id="home" class="hero-section pt-21 min-h-100 md:min-h-screen flex flex-col gap-17 items-center justify-center relative">
-        <div class="absolute inset-0 bg-no-repeat bg-cover" style="background-image: url('/images/bg-events.jpg');">
+        <div class="absolute inset-0 bg-no-repeat bg-cover" style="background-image: url('/images/bg-events.webp');">
             <div class="absolute inset-0 bg-[rgba(239,230,215,0.73)]" style="background-color:#45618696;"></div>
         </div>
         <div class="relative z-10 text-center text-white">

@@ -11,7 +11,7 @@
     };
 </script>
 <div class="bg-gray-50">
-   <section id="home" class="hero-section flex flex-col items-center justify-around relative bg-[url('/images/bg-image.png')] bg-center bg-no-repeat bg-cover " style="min-height: calc(100dvh - 80px); margin-top: 80px;" xl:style="min-height: calc(100dvh - 96px); margin-top: 96px;">
+   <section id="home" class="hero-section flex flex-col items-center justify-around relative bg-[url('/images/bg-image.webp')] bg-center bg-no-repeat bg-cover " style="min-height: calc(100dvh - 80px); margin-top: 80px;" xl:style="min-height: calc(100dvh - 96px); margin-top: 96px;">
         <div class="max-w-6xl 3xl:max-w-7xl mx-auto flex flex-col h-full w-full px-1 xs:px-4 sm:px-10">
 
             <div class="flex flex-col items-center md:items-end justify-center flex-1 gap-10 3xl:gap-15 pt-15 pb-7 lg:pb-10 3xl:pb-15">
@@ -297,7 +297,7 @@
 {{--            <div class="grid md:grid-cols-2 gap-7 xl:gap-12 items-center">--}}
 {{--                <div data-aos="fade-right">--}}
 {{--                    <div class="relative xl:w-full md:h-99 xl:h-full shadow-xl">--}}
-{{--                        <img src="{{asset('/images/a2180e30ceeba4a115385d68e52b22ba3e08df0f.jpg')}}" alt="Саратовский мост" class="rounded-2xl">--}}
+{{--                        <img src="{{asset('/images/a2180e30ceeba4a115385d68e52b22ba3e08df0f.webp')}}" alt="Саратовский мост" class="rounded-2xl">--}}
 {{--                        <div class="absolute inset-0 bg-linear-to-t from-black/50 to-transparent rounded-2xl"></div>--}}
 {{--                        <div class="absolute bottom-6 left-6 text-white">--}}
 {{--                            <div class="bg-white/20 backdrop-blur-sm rounded-lg p-4">--}}
@@ -388,8 +388,8 @@
                     </div>
                 </div>
 
-                <div data-aos="zoom-in" data-aos-delay="150" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/07458c68242fb8524be00a45a7df919ea6e65e78.png')}}" data-caption="Первый цирк России">
-                    <img src="{{asset('/images/07458c68242fb8524be00a45a7df919ea6e65e78.png')}}" alt="Цирк" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="150" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/07458c68242fb8524be00a45a7df919ea6e65e78.webp')}}" data-caption="Первый цирк России">
+                    <img src="{{asset('/images/07458c68242fb8524be00a45a7df919ea6e65e78.webp')}}" alt="Цирк" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <p class="font-['Merriweather'] font-bold">Первый цирк России</p>
@@ -407,8 +407,8 @@
                     </div>
                 </div>
 
-                <div data-aos="zoom-in" data-aos-delay="250" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/8356339c970afc2d070e74f08f8a05505a083931.png')}}" data-caption="Саратовский мост">
-                    <img src="{{asset('/images/8356339c970afc2d070e74f08f8a05505a083931.png')}}" alt="Мост через Волгу" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="250" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/8356339c970afc2d070e74f08f8a05505a083931.webp')}}" data-caption="Саратовский мост">
+                    <img src="{{asset('/images/8356339c970afc2d070e74f08f8a05505a083931.webp')}}" alt="Мост через Волгу" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <p class="font-['Merriweather'] font-bold">Саратовский мост</p>
@@ -427,8 +427,8 @@
                 </div>
 
                 <!-- Row 3 -->
-                <div data-aos="zoom-in" data-aos-delay="350" class="col-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/ato58r5xh7sog4k40swwg0ksw.jpg')}}" data-caption="Архитектурное наследие">
-                    <img src="{{asset('/images/ato58r5xh7sog4k40swwg0ksw.jpg')}}" alt="Консерватория фасад" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="350" class="col-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/ato58r5xh7sog4k40swwg0ksw.webp')}}" data-caption="Архитектурное наследие">
+                    <img src="{{asset('/images/ato58r5xh7sog4k40swwg0ksw.webp')}}" alt="Консерватория фасад" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <p class="font-['Merriweather'] font-bold text-lg">Архитектурное наследие</p>
@@ -454,7 +454,7 @@
                         </div>
                     </div>
                 </div>
-                <div data-aos="zoom-in" data-aos-delay="450" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/d6e40fb855b389b4827ce14c2652cfc3c5295f12.png')}}" data-caption="Церковь иконы Божией Матери">
+                <div data-aos="zoom-in" data-aos-delay="450" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/d6e40fb855b389b4827ce14c2652cfc3c5295f12.webp')}}" data-caption="Церковь иконы Божией Матери">
                     <img src="{{asset('/images/image 3.png')}}" alt="Церковь иконы Божией Матери" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
@@ -483,21 +483,21 @@
             <div style="display: none;">
                 <a href="{{asset('/images/Saratovskiy-Krytyy-rynok.jpg')}}" data-fancybox="full-gallery" data-caption="Крытый рынок"></a>
                 <a href="{{asset('/images/img424_0.jpg" data-fancybox="full-gallery')}}" data-caption="Консерватория"></a>
-                <a href="{{asset('/images/07458c68242fb8524be00a45a7df919ea6e65e78.png')}}" data-fancybox="full-gallery"
+                <a href="{{asset('/images/07458c68242fb8524be00a45a7df919ea6e65e78.webp')}}" data-fancybox="full-gallery"
                 data-caption="Первый цирк России"></a>
                 <a href="{{asset('/images/photo_2022-11-14_16-25-54.jpg')}}" data-fancybox="full-gallery"
                 data-caption="Парк Победы"></a>
-                <a href="{{asset('/images/8356339c970afc2d070e74f08f8a05505a083931.png')}}" data-fancybox="full-gallery"
+                <a href="{{asset('/images/8356339c970afc2d070e74f08f8a05505a083931.webp')}}" data-fancybox="full-gallery"
                 data-caption="Саратовский мост"></a>
                 <a href="{{asset('/images/Saratov-3.jpg')}}" data-fancybox="full-gallery"
                 data-caption="Вечерний Саратов"></a>
-                <a href="{{asset('/images/ato58r5xh7sog4k40swwg0ksw.jpg')}}" data-fancybox="full-gallery"
+                <a href="{{asset('/images/ato58r5xh7sog4k40swwg0ksw.webp')}}" data-fancybox="full-gallery"
                 data-caption="Архитектурное наследие"></a>
                 <a href="{{asset('/images/6whi7saljzocs40kwoo8okksg.webp')}}" data-fancybox="full-gallery"
                 data-caption="Великая волга"></a>
                 <a href="{{asset('https://fs.tonkosti.ru/30/ls/30lsy6fot9s0o04g4wow8wkgc.jpg')}}" data-fancybox="full-gallery"
                 data-caption="Летний Саратов"></a>
-                <a href="{{asset('/images/d6e40fb855b389b4827ce14c2652cfc3c5295f12.png')}}" data-fancybox="full-gallery"
+                <a href="{{asset('/images/d6e40fb855b389b4827ce14c2652cfc3c5295f12.webp')}}" data-fancybox="full-gallery"
                 data-caption="Церковь иконы Божией Матери"></a>
                 <a href="{{asset('/images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.webp')}}" data-fancybox="full-gallery"
                 data-caption="Набережная космонавтов"></a>

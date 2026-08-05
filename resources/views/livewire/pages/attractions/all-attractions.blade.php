@@ -13,7 +13,7 @@
         </div>
 
         <div class="flex-1 relative z-20">
-            <div class="absolute inset-0 bg-[url('/images/bg-attractions.png')] bg-no-repeat bg-cover bg-center"></div>
+            <div class="absolute inset-0 bg-[url('/images/bg-attractions.webp')] bg-no-repeat bg-cover bg-center"></div>
 
             <div class="relative max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 xl:px-20 h-full">
                 <div class="flex flex-col items-end h-full relative">
