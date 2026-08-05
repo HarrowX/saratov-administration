@@ -43,9 +43,18 @@ class AuthController extends Controller
 
     public function logout()
     {
-        $this->authService->logout();
+        if ($this->authService->logout(auth()->user())) {
+            return response(status: 204);
+        }
 
-        return response(status: 204);
+        return response(status: 404);
+    }
+
+    public function refresh()
+    {
+        $refreshToken = request()->string('refresh_token');
+
+        return $this->authService->refresh($refreshToken);
     }
 
     public function forgotPassword(ForgotPasswordDTO $request)

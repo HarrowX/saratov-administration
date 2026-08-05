@@ -12,11 +12,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Larahook\SanctumRefreshToken\Trait\AuthTokens;
 use Laravel\Socialite\Socialite;
 
 class AuthVkController extends Controller
 {
+    use AuthTokens;
     public AuthService $authService;
+
 
     public function __construct(AuthService $authService)
     {
@@ -62,9 +65,9 @@ class AuthVkController extends Controller
         $res = $this->handleCallback($request, $clientId, $request->boolean('invalidate') ?? true);
 
         if ($res instanceof User) {
-            $token = $this->createToken($res);
+            $tokens = $this->createTokenPair($res);
 
-            return response()->json($token, 200);
+            return response()->json($tokens, 200);
         }
 
         return $res;

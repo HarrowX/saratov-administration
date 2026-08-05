@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Ai\Concerns\HasConversations;
-use Laravel\Sanctum\HasApiTokens;
-
+use Larahook\SanctumRefreshToken\Trait\HasApiTokens;
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
