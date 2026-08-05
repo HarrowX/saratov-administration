@@ -8,14 +8,11 @@ use App\Exceptions\Auth\BadCredentialsException;
 use App\Models\User;
 use App\Models\UserName;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Larahook\SanctumRefreshToken\Model\PersonalAccessToken;
 use Larahook\SanctumRefreshToken\Trait\AuthTokens;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AuthService
 {
@@ -66,30 +63,25 @@ class AuthService
         return $user;
     }
 
-    /**
-     * @param string $refreshToken
-     *
-     * @return array
-     */
     public function refresh(string $refreshToken): array
     {
-        if (!$refreshToken) {
+        if (! $refreshToken) {
             throw new HttpResponseException(response()->json([
-                'message' => 'refresh_token обязателен'
+                'message' => 'refresh_token обязателен',
             ], 401));
         }
 
         $token = PersonalAccessToken::findToken($refreshToken);
 
-        if (!$token || !$token?->can('refresh')) {
+        if (! $token || ! $token?->can('refresh')) {
             throw new HttpResponseException(response()->json([
-                'message' => 'Не валидный токен'
+                'message' => 'Не валидный токен',
             ], 401));
         }
 
         if ($token->expires_at && $token->expires_at < now()) {
             throw new HttpResponseException(response()->json([
-                'message' => 'токен протух'
+                'message' => 'токен протух',
             ], 401));
         }        if ($token->expires_at < now()) {
             throw new HttpResponseException(response()->json([], 401));
@@ -97,9 +89,9 @@ class AuthService
 
         $user = $token->tokenable;
 
-        if (!$user) {
+        if (! $user) {
             throw new HttpResponseException(response()->json([
-                'message' => 'Пользователь не найден'
+                'message' => 'Пользователь не найден',
             ], 404));
         }
 
@@ -116,11 +108,6 @@ class AuthService
         return $this->createTokenPair($user, 'access-api');
     }
 
-    /**
-     * @param User $user
-     *
-     * @return bool
-     */
     public function logout(User $user): bool
     {
         return $this->logoutTokenPair($user);

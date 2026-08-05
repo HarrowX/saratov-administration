@@ -1,5 +1,7 @@
 <?php
 
+use Larahook\SanctumRefreshToken\Model\PersonalAccessToken;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -9,7 +11,7 @@ return [
     | This model with refresh_id column
     |
     */
-    'personal_access_token_model' => \Larahook\SanctumRefreshToken\Model\PersonalAccessToken::class,
+    'personal_access_token_model' => PersonalAccessToken::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -30,6 +32,6 @@ return [
     | considered expired.
     |
     */
-    'auth_token_expiration' => env('AUTH_TOKEN_EXPIRATION', 10*24*60),
+    'auth_token_expiration' => env('AUTH_TOKEN_EXPIRATION', 10 * 24 * 60),
     'refresh_token_expiration' => env('REFRESH_TOKEN_EXPIRATION', 5),
 ];

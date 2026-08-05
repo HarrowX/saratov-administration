@@ -18,8 +18,8 @@ use Laravel\Socialite\Socialite;
 class AuthVkController extends Controller
 {
     use AuthTokens;
-    public AuthService $authService;
 
+    public AuthService $authService;
 
     public function __construct(AuthService $authService)
     {

@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Ai\Concerns\HasConversations;
 use Larahook\SanctumRefreshToken\Trait\HasApiTokens;
+use Laravel\Ai\Concerns\HasConversations;
+
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
