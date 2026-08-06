@@ -58,14 +58,17 @@ class AuthVkController extends Controller
 
         if (! $clientId) {
             return response()->json([
-                'device_type' => 'must be "android" or "ios"',
-            ], 400);
+                'message' => 'must be "android" or "ios"',
+                'errors' => [
+                    'device_type' => 'должен быть "android" или "ios"',
+                ]
+            ], 422);
         }
 
         $res = $this->handleCallback($request, $clientId, $request->boolean('invalidate') ?? true);
 
         if ($res instanceof User) {
-            $tokens = $this->createTokenPair($res);
+            $tokens = $this->createTokenPair($res, 'access-api');
 
             return response()->json($tokens, 200);
         }

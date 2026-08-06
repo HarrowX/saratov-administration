@@ -67,7 +67,7 @@ class AuthService
     {
         if (! $refreshToken) {
             throw new HttpResponseException(response()->json([
-                'message' => 'refresh_token обязателен',
+                'message' => 'Токен не был предоставлен',
             ], 401));
         }
 
@@ -81,7 +81,7 @@ class AuthService
 
         if ($token->expires_at && $token->expires_at < now()) {
             throw new HttpResponseException(response()->json([
-                'message' => 'токен протух',
+                'message' => 'Срок токена истек',
             ], 401));
         }        if ($token->expires_at < now()) {
             throw new HttpResponseException(response()->json([], 401));
