@@ -61,7 +61,7 @@ class AuthVkController extends Controller
                 'message' => 'must be "android" or "ios"',
                 'errors' => [
                     'device_type' => 'должен быть "android" или "ios"',
-                ]
+                ],
             ], 422);
         }
 
