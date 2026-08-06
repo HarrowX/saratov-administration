@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 trait HasViews
 {
     use HasRelationships;
+
     public function views(): MorphMany
     {
         return $this->morphMany(HistoryView::class, 'viewable');

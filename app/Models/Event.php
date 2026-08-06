@@ -5,13 +5,11 @@ namespace App\Models;
 use App\HasAttachments;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Event extends Model
 {
     use HasAttachments;
-
 
     protected $fillable = [
         'name',

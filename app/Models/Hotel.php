@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 #[UseResource(HotelResource::class)]
 class Hotel extends Model
 {
-    use HasAttachments, HasExcursionPoints, HasEvents, HasFavorites, HasVisits, HasViews;
+    use HasAttachments, HasEvents, HasExcursionPoints, HasFavorites, HasViews, HasVisits;
 
     protected $fillable = [
         'name',
