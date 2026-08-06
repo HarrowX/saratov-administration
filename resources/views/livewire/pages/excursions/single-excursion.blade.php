@@ -39,7 +39,7 @@
                 <span class="text-xs xs:text-sm sm:text-lg 2xl:text-3xl font-medium">
                     {{ $isFavorite ? 'В избранном' : 'В избранное' }}
                 </span>
-                <span class="favorite-count ml-2 text-xs sm:text-base 2xl:text-xl font-bold flex justify-center items-center size-5 sm:size-8 rounded-full {{ $isFavorite ? 'bg-red-400 text-white' : 'bg-red-400/80 text-white' }} transition-colors shadow-lg">
+                <span class="favorite-count ml-2 text-xs sm:text-base 2xl:text-xl font-bold flex justify-center items-center min-w-5 h-5 sm:min-w-8 sm:h-8 px-1 sm:px-2 rounded-full {{ $isFavorite ? 'bg-red-400 text-white' : 'bg-red-400/80 text-white' }} transition-colors shadow-lg">
                 {{ $favoritesCount }}
                 </span>
             </button>
