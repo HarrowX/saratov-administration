@@ -112,8 +112,7 @@ class AttractionFormPage extends FormPage
                         ])->removable(),
                 ]),
                 Tab::make('Расписание',[
-                    MorphMany::make('Расписание', 'scheduleRecords', ScheduleRecordResource::class)
-                        ->creatable()
+                    MorphMany::make('Расписание', 'scheduleRecords', ScheduleRecordResource::class)->creatable()
                 ]),
             ]),
 
