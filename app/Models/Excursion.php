@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\HasAttachments;
+use App\HasFavorites;
+use App\HasViews;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Excursion extends Model
 {
-    use HasAttachments;
+    use HasAttachments, HasFavorites, HasViews;
 
     protected $fillable = [
         'name', 'slug', 'description', 'type', 'duration',
@@ -20,7 +22,7 @@ class Excursion extends Model
         'operator_name', 'operator_phone', 'booking_enabled', 'rating', 'views_count', 'status', 'views_count',
     ];
 
-    public function points(): HasMany //TODO rename all usage and use trait HasExcursionPoints
+    public function points(): HasMany
     {
         return $this->hasMany(ExcursionPoint::class)->orderBy('order');
     }
@@ -38,15 +40,5 @@ class Excursion extends Model
     public function getDuration(): int
     {
         return $this->duration ?? $this->points->sum('duration_minutes');
-    }
-
-    public function favorites(): MorphMany
-    {
-        return $this->morphMany(Favorite::class, 'favoriteable');
-    }
-
-    public function views(): MorphMany
-    {
-        return $this->morphMany(HistoryView::class, 'viewable');
     }
 }
