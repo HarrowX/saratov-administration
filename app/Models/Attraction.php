@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\HasSchedule;
 use App\Http\Resources\AttractionResource;
 use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +11,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 #[UseResource(AttractionResource::class)]
 class Attraction extends Model
 {
+    use HasSchedule;
+
     protected $fillable = [
         'name',
         'short_description',

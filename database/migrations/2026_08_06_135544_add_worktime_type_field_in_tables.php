@@ -14,7 +14,34 @@ return new class extends Migration
         Schema::table('attractions', function (Blueprint $table) {
             $table->string('worktime_type')->nullable();
             $table->string('worktime_weekends')->nullable();
+        });
 
+        Schema::create('schedule_records', function (Blueprint $table) {
+            $table->id();
+
+            $table->morphs('schedulable');
+
+            $table->string('kind');
+            // like:
+            // every-time (остальное null)
+            // every-day (сетать только hour_start, hour_end)
+            // week-day (сетать только hour_start, hour_end, week_start)
+            // interval-week-day (сетать только hour_start, hour_end, week_start, week_end)
+            // day (сетать только hour_start, hour_end, day_start)
+            // interval-day (сетать только hour_start, hour_end, day_start)
+
+            // приоритеты при вычислении: every-time < every-day < interval-week-day < week-day < interval-day < day
+
+            $table->string('week_start')->nullable(); // like "1", "2", ..., "7" or "man", "thu", ... "sun". || заполняется при kind: week-day, interval-week-day
+            $table->string('week_end')->nullable();   // like "1", "2", ..., "7" or "man", "thu", ... "sun". || заполняется при kind: interval-week-day
+
+            $table->string('day_start')->nullable(); // like "30.12", "10.05", "09.05", "01.01" || заполняется при kind: day, interval-day
+            $table->string('day_end')->nullable();   // like "30.12", "10.05", "09.05", "01.01" || заполняется при kind: interval-day
+
+            $table->string('hour_start')->nullable(); // like "00:00", "12:00", "13::00", "24:00" || заполняется при kind: every-day, week-day, interval-week-day, day, interval-day
+            $table->string('hour_end')->nullable();   // like "00:00", "12:00", "13::00", "24:00" || заполняется при kind: every-day, week-day, interval-week-day, day, interval-day
+
+            $table->timestamps();
         });
     }
 
@@ -27,5 +54,7 @@ return new class extends Migration
             $table->dropColumn('worktime_type');
             $table->dropColumn('worktime_weekends');
         });
+
+        Schema::dropIfExists('schedule_records');
     }
 };
