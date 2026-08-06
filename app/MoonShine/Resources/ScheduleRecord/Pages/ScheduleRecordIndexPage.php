@@ -5,21 +5,20 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources\ScheduleRecord\Pages;
 
 use App\Models\Attraction;
+use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
 use Illuminate\Database\Eloquent\Model;
+use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Fields\Relationships\MorphTo;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
-use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\UI\Components\Table\TableBuilder;
-use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\QueryTags\QueryTag;
-use MoonShine\UI\Components\Metrics\Wrapped\Metric;
-use MoonShine\UI\Fields\ID;
-use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
 use MoonShine\Support\ListOf;
+use MoonShine\UI\Components\Metrics\Wrapped\Metric;
+use MoonShine\UI\Components\Table\TableBuilder;
+use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use Throwable;
-
 
 /**
  * @extends IndexPage<ScheduleRecordResource>
@@ -37,7 +36,7 @@ class ScheduleRecordIndexPage extends IndexPage
             ID::make(),
             Select::make('Тип', 'kind')->options($this->getResource()->getKindOptions()),
             MorphTo::make('Расписываемое', 'schedulable')->types([
-                Attraction::class => ['name', 'Достопремичательность']
+                Attraction::class => ['name', 'Достопремичательность'],
             ]),
 
             Text::make('День', 'day')
@@ -51,7 +50,6 @@ class ScheduleRecordIndexPage extends IndexPage
             Text::make('До дня', 'day_end')
                 ->changeFill(fn ($item) => $item->kind == 'interval-day' ? $item->day_end : '')
                 ->showWhen('kind', '=', 'interval-day'),
-
 
             Select::make('День недели', 'week')
                 ->changeFill(fn ($item) => $item->kind == 'week-day' ? $item->week_start : '')
@@ -112,7 +110,6 @@ class ScheduleRecordIndexPage extends IndexPage
 
     /**
      * @param  TableBuilder  $component
-     *
      * @return TableBuilder
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
@@ -122,34 +119,37 @@ class ScheduleRecordIndexPage extends IndexPage
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function topLayer(): array
     {
         return [
-            ...parent::topLayer()
+            ...parent::topLayer(),
         ];
     }
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function mainLayer(): array
     {
         return [
-            ...parent::mainLayer()
+            ...parent::mainLayer(),
         ];
     }
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function bottomLayer(): array
     {
         return [
-            ...parent::bottomLayer()
+            ...parent::bottomLayer(),
         ];
     }
 }

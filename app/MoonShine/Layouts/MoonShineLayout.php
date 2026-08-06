@@ -16,6 +16,7 @@ use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
 use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
 use App\MoonShine\Resources\Hotel\HotelResource;
 use App\MoonShine\Resources\Restaurant\RestaurantResource;
+use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
 use App\MoonShine\Resources\User\UserResource;
 use MoonShine\AssetManager\Raw;
 use MoonShine\ColorManager\ColorManager;
@@ -25,7 +26,6 @@ use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\MenuManager\MenuGroup;
 use MoonShine\MenuManager\MenuItem;
 use MoonShine\UI\Components\Layout\Div;
-use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
 
 final class MoonShineLayout extends AppLayout
 {

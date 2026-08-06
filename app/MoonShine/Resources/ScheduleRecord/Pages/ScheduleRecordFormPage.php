@@ -7,24 +7,21 @@ namespace App\MoonShine\Resources\ScheduleRecord\Pages;
 use App\Models\Attraction;
 use App\Models\Hotel;
 use App\Models\Restaurant;
-use App\MoonShine\Resources\Restaurant\RestaurantResource;
-use Illuminate\Database\Eloquent\Model;
+use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
+use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
+use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Contracts\UI\FieldContract;
+use MoonShine\Contracts\UI\FormBuilderContract;
 use MoonShine\Laravel\Fields\Relationships\MorphTo;
 use MoonShine\Laravel\Pages\Crud\FormPage;
-use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\Contracts\UI\FormBuilderContract;
-use MoonShine\UI\Components\FormBuilder;
-use MoonShine\Contracts\UI\FieldContract;
-use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
-use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
 use MoonShine\Support\ListOf;
+use MoonShine\UI\Components\FormBuilder;
+use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Components\Layout\Div;
 use MoonShine\UI\Fields\ID;
-use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use Throwable;
-
 
 /**
  * @extends FormPage<ScheduleRecordResource>
@@ -44,15 +41,13 @@ class ScheduleRecordFormPage extends FormPage
                     ->required()
                     ->options($this->getResource()->getKindOptions()),
 
-
                 MorphTo::make('Расписываемое', 'schedulable')
                     ->required()
                     ->types([
                         Attraction::class => ['name', 'Достопремичательность'],
                         Restaurant::class => ['name', 'Ресторан'],
-                        Hotel::class      => ['name', 'Отель'],
+                        Hotel::class => ['name', 'Отель'],
                     ]),
-
 
                 Text::make('День', 'day')
                     ->required()
@@ -60,8 +55,12 @@ class ScheduleRecordFormPage extends FormPage
                     ->placeholder('09.05')
                     ->changeFill(fn ($item) => $item->day_start)
                     ->onApply(function ($item, $value, $context) {
-                        if ($item->kind == 'day') $item->day_start = $value;
-                        else $item->day_start = null;
+                        if ($item->kind == 'day') {
+                            $item->day_start = $value;
+                        } else {
+                            $item->day_start = null;
+                        }
+
                         return $item;
                     }),
 
@@ -71,8 +70,12 @@ class ScheduleRecordFormPage extends FormPage
                         ->showWhen('kind', '=', 'interval-day')
                         ->placeholder('01.01')
                         ->onApply(function ($item, $value, $context) {
-                            if ($item->kind == 'interval-day') $item->day_start = $value;
-                            else $item->day_start = null;
+                            if ($item->kind == 'interval-day') {
+                                $item->day_start = $value;
+                            } else {
+                                $item->day_start = null;
+                            }
+
                             return $item;
                         }),
                     Text::make('До дня', 'day_end')
@@ -80,12 +83,15 @@ class ScheduleRecordFormPage extends FormPage
                         ->showWhen('kind', '=', 'interval-day')
                         ->placeholder('12.01')
                         ->onApply(function ($item, $value, $context) {
-                            if ($item->kind == 'interval-day') $item->day_end = $value;
-                            else $item->day_end = null;
+                            if ($item->kind == 'interval-day') {
+                                $item->day_end = $value;
+                            } else {
+                                $item->day_end = null;
+                            }
+
                             return $item;
                         }),
                 ])->style('display: flex; gap: 1rem;'),
-
 
                 Select::make('День недели', 'week')
                     ->required()
@@ -93,8 +99,12 @@ class ScheduleRecordFormPage extends FormPage
                     ->showWhen('kind', '=', 'week-day')
                     ->changeFill(fn ($item) => $item->week_start)
                     ->onApply(function ($item, $value, $context) {
-                        if ($item->kind == 'week-day') $item->week_start = $value;
-                        else $item->week_start = null;
+                        if ($item->kind == 'week-day') {
+                            $item->week_start = $value;
+                        } else {
+                            $item->week_start = null;
+                        }
+
                         return $item;
                     }),
 
@@ -105,8 +115,12 @@ class ScheduleRecordFormPage extends FormPage
                         ->showWhen('kind', '=', 'interval-week-day')
                         ->required()
                         ->onApply(function ($item, $value, $context) {
-                            if ($item->kind == 'interval-week-day') $item->week_start = $value;
-                            else $item->week_start = null;
+                            if ($item->kind == 'interval-week-day') {
+                                $item->week_start = $value;
+                            } else {
+                                $item->week_start = null;
+                            }
+
                             return $item;
                         }),
                     Select::make('Конец  дня недели', 'week_end')
@@ -114,8 +128,12 @@ class ScheduleRecordFormPage extends FormPage
                         ->options($this->getResource()->getWeekDaysOptions())
                         ->showWhen('kind', '=', 'interval-week-day')
                         ->onApply(function ($item, $value, $context) {
-                            if ($item->kind == 'interval-week-day') $item->week_end = $value;
-                            else $item->week_end = null;
+                            if ($item->kind == 'interval-week-day') {
+                                $item->week_end = $value;
+                            } else {
+                                $item->week_end = null;
+                            }
+
                             return $item;
                         }),
 
@@ -127,8 +145,12 @@ class ScheduleRecordFormPage extends FormPage
                         ->setAttribute('type', 'time')
                         ->showWhen('kind', '!=', 'every-time')
                         ->onApply(function ($item, $value, $context) {
-                            if ($item->kind != 'every-time') $item->hour_start = $value;
-                            else $item->hour_start = null;
+                            if ($item->kind != 'every-time') {
+                                $item->hour_start = $value;
+                            } else {
+                                $item->hour_start = null;
+                            }
+
                             return $item;
                         }),
                     Text::make('Конец  рабочих часов', 'hour_end')
@@ -136,8 +158,12 @@ class ScheduleRecordFormPage extends FormPage
                         ->setAttribute('type', 'time')
                         ->showWhen('kind', '!=', 'every-time')
                         ->onApply(function ($item, $value, $context) {
-                            if ($item->kind != 'every-time') $item->hour_end = $value;
-                            else $item->hour_end = null;
+                            if ($item->kind != 'every-time') {
+                                $item->hour_end = $value;
+                            } else {
+                                $item->hour_end = null;
+                            }
+
                             return $item;
                         }),
 
@@ -163,7 +189,6 @@ class ScheduleRecordFormPage extends FormPage
 
     /**
      * @param  FormBuilder  $component
-     *
      * @return FormBuilder
      */
     protected function modifyFormComponent(FormBuilderContract $component): FormBuilderContract
@@ -173,34 +198,37 @@ class ScheduleRecordFormPage extends FormPage
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function topLayer(): array
     {
         return [
-            ...parent::topLayer()
+            ...parent::topLayer(),
         ];
     }
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function mainLayer(): array
     {
         return [
-            ...parent::mainLayer()
+            ...parent::mainLayer(),
         ];
     }
 
     /**
      * @return list<ComponentContract>
+     *
      * @throws Throwable
      */
     protected function bottomLayer(): array
     {
         return [
-            ...parent::bottomLayer()
+            ...parent::bottomLayer(),
         ];
     }
 }

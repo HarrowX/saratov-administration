@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\ScheduleRecord;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\ScheduleRecord;
-use App\MoonShine\Resources\ScheduleRecord\Pages\ScheduleRecordIndexPage;
-use App\MoonShine\Resources\ScheduleRecord\Pages\ScheduleRecordFormPage;
 use App\MoonShine\Resources\ScheduleRecord\Pages\ScheduleRecordDetailPage;
-
-use MoonShine\Laravel\Resources\ModelResource;
+use App\MoonShine\Resources\ScheduleRecord\Pages\ScheduleRecordFormPage;
+use App\MoonShine\Resources\ScheduleRecord\Pages\ScheduleRecordIndexPage;
 use MoonShine\Contracts\Core\PageContract;
+use MoonShine\Laravel\Resources\ModelResource;
 
 /**
  * @extends ModelResource<ScheduleRecord, ScheduleRecordIndexPage, ScheduleRecordFormPage, ScheduleRecordDetailPage>
@@ -30,6 +28,7 @@ class ScheduleRecordResource extends ModelResource
         'day' => 'День',
         'interval-day' => 'Интервал дней',
     ];
+
     private array $weekDaysOptions = [
         'mon' => 'Понедельник',
         'tue' => 'Вторник',

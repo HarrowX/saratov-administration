@@ -12,7 +12,6 @@ use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\FormBuilderContract;
-use MoonShine\Laravel\Fields\Relationships\HasMany;
 use MoonShine\Laravel\Fields\Relationships\MorphMany;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
 use MoonShine\Laravel\Fields\Slug;
@@ -111,8 +110,8 @@ class AttractionFormPage extends FormPage
                             Number::make('Порядковый номер', 'order')->default(0),
                         ])->removable(),
                 ]),
-                Tab::make('Расписание',[
-                    MorphMany::make('Расписание', 'scheduleRecords', ScheduleRecordResource::class)->creatable()
+                Tab::make('Расписание', [
+                    MorphMany::make('Расписание', 'scheduleRecords', ScheduleRecordResource::class)->creatable(),
                 ]),
             ]),
 
