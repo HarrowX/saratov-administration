@@ -1,5 +1,13 @@
 @extends('errors::minimal')
 
-@section('title', __('Not Found'))
+@section('title', 'Страница не найдена')
 @section('code', '404')
-@section('message', __('Not Found'))
+@section('message', 'Кажется, вы свернули не туда')
+@section('description', 'Здесь ничего нет, но на главной точно есть что посмотреть')
+@section('extra_styles')
+    <style>
+        .error-gradient-text {
+            background-image: url('{{ asset('images/bgError404.jpg') }}') !important;
+        }
+    </style>
+@endsection
