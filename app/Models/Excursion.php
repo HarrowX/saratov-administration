@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
+use App\HasAttachments;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Excursion extends Model
 {
+    use HasAttachments;
+
     protected $fillable = [
         'name', 'slug', 'description', 'type', 'duration',
         'distance', 'difficulty', 'group_size_min', 'group_size_max',
@@ -16,12 +20,7 @@ class Excursion extends Model
         'operator_name', 'operator_phone', 'booking_enabled', 'rating', 'views_count', 'status', 'views_count',
     ];
 
-    public function attachments(): MorphMany
-    {
-        return $this->morphMany(Attachment::class, 'attachable');
-    }
-
-    public function points()
+    public function points(): HasMany //TODO rename all usage and use trait HasExcursionPoints
     {
         return $this->hasMany(ExcursionPoint::class)->orderBy('order');
     }

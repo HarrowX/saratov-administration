@@ -2,17 +2,14 @@
 
 namespace App\Models;
 
+use App\HasExcursionPoints;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class CustomPoint extends Model
 {
+    use HasExcursionPoints;
+
     protected $fillable = [
         'name', 'description', 'latitude', 'longitude', 'slug', 'order', 'duration_minutes',
     ];
-
-    public function excursionPoints(): MorphMany
-    {
-        return $this->morphMany(ExcursionPoint::class, 'pointable');
-    }
 }
