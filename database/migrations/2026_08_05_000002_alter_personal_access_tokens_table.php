@@ -43,12 +43,12 @@ return new class extends Migration
         }
         if (Schema::hasColumn('personal_access_tokens', 'created_ip')) {
             Schema::table('personal_access_tokens', static function (Blueprint $table) {
-                $table->dropConstrainedForeignId('created_ip');
+                $table->dropColumn('created_ip');
             });
         }
         if (Schema::hasColumn('personal_access_tokens', 'updated_ip')) {
             Schema::table('personal_access_tokens', static function (Blueprint $table) {
-                $table->dropConstrainedForeignId('updated_ip');
+                $table->dropColumn('updated_ip');
             });
         }
     }
