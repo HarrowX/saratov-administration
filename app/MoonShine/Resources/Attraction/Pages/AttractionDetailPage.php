@@ -73,8 +73,20 @@ class AttractionDetailPage extends DetailPage
             Number::make('Цена билета', 'ticket_price'),
             Number::make('Время посещения (мин)', 'visit_duration'),
 
-            Switcher::make('Доступность', 'is_accessible'),
-            Switcher::make('Парковка', 'has_parking'),
+            Select::make('Доступность', 'is_accessible')
+                ->changeFill(fn ($item) => $item->is_accessible ?? 'null')
+                ->options([
+                    'null' => 'Не показывать',
+                    false => 'Не имеется',
+                    true => 'Имеется'
+                ])->default(null),
+            Select::make('Парковка', 'has_parking')
+                ->changeFill(fn ($item) => $item->has_parking ?? 'null')
+                ->options([
+                    'null' => 'Не показывать',
+                    false => 'Не имеется',
+                    true => 'Имеется'
+                ])->default(null),
 
             Text::make('Координаты', 'coordinates')
                 ->changeFill(fn ($data) => "{$data->latitude}, {$data->longitude}"),

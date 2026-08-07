@@ -86,8 +86,26 @@ class AttractionFormPage extends FormPage
                 ]),
             Number::make('Цена билета', 'ticket_price'),
             Number::make('Время посещения (мин)', 'visit_duration'),
-            Switcher::make('Доступность', 'is_accessible'),
-            Switcher::make('Парковка', 'has_parking'),
+            Select::make('Доступность', 'is_accessible')
+                ->options([
+                    'null' => 'Не показывать',
+                    false => 'Не имеется',
+                    true => 'Имеется'
+                ])->default(null)
+                ->onApply(function ($item, $value) {
+                    if ($value == 'null') $item->is_accessible = null;
+                    else $item->is_accessible = $value;
+                }),
+            Select::make('Парковка', 'has_parking')
+                ->options([
+                    'null' => 'Не показывать',
+                    false => 'Не имеется',
+                    true => 'Имеется'
+                ])->default(null)
+                ->onApply(function ($item, $value) {
+                    if ($value == 'null') $item->has_parking = null;
+                    else $item->has_parking = $value;
+                }),
             Box::make('Координаты', [
                 Div::make([
                     Text::make('Широта', 'latitude'),
