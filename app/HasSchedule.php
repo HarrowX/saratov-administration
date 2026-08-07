@@ -2,13 +2,17 @@
 
 namespace App;
 
-use App\Models\ScheduleRecord;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use App\Models\Schedule;
+use Illuminate\Database\Eloquent\Concerns\HasRelationships;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 trait HasSchedule
 {
-    public function scheduleRecords(): MorphMany
+    use HasRelationships;
+
+    public function schedule(): BelongsTo
     {
-        return $this->morphMany(ScheduleRecord::class, 'schedulable');
+        return $this->belongsTo(Schedule::class, 'schedule_id');
     }
 }

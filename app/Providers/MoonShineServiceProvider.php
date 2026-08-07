@@ -23,6 +23,7 @@ use App\MoonShine\Resources\User\UserResource;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
 use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
+use App\MoonShine\Resources\Schedule\ScheduleResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -49,6 +50,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 UserResource::class,
                 CustomLocationResource::class,
                 ScheduleRecordResource::class,
+                ScheduleResource::class,
             ])
             ->pages([
                 ...$core->getConfig()->getPages(),

@@ -26,6 +26,7 @@ use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\MenuManager\MenuGroup;
 use MoonShine\MenuManager\MenuItem;
 use MoonShine\UI\Components\Layout\Div;
+use App\MoonShine\Resources\Schedule\ScheduleResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -59,6 +60,7 @@ final class MoonShineLayout extends AppLayout
             MenuItem::make(ContactUsResource::class, 'Связаться с нами')->icon('envelope'),
             MenuItem::make(UserResource::class, 'Пользователи')->icon('user'),
             MenuItem::make(ScheduleRecordResource::class, 'Записи Расписаний'),
+            MenuItem::make(ScheduleResource::class, 'Schedules'),
         ];
     }
 

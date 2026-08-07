@@ -7,11 +7,13 @@ namespace App\MoonShine\Resources\ScheduleRecord\Pages;
 use App\Models\Attraction;
 use App\Models\Hotel;
 use App\Models\Restaurant;
+use App\MoonShine\Resources\Schedule\ScheduleResource;
 use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\FormBuilderContract;
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Fields\Relationships\MorphTo;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Support\ListOf;
@@ -21,6 +23,7 @@ use MoonShine\UI\Components\Layout\Div;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
+use MoonShine\UI\Fields\Textarea;
 use Throwable;
 
 /**
@@ -41,13 +44,15 @@ class ScheduleRecordFormPage extends FormPage
                     ->required()
                     ->options($this->getResource()->getKindOptions()),
 
-                MorphTo::make('Расписываемое', 'schedulable')
+                Select::make('Статус', 'status')
                     ->required()
-                    ->types([
-                        Attraction::class => ['name', 'Достопремичательность'],
-                        Restaurant::class => ['name', 'Ресторан'],
-                        Hotel::class => ['name', 'Отель'],
+                    ->options([
+                        'open' => 'Открыто',
+                        'full-closed' => 'Полностью закрыто',
+                        'closed' => 'Закрыто',
                     ]),
+
+                BelongsTo::make('Расписание', 'schedule', 'name', ScheduleResource::class),
 
                 Text::make('День', 'day')
                     ->required()
@@ -168,6 +173,8 @@ class ScheduleRecordFormPage extends FormPage
                         }),
 
                 ])->style('display: flex; gap: 1rem;'),
+
+                Textarea::make('Комментарий', 'comment')->nullable(),
             ]),
         ];
     }

@@ -11,15 +11,34 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('attractions', function (Blueprint $table) {
-            $table->string('worktime_type')->nullable();
-            $table->string('worktime_weekends')->nullable();
+        Schema::create('schedules', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('is_closed_by_default')->default(false);
+            $table->string('is_active')->default(false);
+            $table->timestamps();
         });
+
+        Schema::table('attractions', function (Blueprint $table) {
+//            $table->string('worktime_type')->nullable();
+//            $table->string('worktime_weekends')->nullable();
+            $table->foreignId('schedule_id')->nullable();
+        });
+
+//        Schema::create('schedule_record_kinds', function (Blueprint $table) {
+//            $table->id();
+//            $table->string('name');
+//            $table->string('value');
+//            $table->timestamps();
+//        });
+
 
         Schema::create('schedule_records', function (Blueprint $table) {
             $table->id();
 
-            $table->morphs('schedulable');
+//            $table->morphs('schedulable');
+
+            $table->foreignId('schedule_id')->constrained('schedules');
 
             $table->string('kind');
             // like:
@@ -41,6 +60,9 @@ return new class extends Migration
             $table->string('hour_start')->nullable(); // like "00:00", "12:00", "13::00", "24:00" || заполняется при kind: every-day, week-day, interval-week-day, day, interval-day
             $table->string('hour_end')->nullable();   // like "00:00", "12:00", "13::00", "24:00" || заполняется при kind: every-day, week-day, interval-week-day, day, interval-day
 
+            $table->string('open_status')->default('open'); // сложный комментарий open closed full-closed
+            $table->text('comment')->nullable(); //
+
             $table->timestamps();
         });
     }
@@ -51,10 +73,12 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('attractions', function (Blueprint $table) {
-            $table->dropColumn('worktime_type');
-            $table->dropColumn('worktime_weekends');
+//            $table->dropColumn('worktime_type');
+//            $table->dropColumn('worktime_weekends');
+            $table->dropColumn('schedule_id');
         });
 
         Schema::dropIfExists('schedule_records');
+        Schema::dropIfExists('schedules');
     }
 };
