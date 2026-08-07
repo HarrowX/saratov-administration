@@ -20,7 +20,6 @@ use MoonShine\UI\Fields\Json;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Phone;
 use MoonShine\UI\Fields\Select;
-use MoonShine\UI\Fields\Switcher;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 use MoonShine\UI\Fields\Url;
@@ -78,14 +77,14 @@ class AttractionDetailPage extends DetailPage
                 ->options([
                     'null' => 'Не показывать',
                     false => 'Не имеется',
-                    true => 'Имеется'
+                    true => 'Имеется',
                 ])->default(null),
             Select::make('Парковка', 'has_parking')
                 ->changeFill(fn ($item) => $item->has_parking ?? 'null')
                 ->options([
                     'null' => 'Не показывать',
                     false => 'Не имеется',
-                    true => 'Имеется'
+                    true => 'Имеется',
                 ])->default(null),
 
             Text::make('Координаты', 'coordinates')
