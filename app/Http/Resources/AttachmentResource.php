@@ -17,11 +17,11 @@ class AttachmentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'attachableType' => $this->attachable_type,
-            'attachableId' => $this->attachable_id,
+            'attachable_type' => $this->attachable_type,
+            'attachable_id' => $this->attachable_id,
             'order' => $this->order,
             'link' => asset(Storage::url($this->link)),
-            'createdAt' => $this->created_at,
+            'created_at' => $this->created_at,
         ];
     }
 }

@@ -23,14 +23,14 @@ class GuidedTourResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'shortDescription' => $this->second_description,
+            'short_description' => $this->second_description,
 
             'class' => GuidedTour::class,
 
             'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
-            'isFavorite' => $isFavorite,
+            'is_favorite' => $isFavorite,
 
-            'favoritesCount' => $this->favorites?->count() ?? 0,
+            'favorites_count' => $this->favorites?->count() ?? 0,
 
             'experience' => $this->experience,
             'phone' => $this->phone,
