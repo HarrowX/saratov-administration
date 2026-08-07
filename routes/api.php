@@ -17,6 +17,7 @@ Route::prefix('v1')->group(function () {
         ->group(function () {
             Route::post('login', 'login');
             Route::post('register', 'register');
+            Route::post('refresh', 'refresh')->name('token.refresh');
             Route::post('logout', 'logout')->middleware(['auth:sanctum']);
 
             Route::post('forgot-password', 'forgotPassword');
