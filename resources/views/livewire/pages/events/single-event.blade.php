@@ -60,11 +60,11 @@
                             <p>Локация</p>
                             <div class="flex items-center gap-2 3xl:gap-5">
                                 <i class="fa-solid fa-location-dot"></i>
-                                <p>{{ $event->location->name ?? 'Локация' }}</p>
+                                <p>{{ $event->eventable->name ?? 'Локация' }}</p>
                             </div>
                             <div class="flex items-center gap-2 3xl:gap-5">
                                 <i class="fa-solid fa-location-arrow"></i>
-                                <p>{{ $event->location->address ?? 'Адрес не указан' }}</p>
+                                <p>{{ $event->eventable->address ?? 'Адрес не указан' }}</p>
                             </div>
                         </div>
                         @if($event->organizer_name || $event->organizer_phone || $event->organizer_email || $event->organizer_website)

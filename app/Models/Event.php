@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\HasAttachments;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Event extends Model
 {
+    use HasAttachments;
+
     protected $fillable = [
         'name',
         'slug',
@@ -32,12 +34,7 @@ class Event extends Model
         return $this->belongsToMany(Category::class, 'event_categories', 'event_id', 'category_id');
     }
 
-    public function attachments(): MorphMany
-    {
-        return $this->morphMany(Attachment::class, 'attachable');
-    }
-
-    public function location(): MorphTo
+    public function eventable(): MorphTo
     {
         return $this->morphTo();
     }
