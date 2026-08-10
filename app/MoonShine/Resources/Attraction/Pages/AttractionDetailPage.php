@@ -73,19 +73,16 @@ class AttractionDetailPage extends DetailPage
             Number::make('Время посещения (мин)', 'visit_duration'),
 
             Select::make('Доступность', 'is_accessible')
-                ->changeFill(fn ($item) => $item->is_accessible ?? 'null')
                 ->options([
-                    'null' => 'Не показывать',
-                    false => 'Не имеется',
-                    true => 'Имеется',
-                ])->default(null),
+                    false => 'Не обустроено для людей с ограниченными возможностями',
+                    true => 'Обустроено для людей с ограниченными возможностями',
+                ]),
+
             Select::make('Парковка', 'has_parking')
-                ->changeFill(fn ($item) => $item->has_parking ?? 'null')
                 ->options([
-                    'null' => 'Не показывать',
                     false => 'Не имеется',
                     true => 'Имеется',
-                ])->default(null),
+                ]),
 
             Text::make('Координаты', 'coordinates')
                 ->changeFill(fn ($data) => "{$data->latitude}, {$data->longitude}"),
