@@ -14,13 +14,13 @@
                     </p>
 
                     <div class="mmin-w-full sm:min-w-110 xl:min-w-140 3xl:min-w-197">
-                        <img src="/images/Rectangle 12224702 (1).webp" class="photo w-full h-auto object-cover">
+                        <img src="{{asset('/images/Rectangle 12224702 (1).webp')}}" class="photo w-full h-auto object-cover" alt="картинка-1">
                     </div>
 
                     <div class="grid grid-cols-3 gap-5 w-full">
-                        <img src="/images/Rectangle 12224705 (1).png" class="photo w-full h-auto object-cover">
-                        <img src="/images/Rectangle 12224704 (1).png" class="photo w-full h-auto object-cover">
-                        <img src="/images/Rectangle 12224707.png" class="photo w-full h-auto object-cover">
+                        <img src="{{asset('/images/Rectangle 12224705 (1).webp')}}" class="photo w-full h-auto object-cover" alt="картинка-2">
+                        <img src="{{asset('/images/Rectangle 12224704 (1).webp')}}" class="photo w-full h-auto object-cover" alt="картинка-3">
+                        <img src="{{asset('/images/Rectangle 12224707.webp')}}" class="photo w-full h-auto object-cover" alt="картинка-4">
                     </div>
                 </div>
 

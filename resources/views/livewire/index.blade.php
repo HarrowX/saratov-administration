@@ -398,8 +398,8 @@
                 </div>
 
                 <!-- Row 2 -->
-                <div data-aos="zoom-in" data-aos-delay="200" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/photo_2022-11-14_16-25-54.jpg')}}"  data-caption="Парк Победы">
-                    <img src="{{asset('/images/photo_2022-11-14_16-25-54.jpg')}}" alt="Парк Победы" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="200" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/photo_2022-11-14_16-25-54.webp')}}"  data-caption="Парк Победы">
+                    <img src="{{asset('/images/photo_2022-11-14_16-25-54.webp')}}" alt="Парк Победы" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <p class="font-['Merriweather'] font-bold">Парк Победы</p>
@@ -416,8 +416,8 @@
                     </div>
                 </div>
 
-                <div data-aos="zoom-in" data-aos-delay="300" class="col-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/Saratov-3.jpg')}}" data-caption="Вечерний Саратов">
-                    <img src="{{asset('/images/Saratov-3.jpg')}}" class="group-hover:scale-110 transition duration-500">
+                <div data-aos="zoom-in" data-aos-delay="300" class="col-span-2 relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/Saratov-3.webp')}}" data-caption="Вечерний Саратов">
+                    <img src="{{asset('/images/Saratov-3.webp')}}" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-lineart-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <p class="font-['Merriweather'] font-bold text-lg">Вечерний Саратов</p>
@@ -455,7 +455,7 @@
                     </div>
                 </div>
                 <div data-aos="zoom-in" data-aos-delay="450" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/d6e40fb855b389b4827ce14c2652cfc3c5295f12.webp')}}" data-caption="Церковь иконы Божией Матери">
-                    <img src="{{asset('/images/image 3.png')}}" alt="Церковь иконы Божией Матери" class="group-hover:scale-110 transition duration-500">
+                    <img src="{{asset('/images/image 3.webp')}}" alt="Церковь иконы Божией Матери" class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <p class="font-['Merriweather'] font-bold">Церковь иконы Божией Матери</p>
@@ -463,7 +463,7 @@
                     </div>
                 </div>
                 <div data-aos="zoom-in" data-aos-delay="450" class="relative group overflow-hidden rounded-lg" data-fancybox="gallery" data-src="{{asset('/images/3a2ab4b764e3db0e3d0f1c051cffa200df2712a0.webp')}}" data-caption="Набережная Космонавтов ">
-                    <img src="{{asset('/images/image 22.png')}}" alt="Набережная Космонавтов " class="group-hover:scale-110 transition duration-500">
+                    <img src="{{asset('/images/image 22.webp')}}" alt="Набережная Космонавтов " class="group-hover:scale-110 transition duration-500">
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
                         <div class="absolute bottom-4 left-4 text-white">
                             <p class="font-['Merriweather'] font-bold">Набережная Космонавтов</p>
@@ -485,11 +485,11 @@
                 <a href="{{asset('/images/img424_0.webp" data-fancybox="full-gallery')}}" data-caption="Консерватория"></a>
                 <a href="{{asset('/images/07458c68242fb8524be00a45a7df919ea6e65e78.webp')}}" data-fancybox="full-gallery"
                 data-caption="Первый цирк России"></a>
-                <a href="{{asset('/images/photo_2022-11-14_16-25-54.jpg')}}" data-fancybox="full-gallery"
+                <a href="{{asset('/images/photo_2022-11-14_16-25-54.webp')}}" data-fancybox="full-gallery"
                 data-caption="Парк Победы"></a>
                 <a href="{{asset('/images/8356339c970afc2d070e74f08f8a05505a083931.webp')}}" data-fancybox="full-gallery"
                 data-caption="Саратовский мост"></a>
-                <a href="{{asset('/images/Saratov-3.jpg')}}" data-fancybox="full-gallery"
+                <a href="{{asset('/images/Saratov-3.webp')}}" data-fancybox="full-gallery"
                 data-caption="Вечерний Саратов"></a>
                 <a href="{{asset('/images/ato58r5xh7sog4k40swwg0ksw.webp')}}" data-fancybox="full-gallery"
                 data-caption="Архитектурное наследие"></a>

@@ -54,12 +54,12 @@
                     <div class="flex flex-row gap-5 justify-start">
                         @if($guidedTour->max)
                             <a href="{{$guidedTour->max}}" target="_blank">
-                                <img src="{{asset('images/max-dark.svg')}}" class="icon size-10 hover:scale-130 transition-transform duration-300">
+                                <img src="{{asset('images/max-dark.svg')}}" class="icon size-10 hover:scale-130 transition-transform duration-300" vk="иконка макса">
                             </a>
                         @endif
                         @if($guidedTour->vk)
                             <a href="{{$guidedTour->vk}}" target="_blank">
-                                <img src="{{asset('images/vk.png')}}" class="icon size-10 hover:scale-130 transition-transform duration-300">
+                                <img src="{{asset('images/vk.png')}}" class="icon size-10 hover:scale-130 transition-transform duration-300" alt="иконка вк">
                             </a>
                         @endif
 

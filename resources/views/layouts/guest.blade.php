@@ -16,7 +16,7 @@
         <div class="min-h-screen lg:grid lg:grid-cols-2">
             {{-- Brand panel --}}
             <div class="relative hidden lg:flex flex-col justify-between p-12 overflow-hidden">
-                <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('/images/saratovskiy-teatr-operyi-i-baleta.jpg')"></div>
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image:url({{asset('/images/saratovskiy-teatr-operyi-i-baleta.webp')}})"></div>
                 <div class="absolute inset-0 bg-linear-to-br from-[#A556F7]/90 via-[#7c4fef]/85 to-[#2663EB]/90"></div>
 
                 <div class="relative">
