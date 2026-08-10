@@ -34,7 +34,7 @@ class Event extends Model
         return $this->belongsToMany(Category::class, 'event_categories', 'event_id', 'category_id');
     }
 
-    public function location(): MorphTo
+    public function eventable(): MorphTo
     {
         return $this->morphTo();
     }

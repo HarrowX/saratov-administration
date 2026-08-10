@@ -17,7 +17,7 @@ class ExcursionPoint extends Model
         return $this->belongsTo(Excursion::class);
     }
 
-    public function pointable(): MorphTo
+    public function excursionPointable(): MorphTo
     {
         return $this->morphTo();
     }

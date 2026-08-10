@@ -12,7 +12,7 @@ class SingleEvent extends Component
     public function mount(Event $event)
     {
         $this->event = $event;
-        $this->event->load('categories', 'attachments', 'location');
+        $this->event->load('categories', 'attachments', 'eventable');
     }
 
     public function render()

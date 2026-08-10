@@ -12,6 +12,6 @@ trait HasExcursionPoints
 
     public function excursionPoints(): MorphMany
     {
-        return $this->morphMany(ExcursionPoint::class, 'pointable');
+        return $this->morphMany(ExcursionPoint::class, 'excursionPointable');
     }
 }

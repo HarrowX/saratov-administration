@@ -12,6 +12,6 @@ trait HasEvents
 
     public function events(): MorphMany
     {
-        return $this->morphMany(Event::class, 'location');
+        return $this->morphMany(Event::class, 'eventable');
     }
 }
