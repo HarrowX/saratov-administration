@@ -1,4 +1,6 @@
-@extends('errors::minimal')
+@extends('errors::minimal',  [
+    'disabledHomeLink' => true
+    ])
 
 @section('title', 'Технические работы')
 @section('code', '503')

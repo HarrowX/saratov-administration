@@ -39,11 +39,13 @@
                         @yield('description')
                     </p>
 
+                    @empty($disabledHomeLink)
                     <a href="{{ route('index') }}" class="inline-block p-0.5 rounded-lg bg-linear-to-r from-[#A556F7] to-[#2663EB]">
                         <span class="block py-2 xl:py-4 px-7 xl:px-11 text-sm xl:text-base rounded-lg bg-white hover:bg-transparent hover:text-white transition font-normal">
                             Вернуться на главную
                         </span>
                     </a>
+                    @endempty
                 </div>
             </div>
         </div>
