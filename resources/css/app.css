@@ -48,6 +48,24 @@
 @font-face {
     font-family: "Inter";
     font-style: normal;
+    font-weight: 900;
+    src: local("Inter Black"),
+    url("../fonts/Inter_18pt-Black.ttf") format("woff2"),
+    url("../fonts/Inter_18pt-Black.ttf") format("woff");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    src: local("Inter Black"),
+    url("../fonts/Inter_18pt-SemiBold.ttf") format("woff2"),
+    url("../fonts/Inter_18pt-SemiBold.ttf") format("woff");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
     font-weight: 500;
     src: local("Inter"),
         url("../fonts/Inter_18pt-Regular.ttf") format("woff2"),
@@ -65,6 +83,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
+    font-weight: 500;
     overflow-x: hidden;
 }
 

@@ -66,7 +66,7 @@ class SingleExcursion extends Component
 
         $firstPlace = $excursion->points()->orderBy('order')->first();
 
-        $this->startPosition = [$firstPlace->pointable->latitude, $firstPlace->pointable->longitude];
+        $this->startPosition = [$firstPlace?->excursionPointable?->latitude, $firstPlace?->excursionPointable?->longitude];
 
         $this->favoritesCount = $excursion->favorites?->count() ?? 0;
 

@@ -12,11 +12,11 @@
                 <p class="text text-gray-600">Экскурсии от людей, влюблённых в город</p>
             </div>
             <div class="flex flex-col-reverse md:flex-row items-center gap-5 lg:gap-9.5">
-                <div data-aos="fade-right">
+                <div>
                     <p class="text-base xl:text-lg 3xl:text-xl text-black">Саратов - город с характером, и лучше всего его раскрывают местные экскурсоводы. Они покажут не только известные места и панорамы Волги, но и тихие дворики, купеческие истории, архитектурные детали и маршруты, которые не найти в путеводителях. Выбирайте формат под настроение: обзорная прогулка, тематическая экскурсия, семейный маршрут или индивидуальная программа. Саратов становится ближе, когда его рассказывает человек, который здесь живет и знает город изнутри.
                     </p>
                 </div>
-                <div data-aos="fade-left" class="min-w-full md:min-w-88 lg:min-w-146 h-88 xl:h-90 3xl:h-auto 3xl:min-w-237.5">
+                <div class="min-w-full md:min-w-88 lg:min-w-146 h-88 xl:h-90 3xl:h-auto 3xl:min-w-237.5">
                     <img src="{{asset('/images/8db8ab433352393d924ca0346e6cbc898e876593.webp')}}" class="rounded-md md:rounded-2xl">
                 </div>
             </div>

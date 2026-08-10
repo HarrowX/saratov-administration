@@ -1,7 +1,7 @@
 @php use App\Models\Attraction; @endphp
 
 @section('title')
-    Саратов 435 - Цифровой дайвинг в историю города
+    Саратов - Цифровой дайвинг в историю города
 @endsection
 <script>
     window.mapData = {

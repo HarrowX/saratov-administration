@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Larahook\SanctumRefreshToken\Trait\HasApiTokens;
 use Laravel\Ai\Concerns\HasConversations;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -64,7 +64,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function haveFakeVkEmail()
+    public function haveFakeVkEmail(): bool
     {
         return $this->email == 'vk_'.$this->vk_id.'@'.config('app.domain_name');
     }

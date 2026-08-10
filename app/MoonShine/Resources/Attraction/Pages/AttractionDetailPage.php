@@ -20,7 +20,6 @@ use MoonShine\UI\Fields\Json;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Phone;
 use MoonShine\UI\Fields\Select;
-use MoonShine\UI\Fields\Switcher;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 use MoonShine\UI\Fields\Url;
@@ -73,8 +72,17 @@ class AttractionDetailPage extends DetailPage
             Number::make('Цена билета', 'ticket_price'),
             Number::make('Время посещения (мин)', 'visit_duration'),
 
-            Switcher::make('Доступность', 'is_accessible'),
-            Switcher::make('Парковка', 'has_parking'),
+            Select::make('Доступность', 'is_accessible')
+                ->options([
+                    false => 'Не обустроено для людей с ограниченными возможностями',
+                    true => 'Обустроено для людей с ограниченными возможностями',
+                ]),
+
+            Select::make('Парковка', 'has_parking')
+                ->options([
+                    false => 'Не имеется',
+                    true => 'Имеется',
+                ]),
 
             Text::make('Координаты', 'coordinates')
                 ->changeFill(fn ($data) => "{$data->latitude}, {$data->longitude}"),

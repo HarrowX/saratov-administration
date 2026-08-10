@@ -39,7 +39,7 @@
                 <span class="text-xs xs:text-sm sm:text-lg 2xl:text-3xl font-medium">
                     {{ $isFavorite ? 'В избранном' : 'В избранное' }}
                 </span>
-                <span class="favorite-count ml-2 text-xs sm:text-base 2xl:text-xl font-bold flex justify-center items-center size-5 sm:size-8 rounded-full {{ $isFavorite ? 'bg-red-400 text-white' : 'bg-red-400/80 text-white' }} transition-colors shadow-lg">
+                <span class="favorite-count ml-2 text-xs sm:text-base 2xl:text-xl font-bold flex justify-center items-center min-w-5 h-5 sm:min-w-8 sm:h-8 px-1 sm:px-2 rounded-full {{ $isFavorite ? 'bg-red-400 text-white' : 'bg-red-400/80 text-white' }} transition-colors shadow-lg">
                 {{ $favoritesCount }}
                 </span>
             </button>
@@ -85,9 +85,11 @@
                             <p>{{num_word($excursion->getDuration(), ['минута', 'минуты', 'минут'])}}</p>
                         </div>
                     </div>
-                    <button onclick="document.getElementById('map-modal').classList.remove(['hidden'])" class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] 2xl:rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-xl 3xl:text-3xl">
-                        Показать на карте
-                    </button>
+                    @if($startPosition[0] != null && $startPosition[1] != null)
+                        <button onclick="document.getElementById('map-modal').classList.remove(['hidden'])" class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] 2xl:rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-xl 3xl:text-3xl">
+                            Показать на карте
+                        </button>
+                    @endif
                 </div>
             </div>
         </div>
@@ -101,13 +103,13 @@
                 <div class="flex flex-col items-start justify-center gap-3 3xl:gap-6 text-base xl:text-xl 3xl:text-2xl">
                     @foreach($excursion->points as $point)
                         <div class="flex items-center">
-                            <img class="icon max-w-3 max-h-3 lg:max-w-5 lg:max-h-7 2xl:max-w-[26px] 2xl:max-h-[31px] mr-2.5 lg:mr-6" src="/images/sign-location.svg">
-                            <p>{{ $point->pointable?->name ?? 'Без названия' }}</p>
+                            <img class="icon max-w-3 max-h-3 lg:max-w-5 lg:max-h-7 2xl:max-w-[26px] 2xl:max-h-[31px] mr-2.5 lg:mr-6" src="{{asset('/images/sign-location.svg')}}" alt="значок локации">
+                            <p>{{ $point?->excursionPointable?->name ?? 'Без названия' }}</p>
                         </div>
                     @endforeach
                 </div>
                 <a href="{{ route('all-excursions') }}#ai-guide" class="w-full bg-linear-to-r from-purple-500 to-blue-600 text-white px-4 rounded-[30px] hover:shadow-lg transition text-center cursor-pointer mt-7 py-4 max-w-full md:max-w-[585px]">
-                    <div class="text-[16px] lg:text-[18px] xl:text-xl 3xl:text-2xl">Задать вопрос AI Ассистенту Саре</div>
+                    <div class="text-[16px] lg:text-[18px] xl:text-xl 3xl:text-2xl">Задать вопрос персональному гиду</div>
                 </a>
             </div>
             <div class="job-swiper__swiper swiper mx-auto max-w-full lg:max-w-100 xl:max-w-150 3xl:max-w-200 h-80 lg:h-100 3xl:h-129.5 relative rounded-xl">

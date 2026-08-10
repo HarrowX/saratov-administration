@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "93c8d01992648190749f19c333fa1969",
+    "content-hash": "7fe45ec25e23cd06b0c0eb9e90caf6ec",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -1675,6 +1675,62 @@
             ],
             "abandoned": true,
             "time": "2025-04-14T21:32:13+00:00"
+        },
+        {
+            "name": "larahook/sanctum-refresh-token",
+            "version": "v1.0.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mishanki/sanctum-refresh-token.git",
+                "reference": "46dc840d0ad2281f2af986fc738d41bc31663d78"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mishanki/sanctum-refresh-token/zipball/46dc840d0ad2281f2af986fc738d41bc31663d78",
+                "reference": "46dc840d0ad2281f2af986fc738d41bc31663d78",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^10.0|^11.0|^12.0|^13.0",
+                "php": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Larahook\\SanctumRefreshToken\\SanctumRefreshTokenServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Larahook\\SanctumRefreshToken\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mikhail Mishankin",
+                    "email": "mishanki@yandex.ru"
+                }
+            ],
+            "description": "Sanctum authentication with refresh token",
+            "homepage": "https://github.com/Mishanki/sanctum-refresh-token",
+            "keywords": [
+                "Authentication",
+                "Refresh Token",
+                "laravel",
+                "sanctum"
+            ],
+            "support": {
+                "email": "mishanki@yandex.ru",
+                "issues": "https://github.com/Mishanki/sanctum-refresh-token/issues",
+                "source": "https://github.com/Mishanki/sanctum-refresh-token"
+            },
+            "time": "2026-03-24T11:11:49+00:00"
         },
         {
             "name": "laravel/ai",

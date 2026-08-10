@@ -23,9 +23,9 @@ class AuthController extends Controller
     {
         $request->validate();
 
-        $token = $this->authService->register($request);
+        $tokens = $this->authService->register($request);
 
-        return response()->json($token, 201);
+        return response()->json($tokens, 201);
     }
 
     public function login(LoginDTO $request)
@@ -33,9 +33,9 @@ class AuthController extends Controller
         try {
             $request->validate();
 
-            $token = $this->authService->login($request);
+            $tokens = $this->authService->login($request);
 
-            return response()->json($token, 200);
+            return response()->json($tokens, 200);
         } catch (BadCredentialsException $exception) {
             return response()->json(['error' => $exception->getMessage()], $exception->getCode());
         }
@@ -43,9 +43,18 @@ class AuthController extends Controller
 
     public function logout()
     {
-        $this->authService->logout();
+        if ($this->authService->logout(auth()->user())) {
+            return response(status: 204);
+        }
 
-        return response(status: 204);
+        return response(status: 404);
+    }
+
+    public function refresh()
+    {
+        $refreshToken = request()->string('refresh_token');
+
+        return $this->authService->refresh($refreshToken);
     }
 
     public function forgotPassword(ForgotPasswordDTO $request)
