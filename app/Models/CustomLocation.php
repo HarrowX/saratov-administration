@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\HasEvents;
+use App\Traits\HasEvents;
 use Illuminate\Database\Eloquent\Model;
 
 class CustomLocation extends Model

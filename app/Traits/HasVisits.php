@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Traits;
 
 use App\Models\PlaceVisit;
 use Illuminate\Database\Eloquent\Concerns\HasRelationships;

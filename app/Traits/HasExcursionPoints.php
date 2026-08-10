@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Traits;
 
 use App\Models\ExcursionPoint;
 use Illuminate\Database\Eloquent\Concerns\HasRelationships;

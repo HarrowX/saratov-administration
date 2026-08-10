@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\HasAttachments;
-use App\HasFavorites;
-use App\HasViews;
+use App\Traits\HasAttachments;
+use App\Traits\HasFavorites;
+use App\Traits\HasViews;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 

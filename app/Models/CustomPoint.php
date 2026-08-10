@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\HasExcursionPoints;
+use App\Traits\HasExcursionPoints;
 use Illuminate\Database\Eloquent\Model;
 
 class CustomPoint extends Model

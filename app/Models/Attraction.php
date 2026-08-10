@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\HasAttachments;
-use App\HasEvents;
-use App\HasExcursionPoints;
-use App\HasFavorites;
-use App\HasViews;
-use App\HasVisits;
 use App\Http\Resources\AttractionResource;
+use App\Traits\HasAttachments;
+use App\Traits\HasEvents;
+use App\Traits\HasExcursionPoints;
+use App\Traits\HasFavorites;
+use App\Traits\HasViews;
+use App\Traits\HasVisits;
 use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Model;
 
