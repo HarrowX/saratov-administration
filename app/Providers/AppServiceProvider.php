@@ -9,6 +9,7 @@ use App\Services\PlaceVisitService;
 use App\Services\SystemPromptDataService;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 use SocialiteProviders\VKID\Provider;
@@ -43,6 +44,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Event::listen(function (SocialiteWasCalled $event) {
             $event->extendSocialite('vk', Provider::class);
+        });
+
+        Gate::define('viewApiDocs', static function ($user) {
+            return method_exists($user, 'isSuperUser') && $user->isSuperUser();
         });
     }
 }
