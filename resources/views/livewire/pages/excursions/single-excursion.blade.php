@@ -101,7 +101,7 @@
                 <div class="flex flex-col items-start justify-center gap-3 3xl:gap-6 text-base xl:text-xl 3xl:text-2xl">
                     @foreach($excursion->points as $point)
                         <div class="flex items-center">
-                            <img class="icon max-w-3 max-h-3 lg:max-w-5 lg:max-h-7 2xl:max-w-[26px] 2xl:max-h-[31px] mr-2.5 lg:mr-6" src="/images/значок локации.svg">
+                            <img class="icon max-w-3 max-h-3 lg:max-w-5 lg:max-h-7 2xl:max-w-[26px] 2xl:max-h-[31px] mr-2.5 lg:mr-6" src="/images/sign-location.svg">
                             <p>{{ $point->pointable?->name ?? 'Без названия' }}</p>
                         </div>
                     @endforeach
