@@ -1,6 +1,7 @@
 <?php
 
 use Dedoc\Scramble\Http\Middleware\RestrictedDocsAccess;
+use Dedoc\Scramble\SecurityDocumentation\MiddlewareAuthSecurityStrategy;
 use MoonShine\Laravel\Http\Middleware\Authenticate;
 
 return [
@@ -171,6 +172,6 @@ return [
      *     ],
      * ],
      */
-    'security_strategy' => \Dedoc\Scramble\SecurityDocumentation\MiddlewareAuthSecurityStrategy::class,
+    'security_strategy' => MiddlewareAuthSecurityStrategy::class,
     // 'security_strategy' => null,
 ];
