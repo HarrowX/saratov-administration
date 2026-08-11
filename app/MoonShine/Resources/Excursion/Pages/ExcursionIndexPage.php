@@ -48,7 +48,7 @@ class ExcursionIndexPage extends IndexPage
             ID::make()->sortable(),
             Text::make('Название', 'name')->sortable()->unescape()->required(),
             Slug::make('Слаг', 'slug')->sortable()->from('name')->unique(),
-            BelongsTo::make('Оператор', 'guide', 'name', GuidedTourResource::class),
+            BelongsTo::make('Оператор', 'guide', 'name', GuidedTourResource::class)->columnSelection(false), // TODO еще один баг от moonshine который скорет title в таблице, но самих операторов нет и все поплывет, поэтому отключаем возможность скрытие оператора, bug report точно будет
             Textarea::make('Описание', 'description')->sortable()->unescape()->required(),
             Select::make('Тип экскурсии', 'type')
                 ->sortable()
