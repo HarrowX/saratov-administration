@@ -23,7 +23,6 @@ use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Number;
-use MoonShine\UI\Fields\Text;
 use Throwable;
 
 /**
@@ -46,8 +45,8 @@ class AttachmentFormPage extends FormPage
                         Excursion::class => ['name', 'Экскурсия'],
                         GuidedTour::class => ['name', 'Экскурсовод'],
                         Hotel::class => ['name', 'Отель'],
-                        Restaurant::class => ['name', 'Ресторан']
-                    ])->required(), //TODO надо написать bug report снова при смене типа можно сохранить и attachable id станет null но приведется в 0
+                        Restaurant::class => ['name', 'Ресторан'],
+                    ])->required(), // TODO надо написать bug report снова при смене типа можно сохранить и attachable id станет null но приведется в 0
                 CompressedImage::make('Файл', 'link')
                     ->format('webp')
                     ->quality((int) config('app.admin.images.quality'))

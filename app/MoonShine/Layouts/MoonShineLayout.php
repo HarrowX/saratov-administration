@@ -39,6 +39,7 @@ use MoonShine\UI\Components\Layout\Div;
 final class MoonShineLayout extends AppLayout
 {
     public ?string $palette = SkyPalette::class;
+
     protected function assets(): array
     {
         return [
@@ -77,7 +78,7 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make(CustomPointResource::class, 'Дополнительные точки экскурсий')->badge(fn () => CustomPoint::query()->count()),
             ])->icon('academic-cap'),
             MenuItem::make(ContactUsResource::class, 'Связаться с нами')->icon('envelope')->badge(fn () => ContactUs::query()->count()),
-            MenuItem::make(UserResource::class, 'Пользователи')->icon('user')->badge(fn() => User::query()->count()),
+            MenuItem::make(UserResource::class, 'Пользователи')->icon('user')->badge(fn () => User::query()->count()),
         ];
     }
 
@@ -93,11 +94,11 @@ final class MoonShineLayout extends AppLayout
         return [];
     }
 
-//    // #[Override]
-//    protected function getSearchComponent(): ComponentContract
-//    {
-//        return Div::make();
-//    }
+    //    // #[Override]
+    //    protected function getSearchComponent(): ComponentContract
+    //    {
+    //        return Div::make();
+    //    }
 
     /**
      * @param  ColorManager  $colorManager
@@ -108,6 +109,4 @@ final class MoonShineLayout extends AppLayout
 
         // $colorManager->primary('#00000');
     }
-
-
 }

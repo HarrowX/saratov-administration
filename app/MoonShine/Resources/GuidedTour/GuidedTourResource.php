@@ -36,6 +36,4 @@ class GuidedTourResource extends ModelResource
     {
         return ['id', 'name', 'short_description', 'description', 'phone', 'email'];
     }
-
-
 }

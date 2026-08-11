@@ -20,7 +20,6 @@ use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Number;
-use MoonShine\UI\Fields\Text;
 use Throwable;
 
 /**
@@ -44,7 +43,7 @@ class AttachmentDetailPage extends DetailPage
                     Excursion::class => ['name', 'Экскурсия'],
                     GuidedTour::class => ['name', 'Экскурсовод'],
                     Hotel::class => ['name', 'Отель'],
-                    Restaurant::class => ['name', 'Ресторан']
+                    Restaurant::class => ['name', 'Ресторан'],
                 ]),
         ];
     }

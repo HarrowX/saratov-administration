@@ -22,7 +22,6 @@ use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Number;
-use MoonShine\UI\Fields\Text;
 use Throwable;
 
 /**
@@ -48,8 +47,8 @@ class AttachmentIndexPage extends IndexPage
                     Excursion::class => ['name', 'Экскурсия'],
                     GuidedTour::class => ['name', 'Экскурсовод'],
                     Hotel::class => ['name', 'Отель'],
-                    Restaurant::class => ['name', 'Ресторан']
-                ])->sortable()
+                    Restaurant::class => ['name', 'Ресторан'],
+                ])->sortable(),
         ];
     }
 

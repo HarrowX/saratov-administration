@@ -36,6 +36,4 @@ class HotelResource extends ModelResource
     {
         return ['id', 'name', 'description', 'second_description', 'address', 'phone', 'email', 'website'];
     }
-
-
 }
