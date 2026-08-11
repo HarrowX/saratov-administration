@@ -39,7 +39,7 @@ class ExcursionPointIndexPage extends IndexPage
         return [
             ID::make()->sortable(),
 
-            BelongsTo::make('Экскурсия', 'excursion', resource: ExcursionResource::class)
+            BelongsTo::make('Экскурсия', 'excursion', 'name', resource: ExcursionResource::class)
                 ->required(),
             Slug::make('Слаг', 'slug')
                 ->sortable()->from('name')->unique()->unescape(),

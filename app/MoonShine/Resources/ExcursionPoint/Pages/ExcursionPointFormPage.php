@@ -36,7 +36,7 @@ class ExcursionPointFormPage extends FormPage
         return [
             ID::make(),
 
-            BelongsTo::make('Экскурсия', 'excursion', resource: ExcursionResource::class)
+            BelongsTo::make('Экскурсия', 'excursion', 'name', resource: ExcursionResource::class)
                 ->required(),
 
             Number::make('Порядок', 'order')->default(0),
