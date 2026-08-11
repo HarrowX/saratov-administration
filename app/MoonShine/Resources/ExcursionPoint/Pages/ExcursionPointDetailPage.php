@@ -35,7 +35,7 @@ class ExcursionPointDetailPage extends DetailPage
         return [
             ID::make(),
 
-            BelongsTo::make('Экскурсия', 'excursion','name', resource: ExcursionResource::class)
+            BelongsTo::make('Экскурсия', 'excursion', 'name', resource: ExcursionResource::class)
                 ->required(),
             Slug::make('Слаг', 'slug')->from('name')->unique()->unescape(),
             Number::make('Порядок', 'order')->default(0),
