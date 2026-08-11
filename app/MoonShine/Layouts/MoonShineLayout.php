@@ -28,7 +28,6 @@ use App\MoonShine\Resources\Restaurant\RestaurantResource;
 use App\MoonShine\Resources\User\UserResource;
 use MoonShine\AssetManager\Raw;
 use MoonShine\ColorManager\ColorManager;
-use MoonShine\ColorManager\Palettes\SkyPalette;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Laravel\Layouts\AppLayout;

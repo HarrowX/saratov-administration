@@ -36,8 +36,6 @@ class EventResource extends ModelResource
 
     protected function search(): array
     {
-        return ['id', 'name', 'description', 'organizer_name', 'organizer_phone','organizer_email', 'organizer_website'];
+        return ['id', 'name', 'description', 'organizer_name', 'organizer_phone', 'organizer_email', 'organizer_website'];
     }
-
-
 }

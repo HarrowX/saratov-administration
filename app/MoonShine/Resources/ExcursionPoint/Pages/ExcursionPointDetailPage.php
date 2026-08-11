@@ -20,7 +20,6 @@ use MoonShine\Support\ListOf;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Number;
-use MoonShine\UI\Fields\Select;
 use Throwable;
 
 /**

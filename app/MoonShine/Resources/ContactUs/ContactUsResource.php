@@ -43,6 +43,4 @@ class ContactUsResource extends ModelResource
     {
         return ['id', 'message'];
     }
-
-
 }

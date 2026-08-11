@@ -36,6 +36,4 @@ class ExcursionPointResource extends ModelResource
     {
         return [];
     }
-
-
 }

@@ -36,6 +36,4 @@ class CustomPointResource extends ModelResource
     {
         return ['id', 'name', 'description', 'duration_minutes'];
     }
-
-
 }

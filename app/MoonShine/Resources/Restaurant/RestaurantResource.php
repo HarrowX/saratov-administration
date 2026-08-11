@@ -36,6 +36,4 @@ class RestaurantResource extends ModelResource
     {
         return [];
     }
-
-
 }

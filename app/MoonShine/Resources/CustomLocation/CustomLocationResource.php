@@ -36,6 +36,4 @@ class CustomLocationResource extends ModelResource
     {
         return ['id', 'name', 'address', 'description'];
     }
-
-
 }

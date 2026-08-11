@@ -36,6 +36,4 @@ class ExcursionResource extends ModelResource
     {
         return ['id', 'name', 'description', 'meeting_point', 'meeting_address'];
     }
-
-
 }

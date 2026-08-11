@@ -38,6 +38,4 @@ class EventCategoryResource extends ModelResource
     {
         return ['id', 'name'];
     }
-
-
 }
