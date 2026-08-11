@@ -38,8 +38,6 @@ use MoonShine\UI\Components\Layout\Div;
 
 final class MoonShineLayout extends AppLayout
 {
-    public ?string $palette = SkyPalette::class;
-
     protected function assets(): array
     {
         return [
