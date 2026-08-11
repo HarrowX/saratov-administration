@@ -31,4 +31,11 @@ class CustomLocationResource extends ModelResource
             CustomLocationDetailPage::class,
         ];
     }
+
+    protected function search(): array
+    {
+        return ['id', 'name', 'address', 'description'];
+    }
+
+
 }

@@ -41,13 +41,14 @@ class HotelIndexPage extends IndexPage
     protected function fields(): iterable
     {
         return [
-            ID::make(),
-            Text::make('Название', 'name')->unescape(),
-            Slug::make('Слаг', 'slug')->from('name')->unique(),
-            Textarea::make('Описание', 'description')->unescape(),
-            Textarea::make('Второе описание', 'second_description')->unescape(),
+            ID::make()->sortable(),
+            Text::make('Название', 'name')->sortable()->unescape(),
+            Slug::make('Слаг', 'slug')->sortable()->from('name')->unique(),
+            Textarea::make('Описание', 'description')->sortable()->unescape(),
+            Textarea::make('Второе описание', 'second_description')->sortable()->unescape(),
             Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы'),
             Select::make('Тип размещения', 'type')
+                ->sortable()
                 ->options([
                     'hostel' => 'Хостел',
                     'guesthouse' => 'Гостевой дом',
@@ -55,12 +56,12 @@ class HotelIndexPage extends IndexPage
                     'resort' => 'Курорт',
                 ])
                 ->required(),
-            Number::make('Количество звезд', 'stars'),
-            Phone::make('Номер телефона', 'phone'),
-            Text::make('Адрес', 'address')->unescape(),
-            Text::make('Район', 'district'),
-            Text::make('Email', 'email'),
-            Url::make('Сайт', 'website'),
+            Number::make('Количество звезд', 'stars')->sortable(),
+            Phone::make('Номер телефона', 'phone')->sortable(),
+            Text::make('Адрес', 'address')->sortable()->unescape(),
+            Text::make('Район', 'district')->sortable(),
+            Text::make('Email', 'email')->sortable(),
+            Url::make('Сайт', 'website')->sortable(),
             //            Url::make('Ссылка на карту', 'map_link'),
             Text::make('Виджет отзывов', 'yandex_review_widget')->changePreview(
                 fn ($value) => $value ? ActionButton::make('Посмотреть')->inModal(
@@ -69,8 +70,8 @@ class HotelIndexPage extends IndexPage
                     builder: fn ($component) => $component->auto(),
                 ) : 'Отсутствует'
             ),
-            Number::make('Максимальная цена', 'max_price'),
-            Number::make('Минимальная цена', 'min_price'),
+            Number::make('Максимальная цена', 'max_price')->sortable(),
+            Number::make('Минимальная цена', 'min_price')->sortable(),
             Text::make('Координаты', 'coordinates')
                 ->changeFill(fn ($data) => "{$data->latitude}, {$data->longitude}"),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
@@ -117,7 +118,9 @@ class HotelIndexPage extends IndexPage
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
     {
-        return $component;
+        return $component
+            ->stickyButtons()
+            ->columnSelection();
     }
 
     /**

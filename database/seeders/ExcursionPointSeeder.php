@@ -26,8 +26,8 @@ class ExcursionPointSeeder extends Seeder
             foreach ($attractions as $attraction) {
                 ExcursionPoint::create([
                     'excursion_id' => $excursion->id,
-                    'pointable_id' => $attraction->id,
-                    'pointable_type' => Attraction::class,
+                    'excursion_pointable_id' => $attraction->id,
+                    'excursion_pointable_type' => Attraction::class,
                     'order' => $order++,
                     'duration_minutes' => rand(20, 60),
                 ]);
@@ -37,8 +37,8 @@ class ExcursionPointSeeder extends Seeder
             foreach ($hotels as $hotel) {
                 ExcursionPoint::create([
                     'excursion_id' => $excursion->id,
-                    'pointable_id' => $hotel->id,
-                    'pointable_type' => Hotel::class,
+                    'excursion_pointable_id' => $hotel->id,
+                    'excursion_pointable_type' => Hotel::class,
                     'order' => $order++,
                     'duration_minutes' => rand(15, 30),
                 ]);
@@ -48,8 +48,8 @@ class ExcursionPointSeeder extends Seeder
             foreach ($restaurants as $restaurant) {
                 ExcursionPoint::create([
                     'excursion_id' => $excursion->id,
-                    'pointable_id' => $restaurant->id,
-                    'pointable_type' => Restaurant::class,
+                    'excursion_pointable_id' => $restaurant->id,
+                    'excursion_pointable_type' => Restaurant::class,
                     'order' => $order++,
                     'duration_minutes' => rand(30, 90),
                 ]);
@@ -59,8 +59,8 @@ class ExcursionPointSeeder extends Seeder
             foreach ($customPoints as $customPoint) {
                 ExcursionPoint::create([
                     'excursion_id' => $excursion->id,
-                    'pointable_id' => $customPoint->id,
-                    'pointable_type' => CustomPoint::class,
+                    'excursion_pointable_id' => $customPoint->id,
+                    'excursion_pointable_type' => CustomPoint::class,
                     'order' => $order++,
                     'duration_minutes' => rand(10, 40),
                 ]);

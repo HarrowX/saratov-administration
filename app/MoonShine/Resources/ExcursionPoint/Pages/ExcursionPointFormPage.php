@@ -41,7 +41,7 @@ class ExcursionPointFormPage extends FormPage
 
             Number::make('Порядок', 'order')->default(0),
 
-            MorphTo::make('Связанный объект', 'pointable')
+            MorphTo::make('Связанный объект', 'excursionPointable')
                 ->types([
                     Attraction::class => ['name', 'Достопримечательности'],
                     Hotel::class => ['name', 'Отели'],

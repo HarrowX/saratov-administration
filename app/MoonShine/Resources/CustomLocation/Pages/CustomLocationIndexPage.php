@@ -31,9 +31,9 @@ class CustomLocationIndexPage extends IndexPage
     {
         return [
             ID::make()->sortable(),
-            Text::make('Название', 'name')->required(),
-            Textarea::make('Описание', 'description')->nullable(),
-            Text::make('Адрес', 'address')->nullable(),
+            Text::make('Название', 'name')->sortable()->required(),
+            Textarea::make('Описание', 'description')->sortable()->nullable(),
+            Text::make('Адрес', 'address')->sortable()->nullable(),
             Text::make('Координаты', 'coordinates')
                 ->changeFill(fn ($data) => "{$data->latitude}, {$data->longitude}"),
         ];
@@ -77,7 +77,9 @@ class CustomLocationIndexPage extends IndexPage
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
     {
-        return $component;
+        return $component
+            ->stickyButtons()
+            ->columnSelection();
     }
 
     /**

@@ -31,4 +31,11 @@ class GuidedTourResource extends ModelResource
             GuidedTourDetailPage::class,
         ];
     }
+
+    protected function search(): array
+    {
+        return ['id', 'name', 'short_description', 'description', 'phone', 'email'];
+    }
+
+
 }

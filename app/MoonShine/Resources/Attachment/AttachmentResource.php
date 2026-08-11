@@ -31,4 +31,9 @@ class AttachmentResource extends ModelResource
             AttachmentDetailPage::class,
         ];
     }
+
+    protected function search(): array
+    {
+        return [];
+    }
 }

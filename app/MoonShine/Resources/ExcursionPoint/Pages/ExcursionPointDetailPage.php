@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\ExcursionPoint\Pages;
 
+use App\Models\Attraction;
+use App\Models\CustomPoint;
+use App\Models\Hotel;
+use App\Models\Restaurant;
 use App\MoonShine\Resources\Excursion\ExcursionResource;
 use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use MoonShine\Laravel\Fields\Relationships\MorphTo;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\DetailPage;
 use MoonShine\Support\ListOf;
@@ -35,16 +40,16 @@ class ExcursionPointDetailPage extends DetailPage
                 ->required(),
             Slug::make('Слаг', 'slug')->from('name')->unique()->unescape(),
             Number::make('Порядок', 'order')->default(0),
-            Number::make('ID объекта', 'pointable_id')->nullable(),
-            Select::make('Тип объекта', 'pointable_type')
-                ->options([
-                    'App\Models\Attraction' => 'Достопримечательность',
-                    'App\Models\Hotel' => 'Отель',
-                    'App\Models\Restaurant' => 'Ресторан',
-                    'App\Models\CustomPoint' => 'Кастомная точка',
+
+            MorphTo::make('Связанный объект', 'excursionPointable')
+                ->types([
+                    Attraction::class => ['name', 'Достопримечательности'],
+                    Hotel::class => ['name', 'Отели'],
+                    Restaurant::class => ['name', 'Рестораны'],
+                    CustomPoint::class => ['name', 'Дополнительные точки'],
                 ])
-                ->reactive()
-                ->nullable(),
+                ->required(),
+
             Number::make('Время на точке', 'duration_minutes')->nullable(),
         ];
     }

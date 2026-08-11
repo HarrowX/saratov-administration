@@ -31,4 +31,11 @@ class ExcursionPointResource extends ModelResource
             ExcursionPointDetailPage::class,
         ];
     }
+
+    protected function search(): array
+    {
+        return [];
+    }
+
+
 }

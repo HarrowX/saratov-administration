@@ -31,4 +31,11 @@ class CustomPointResource extends ModelResource
             CustomPointDetailPage::class,
         ];
     }
+
+    protected function search(): array
+    {
+        return ['id', 'name', 'description', 'duration_minutes'];
+    }
+
+
 }
