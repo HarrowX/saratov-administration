@@ -85,7 +85,7 @@ return [
     */
 
     'middleware' => [
-        'web', 
+        'web',
         Authenticate::class,
     ],
 
