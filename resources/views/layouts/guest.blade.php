@@ -21,7 +21,7 @@
 
                 <div class="relative">
 {{--                    <a href="/" wire:navigate class="flex items-center gap-3">--}}
-{{--                        <img src="/images/Photoroom 1.png" alt="Саратов" class="icon h-10 w-auto brightness-0 invert">--}}
+{{--                        <img src="/images/4480112d-26b0-4ff4-a8cd-7720a7174f99.png" alt="Саратов" class="icon h-10 w-auto brightness-0 invert">--}}
 {{--                        <span class="text-2xl font-bold text-white">Саратов</span>--}}
 {{--                    </a>--}}
                     <a href="{{ route('index') }}" class="flex items-center space-x-1 xl:space-x-3">

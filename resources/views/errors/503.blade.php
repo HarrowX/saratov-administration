@@ -9,7 +9,7 @@
 @section('extra_styles')
     <style>
         .error-gradient-text {
-            background-image: url('{{ asset('images/bgError500.jpg') }}') !important;
+            background-image: url('{{ asset('images/bg-error-500.jpg') }}') !important;
         }
     </style>
 @endsection

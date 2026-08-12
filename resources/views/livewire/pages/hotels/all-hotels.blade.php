@@ -14,13 +14,13 @@
                     </p>
 
                     <div class="mmin-w-full sm:min-w-110 xl:min-w-140 3xl:min-w-197">
-                        <img src="{{asset('/images/Rectangle 12224702 (1).webp')}}" class="photo w-full h-auto object-cover" alt="картинка-1">
+                        <img src="{{asset('/images/b4b7a502-f003-46a3-8ae9-1a47d540efa3.webp')}}" class="photo w-full h-auto object-cover" alt="Здание богемия">
                     </div>
 
                     <div class="grid grid-cols-3 gap-5 w-full">
-                        <img src="{{asset('/images/Rectangle 12224705 (1).webp')}}" class="photo w-full h-auto object-cover" alt="картинка-2">
-                        <img src="{{asset('/images/Rectangle 12224704 (1).webp')}}" class="photo w-full h-auto object-cover" alt="картинка-3">
-                        <img src="{{asset('/images/Rectangle 12224707.webp')}}" class="photo w-full h-auto object-cover" alt="картинка-4">
+                        <img src="{{asset('/images/2eff73ab-4a94-4af2-bd59-3e3829d874f3.webp')}}" class="photo w-full h-auto object-cover" alt="Современные дома в модерн">
+                        <img src="{{asset('/images/3f67cd31-3ae7-4db3-913c-79c54862334b.webp')}}" class="photo w-full h-auto object-cover" alt="Красивые стулья на участке">
+                        <img src="{{asset('/images/bd530e76-a729-4ad8-8497-9cfd692e8667.webp')}}" class="photo w-full h-auto object-cover" alt="Современные дома в лесу">
                     </div>
                 </div>
 
