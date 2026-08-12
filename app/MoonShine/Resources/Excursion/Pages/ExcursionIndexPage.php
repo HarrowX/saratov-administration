@@ -142,6 +142,7 @@ class ExcursionIndexPage extends IndexPage
                             CustomPoint::class => ['name', 'Дополнительная точка экскурсии'],
                         ]),
                     Number::make('Время на точке', 'duration_minutes')->nullable(),
+                    Text::make('Подпись к картинке', 'alt_name'),
                 ])
                 ->creatable()
                 ->removable(),

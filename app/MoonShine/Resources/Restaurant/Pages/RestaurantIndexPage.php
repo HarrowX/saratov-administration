@@ -77,6 +77,7 @@ class RestaurantIndexPage extends IndexPage
                     ID::make(),
                     Image::make('Файл', 'link'),
                     Number::make('Порядковый номер', 'order')->default(0),
+                    Text::make('Подпись к картинке', 'alt_name'),
                 ]),
         ];
     }
