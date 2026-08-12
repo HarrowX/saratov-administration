@@ -33,4 +33,9 @@ class EventCategoryResource extends ModelResource
             EventCategoryDetailPage::class,
         ];
     }
+
+    protected function search(): array
+    {
+        return ['id', 'name'];
+    }
 }

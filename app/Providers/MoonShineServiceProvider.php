@@ -30,6 +30,10 @@ class MoonShineServiceProvider extends ServiceProvider
      */
     public function boot(CoreContract $core): void
     {
+        $core->getConfig()
+            ->title('Саратов на волне времени')
+            ->logo(asset('images/logo.svg'), true)
+            ->logo(asset('images/logo.svg'));
         $core
             ->resources([
                 MoonShineUserResource::class,

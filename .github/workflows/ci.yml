@@ -170,6 +170,10 @@ jobs:
             chmod -R 775 storage bootstrap/cache
 
             /opt/php84/bin/php artisan optimize:clear
+
+            /opt/php84/bin/php artisan scramble:clear || true
+            /opt/php84/bin/php artisan scramble:analyze || true
+
             /opt/php84/bin/php artisan config:cache
             /opt/php84/bin/php artisan route:cache
             /opt/php84/bin/php artisan view:cache
