@@ -39,12 +39,21 @@
                     <p>{{ $guidedTour->short_description }}</p>
                     <p>Стаж работы: {{ $guidedTour->experience }}</p>
                     <p>{{ $guidedTour->description }}</p>
-                    <a href="tel:{{ $guidedTour->phone }}" class="flex flex-row gap-5 3xl:gap-10 w-fit hover:text-[#352AA2] transition-colors duration-300">
-                        <div class="size-4 3xl:size-6">
-                            <i class="fa fa-phone text-lg lg:text-2xl"></i>
-                        </div>
-                       <p>{{ $guidedTour->phone }}</p>
-                    </a>
+                    @php
+                        $phones = explode(', ', $guidedTour->phone);
+
+                    @endphp
+                    @if(!empty($phones))
+                        @foreach($phones as $phone)
+                            <a href="tel:{{ $phone }}" class="flex flex-row gap-5 3xl:gap-10 w-fit hover:text-[#352AA2] transition-colors duration-300">
+                                <div class="size-4 3xl:size-6">
+                                    <i class="fa fa-phone text-lg lg:text-2xl"></i>
+                                </div>
+                                <p>{{ $phone }}</p>
+                            </a>
+                        @endforeach
+                    @endif
+
                     <a href="mailto:{{ $guidedTour->email }}" class="flex flex-row gap-5 3xl:gap-10 3xl:ml-3 w-fit hover:text-[#352AA2] transition-colors duration-300">
                         <div class="w-4 h-6 3xl:w-4.5 3xl:h-8">
                             <i class="fa fa-question text-lg lg:text-2xl"></i>
