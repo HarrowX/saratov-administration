@@ -38,4 +38,9 @@ class UserResource extends ModelResource
     {
         return parent::activeActions()->except(Action::UPDATE, Action::CREATE);
     }
+
+    protected function search(): array
+    {
+        return ['id', 'email', 'phone'];
+    }
 }

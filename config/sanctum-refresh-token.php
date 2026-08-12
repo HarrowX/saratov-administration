@@ -32,6 +32,6 @@ return [
     | considered expired.
     |
     */
-    'auth_token_expiration' => env('AUTH_TOKEN_EXPIRATION', 5),
-    'refresh_token_expiration' => env('REFRESH_TOKEN_EXPIRATION', 10 * 24 * 60),
+    'auth_token_expiration' => (int) env('AUTH_TOKEN_EXPIRATION', 5),
+    'refresh_token_expiration' => (int) env('REFRESH_TOKEN_EXPIRATION', 10 * 24 * 60),
 ];

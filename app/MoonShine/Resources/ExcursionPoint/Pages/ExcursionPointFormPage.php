@@ -36,12 +36,12 @@ class ExcursionPointFormPage extends FormPage
         return [
             ID::make(),
 
-            BelongsTo::make('Экскурсия', 'excursion', resource: ExcursionResource::class)
+            BelongsTo::make('Экскурсия', 'excursion', 'name', resource: ExcursionResource::class)
                 ->required(),
 
             Number::make('Порядок', 'order')->default(0),
 
-            MorphTo::make('Связанный объект', 'pointable')
+            MorphTo::make('Связанный объект', 'excursionPointable')
                 ->types([
                     Attraction::class => ['name', 'Достопримечательности'],
                     Hotel::class => ['name', 'Отели'],

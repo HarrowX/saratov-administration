@@ -31,4 +31,9 @@ class HotelResource extends ModelResource
             HotelDetailPage::class,
         ];
     }
+
+    protected function search(): array
+    {
+        return ['id', 'name', 'description', 'second_description', 'address', 'phone', 'email', 'website'];
+    }
 }
