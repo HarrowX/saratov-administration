@@ -23,13 +23,12 @@ return new class extends Migration
             $table->foreignId('schedule_id')->nullable();
         });
 
-//        Schema::create('schedule_record_kinds', function (Blueprint $table) {
-//            $table->id();
-//            $table->string('name');
-//            $table->string('value');
-//            $table->timestamps();
-//        });
-
+        //        Schema::create('schedule_record_kinds', function (Blueprint $table) {
+        //            $table->id();
+        //            $table->string('name');
+        //            $table->string('value');
+        //            $table->timestamps();
+        //        });
 
         Schema::create('schedule_records', function (Blueprint $table) {
             $table->id();
@@ -69,8 +68,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('attractions', function (Blueprint $table) {
-//            $table->dropColumn('worktime_type');
-//            $table->dropColumn('worktime_weekends');
+            //            $table->dropColumn('worktime_type');
+            //            $table->dropColumn('worktime_weekends');
             $table->dropColumn('schedule_id');
         });
 
