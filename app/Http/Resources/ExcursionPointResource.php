@@ -17,6 +17,7 @@ class ExcursionPointResource extends JsonResource
         Restaurant::class => RestaurantResource::class,
         CustomPoint::class => CustomPointResource::class,
     ];
+
     /**
      * Transform the resource into an array.
      *
