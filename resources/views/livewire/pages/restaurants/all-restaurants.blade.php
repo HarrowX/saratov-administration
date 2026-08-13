@@ -123,7 +123,7 @@
                             <div class="flex flex-col justify-end text-sm lg:text-base 3xl:text-2xl font-light gap-3 text-[#5F5F5F]">
                                 <p class="text-center mb-2 ">{{ $restaurant->kitchen }} кухня</p>
                                 @php
-                                    $phones = array_map(fn (string $item) => trim($item), explode(',', $hotel->phone));
+                                    $phones = array_map(fn (string $item) => trim($item), explode(',', $restaurant->phone));
                                 @endphp
                                 @if(!empty($phones))
                                     @foreach($phones as $phone)
