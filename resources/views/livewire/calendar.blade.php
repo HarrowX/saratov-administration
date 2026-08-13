@@ -22,11 +22,11 @@
                 <div class="calendar bg-white px-4 sm:px-3 pt-4 lg:pt-7 md:px-7 3xl:pt-8 rounded-b-xl sm:rounded-bl-0 rounded-r-xl lg:rounded-r-4xl">
                     <div class="calendar-header flex items-center justify-between mb-4 lg:mb-8">
                         <button type="button" class="calendar-btn size-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors" id="prev-btn">
-                            <img src="/images/Vector.svg" alt="Предыдущий месяц" class="icon size-4">
+                            <img src="{{asset('/images/arrow-left.svg')}}" alt="Предыдущий месяц" class="icon size-4">
                         </button>
                         <span id="month-year" class="text-sm lg:text-xl 3xl:text-2xl font-semibold text-gray-800"></span>
                         <button type="button" class="calendar-btn size-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors" id="next-btn">
-                            <img src="/images/Vector.svg" alt="Следующий месяц" class="icon size-4 transform rotate-180">
+                            <img src="{{asset('/images/arrow-left.svg')}}" alt="Следующий месяц" class="icon size-4 transform rotate-180">
                         </button>
                     </div>
 
