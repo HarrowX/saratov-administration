@@ -82,8 +82,7 @@
                         </div>
                     @endif
                     @php
-                        $phones = explode(', ', $restaurant->phone);
-
+                        $phones = array_map(fn (string $item) => trim($item), explode(',', $restaurant->phone));
                     @endphp
                     @if(!empty($phones))
                         @foreach($phones as $phone)

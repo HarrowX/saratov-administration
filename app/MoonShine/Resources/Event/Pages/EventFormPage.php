@@ -82,7 +82,7 @@ class EventFormPage extends FormPage
                         CompressedImage::make('Файл', 'link')
                             ->format('webp')
                             ->quality(config('app.admin.images.quality'))
-                            ->thumb(config('app.admin\.images.thumb.width'), config('app.admin.images.thumb.height')),
+                            ->thumb(config('app.admin.images.thumb.width'), config('app.admin.images.thumb.height')),
                         Number::make('Порядковый номер', 'order')->default(0),
                         Text::make('Подпись к картинке', 'alt_name'),
                     ])->removable(),

@@ -122,10 +122,18 @@
                             <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold group-hover:text-[#352AA2] transition-colors duration-300">{{ $restaurant->name}}</h2>
                             <div class="flex flex-col justify-end text-sm lg:text-base 3xl:text-2xl font-light gap-3 text-[#5F5F5F]">
                                 <p class="text-center mb-2 ">{{ $restaurant->kitchen }} кухня</p>
-                                <span class="flex items-center gap-3.5">
-                                        <i class="fas fa-phone text-lg xl:text-xl"></i>
-                                        {{ $restaurant->phone }}
-                                    </span>
+                                @php
+                                    $phones = array_map(fn (string $item) => trim($item), explode(',', $hotel->phone));
+                                @endphp
+                                @if(!empty($phones))
+                                    @foreach($phones as $phone)
+                                        <span class="flex items-center gap-3.5">
+                                            <i class="fas fa-phone text-lg xl:text-xl"></i>
+                                            {{ $phone }}
+                                        </span>
+                                    @endforeach
+                                @endif
+
                             </div>
                             <div class="flex flex-col justify-between h-full font-['FindSansPro']">
                                 <div class="flex flex-row justify-between items-end gap-3.5 text-sm lg:text-base 3xl:text-2xl font-light">

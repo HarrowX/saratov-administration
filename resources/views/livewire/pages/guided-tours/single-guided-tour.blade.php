@@ -40,8 +40,7 @@
                     <p>Стаж работы: {{ $guidedTour->experience }}</p>
                     <p>{{ $guidedTour->description }}</p>
                     @php
-                        $phones = explode(', ', $guidedTour->phone);
-
+                        $phones = array_map(fn (string $item) => trim($item), explode(',', $guidedTour->phone));
                     @endphp
                     @if(!empty($phones))
                         @foreach($phones as $phone)

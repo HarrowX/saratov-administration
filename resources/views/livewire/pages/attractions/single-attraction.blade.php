@@ -75,7 +75,7 @@
                         @endif
 
                         @php
-                            $phones = explode(', ', $attraction->phone);
+                            $phones = array_map(fn (string $item) => trim($item), explode(',', $attraction->phone));
                         @endphp
                         @if(!empty($phones))
                             @foreach($phones as $phone)

@@ -111,8 +111,7 @@
                             </div>
                         @endif
                         @php
-                            $phones = explode(', ', $hotel->phone);
-
+                            $phones = array_map(fn (string $item) => trim($item), explode(',', $hotel->phone));
                         @endphp
                         @if(!empty($phones))
                             @foreach($phones as $phone)
