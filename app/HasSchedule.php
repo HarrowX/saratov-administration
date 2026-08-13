@@ -5,7 +5,6 @@ namespace App;
 use App\Models\Schedule;
 use Illuminate\Database\Eloquent\Concerns\HasRelationships;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 trait HasSchedule
 {

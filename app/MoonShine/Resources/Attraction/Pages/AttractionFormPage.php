@@ -7,14 +7,12 @@ namespace App\MoonShine\Resources\Attraction\Pages;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
 use App\MoonShine\Resources\Schedule\ScheduleResource;
-use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
 use Chocoway\MoonshineCompressedImage\Fields\CompressedImage;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\FormBuilderContract;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
-use MoonShine\Laravel\Fields\Relationships\MorphMany;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\FormPage;
@@ -94,19 +92,19 @@ class AttractionFormPage extends FormPage
                     Number::make('Цена билета', 'ticket_price'),
                     Number::make('Время посещения (мин)', 'visit_duration'),
                     Select::make('Доступность', 'is_accessible')
-                    ->nullable()
-                ->placeholder('Не показывать')
-                ->options([
-                    false => 'Не обустроено для людей с ограниченными возможностями',
-                    true => 'Обустроено для людей с ограниченными возможностями',
-                ]),
-            Select::make('Парковка', 'has_parking')
-                ->nullable()
-                ->placeholder('Не показывать')
-                ->options([
-                    false => 'Не имеется',
-                    true => 'Имеется',
-                ]),
+                        ->nullable()
+                        ->placeholder('Не показывать')
+                        ->options([
+                            false => 'Не обустроено для людей с ограниченными возможностями',
+                            true => 'Обустроено для людей с ограниченными возможностями',
+                        ]),
+                    Select::make('Парковка', 'has_parking')
+                        ->nullable()
+                        ->placeholder('Не показывать')
+                        ->options([
+                            false => 'Не имеется',
+                            true => 'Имеется',
+                        ]),
                     Box::make('Координаты', [
                         Div::make([
                             Text::make('Широта', 'latitude'),

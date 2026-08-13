@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\ScheduleRecord\Pages;
 
-use App\Models\Attraction;
-use App\Models\Hotel;
-use App\Models\Restaurant;
 use App\MoonShine\Resources\Schedule\ScheduleResource;
 use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
@@ -14,7 +11,6 @@ use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\FormBuilderContract;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
-use MoonShine\Laravel\Fields\Relationships\MorphTo;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Components\FormBuilder;
@@ -53,7 +49,6 @@ class ScheduleRecordFormPage extends FormPage
                         'closed' => 'Закрыто',
                         'break' => 'Перерыв',
                     ]),
-
 
                 Text::make('День', 'day')
                     ->required()

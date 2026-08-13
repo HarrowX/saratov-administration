@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Schedule;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Schedule;
-use App\MoonShine\Resources\Schedule\Pages\ScheduleIndexPage;
-use App\MoonShine\Resources\Schedule\Pages\ScheduleFormPage;
 use App\MoonShine\Resources\Schedule\Pages\ScheduleDetailPage;
-
-use MoonShine\Laravel\Resources\ModelResource;
+use App\MoonShine\Resources\Schedule\Pages\ScheduleFormPage;
+use App\MoonShine\Resources\Schedule\Pages\ScheduleIndexPage;
 use MoonShine\Contracts\Core\PageContract;
+use MoonShine\Laravel\Resources\ModelResource;
 
 /**
  * @extends ModelResource<Schedule, ScheduleIndexPage, ScheduleFormPage, ScheduleDetailPage>
