@@ -23,10 +23,10 @@ class ScheduleRecordResource extends ModelResource
     private array $kindOptions = [
         'every-time' => 'Круглосуточно',
         'every-day' => 'Ежедневно',
+        'interval-week-day' => 'Интервал дня недели',
         'week-day' => 'День недели',
-        'interval-week-day' => 'Интервал недели',
-        'day' => 'День',
         'interval-day' => 'Интервал дней',
+        'day' => 'День',
     ];
 
     private array $weekDaysOptions = [
@@ -37,6 +37,13 @@ class ScheduleRecordResource extends ModelResource
         'fri' => 'Пятница',
         'sat' => 'Суббота',
         'sun' => 'Воскресенье',
+    ];
+
+    private array $intervalTypeOptions = [
+        'open' => 'Открыто',
+        'closed' => 'Закрыто',
+        'break' => 'Перерыв',
+        'weekend' => 'Выходной',
     ];
 
     /**
@@ -59,5 +66,15 @@ class ScheduleRecordResource extends ModelResource
     public function getWeekDaysOptions(): array
     {
         return $this->weekDaysOptions;
+    }
+
+    public function getIntervalTypeOptions(): array
+    {
+        return $this->intervalTypeOptions;
+    }
+
+    protected function search(): array
+    {
+        return [];
     }
 }

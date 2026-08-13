@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\HasSchedule;
+use App\HasSchedules;
 use App\Http\Resources\AttractionResource;
 use App\Traits\HasAttachments;
 use App\Traits\HasEvents;
@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 #[UseResource(AttractionResource::class)]
 class Attraction extends Model
 {
-    use HasAttachments, HasEvents, HasExcursionPoints, HasFavorites, HasSchedule, HasViews, HasVisits;
+    use HasAttachments, HasEvents, HasExcursionPoints, HasFavorites, HasSchedules, HasViews, HasVisits;
 
     protected $fillable = [
         'name',

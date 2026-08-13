@@ -14,26 +14,19 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->morphs('schedulable');
             $table->boolean('is_active')->default(true);
             $table->string('is_closed_by_default')->default(false);
             $table->timestamps();
         });
 
-        Schema::table('attractions', function (Blueprint $table) {
-            $table->foreignId('schedule_id')->nullable();
-        });
-
-        //        Schema::create('schedule_record_kinds', function (Blueprint $table) {
-        //            $table->id();
-        //            $table->string('name');
-        //            $table->string('value');
-        //            $table->timestamps();
-        //        });
-
         Schema::create('schedule_records', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('schedule_id')->constrained('schedules');
+
+            $table->integer('order')->default(0);
+            $table->integer('priority')->default(0);
 
             $table->string('kind');
             // like:
@@ -52,11 +45,11 @@ return new class extends Migration
             $table->string('day_start')->nullable(); // like "30.12", "10.05", "09.05", "01.01" || заполняется при kind: day, interval-day
             $table->string('day_end')->nullable();   // like "30.12", "10.05", "09.05", "01.01" || заполняется при kind: interval-day
 
-            $table->string('hour_start')->nullable(); // like "00:00", "12:00", "13::00", "24:00" || заполняется при kind: every-day, week-day, interval-week-day, day, interval-day
-            $table->string('hour_end')->nullable();   // like "00:00", "12:00", "13::00", "24:00" || заполняется при kind: every-day, week-day, interval-week-day, day, interval-day
+            $table->string('time_start')->nullable(); // like "00:00", "12:00", "13::00", "24:00" || заполняется при kind: every-day, week-day, interval-week-day, day, interval-day
+            $table->string('time_end')->nullable();   // like "00:00", "12:00", "13::00", "24:00" || заполняется при kind: every-day, week-day, interval-week-day, day, interval-day
 
-            $table->string('interval_type')->default('open'); // сложный комментарий
-            $table->text('comment')->nullable(); //
+            $table->string('interval_type')->default('open');
+            $table->text('comment')->nullable();
 
             $table->timestamps();
         });
@@ -67,12 +60,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('attractions', function (Blueprint $table) {
-            //            $table->dropColumn('worktime_type');
-            //            $table->dropColumn('worktime_weekends');
-            $table->dropColumn('schedule_id');
-        });
-
         Schema::dropIfExists('schedule_records');
         Schema::dropIfExists('schedules');
     }

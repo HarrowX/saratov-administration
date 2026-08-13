@@ -17,6 +17,7 @@ use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Components\Layout\Div;
 use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
@@ -42,13 +43,8 @@ class ScheduleRecordFormPage extends FormPage
                     ->required()
                     ->options($this->getResource()->getKindOptions()),
 
-                Select::make('Статус', 'interval_type')
-                    ->required()
-                    ->options([
-                        'open' => 'Открыто',
-                        'closed' => 'Закрыто',
-                        'break' => 'Перерыв',
-                    ]),
+                Number::make('Порядок', 'order')->default(0)->required(),
+                Number::make('Приоритет', 'priority')->default(0)->required(),
 
                 Text::make('День', 'day')
                     ->required()
@@ -58,7 +54,7 @@ class ScheduleRecordFormPage extends FormPage
                     ->onApply(function ($item, $value, $context) {
                         if ($item->kind == 'day') {
                             $item->day_start = $value;
-                        } else {
+                        } elseif ($item->kind != 'interval-day') {
                             $item->day_start = null;
                         }
 
@@ -73,7 +69,7 @@ class ScheduleRecordFormPage extends FormPage
                         ->onApply(function ($item, $value, $context) {
                             if ($item->kind == 'interval-day') {
                                 $item->day_start = $value;
-                            } else {
+                            } elseif ($item->kind != 'day') {
                                 $item->day_start = null;
                             }
 
@@ -82,11 +78,11 @@ class ScheduleRecordFormPage extends FormPage
                     Text::make('До дня', 'day_end')
                         ->required()
                         ->showWhen('kind', '=', 'interval-day')
-                        ->placeholder('12.01')
+                        ->placeholder('08.01')
                         ->onApply(function ($item, $value, $context) {
                             if ($item->kind == 'interval-day') {
                                 $item->day_end = $value;
-                            } else {
+                            } elseif ($item->kind != 'day') {
                                 $item->day_end = null;
                             }
 
@@ -102,7 +98,7 @@ class ScheduleRecordFormPage extends FormPage
                     ->onApply(function ($item, $value, $context) {
                         if ($item->kind == 'week-day') {
                             $item->week_start = $value;
-                        } else {
+                        } elseif ($item->kind != 'interval-week-day') {
                             $item->week_start = null;
                         }
 
@@ -118,7 +114,7 @@ class ScheduleRecordFormPage extends FormPage
                         ->onApply(function ($item, $value, $context) {
                             if ($item->kind == 'interval-week-day') {
                                 $item->week_start = $value;
-                            } else {
+                            } elseif ($item->kind != 'week-day') {
                                 $item->week_start = null;
                             }
 
@@ -131,7 +127,7 @@ class ScheduleRecordFormPage extends FormPage
                         ->onApply(function ($item, $value, $context) {
                             if ($item->kind == 'interval-week-day') {
                                 $item->week_end = $value;
-                            } else {
+                            } elseif ($item->kind != 'week-day') {
                                 $item->week_end = null;
                             }
 
@@ -140,29 +136,37 @@ class ScheduleRecordFormPage extends FormPage
 
                 ])->style('display: flex; gap: 1rem;'),
 
+                Select::make('Статус', 'interval_type')
+                    ->required()
+                    ->options($this->getResource()->getIntervalTypeOptions()),
+
                 Div::make([
-                    Text::make('Начало рабочих часов', 'hour_start')
+                    Text::make('Начало рабочих часов', 'time_start')
                         ->required()
                         ->setAttribute('type', 'time')
                         ->showWhen('kind', '!=', 'every-time')
+                        ->showWhen('interval_type', '!=', 'closed')
+                        ->showWhen('interval_type', '!=', 'weekend')
                         ->onApply(function ($item, $value, $context) {
                             if ($item->kind != 'every-time') {
-                                $item->hour_start = $value;
+                                $item->time_start = $value;
                             } else {
-                                $item->hour_start = null;
+                                $item->time_start = null;
                             }
 
                             return $item;
                         }),
-                    Text::make('Конец  рабочих часов', 'hour_end')
+                    Text::make('Конец  рабочих часов', 'time_end')
                         ->required()
                         ->setAttribute('type', 'time')
                         ->showWhen('kind', '!=', 'every-time')
+                        ->showWhen('interval_type', '!=', 'closed')
+                        ->showWhen('interval_type', '!=', 'weekend')
                         ->onApply(function ($item, $value, $context) {
                             if ($item->kind != 'every-time') {
-                                $item->hour_end = $value;
+                                $item->time_end = $value;
                             } else {
-                                $item->hour_end = null;
+                                $item->time_end = null;
                             }
 
                             return $item;

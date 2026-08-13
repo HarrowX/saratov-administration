@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Schedule extends Model
 {
-    public function schedulable(): MorphTo
-    {
-        return $this->morphTo();
-    }
-
     public function scheduleRecords(): HasMany
     {
         return $this->hasMany(ScheduleRecord::class, 'schedule_id');
+    }
+
+    public function schedulable(): MorphTo
+    {
+        return $this->morphTo();
     }
 }

@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\ScheduleRecord\Pages;
 
-use App\Models\Attraction;
 use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
 use Illuminate\Database\Eloquent\Model;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
-use MoonShine\Laravel\Fields\Relationships\MorphTo;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
 use MoonShine\Laravel\QueryTags\QueryTag;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Components\Metrics\Wrapped\Metric;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
@@ -34,17 +33,30 @@ class ScheduleRecordIndexPage extends IndexPage
     protected function fields(): iterable
     {
         return [
-            ID::make(),
-            Select::make('Тип', 'kind')->options($this->getResource()->getKindOptions()),
-            MorphTo::make('Расписываемое', 'schedulable')->types([
-                Attraction::class => ['name', 'Достопремичательность'],
-            ]),
-
+            ID::make()->sortable(),
+            Number::make('Порядок', 'order')->updateOnPreview(),
+            Number::make('Приоритет', 'priority')->updateOnPreview(),
+            //            Select::make('Тип', 'kind')->options($this->getResource()->getKindOptions())->sortable(),
             Text::make('Когда?', 'how')
                 ->changeFill(function ($item) {
-
-                    return 'sdas';
+                    //                    dd($item);
+                    switch ($item->kind) {
+                        case 'every-time': return 'круглосуточно';
+                        case 'every-day': return 'ежедневно';
+                        case 'week-day': return $this->getResource()->getWeekDaysOptions()[$item->week_start];
+                        case 'interval-week-day': return $this->getResource()->getWeekDaysOptions()[$item->week_start].' - '.$this->getResource()->getWeekDaysOptions()[$item->week_end];
+                        case 'day': return $item->day_start;
+                        case 'interval-day': return $item->day_start.' - '.$item->day_end;
+                        default: return 'wip';
+                    }
                 }),
+            Text::make('Начало', 'time_start')->setAttribute('type', 'time'),
+            Text::make('Начало', 'time_end')->setAttribute('type', 'time'),
+
+            Select::make('Статус', 'interval_type')
+                ->required()
+                ->options($this->getResource()->getIntervalTypeOptions()),
+
             //            Text::make('День', 'day')
             //                ->changeFill(fn ($item) => $item->kind == 'day' ? $item->day_start : '')
             //                ->showWhen('kind', '=', 'day')
@@ -78,7 +90,7 @@ class ScheduleRecordIndexPage extends IndexPage
             //            Text::make('Конец  рабочих часов', 'hour_end')
             //                ->setAttribute('type', 'time')
             //                ->showWhen('kind', '!=', 'every-time'),
-            Textarea::make('Комментарий', 'comment')->nullable(),
+            Textarea::make('Комментарий', 'comment')->nullable()->sortable(),
         ];
     }
 
@@ -120,7 +132,9 @@ class ScheduleRecordIndexPage extends IndexPage
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
     {
-        return $component;
+        return $component
+            ->stickyButtons()
+            ->columnSelection();
     }
 
     /**

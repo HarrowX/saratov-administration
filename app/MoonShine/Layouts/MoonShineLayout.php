@@ -78,8 +78,10 @@ final class MoonShineLayout extends AppLayout
             ])->icon('academic-cap'),
             MenuItem::make(ContactUsResource::class, 'Связаться с нами')->icon('envelope')->badge(fn () => ContactUs::query()->count()),
             MenuItem::make(UserResource::class, 'Пользователи')->icon('user')->badge(fn () => User::query()->count()),
-            MenuItem::make(ScheduleRecordResource::class, 'Записи Расписаний'),
-            MenuItem::make(ScheduleResource::class, 'Расписание'),
+            MenuGroup::make('Расписание', [
+                MenuItem::make(ScheduleResource::class, 'Расписание'),
+                MenuItem::make(ScheduleRecordResource::class, 'Записи Расписаний'),
+            ])->icon('view-columns'),
         ];
     }
 

@@ -12,7 +12,7 @@ use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\FormBuilderContract;
-use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use MoonShine\Laravel\Fields\Relationships\MorphMany;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
 use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\FormPage;
@@ -122,12 +122,11 @@ class AttractionFormPage extends FormPage
                         ])->removable(),
                 ]),
                 Tab::make('Расписание', [
-                    BelongsTo::make('Расписание', 'schedule', 'name', ScheduleResource::class)
-                        ->default(null)
+                    MorphMany::make('Расписание', 'schedules', 'name', ScheduleResource::class)
                         ->nullable()
-                        ->placeholder('Выберете расписание')
                         ->searchable()
-                        ->creatable(button: ActionButton::make('Добавить новое расписание')),
+                        ->creatable(button: ActionButton::make('Добавить новое расписание'))
+                        ->withoutModals(),
                 ]),
             ]),
         ];

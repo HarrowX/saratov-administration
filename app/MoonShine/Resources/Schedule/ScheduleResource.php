@@ -31,4 +31,9 @@ class ScheduleResource extends ModelResource
             ScheduleDetailPage::class,
         ];
     }
+
+    protected function search(): array
+    {
+        return ['id', 'name'];
+    }
 }

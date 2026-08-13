@@ -13,6 +13,7 @@ use MoonShine\Laravel\Pages\Crud\DetailPage;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Switcher;
 use MoonShine\UI\Fields\Text;
 use Throwable;
 
@@ -28,8 +29,9 @@ class ScheduleDetailPage extends DetailPage
     {
         return [
             ID::make(),
-            Text::make('Имя', 'name'),
-            HasMany::make('Записи', 'scheduleRecords', resource: ScheduleRecordResource::class),
+            //            Text::make('Имя', 'name'),
+            //            Switcher::make('Активный?', 'is_active'),
+            //            HasMany::make('Записи', 'scheduleRecords', resource: ScheduleRecordResource::class),
         ];
     }
 

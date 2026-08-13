@@ -4,17 +4,20 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Schedule\Pages;
 
+use App\Models\Attraction;
 use App\MoonShine\Resources\Schedule\ScheduleResource;
 use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Fields\Relationships\HasMany;
+use MoonShine\Laravel\Fields\Relationships\MorphTo;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
 use MoonShine\Laravel\QueryTags\QueryTag;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Components\Metrics\Wrapped\Metric;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Switcher;
 use MoonShine\UI\Fields\Text;
 use Throwable;
 
@@ -33,6 +36,13 @@ class ScheduleIndexPage extends IndexPage
         return [
             ID::make(),
             Text::make('Имя', 'name'),
+
+            MorphTo::make('Расписание к сущности', 'schedulable')
+                ->types([
+                    Attraction::class => ['name', 'Достопримечательность'],
+                ]),
+
+            Switcher::make('Активный?', 'is_active'),
             HasMany::make('Записи', 'scheduleRecords', resource: ScheduleRecordResource::class),
         ];
     }
@@ -75,7 +85,9 @@ class ScheduleIndexPage extends IndexPage
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
     {
-        return $component;
+        return $component
+            ->stickyButtons()
+            ->columnSelection();
     }
 
     /**
