@@ -36,13 +36,13 @@ class GuidedTourIndexPage extends IndexPage
     protected function fields(): iterable
     {
         return [
-            ID::make(),
-            Text::make('ФИО', 'name'),
-            Textarea::make('Краткое описание', 'short_description'),
-            Textarea::make('Описание', 'description'),
-            Text::make('Опыт', 'experience'),
-            Phone::make('Номер телефона', 'phone'),
-            Email::make('Почта', 'email'),
+            ID::make()->sortable(),
+            Text::make('ФИО', 'name')->sortable(),
+            Textarea::make('Краткое описание', 'short_description')->sortable(),
+            Textarea::make('Описание', 'description')->sortable(),
+            Text::make('Опыт', 'experience')->sortable(),
+            Phone::make('Номер телефона', 'phone')->sortable(),
+            Email::make('Почта', 'email')->sortable(),
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),
@@ -87,7 +87,9 @@ class GuidedTourIndexPage extends IndexPage
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
     {
-        return $component;
+        return $component
+            ->stickyButtons()
+            ->columnSelection();
     }
 
     /**

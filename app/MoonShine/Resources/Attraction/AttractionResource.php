@@ -31,4 +31,9 @@ class AttractionResource extends ModelResource
             AttractionDetailPage::class,
         ];
     }
+
+    protected function search(): array
+    {
+        return ['id', 'name', 'short_description', 'description', 'address', 'email', 'phone'];
+    }
 }

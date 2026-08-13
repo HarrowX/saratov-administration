@@ -68,20 +68,21 @@ class EventFormPage extends FormPage
                     Email::make('Email организатора', 'organizer_email')->nullable(),
                     Url::make('Сайт организатора', 'organizer_website')->nullable(),
                 ]),
-                MorphTo::make('Локация', 'location')
+                MorphTo::make('Локация', 'eventable')
                     ->types([
                         Attraction::class => ['name', 'Достопримечательность'],
                         Hotel::class => ['name', 'Отель'],
                         Restaurant::class => ['name', 'Ресторан'],
                         CustomLocation::class => ['name', 'Своя локация'],
                     ])->searchable()->nullable(),
+
                 RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                     ->fields([
                         ID::make(),
                         CompressedImage::make('Файл', 'link')
                             ->format('webp')
                             ->quality((int) config('app.admin.images.quality'))
-                            ->thumb((int) config('app.admin.images.thumb.width'), (int) config('app.admin.images.thumb.height')),
+                            ->thumb((int) config('app.admin\.images.thumb.width'), (int) config('app.admin.images.thumb.height')),
                         Number::make('Порядковый номер', 'order')->default(0),
                     ])->removable(),
             ]),

@@ -21,7 +21,7 @@ class ProfileResource extends JsonResource
             'patronymic' => $this->username->patronymic ?? '',
             'email' => auth()->user()->haveFakeVkEmail() ? '' : $this->email,
             'phone' => $this->phone ?? '',
-            'createdAt' => $this->created_at,
+            'created_at' => $this->created_at,
         ];
     }
 }

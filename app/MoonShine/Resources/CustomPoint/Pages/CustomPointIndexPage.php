@@ -33,10 +33,10 @@ class CustomPointIndexPage extends IndexPage
     {
         return [
             ID::make()->sortable(),
-            Text::make('Название', 'name')->required(),
-            Slug::make('Слаг', 'slug')->from('name')->unique(),
-            Textarea::make('Описание', 'description')->nullable(),
-            Number::make('Время на точке', 'duration_minutes'),
+            Text::make('Название', 'name')->sortable()->required(),
+            Slug::make('Слаг', 'slug')->sortable()->from('name')->unique(),
+            Textarea::make('Описание', 'description')->sortable()->nullable(),
+            Number::make('Время на точке', 'duration_minutes')->sortable(),
             Text::make('Координаты', 'coordinates')
                 ->changeFill(fn ($data) => "{$data->latitude}, {$data->longitude}"),
         ];
@@ -77,7 +77,9 @@ class CustomPointIndexPage extends IndexPage
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
     {
-        return $component;
+        return $component
+            ->stickyButtons()
+            ->columnSelection();
     }
 
     /**

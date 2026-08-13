@@ -55,7 +55,7 @@ class EventDetailPage extends DetailPage
             Text::make('Телефон организатора', 'organizer_phone')->nullable(),
             Email::make('Email организатора', 'organizer_email')->nullable(),
             Url::make('Сайт организатора', 'organizer_website')->nullable(),
-            MorphTo::make('Локация', 'location')
+            MorphTo::make('Локация', 'eventable')
                 ->types([
                     Attraction::class => ['name', 'Достопримечательность'],
                     Hotel::class => ['name', 'Отель'],

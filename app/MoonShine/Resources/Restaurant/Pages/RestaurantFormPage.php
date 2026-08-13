@@ -53,13 +53,15 @@ class RestaurantFormPage extends FormPage
                 Phone::make('Номер телефона', 'phone')->required(),
                 Text::make('Кухня', 'kitchen')->unescape()->required(),
                 Select::make('Ценовая категория', 'price_category')
+                    ->nullable()
+                    ->placeholder('Не указывать')
                     ->options([
                         'budget' => 'Дешево',
                         'medium' => 'Средне',
                         'premium' => 'Премиум',
                         'luxury' => 'Люкс',
                     ]),
-                Number::make('Количество посадочных мест', 'capacity'),
+                Number::make('Количество столов в зале для посадки', 'capacity'),
                 Text::make('Адрес', 'address')->unescape()->required(),
                 Text::make('Район', 'district'),
                 Text::make('Email', 'email'),

@@ -113,7 +113,7 @@ class AllEvents extends Component
         // стоит вынести тяжелые запросы из render()
         $categories = Category::where('is_active', true)->get();
         $events = Event::query()
-            ->with('categories', 'attachments', 'location')
+            ->with('categories', 'attachments', 'eventable')
             ->when($this->date, function ($query) {
                 return $query->whereDate('start_date', $this->date);
             })
@@ -134,7 +134,7 @@ class AllEvents extends Component
                 return $query->where('age_restriction', $this->ageRestriction);
             })
             ->when($this->selectedLocation, function ($query) {
-                return $query->whereHas('location', function ($q) {
+                return $query->whereHas('eventable', function ($q) {
                     $q->where('id', $this->selectedLocation);
                 });
             })

@@ -27,7 +27,7 @@ class RestaurantResource extends JsonResource
             'class' => Restaurant::class,
 
             'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
-            'isFavorite' => $isFavorite,
+            'is_favorite' => $isFavorite,
 
             'description' => $this->description,
             'address' => $this->address,
@@ -40,13 +40,13 @@ class RestaurantResource extends JsonResource
             'email' => $this->email,
             'website' => $this->website,
 
-            'priceCategory' => $this->price_category,
+            'price_category' => $this->price_category,
             'capacity' => $this->capacity,
             'rating' => $this->rating,
 
-            'favoritesCount' => $this->favorites?->count() ?? 0,
+            'favorites_count' => $this->favorites?->count() ?? 0,
 
-            'createdAt' => $this->created_at,
+            'created_at' => $this->created_at,
             'attachments' => AttachmentResource::collection($this->attachments),
         ];
     }

@@ -32,11 +32,11 @@ class UserIndexPage extends IndexPage
     protected function fields(): iterable
     {
         return [
-            ID::make(),
+            ID::make()->sortable(),
             Text::make('Фио', 'fio')->changeFill(fn ($c) => $c->username->toFio()),
-            Email::make('Почта', 'email'),
-            Phone::make('Номер', 'phone'),
-            Checkbox::make('ВК привязан', 'vk_id'),
+            Email::make('Почта', 'email')->sortable(),
+            Phone::make('Номер', 'phone')->sortable(),
+            Checkbox::make('ВК привязан', 'vk_id')->sortable(),
         ];
     }
 
@@ -78,7 +78,9 @@ class UserIndexPage extends IndexPage
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
     {
-        return $component;
+        return $component
+            ->stickyButtons()
+            ->columnSelection();
     }
 
     /**

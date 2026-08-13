@@ -50,7 +50,7 @@ class RestaurantDetailPage extends DetailPage
                     'premium' => 'Премиум',
                     'luxury' => 'Люкс',
                 ]),
-            Number::make('Количество посадочных мест', 'capacity'),
+            Number::make('Количество столов в зале для посадки', 'capacity'),
             Text::make('Адрес', 'address')->unescape(),
             Text::make('Район', 'district'),
             Text::make('Email', 'email'),
