@@ -127,6 +127,7 @@ class AttractionFormPage extends FormPage
                     BelongsTo::make('Расписание', 'schedule', 'name', ScheduleResource::class)
                         ->default(null)
                         ->nullable()
+                        ->placeholder('Выберете расписание')
                         ->searchable()
                         ->creatable(button: ActionButton::make('Добавить новое расписание')),
                 ]),

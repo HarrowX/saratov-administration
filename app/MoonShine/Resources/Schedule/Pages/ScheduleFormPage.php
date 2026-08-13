@@ -17,6 +17,7 @@ use App\MoonShine\Resources\Schedule\ScheduleResource;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Fields\Switcher;
 use MoonShine\UI\Fields\Text;
 use Throwable;
 
@@ -35,6 +36,7 @@ class ScheduleFormPage extends FormPage
             Box::make([
                 ID::make(),
                 Text::make('Имя', 'name'),
+                Switcher::make('Активный?', 'is_active'),
                 HasMany::make('Записи', 'scheduleRecords', resource: ScheduleRecordResource::class)->creatable(),
             ]),
         ];

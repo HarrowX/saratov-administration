@@ -46,12 +46,12 @@ class ScheduleRecordFormPage extends FormPage
                     ->required()
                     ->options($this->getResource()->getKindOptions()),
 
-                Select::make('Статус', 'open_status')
+                Select::make('Статус', 'interval_type')
                     ->required()
                     ->options([
                         'open' => 'Открыто',
-                        'full-closed' => 'Полностью закрыто',
                         'closed' => 'Закрыто',
+                        'break' => 'Перерыв',
                     ]),
 
 
