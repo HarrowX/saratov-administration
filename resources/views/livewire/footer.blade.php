@@ -2,8 +2,8 @@
     <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4">
         <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
             <div class="flex items-center space-x-2">
-                <img src="/images/Photoroom 1.png" alt="Логотип" class="icon h-7">
-                <span class="text-sm lg:text-base font-['FindSansPro']">Саратов</span>
+                <img src="/images/Photoroom 1.png" alt="Логотип {{ config('app.name') }}" class="icon h-7">
+                <span class="text-sm lg:text-base font-['FindSansPro']">{{config('app.name')}}</span>
             </div>
 
             <div class="flex flex-col gap-4 md:flex-row items-center space-x-2 3xl:space-x-6 text-xs xl:text-sm text-gray-400">
@@ -29,7 +29,7 @@
         </div>
 
         <div class="border-t border-gray-800 mt-4 pt-4 text-center text-gray-400 text-sm">
-            <p>&copy; 2026 Саратов. Все права защищены.</p>
+            <p>&copy; {{ date('Y') }} {{config('app.name')}}. Все права защищены.</p>
         </div>
     </div>
 </footer>

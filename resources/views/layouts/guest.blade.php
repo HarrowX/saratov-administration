@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="relative text-white/60 text-sm">
-                    © {{ date('Y') }} Саратов. Все права защищены.
+                    © {{ date('Y') }} {{config('app.name')}}. Все права защищены.
                 </div>
             </div>
 
@@ -63,8 +63,8 @@
             <div class="flex flex-col justify-center items-center px-6 py-12 lg:bg-white">
                 {{-- Mobile logo --}}
                 <a href="/" class="flex lg:hidden items-center gap-2 mb-8">
-                    <img src="/images/Photoroom 1.png" alt="Саратов" class="icon h-9 w-auto">
-                    <span class="text-xl text-gray-900 font-['FindSansPro']">Саратов</span>
+                    <img src="/images/Photoroom 1.png" alt="Логотип {{ config('app.name') }}" class="icon h-9 w-auto">
+                    <span class="text-xl text-gray-900 font-['FindSansPro']">{{ config('app.name') }}</span>
                 </a>
 
                 <div class="w-full max-w-md">
