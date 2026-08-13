@@ -101,7 +101,7 @@ class ContentController extends Controller
 
     public function excursions(Request $request)
     {
-        $query = Excursion::query()->with('attachments');
+        $query = Excursion::query()->with('points')->with('attachments');
 
         $perPage = $request->integer('per_page', 15);
 
