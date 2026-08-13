@@ -18,7 +18,7 @@ class ScheduleRecordResource extends ModelResource
 {
     protected string $model = ScheduleRecord::class;
 
-    protected string $title = 'ScheduleRecords';
+    protected string $title = 'Записи расписаний';
 
     private array $kindOptions = [
         'every-time' => 'Круглосуточно',

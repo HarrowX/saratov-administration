@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Schedule\Pages;
 
+use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
+use MoonShine\Laravel\Fields\Relationships\HasMany;
 use MoonShine\Laravel\Pages\Crud\DetailPage;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Components\Table\TableBuilder;
@@ -11,6 +13,7 @@ use MoonShine\Contracts\UI\FieldContract;
 use App\MoonShine\Resources\Schedule\ScheduleResource;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Text;
 use Throwable;
 
 
@@ -26,6 +29,8 @@ class ScheduleDetailPage extends DetailPage
     {
         return [
             ID::make(),
+            Text::make('Имя', 'name'),
+            HasMany::make('Записи', 'scheduleRecords', resource: ScheduleRecordResource::class),
         ];
     }
 

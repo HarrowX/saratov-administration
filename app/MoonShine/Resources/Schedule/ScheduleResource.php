@@ -20,8 +20,8 @@ class ScheduleResource extends ModelResource
 {
     protected string $model = Schedule::class;
 
-    protected string $title = 'Schedules';
-    
+    protected string $title = 'Расписание';
+
     /**
      * @return list<class-string<PageContract>>
      */

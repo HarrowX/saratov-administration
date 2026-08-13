@@ -35,7 +35,7 @@ class ScheduleFormPage extends FormPage
             Box::make([
                 ID::make(),
                 Text::make('Имя', 'name'),
-                HasMany::make('Расписание', 'scheduleRecords', resource: ScheduleRecordResource::class)->creatable(),
+                HasMany::make('Записи', 'scheduleRecords', resource: ScheduleRecordResource::class)->creatable(),
             ]),
         ];
     }

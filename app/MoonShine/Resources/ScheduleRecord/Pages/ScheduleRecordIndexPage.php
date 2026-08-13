@@ -18,6 +18,7 @@ use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
+use MoonShine\UI\Fields\Textarea;
 use Throwable;
 
 /**
@@ -39,40 +40,45 @@ class ScheduleRecordIndexPage extends IndexPage
                 Attraction::class => ['name', 'Достопремичательность'],
             ]),
 
-            Text::make('День', 'day')
-                ->changeFill(fn ($item) => $item->kind == 'day' ? $item->day_start : '')
-                ->showWhen('kind', '=', 'day')
-                ->onApply(fn (Model $item, string $value, Text $context) => $item->day_start = $value),
+            Text::make('Когда?', 'how')
+                ->changeFill(function ($item) {
 
-            Text::make('От дня', 'day_start')
-                ->changeFill(fn ($item) => $item->kind == 'interval-day' ? $item->day_start : '')
-                ->showWhen('kind', '=', 'interval-day'),
-            Text::make('До дня', 'day_end')
-                ->changeFill(fn ($item) => $item->kind == 'interval-day' ? $item->day_end : '')
-                ->showWhen('kind', '=', 'interval-day'),
-
-            Select::make('День недели', 'week')
-                ->changeFill(fn ($item) => $item->kind == 'week-day' ? $item->week_start : '')
-                ->options($this->getResource()->getWeekDaysOptions())
-                ->showWhen('kind', '=', 'week-day')
-                ->onApply(fn (Model $item, string $value, Text $context) => $item->week_start = $value),
-
-            Select::make('Начало дня недели', 'week_start')
-                ->changeFill(fn ($item) => $item->kind == 'interval-week-day' ? $item->week_start : '')
-                ->options($this->getResource()->getWeekDaysOptions())
-                ->showWhen('kind', '=', 'interval-week-day'),
-            Select::make('Конец  дня недели', 'week_end')
-                ->changeFill(fn ($item) => $item->kind == 'interval-week-day' ? $item->week_end : '')
-                ->options($this->getResource()->getWeekDaysOptions())
-                ->showWhen('kind', '=', 'interval-week-day'),
-
-            Text::make('Начало рабочих часов', 'hour_start')
-                ->setAttribute('type', 'time')
-                ->showWhen('kind', '!=', 'every-time'),
-            Text::make('Конец  рабочих часов', 'hour_end')
-                ->setAttribute('type', 'time')
-                ->showWhen('kind', '!=', 'every-time'),
-
+                    return 'sdas';
+                }),
+//            Text::make('День', 'day')
+//                ->changeFill(fn ($item) => $item->kind == 'day' ? $item->day_start : '')
+//                ->showWhen('kind', '=', 'day')
+//                ->onApply(fn (Model $item, string $value, Text $context) => $item->day_start = $value),
+//
+//            Text::make('От дня', 'day_start')
+//                ->changeFill(fn ($item) => $item->kind == 'interval-day' ? $item->day_start : '')
+//                ->showWhen('kind', '=', 'interval-day'),
+//            Text::make('До дня', 'day_end')
+//                ->changeFill(fn ($item) => $item->kind == 'interval-day' ? $item->day_end : '')
+//                ->showWhen('kind', '=', 'interval-day'),
+//
+//            Select::make('День недели', 'week')
+//                ->changeFill(fn ($item) => $item->kind == 'week-day' ? $item->week_start : '')
+//                ->options($this->getResource()->getWeekDaysOptions())
+//                ->showWhen('kind', '=', 'week-day')
+//                ->onApply(fn (Model $item, string $value, Text $context) => $item->week_start = $value),
+//
+//            Select::make('Начало дня недели', 'week_start')
+//                ->changeFill(fn ($item) => $item->kind == 'interval-week-day' ? $item->week_start : '')
+//                ->options($this->getResource()->getWeekDaysOptions())
+//                ->showWhen('kind', '=', 'interval-week-day'),
+//            Select::make('Конец  дня недели', 'week_end')
+//                ->changeFill(fn ($item) => $item->kind == 'interval-week-day' ? $item->week_end : '')
+//                ->options($this->getResource()->getWeekDaysOptions())
+//                ->showWhen('kind', '=', 'interval-week-day'),
+//
+//            Text::make('Начало рабочих часов', 'hour_start')
+//                ->setAttribute('type', 'time')
+//                ->showWhen('kind', '!=', 'every-time'),
+//            Text::make('Конец  рабочих часов', 'hour_end')
+//                ->setAttribute('type', 'time')
+//                ->showWhen('kind', '!=', 'every-time'),
+            Textarea::make('Комментарий', 'comment')->nullable(),
         ];
     }
 

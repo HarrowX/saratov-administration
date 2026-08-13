@@ -6,12 +6,14 @@ namespace App\MoonShine\Resources\Attraction\Pages;
 
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
+use App\MoonShine\Resources\Schedule\ScheduleResource;
 use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
 use Chocoway\MoonshineCompressedImage\Fields\CompressedImage;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\FormBuilderContract;
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Fields\Relationships\MorphMany;
 use MoonShine\Laravel\Fields\Relationships\RelationRepeater;
 use MoonShine\Laravel\Fields\Slug;
@@ -111,6 +113,11 @@ class AttractionFormPage extends FormPage
                         ])->removable(),
                 ]),
                 Tab::make('Расписание', [
+                    BelongsTo::make('Расписание', 'schedule', 'name', ScheduleResource::class)
+                        ->default(null)
+                        ->nullable()
+                        ->searchable()
+                        ->creatable(button: ActionButton::make('Добавить новое расписание')),
                 ]),
             ]),
 

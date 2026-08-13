@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources\Schedule\Pages;
 
 use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
+use MoonShine\Laravel\Fields\Relationships\HasMany;
 use MoonShine\Laravel\Fields\Relationships\MorphMany;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
 use MoonShine\Contracts\UI\ComponentContract;
@@ -15,6 +16,7 @@ use MoonShine\UI\Components\Metrics\Wrapped\Metric;
 use MoonShine\UI\Fields\ID;
 use App\MoonShine\Resources\Schedule\ScheduleResource;
 use MoonShine\Support\ListOf;
+use MoonShine\UI\Fields\Text;
 use Throwable;
 
 
@@ -32,7 +34,8 @@ class ScheduleIndexPage extends IndexPage
     {
         return [
             ID::make(),
-            MorphMany::make('Расписание', 'scheduleRecords', ScheduleRecordResource::class),
+            Text::make('Имя', 'name'),
+            HasMany::make('Записи', 'scheduleRecords', resource: ScheduleRecordResource::class),
         ];
     }
 

@@ -40,11 +40,13 @@ class ScheduleRecordFormPage extends FormPage
         return [
             Box::make([
                 ID::make(),
+                BelongsTo::make('Расписание', 'schedule', 'name', ScheduleResource::class)->required(),
+
                 Select::make('Тип', 'kind')
                     ->required()
                     ->options($this->getResource()->getKindOptions()),
 
-                Select::make('Статус', 'status')
+                Select::make('Статус', 'open_status')
                     ->required()
                     ->options([
                         'open' => 'Открыто',
@@ -52,7 +54,6 @@ class ScheduleRecordFormPage extends FormPage
                         'closed' => 'Закрыто',
                     ]),
 
-                BelongsTo::make('Расписание', 'schedule', 'name', ScheduleResource::class),
 
                 Text::make('День', 'day')
                     ->required()
