@@ -53,6 +53,9 @@ class ExcursionResource extends JsonResource
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+
+            'excursion_points' => ExcursionPointResource::collection($this->points),
+
             'attachments' => AttachmentResource::collection($this->attachments),
         ];
     }
