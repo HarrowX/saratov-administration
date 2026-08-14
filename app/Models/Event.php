@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Traits\HasAttachments;
-use App\Traits\HasEvents;
 use App\Traits\HasFavorites;
 use App\Traits\HasViews;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Event extends Model
 {
-    use HasAttachments, HasViews, HasFavorites;
+    use HasAttachments, HasFavorites, HasViews;
 
     protected $fillable = [
         'name',

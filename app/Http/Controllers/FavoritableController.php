@@ -148,7 +148,6 @@ class FavoritableController extends Controller
         }
     }
 
-
     public function unfavoriteEvent(Request $request)
     {
         try {
@@ -242,5 +241,4 @@ class FavoritableController extends Controller
 
         return EventResource::collection($query->paginate($perPage));
     }
-
 }

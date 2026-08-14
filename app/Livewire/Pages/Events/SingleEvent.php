@@ -3,7 +3,6 @@
 namespace App\Livewire\Pages\Events;
 
 use App\Models\Event;
-use App\Models\GuidedTour;
 use App\Services\FavoritableService;
 use App\Services\ViewService;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +15,6 @@ class SingleEvent extends Component
     public int $favoritesCount = 0;
 
     public $isFavorite = false;
-
 
     protected FavoritableService $favoritableService;
 
