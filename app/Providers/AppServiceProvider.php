@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Services\AuthService;
 use App\Services\FavoritableService;
+use App\Services\FirebaseDeviceTokensService;
 use App\Services\ModelConversationService;
 use App\Services\PlaceVisitService;
 use App\Services\SystemPromptDataService;
@@ -25,16 +26,18 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(UserService::class);
         $this->app->singleton(FavoritableService::class);
         $this->app->singleton(PlaceVisitService::class);
-        $this->app->singleton(ModelConversationService::class, static function () {
-            return new ModelConversationService(
-                (int) config('ai.user_messages.max_length')
-            );
-        });
-        $this->app->singleton(SystemPromptDataService::class, static function () {
-            return new SystemPromptDataService(
-                (int) config('ai.database_entries.ttl'),
-            );
-        });
+
+        $this->app->singleton(ModelConversationService::class);
+        $this->app->when(ModelConversationService::class)
+            ->needs('$maxUserMessageLength')
+            ->give(static fn () => (int) config('ai.user_messages.max_length'));
+
+        $this->app->singleton(SystemPromptDataService::class);
+        $this->app->when(SystemPromptDataService::class)
+            ->needs('$databaseEntriesTtl')
+            ->give(static fn () => (int) config('ai.database_entries.ttl'));
+
+        $this->app->singleton(FirebaseDeviceTokensService::class);
     }
 
     /**

@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthVkController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\FavoritableController;
+use App\Http\Controllers\FirebaseDeviceTokenController;
 use App\Http\Controllers\PlaceVisitController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SaratovChatController;
@@ -26,6 +27,8 @@ Route::prefix('v1')->group(function () {
         });
 
     Route::post('auth/vk/token/exchange', [AuthVkController::class, 'exchangeToken']);
+
+    Route::post('update-firebase-device-token', FirebaseDeviceTokenController::class)->middleware(['auth:sanctum']);
 
     Route::prefix('users')->group(function () {
         Route::middleware(['auth:sanctum'])
