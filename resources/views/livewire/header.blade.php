@@ -42,7 +42,7 @@
                 </button>
                 @auth
 {{--                <button id="" class="">--}}
-{{--                    <img src="/images/image 21.svg" alt="поиск" class="icon size-7 3xl:size-11 hover:scale-125 transition duration-300">--}}
+{{--                    <img src="/images/2b6fa29f-a169-4aa2-9b5d-f1e392962ba7.svg" alt="поиск" class="icon size-7 3xl:size-11 hover:scale-125 transition duration-300">--}}
 {{--                </button>--}}
                     @php
                         $u = auth()->user();

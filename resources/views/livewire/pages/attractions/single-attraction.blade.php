@@ -73,12 +73,22 @@
                                 </div>
                             </div>
                         @endif
-                        <a href="tel:{{ $attraction->phone}}" class="flex items-center gap-1 sm:gap-3 w-fit hover:text-green-500 transition-color duration-300">
-                            <div class="flex flex-wrap content-center size-5 xl:size-7.5">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <p>{{ $attraction->phone}}</p>
-                        </a>
+
+                        @php
+                            $phones = array_map(fn (string $item) => trim($item), explode(',', $attraction->phone));
+                        @endphp
+                        @if(!empty($phones))
+                            @foreach($phones as $phone)
+                                <a href="tel:{{ $phone }}" class="flex items-center gap-1 sm:gap-3 w-fit hover:text-green-500 transition-color duration-300">
+                                    <div class="flex flex-wrap content-center size-5 xl:size-7.5">
+                                        <i class="fa fa-phone"></i>
+                                    </div>
+                                    <p>{{ $phone }}</p>
+                                </a>
+                            @endforeach
+                        @endif
+
+
                         @if($attraction->email)
                             <a href="mailto:{{ $attraction->email}}" class="flex items-center gap-1 sm:gap-3 w-fit hover:text-green-500 transition-color duration-300">
                                 <div class="flex flex-wrap content-center size-5 xl:size-7.5">

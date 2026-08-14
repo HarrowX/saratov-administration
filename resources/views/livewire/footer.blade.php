@@ -2,7 +2,7 @@
     <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4">
         <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
             <div class="flex items-center space-x-2">
-                <img src="/images/Photoroom 1.png" alt="Логотип {{ config('app.name') }}" class="icon h-7">
+                <img src="{{asset('4480112d-26b0-4ff4-a8cd-7720a7174f99.png')}}" alt="Логотип {{ config('app.name') }}" class="icon h-7">
                 <span class="text-sm lg:text-base font-['FindSansPro']">{{config('app.name')}}</span>
             </div>
 

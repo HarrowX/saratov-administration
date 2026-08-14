@@ -17,7 +17,7 @@
                     </p>
                 </div>
                 <div class="min-w-full md:min-w-88 lg:min-w-146 h-88 xl:h-90 3xl:h-auto 3xl:min-w-237.5">
-                    <img src="{{asset('/images/8db8ab433352393d924ca0346e6cbc898e876593.jpg')}}" class="rounded-md md:rounded-2xl">
+                    <img src="{{asset('/images/8db8ab433352393d924ca0346e6cbc898e876593.webp')}}" class="rounded-md md:rounded-2xl">
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
                                             {{ $guidedTour->short_description }}
                                         </span>
                                         <a href="{{ route('single-guided-tour', ['guidedTour' => $guidedTour->id]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
-                                            <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
+                                            <img src="{{asset('/images/arrow-right.png')}}" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
                                         </a>
                                     </div>
                                 </div>
