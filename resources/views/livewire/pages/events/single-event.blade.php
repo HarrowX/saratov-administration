@@ -83,11 +83,16 @@
                                         <p>Перейти на сайт</p>
                                     </a>
                                 @endif
-                                @if($event->organizer_phone)
-                                    <a href="tel:{{ $event->organizer_phone }}" class="flex flex-row gap-2 3xl:gap-5 items-center hover:text-green-500 transition-colors duration-300 max-w-fit">
-                                        <i class="fas fa-phone"></i>
-                                        <p>{{ $event->organizer_phone }}</p>
-                                    </a>
+                                @php
+                                    $phones = array_map(fn (string $item) => trim($item), explode(',', $guidedTour->organizer_phone));
+                                @endphp
+                                @if(!empty($phones))
+                                    @foreach($phones as $phone)
+                                        <a href="tel:{{ $phone }}" class="flex flex-row gap-2 3xl:gap-5 items-center hover:text-green-500 transition-colors duration-300 max-w-fit">
+                                            <i class="fas fa-phone"></i>
+                                            <p>{{ $phone }}</p>
+                                        </a>
+                                    @endforeach
                                 @endif
 
                                 @if($event->organizer_email)

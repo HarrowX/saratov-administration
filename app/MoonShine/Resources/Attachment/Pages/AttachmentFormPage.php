@@ -23,6 +23,7 @@ use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Number;
+use MoonShine\UI\Fields\Text;
 use Throwable;
 
 /**
@@ -38,6 +39,12 @@ class AttachmentFormPage extends FormPage
         return [
             Box::make([
                 ID::make(),
+                CompressedImage::make('Файл', 'link')
+                    ->format('webp')
+                    ->quality(config('app.admin.images.quality'))
+                    ->thumb(config('app.admin.images.thumb.width'), config('app.admin.images.thumb.height')),
+                Number::make('Порядковый номер', 'order')->default(0),
+                Text::make('Подпись к картинке', 'alt_name')->nullable(),
                 MorphTo::make('Прикрепляется к', 'attachable')
                     ->types([
                         Attraction::class => ['name', 'Достопримечательность'],
@@ -47,11 +54,6 @@ class AttachmentFormPage extends FormPage
                         Hotel::class => ['name', 'Отель'],
                         Restaurant::class => ['name', 'Ресторан'],
                     ])->required(), // TODO надо написать bug report снова при смене типа можно сохранить и attachable id станет null но приведется в 0
-                CompressedImage::make('Файл', 'link')
-                    ->format('webp')
-                    ->quality((int) config('app.admin.images.quality'))
-                    ->thumb((int) config('app.admin.images.thumb.width'), (int) config('app.admin.images.thumb.height')),
-                Number::make('Порядковый номер', 'order')->default(0),
             ]),
         ];
     }

@@ -34,6 +34,6 @@ class RestaurantResource extends ModelResource
 
     protected function search(): array
     {
-        return [];
+        return ['id', 'name', 'description', 'short_description', 'phone', 'address', 'email', 'website'];
     }
 }

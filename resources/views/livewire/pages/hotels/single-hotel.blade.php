@@ -110,16 +110,21 @@
                                 </div>
                             </div>
                         @endif
-                        @if($hotel->phone)
-                            <a href="tel:{{ $hotel->phone }}" class="flex items-center gap-1 sm:gap-3 w-fit hover:text-green-500 transition-color duration-300">
-                                <div class="flex flex-wrap content-center size-5 xl:size-7.5">
-                                    <i class="fa fa-phone"></i>
-                                </div>
-                                <p>{{ $hotel->phone }}</p>
-                            </a>
+                        @php
+                            $phones = array_map(fn (string $item) => trim($item), explode(',', $hotel->phone));
+                        @endphp
+                        @if(!empty($phones))
+                            @foreach($phones as $phone)
+                                <a href="tel:{{ $phone }}" class="flex items-center gap-1 sm:gap-3 w-fit hover:text-green-500 transition-color duration-300">
+                                    <div class="flex flex-wrap content-center size-5 xl:size-7.5">
+                                        <i class="fa fa-phone"></i>
+                                    </div>
+                                    <p>{{ $phone }}</p>
+                                </a>
+                          @endforeach
                         @endif
 
-                        @if($hotel->email)
+                    @if($hotel->email)
                             <a href="mailto:{{ $hotel->email }}" class="flex items-center gap-1 sm:gap-3 w-fit hover:text-green-500 transition-color duration-300">
                                 <div class="flex flex-wrap content-center size-5 xl:size-7.5">
                                     <i class="fas fa-envelope"></i>

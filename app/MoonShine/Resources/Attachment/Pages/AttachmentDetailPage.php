@@ -20,6 +20,7 @@ use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Number;
+use MoonShine\UI\Fields\Text;
 use Throwable;
 
 /**
@@ -36,6 +37,7 @@ class AttachmentDetailPage extends DetailPage
             ID::make(),
             Image::make('Файл', 'link'),
             Number::make('Порядковый номер', 'order'),
+            Text::make('Подпись к картинке', 'alt_name'),
             MorphTo::make('Прикрепляется к', 'attachable')
                 ->types([
                     Attraction::class => ['name', 'Достопримечательность'],
