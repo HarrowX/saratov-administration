@@ -74,4 +74,9 @@ class User extends Authenticatable
     {
         return $this->email == 'vk_'.$this->vk_id.'@'.config('app.domain_name');
     }
+
+    public function routeNotificationForFcm()
+    {
+        return $this->firebaseDeviceTokens()->pluck('device_token')->toArray();
+    }
 }
