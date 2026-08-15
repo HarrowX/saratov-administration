@@ -13,12 +13,12 @@ class FirebaseDeviceTokenController extends Controller
 
     public function __invoke(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'device_token' => ['required', 'string'],
         ]);
 
         $user = auth()->user();
-        $deviceToken = $this->firebaseDeviceTokensService->freshTokenBinding($user, $request['device_token']);
+        $deviceToken = $this->firebaseDeviceTokensService->freshTokenBinding($user, $validated['device_token']);
 
         return response()->json($deviceToken->toArray(), 200);
     }

@@ -42,7 +42,7 @@ class FirebaseDeviceTokensService
             ->where('device_token', $deviceToken)
             ->update(['user_id' => null]);
 
-        Log::info('FCM device token was inbinded from user', [
+        Log::info('FCM device token was unbinded from user', [
             'device_token' => $deviceToken,
             'user_id' => $user->id,
         ]);

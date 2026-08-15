@@ -28,7 +28,10 @@ Route::prefix('v1')->group(function () {
 
     Route::post('auth/vk/token/exchange', [AuthVkController::class, 'exchangeToken']);
 
-    Route::post('update-firebase-device-token', FirebaseDeviceTokenController::class)->middleware(['auth:sanctum']);
+    Route::prefix('firebase')->group(static function () {
+        Route::post('fresh-device-token', FirebaseDeviceTokenController::class)->middleware(['auth:sanctum']);
+    });
+
 
     Route::prefix('users')->group(function () {
         Route::middleware(['auth:sanctum'])
