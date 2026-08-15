@@ -32,7 +32,6 @@ Route::prefix('v1')->group(function () {
         Route::post('fresh-device-token', FirebaseDeviceTokenController::class)->middleware(['auth:sanctum']);
     });
 
-
     Route::prefix('users')->group(function () {
         Route::middleware(['auth:sanctum'])
             ->controller(ProfileController::class)

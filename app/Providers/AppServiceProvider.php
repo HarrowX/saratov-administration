@@ -38,6 +38,10 @@ class AppServiceProvider extends ServiceProvider
             ->give(static fn () => (int) config('ai.database_entries.ttl'));
 
         $this->app->singleton(FirebaseDeviceTokensService::class);
+
+        $this->app->when([AuthService::class])
+            ->needs('$firebaseDeviceTokensService')
+            ->give(FirebaseDeviceTokensService::class);
     }
 
     /**

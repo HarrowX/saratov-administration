@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\DTOs\ChangePasswordDTO;
 use App\DTOs\ForgotPasswordDTO;
 use App\DTOs\LoginDTO;
+use App\DTOs\LogoutDTO;
 use App\DTOs\PostRegistrationDTO;
 use App\DTOs\RegisterDTO;
 use App\Exceptions\Auth\BadCredentialsException;
@@ -41,9 +42,10 @@ class AuthController extends Controller
         }
     }
 
-    public function logout()
+    public function logout(LogoutDTO $dto)
     {
-        if ($this->authService->logout(auth()->user())) {
+        $dto->validate();
+        if ($this->authService->logout(auth()->user(), $dto)) {
             return response(status: 204);
         }
 
