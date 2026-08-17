@@ -69,7 +69,7 @@
                     </div>
                 @endforeach
             </div>
-            {{ $this->guidedTours->links() }}
+            {{ $this->guidedTours->links('livewire::tailwind') }}
             @if($this->guidedTours->isEmpty())
                 <div class="text-center">
                     <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">

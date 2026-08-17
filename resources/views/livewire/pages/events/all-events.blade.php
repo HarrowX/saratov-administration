@@ -154,7 +154,7 @@
                     </div>
                 @endforeach
             </div>
-            {{ $this->events()->links() }}
+            {{ $this->events()->links('livewire::tailwind') }}
             @endif
         </div>
     </section>
