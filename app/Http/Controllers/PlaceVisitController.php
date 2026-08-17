@@ -21,9 +21,11 @@ class PlaceVisitController extends Controller
 
         $status = $request->string('status', '')->value;
 
-        $visits = $this->placeVisitService->findRecentlyVisits($userId, $status);
+        $visitsQuery = $this->placeVisitService->findRecentlyVisits($userId, $status);
 
-        return PlaceVisitResource::collection($visits);
+        $perPage = $request->integer('per_page', 15);
+
+        return PlaceVisitResource::collection($visitsQuery->paginate($perPage));
     }
 
     public function around(CoordinatesDTO $dto)

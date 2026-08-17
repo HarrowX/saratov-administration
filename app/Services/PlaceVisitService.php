@@ -39,7 +39,7 @@ class PlaceVisitService
             $query->where('status', $status);
         }
 
-        return $query->get();
+        return $query;
     }
 
     public function semiApproveByLocation($userId, $latitude, $longitude)
