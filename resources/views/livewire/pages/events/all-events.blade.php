@@ -109,8 +109,9 @@
                             <div class="flex flex-col gap-3 xl:gap-5">
                                 <div class="relative overflow-hidden rounded-[7px] sm:rounded-[19px]">
                                     <img src="{{ $event->attachments?->get(0)?->url() ?? "" }}" alt="{{ $event->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 sm:h-70 md:h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <livewire:favorite-mini-button :position='"right-2 top-2"' :object="$event"/>
                                     @if($event->age_restriction)
-                                        <span class="absolute right-2 top-2 size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-md xl:rounded-xl flex items-center justify-center text-white text-sm xl:text-base 3xl:text-xl shadow-lg">
+                                        <span class="absolute left-2 top-2 size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-md xl:rounded-xl flex items-center justify-center text-white text-sm xl:text-base 3xl:text-xl shadow-lg">
                                             {{ $event->age_restriction }} +
                                         </span>
                                     @endif

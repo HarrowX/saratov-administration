@@ -16,6 +16,15 @@
                 <i class="fa-solid fa-chevron-left text-xl 3xl:text-3xl"></i>
                 <span class="text-xl xl:text-2xl 3xl:text-3xl">События</span>
             </a>
+            <button wire:click="toggleFavorite" class="flex absolute right-3 sm:right-10 top-20 md:top-10 lg:top-16 xl:right-20 z-20 items-center gap-1 sm:gap-3 px-3 sm:px-5 py-1.5 sm:py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group">
+                <i class="fa-regular fa-heart text-lg sm:text-2xl xl:text-3xl group-hover:scale-110 group-hover:animate-pulse transition-transform {{ $isFavorite ? 'fa-solid text-red-400' : 'fa-regular' }}"></i>
+                <span class="text-xs xs:text-sm sm:text-lg 2xl:text-3xl font-medium">
+                    {{ $isFavorite ? 'В избранном' : 'В избранное' }}
+                </span>
+                <span class="favorite-count ml-2 text-xs sm:text-base 2xl:text-xl font-bold flex justify-center items-center min-w-5 h-5 sm:min-w-8 sm:h-8 px-1 sm:px-2 rounded-full {{ $isFavorite ? 'bg-red-400 text-white' : 'bg-red-400/80 text-white' }} transition-colors shadow-lg">
+                {{ $favoritesCount }}
+                </span>
+            </button>
             <div class="flex flex-col justify-end h-full md:h-screen w-full z-10 text-white">
                 <h1 class="text-3xl xl:text-4xl 3xl:text-5xl font-extrabold leading-16 3xl:leading-24">{{$event->name}}</h1>
                 <div class="flex flex-row gap-2 items-center rounded-xl xl:pb-10 text-black">

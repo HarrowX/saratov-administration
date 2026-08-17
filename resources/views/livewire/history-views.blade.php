@@ -7,6 +7,7 @@
             'App\\Models\\Restaurant' => 'Рестораны',
             'App\\Models\\Excursion'  => 'Экскурсии',
             'App\\Models\\GuidedTour' => 'Экскурсоводы',
+            'App\\Models\\Event'      => 'События',
         ];
         $favIds = $this->favoritedIds;
         $items = $this->items;

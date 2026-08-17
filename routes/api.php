@@ -81,12 +81,15 @@ Route::prefix('v1')->group(function () {
 
             Route::get('excursions', 'indexExcursion');
             Route::get('guide-tours', 'indexGuideTour');
+            Route::get('events', 'indexEvent');
 
             Route::post('excursions/{id}', 'favoriteExcursion');
             Route::post('guide-tours/{id}', 'favoriteGuideTour');
+            Route::post('events/{id}', 'favoriteEvent');
 
             Route::delete('excursions/{id}', 'unfavoriteExcursion');
             Route::delete('guide-tours/{id}', 'unfavoriteGuideTour');
+            Route::delete('events/{id}', 'unfavoriteEvent');
 
         });
 
