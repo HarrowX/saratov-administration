@@ -4,6 +4,7 @@ import './scripts/journey'
 import './scripts/notification';
 import './scripts/gallery';
 import './scripts/slider';
+import './scripts/thumbs-gallery';
 import './scripts/yandex-map';
 
 import './scripts/calendar';

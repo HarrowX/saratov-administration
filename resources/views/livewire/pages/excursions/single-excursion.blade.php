@@ -49,7 +49,7 @@
     <section class="features-section pt-8 md:pt-10 xl:pt-15 2xl:pt-26 pb-4 sm:pb-10 lg:pb-20 2xl:pb-26 3xl:pb-36 bg-white">
         <div class="max-w-6xl xl:max-w-7xl 3xl:max-w-398.25 px-4 sm:px-20 mx-auto">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-5 xl:gap-11">
-                <div class="max-w-full lg:max-w-120 xl:max-w-150 3xl:max-w-206 lg:w-auto">
+                <div class="max-w-full lg:max-w-120 xl:max-w-120 3xl:max-w-206 lg:w-auto">
                     <p class="text-base lg:text-lg/relaxed xl:text-2xl 3xl:text-3xl/relaxed">
                         {{$excursion->description}}
                     </p>
@@ -66,17 +66,19 @@
                             </div>
                             <p>{{ $excursion->guide->name }}</p>
                         </a>
-                        <div class="flex items-center gap-2 xl:gap-5">
-                            <div class="flex flex-wrap content-center size-5 xl:size-7.5">
-                                <i class="fa-solid fa-location-dot"></i>
+                        <div class="flex flex-col gap-1 xl:gap-1">
+                            <div class=" flex items-center gap-2 xl:gap-5">
+                                <div class="flex flex-wrap content-center size-5 xl:size-7.5">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <p>
+                                        <span class="text-xs text-gray-500 block">Место встречи</span>
+                                        {{ $excursion->meeting_point }}
+                                    </p>
+                                    <p class="text-sm text-[#4e4e52]">{{ $excursion->meeting_address }}</p>
+                                </div>
                             </div>
-                            <p>{{ $excursion->meeting_point }}</p>
-                        </div>
-                        <div class="flex items-center gap-2 xl:gap-5">
-                            <div class="flex flex-wrap content-center size-5 xl:size-7.5">
-                                <i class="fa fa-map"></i>
-                            </div>
-                            <p>{{ $excursion->meeting_address }}</p>
                         </div>
                         <div class="flex items-center gap-2 xl:gap-5">
                             <div class="flex flex-wrap content-center size-5 xl:size-7.5">
@@ -85,6 +87,7 @@
                             <p>{{num_word($excursion->getDuration(), ['минута', 'минуты', 'минут'])}}</p>
                         </div>
                     </div>
+
                     <button onclick="document.getElementById('map-modal').classList.remove(['hidden'])" class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] 2xl:rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-xl 3xl:text-3xl">
                         Показать на карте
                     </button>
