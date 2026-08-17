@@ -2,22 +2,22 @@
 
 namespace App\Livewire\Pages\GuidedTours;
 
+use App\Models\Attraction;
 use App\Models\GuidedTour;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class AllGuidedTours extends Component
 {
-    public $guidedTours;
+    use WithPagination;
 
     // TODO: Добавить синхронизацию поиска с поисковой строкой браузера
     public $searchString;
 
-    public function mount()
-    {
-        $this->loadGuidedTours();
-    }
 
-    public function loadGuidedTours()
+    #[Computed]
+    public function guidedTours()
     {
         $builder = GuidedTour::with(['attachments', 'favorites', 'views']);
 
@@ -28,7 +28,12 @@ class AllGuidedTours extends Component
                     ->orWhereLike('description', '%'.trim($this->searchString).'%');
             });
         }
-        $this->guidedTours = $builder->get();
+        return $builder->paginate(15);
+    }
+
+    public function loadGuidedTours()
+    {
+        $this->resetPage();
     }
 
     public function render()

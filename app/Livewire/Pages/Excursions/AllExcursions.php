@@ -2,17 +2,22 @@
 
 namespace App\Livewire\Pages\Excursions;
 
+use App\Models\Attraction;
 use App\Models\Excursion;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class AllExcursions extends Component
 {
-    public $excursions;
+    use WithPagination;
 
-    public function mount()
+    #[Computed]
+    public function excursions()
     {
-        $this->excursions = Excursion::with(['attachments', 'favorites', 'views'])->get();
+        return Excursion::with(['attachments', 'favorites', 'views'])->paginate(15);
     }
+
 
     public function render()
     {

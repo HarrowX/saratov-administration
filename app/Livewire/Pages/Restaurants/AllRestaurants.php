@@ -3,15 +3,18 @@
 namespace App\Livewire\Pages\Restaurants;
 
 use App\Models\Restaurant;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class AllRestaurants extends Component
 {
-    public $restaurants;
+    use WithPagination;
 
-    public function mount()
+    #[Computed]
+    public function restaurants()
     {
-        $this->restaurants = Restaurant::with(['attachments', 'favorites', 'views'])->get();
+        return Restaurant::with(['attachments', 'favorites', 'views'])->paginate(15);
     }
 
     public function render()
