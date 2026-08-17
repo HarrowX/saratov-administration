@@ -6,6 +6,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
+let currentSliderIndex = 0 ;
+
 function placeDetailSwiper() {
     const wrapper = document.querySelector(".gallery-detail-swiper");
     if (!wrapper) return;
@@ -41,6 +43,14 @@ function placeDetailSwiper() {
                 disableOnInteraction: false,
                 pauseOnMouseEnter: false,
             },
+            on: {
+                slideChange: function(){
+                    currentSliderIndex = this.realIndex;
+                },
+                init: function() {
+                    currentSliderIndex = 0;
+                }
+            }
         });
         return;
     }
@@ -65,15 +75,10 @@ function placeDetailSwiper() {
             nextEl: '.thumbs-button-next',
             prevEl: '.thumbs-button-prev',
         },
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: false,
-        },
     });
 
     const mainSwiper = new Swiper(main, {
-        modules: [Thumbs, Pagination, Navigation, Autoplay],
+        modules: [Thumbs, Navigation, Autoplay],
         loop: true,
         roundLengths: true,
         slidesPerView: 'auto',
@@ -82,18 +87,16 @@ function placeDetailSwiper() {
             swiper: thumbsSwiper,
             autoScrollOffset: 1,
         },
-        pagination: {
-            el: '.main-pagination',
-            clickable: true,
-            dynamicBullets: true,
-            dynamicMainBullets: 4,
-        },
         navigation: {
             nextEl: '.button-navigation--main-right',
             prevEl: '.button-navigation--main-left',
         },
         on: {
+            slideChange: function(){
+                currentSliderIndex = this.realIndex;
+            },
             init: function() {
+                currentSliderIndex = 0;
                 this.autoplay.start();
             }
         },
@@ -102,8 +105,17 @@ function placeDetailSwiper() {
             disableOnInteraction: false,
             pauseOnMouseEnter: false,
         },
-
     });
+}
+
+window.openGallery = function() {
+    const slider = document.querySelectorAll('[data-fancybox="gallery"]');
+    const index = currentSliderIndex || 0;
+
+    if(slider.length > 0){
+        const targetSlider = slider[index] || slider[0];
+        targetSlider.click();
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
