@@ -19,7 +19,7 @@ class AllGuidedTours extends Component
 
     public function loadGuidedTours()
     {
-        $builder = GuidedTour::with('attachments');
+        $builder = GuidedTour::with(['attachments', 'favorites', 'views']);
 
         if (trim($this->searchString)) {
             $builder->where(function ($builder) {

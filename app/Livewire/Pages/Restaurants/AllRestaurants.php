@@ -11,7 +11,7 @@ class AllRestaurants extends Component
 
     public function mount()
     {
-        $this->restaurants = Restaurant::with('attachments')->get();
+        $this->restaurants = Restaurant::with(['attachments', 'favorites', 'views'])->get();
     }
 
     public function render()

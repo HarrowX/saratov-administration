@@ -11,7 +11,7 @@ class AllHotels extends Component
 
     public function mount()
     {
-        $this->hotels = Hotel::with('attachments')->get();
+        $this->hotels = Hotel::with(['attachments', 'favorites', 'views'])->get();
     }
 
     public function render()

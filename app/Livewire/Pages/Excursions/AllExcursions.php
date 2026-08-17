@@ -11,7 +11,7 @@ class AllExcursions extends Component
 
     public function mount()
     {
-        $this->excursions = Excursion::with('attachments')->get();
+        $this->excursions = Excursion::with(['attachments', 'favorites', 'views'])->get();
     }
 
     public function render()

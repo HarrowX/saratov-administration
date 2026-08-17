@@ -113,7 +113,7 @@ class AllEvents extends Component
         // стоит вынести тяжелые запросы из render()
         $categories = Category::where('is_active', true)->get();
         $events = Event::query()
-            ->with('categories', 'attachments', 'eventable')
+            ->with(['categories', 'attachments', 'eventable', 'favorites', 'views'])
             ->when($this->date, function ($query) {
                 return $query->whereDate('start_date', $this->date);
             })
