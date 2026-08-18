@@ -85,15 +85,9 @@ class AuthAppleController extends Controller
             'alg' => ['required', 'string', 'in:RS256'],
         ])->validate();
 
-        $keys = Http::get('https://appleid.apple.com/auth/keys')->json()['keys']; // todo in cache
-
-        $jwk = collect($keys)->firstWhere('kid', '=', $header['kid']);
-
-        $publicKey = JWK::parseKey($jwk);
-
-        $keyObject = new Key($publicKey->getKeyMaterial(), 'RS256');
-
-        $payload = (array) JWT::decode($idToken, $keyObject);
+        $jwks = Http::get('https://appleid.apple.com/auth/keys')->json()['keys']; // todo in cache
+        $keys = JWK::parseKeySet($jwks, 'RS256');
+        $payload = (array) JWT::decode($idToken, $keys);
 
         validator($payload, [
             'iss' => ['required', 'string', 'in:https://appleid.apple.com'],
