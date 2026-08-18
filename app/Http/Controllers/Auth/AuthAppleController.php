@@ -32,8 +32,8 @@ class AuthAppleController extends Controller
     {
          $request->validate([
             'id_token' => ['required', 'string'],
-            'name' => ['sometimes', 'string'],
-            'surname' => ['sometimes', 'string'],
+            'name' => ['nullable', 'sometimes', 'string', 'min:2', 'max:255'],
+            'surname' => ['nullable', 'sometimes', 'string', 'min:2', 'max:255'],
         ]);
 
         $idToken = request()->string('id_token')->value();
