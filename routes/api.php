@@ -17,7 +17,12 @@ Route::prefix('v1')->group(function () {
         ->group(function () {
             Route::post('login', 'login');
             Route::post('register', 'register');
+            Route::post('refresh', 'refresh')->name('token.refresh');
             Route::post('logout', 'logout')->middleware(['auth:sanctum']);
+
+            Route::post('forgot-password', 'forgotPassword');
+            Route::post('reset-password', 'changePassword')->middleware(['auth:sanctum']);
+            Route::post('post-register', 'postRegister')->middleware(['auth:sanctum']);
         });
 
     Route::post('auth/vk/token/exchange', [AuthVkController::class, 'exchangeToken']);
@@ -76,12 +81,15 @@ Route::prefix('v1')->group(function () {
 
             Route::get('excursions', 'indexExcursion');
             Route::get('guide-tours', 'indexGuideTour');
+            Route::get('events', 'indexEvent');
 
             Route::post('excursions/{id}', 'favoriteExcursion');
             Route::post('guide-tours/{id}', 'favoriteGuideTour');
+            Route::post('events/{id}', 'favoriteEvent');
 
             Route::delete('excursions/{id}', 'unfavoriteExcursion');
             Route::delete('guide-tours/{id}', 'unfavoriteGuideTour');
+            Route::delete('events/{id}', 'unfavoriteEvent');
 
         });
 

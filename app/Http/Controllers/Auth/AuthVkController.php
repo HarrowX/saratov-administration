@@ -12,10 +12,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Larahook\SanctumRefreshToken\Trait\AuthTokens;
 use Laravel\Socialite\Socialite;
 
 class AuthVkController extends Controller
 {
+    use AuthTokens;
+
     public AuthService $authService;
 
     public function __construct(AuthService $authService)
@@ -55,11 +58,20 @@ class AuthVkController extends Controller
 
         if (! $clientId) {
             return response()->json([
-                'device_type' => 'must be "android" or "ios"',
-            ], 400);
+                'message' => 'must be "android" or "ios"',
+                'errors' => [
+                    'device_type' => 'должен быть "android" или "ios"',
+                ],
+            ], 422);
         }
 
         $res = $this->handleCallback($request, $clientId, $request->boolean('invalidate') ?? true);
+
+        if ($res instanceof User) {
+            $tokens = $this->createTokenPair($res, 'access-api');
+
+            return response()->json($tokens, 200);
+        }
 
         return $res;
     }
@@ -105,10 +117,17 @@ class AuthVkController extends Controller
 
             if (! $user) {
                 $user = DB::transaction(function () use ($userData) {
-                    $user = null;
-
                     try {
-                        $email = $userData['email'] == '' ? 'vk_'.$userData['user_id'].'@'.config('app.domain_name') : $userData['email'];
+                        $email = 'vk_'.$userData['user_id'].'@'.config('app.domain_name');
+
+                        $user = User::query()->where('email', $userData['email'])->first();
+                        if ($user) {
+                            $user->vk_id = $userData['user_id'];
+                            $user->vk_avatar = $userData['avatar'] ?? null;
+                            $user->save();
+
+                            return $user;
+                        }
 
                         $password = Str::random(20);
                         $dto = new RegisterDTO([

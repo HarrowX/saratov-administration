@@ -32,9 +32,9 @@ class EventCategoryIndexPage extends IndexPage
     protected function fields(): iterable
     {
         return [
-            ID::make(),
-            Text::make('Название', 'name'),
-            Switcher::make('Активна', 'is_active')->default(true),
+            ID::make()->sortable(),
+            Text::make('Название', 'name')->sortable(),
+            Switcher::make('Активна', 'is_active')->default(true)->sortable(),
             BelongsToMany::make('События', 'events', resource: EventResource::class)->selectMode()->searchable(),
         ];
     }
@@ -74,7 +74,9 @@ class EventCategoryIndexPage extends IndexPage
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
     {
-        return $component;
+        return $component
+            ->stickyButtons()
+            ->columnSelection();
     }
 
     /**

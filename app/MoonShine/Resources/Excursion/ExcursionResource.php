@@ -31,4 +31,9 @@ class ExcursionResource extends ModelResource
             ExcursionDetailPage::class,
         ];
     }
+
+    protected function search(): array
+    {
+        return ['id', 'name', 'description', 'meeting_point', 'meeting_address'];
+    }
 }

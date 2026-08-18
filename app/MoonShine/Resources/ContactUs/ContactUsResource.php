@@ -38,4 +38,9 @@ class ContactUsResource extends ModelResource
     {
         return parent::activeActions()->except(Action::CREATE);
     }
+
+    protected function search(): array
+    {
+        return ['id', 'message'];
+    }
 }

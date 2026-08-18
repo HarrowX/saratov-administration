@@ -14,13 +14,13 @@
                     </p>
 
                     <div class="mmin-w-full sm:min-w-110 xl:min-w-140 3xl:min-w-197">
-                        <img src="/images/Rectangle 12224702 (1).png" class="photo w-full h-auto object-cover">
+                        <img src="{{asset('/images/b4b7a502-f003-46a3-8ae9-1a47d540efa3.webp')}}" class="photo w-full h-auto object-cover" alt="Здание богемия">
                     </div>
 
                     <div class="grid grid-cols-3 gap-5 w-full">
-                        <img src="/images/Rectangle 12224705 (1).png" class="photo w-full h-auto object-cover">
-                        <img src="/images/Rectangle 12224704 (1).png" class="photo w-full h-auto object-cover">
-                        <img src="/images/Rectangle 12224707.png" class="photo w-full h-auto object-cover">
+                        <img src="{{asset('/images/2eff73ab-4a94-4af2-bd59-3e3829d874f3.webp')}}" class="photo w-full h-auto object-cover" alt="Современные дома в модерн">
+                        <img src="{{asset('/images/3f67cd31-3ae7-4db3-913c-79c54862334b.webp')}}" class="photo w-full h-auto object-cover" alt="Красивые стулья на участке">
+                        <img src="{{asset('/images/bd530e76-a729-4ad8-8497-9cfd692e8667.webp')}}" class="photo w-full h-auto object-cover" alt="Современные дома в лесу">
                     </div>
                 </div>
 
@@ -138,10 +138,18 @@
                                 <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold group-hover:text-[#352AA2] transition-colors duration-300">{{ $hotel->name}}</h2>
                                 <div class="flex flex-col justify-end text-sm lg:text-base 3xl:text-2xl font-light gap-3 text-[#5F5F5F]">
                                     <p class="text-center mb-2 ">{{ $hotel->type}}</p>
-                                    <span class="flex items-center gap-3.5">
-                                        <i class="fas fa-phone text-lg xl:text-xl"></i>
-                                        {{ $hotel->phone }}
-                                    </span>
+                                    @php
+                                        $phones = array_map(fn (string $item) => trim($item), explode(',', $hotel->phone));
+                                    @endphp
+                                    @if(!empty($phones))
+                                        @foreach($phones as $phone)
+                                            <span class="flex items-center gap-3.5">
+                                                <i class="fas fa-phone text-lg xl:text-xl"></i>
+                                                {{ $phone }}
+                                            </span>
+                                        @endforeach
+                                    @endif
+
                                 </div>
                                 <div class="flex flex-col justify-between h-full font-['FindSansPro']">
                                     <div class="flex flex-row justify-between items-end gap-3.5 text-sm lg:text-base 3xl:text-2xl font-light">
@@ -150,7 +158,7 @@
                                             {{ $hotel->address }}
                                         </span>
                                         <a href="{{ route('single-hotel', ['hotel' => $hotel->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
-                                            <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
+                                            <img src="{{asset('/images/arrow-right.png')}}" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
                                         </a>
                                     </div>
                                 </div>

@@ -88,9 +88,11 @@
                         </div>
                     </div>
 
-                    <button onclick="document.getElementById('map-modal').classList.remove(['hidden'])" class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] 2xl:rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-xl 3xl:text-3xl">
-                        Показать на карте
-                    </button>
+@if($startPosition[0] != null && $startPosition[1] != null)
+                        <button onclick="document.getElementById('map-modal').classList.remove(['hidden'])" class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white py-3 2xl:py-6 rounded-[20px] 2xl:rounded-[30px] hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-lg sm:text-xl 3xl:text-3xl">
+                            Показать на карте
+                        </button>
+                    @endif
                 </div>
             </div>
         </div>
@@ -104,8 +106,8 @@
                 <div class="flex flex-col items-start justify-center gap-3 3xl:gap-6 text-base xl:text-xl 3xl:text-2xl">
                     @foreach($excursion->points as $point)
                         <div class="flex items-center">
-                            <img class="icon max-w-3 max-h-3 lg:max-w-5 lg:max-h-7 2xl:max-w-[26px] 2xl:max-h-[31px] mr-2.5 lg:mr-6" src="/images/значок локации.svg">
-                            <p>{{ $point->pointable?->name ?? 'Без названия' }}</p>
+                            <img class="icon max-w-3 max-h-3 lg:max-w-5 lg:max-h-7 2xl:max-w-[26px] 2xl:max-h-[31px] mr-2.5 lg:mr-6" src="{{asset('/images/sign-location.svg')}}" alt="значок локации">
+                            <p>{{ $point?->excursionPointable?->name ?? 'Без названия' }}</p>
                         </div>
                     @endforeach
                 </div>

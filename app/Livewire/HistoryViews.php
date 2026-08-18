@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Exceptions\AlreadyExistsException;
 use App\Models\Attraction;
+use App\Models\Event;
 use App\Models\Excursion;
 use App\Models\Favorite;
 use App\Models\GuidedTour;
@@ -73,6 +74,7 @@ class HistoryViews extends Component
             Restaurant::class => route('single-restaurant', $item),
             Excursion::class => route('single-excursion', $item),
             GuidedTour::class => route('single-guided-tour', $item),
+            Event::class => route('single-event', $item),
         };
     }
 

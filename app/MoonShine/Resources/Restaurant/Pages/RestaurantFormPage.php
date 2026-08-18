@@ -53,13 +53,15 @@ class RestaurantFormPage extends FormPage
                 Phone::make('Номер телефона', 'phone')->required(),
                 Text::make('Кухня', 'kitchen')->unescape()->required(),
                 Select::make('Ценовая категория', 'price_category')
+                    ->nullable()
+                    ->placeholder('Не указывать')
                     ->options([
                         'budget' => 'Дешево',
                         'medium' => 'Средне',
                         'premium' => 'Премиум',
                         'luxury' => 'Люкс',
                     ]),
-                Number::make('Количество посадочных мест', 'capacity'),
+                Number::make('Количество столов в зале для посадки', 'capacity'),
                 Text::make('Адрес', 'address')->unescape()->required(),
                 Text::make('Район', 'district'),
                 Text::make('Email', 'email'),
@@ -89,9 +91,10 @@ class RestaurantFormPage extends FormPage
                         ID::make(),
                         CompressedImage::make('Файл', 'link')
                             ->format('webp')
-                            ->quality((int) config('app.admin.images.quality'))
-                            ->thumb((int) config('app.admin.images.thumb.width'), (int) config('app.admin.images.thumb.height')),
+                            ->quality(config('app.admin.images.quality'))
+                            ->thumb(config('app.admin.images.thumb.width'), config('app.admin.images.thumb.height')),
                         Number::make('Порядковый номер', 'order')->default(0),
+                        Text::make('Подпись к картинке', 'alt_name'),
                     ])->removable(),
             ]),
         ];

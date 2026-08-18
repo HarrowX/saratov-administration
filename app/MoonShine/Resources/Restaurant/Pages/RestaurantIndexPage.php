@@ -41,25 +41,26 @@ class RestaurantIndexPage extends IndexPage
     protected function fields(): iterable
     {
         return [
-            ID::make(),
-            Text::make('Название', 'name')->unescape(),
-            Slug::make('Слаг', 'slug')->from('name')->unique()->unescape(),
-            Textarea::make('Описание', 'description')->unescape(),
+            ID::make()->sortable(),
+            Text::make('Название', 'name')->sortable()->unescape(),
+            Slug::make('Слаг', 'slug')->sortable()->from('name')->unique()->unescape(),
+            Textarea::make('Описание', 'description')->sortable()->unescape(),
             Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы'),
-            Phone::make('Номер телефона', 'phone'),
-            Text::make('Кухня', 'kitchen')->unescape(),
+            Phone::make('Номер телефона', 'phone')->sortable(),
+            Text::make('Кухня', 'kitchen')->sortable()->unescape(),
             Select::make('Ценовая категория', 'price_category')
+                ->sortable()
                 ->options([
                     'budget' => 'Дешево',
                     'medium' => 'Средне',
                     'premium' => 'Премиум',
                     'luxury' => 'Люкс',
                 ]),
-            Number::make('Количество посадочных мест', 'capacity'),
-            Text::make('Адрес', 'address')->unescape(),
-            Text::make('Район', 'district'),
-            Text::make('Email', 'email'),
-            Url::make('Сайт', 'website'),
+            Number::make('Количество столов в зале для посадки', 'capacity')->sortable(),
+            Text::make('Адрес', 'address')->sortable()->unescape(),
+            Text::make('Район', 'district')->sortable(),
+            Text::make('Email', 'email')->sortable(),
+            Url::make('Сайт', 'website')->sortable(),
             //            Url::make('Ссылка на карту', 'map_link'),
             Text::make('Виджет отзывов', 'yandex_review_widget')->changePreview(
                 fn ($value) => $value ? ActionButton::make('Посмотреть')->inModal(
@@ -76,6 +77,7 @@ class RestaurantIndexPage extends IndexPage
                     ID::make(),
                     Image::make('Файл', 'link'),
                     Number::make('Порядковый номер', 'order')->default(0),
+                    Text::make('Подпись к картинке', 'alt_name'),
                 ]),
         ];
     }
@@ -115,7 +117,9 @@ class RestaurantIndexPage extends IndexPage
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
     {
-        return $component;
+        return $component
+            ->stickyButtons()
+            ->columnSelection();
     }
 
     /**

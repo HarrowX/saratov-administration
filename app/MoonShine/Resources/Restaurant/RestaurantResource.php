@@ -31,4 +31,9 @@ class RestaurantResource extends ModelResource
             RestaurantDetailPage::class,
         ];
     }
+
+    protected function search(): array
+    {
+        return ['id', 'name', 'description', 'short_description', 'phone', 'address', 'email', 'website'];
+    }
 }

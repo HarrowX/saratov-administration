@@ -22,7 +22,9 @@ class PromptAgent implements ShouldQueue
         public User $user,
         public string $message,
         public $promptable = SaratovAiModel::class,
-    ) {}
+    ) {
+        $this->onQueue('chat_bot');
+    }
 
     /**
      * Execute the job.

@@ -4,7 +4,7 @@
 
 <div>
     <section id="home" class="hero-section pt-21 min-h-100 md:min-h-screen flex flex-col gap-17 items-center justify-center relative">
-        <div class="absolute inset-0 bg-no-repeat bg-cover" style="background-image: url('/images/bg-events.jpg');">
+        <div class="absolute inset-0 bg-no-repeat bg-cover" style="background-image: url('/images/bg-events.webp');">
             <div class="absolute inset-0 bg-[rgba(239,230,215,0.73)]" style="background-color:#45618696;"></div>
         </div>
         <div class="relative z-10 text-center text-white">
@@ -109,8 +109,9 @@
                             <div class="flex flex-col gap-3 xl:gap-5">
                                 <div class="relative overflow-hidden rounded-[7px] sm:rounded-[19px]">
                                     <img src="{{ $event->attachments?->get(0)?->url() ?? "" }}" alt="{{ $event->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 sm:h-70 md:h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <livewire:favorite-mini-button :position='"right-2 top-2"' :object="$event"/>
                                     @if($event->age_restriction)
-                                        <span class="absolute right-2 top-2 size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-md xl:rounded-xl flex items-center justify-center text-white text-sm xl:text-base 3xl:text-xl shadow-lg">
+                                        <span class="absolute left-2 top-2 size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-md xl:rounded-xl flex items-center justify-center text-white text-sm xl:text-base 3xl:text-xl shadow-lg">
                                             {{ $event->age_restriction }} +
                                         </span>
                                     @endif
@@ -143,10 +144,10 @@
                                 <div class="flex flex-row justify-between items-end gap-3.5 text-xs xl:text-sm font-light">
                                     <span class="flex items-center gap-1 font-medium text-[#5F5F5F]">
                                         <i class="fas fa-map-marker-alt text-base xl:text-xl"></i>
-                                         {{ $event->location->name ?? 'Адрес не указан' }}
+                                         {{ $event->eventable->name ?? 'Адрес не указан' }}
                                     </span>
                                     <a href="{{ route('single-event', ['event' => $event->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
-                                        <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
+                                        <img src="{{asset('/images/arrow-right.png')}}" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
                                     </a>
                                 </div>
                             </div>

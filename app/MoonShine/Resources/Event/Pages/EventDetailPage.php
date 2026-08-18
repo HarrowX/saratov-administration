@@ -55,7 +55,7 @@ class EventDetailPage extends DetailPage
             Text::make('Телефон организатора', 'organizer_phone')->nullable(),
             Email::make('Email организатора', 'organizer_email')->nullable(),
             Url::make('Сайт организатора', 'organizer_website')->nullable(),
-            MorphTo::make('Локация', 'location')
+            MorphTo::make('Локация', 'eventable')
                 ->types([
                     Attraction::class => ['name', 'Достопримечательность'],
                     Hotel::class => ['name', 'Отель'],
@@ -67,6 +67,7 @@ class EventDetailPage extends DetailPage
                     ID::make(),
                     Image::make('Файл', 'link'),
                     Number::make('Порядковый номер', 'order')->default(0),
+                    Text::make('Подпись к картинке', 'alt_name'),
                 ]),
         ];
     }

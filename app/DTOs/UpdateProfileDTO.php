@@ -19,11 +19,13 @@ class UpdateProfileDTO extends ValidatedDTO
     protected function rules(): array
     {
         return [
-            'name' => ['string', 'required', 'max:255'],
-            'surname' => ['string', 'required', 'max:255'],
+            'name' => ['string', 'required', 'min:2', 'max:255'],
+            'surname' => ['string', 'required', 'min:2', 'max:255'],
             'patronymic' => ['sometimes', 'string', 'nullable', 'max:255'],
 
             'phone' => ['phone:RU', 'sometimes', 'string', 'nullable', 'max:255'],
+
+            'email' => ['sometimes', 'nullable', 'email', 'max:255', 'unique:users,email'],
         ];
     }
 
@@ -43,7 +45,6 @@ class UpdateProfileDTO extends ValidatedDTO
 
             'phone.string' => 'Телефон должен быть строкой.',
             'phone.max' => 'Телефон не должен превышать :max символов.',
-            'phone' => 'Номер должен быть в формате +7 999 99-99-99',
         ];
     }
 

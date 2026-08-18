@@ -8,9 +8,12 @@
     "require": {
         "php": "^8.2",
         "chocoway/moonshine-compressed-image": "^1.0",
+        "dedoc/scramble": "^0.13.39",
         "joelbutcher/socialstream": "^6.3",
+        "larahook/sanctum-refresh-token": "^1.0",
         "laravel/ai": "^0.7.2",
         "laravel/framework": "^12.0",
+        "laravel/horizon": "^5.48",
         "laravel/pulse": "^1.4",
         "laravel/sanctum": "^4.0",
         "laravel/telescope": "^5.15",
@@ -26,6 +29,7 @@
     "require-dev": {
         "fakerphp/faker": "^1.23",
         "friendsofphp/php-cs-fixer": "^3.91",
+        "laravel-lang/lang": "^15.34",
         "laravel/breeze": "^2.4",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.24",
