@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthAppleController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\AuthVkController;
 use App\Http\Controllers\ContactUsController;
@@ -26,6 +27,7 @@ Route::prefix('v1')->group(function () {
         });
 
     Route::post('auth/vk/token/exchange', [AuthVkController::class, 'exchangeToken']);
+    Route::post('auth/apple/token/exchange', [AuthAppleController::class, 'exchangeToken']);
 
     Route::prefix('users')->group(function () {
         Route::middleware(['auth:sanctum'])

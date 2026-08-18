@@ -25,6 +25,7 @@ class User extends Authenticatable
         'phone',
         'password',
         'vk_id',
+        'apple_id',
         'vk_avatar',
         'email_verified_at',
     ];
