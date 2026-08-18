@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Listeners\DeleteExpiredFcmNotificationTokens;
 use App\Services\AuthService;
 use App\Services\FavoritableService;
 use App\Services\FirebaseDeviceTokensService;
@@ -9,6 +10,7 @@ use App\Services\ModelConversationService;
 use App\Services\PlaceVisitService;
 use App\Services\SystemPromptDataService;
 use App\Services\UserService;
+use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -52,6 +54,8 @@ class AppServiceProvider extends ServiceProvider
         Event::listen(function (SocialiteWasCalled $event) {
             $event->extendSocialite('vk', Provider::class);
         });
+
+        Event::listen(NotificationFailed::class, DeleteExpiredFcmNotificationTokens::class);
 
         Gate::define('viewApiDocs', static function ($user) {
             return method_exists($user, 'isSuperUser') && $user->isSuperUser();
