@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserName;
 use App\Services\AuthService;
+use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +18,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Larahook\SanctumRefreshToken\Trait\AuthTokens;
 use Laravel\Socialite\Socialite;
+use phpseclib3\Crypt\RSA;
 
 class AuthAppleController extends Controller
 {
@@ -83,19 +86,25 @@ class AuthAppleController extends Controller
         validator(['jwtSections' => $jwtSections], ['jwtSections' => ['array'],])->validate();
 
         $header = (array) json_decode(base64_decode($jwtSections[0]));
-        $payload = (array) json_decode(base64_decode($jwtSections[1]));
-
-//        $signature = base64_decode($jwtSections[2]); TODO add checking
 
         validator($header, [
             'alg' => ['required', 'string', 'in:RS256'],
         ])->validate();
 
+        $keys = Http::get('https://appleid.apple.com/auth/keys')->json()['keys']; //todo in cache
+
+        $jwk = collect($keys)->firstWhere('kid', '=', $header['kid']);
+
+        $publicKey = JWK::parseKey($jwk);
+
+        $keyObject = new Key($publicKey->getKeyMaterial(), 'RS256');
+
+        $payload = (array) JWT::decode($idToken, $keyObject);
+
         validator($payload, [
             'iss' => ['required', 'string', 'in:https://appleid.apple.com'],
             'aud' => ['required', 'string', 'in:ru.saratov.administration'],
-            'exp' => ['required', 'integer'],
-//            'exp' => ['required', 'integer', 'lt:' . now()->timestamp],
+            'exp' => ['required', 'integer', 'lt:' . now()->timestamp],
             'sub' => ['required', 'string'],
             'email' => ['required', 'string', 'email'],
         ])->validate();
