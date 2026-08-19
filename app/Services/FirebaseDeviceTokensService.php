@@ -48,7 +48,7 @@ class FirebaseDeviceTokensService
         Log::info('FCM device token was unbinded from user', [
             'device_token' => $deviceToken,
             'user_id' => $user->id,
-            'soft' => $soft
+            'soft' => $soft,
         ]);
     }
 
