@@ -269,15 +269,6 @@ html {
     @apply space-y-2 text-gray-600 pb-4;
 }
 
-/* Map styles */
-#map {
-    border: 2px solid #E5E7EB;
-    transition: all 0.3s ease;
-}
-
-#map:hover {
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-}
 
 .leaflet-popup-content-wrapper {
     border-radius: 12px;
@@ -882,19 +873,17 @@ button{
     transition: transform 0.3s ease;
 }
 
-.restaurant #map {
-    width: 100%;
-    height: 100%;
-    min-height: 300px;
-    border-radius: 0 24px 24px 0;
+/* Map styles */
+#map {
     overflow: hidden;
     border: 0;
-    box-shadow: none;
 }
-@media (max-width: 1024px) {
-    .restaurant #map {
-        height: 300px;
-    }
+.index-map #map {
+    border-radius: 12px;
+}
+#map:hover {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
 }
 
 @keyframes shake {
@@ -904,3 +893,12 @@ button{
     95% { transform: rotate(5deg); }
 }
 
+
+.yandex-review-wrapper iframe {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    border: none !important;
+    display: block !important;
+    border-radius: 12px !important;
+}

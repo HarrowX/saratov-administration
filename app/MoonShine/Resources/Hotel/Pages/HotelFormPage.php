@@ -47,8 +47,8 @@ class HotelFormPage extends FormPage
 
                 return $item && $item->exists;
             }),
-            Textarea::make('Описание', 'description')->unescape()->required(),
-            Textarea::make('Второе описание', 'second_description')->unescape()->required(),
+            Textarea::make('Краткое описание', 'description')->unescape()->required(),
+            Textarea::make('Полное описание', 'second_description')->unescape()->required(),
             Json::make('Рабочее время', 'worktime')->keyValue('День', 'Часы работы'),
             Select::make('Тип размещения', 'type')
                 ->options([
@@ -65,7 +65,12 @@ class HotelFormPage extends FormPage
             Text::make('Email', 'email'),
             Url::make('Сайт', 'website'),
             //            Url::make('Ссылка на карту', 'map_link'),
-            Textarea::make('Код виджета отзывов яндекс карт', 'yandex_review_widget')->unescape(),
+            Textarea::make('Код виджета отзывов яндекс карт', 'yandex_review_widget')
+                ->onApply(function ($item, $value) {
+                    if (empty($value)) return $item;
+                    $item->yandex_review_widget =  preg_replace('/width:\d+px/', 'width:100%', $value, 1);
+                    return $item;
+                })->unescape(),
             ActionButton::make('Инструкция')
                 ->inModal('Инструкция', <<<'HTML'
                 <div style="line-height: 1.6; display: flex; flex-direction: column; gap: 0.25rem;">
@@ -78,8 +83,8 @@ class HotelFormPage extends FormPage
                     </div>
                 </div>
                 HTML),
-            Number::make('Максимальная цена', 'max_price'),
-            Number::make('Минимальная цена', 'min_price'),
+            Number::make('Максимальная цена', 'max_price')->step(1),
+            Number::make('Минимальная цена', 'min_price')->step(1),
             Box::make('Координаты', [
                 Div::make([
                     Text::make('Широта', 'latitude'),
