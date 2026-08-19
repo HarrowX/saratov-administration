@@ -8,6 +8,7 @@ use App\Models\User;
 use App\MoonShine\Resources\User\UserResource;
 use App\Notifications\FcmTestNotification;
 use Illuminate\Http\Request;
+use MoonShine\Contracts\UI\ActionButtonContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
@@ -18,12 +19,12 @@ use MoonShine\Support\ListOf;
 use MoonShine\UI\Components\ActionButton;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Metrics\Wrapped\Metric;
+use MoonShine\UI\Components\Modal;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\UI\Fields\Checkbox;
 use MoonShine\UI\Fields\Email;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Phone;
-use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use Throwable;
 
@@ -58,19 +59,16 @@ class UserIndexPage extends IndexPage
                 ->icon('fire')
                 ->inModal(
                     title: 'Отправка уведомления на мобильные устройства',
-                    name: 'send-notification',
-                    components: [
+                    name: static fn (mixed $item, ActionButtonContract $ctx): string => 'send-notification-'.$ctx->getData()?->getKey(),
+                    builder: fn (Modal $modal, ActionButton $ctx) => $modal->setComponents([
                         FormBuilder::make('send-notification-form', fields: [
-                            Select::make('Пользователь', 'user_id')
-                                ->options(function () {
-                                    return User::query()->pluck('email', 'id')->toArray();
-                                })->required(),
+                            ID::make()->setValue($ctx->getData()?->getKey()),
                             Text::make('Заголовок', 'title')->required(),
                             Text::make('Тело', 'body')->required(),
                         ])
                             ->asyncMethod('sendNotification')
                             ->submit('Отправить'),
-                    ],
+                    ])
                 )
         );
     }
@@ -79,11 +77,11 @@ class UserIndexPage extends IndexPage
     public function sendNotification(Request $request)
     {
         $validated = $request->validate([
-            'user_id' => ['exists:users,id'],
+            'id' => ['exists:users,id'],
             'title' => ['required', 'string'],
             'body' => ['required', 'string'],
         ]);
-        $user = User::find($validated['user_id']);
+        $user = User::find($validated['id']);
         $user->notify(new FcmTestNotification($validated['title'], $validated['body']));
         toast('Уведомление в очереди на отправку', ToastType::SUCCESS);
     }
