@@ -36,15 +36,19 @@ class FirebaseDeviceTokensService
         return $token;
     }
 
-    public function unbindToken(User $user, string $deviceToken)
+    public function unbindToken(User $user, string $deviceToken, bool $soft = true)
     {
-        FirebaseDeviceToken::where('user_id', $user->id)
-            ->where('device_token', $deviceToken)
-            ->update(['user_id' => null]);
+        $query = $user->firebaseDeviceTokens()->where('device_token', $deviceToken);
+        if ($soft) {
+            $query->update(['user_id' => null]);
+        } else {
+            $query->delete();
+        }
 
         Log::info('FCM device token was unbinded from user', [
             'device_token' => $deviceToken,
             'user_id' => $user->id,
+            'soft' => $soft
         ]);
     }
 
