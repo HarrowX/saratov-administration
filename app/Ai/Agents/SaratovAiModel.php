@@ -4,25 +4,27 @@ namespace App\Ai\Agents;
 
 use App\Services\SystemPromptDataService;
 use Laravel\Ai\Attributes\Model;
-use Laravel\Ai\Attributes\Provider;
 use Laravel\Ai\Attributes\Temperature;
 use Laravel\Ai\Concerns\RemembersConversations;
 use Laravel\Ai\Contracts\Agent;
 use Laravel\Ai\Contracts\Conversational;
 use Laravel\Ai\Contracts\HasTools;
 use Laravel\Ai\Contracts\Tool;
-use Laravel\Ai\Enums\Lab;
 use Laravel\Ai\Promptable;
 use Stringable;
 
 #[Temperature(0.2)]
 #[Model('claude-sonnet-4.6')]
-#[Provider(Lab::Anthropic)]
 class SaratovAiModel implements Agent, Conversational, HasTools
 {
     use Promptable, RemembersConversations;
 
     public function __construct() {}
+
+    public function provider(): string
+    {
+        return config('ai.selected_provider');
+    }
 
     /**
      * Get the instructions that the agent should follow.
