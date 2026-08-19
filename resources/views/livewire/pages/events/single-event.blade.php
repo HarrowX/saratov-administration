@@ -93,7 +93,7 @@
                                     </a>
                                 @endif
                                 @php
-                                    $phones = array_map(fn (string $item) => trim($item), explode(',', $guidedTour->organizer_phone));
+                                    $phones = array_map(fn (string $item) => trim($item), explode(',', $event->organizer_phone));
                                 @endphp
                                 @if(!empty($phones))
                                     @foreach($phones as $phone)
