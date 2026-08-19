@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Services\AuthService;
 use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -85,14 +84,14 @@ class AuthAppleController extends Controller
             'alg' => ['required', 'string', 'in:RS256'],
         ])->validate();
 
-        $jwks = Http::get('https://appleid.apple.com/auth/keys')->json()['keys']; // todo in cache
+        $jwks = Http::get('https://appleid.apple.com/auth/keys')->json()['keys'];
         $keys = JWK::parseKeySet($jwks, 'RS256');
         $payload = (array) JWT::decode($idToken, $keys);
 
         validator($payload, [
             'iss' => ['required', 'string', 'in:https://appleid.apple.com'],
             'aud' => ['required', 'string', 'in:ru.saratov.administration'],
-            'exp' => ['required', 'integer', 'lt:'.now()->timestamp],
+            'exp' => ['required', 'integer', 'gt:'.now()->timestamp],
             'sub' => ['required', 'string'],
             'email' => ['required', 'string', 'email'],
         ])->validate();
