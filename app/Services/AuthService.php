@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\DTOs\LoginDTO;
+use App\DTOs\LogoutDTO;
 use App\DTOs\RegisterDTO;
 use App\Exceptions\Auth\BadCredentialsException;
 use App\Models\User;
@@ -17,6 +18,10 @@ use Larahook\SanctumRefreshToken\Trait\AuthTokens;
 class AuthService
 {
     use AuthTokens;
+
+    public function __construct(
+        protected FirebaseDeviceTokensService $firebaseDeviceTokensService
+    ) {}
 
     /**
      * @throws BadCredentialsException
@@ -108,8 +113,16 @@ class AuthService
         return $this->createTokenPair($user, 'access-api');
     }
 
-    public function logout(User $user): bool
+    public function logout(User $user, LogoutDTO $logoutData): bool
     {
-        return $this->logoutTokenPair($user);
+        return DB::transaction(function () use ($user, $logoutData) {
+            // TODO: @refactor: remove if-condition when sending device_token
+            // will implemented in mobile application
+            if ($logoutData->device_token !== null) {
+                $this->firebaseDeviceTokensService->unbindToken($user, $logoutData->device_token);
+            }
+
+            return $this->logoutTokenPair($user);
+        });
     }
 }
