@@ -19,30 +19,32 @@
     --breakpoint-xs: 25rem;
 }
 
-
 @font-face {
   font-family: "FindSansPro";
   font-style: normal;
-  font-weight: 400;
-  src: local("FindSansPro"),
-       url("../fonts/FindSansPro-Regular.ttf") format("woff2"),
-       url("../fonts/FindSansPro-Regular.ttf") format("woff");
+    font-weight: 400;
+    src: local("FindSansPro"),
+    url("../fonts/findsans-pro-regular-regular-russian.woff2") format("woff2"),
+    url("../fonts/findsans-pro-regular-regular-russian.woff") format("woff"),
+    url("../fonts/findsans-pro-regular-regular-russian.ttf") format("truetype");
 }
 @font-face {
   font-family: "Centurygothic";
   font-style: normal;
   font-weight: 400;
   src: local("Centurygothic"),
-       url("../fonts/centurygothic.ttf") format("woff2"),
-       url("../fonts/centurygothic.ttf") format("woff");
+       url("../fonts/centurygothic-russian.woff2") format("woff2"),
+       url("../fonts/centurygothic-russian.woff") format("woff"),
+       url("../fonts/centurygothic-russian.ttf") format("truetype");
 }
 @font-face {
   font-family: "CenturygothicBold";
   font-style: normal;
   font-weight: 800;
   src: local("CenturygothicBold"),
-       url("../fonts/centurygothic_bold.ttf") format("woff2"),
-       url("../fonts/centurygothic_bold.ttf") format("woff");
+       url("../fonts/centurygothic_bold-russian.woff2") format("woff2"),
+       url("../fonts/centurygothic_bold-russian.woff") format("woff"),
+       url("../fonts/centurygothic_bold-russian.ttf") format("woff");
 }
 
 @font-face {
@@ -50,8 +52,9 @@
     font-style: normal;
     font-weight: 900;
     src: local("Inter Black"),
-    url("../fonts/Inter_18pt-Black.ttf") format("woff2"),
-    url("../fonts/Inter_18pt-Black.ttf") format("woff");
+    url("../fonts/inter_18pt-black-russian.woff2") format("woff2"),
+    url("../fonts/inter_18pt-black-russian.woff") format("woff"),
+    url("../fonts/inter_18pt-black-russian.ttf") format("truetype");
 }
 
 @font-face {
@@ -59,8 +62,9 @@
     font-style: normal;
     font-weight: 600;
     src: local("Inter Black"),
-    url("../fonts/Inter_18pt-SemiBold.ttf") format("woff2"),
-    url("../fonts/Inter_18pt-SemiBold.ttf") format("woff");
+    url("../fonts/inter_18pt-semibold-russian.woff2") format("woff2"),
+    url("../fonts/inter_18pt-semibold-russian.woff") format("woff"),
+    url("../fonts/inter_18pt-semibold-russian.ttf") format("truetype");
 }
 
 @font-face {
@@ -68,8 +72,9 @@
     font-style: normal;
     font-weight: 500;
     src: local("Inter"),
-        url("../fonts/Inter_18pt-Regular.ttf") format("woff2"),
-        url("../fonts/Inter_18pt-Regular.ttf") format("woff");
+        url("../fonts/inter_18pt-regular-russian.woff2") format("woff2"),
+        url("../fonts/inter_18pt-regular-russian.woff") format("woff"),
+        url("../fonts/inter_18pt-regular-russian.ttf") format("truetype");
 }
 
 @font-face {
@@ -77,8 +82,9 @@
     font-style: normal;
     font-weight: 500;
     src: local("Merriweather"),
-        url("../fonts/Merriweather_24pt-Regular.ttf") format("woff2"),
-        url("../fonts/Merriweather_24pt-Regular.ttf") format("woff");
+        url("../fonts/merriweather_24pt-regular-russian.woff2") format("woff2"),
+        url("../fonts/merriweather_24pt-regular-russian.woff") format("woff"),
+        url("../fonts/merriweather_24pt-regular-russian.ttf") format("ttf");
 }
 
 body {
