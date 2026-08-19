@@ -8,7 +8,6 @@ use App\Models\User;
 use App\MoonShine\Resources\User\UserResource;
 use App\Notifications\FcmTestNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use MoonShine\Contracts\UI\ActionButtonContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
@@ -26,7 +25,6 @@ use MoonShine\UI\Fields\Checkbox;
 use MoonShine\UI\Fields\Email;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Phone;
-use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use Throwable;
 
@@ -68,8 +66,8 @@ class UserIndexPage extends IndexPage
                             Text::make('Заголовок', 'title')->required(),
                             Text::make('Тело', 'body')->required(),
                         ])
-                        ->asyncMethod('sendNotification')
-                        ->submit('Отправить'),
+                            ->asyncMethod('sendNotification')
+                            ->submit('Отправить'),
                     ])
                 )
         );
