@@ -57,6 +57,7 @@
                 <div data-aos="fade-left" class="flex flex-col gap-7 w-full lg:w-auto">
                     <div class="flex flex-col w-full justify-around bg-[#E5E6F6] gap-3 md:gap-6.75 px-6 xl:px-11 py-8 rounded-[20px] font-['FindSansPro'] text-sm sm:text-base xl:text-xl 3xl:text-2xl">
                         <div class="flex items-center gap-2 xl:gap-5">
+                            <i class="fas fa-shoe-prints"></i>
                             <img class="size-4.5 xl:size-7 icon" src="/images/image 17.svg">
                             <p>{{ $excursion->type }}</p>
                         </div>
@@ -106,7 +107,7 @@
                 <div class="flex flex-col items-start justify-center gap-3 3xl:gap-6 text-base xl:text-xl 3xl:text-2xl">
                     @foreach($excursion->points as $point)
                         <div class="flex items-center">
-                            <img class="icon max-w-3 max-h-3 lg:max-w-5 lg:max-h-7 2xl:max-w-[26px] 2xl:max-h-[31px] mr-2.5 lg:mr-6" src="{{asset('/images/sign-location.svg')}}" alt="значок локации">
+                            <img class="icon max-w-3 max-h-3 lg:max-w-5 lg:max-h-7 2xl:max-w-6.5 2xl:max-h-7.75 mr-2.5 lg:mr-6" src="{{asset('/images/sign-location.svg')}}" alt="значок локации">
                             <p>{{ $point?->excursionPointable?->name ?? 'Без названия' }}</p>
                         </div>
                     @endforeach
@@ -137,19 +138,6 @@
         </div>
     </section>
 
-<!--Achievements Section-->
-{{--    <section class="features-section py-6 md:py-10 xl:py-15 2xl:py-25 bg-white">--}}
-{{--        <div class="max-w-6xl xl:max-w-7xl 3xl:max-w-398.25 px-4 sm:px-20 mx-auto flex flex-col gap-12">--}}
-{{--            <div data-aos="fade-right" class="font-['FindSansPro'] flex flex-col items-center lg:items-start">--}}
-{{--                <h3>Достижения</h3>--}}
-{{--                <p class="text-lg md:text-2xl text-center lg:text-left">За прохождение “{{$excursion->name}}” вы получите:</p>--}}
-{{--                <div class="flex flex-row flex-wrap gap-4 lg:gap-10 justify-center lg:justify-start items-center text-sm pt-4 lg:pt-5 3xl:pt-7 md:text-xl">--}}
-{{--                    <div class="text-white rounded-4xl bg-linear-to-r from-green-500 to-teal-600 py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Исследователю”</div>--}}
-{{--                    <div class="gradient-button text-white rounded-4xl py-3 sm:py-4.5 px-8 sm:px-15">+1 к “Первооткрывателю” </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </section>--}}
     @if(isset($nearbyLatitude) && isset($nearbyLongitude))
         @livewire('attraction-component', [
             'latitude' => $nearbyLatitude,

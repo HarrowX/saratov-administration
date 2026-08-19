@@ -42,8 +42,8 @@
                                 </div>
                             @endforeach
                         </div>
-                        <div class="absolute right-6 bottom-6 z-20 flex items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-110 cursor-pointer select-none" onclick="openGallery()">
-                            <i class="fas fa-search-plus text-white/50 text-2xl lg:text-3xl transition-transform duration-300 group-hover:scale-125 group-hover:text-white/70"></i>
+                        <div class="absolute right-6 bottom-106 lg:bottom-6 z-20 flex items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-110 cursor-pointer select-none" onclick="openGallery()">
+                            <i class="fas fa-search-plus text-white/50 text-3xl transition-transform duration-300 group-hover:scale-125 group-hover:text-white/70"></i>
                         </div>
 
                         @if($restaurant->attachments->count() > 1)

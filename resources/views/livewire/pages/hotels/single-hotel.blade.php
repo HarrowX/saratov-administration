@@ -42,8 +42,8 @@
                                 </div>
                             @endforeach
                         </div>
-                        <div class="absolute right-6 top-6 lg:bottom-6 z-20 flex items-center justify-center rounded-full transition-transform duration-300 float-right group-hover:scale-110 cursor-pointer select-none" onclick="openGallery()">
-                            <i class="fas fa-search-plus text-white/50 text-2xl lg:text-3xl transition-transform duration-300 group-hover:scale-125 group-hover:text-white/70"></i>
+                        <div class="absolute right-6 bottom-106 lg:bottom-6 z-20 flex items-center justify-center rounded-full transition-transform duration-300 float-right group-hover:scale-110 cursor-pointer select-none" onclick="openGallery()">
+                            <i class="fas fa-search-plus text-white/50 text-3xl transition-transform duration-300 group-hover:scale-125 group-hover:text-white/70"></i>
                         </div>
 
                         @if($hotel->attachments->count() > 1)
@@ -118,7 +118,7 @@
                                     </span>
                                     <div>
                                         <span class="text-xs text-gray-400 block">Ценовой диапазон</span>
-                                        <span class="font-medium">от {{ number_format($hotel->min_price, 0, '', ' ') }} до {{ number_format($hotel->max_price, 0, '', ' ') }}</span>
+                                        <span class="font-medium">от {{ number_format($hotel->min_price, 0, '', ' ') }} до {{ number_format($hotel->max_price, 0, '', ' ') }} рублей</span>
                                     </div>
                                 </div>
                             @endif

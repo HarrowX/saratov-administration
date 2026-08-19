@@ -11,12 +11,12 @@
             <div class="absolute inset-x-0 bottom-0 h-40 sm:h-60 md:h-100 bg-linear-to-t from-black via-black/50 to-transparent"></div>
         </div>
 
-        <div class="relative z-10 flex flex-col justify-between h-full max-w-6xl 3xl:max-w-421 mx-auto px-4 sm:px-10 py-8 md:py-20 w-full">
+        <div class="relative z-10 flex flex-col justify-between h-full max-w-6xl 3xl:max-w-421 mx-auto px-4 sm:px-10 py-8 md:py-10 w-full">
             <a href="{{ route('all-events') }}" class="z-20 hidden md:flex items-center gap-2 3xl:gap-6 text-white hover:text-blue-800 transition-colors font-['FindSansPro'] max-w-fit">
                 <i class="fa-solid fa-chevron-left text-xl 3xl:text-3xl"></i>
                 <span class="text-xl xl:text-2xl 3xl:text-3xl">События</span>
             </a>
-            <button wire:click="toggleFavorite" class="flex absolute right-3 sm:right-10 top-20 md:top-10 lg:top-16 xl:right-20 z-20 items-center gap-1 sm:gap-3 px-3 sm:px-5 py-1.5 sm:py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group">
+            <button wire:click="toggleFavorite" class="flex absolute right-3 sm:right-10 top-20 md:top-10 xl:right-20 z-20 items-center gap-1 sm:gap-3 px-3 sm:px-5 py-1.5 sm:py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group">
                 <i class="fa-regular fa-heart text-lg sm:text-2xl xl:text-3xl group-hover:scale-110 group-hover:animate-pulse transition-transform {{ $isFavorite ? 'fa-solid text-red-400' : 'fa-regular' }}"></i>
                 <span class="text-xs xs:text-sm sm:text-lg 2xl:text-3xl font-medium">
                     {{ $isFavorite ? 'В избранном' : 'В избранное' }}
@@ -93,7 +93,7 @@
                                     </a>
                                 @endif
                                 @php
-                                    $phones = array_map(fn (string $item) => trim($item), explode(',', $guidedTour->organizer_phone));
+                                    $phones = array_map(fn (string $item) => trim($item), explode(',', $event->organizer_phone));
                                 @endphp
                                 @if(!empty($phones))
                                     @foreach($phones as $phone)
