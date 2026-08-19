@@ -9,7 +9,6 @@
 
             <div class="max-w-4xl mx-auto font-['FindSansPro']">
                 <div class="flex flex-col rounded-3xl bg-white overflow-hidden shadow-[0_20px_60px_rgba(30,58,138,0.16)] ring-1 ring-slate-200">
-
                     {{-- Header (dark) --}}
                     <div class="flex items-center gap-3 px-5 py-4 bg-linear-to-r from-[#1e2a5a] to-[#1e3a8a] text-white">
                         <div class="relative shrink-0">
@@ -24,7 +23,6 @@
                                 <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span> В сети · AI-помощник
                             </div>
                         </div>
-                        <span class="ml-auto text-[11px] font-bold tracking-wide text-blue-100 bg-white/15 border border-white/20 px-2.5 py-1 rounded-full">AI</span>
                     </div>
 
                     {{-- Messages --}}
@@ -65,34 +63,20 @@
                                 </div>
                             @endforelse
 
-                            {{-- Typing indicator --}}
-                            <div wire:loading wire:target="postMessage" class="flex items-start gap-3">
-                                <div class="w-9 h-9 shrink-0 rounded-full bg-linear-to-br from-[#1e3a8a] to-[#2663EB] flex items-center justify-center text-white shadow-md shadow-blue-900/25">
-                                    <i class="fas fa-robot text-sm"></i>
+                            @if($isWaitingForResponse)
+                                <div class="flex items-start gap-3">
+                                    <div class="w-9 h-9 shrink-0 rounded-full bg-linear-to-br from-[#1e3a8a] to-[#2663EB] flex items-center justify-center text-white shadow-md shadow-blue-900/25">
+                                        <i class="fas fa-robot text-sm"></i>
+                                    </div>
+                                    <div class="bg-white border border-[#e8edf5] rounded-2xl rounded-tl-md px-4 py-3.5 shadow-sm flex items-center gap-1.5">
+                                        <span class="w-2 h-2 rounded-full bg-[#3b6fe0] animate-bounce [animation-delay:-0.3s]"></span>
+                                        <span class="w-2 h-2 rounded-full bg-[#3b6fe0] animate-bounce [animation-delay:-0.15s]"></span>
+                                        <span class="w-2 h-2 rounded-full bg-[#3b6fe0] animate-bounce"></span>
+                                    </div>
                                 </div>
-                                <div class="bg-white border border-[#e8edf5] rounded-2xl rounded-tl-md px-4 py-3.5 shadow-sm flex items-center gap-1.5">
-                                    <span class="w-2 h-2 rounded-full bg-[#3b6fe0] animate-bounce [animation-delay:-0.3s]"></span>
-                                    <span class="w-2 h-2 rounded-full bg-[#3b6fe0] animate-bounce [animation-delay:-0.15s]"></span>
-                                    <span class="w-2 h-2 rounded-full bg-[#3b6fe0] animate-bounce"></span>
-                                </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
-
-                    {{-- Quick actions --}}
-                    <div class="px-4 md:px-6 pt-4 flex gap-2 overflow-x-auto scrollbar-hide">
-                        @php
-                            $quick = ['🚀 Поехали!', '🍽️ Рестораны и кафе', '🌳 Парки и прогулки', '🏛️ Музеи и культура', '🌤️ Погода', '🎭 События', '📚 История города', '🛍️ Шопинг'];
-                        @endphp
-                        @foreach ($quick as $q)
-                            <button type="button"
-                                    x-on:click="$wire.set('prompt', @js($q)); $refs.aiInput && $refs.aiInput.focus()"
-                                    class="shrink-0 whitespace-nowrap text-sm px-4 py-2 rounded-full bg-[#eef3fb] text-[#1e3a8a] border border-[#dbe4f5] hover:bg-[#1e3a8a] hover:text-white hover:border-[#1e3a8a] transition-colors cursor-pointer">
-                                {{ $q }}
-                            </button>
-                        @endforeach
-                    </div>
-
                     {{-- Input --}}
                     <form wire:submit="postMessage" class="p-4 md:p-6">
                         <div class="flex items-center gap-2 rounded-full bg-white border border-[#cdd8ec] focus-within:border-[#2663EB] focus-within:ring-2 focus-within:ring-[#2663EB]/20 transition pl-5 pr-2 py-2">

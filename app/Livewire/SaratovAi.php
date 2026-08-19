@@ -53,6 +53,11 @@ class SaratovAi extends Component
 
             return;
         }
+        if ($this->isWaitingForResponse) {
+            $this->addError('prompt', 'Сообщение в процессе обработки');
+            
+            return;
+        }
         $this->prompt = trim($this->prompt);
         $maxMessageLength = $this->modelConversationService->maxMessageLength();
 
