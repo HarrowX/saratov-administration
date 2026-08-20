@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Pages\GuidedTours;
 
-use App\Models\Attraction;
 use App\Models\GuidedTour;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -14,7 +13,6 @@ class AllGuidedTours extends Component
 
     // TODO: Добавить синхронизацию поиска с поисковой строкой браузера
     public $searchString;
-
 
     #[Computed]
     public function guidedTours()
@@ -28,6 +26,7 @@ class AllGuidedTours extends Component
                     ->orWhereLike('description', '%'.trim($this->searchString).'%');
             });
         }
+
         return $builder->paginate(15);
     }
 

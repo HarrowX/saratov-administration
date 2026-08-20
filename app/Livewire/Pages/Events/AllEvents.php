@@ -111,7 +111,6 @@ class AllEvents extends Component
         }
     }
 
-
     #[Computed]
     public function events()
     {
