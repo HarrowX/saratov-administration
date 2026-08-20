@@ -30,15 +30,87 @@
                         <div class="flex flex-col gap-4 w-full" id="chat-messages">
                             @forelse ($chatMessages as $message)
                                 @if($message['fromBot'])
+                                    {{--
+                                        Структурированный ответ: помимо текста бот может вернуть массив мест.
+                                        Ожидаемая структура одного места в $message['places'][]:
+                                        [
+                                            'name' => string,           // название
+                                            'category' => ?string,      // подпись/категория (напр. "Кафе · берег Волги")
+                                            'image' => ?string,         // URL изображения
+                                            'rating' => ?float,         // рейтинг
+                                            'meta' => ?string,          // бейдж (напр. "15 мин", "300 м")
+                                            'url' => ?string,           // ссылка на страницу места
+                                            'map_url' => ?string,       // ссылка "На карте"
+                                            'favorited' => ?bool,       // в избранном
+                                        ]
+                                    --}}
+                                    @php $places = $message['places'] ?? []; @endphp
                                     <div class="flex items-start gap-3 animate-fadeIn">
                                         <div class="w-9 h-9 shrink-0 rounded-full bg-linear-to-br from-[#1e3a8a] to-[#2663EB] flex items-center justify-center text-white shadow-md shadow-blue-900/25">
                                             <i class="fas fa-robot text-sm"></i>
                                         </div>
-                                        <div class="max-w-[80%]">
+                                        <div class="{{ empty($places) ? 'max-w-[80%]' : 'max-w-[92%] w-full' }}">
                                             <div class="bg-white border border-[#e8edf5] rounded-2xl rounded-tl-md px-4 py-3 shadow-sm">
                                                 <p class="text-xs font-bold text-[#1e3a8a] mb-1">Гид Саратов</p>
                                                 <p class="text-sm text-gray-700 leading-relaxed whitespace-pre-line">{{ $message['text'] }}</p>
                                             </div>
+
+                                            @if(!empty($places))
+                                                <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                                    @foreach($places as $place)
+                                                        <div class="group/place flex flex-col bg-white border border-[#e8ecf7] rounded-2xl overflow-hidden shadow-[0_8px_20px_rgba(15,23,42,0.07)] hover:shadow-[0_12px_28px_rgba(15,23,42,0.12)] transition-all duration-300">
+                                                            <div class="relative h-28 overflow-hidden">
+                                                                @if(!empty($place['image']))
+                                                                    <img src="{{ $place['image'] }}" alt="{{ $place['name'] ?? '' }}"
+                                                                         class="w-full h-full object-cover group-hover/place:scale-105 transition-transform duration-500">
+                                                                @else
+                                                                    <div class="w-full h-full bg-linear-to-br from-[#A556F7]/25 to-[#2663EB]/25 flex items-center justify-center">
+                                                                        <i class="fas fa-image text-2xl text-white/70"></i>
+                                                                    </div>
+                                                                @endif
+
+                                                                @if(!empty($place['favorited']))
+                                                                    <span class="absolute top-2 left-2 w-7 h-7 rounded-lg bg-[#A855F7] text-white flex items-center justify-center text-xs shadow-md">
+                                                                        <i class="fas fa-heart"></i>
+                                                                    </span>
+                                                                @endif
+
+                                                                @if(isset($place['rating']) && $place['rating'] !== null)
+                                                                    <span class="absolute top-2 right-2 flex items-center gap-1 bg-white/95 backdrop-blur px-2 py-0.5 rounded-full text-xs font-bold text-gray-800 shadow">
+                                                                        <i class="fas fa-star text-yellow-400"></i>{{ number_format((float) $place['rating'], 1) }}
+                                                                    </span>
+                                                                @endif
+
+                                                                @if(!empty($place['meta']))
+                                                                    <span class="absolute bottom-2 left-2 bg-black/55 backdrop-blur text-white text-[11px] font-medium px-2 py-0.5 rounded-full">
+                                                                        {{ $place['meta'] }}
+                                                                    </span>
+                                                                @endif
+                                                            </div>
+
+                                                            <div class="flex flex-col grow p-3">
+                                                                <div class="font-bold text-gray-900 text-sm line-clamp-1">{{ $place['name'] ?? '' }}</div>
+                                                                @if(!empty($place['category']))
+                                                                    <div class="text-xs text-gray-400 line-clamp-1 mt-0.5">{{ $place['category'] }}</div>
+                                                                @endif
+
+                                                                <div class="mt-3 flex gap-2">
+                                                                    <a href="{{ $place['url'] ?? '#' }}"
+                                                                       class="flex-1 text-center text-xs font-bold py-2 rounded-lg bg-linear-to-r from-[#1e3a8a] to-[#2663EB] text-white hover:shadow-lg hover:shadow-blue-900/25 transition-all">
+                                                                        Подробнее
+                                                                    </a>
+                                                                    @if(!empty($place['map_url']))
+                                                                        <a href="{{ $place['map_url'] }}"
+                                                                           class="flex-1 text-center text-xs font-bold py-2 rounded-lg bg-[#eef3fb] text-[#1e3a8a] border border-[#dbe4f5] hover:bg-[#e2ebfa] transition-colors">
+                                                                            На карте
+                                                                        </a>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 @else
