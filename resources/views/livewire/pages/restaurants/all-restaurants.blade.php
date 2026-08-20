@@ -17,9 +17,9 @@
     @livewire('saratov-ai')
 
     <!-- Section with filter and card-vebue -->
-    <section class="bg-white pb-5 md:pb-10 xl:pb-20 3xl:pb-26">
+    <section id="cards" class="bg-white pb-5 md:pb-10 xl:pb-20 3xl:pb-26">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-4 sm:px-10">
-            <div class="text-center mb-2 3xl:mb-12" data-aos="fade-up">
+            <div class="text-center mb-2 3xl:mb-12">
                 <p class="text text-gray-600 content-center">Заведения рядом на любой вкус - от кофеен и пекарен до ресторанов и баров</p>
             </div>
 {{--            <div class="w-full">--}}

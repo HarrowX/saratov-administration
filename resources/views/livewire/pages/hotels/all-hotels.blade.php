@@ -35,9 +35,9 @@
     @livewire('saratov-ai')
 
     <!-- Section with filter and card-vebue -->
-    <section class="bg-white pb-10 md:pb-15 xl:pb-20 3xl:pb-26 px-4 sm:px-10">
+    <section id="cards" class="bg-white pb-10 md:pb-15 xl:pb-20 3xl:pb-26 px-4 sm:px-10">
         <div class="max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto flex flex-col gap-7 3xl:gap-12 items-center">
-            <div class="text-center" data-aos="fade-up">
+            <div class="text-center">
                 <p class="text text-gray-600 content-center">Подскажем, в каких районах удобнее жить, и какие варианты жилья выбрать под ваш бюджет и планы.</p>
             </div>
 {{--            <div class="w-full">--}}

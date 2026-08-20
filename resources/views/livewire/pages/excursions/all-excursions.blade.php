@@ -25,9 +25,9 @@
     @livewire('saratov-ai')
 
     <!-- Section with tour cards -->
-    <section class="bg-white pb-10 sm:pb-15 xl:pb-20 3xl:pb-26">
+    <section id="cards" class="bg-white pb-10 sm:pb-15 xl:pb-20 3xl:pb-26">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-4 sm:px-10">
-            <div class="text-center mb-5 3xl:mb-12" data-aos="fade-up">
+            <div class="text-center mb-5 3xl:mb-12">
                 <h2 class="title-big">Популярные экскурсии в Саратове</h2>
                 <p class="text text-gray-600 content-center">Лучшие экскурсии от профессиональных гидов и местных жителей.</p>
             </div>

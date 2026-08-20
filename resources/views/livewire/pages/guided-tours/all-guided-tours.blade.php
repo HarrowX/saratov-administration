@@ -24,7 +24,7 @@
     </section>
 
     <!-- Section with guided cards -->
-    <section class="bg-white pb-10  py-5 sm:py-10 md:py-15 xl:py-20 3xl:py-26">
+    <section id="cards" class="bg-white pb-10  py-5 sm:py-10 md:py-15 xl:py-20 3xl:py-26">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-4 sm:px-10 flex flex-col gap-7 md:gap-12 items-center">
             <form wire:submit="loadGuidedTours" class="relative w-67 sm:w-114 group">
                 <input type="search"

@@ -60,9 +60,9 @@
 
     @livewire('saratov-ai')
 
-    <section class="bg-white pb-10 sm:pb-15 xl:pb-20 3xl:pb-26">
+    <section id="cards" class="bg-white pb-10 sm:pb-15 xl:pb-20 3xl:pb-26">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 xl:px-20">
-            <div class="text-center mb-12" data-aos="fade-up">
+            <div class="text-center mb-12">
                 <p class="text text-gray-600 content-center">Откройте для себя лучшие достопримечательности города: знаковые места, уютные уголки и природные локации.</p>
             </div>
 {{--            <div class="w-full pb-5">--}}
