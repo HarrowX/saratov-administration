@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
+use Laravel\Ai\Responses\StructuredAgentResponse;
 
 class PromptAgent implements ShouldQueue
 {
@@ -33,11 +34,17 @@ class PromptAgent implements ShouldQueue
     {
         $dto = null;
         try {
-            $message = $modelConversationService->promptModelForUser($this->user, $this->message);
+            $response = $modelConversationService->promptModelForUser($this->user, $this->message);
+            $message = null;
+            if ($response instanceof StructuredAgentResponse) {
+                $message = $response->toArray();
+            } else {
+                $message = $response->text;
+            }
             $dto = ModelPendingResponseDTO::fromArray([
                 'userId' => $this->user->id,
                 'ok' => true,
-                'message' => $message,
+                'response' => $message,
             ]);
         } catch (Exception $ex) {
             $dto = ModelPendingResponseDTO::fromArray([

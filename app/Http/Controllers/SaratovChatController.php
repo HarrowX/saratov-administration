@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\DTOs\StructuredResponse\SaratovModelStructuredResponseDTO;
 use App\Services\ModelConversationService;
 use Illuminate\Http\Request;
+use Laravel\Ai\Responses\StructuredAgentResponse;
 
 class SaratovChatController extends Controller
 {
@@ -25,9 +27,17 @@ class SaratovChatController extends Controller
 
         $response = $this->modelConversationService->promptModelForUser($user, $message);
 
-        return response()->json([
-            'text' => $response,
-        ], 200);
+        $dto = null;
+        if ($response instanceof StructuredAgentResponse) {
+            $dto = SaratovModelStructuredResponseDTO::fromArray($response->toArray());
+        } else {
+            $dto = SaratovModelStructuredResponseDTO::fromArray([
+                'response' => $response->text,
+                'response_entities' => [],
+            ]);
+        }
+
+        return response()->json($dto->toArray(), 200);
     }
 
     public function getAllMessages(Request $request)

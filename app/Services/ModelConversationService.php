@@ -11,6 +11,8 @@ use Laravel\Ai\Contracts\Agent;
 use Laravel\Ai\Contracts\Conversational;
 use Laravel\Ai\Models\ConversationMessage;
 use Laravel\Ai\Promptable;
+use Laravel\Ai\Responses\AgentResponse;
+use Laravel\Ai\Responses\StructuredAgentResponse;
 
 class ModelConversationService
 {
@@ -46,12 +48,12 @@ class ModelConversationService
      *
      * @param  T  $promptable
      */
-    public function promptModelForUser(User $user, string $userMessage, $promptable = SaratovAiModel::class): string
+    public function promptModelForUser(User $user, string $userMessage, $promptable = SaratovAiModel::class): AgentResponse|StructuredAgentResponse
     {
         $agent = $this->getOrCreateConversationWithModel($user, promptable: $promptable);
         $response = $agent->prompt($userMessage);
 
-        return $response->text;
+        return $response;
     }
 
     /**

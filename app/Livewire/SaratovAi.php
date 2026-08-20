@@ -2,8 +2,12 @@
 
 namespace App\Livewire;
 
+use App\DTOs\StructuredResponse\SaratovModelStructuredResponseDTO;
 use App\Jobs\PromptAgent;
 use App\Services\ModelConversationService;
+use Exception;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Laravel\Ai\Messages\MessageRole;
 use Livewire\Component;
 
@@ -37,7 +41,16 @@ class SaratovAi extends Component
                     if ($message->role == MessageRole::User) {
                         $this->addMessageFromUser($message->content);
                     } else {
-                        $this->addMessageFromModel($message->content);
+                        try {
+                            $dto = SaratovModelStructuredResponseDTO::fromJson($message->content);
+                            $this->addMessageFromModel($dto);
+                        } catch (Exception $ex) {
+                            Log::warning('Unable to parse content of message as SaratovModelStructuredResponseDTO', [
+                                'message.content' => $message?->content,
+                                'reason' => $ex->getMessage(),
+                            ]);
+                            $this->addMessageFromModel($message->content);
+                        }
                     }
                 }
             } else {
@@ -55,7 +68,7 @@ class SaratovAi extends Component
         }
         if ($this->isWaitingForResponse) {
             $this->addError('prompt', 'Сообщение в процессе обработки');
-            
+
             return;
         }
         $this->prompt = trim($this->prompt);
@@ -92,7 +105,7 @@ class SaratovAi extends Component
             $dto = $this->modelConversationService->pullModelResultsFromCache($user, $exists);
             if ($exists) {
                 if ($dto->ok) {
-                    $this->addMessageFromModel($dto->message);
+                    $this->addMessageFromModel($dto->response);
                     $this->resetErrorBag();
                 } else {
                     $this->addError('prompt', $dto->errorMessage);
@@ -110,12 +123,23 @@ class SaratovAi extends Component
         ];
     }
 
-    public function addMessageFromModel(string $text)
+    public function addMessageFromModel(SaratovModelStructuredResponseDTO|string $message)
     {
-        $this->chatMessages[] = [
-            'fromBot' => true,
-            'text' => $text,
-        ];
+        if (is_string($message)) {
+            $this->chatMessages[] = [
+                'fromBot' => true,
+                'text' => $message,
+                'entities' => new Collection,
+            ];
+        } else {
+            $text = $message?->response ?? '';
+            $entities = $message?->response_entities?->map(fn ($entity) => $entity->toActualModel()) ?? new Collection;
+            $this->chatMessages[] = [
+                'fromBot' => true,
+                'text' => $text,
+                'entities' => $entities,
+            ];
+        }
     }
 
     public function render()
