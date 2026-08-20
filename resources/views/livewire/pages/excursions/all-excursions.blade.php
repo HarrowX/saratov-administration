@@ -25,9 +25,9 @@
     @livewire('saratov-ai')
 
     <!-- Section with tour cards -->
-    <section class="bg-white pb-10 sm:pb-15 xl:pb-20 3xl:pb-26">
+    <section id="cards" class="bg-white pb-10 sm:pb-15 xl:pb-20 3xl:pb-26">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-4 sm:px-10">
-            <div class="text-center mb-5 3xl:mb-12" data-aos="fade-up">
+            <div class="text-center mb-5 3xl:mb-12">
                 <h2 class="title-big">Популярные экскурсии в Саратове</h2>
                 <p class="text text-gray-600 content-center">Лучшие экскурсии от профессиональных гидов и местных жителей.</p>
             </div>
@@ -139,7 +139,7 @@
 {{--            </div>--}}
 
                 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 lg:p-6 xl:gap-y-12">
-                    @foreach ($excursions as $excursion)
+                    @foreach ($this->excursions as $excursion)
                         <div class="card bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                             <div class="card-content group p-5 relative grid grid-rows-subgrid content-between row-span-2 gap-3 h-full font-['FindSansPro']">
                                 <div>
@@ -178,7 +178,8 @@
                         </div>
                     @endforeach
                 </div>
-                @if($excursions->isEmpty())
+            {{ $this->excursions->links('livewire::tailwind') }}
+        @if($this->excursions->isEmpty())
                     <div class="text-center">
                         <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
                             <i class="fa fa-compass text-4xl text-[#352AA2]"></i>

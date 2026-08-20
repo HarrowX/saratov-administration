@@ -83,7 +83,7 @@
                 </div>
             </div>
 
-        @if($events->isEmpty())
+        @if($this->events->isEmpty())
             <div class="text-center py-20">
                 <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
                     <i class="fas fa-calendar-times text-4xl text-[#352AA2]"></i>
@@ -102,8 +102,8 @@
             </div>
         @endif
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 xl:gap-y-12">
-                @foreach ($events as $event)
+            <div id="cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 xl:gap-y-12">
+                @foreach ($this->events as $event)
                     <div class="card bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div class="card-content group p-2 sm:p-5 h-full font-['FindSansPro'] grid grid-rows-[auto_1fr_auto] row-span-2 gap-3">
                             <div class="flex flex-col gap-3 xl:gap-5">
@@ -155,6 +155,7 @@
                     </div>
                 @endforeach
             </div>
+            {{ $this->events()->links('livewire::tailwind') }}
             @endif
         </div>
     </section>

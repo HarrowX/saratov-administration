@@ -17,12 +17,12 @@
 
             <div class="relative max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 xl:px-20 h-full">
                 <div class="flex flex-col items-end h-full relative">
-                    @if($attractions->isNotEmpty())
+                    @if($this->attractions->isNotEmpty())
                         <p class="hidden lg:block font-['FindSansPro'] md:text-xs 2xl:text-lg text-[#374559] absolute -top-19 2xl:-top-20 right-32 2xl:right-12">
                             Пользователи рекомендуют:
                         </p>
                         @php
-                            $attraction=$attractions->random()
+                            $attraction=$this->attractions->random()
                         @endphp
                         <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}">
                             <div class="hidden lg:block sm:min-w-92 md:min-w-60 2xl:min-w-92 w-fit max-w-90  bg-white rounded-[20px] shadow-lg hover:shadow-xl transition-shadow duration-300 absolute -top-15 2xl:-top-12 group group/image">
@@ -60,9 +60,9 @@
 
     @livewire('saratov-ai')
 
-    <section class="bg-white pb-10 sm:pb-15 xl:pb-20 3xl:pb-26">
+    <section id="cards" class="bg-white pb-10 sm:pb-15 xl:pb-20 3xl:pb-26">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 xl:px-20">
-            <div class="text-center mb-12" data-aos="fade-up">
+            <div class="text-center mb-12">
                 <p class="text text-gray-600 content-center">Откройте для себя лучшие достопримечательности города: знаковые места, уютные уголки и природные локации.</p>
             </div>
 {{--            <div class="w-full pb-5">--}}
@@ -152,8 +152,8 @@
 {{--                </div>--}}
 {{--            </div>--}}
             <!-- Сетка карточек -->
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 lg:p-6 xl:gap-y-12">
-                @foreach ($attractions as $attraction)
+            <div id="attraction-list" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 lg:p-6 xl:gap-y-12">
+                @foreach ($this->attractions as $attraction)
                     <div class="card bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div class="card-content group p-5 relative h-full font-['FindSansPro'] grid grid-rows-[auto_1fr_auto] content-between row-span-2 gap-3">
                             <div>
@@ -181,7 +181,8 @@
                     </div>
                 @endforeach
             </div>
-            @if($attractions->isEmpty())
+            {{ $this->attractions->links('livewire::tailwind') }}
+            @if($this->attractions->isEmpty())
                 <div class="text-center">
                     <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fa-solid fa-magnifying-glass text-4xl text-[#352AA2]"></i>
