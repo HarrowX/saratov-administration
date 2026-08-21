@@ -49,4 +49,9 @@ class Attachment extends Model
     {
         return asset(Storage::url($this->link)); // отличается от url() тем что есть доменное имя сайта с протоколом
     }
+
+    public function tryGetThumbUrlOrGetUrl(): string
+    {
+        return $this->getThumbUrl() ?? $this->getUrl();
+    }
 }
