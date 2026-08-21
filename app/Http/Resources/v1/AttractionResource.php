@@ -5,7 +5,6 @@ namespace App\Http\Resources\v1;
 use App\Models\Attraction;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
 class AttractionResource extends JsonResource
 {

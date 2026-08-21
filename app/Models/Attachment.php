@@ -38,9 +38,13 @@ class Attachment extends Model
 
     public function getThumbUrl(): string
     {
-        if (Storage::exists('thumb_' . $this->link)) return false;
-        return asset(Storage::url('thumb_' . $this->link));
+        if (Storage::exists('thumb_'.$this->link)) {
+            return false;
+        }
+
+        return asset(Storage::url('thumb_'.$this->link));
     }
+
     public function getUrl(): string
     {
         return asset(Storage::url($this->link)); // отличается от url() тем что есть доменное имя сайта с протоколом

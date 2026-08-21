@@ -5,7 +5,6 @@ namespace App\Http\Resources\v1;
 use App\Models\Excursion;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
 class ExcursionResource extends JsonResource
 {
@@ -18,7 +17,7 @@ class ExcursionResource extends JsonResource
     {
         $isFavorite = $this->favorites->where('user_id', $request->user()->id)->isNotEmpty() || false;
 
-        return array(
+        return [
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
@@ -59,6 +58,6 @@ class ExcursionResource extends JsonResource
             'excursion_points' => ExcursionPointResource::collection($this->points),
 
             'attachments' => AttachmentResource::collection($this->attachments),
-        );
+        ];
     }
 }

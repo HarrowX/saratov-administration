@@ -5,7 +5,6 @@ namespace App\Traits;
 use App\Models\Attachment;
 use Illuminate\Database\Eloquent\Concerns\HasRelationships;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Support\Facades\Storage;
 
 trait HasAttachments
 {
@@ -21,7 +20,6 @@ trait HasAttachments
         return null;
     }
 
-
     public function getPrimaryImageUrl(): ?string
     {
         $attachment = $this->attachments()->first();
@@ -29,18 +27,16 @@ trait HasAttachments
         return $attachment ? $attachment->getUrl() : $this->getDefaultImagePath();
     }
 
-
     public function getAltPrimaryImage(): ?string
     {
         $attachment = $this->attachments()->first();
 
         if ($attachment == null || $attachment->alt_name == '') {
-            return 'Изображение ' . $this->name;
+            return 'Изображение '.$this->name;
         }
 
         return $attachment->alt_name;
     }
-
 
     public function getPrimaryThumbImageUrl(): ?string
     {
