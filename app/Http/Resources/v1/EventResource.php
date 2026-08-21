@@ -15,7 +15,7 @@ class EventResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $attachment = $this->attachments()->first();
+        $isFavorite = $this->favorites->where('user_id', $request->user()->id)->isNotEmpty() || false;
 
         return [
             'id' => $this->id,
@@ -24,7 +24,10 @@ class EventResource extends JsonResource
             'description' => $this->description,
             'categories' => CategoryResource::collection($this->categories),
 
-            'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
+            'image' => $this->getPrimaryImageUrl(),
+            'image_thumb' => $this->getPrimaryThumbImageUrl(),
+
+            'is_favorite' => $isFavorite,
 
             'address' => $this->address,
             'age_restriction' => $this->age_restriction,
@@ -32,6 +35,10 @@ class EventResource extends JsonResource
             'end_date' => $this->end_date,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
+
+            'views_count' => $this->views_count,
+            'favorites_count' => $this->favorites?->count() ?? 0,
+
             'attachments' => AttachmentResource::collection($this->attachments),
         ];
     }
