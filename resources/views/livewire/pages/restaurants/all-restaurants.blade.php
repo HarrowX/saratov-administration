@@ -114,7 +114,7 @@
                     <div class="card-content group p-5 relative grid grid-rows-[auto_1fr_auto] content-between row-span-2 gap-3 h-full font-['FindSansPro']">
                         <div>
                             <div class="overflow-hidden rounded-[7px] sm:rounded-[19px]">
-                                <img src="{{ $restaurant->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $restaurant->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
+                                <img src="{{ $restaurant->getPrimaryThumbImageUrl() }}" alt="{{ $restaurant->getAltPrimaryImage() }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
                                 <livewire:favorite-mini-button :object="$restaurant"/>
                             </div>
                         </div>

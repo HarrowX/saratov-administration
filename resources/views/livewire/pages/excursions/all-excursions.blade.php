@@ -144,7 +144,7 @@
                             <div class="card-content group p-5 relative grid grid-rows-subgrid content-between row-span-2 gap-3 h-full font-['FindSansPro']">
                                 <div>
                                     <div class="overflow-hidden rounded-[7px] sm:rounded-[19px]">
-                                        <img src="{{ $excursion->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $excursion->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
+                                        <img src="{{ $excursion->getPrimaryThumbImageUrl() }}" alt="{{ $excursion->getAltPrimaryImage() }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
                                         <livewire:favorite-mini-button :object="$excursion"/>
                                     </div>
                                 </div>

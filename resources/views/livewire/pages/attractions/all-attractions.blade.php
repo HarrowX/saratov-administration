@@ -28,7 +28,7 @@
                             <div class="hidden lg:block sm:min-w-92 md:min-w-60 2xl:min-w-92 w-fit max-w-90  bg-white rounded-[20px] shadow-lg hover:shadow-xl transition-shadow duration-300 absolute -top-15 2xl:-top-12 group group/image">
                                 <div class="p-2 sm:p-4 3xl:p-5 flex flex-col">
                                     <div class="w-full mb-4 overflow-hidden rounded-[20px] shrink-0">
-                                        <img src="{{ asset($attraction->attachments?->get(0)?->url()) ?? "" }}" alt="Изображение {{ $attraction->name }}" class="photo h-37.5 sm:h-53.75 3xl:h-78.75 object-cover group-hover/image:scale-110 transition-transform duration-500">
+                                        <img src="{{ asset($attraction->getPrimaryThumbImageUrl()) ?? "" }}" alt="{{ $attraction->getAltPrimaryImage() }}" class="photo h-37.5 sm:h-53.75 3xl:h-78.75 object-cover group-hover/image:scale-110 transition-transform duration-500">
                                     </div>
 
                                     <div class="font-['FindSansPro'] flex flex-col">
@@ -158,7 +158,7 @@
                         <div class="card-content group p-5 relative h-full font-['FindSansPro'] grid grid-rows-[auto_1fr_auto] content-between row-span-2 gap-3">
                             <div>
                                 <div class="overflow-hidden rounded-[7px] sm:rounded-[19px]">
-                                    <img src="{{asset($attraction->attachments?->get(0)?->url()) ?? ""}}" alt="Изображение {{ $attraction->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <img src="{{ $attraction->getPrimaryThumbImageUrl() }}" alt="{{ $attraction->getAltPrimaryImage() }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500" >
                                     <livewire:favorite-mini-button :object="$attraction"/>
                                 </div>
                             </div>

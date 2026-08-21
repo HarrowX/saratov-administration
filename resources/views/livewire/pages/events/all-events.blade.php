@@ -108,7 +108,7 @@
                         <div class="card-content group p-2 sm:p-5 h-full font-['FindSansPro'] grid grid-rows-[auto_1fr_auto] row-span-2 gap-3">
                             <div class="flex flex-col gap-3 xl:gap-5">
                                 <div class="relative overflow-hidden rounded-[7px] sm:rounded-[19px]">
-                                    <img src="{{ $event->attachments?->get(0)?->url() ?? "" }}" alt="{{ $event->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 sm:h-70 md:h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <img src="{{ $event->getPrimaryThumbImageUrl() }}" alt="{{ $event->getAltPrimaryImage() }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 sm:h-70 md:h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
                                     <livewire:favorite-mini-button :position='"right-2 top-2"' :object="$event"/>
                                 </div>
                                 <a href="{{route('single-event', ['event' => $event->slug])}}" class="flex flex-col gap-2">
