@@ -28,7 +28,9 @@ class HotelResource extends JsonResource
 
             'class' => Hotel::class,
 
-            'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
+            'image' => $this->getPrimaryImageUrl(),
+            'image_thumb' => $this->getPrimaryThumbImageUrl(),
+
             'is_favorite' => $isFavorite,
 
             'type' => $this->type,

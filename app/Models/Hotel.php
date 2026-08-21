@@ -17,6 +17,8 @@ class Hotel extends Model
 {
     use HasAttachments, HasEvents, HasExcursionPoints, HasFavorites, HasViews, HasVisits;
 
+    protected ?string $defaultImagePath = '/images/image-coming-soon-hotel.webp';
+
     protected $fillable = [
         'name',
         'type',
@@ -35,5 +37,10 @@ class Hotel extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    protected function getDefaultImagePath(): ?string
+    {
+        return asset('images/image_coming_soon_hotel.webp');
     }
 }
