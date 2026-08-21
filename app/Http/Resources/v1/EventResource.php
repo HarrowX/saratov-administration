@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\v1;
 
-use App\Models\GuidedTour;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
-class GuidedTourResource extends JsonResource
+class EventResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,25 +16,22 @@ class GuidedTourResource extends JsonResource
     public function toArray(Request $request): array
     {
         $attachment = $this->attachments()->first();
-        $isFavorite = $this->favorites->where('user_id', $request->user()->id)->isNotEmpty() || false;
 
         return [
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'short_description' => $this->second_description,
-
-            'class' => GuidedTour::class,
+            'description' => $this->description,
+            'categories' => CategoryResource::collection($this->categories),
 
             'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
-            'is_favorite' => $isFavorite,
 
-            'favorites_count' => $this->favorites?->count() ?? 0,
-
-            'experience' => $this->experience,
-            'phone' => $this->phone,
-            'email' => $this->email,
-            'excursions' => ExcursionResource::collection($this->excursions),
+            'address' => $this->address,
+            'age_restriction' => $this->age_restriction,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
             'attachments' => AttachmentResource::collection($this->attachments),
         ];
     }

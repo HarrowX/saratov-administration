@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\DTOs\ChangeVisitStatusDTO;
 use App\DTOs\CoordinatesDTO;
 use App\Enums\VisitedStatus;
-use App\Http\Resources\PlaceVisitResource;
+use App\Http\Resources\v1\PlaceVisitResource;
 use App\Services\PlaceVisitService;
 use Illuminate\Http\Request;
 

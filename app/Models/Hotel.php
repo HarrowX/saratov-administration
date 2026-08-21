@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\Resources\HotelResource;
+use App\Http\Resources\v1\HotelResource;
 use App\Traits\HasAttachments;
 use App\Traits\HasEvents;
 use App\Traits\HasExcursionPoints;
