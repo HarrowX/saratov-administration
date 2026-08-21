@@ -257,3 +257,39 @@
 
     @livewire('attraction-component', ['latitude' => $hotel->latitude, 'longitude' => $hotel->longitude])
 </div>
+
+
+
+
+{{--function openMarkerOnMap(index) {--}}
+{{--if (!window.yandexMap) {--}}
+{{--console.warn('Карта не загружена');--}}
+{{--return;--}}
+{{--}--}}
+
+{{--// Находим маркер по индексу--}}
+{{--const marker = markersData[index];--}}
+
+{{--if (!marker) {--}}
+{{--console.warn('Маркер с индексом', index, 'не найден');--}}
+{{--return;--}}
+{{--}--}}
+
+{{--// Открываем балун--}}
+{{--marker.balloon.open();--}}
+
+{{--// Получаем координаты--}}
+{{--const coords = marker.geometry.getCoordinates();--}}
+
+{{--// Приближаем карту к маркеру--}}
+{{--window.yandexMap.setCenter(coords, 15, {--}}
+{{--duration: 300,        // плавная анимация--}}
+{{--checkZoomRange: true--}}
+{{--});--}}
+{{--}--}}
+
+
+
+
+
+

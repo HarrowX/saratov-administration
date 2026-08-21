@@ -67,8 +67,11 @@ class HotelFormPage extends FormPage
             //            Url::make('Ссылка на карту', 'map_link'),
             Textarea::make('Код виджета отзывов яндекс карт', 'yandex_review_widget')
                 ->onApply(function ($item, $value) {
-                    if (empty($value)) return $item;
-                    $item->yandex_review_widget =  preg_replace('/width:\d+px/', 'width:100%', $value, 1);
+                    if (empty($value)) {
+                        return $item;
+                    }
+                    $item->yandex_review_widget = preg_replace('/width:\d+px/', 'width:100%', $value, 1);
+
                     return $item;
                 })->unescape(),
             ActionButton::make('Инструкция')

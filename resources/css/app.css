@@ -858,6 +858,14 @@ button{
     transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
 }
 
+.job-swiper__swiper .swiper-wrapper {
+    opacity: 0;
+}
+
+.job-swiper__swiper.swiper-initialized .swiper-wrapper {
+    opacity: 1;
+}
+
 
 .place-detail-swiper-thumbs .swiper-wrapper {
     display: flex;
@@ -901,4 +909,74 @@ button{
     border: none !important;
     display: block !important;
     border-radius: 12px !important;
+}
+
+/*стили для списка точек экскурсии */
+.list-group .point-item:first-of-type {
+    color: #5F5F5F;
+}
+
+.list-group .point-item:first-of-type .point-number {
+    background-color: #E5E6F6;
+    color: #5F5F5F;
+}
+
+.list-group .point-item:first-of-type .point-show {
+    opacity: 0 !important;
+    background-color: #E5E6F6;
+    color: #2b7fff;
+}
+.list-group .point-item:first-of-type:hover {
+    color: #2b7fff !important;
+}
+
+.list-group .point-item:first-of-type:hover .point-number {
+    background-color: #2b7fff !important;
+    color: white !important;
+}
+
+.list-group .point-item:first-of-type:hover .point-show {
+    opacity: 1 !important;
+    background-color: #2b7fff !important;
+    color: white !important;
+}
+.list-group .point-item:first-of-type.active {
+    color: #2b7fff !important;
+}
+
+.list-group .point-item:first-of-type.active .point-number {
+    background-color: #2b7fff !important;
+    color: white !important;
+}
+
+.list-group .point-item:first-of-type.active .point-show {
+    opacity: 0 !important;
+    pointer-events: none;
+}
+.point-item:not(:first-of-type):hover {
+    color: #2b7fff;
+}
+
+.point-item:not(:first-of-type):hover .point-number {
+    background-color: #2b7fff;
+    color: white;
+}
+
+.point-item:not(:first-of-type):hover .point-show {
+    opacity: 1;
+    background-color: #2b7fff;
+    color: white;
+}
+.point-item:not(:first-of-type).active {
+    color: #2b7fff;
+}
+
+.point-item:not(:first-of-type).active .point-number {
+    background-color: #2b7fff;
+    color: white;
+}
+
+.point-item:not(:first-of-type).active .point-show {
+    opacity: 0 !important;
+    pointer-events: none;
 }
