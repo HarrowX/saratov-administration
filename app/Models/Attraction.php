@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\Resources\AttractionResource;
+use App\Http\Resources\v1\AttractionResource;
 use App\Traits\HasAttachments;
 use App\Traits\HasEvents;
 use App\Traits\HasExcursionPoints;

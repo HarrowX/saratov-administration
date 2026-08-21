@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\v1;
 
-use App\Models\Attraction;
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
-class AttractionResource extends JsonResource
+class RestaurantResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,41 +15,36 @@ class AttractionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $attachment = $this->attachments()->first();
         $isFavorite = $this->favorites->where('user_id', $request->user()->id)->isNotEmpty() || false;
 
         return [
             'id' => $this->id,
-
             'name' => $this->name,
             'slug' => $this->slug,
-            'short_description' => $this->short_description,
-            'description' => $this->description,
 
-            'class' => Attraction::class,
+            'class' => Restaurant::class,
 
-            'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
+            'image' => $this->getPrimaryImageUrl(),
+            'image_thumb' => $this->getPrimaryThumbImageUrl(),
+
             'is_favorite' => $isFavorite,
 
-            'worktime' => $this->worktime,
-            'phone' => $this->phone,
+            'description' => $this->description,
             'address' => $this->address,
             'district' => $this->district,
             'longitude' => $this->longitude,
             'latitude' => $this->latitude,
-
+            'worktime' => $this->worktime,
+            'phone' => $this->phone,
+            'kitchen' => $this->kitchen,
             'email' => $this->email,
             'website' => $this->website,
 
-            'status' => $this->status,
-            'ticket_price' => $this->ticket_price,
-            'visit_duration' => $this->visit_duration,
+            'price_category' => $this->price_category,
+            'capacity' => $this->capacity,
+            'rating' => $this->rating,
 
-            'is_accessible' => (bool) $this->is_accessible,
-            'has_parking' => (bool) $this->has_parking,
-
-            'display_location' => $this->display_location,
-            //            'views_count' => $this->views_count,
+            'views_count' => $this->views_count,
             'favorites_count' => $this->favorites?->count() ?? 0,
 
             'created_at' => $this->created_at,

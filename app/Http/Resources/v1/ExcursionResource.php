@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\v1;
 
 use App\Models\Excursion;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
 class ExcursionResource extends JsonResource
 {
@@ -16,7 +15,6 @@ class ExcursionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $attachment = $this->attachments()->first();
         $isFavorite = $this->favorites->where('user_id', $request->user()->id)->isNotEmpty() || false;
 
         return [
@@ -27,10 +25,10 @@ class ExcursionResource extends JsonResource
 
             'class' => Excursion::class,
 
-            'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
-            'is_favorite' => $isFavorite,
+            'image' => $this->getPrimaryImageUrl(),
+            'image_thumb' => $this->getPrimaryThumbImageUrl(),
 
-            'favorites_count' => $this->favorites?->count() ?? 0,
+            'is_favorite' => $isFavorite,
 
             'guide_id' => $this->guided_tour_id,
             'type' => $this->type,
@@ -49,7 +47,10 @@ class ExcursionResource extends JsonResource
             'schedule_type' => $this->schedule_type,
             'booking_enabled' => $this->booking_enabled,
             'rating' => $this->rating,
+
             'views_count' => $this->views_count,
+            'favorites_count' => $this->favorites?->count() ?? 0,
+
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

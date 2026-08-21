@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\v1;
 
-use App\Models\Restaurant;
+use App\Models\Hotel;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
-class RestaurantResource extends JsonResource
+class HotelResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,34 +15,36 @@ class RestaurantResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $attachment = $this->attachments()->first();
         $isFavorite = $this->favorites->where('user_id', $request->user()->id)->isNotEmpty() || false;
 
         return [
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
+            'short_description' => $this->short_description,
+            'description' => $this->description,
 
-            'class' => Restaurant::class,
+            'class' => Hotel::class,
 
-            'image' => $attachment ? asset(Storage::url($attachment?->link)) : null,
+            'image' => $this->getPrimaryImageUrl(),
+            'image_thumb' => $this->getPrimaryThumbImageUrl(),
+
             'is_favorite' => $isFavorite,
 
-            'description' => $this->description,
+            'type' => $this->type,
+            'stars' => $this->stars,
+            'worktime' => $this->worktime,
+            'phone' => $this->phone,
             'address' => $this->address,
             'district' => $this->district,
             'longitude' => $this->longitude,
             'latitude' => $this->latitude,
-            'worktime' => $this->worktime,
-            'phone' => $this->phone,
-            'kitchen' => $this->kitchen,
             'email' => $this->email,
             'website' => $this->website,
+            'max_price' => $this->max_price,
+            'min_price' => $this->min_price,
 
-            'price_category' => $this->price_category,
-            'capacity' => $this->capacity,
-            'rating' => $this->rating,
-
+            'views_count' => $this->views_count,
             'favorites_count' => $this->favorites?->count() ?? 0,
 
             'created_at' => $this->created_at,

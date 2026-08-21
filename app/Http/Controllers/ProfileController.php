@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DTOs\UpdateProfileDTO;
-use App\Http\Resources\ProfileResource;
+use App\Http\Resources\v1\ProfileResource;
 use App\Services\UserService;
 
 class ProfileController extends Controller
