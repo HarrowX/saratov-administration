@@ -36,10 +36,10 @@ class Attachment extends Model
         return '';
     }
 
-    public function getThumbUrl(): string
+    public function getThumbUrl(): ?string
     {
         if (Storage::exists('thumb_'.$this->link)) {
-            return false;
+            return null;
         }
 
         return asset(Storage::url('thumb_'.$this->link));
