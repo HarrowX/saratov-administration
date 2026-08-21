@@ -1,14 +1,14 @@
 
 // slider
 import Swiper from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 document.addEventListener('DOMContentLoaded', () => {
     const swiper = new Swiper('.job-swiper__swiper', {
-        modules: [Navigation, Pagination],
+        modules: [Navigation, Pagination, Autoplay],
 
         slidesPerView: 1,
         spaceBetween: 24,
@@ -43,10 +43,10 @@ let slideInterval;
 // Initialize slider
 function initSlider() {
     if (slides.length === 0) return;
-    
+
     // Show first slide
     showSlide(0);
-    
+
     // Start auto-slide
     startAutoSlide();
 }
@@ -59,20 +59,20 @@ function showSlide(index) {
         slide.style.opacity = '0';
         slide.style.visibility = 'hidden';
     });
-    
+
     // Hide all dots
     dots.forEach(dot => {
         dot.classList.remove('active');
         dot.classList.add('bg-white/50');
         dot.classList.remove('bg-white');
     });
-    
+
     // Show current slide
     currentSlide = index;
     slides[currentSlide].classList.add('active');
     slides[currentSlide].style.opacity = '1';
     slides[currentSlide].style.visibility = 'visible';
-    
+
     // Highlight current dot
     if (dots[currentSlide]) {
         dots[currentSlide].classList.add('active');

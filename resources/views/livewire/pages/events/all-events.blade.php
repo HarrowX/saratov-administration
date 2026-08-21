@@ -110,11 +110,6 @@
                                 <div class="relative overflow-hidden rounded-[7px] sm:rounded-[19px]">
                                     <img src="{{ $event->attachments?->get(0)?->url() ?? "" }}" alt="{{ $event->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 sm:h-70 md:h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
                                     <livewire:favorite-mini-button :position='"right-2 top-2"' :object="$event"/>
-                                    @if($event->age_restriction)
-                                        <span class="absolute left-2 top-2 size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-md xl:rounded-xl flex items-center justify-center text-white text-sm xl:text-base 3xl:text-xl shadow-lg">
-                                            {{ $event->age_restriction }} +
-                                        </span>
-                                    @endif
                                 </div>
                                 <a href="{{route('single-event', ['event' => $event->slug])}}" class="flex flex-col gap-2">
                                     <h2 class="card-title text-start text-lg xl:text-xl 3xl:text-3xl group-hover:text-[#352AA2] transition-colors duration-300 font-bold">
@@ -129,18 +124,22 @@
                                 </a>
                             </div>
                             <div class="flex flex-col gap-1 justify-end h-full font-['FindSansPro']">
-                                @if($event->categories && $event->categories->count() > 0)
-                                    <div class="flex flex-wrap gap-1.5 pt-1">
+                                <div class="flex flex-wrap gap-1.5 pt-1">
+                                    @if($event->categories && $event->categories->count() > 0)
                                         @foreach($event->categories as $category)
                                             <span class="inline-block p-0.5 rounded-full bg-linear-to-r from-[#A556F7] to-[#2663EB]">
-                                            <span class="block px-3 py-0.5 text-[10px] xl:text-xs rounded-full"
-                                                  style="background: rgba(255,255,255,0.9);">
+                                            <span class="block px-3 py-0.5 text-[10px] xl:text-xs rounded-full bg-[#ffffffe6]">
                                                 {{ $category->name }}
                                             </span>
                                         </span>
                                         @endforeach
-                                    </div>
-                                @endif
+                                    @endif
+                                    @if($event->age_restriction)
+                                        <span class="px-2 py-0.5 text-white text-[10px] xl:text-xs flex justify-center items-center rounded-full bg-[#A855F7]">
+                                        {{ $event->age_restriction }} +
+                                    </span>
+                                    @endif
+                                </div>
                                 <div class="flex flex-row justify-between items-end gap-3.5 text-xs xl:text-sm font-light">
                                     <span class="flex items-center gap-1 font-medium text-[#5F5F5F]">
                                         <i class="fas fa-map-marker-alt text-base xl:text-xl"></i>

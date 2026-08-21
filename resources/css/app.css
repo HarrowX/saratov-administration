@@ -275,15 +275,6 @@ html {
     @apply space-y-2 text-gray-600 pb-4;
 }
 
-/* Map styles */
-#map {
-    border: 2px solid #E5E7EB;
-    transition: all 0.3s ease;
-}
-
-#map:hover {
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-}
 
 .leaflet-popup-content-wrapper {
     border-radius: 12px;
@@ -843,4 +834,155 @@ button{
 
 .slider-dot:hover {
     transform: scale(1.2);
+}
+
+.place-detail-swiper-thumbs {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.place-detail-swiper-thumbs .swiper-slide {
+    opacity: 0.6;
+    transition: none;
+}
+
+.place-detail-swiper-thumbs .swiper-slide-thumb-active {
+    opacity: 1 !important;
+}
+
+.place-detail-swiper-thumbs .swiper-slide:hover {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.place-detail-swiper-thumbs .thumb-image {
+    transition: none;
+}
+
+.swiper-slide {
+    transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.job-swiper__swiper .swiper-wrapper {
+    opacity: 0;
+}
+
+.job-swiper__swiper.swiper-initialized .swiper-wrapper {
+    opacity: 1;
+}
+
+
+.place-detail-swiper-thumbs .swiper-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.place-detail-swiper-thumbs .swiper-slide-thumb-active {
+    opacity: 1 !important;
+    border-color: #5a73ea !important;
+}
+
+.place-detail-swiper-thumbs .swiper-slide img {
+    transition: transform 0.3s ease;
+}
+
+/* Map styles */
+#map {
+    overflow: hidden;
+    border: 0;
+}
+.index-map #map {
+    border-radius: 12px;
+}
+#map:hover {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-15deg); }
+    75% { transform: rotate(15deg); }
+    95% { transform: rotate(5deg); }
+}
+
+
+.yandex-review-wrapper iframe {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    border: none !important;
+    display: block !important;
+    border-radius: 12px !important;
+}
+
+/*стили для списка точек экскурсии */
+.list-group .point-item:first-of-type {
+    color: #5F5F5F;
+}
+
+.list-group .point-item:first-of-type .point-number {
+    background-color: #E5E6F6;
+    color: #5F5F5F;
+}
+
+.list-group .point-item:first-of-type .point-show {
+    opacity: 0 !important;
+    background-color: #E5E6F6;
+    color: #2b7fff;
+}
+.list-group .point-item:first-of-type:hover {
+    color: #2b7fff !important;
+}
+
+.list-group .point-item:first-of-type:hover .point-number {
+    background-color: #2b7fff !important;
+    color: white !important;
+}
+
+.list-group .point-item:first-of-type:hover .point-show {
+    opacity: 1 !important;
+    background-color: #2b7fff !important;
+    color: white !important;
+}
+.list-group .point-item:first-of-type.active {
+    color: #2b7fff !important;
+}
+
+.list-group .point-item:first-of-type.active .point-number {
+    background-color: #2b7fff !important;
+    color: white !important;
+}
+
+.list-group .point-item:first-of-type.active .point-show {
+    opacity: 0 !important;
+    pointer-events: none;
+}
+.point-item:not(:first-of-type):hover {
+    color: #2b7fff;
+}
+
+.point-item:not(:first-of-type):hover .point-number {
+    background-color: #2b7fff;
+    color: white;
+}
+
+.point-item:not(:first-of-type):hover .point-show {
+    opacity: 1;
+    background-color: #2b7fff;
+    color: white;
+}
+.point-item:not(:first-of-type).active {
+    color: #2b7fff;
+}
+
+.point-item:not(:first-of-type).active .point-number {
+    background-color: #2b7fff;
+    color: white;
+}
+
+.point-item:not(:first-of-type).active .point-show {
+    opacity: 0 !important;
+    pointer-events: none;
 }

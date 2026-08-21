@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Excursions;
 
 use App\Models\Attraction;
+use App\Models\CustomPoint;
 use App\Models\Excursion;
 use App\Models\Hotel;
 use App\Models\Restaurant;
@@ -33,6 +34,8 @@ class SingleExcursion extends Component
 
     public array $restaurants;
 
+    public array $customPoints;
+
     public array $startPosition;
 
     public function boot(FavoritableService $favoritableService, ViewService $viewService): void
@@ -47,20 +50,26 @@ class SingleExcursion extends Component
         $this->excursion->load('attachments');
 
         $this->attractions = $excursion->points
-            ->where('pointable_type', Attraction::class)
-            ->map(fn ($point) => $point->pointable)
+            ->where('excursion_pointable_type', Attraction::class)
+            ->map(fn ($point) => $point->excursionPointable)
             ->values()
             ->toArray();
 
         $this->hotels = $excursion->points
-            ->where('pointable_type', Hotel::class)
-            ->map(fn ($point) => $point->pointable)
+            ->where('excursion_pointable_type', Hotel::class)
+            ->map(fn ($point) => $point->excursionPointable)
             ->values()
             ->toArray();
 
         $this->restaurants = $excursion->points
-            ->where('pointable_type', Restaurant::class)
-            ->map(fn ($point) => $point->pointable)
+            ->where('excursion_pointable_type', Restaurant::class)
+            ->map(fn ($point) => $point->excursionPointable)
+            ->values()
+            ->toArray();
+
+        $this->customPoints = $excursion->points
+            ->where('excursion_pointable_type', CustomPoint::class)
+            ->map(fn ($point) => $point->excursionPointable)
             ->values()
             ->toArray();
 
