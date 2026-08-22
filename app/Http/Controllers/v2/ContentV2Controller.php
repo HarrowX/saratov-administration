@@ -81,7 +81,7 @@ class ContentV2Controller extends Controller
 
     private function useSearchDistanceFilter(Request $request, Builder $builder)
     {
-        if ($request->has('distance')&& $request->has('latitude')&& $request->has('longitude')) {
+        if ($request->has('distance') && $request->has('latitude') && $request->has('longitude')) {
             $distance = $request->string('distance')->value();
             $latitude = $request->string('latitude')->value();
             $longitude = $request->string('longitude')->value();
@@ -89,6 +89,7 @@ class ContentV2Controller extends Controller
             $builder->whereRaw('ST_Distance_Sphere(point(longitude, latitude), point(?, ?)) <= ?', [
                 $longitude, $latitude, $distance,
             ]);
+
             return;
         }
         if ($request->has('distance')) {
@@ -111,8 +112,10 @@ class ContentV2Controller extends Controller
     private function useIsNowOpenFilter(Request $request, Builder $builder)
     {
         $isNowOpen = $request->boolean('is_now_open');
-        if ($isNowOpen == null) return;
-        //TODO когда расписание будет
+        if ($isNowOpen == null) {
+            return;
+        }
+        // TODO когда расписание будет
     }
 
     private function paginateBuilder(Request $request, Builder $builder, int $perPageDefault = 15): LengthAwarePaginator

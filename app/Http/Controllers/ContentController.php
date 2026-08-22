@@ -50,6 +50,7 @@ class ContentController extends Controller
             return response()->json(status: 404);
         }
         $this->viewService->calculate($request->id, Hotel::class);
+
         return HotelResource::make($model);
     }
 
@@ -78,6 +79,7 @@ class ContentController extends Controller
         }
 
         $this->viewService->calculate($request->id, Restaurant::class);
+
         return RestaurantResource::make($model);
     }
 
@@ -106,6 +108,7 @@ class ContentController extends Controller
         }
 
         $this->viewService->calculate($request->id, Attraction::class);
+
         return AttractionResource::make($model);
     }
 
@@ -129,6 +132,7 @@ class ContentController extends Controller
         }
 
         $this->viewService->calculate($request->id, Excursion::class);
+
         return ExcursionResource::make($model);
     }
 
@@ -157,6 +161,7 @@ class ContentController extends Controller
         }
 
         $this->viewService->calculate($request->id, GuidedTour::class);
+
         return GuidedTourResource::make($model);
     }
 
@@ -185,6 +190,7 @@ class ContentController extends Controller
         }
 
         $this->viewService->calculate($request->id, Event::class);
+
         return EventResource::make($model);
     }
 }
