@@ -14,4 +14,9 @@ trait HasAttachments
     {
         return $this->morphMany(Attachment::class, 'attachable');
     }
+
+    public function firstAttachment(): ?Attachment
+    {
+        return $this->attachments()->first();
+    }
 }

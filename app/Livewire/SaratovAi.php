@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\DTOs\StructuredResponse\SaratovModelStructuredResponseDTO;
 use App\Jobs\PromptAgent;
 use App\Services\ModelConversationService;
+use App\Services\StructuredResponseToModelService;
 use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
@@ -23,9 +24,12 @@ class SaratovAi extends Component
 
     protected ModelConversationService $modelConversationService;
 
-    public function boot(ModelConversationService $modelConversationService)
+    protected StructuredResponseToModelService $structuredResponseToModelService;
+
+    public function boot(ModelConversationService $modelConversationService, StructuredResponseToModelService $structuredResponseToModelService)
     {
         $this->modelConversationService = $modelConversationService;
+        $this->structuredResponseToModelService = $structuredResponseToModelService;
     }
 
     public function mount()
@@ -47,7 +51,7 @@ class SaratovAi extends Component
                         } catch (Exception $ex) {
                             Log::warning('Unable to parse content of message as SaratovModelStructuredResponseDTO', [
                                 'message.content' => $message?->content,
-                                'reason' => $ex->getMessage(),
+                                'reasosn' => $ex->getMessage(),
                             ]);
                             $this->addMessageFromModel($message->content);
                         }
@@ -133,7 +137,7 @@ class SaratovAi extends Component
             ];
         } else {
             $text = $message?->response ?? '';
-            $entities = $message?->response_entities?->map(fn ($entity) => $entity->toActualModel()) ?? new Collection;
+            $entities = $message?->response_entities?->map(fn ($entity) => $this->structuredResponseToModelService->toDatabaseModel($entity->entity_id, $entity->entity_type, ['attachments']))->filter(fn ($entity) => $entity !== null) ?? new Collection;
             $this->chatMessages[] = [
                 'fromBot' => true,
                 'text' => $text,

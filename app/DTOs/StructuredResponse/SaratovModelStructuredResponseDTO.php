@@ -20,6 +20,7 @@ class SaratovModelStructuredResponseDTO extends ValidatedDTO
     {
         return [
             'response' => ['required', 'string', 'min:1'],
+            'response_entities' => ['sometimes'],
         ];
     }
 
