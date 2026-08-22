@@ -149,4 +149,8 @@ return [
     ],
 
     'selected_provider' => env('AI_LAB_NAME', 'anthropic'),
+
+    'conversations' => [
+        'generate_title' => false,
+    ]
 ];
