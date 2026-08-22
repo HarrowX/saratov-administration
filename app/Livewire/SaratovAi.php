@@ -48,11 +48,13 @@ class SaratovAi extends Component
         }
     }
 
-    public function clearMessages() {
+    public function clearMessages()
+    {
         $this->chatMessages = [];
     }
 
-    public function loadMessages(User $user) {
+    public function loadMessages(User $user)
+    {
         $userMessages = $this->modelConversationService->messagesFromCurrentConversation($user);
         $this->clearMessages();
         $this->addHelloMessageFromModel();
@@ -76,12 +78,14 @@ class SaratovAi extends Component
         }
     }
 
-    public function addHelloMessageFromModel() {
+    public function addHelloMessageFromModel()
+    {
         $this->addMessageFromModel(self::HELLO_MESSAGE);
     }
 
-    public function switchNewConversationMode() {
-        $this->createsNewConversation = !$this->createsNewConversation;
+    public function switchNewConversationMode()
+    {
+        $this->createsNewConversation = ! $this->createsNewConversation;
         if ($this->createsNewConversation) {
             $this->clearMessages();
             $this->addHelloMessageFromModel();
