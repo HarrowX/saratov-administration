@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\DTOs\StructuredResponse\SaratovModelStructuredResponseDTO;
 use App\Jobs\PromptAgent;
+use App\Models\User;
 use App\Services\ModelConversationService;
 use App\Services\StructuredResponseToModelService;
 use Exception;
@@ -15,6 +16,10 @@ use Livewire\Component;
 class SaratovAi extends Component
 {
     public bool $authorized = false;
+
+    const string HELLO_MESSAGE = 'Привет! Я Саратов, ваш AI-гид!';
+
+    public bool $createsNewConversation = false;
 
     public array $chatMessages = [];
 
@@ -39,27 +44,49 @@ class SaratovAi extends Component
         if (! $this->authorized) {
             $this->addMessageFromModel('Для использования бота необходимо авторизоваться в аккаунте');
         } else {
-            $userMessages = $this->modelConversationService->messagesFromCurrentConversation($user);
-            if (count($userMessages) > 0) {
-                foreach ($userMessages as $message) {
-                    if ($message->role == MessageRole::User) {
-                        $this->addMessageFromUser($message->content);
-                    } else {
-                        try {
-                            $dto = SaratovModelStructuredResponseDTO::fromJson($message->content);
-                            $this->addMessageFromModel($dto);
-                        } catch (Exception $ex) {
-                            Log::warning('Unable to parse content of message as SaratovModelStructuredResponseDTO', [
-                                'message.content' => $message?->content,
-                                'reasosn' => $ex->getMessage(),
-                            ]);
-                            $this->addMessageFromModel($message->content);
-                        }
+            $this->loadMessages($user);
+        }
+    }
+
+    public function clearMessages() {
+        $this->chatMessages = [];
+    }
+
+    public function loadMessages(User $user) {
+        $userMessages = $this->modelConversationService->messagesFromCurrentConversation($user);
+        $this->clearMessages();
+        $this->addHelloMessageFromModel();
+        if (count($userMessages) > 0) {
+            foreach ($userMessages as $message) {
+                if ($message->role == MessageRole::User) {
+                    $this->addMessageFromUser($message->content);
+                } else {
+                    try {
+                        $dto = SaratovModelStructuredResponseDTO::fromJson($message->content);
+                        $this->addMessageFromModel($dto);
+                    } catch (Exception $ex) {
+                        Log::warning('Unable to parse content of message as SaratovModelStructuredResponseDTO', [
+                            'message.content' => $message?->content,
+                            'reasosn' => $ex->getMessage(),
+                        ]);
+                        $this->addMessageFromModel($message->content);
                     }
                 }
-            } else {
-                $this->addMessageFromModel('Привет! Я Саратов, ваш AI-гид!');
             }
+        }
+    }
+
+    public function addHelloMessageFromModel() {
+        $this->addMessageFromModel(self::HELLO_MESSAGE);
+    }
+
+    public function switchNewConversationMode() {
+        $this->createsNewConversation = !$this->createsNewConversation;
+        if ($this->createsNewConversation) {
+            $this->clearMessages();
+            $this->addHelloMessageFromModel();
+        } else {
+            $this->loadMessages(auth()->user());
         }
     }
 
@@ -88,9 +115,10 @@ class SaratovAi extends Component
         $this->resetErrorBag();
         $this->addMessageFromUser($this->prompt);
 
-        PromptAgent::dispatch(auth()->user(), $this->prompt);
+        PromptAgent::dispatch(auth()->user(), $this->prompt, $this->createsNewConversation);
 
         $this->isWaitingForResponse = true;
+        $this->createsNewConversation = false;
         $this->prompt = '';
     }
 

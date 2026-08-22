@@ -48,23 +48,12 @@ class ModelConversationService
      *
      * @param  T  $promptable
      */
-    public function promptModelForUser(User $user, string $userMessage, $promptable = SaratovAiModel::class): AgentResponse|StructuredAgentResponse
+    public function promptModelForUser(User $user, string $userMessage, bool $startNew = false, $promptable = SaratovAiModel::class): AgentResponse|StructuredAgentResponse
     {
-        $agent = $this->getOrCreateConversationWithModel($user, promptable: $promptable);
+        $agent = $this->getOrCreateConversationWithModel($user, reset: $startNew, promptable: $promptable);
         $response = $agent->prompt($userMessage);
 
         return $response;
-    }
-
-    /**
-     * @template T of Promptable|Agent|Conversational|RemembersConversations
-     *
-     * @param  T  $promptable
-     */
-    public function resetConversationForUser(User $user, $promptable = SaratovAiModel::class)
-    {
-        // TODO: not working
-        $this->getOrCreateConversationWithModel($user, reset: true, promptable: $promptable);
     }
 
     /**

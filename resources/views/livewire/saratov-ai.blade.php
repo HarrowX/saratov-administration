@@ -23,6 +23,21 @@
                                 <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span> В сети · AI-помощник
                             </div>
                         </div>
+
+                        {{-- TODO: redesign --}}
+                        @auth
+                            @if(! $isWaitingForResponse)
+                                @if ($createsNewConversation)
+                                    <button wire:click="switchNewConversationMode" class="ml-auto text-[11px] font-bold tracking-wide text-blue-100 bg-white/15 border border-white/20 px-2.5 py-1 rounded-full">
+                                        К последнему диалогу
+                                    </button>
+                                @else
+                                    <button wire:click="switchNewConversationMode" class="ml-auto text-[11px] font-bold tracking-wide text-blue-100 bg-white/15 border border-white/20 px-2.5 py-1 rounded-full">
+                                        Новый диалог
+                                    </button>
+                                @endif
+                            @endif
+                        @endauth
                     </div>
 
                     {{-- Messages --}}

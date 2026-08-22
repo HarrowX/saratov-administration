@@ -22,6 +22,7 @@ class PromptAgent implements ShouldQueue
     public function __construct(
         public User $user,
         public string $message,
+        public bool $startNew = false,
         public $promptable = SaratovAiModel::class,
     ) {
         $this->onQueue('chat_bot');
@@ -34,7 +35,7 @@ class PromptAgent implements ShouldQueue
     {
         $dto = null;
         try {
-            $response = $modelConversationService->promptModelForUser($this->user, $this->message);
+            $response = $modelConversationService->promptModelForUser($this->user, $this->message, startNew: $this->startNew);
             $message = null;
             if ($response instanceof StructuredAgentResponse) {
                 $message = $response->toArray();

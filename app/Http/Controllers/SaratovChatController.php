@@ -16,16 +16,18 @@ class SaratovChatController extends Controller
     public function processUserMessage(Request $request)
     {
         $maxMessageLength = $this->modelConversationService->maxMessageLength();
-        $validated = $request->validate([
+        $request->validate([
             'message' => ['required', 'string', 'max:'.$maxMessageLength],
+            'start_new_dialog' => ['sometimes', 'boolean'],
         ], [
             'message.max' => 'Длинна сообщения не должна превышать '.$maxMessageLength.' символов',
         ]);
-        $message = $validated['message'];
+        $message = $request->input('message');
+        $startNewDialog = $request->input('start_new_dialog', false);
 
         $user = auth()->user();
 
-        $response = $this->modelConversationService->promptModelForUser($user, $message);
+        $response = $this->modelConversationService->promptModelForUser($user, $message, startNew: $startNewDialog);
 
         $dto = null;
         if ($response instanceof StructuredAgentResponse) {
@@ -46,13 +48,5 @@ class SaratovChatController extends Controller
         $messages = $this->modelConversationService->messagesFromCurrentConversation($user);
 
         return response()->json($messages, 200);
-    }
-
-    public function resetDialog(Request $request)
-    {
-        $user = auth()->user();
-        $this->modelConversationService->resetConversationForUser($user);
-
-        return response()->json([], 204);
     }
 }
