@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Attraction;
+use App\Models\Event;
 use App\Models\Excursion;
 use App\Models\GuidedTour;
 use App\Models\Hotel;
@@ -45,6 +46,7 @@ class FavoriteSection extends Component
             Restaurant::class => route('single-restaurant', $item),
             Excursion::class => route('single-excursion', $item),
             GuidedTour::class => route('single-guided-tour', $item),
+            Event::class => route('single-event', $item),
         };
     }
 

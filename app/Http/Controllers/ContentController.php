@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\AttractionResource;
-use App\Http\Resources\EventResource;
-use App\Http\Resources\ExcursionResource;
-use App\Http\Resources\GuidedTourResource;
-use App\Http\Resources\HotelResource;
-use App\Http\Resources\RestaurantResource;
+use App\Http\Resources\v1\AttractionResource;
+use App\Http\Resources\v1\EventResource;
+use App\Http\Resources\v1\ExcursionResource;
+use App\Http\Resources\v1\GuidedTourResource;
+use App\Http\Resources\v1\HotelResource;
+use App\Http\Resources\v1\RestaurantResource;
 use App\Models\Attraction;
 use App\Models\Event;
 use App\Models\Excursion;
@@ -101,7 +101,7 @@ class ContentController extends Controller
 
     public function excursions(Request $request)
     {
-        $query = Excursion::query()->with('attachments');
+        $query = Excursion::query()->with('points')->with('attachments');
 
         $perPage = $request->integer('per_page', 15);
 

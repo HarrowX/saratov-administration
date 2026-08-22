@@ -70,7 +70,15 @@ class AttractionFormPage extends FormPage
                     Text::make('Email', 'email'),
                     Url::make('Сайт', 'website'),
                     //            Url::make('Ссылка на карту', 'map_link'),
-                    Textarea::make('Код виджета отзывов яндекс карт', 'yandex_review_widget')->unescape(),
+                    Textarea::make('Код виджета отзывов яндекс карт', 'yandex_review_widget')
+                ->onApply(function ($item, $value) {
+                    if (empty($value)) {
+                        return $item;
+                    }
+                    $item->yandex_review_widget = preg_replace('/width:\d+px/', 'width:100%', $value, 1);
+
+                    return $item;
+                })->unescape(),
                     ActionButton::make('Инструкция')
                         ->inModal('Инструкция', <<<'HTML'
                 <div style="line-height: 1.6; display: flex; flex-direction: column; gap: 0.25rem;">
@@ -116,8 +124,9 @@ class AttractionFormPage extends FormPage
                             ID::make(),
                             CompressedImage::make('Файл', 'link')
                                 ->format('webp')
-                                ->quality((int) config('app.admin.images.quality'))
-                                ->thumb((int) config('app.admin.images.thumb.width'), (int) config('app.admin.images.thumb.height')),
+                                ->quality(config('app.admin.images.quality'))
+                                ->thumb(config('app.admin.images.thumb.width'), config('app.admin.images.thumb.height')),
+                            Text::make('Подпись к картинке', 'alt_name'),
                             Number::make('Порядковый номер', 'order')->default(0),
                         ])->removable(),
                 ]),

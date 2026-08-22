@@ -5,7 +5,7 @@
 <div>
     <!--Hero Section-->
     <section id="home" class="hero-section pt-21 min-h-100 md:min-h-screen flex flex-col gap-17 items-center justify-center relative">
-        <div class="absolute inset-0 bg-[url('/images/bg-restaurants.jpg')] bg-no-repeat bg-cover">
+        <div class="absolute inset-0 bg-[url('/images/bg-restaurants.webp')] bg-no-repeat bg-cover">
             <div class="absolute inset-0 bg-[rgba(239,230,215,0.73)]"></div>
         </div>
         <div class="relative z-10 text-center text-black">
@@ -17,9 +17,9 @@
     @livewire('saratov-ai')
 
     <!-- Section with filter and card-vebue -->
-    <section class="bg-white pb-5 md:pb-10 xl:pb-20 3xl:pb-26">
+    <section id="cards" class="bg-white pb-5 md:pb-10 xl:pb-20 3xl:pb-26">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-4 sm:px-10">
-            <div class="text-center mb-2 3xl:mb-12" data-aos="fade-up">
+            <div class="text-center mb-2 3xl:mb-12">
                 <p class="text text-gray-600 content-center">Заведения рядом на любой вкус - от кофеен и пекарен до ресторанов и баров</p>
             </div>
 {{--            <div class="w-full">--}}
@@ -109,7 +109,7 @@
 {{--                </div>--}}
 {{--            </div>--}}
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 lg:p-6 xl:gap-y-12">
-                @foreach ($restaurants as $restaurant)
+                @foreach ($this->restaurants as $restaurant)
                 <div class="card bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <div class="card-content group p-5 relative grid grid-rows-[auto_1fr_auto] content-between row-span-2 gap-3 h-full font-['FindSansPro']">
                         <div>
@@ -122,10 +122,18 @@
                             <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold group-hover:text-[#352AA2] transition-colors duration-300">{{ $restaurant->name}}</h2>
                             <div class="flex flex-col justify-end text-sm lg:text-base 3xl:text-2xl font-light gap-3 text-[#5F5F5F]">
                                 <p class="text-center mb-2 ">{{ $restaurant->kitchen }} кухня</p>
-                                <span class="flex items-center gap-3.5">
-                                        <i class="fas fa-phone text-lg xl:text-xl"></i>
-                                        {{ $restaurant->phone }}
-                                    </span>
+                                @php
+                                    $phones = array_map(fn (string $item) => trim($item), explode(',', $restaurant->phone));
+                                @endphp
+                                @if(!empty($phones))
+                                    @foreach($phones as $phone)
+                                        <span class="flex items-center gap-3.5">
+                                            <i class="fas fa-phone text-lg xl:text-xl"></i>
+                                            {{ $phone }}
+                                        </span>
+                                    @endforeach
+                                @endif
+
                             </div>
                             <div class="flex flex-col justify-between h-full font-['FindSansPro']">
                                 <div class="flex flex-row justify-between items-end gap-3.5 text-sm lg:text-base 3xl:text-2xl font-light">
@@ -134,7 +142,7 @@
                                         <p class="line-clamp-2">{{ $restaurant->address }}</p>
                                     </div>
                                     <a href="{{ route('single-restaurant', ['restaurant' => $restaurant->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
-                                        <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
+                                        <img src="{{asset('/images/arrow-right.png')}}" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
                                     </a>
                                 </div>
                             </div>
@@ -143,7 +151,8 @@
                 </div>
                 @endforeach
             </div>
-            @if($restaurants->isEmpty())
+            {{ $this->restaurants->links('livewire::tailwind') }}
+            @if($this->restaurants->isEmpty())
                 <div class="text-center">
                     <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fa-solid fa-magnifying-glass text-4xl text-[#352AA2]"></i>

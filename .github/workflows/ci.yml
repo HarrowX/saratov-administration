@@ -178,7 +178,7 @@ jobs:
             /opt/php84/bin/php artisan route:cache
             /opt/php84/bin/php artisan view:cache
 
-            /opt/php84/bin/php artisan queue:restart
+            /opt/php84/bin/php artisan horizon:terminate
 
             /opt/php84/bin/php artisan up
         env:

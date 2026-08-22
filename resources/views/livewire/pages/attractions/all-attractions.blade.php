@@ -13,16 +13,16 @@
         </div>
 
         <div class="flex-1 relative z-20">
-            <div class="absolute inset-0 bg-[url('/images/bg-attractions.png')] bg-no-repeat bg-cover bg-center"></div>
+            <div class="absolute inset-0 bg-[url('/images/bg-attractions.webp')] bg-no-repeat bg-cover bg-center"></div>
 
             <div class="relative max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 xl:px-20 h-full">
                 <div class="flex flex-col items-end h-full relative">
-                    @if($attractions->isNotEmpty())
+                    @if($this->attractions->isNotEmpty())
                         <p class="hidden lg:block font-['FindSansPro'] md:text-xs 2xl:text-lg text-[#374559] absolute -top-19 2xl:-top-20 right-32 2xl:right-12">
                             Пользователи рекомендуют:
                         </p>
                         @php
-                            $attraction=$attractions->random()
+                            $attraction=$this->attractions->random()
                         @endphp
                         <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}">
                             <div class="hidden lg:block sm:min-w-92 md:min-w-60 2xl:min-w-92 w-fit max-w-90  bg-white rounded-[20px] shadow-lg hover:shadow-xl transition-shadow duration-300 absolute -top-15 2xl:-top-12 group group/image">
@@ -44,7 +44,7 @@
                                                     <span class="text-sm 2xl:text-base">{{ $attraction->address }}</span>
                                                 </div>
                                                 <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
-                                                    <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
+                                                    <img src="{{asset('/images/arrow-right.png')}}" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
                                                 </a>
                                             </div>
                                         </div>
@@ -60,9 +60,9 @@
 
     @livewire('saratov-ai')
 
-    <section class="bg-white pb-10 sm:pb-15 xl:pb-20 3xl:pb-26">
+    <section id="cards" class="bg-white pb-10 sm:pb-15 xl:pb-20 3xl:pb-26">
         <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 xl:px-20">
-            <div class="text-center mb-12" data-aos="fade-up">
+            <div class="text-center mb-12">
                 <p class="text text-gray-600 content-center">Откройте для себя лучшие достопримечательности города: знаковые места, уютные уголки и природные локации.</p>
             </div>
 {{--            <div class="w-full pb-5">--}}
@@ -152,8 +152,8 @@
 {{--                </div>--}}
 {{--            </div>--}}
             <!-- Сетка карточек -->
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 lg:p-6 xl:gap-y-12">
-                @foreach ($attractions as $attraction)
+            <div id="attraction-list" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 lg:p-6 xl:gap-y-12">
+                @foreach ($this->attractions as $attraction)
                     <div class="card bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div class="card-content group p-5 relative h-full font-['FindSansPro'] grid grid-rows-[auto_1fr_auto] content-between row-span-2 gap-3">
                             <div>
@@ -172,7 +172,7 @@
                                         <p class="line-clamp-2"> {{ $attraction->address }}</p>
                                     </span>
                                         <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
-                                            <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
+                                            <img src="{{asset('/images/arrow-right.png')}}" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
                                         </a>
                                     </div>
                                 </div>
@@ -181,7 +181,8 @@
                     </div>
                 @endforeach
             </div>
-            @if($attractions->isEmpty())
+            {{ $this->attractions->links('livewire::tailwind') }}
+            @if($this->attractions->isEmpty())
                 <div class="text-center">
                     <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fa-solid fa-magnifying-glass text-4xl text-[#352AA2]"></i>

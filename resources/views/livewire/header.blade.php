@@ -3,7 +3,7 @@
         <div class="flex justify-between items-center h-20 3xl:h-24">
             <div class="flex items-center">
                 <a href="{{ route('index') }}" class="flex items-center space-x-1 3xl:space-x-3">
-                    <img src="/images/logo.svg" alt="Логотип" class="icon h-7 3xl:h-10">
+                    <img src="{{asset('/images/logo.svg')}}" alt="Логотип" class="icon h-7 3xl:h-10">
                     <span class="md:text-base xl:text-lg 3xl:text-2xl text-black font-['FindSansPro']">Саратов</span>
                 </a>
             </div>
@@ -42,7 +42,7 @@
                 </button>
                 @auth
 {{--                <button id="" class="">--}}
-{{--                    <img src="/images/image 21.svg" alt="поиск" class="icon size-7 3xl:size-11 hover:scale-125 transition duration-300">--}}
+{{--                    <img src="/images/2b6fa29f-a169-4aa2-9b5d-f1e392962ba7.svg" alt="поиск" class="icon size-7 3xl:size-11 hover:scale-125 transition duration-300">--}}
 {{--                </button>--}}
                     @php
                         $u = auth()->user();

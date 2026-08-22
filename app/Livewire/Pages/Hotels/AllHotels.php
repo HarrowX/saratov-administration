@@ -3,15 +3,18 @@
 namespace App\Livewire\Pages\Hotels;
 
 use App\Models\Hotel;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class AllHotels extends Component
 {
-    public $hotels;
+    use WithPagination;
 
-    public function mount()
+    #[Computed]
+    public function hotels()
     {
-        $this->hotels = Hotel::with('attachments')->get();
+        return Hotel::with(['attachments', 'favorites', 'views'])->paginate(15);
     }
 
     public function render()

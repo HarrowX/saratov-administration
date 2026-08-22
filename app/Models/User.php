@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -25,6 +26,7 @@ class User extends Authenticatable
         'phone',
         'password',
         'vk_id',
+        'apple_id',
         'vk_avatar',
         'email_verified_at',
     ];
@@ -51,6 +53,11 @@ class User extends Authenticatable
         return $this->hasOne(UserName::class, 'user_id');
     }
 
+    public function firebaseDeviceTokens(): HasMany
+    {
+        return $this->hasMany(FirebaseDeviceToken::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -67,5 +74,10 @@ class User extends Authenticatable
     public function haveFakeVkEmail(): bool
     {
         return $this->email == 'vk_'.$this->vk_id.'@'.config('app.domain_name');
+    }
+
+    public function routeNotificationForFcm()
+    {
+        return $this->firebaseDeviceTokens()->pluck('device_token')->toArray();
     }
 }

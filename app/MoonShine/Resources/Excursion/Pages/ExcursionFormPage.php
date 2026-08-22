@@ -120,6 +120,7 @@ class ExcursionFormPage extends FormPage
                         ->quality((int) config('app.admin.images.quality'))
                         ->thumb((int) config('app.admin.images.thumb.width'), (int) config('app.admin.images.thumb.height')),
                     Number::make('Порядковый номер', 'order')->default(0),
+                    Text::make('Подпись к картинке', 'alt_name'),
                 ])->removable(),
 
             RelationRepeater::make('Точки маршрута', 'points', resource: ExcursionPointResource::class)
@@ -128,7 +129,7 @@ class ExcursionFormPage extends FormPage
                     ID::make(),
                     Number::make('Порядок', 'order')->default(0),
 
-                    MorphTo::make('Точка', 'pointable', resource: ExcursionPointResource::class)
+                    MorphTo::make('Точка', 'excursionPointable', resource: ExcursionPointResource::class)
                         ->types([
                             Attraction::class => ['name', 'Достопримечательность'],
                             Restaurant::class => ['name', 'Ресторан'],
