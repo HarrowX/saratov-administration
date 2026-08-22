@@ -24,8 +24,9 @@ class EventV2AlpineResource extends JsonResource
             'description' => $this->description,
             'categories' => CategoryV2AlpineResource::collection($this->categories),
 
-            'image' => $this->getPrimaryImageUrl(),
-            'image_thumb' => $this->getPrimaryThumbImageUrl(),
+            'primary_image_url' => $this->getPrimaryImageUrl(),
+            'thumb_primary_image_url' => $this->getPrimaryThumbImageUrl(),
+
 
             'is_favorite' => $isFavorite,
 

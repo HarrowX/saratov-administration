@@ -22,8 +22,8 @@ class ExcursionV2AlpineResource extends JsonResource
 
             'description' => $this->description,
 
-            'image' => $this->getPrimaryImageUrl(),
-            'image_thumb' => $this->getPrimaryThumbImageUrl(),
+            'primary_image_url' => $this->getPrimaryImageUrl(),
+            'thumb_primary_image_url' => $this->getPrimaryThumbImageUrl(),
 
             'is_favorite' => $isFavorite,
 
