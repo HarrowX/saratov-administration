@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\Resources\HotelResource;
+use App\Http\Resources\v1\HotelResource;
 use App\Traits\HasAttachments;
 use App\Traits\HasEvents;
 use App\Traits\HasExcursionPoints;
@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Model;
 class Hotel extends Model
 {
     use HasAttachments, HasEvents, HasExcursionPoints, HasFavorites, HasViews, HasVisits;
+
+    protected ?string $defaultImagePath = '/images/image-coming-soon-hotel.webp';
 
     protected $fillable = [
         'name',
@@ -35,5 +37,10 @@ class Hotel extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    protected function getDefaultImagePath(): ?string
+    {
+        return asset('images/image_coming_soon_hotel.webp');
     }
 }

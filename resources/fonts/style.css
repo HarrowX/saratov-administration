@@ -1,0 +1,94 @@
+/********************************************
+Сгенерированно в Site Alarm
+https://site-alarm.com/tools/web-font-optimizer
+********************************************/
+
+@font-face {
+    font-family: 'centurygothic';
+    font-style: normal;
+    font-weight: 400;
+    src: url('centurygothic-russian.woff2') format('woff2'),
+        url('centurygothic-russian.woff') format('woff'),
+        url('centurygothic-russian.ttf') format('truetype');
+    unicode-range: U+21-23,U+25-5F,U+61-7E,U+AB,U+BB,U+401,U+410-44F,U+451,U+2013-2014,U+2018-2019,U+201C,U+201C-201E,U+2026,U+20BD;
+}
+
+@font-face {
+    font-family: 'centurygothic_bold';
+    font-style: normal;
+    font-weight: 400;
+    src: url('centurygothic_bold-russian.woff2') format('woff2'),
+        url('centurygothic_bold-russian.woff') format('woff'),
+        url('centurygothic_bold-russian.ttf') format('truetype');
+    unicode-range: U+21-23,U+25-5F,U+61-7E,U+AB,U+BB,U+401,U+410-44F,U+451,U+2013-2014,U+2018-2019,U+201C,U+201C-201E,U+2026,U+20BD;
+}
+
+@font-face {
+    font-family: 'findsans-pro-regular-regular';
+    font-style: normal;
+    font-weight: 400;
+    src: url('findsans-pro-regular-regular-russian.woff2') format('woff2'),
+        url('findsans-pro-regular-regular-russian.woff') format('woff'),
+        url('findsans-pro-regular-regular-russian.ttf') format('truetype');
+    unicode-range: U+21-23,U+25-5F,U+61-7E,U+AB,U+BB,U+401,U+410-44F,U+451,U+2013-2014,U+2018-2019,U+201C,U+201C-201E,U+2026,U+20BD;
+}
+
+@font-face {
+    font-family: 'findsanspro-light';
+    font-style: normal;
+    font-weight: 400;
+    src: url('findsanspro-light-russian.woff2') format('woff2'),
+        url('findsanspro-light-russian.woff') format('woff'),
+        url('findsanspro-light-russian.ttf') format('truetype');
+    unicode-range: U+21-23,U+25-5F,U+61-7E,U+AB,U+BB,U+401,U+410-44F,U+451,U+2013-2014,U+2018-2019,U+201C,U+201C-201E,U+2026,U+20BD;
+}
+
+@font-face {
+    font-family: 'findsanspro-regular';
+    font-style: normal;
+    font-weight: 400;
+    src: url('findsanspro-regular-russian.woff2') format('woff2'),
+        url('findsanspro-regular-russian.woff') format('woff'),
+        url('findsanspro-regular-russian.ttf') format('truetype');
+    unicode-range: U+21-23,U+25-5F,U+61-7E,U+AB,U+BB,U+401,U+410-44F,U+451,U+2013-2014,U+2018-2019,U+201C,U+201C-201E,U+2026,U+20BD;
+}
+
+@font-face {
+    font-family: 'inter_18pt-black';
+    font-style: normal;
+    font-weight: 400;
+    src: url('inter_18pt-black-russian.woff2') format('woff2'),
+        url('inter_18pt-black-russian.woff') format('woff'),
+        url('inter_18pt-black-russian.ttf') format('truetype');
+    unicode-range: U+21-23,U+25-5F,U+61-7E,U+AB,U+BB,U+401,U+410-44F,U+451,U+2013-2014,U+2018-2019,U+201C,U+201C-201E,U+2026,U+20BD;
+}
+
+@font-face {
+    font-family: 'inter_18pt-regular';
+    font-style: normal;
+    font-weight: 400;
+    src: url('inter_18pt-regular-russian.woff2') format('woff2'),
+        url('inter_18pt-regular-russian.woff') format('woff'),
+        url('inter_18pt-regular-russian.ttf') format('truetype');
+    unicode-range: U+21-23,U+25-5F,U+61-7E,U+AB,U+BB,U+401,U+410-44F,U+451,U+2013-2014,U+2018-2019,U+201C,U+201C-201E,U+2026,U+20BD;
+}
+
+@font-face {
+    font-family: 'inter_18pt-semibold';
+    font-style: normal;
+    font-weight: 400;
+    src: url('inter_18pt-semibold-russian.woff2') format('woff2'),
+        url('inter_18pt-semibold-russian.woff') format('woff'),
+        url('inter_18pt-semibold-russian.ttf') format('truetype');
+    unicode-range: U+21-23,U+25-5F,U+61-7E,U+AB,U+BB,U+401,U+410-44F,U+451,U+2013-2014,U+2018-2019,U+201C,U+201C-201E,U+2026,U+20BD;
+}
+
+@font-face {
+    font-family: 'merriweather_24pt-regular';
+    font-style: normal;
+    font-weight: 400;
+    src: url('merriweather_24pt-regular-russian.woff2') format('woff2'),
+        url('merriweather_24pt-regular-russian.woff') format('woff'),
+        url('merriweather_24pt-regular-russian.ttf') format('truetype');
+    unicode-range: U+21-23,U+25-5F,U+61-7E,U+AB,U+BB,U+401,U+410-44F,U+451,U+2013-2014,U+2018-2019,U+201C,U+201C-201E,U+2026,U+20BD;
+}

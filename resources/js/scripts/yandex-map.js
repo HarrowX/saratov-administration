@@ -1,6 +1,7 @@
 let yandexMap;
 let mapObjects = [];
 let currentFilter = 'all';
+let markersData = [];
 
 const SARATOV_POSITION = [51.5339, 46.0345];
 const STANDARD_ZOOM = 13;
@@ -8,7 +9,8 @@ const STANDARD_ZOOM = 13;
 const categoryColors = {
     attraction: '#3B82F6',
     hotel: '#F59E0B',
-    restaurant: '#EF4444'
+    restaurant: '#EF4444',
+    'custom-point': '#d568dd',
 };
 
 function getLandmarks() {
@@ -44,7 +46,17 @@ function getLandmarks() {
             description: item.description || '',
             tags: ['ресторан'],
             url: `/restaurants/${item.slug || item.id}`,
-        }))
+        })),
+
+        ...(window.mapData?.customPoints || []).map(item => ({
+            id: item.id,
+            name: item.name,
+            lat: parseFloat(item.latitude),
+            lng: parseFloat(item.longitude),
+            category: 'custom-point',
+            description: item.description || '',
+            url: '',
+        })),
     ];
 }
 
@@ -73,14 +85,62 @@ function initYandexMap() {
     });
 }
 
+function highlightPointItem(index) {
+    document.querySelectorAll('.point-item').forEach(el => {
+        el.classList.remove('active');
+    });
+
+    const activeItem = document.querySelector(`.point-item[data-index="${index}"]`);
+    if (activeItem) {
+        activeItem.classList.add('active');
+
+        activeItem.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest'
+        });
+    }
+}
+function openMarkerOnMap(index) {
+    if (!yandexMap || !markersData[index]) {
+        console.error('Маркер не найден');
+        return;
+    }
+
+    const marker = markersData[index];
+
+    yandexMap.balloon.close();
+    marker.balloon.open();
+
+    const coords = marker.geometry.getCoordinates();
+    yandexMap.setCenter(coords, yandexMap.getZoom(), {
+        checkZoomRange: true,
+        duration: 300
+    });
+    highlightPointItem(index);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.point-item').forEach(function(el) {
+        el.addEventListener('click', function() {
+            const index = parseInt(this.dataset.index);
+            if (typeof window.openMarkerOnMap === 'function') {
+                window.openMarkerOnMap(index);
+            }
+        });
+    });
+});
+
 function addMarkers() {
     const landmarks = getLandmarks();
 
-    landmarks.forEach(item => {
+    const isExcursionPage = document.querySelector('.excursion-page') !== null;
+
+    landmarks.forEach((item, index) => {
         const placemark = new ymaps.Placemark(
             [item.lat, item.lng],
             {
                 balloonContent: createBalloonContent(item),
+                iconContent: isExcursionPage ? String(index + 1) : '',
                 hintContent: item.name,
                 category: item.category
             },
@@ -91,6 +151,7 @@ function addMarkers() {
         );
 
         yandexMap.geoObjects.add(placemark);
+        markersData.push(placemark);
         mapObjects.push(placemark);
     });
 }
@@ -102,17 +163,27 @@ function createBalloonContent(item) {
         hotel: 'Отель',
         restaurant: 'Ресторан'
     }[item.category] || 'Место';
+    if (item.url === "") {
+        return `
+        <div class="max-w-[250px]">
+            <h4 class="font-bold text-base mb-2 text-gray-800">${item.name}</h4>
+            <p class="text-xs text-gray-400 mb-2">${categoryText}</p>
+            <p class="text-sm text-gray-500 mb-2 leading-relaxed">${item.description || 'Описание отсутствует'}</p>
+        </div>
+    `;
+    }
+
     return `
         <div class="max-w-[250px]">
             <h4 class="font-bold text-base mb-2 text-gray-800">${item.name}</h4>
             <p class="text-xs text-gray-400 mb-2">${categoryText}</p>
             <p class="text-sm text-gray-500 mb-2 leading-relaxed">${item.description || 'Описание отсутствует'}</p>
             <div class="flex items-center justify-between text-xs text-gray-400 pt-1 border-t border-gray-100">
-            <a href="${item.url}"
-               target="_blank"
-               class="block w-full text-center bg-blue-500 hover:bg-blue-600 transition-colors duration-300 text-white text-sm font-medium py-1 rounded-lg">
-                <i class="fas fa-external-link-alt mr-1"></i>Подробнее
-            </a>
+                <a href="${item.url}"
+                   target="_blank"
+                   class="block w-full text-center bg-blue-500 hover:bg-blue-600 transition-colors duration-300 text-white text-sm font-medium py-1 rounded-lg">
+                    <i class="fas fa-external-link-alt mr-1"></i>Подробнее
+                </a>
             </div>
         </div>
     `;
@@ -251,6 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(initYandexMap, 500);
 });
 window.initYandexMap = initYandexMap;
+window.openMarkerOnMap = openMarkerOnMap;
 window.forceInitMap = forceInitMap;
 window.toggleFilterPanel = toggleFilterPanel;
 window.filterMapByCategory = filterMapByCategory;

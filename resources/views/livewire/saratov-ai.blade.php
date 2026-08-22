@@ -61,8 +61,8 @@
                                                     @foreach($entities as $entity)
                                                         <div class="group/place flex flex-col bg-white border border-[#e8ecf7] rounded-2xl overflow-hidden shadow-[0_8px_20px_rgba(15,23,42,0.07)] hover:shadow-[0_12px_28px_rgba(15,23,42,0.12)] transition-all duration-300">
                                                             <div class="relative h-28 overflow-hidden">
-                                                                @if($entity->firstAttachment() !== null)
-                                                                    <img src="{{ $entity->firstAttachment()?->url() ?? '' }}" alt="{{ $entity?->name ?? '' }}"
+                                                                @if($entity->getPrimaryImageUrl() != null)
+                                                                    <img src="{{ $entity->getPrimaryThumbImageUrl() ?? '' }}" alt="{{ $entity?->getAltPrimaryImage() ?? '' }}"
                                                                          class="w-full h-full object-cover group-hover/entity:scale-105 transition-transform duration-500">
                                                                 @else
                                                                     <div class="w-full h-full bg-linear-to-br from-[#A556F7]/25 to-[#2663EB]/25 flex items-center justify-center">
