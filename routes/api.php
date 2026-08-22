@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\AuthVkController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\v2\ContentV2Controller;
 use App\Http\Controllers\FavoritableController;
 use App\Http\Controllers\FirebaseDeviceTokenController;
 use App\Http\Controllers\PlaceVisitController;
@@ -120,4 +121,23 @@ Route::prefix('v1')->group(function () {
         });
     Route::post('contact-us/send', [ContactUsController::class, 'store'])
         ->middleware(['auth:sanctum']);
+});
+
+
+Route::prefix('v2')->group(function () {
+    Route::controller(ContentV2Controller::class)
+        ->middleware(['auth:sanctum'])
+        ->group(function () {
+            Route::prefix('places')->group(function () {
+                Route::get('hotels', 'listHotels');
+
+                Route::get('restaurants', 'listRestaurants');
+
+                Route::get('attractions', 'listAttractions');
+            });
+
+            Route::get('excursions', 'listExcursions');
+
+            Route::get('events', 'listEvents');
+        });
 });
