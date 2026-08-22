@@ -14,10 +14,18 @@ use App\Models\Excursion;
 use App\Models\GuidedTour;
 use App\Models\Hotel;
 use App\Models\Restaurant;
+use App\Services\ViewService;
 use Illuminate\Http\Request;
 
 class ContentController extends Controller
 {
+    protected ViewService $viewService;
+
+    public function __construct(ViewService $viewService)
+    {
+        $this->viewService = $viewService;
+    }
+
     public function hotels(Request $request)
     {
         $term = $request->string('term', '');
@@ -41,7 +49,7 @@ class ContentController extends Controller
         if (! $model) {
             return response()->json(status: 404);
         }
-
+        $this->viewService->calculate($request->id, Hotel::class);
         return HotelResource::make($model);
     }
 
@@ -69,6 +77,7 @@ class ContentController extends Controller
             return response()->json(status: 404);
         }
 
+        $this->viewService->calculate($request->id, Restaurant::class);
         return RestaurantResource::make($model);
     }
 
@@ -96,6 +105,7 @@ class ContentController extends Controller
             return response()->json(status: 404);
         }
 
+        $this->viewService->calculate($request->id, Attraction::class);
         return AttractionResource::make($model);
     }
 
@@ -118,6 +128,7 @@ class ContentController extends Controller
             return response()->json(status: 404);
         }
 
+        $this->viewService->calculate($request->id, Excursion::class);
         return ExcursionResource::make($model);
     }
 
@@ -145,6 +156,7 @@ class ContentController extends Controller
             return response()->json(status: 404);
         }
 
+        $this->viewService->calculate($request->id, GuidedTour::class);
         return GuidedTourResource::make($model);
     }
 
@@ -172,6 +184,7 @@ class ContentController extends Controller
             return response()->json(status: 404);
         }
 
+        $this->viewService->calculate($request->id, Event::class);
         return EventResource::make($model);
     }
 }
