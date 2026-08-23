@@ -18,7 +18,7 @@ class SaratovChatController extends Controller
         $maxMessageLength = $this->modelConversationService->maxMessageLength();
         $request->validate([
             'message' => ['required', 'string', 'max:'.$maxMessageLength],
-            'start_new_dialog' => ['sometimes', 'boolean'],
+            'start_new_dialog' => ['sometimes', 'nullable', 'boolean'],
         ], [
             'message.max' => 'Длинна сообщения не должна превышать '.$maxMessageLength.' символов',
         ]);
