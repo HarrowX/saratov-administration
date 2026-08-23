@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\HasScheduleContract;
 use App\HasSchedules;
 use App\Http\Resources\v1\AttractionResource;
 use App\Traits\HasAttachments;
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Model;
 
 #[UseResource(AttractionResource::class)]
-class Attraction extends Model
+class Attraction extends Model implements HasScheduleContract
 {
     use HasAttachments, HasEvents, HasExcursionPoints, HasFavorites, HasSchedules, HasViews, HasVisits;
 
