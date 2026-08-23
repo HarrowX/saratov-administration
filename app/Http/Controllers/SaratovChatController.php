@@ -23,7 +23,7 @@ class SaratovChatController extends Controller
             'message.max' => 'Длинна сообщения не должна превышать '.$maxMessageLength.' символов',
         ]);
         $message = $request->input('message');
-        $startNewDialog = $request->input('start_new_dialog', false);
+        $startNewDialog = $request->boolean('start_new_dialog');
 
         $user = auth()->user();
 
