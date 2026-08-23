@@ -2,6 +2,7 @@
 
 use App\Enums\ScheduleRecordIntervalType;
 use App\Enums\ScheduleRecordKind;
+use App\Enums\ScheduleWeekDay;
 use App\Models\ScheduleRecord;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -40,8 +41,8 @@ return new class extends Migration
             // day (сетать только hour_start, hour_end, day_start)
             // interval-day (сетать только hour_start, hour_end, day_start, day_end)
 
-            $table->string('week_start')->nullable(); // like "1", "2", ..., "7" || заполняется при kind: week-day, interval-week-day
-            $table->string('week_end')->nullable();   // like "1", "2", ..., "7" || заполняется при kind: interval-week-day
+            $table->enum('week_start', ScheduleWeekDay::cases())->nullable(); // like "1", "2", ..., "7" || заполняется при kind: week-day, interval-week-day
+            $table->enum('week_end', ScheduleWeekDay::cases())->nullable();   // like "1", "2", ..., "7" || заполняется при kind: interval-week-day
 
             $table->string('day_start')->nullable(); // like "30.12", "10.05", "09.05", "01.01" || заполняется при kind: day, interval-day
             $table->string('day_end')->nullable();   // like "30.12", "10.05", "09.05", "01.01" || заполняется при kind: interval-day
