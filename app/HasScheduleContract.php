@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 interface HasScheduleContract
 {
-    function schedules(): MorphMany;
+    public function schedules(): MorphMany;
 }
