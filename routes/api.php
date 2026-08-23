@@ -115,8 +115,6 @@ Route::prefix('v1')->group(function () {
         ->middleware(['auth:sanctum'])
         ->group(function () {
             Route::post('send', [SaratovChatController::class, 'processUserMessage']);
-            // TODO: not working
-            // Route::post('reset', [SaratovChatController::class, 'resetDialog']);
             Route::get('messages', [SaratovChatController::class, 'getAllMessages']);
         });
     Route::post('contact-us/send', [ContactUsController::class, 'store'])

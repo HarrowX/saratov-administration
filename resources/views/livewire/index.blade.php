@@ -263,7 +263,7 @@
                 @endforeach
             </div>
             <!-- Map Container -->
-            <div data-aos="fade-up" class="bg-white rounded-xl shadow-lg p-6">
+            <div data-aos="fade-up" class="index-map bg-white rounded-xl shadow-lg p-6">
                 <div class="flex flex-col sm:flex-row gap-4 lg:flex-row items-center justify-between mb-4">
                     <p class="font-['Merriweather'] text-2xl font-bold mb-3">Интерактивная карта</p>
                     <div class="flex space-x-4">
