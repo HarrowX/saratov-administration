@@ -3,7 +3,6 @@
 use App\Enums\ScheduleRecordIntervalType;
 use App\Enums\ScheduleRecordKind;
 use App\Enums\ScheduleWeekDay;
-use App\Models\ScheduleRecord;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,14 +19,14 @@ return new class extends Migration
             $table->string('name');
             $table->morphs('schedulable');
             $table->boolean('is_active')->default(true);
-            $table->string('is_closed_by_default')->default(false);
+            $table->boolean('is_closed_by_default')->default(false);
             $table->timestamps();
         });
 
         Schema::create('schedule_records', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(ScheduleRecord::class)->constrained();
+            $table->foreignIdFor(Schedule::class)->constrained();
 
             $table->integer('order')->default(0);
             $table->integer('priority')->default(0);
