@@ -18,6 +18,13 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasApiTokens, HasConversations, HasFactory, Notifiable, SoftDeletes, CascadeSoftDeletes;
 
+    protected $cascadeDeletes = ['username'];
+
+    public function getCascadeDeletes(): array
+    {
+        return $this->cascadeDeletes;
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -42,13 +49,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
-    protected static function booted(): void
-    {
-        static::deleting(function (User $user) {
-            $user->username()->delete();
-        });
-    }
 
     public function username(): HasOne
     {
@@ -75,6 +75,7 @@ class User extends Authenticatable
 
     public function restore(): void
     {
+        parent::restore();
         $this->username()->restore();
     }
 

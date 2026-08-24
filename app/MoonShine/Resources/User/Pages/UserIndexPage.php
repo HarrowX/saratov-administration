@@ -107,7 +107,7 @@ class UserIndexPage extends IndexPage
         $item->restore();
 
         return JsonResponse::make()
-            ->toast('Успешно');
+            ->toast('Успешно', ToastType::SUCCESS);
     }
 
     /**
@@ -126,9 +126,20 @@ class UserIndexPage extends IndexPage
         return [
             QueryTag::make(
                 'Удалённые',
-                static fn(Builder $q) => $q->onlyTrashed()->with([
-                    'username' => fn($q) => $q->withTrashed()
-                ])
+                static function(Builder $q) {
+                    $q->onlyTrashed();
+
+                    $model = $q->getModel();
+                    if (method_exists($model, 'getCascadeDeletes')) {
+                        $with = [];
+                        foreach ($model->getCascadeDeletes() as $relation) {
+                            $with[$relation] = fn($q) => $q->withTrashed();
+                        }
+                        $q->with($with);
+                    }
+
+                    return $q;
+                }
             )
         ];
     }
