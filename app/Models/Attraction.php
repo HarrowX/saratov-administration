@@ -49,4 +49,9 @@ class Attraction extends Model
     {
         return 'slug';
     }
+
+    protected function getDefaultImagePath(): ?string
+    {
+        return asset('images/coming-soon-attraction.webp');
+    }
 }

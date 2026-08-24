@@ -27,7 +27,7 @@
     <section class="features-section flex justify-center pt-10 sm:pt-20 xl:pt-30 bg-white">
         <div class="flex flex-col md:flex-row gap-2.5 sm:gap-5 md:gap-7 3xl:gap-17.5 max-w-6xl 3xl:max-w-421 mx-auto px-4 sm:px-10">
             <div class="relative rounded-2xl overflow-hidden min-w-full md:min-w-95 lg:min-w-120 3xl:min-w-202 h-90 md:h-135 lg:h-auto">
-                <img src="{{ $guidedTour->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $guidedTour->name }}">
+                <img src="{{ $guidedTour->getPrimaryImageUrl() }}" alt="{{ $guidedTour->getAltPrimaryImage() }}">
 {{--                <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5">--}}
 {{--                    <i class="fas fa-star text-yellow-500"></i>--}}
 {{--                    <span class="text-sm font-semibold text-black">4.9</span>--}}
@@ -88,7 +88,7 @@
                             <div class="card-content group p-5 relative grid grid-rows-subgrid content-between row-span-2 gap-3 h-full font-['FindSansPro']">
                                 <div class="flex flex-col gap-5">
                                     <div class="overflow-hidden rounded-[7px] sm:rounded-[19px]">
-                                        <img src="{{ $excursion->attachments?->get(0)?->url() ?? asset('images/default.jpg') }}" alt="Изображение {{ $excursion->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
+                                        <img src="{{ $excursion->getPrimaryThumbImageUrl() }}" alt="{{$excursion->getAltPrimaryImage()}}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
                                     </div>
                                     <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold">{{ $excursion->name}}</h2>
                                     <div class="flex flex-col justify-end text-sm lg:text-base 3xl:text-2xl font-light gap-3 text-[#5F5F5F]">

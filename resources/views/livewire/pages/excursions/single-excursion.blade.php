@@ -17,7 +17,7 @@
         <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10  relative">
             <div class="relative overflow-hidden rounded-lg sm:rounded-2xl md:rounded-[30px] h-70 md:h-100 xl:h-125 3xl:h-200">
                 <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                     style="background-image: url('{{ $excursion->attachments->get(0)?->url() ?? "" }}')">
+                     style="background-image: url('{{ $excursion->getPrimaryThumbImageUrl() }}')">
                 </div>
                 <div class="absolute inset-x-0 bottom-0 h-40 sm:h-60 md:h-100 bg-linear-to-t from-black via-black/30 3xl:via-black/50 to-transparent"></div>
                 <div class="absolute w-full h-full flex justify-center items-end">
@@ -56,8 +56,8 @@
                             <div class="job-swiper__swiper swiper mx-auto max-w-full lg:min-w-140 h-110 lg:h-80 3xl:h-100 relative rounded-xl">
                                 <div class="swiper-wrapper">
                                     @foreach($excursion->attachments->skip(1) as $attachment)
-                                        <div class="swiper-slide flex! justify-center items-center cursor-pointer" data-fancybox="gallery" data-src="{{ $attachment->url() }}" data-caption="{{$attachment->alt_name}}">
-                                            <img src="{{ $attachment->url() }}" alt="{{$attachment->alt_name}}"  class="w-full h-full photo object-cover ">
+                                        <div class="swiper-slide flex! justify-center items-center cursor-pointer" data-fancybox="gallery" data-src="{{ $attachment->getUrl() }}" data-caption="{{$attachment->alt_name}}">
+                                            <img src="{{ $attachment->tryGetThumbUrlOrGetUrl() }}" alt="{{$attachment->alt_name}}"  class="w-full h-full photo object-cover ">
                                         </div>
                                     @endforeach
                                 </div>
@@ -81,10 +81,10 @@
                                 </span>
                             <div>
                                 <span class="text-xs text-gray-400 block">Тип</span>
-                                <span class="font-medium">{{ $excursion->type}}</span>
+                                <span class="font-medium">{{ $excursion->type }}</span>
                             </div>
                         </div>
-                        <a href="{{route('single-guided-tour', $excursion->guide)}}" class="group flex items-center gap-3 hover:bg-white/40 lg:p-2 rounded-xl transition-colors duration-300 cursor-pointer w-full">
+                        <a href="{{route('single-guided-tour', $excursion->guide )}}" class="group flex items-center gap-3 hover:bg-white/40 lg:p-2 rounded-xl transition-colors duration-300 cursor-pointer w-full">
                                 <span class="size-10 sm:size-12 min-w-10 sm:min-w-12 flex justify-center items-center bg-white/60 rounded-xl ">
                                     <i class="fa fa-user text-[#5F5F5F] text-lg sm:text-2xl group-hover:text-blue-800 transition-colors duration-300"></i>
                                 </span>

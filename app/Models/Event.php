@@ -45,4 +45,9 @@ class Event extends Model
     {
         return 'slug';
     }
+
+    protected function getDefaultImagePath(): ?string
+    {
+        return asset('images/coming-soon-event.webp');
+    }
 }

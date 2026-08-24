@@ -40,4 +40,9 @@ class Excursion extends Model
     {
         return $this->duration ?? $this->points->sum('duration_minutes');
     }
+
+    protected function getDefaultImagePath(): ?string
+    {
+        return asset('images/coming-soon-excursion.webp');
+    }
 }
