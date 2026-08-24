@@ -15,7 +15,10 @@ class HotelResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $isFavorite = $this->favorites->where('user_id', $request->user()->id)->isNotEmpty() || false;
+        $isFavorite = null;
+        if (\Auth::check()) {
+            $isFavorite = $this?->favorites?->where('user_id', $request?->user()?->id)->isNotEmpty();
+        }
 
         return [
             'id' => $this->id,

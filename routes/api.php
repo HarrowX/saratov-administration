@@ -45,7 +45,6 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::controller(ContentController::class)
-        ->middleware(['auth:sanctum'])
         ->group(function () {
             Route::prefix('places')->group(function () {
                 Route::get('hotels', 'hotels');
@@ -123,7 +122,6 @@ Route::prefix('v1')->group(function () {
 
 Route::prefix('v2')->group(function () {
     Route::controller(ContentV2Controller::class)
-        ->middleware(['auth:sanctum'])
         ->group(function () {
             Route::prefix('places')->group(function () {
                 Route::get('hotels', 'listHotels');
