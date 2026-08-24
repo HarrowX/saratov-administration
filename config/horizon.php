@@ -203,7 +203,7 @@ return [
     'defaults' => [
         'supervisor-1' => [
             'connection' => 'redis',
-            'queue' => ['chat_bot', 'notifications', 'listeners', 'default'],
+            'queue' => ['chat_bot', 'notifications', 'default'],
             'balance' => 'auto',
             'autoScalingStrategy' => 'time',
             'maxProcesses' => 10,
