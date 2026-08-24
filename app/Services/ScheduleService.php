@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\HasScheduleContract;
 use App\Models\Schedule;
+use Illuminate\Database\Eloquent\Builder;
 
 class ScheduleService
 {
@@ -22,6 +23,21 @@ class ScheduleService
         return true;
     }
 
+    public function useIsNowOpenFilter(Builder $builder) // todo need to model and in sql
+    {
+        $builder->whereHas('schedules', function (Builder $builder) {
+            $builder
+                ->where('is_active', true)
+                ->whereHas('scheduleRecords', function (Builder $builder) {
+                    $builder
+                        ->orderBy('order')
+                        ->where('');
+                });
+        });
+
+        return true;
+    }
+
     /**
      * @var Schedule
      */
@@ -33,7 +49,7 @@ class ScheduleService
         }
 
         return [
-            'mon' => $this->getFormatedIntervalOnDay($schedule, 'mon'),
+            'mon' => 'working',
             'tue' => $this->getFormatedIntervalOnDay($schedule, 'tue'),
             'wed' => $this->getFormatedIntervalOnDay($schedule, 'wed'),
             'thu' => $this->getFormatedIntervalOnDay($schedule, 'thu'),

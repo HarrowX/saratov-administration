@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\ScheduleRecord;
 
+use App\Enums\ScheduleRecordIntervalType;
+use App\Enums\ScheduleRecordKind;
+use App\Enums\ScheduleWeekDay;
 use App\Models\ScheduleRecord;
 use App\MoonShine\Resources\ScheduleRecord\Pages\ScheduleRecordDetailPage;
 use App\MoonShine\Resources\ScheduleRecord\Pages\ScheduleRecordFormPage;
@@ -20,32 +23,6 @@ class ScheduleRecordResource extends ModelResource
 
     protected string $title = 'Записи расписаний';
 
-    private array $kindOptions = [
-        'every-time' => 'Круглосуточно',
-        'every-day' => 'Ежедневно',
-        'interval-week-day' => 'Интервал дня недели',
-        'week-day' => 'День недели',
-        'interval-day' => 'Интервал дней',
-        'day' => 'День',
-    ];
-
-    private array $weekDaysOptions = [
-        'mon' => 'Понедельник',
-        'tue' => 'Вторник',
-        'wed' => 'Среда',
-        'thu' => 'Четверг',
-        'fri' => 'Пятница',
-        'sat' => 'Суббота',
-        'sun' => 'Воскресенье',
-    ];
-
-    private array $intervalTypeOptions = [
-        'open' => 'Открыто',
-        'closed' => 'Закрыто',
-        'break' => 'Перерыв',
-        'weekend' => 'Выходной',
-    ];
-
     /**
      * @return list<class-string<PageContract>>
      */
@@ -60,17 +37,17 @@ class ScheduleRecordResource extends ModelResource
 
     public function getKindOptions(): array
     {
-        return $this->kindOptions;
+        return ScheduleRecordKind::options();
     }
 
     public function getWeekDaysOptions(): array
     {
-        return $this->weekDaysOptions;
+        return ScheduleWeekDay::options();
     }
 
     public function getIntervalTypeOptions(): array
     {
-        return $this->intervalTypeOptions;
+        return ScheduleRecordIntervalType::options();
     }
 
     protected function search(): array
