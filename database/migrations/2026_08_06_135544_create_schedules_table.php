@@ -3,6 +3,7 @@
 use App\Enums\ScheduleRecordIntervalType;
 use App\Enums\ScheduleRecordKind;
 use App\Enums\ScheduleWeekDay;
+use App\Models\Schedule;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -26,7 +27,7 @@ return new class extends Migration
         Schema::create('schedule_records', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(Schedule::class)->constrained();
+            $table->foreignIdFor(Schedule::class);
 
             $table->integer('order')->default(0);
             $table->integer('priority')->default(0);

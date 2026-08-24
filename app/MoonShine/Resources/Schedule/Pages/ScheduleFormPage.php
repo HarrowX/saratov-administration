@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources\Schedule\Pages;
 
 use App\Models\Attraction;
+use App\Models\Hotel;
+use App\Models\Restaurant;
 use App\MoonShine\Resources\Schedule\ScheduleResource;
 use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
@@ -36,12 +38,14 @@ class ScheduleFormPage extends FormPage
         return [
             Box::make([
                 ID::make(),
-                Text::make('Имя', 'name'),
+                Text::make('Имя', 'name')->required(),
                 MorphTo::make('Расписание к сущности', 'schedulable')
                     ->types([
                         Attraction::class => ['name', 'Достопримечательность'],
-                    ]),
-                Switcher::make('Активный?', 'is_active'),
+                        Hotel::class => ['name', 'Отель'],
+                        Restaurant::class => ['name', 'Ресторан'],
+                    ])->required(),
+                Switcher::make('Активный?', 'is_active')->default(true)->required(),
                 HasMany::make('Записи', 'scheduleRecords', resource: ScheduleRecordResource::class)->creatable(),
                 //                RelationRepeater::make('Записи', 'scheduleRecords', ScheduleRecordResource::class),
             ]),

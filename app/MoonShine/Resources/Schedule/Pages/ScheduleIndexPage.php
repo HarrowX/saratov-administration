@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources\Schedule\Pages;
 
 use App\Models\Attraction;
+use App\Models\Hotel;
+use App\Models\Restaurant;
 use App\MoonShine\Resources\Schedule\ScheduleResource;
 use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
 use MoonShine\Contracts\UI\ComponentContract;
@@ -40,6 +42,8 @@ class ScheduleIndexPage extends IndexPage
             MorphTo::make('Расписание к сущности', 'schedulable')
                 ->types([
                     Attraction::class => ['name', 'Достопримечательность'],
+                    Hotel::class => ['name', 'Отель'],
+                    Restaurant::class => ['name', 'Ресторан'],
                 ]),
 
             Switcher::make('Активный?', 'is_active'),
