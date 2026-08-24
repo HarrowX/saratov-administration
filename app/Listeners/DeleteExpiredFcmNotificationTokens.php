@@ -29,8 +29,9 @@ class DeleteExpiredFcmNotificationTokens
 
         if (! is_object($report) || ! method_exists($report, 'target')) {
             Log::warning('Report has no method called `target`', [
-                'report' => $report
+                'report' => $report,
             ]);
+
             return;
         }
 
@@ -40,6 +41,7 @@ class DeleteExpiredFcmNotificationTokens
             Log::warning('Target has no method called `value`', [
                 'target' => $target,
             ]);
+
             return;
         }
 

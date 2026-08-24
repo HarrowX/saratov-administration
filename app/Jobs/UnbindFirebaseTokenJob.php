@@ -16,7 +16,7 @@ class UnbindFirebaseTokenJob implements ShouldQueue
      * Create a new job instance.
      */
     public function __construct(
-        public int|string $userId, 
+        public int|string $userId,
         public string $deviceToken
     ) {
         $this->onQueue('default');
@@ -33,6 +33,7 @@ class UnbindFirebaseTokenJob implements ShouldQueue
                 'user_id' => $this->userId,
                 'device_token' => $this->deviceToken,
             ]);
+
             return;
         }
         $firebaseDeviceTokensService->unbindToken($user, $this->deviceToken);
