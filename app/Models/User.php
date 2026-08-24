@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Database\Factories\UserFactory;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Larahook\SanctumRefreshToken\Trait\HasApiTokens;
@@ -14,7 +16,7 @@ use Laravel\Ai\Concerns\HasConversations;
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasApiTokens, HasConversations, HasFactory, Notifiable;
+    use HasApiTokens, HasConversations, HasFactory, Notifiable, SoftDeletes, CascadeSoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -69,6 +71,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function restore(): void
+    {
+        $this->username()->restore();
     }
 
     public function haveFakeVkEmail(): bool

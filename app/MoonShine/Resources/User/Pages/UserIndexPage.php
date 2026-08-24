@@ -7,10 +7,13 @@ namespace App\MoonShine\Resources\User\Pages;
 use App\Models\User;
 use App\MoonShine\Resources\User\UserResource;
 use App\Notifications\FcmTestNotification;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use MoonShine\Contracts\Core\DependencyInjection\CrudRequestContract;
 use MoonShine\Contracts\UI\ActionButtonContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
+use MoonShine\Crud\JsonResponse;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
 use MoonShine\Laravel\QueryTags\QueryTag;
 use MoonShine\Support\Attributes\AsyncMethod;
@@ -69,7 +72,16 @@ class UserIndexPage extends IndexPage
                             ->asyncMethod('sendNotification')
                             ->submit('Отправить'),
                     ])
+                ),
+
+            ActionButton::make('Восстановить')
+                ->method(
+                    'restore',
+                    events: [$this->getListEventName()]
                 )
+                ->canSee(
+                    fn(User $model) => $model->trashed()
+                ),
         );
     }
 
@@ -86,6 +98,18 @@ class UserIndexPage extends IndexPage
         toast('Уведомление в очереди на отправку', ToastType::SUCCESS);
     }
 
+    #[AsyncMethod]
+    public function restore(
+        CrudRequestContract $request
+    ): JsonResponse
+    {
+        $item = $request->getResource()->getItem();
+        $item->restore();
+
+        return JsonResponse::make()
+            ->toast('Успешно');
+    }
+
     /**
      * @return list<FieldContract>
      */
@@ -99,7 +123,14 @@ class UserIndexPage extends IndexPage
      */
     protected function queryTags(): array
     {
-        return [];
+        return [
+            QueryTag::make(
+                'Удалённые',
+                static fn(Builder $q) => $q->onlyTrashed()->with([
+                    'username' => fn($q) => $q->withTrashed()
+                ])
+            )
+        ];
     }
 
     /**
@@ -119,6 +150,24 @@ class UserIndexPage extends IndexPage
         return $component
             ->stickyButtons()
             ->columnSelection();
+    }
+
+    protected function modifyDeleteButton(
+        ActionButtonContract $button
+    ): ActionButtonContract
+    {
+        return $button->canSee(
+            fn(User $model) => !$model->trashed()
+        );
+    }
+
+    protected function modifyMassDeleteButton(
+        ActionButtonContract $button
+    ): ActionButtonContract
+    {
+        return $button->canSee(
+            fn() => request()->input('query-tag') !== 'udalennye'
+        );
     }
 
     /**
