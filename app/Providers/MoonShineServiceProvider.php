@@ -18,6 +18,8 @@ use App\MoonShine\Resources\Hotel\HotelResource;
 use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
 use App\MoonShine\Resources\Restaurant\RestaurantResource;
+use App\MoonShine\Resources\Schedule\ScheduleResource;
+use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
 use App\MoonShine\Resources\User\UserResource;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
@@ -51,6 +53,8 @@ class MoonShineServiceProvider extends ServiceProvider
                 ContactUsResource::class,
                 UserResource::class,
                 CustomLocationResource::class,
+                ScheduleRecordResource::class,
+                ScheduleResource::class,
             ])
             ->pages([
                 ...$core->getConfig()->getPages(),
