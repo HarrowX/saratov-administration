@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\v1;
+namespace App\Http\Resources\v2\alpine;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EventResource extends JsonResource
+class ExcursionV2AlpineResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,26 +22,24 @@ class EventResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'slug' => $this->slug,
-            'description' => $this->description,
-            'categories' => CategoryResource::collection($this->categories),
 
-            'image' => $this->getPrimaryImageUrl(),
-            'image_thumb' => $this->getPrimaryThumbImageUrl(),
+            'description' => $this->description,
+
+            'primary_image_url' => $this->getPrimaryImageUrl(),
+            'thumb_primary_image_url' => $this->getPrimaryThumbImageUrl(),
 
             'is_favorite' => $isFavorite,
 
-            'address' => $this->address,
-            'age_restriction' => $this->age_restriction,
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
-            'latitude' => $this->latitude,
-            'longitude' => $this->longitude,
+            'price_adult' => $this->price_adult,
+            'price_child' => $this->price_child,
+            'price_group' => $this->price_group,
 
             'views_count' => $this->views_count,
             'favorites_count' => $this->favorites?->count() ?? 0,
 
-            'attachments' => AttachmentResource::collection($this->attachments),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+
         ];
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\v1;
+namespace App\Http\Resources\v2\alpine;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EventResource extends JsonResource
+class EventV2AlpineResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -21,27 +21,19 @@ class EventResource extends JsonResource
 
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'slug' => $this->slug,
-            'description' => $this->description,
-            'categories' => CategoryResource::collection($this->categories),
 
-            'image' => $this->getPrimaryImageUrl(),
-            'image_thumb' => $this->getPrimaryThumbImageUrl(),
+            'name' => $this->name,
+
+            'description' => $this->description,
+            'categories' => CategoryV2AlpineResource::collection($this->categories),
+
+            'primary_image_url' => $this->getPrimaryImageUrl(),
+            'thumb_primary_image_url' => $this->getPrimaryThumbImageUrl(),
 
             'is_favorite' => $isFavorite,
 
-            'address' => $this->address,
-            'age_restriction' => $this->age_restriction,
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
-            'latitude' => $this->latitude,
-            'longitude' => $this->longitude,
-
             'views_count' => $this->views_count,
             'favorites_count' => $this->favorites?->count() ?? 0,
-
-            'attachments' => AttachmentResource::collection($this->attachments),
         ];
     }
 }

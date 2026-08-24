@@ -10,6 +10,7 @@ use App\Http\Controllers\FirebaseDeviceTokenController;
 use App\Http\Controllers\PlaceVisitController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SaratovChatController;
+use App\Http\Controllers\v2\ContentV2Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -44,7 +45,6 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::controller(ContentController::class)
-        ->middleware(['auth:sanctum'])
         ->group(function () {
             Route::prefix('places')->group(function () {
                 Route::get('hotels', 'hotels');
@@ -118,4 +118,21 @@ Route::prefix('v1')->group(function () {
         });
     Route::post('contact-us/send', [ContactUsController::class, 'store'])
         ->middleware(['auth:sanctum']);
+});
+
+Route::prefix('v2')->group(function () {
+    Route::controller(ContentV2Controller::class)
+        ->group(function () {
+            Route::prefix('places')->group(function () {
+                Route::get('hotels', 'listHotels');
+
+                Route::get('restaurants', 'listRestaurants');
+
+                Route::get('attractions', 'listAttractions');
+            });
+
+            Route::get('excursions', 'listExcursions');
+
+            Route::get('events', 'listEvents');
+        });
 });
