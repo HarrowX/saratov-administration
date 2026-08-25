@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Event;
 
+use App\Jobs\NotifyAllUsers;
 use App\Models\Event;
 use App\Models\User;
 use App\MoonShine\Resources\Event\Pages\EventDetailPage;
@@ -48,9 +49,7 @@ class EventResource extends ModelResource
             return $item;
         }
 
-        User::all()->each(function (User $user) use ($item) {
-            $user->notify(new EventCreated($item->name, $item->start_date));
-        });
+        dispatch(new NotifyAllUsers(new EventCreated($item->name, $item->start_date)));
 
         return $item;
     }
