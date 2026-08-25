@@ -17,7 +17,9 @@ use Laravel\Ai\Concerns\HasConversations;
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use CascadeSoftDeletes, HasApiTokens, HasConversations, HasFactory, Notifiable, SoftDeletes;
+    use CascadeSoftDeletes, HasApiTokens, HasConversations, HasFactory, Notifiable;
+
+    use SoftDeletes {restore as parentRestore; }
 
     protected $cascadeDeletes = ['username', 'contactUs', 'favorites'];
 
@@ -88,16 +90,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function restore(): void
+    public function restore(): bool
     {
         $deletedAt = $this->deleted_at;
-        parent::restore();
+        $success = $this->parentRestore();
         $this->username()->restore();
         $this->contactUs()->restore();
         $this->favorites()->whereBetween('deleted_at', [
             $deletedAt->copy()->subSeconds(5),
             $deletedAt->copy()->addSeconds(5),
         ])->restore();
+
+        return $success;
     }
 
     public function haveFakeVkEmail(): bool
