@@ -80,7 +80,7 @@ class UserIndexPage extends IndexPage
                     events: [$this->getListEventName()]
                 )
                 ->canSee(
-                    fn(User $model) => $model->trashed()
+                    fn (User $model) => $model->trashed()
                 ),
         );
     }
@@ -101,8 +101,7 @@ class UserIndexPage extends IndexPage
     #[AsyncMethod]
     public function restore(
         CrudRequestContract $request
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $item = $request->getResource()->getItem();
         $item->restore();
 
@@ -126,21 +125,21 @@ class UserIndexPage extends IndexPage
         return [
             QueryTag::make(
                 'Удалённые',
-                static function(Builder $q) {
+                static function (Builder $q) {
                     $q->onlyTrashed();
 
                     $model = $q->getModel();
                     if (method_exists($model, 'getCascadeDeletes')) {
                         $with = [];
                         foreach ($model->getCascadeDeletes() as $relation) {
-                            $with[$relation] = fn($q) => $q->withTrashed();
+                            $with[$relation] = fn ($q) => $q->withTrashed();
                         }
                         $q->with($with);
                     }
 
                     return $q;
                 }
-            )
+            ),
         ];
     }
 
@@ -165,19 +164,17 @@ class UserIndexPage extends IndexPage
 
     protected function modifyDeleteButton(
         ActionButtonContract $button
-    ): ActionButtonContract
-    {
+    ): ActionButtonContract {
         return $button->canSee(
-            fn(User $model) => !$model->trashed()
+            fn (User $model) => ! $model->trashed()
         );
     }
 
     protected function modifyMassDeleteButton(
         ActionButtonContract $button
-    ): ActionButtonContract
-    {
+    ): ActionButtonContract {
         return $button->canSee(
-            fn() => request()->input('query-tag') !== 'udalennye'
+            fn () => request()->input('query-tag') !== 'udalennye'
         );
     }
 

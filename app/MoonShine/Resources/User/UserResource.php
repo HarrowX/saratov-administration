@@ -42,8 +42,7 @@ class UserResource extends ModelResource
 
     protected function modifyItemQueryBuilder(
         Builder $builder
-    ): Builder
-    {
+    ): Builder {
         return $builder->withTrashed();
     }
 

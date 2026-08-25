@@ -16,7 +16,7 @@ use Laravel\Ai\Concerns\HasConversations;
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasApiTokens, HasConversations, HasFactory, Notifiable, SoftDeletes, CascadeSoftDeletes;
+    use CascadeSoftDeletes, HasApiTokens, HasConversations, HasFactory, Notifiable, SoftDeletes;
 
     protected $cascadeDeletes = ['username', 'contactUs', 'favorites'];
 
@@ -91,7 +91,7 @@ class User extends Authenticatable
         $this->contactUs()->restore();
         $this->favorites()->whereBetween('deleted_at', [
             $deletedAt->copy()->subSeconds(2),
-            $deletedAt->copy()->addSeconds(2)
+            $deletedAt->copy()->addSeconds(2),
         ])->restore();
     }
 
