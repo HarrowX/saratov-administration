@@ -126,6 +126,7 @@ jobs:
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
     environment: test
+    timeout-minutes: 25
 
     concurrency:
       group: deploy-test
@@ -142,31 +143,47 @@ jobs:
           username: ${{ vars.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
+          timeout: 30s
+          command_timeout: 20m
           debug: true
           envs: MAINTENANCE_SECRET
           script: |
-            set -e
+            set -Eeuo pipefail
             cd /var/www/www-root/data/www/test.administration.creatrix-digital.ru/
+
+            cleanup() {
+              exit_code=$?
+              trap - EXIT INT TERM HUP
+              echo "Disabling maintenance mode..."
+              /opt/php84/bin/php artisan up || true
+              exit "$exit_code"
+            }
+
+            trap cleanup EXIT
+            trap 'exit 130' INT
+            trap 'exit 143' TERM
+            trap 'exit 129' HUP
 
             PREV_SHA=$(git rev-parse HEAD)
             echo "Previous SHA: $PREV_SHA"
 
             # Enable maintenance mode (with optional secret for smoke testing)
-            if [ -n "${MAINTENANCE_SECRET}" ]; then
+            if [ -n "${MAINTENANCE_SECRET:-}" ]; then
               /opt/php84/bin/php artisan down --secret="${MAINTENANCE_SECRET}" --render="errors::503" || true
             else
               /opt/php84/bin/php artisan down --render="errors::503" || true
             fi
 
-            git pull origin master
+            timeout 120s git fetch origin master
+            timeout 60s git merge --ff-only FETCH_HEAD
 
-            /opt/php84/bin/php /usr/bin/composer install --no-interaction --no-dev --optimize-autoloader
+            timeout 300s /opt/php84/bin/php /usr/bin/composer install --no-interaction --no-dev --optimize-autoloader
 
-            npm ci && npm run build
+            timeout 300s npm ci
+            timeout 300s npm run build
 
             /opt/php84/bin/php artisan migrate --force
 
-            chown -R www-root:www-root .
             chmod -R 775 storage bootstrap/cache
 
             /opt/php84/bin/php artisan optimize:clear
@@ -179,7 +196,5 @@ jobs:
             /opt/php84/bin/php artisan view:cache
 
             /opt/php84/bin/php artisan horizon:terminate
-
-            /opt/php84/bin/php artisan up
         env:
           MAINTENANCE_SECRET: ${{ secrets.MAINTENANCE_SECRET }}
