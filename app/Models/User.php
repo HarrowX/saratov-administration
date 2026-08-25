@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\UserTrashedEvent;
 use Database\Factories\UserFactory;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -50,6 +51,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $dispatchesEvents = [
+        'trashed' => UserTrashedEvent::class,
+    ];
+
     public function username(): HasOne
     {
         return $this->hasOne(UserName::class, 'user_id');
@@ -90,8 +95,8 @@ class User extends Authenticatable
         $this->username()->restore();
         $this->contactUs()->restore();
         $this->favorites()->whereBetween('deleted_at', [
-            $deletedAt->copy()->subSeconds(2),
-            $deletedAt->copy()->addSeconds(2),
+            $deletedAt->copy()->subSeconds(5),
+            $deletedAt->copy()->addSeconds(5),
         ])->restore();
     }
 
