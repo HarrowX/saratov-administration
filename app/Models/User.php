@@ -18,7 +18,7 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasApiTokens, HasConversations, HasFactory, Notifiable, SoftDeletes, CascadeSoftDeletes;
 
-    protected $cascadeDeletes = ['username'];
+    protected $cascadeDeletes = ['username', 'contactUs', 'favorites'];
 
     public function getCascadeDeletes(): array
     {
@@ -55,6 +55,16 @@ class User extends Authenticatable
         return $this->hasOne(UserName::class, 'user_id');
     }
 
+    public function contactUs(): HasMany
+    {
+        return $this->hasMany(ContactUs::class, 'user_id');
+    }
+
+    public function favorites(): HasMany
+    {
+        return $this->hasMany(Favorite::class, 'user_id');
+    }
+
     public function firebaseDeviceTokens(): HasMany
     {
         return $this->hasMany(FirebaseDeviceToken::class);
@@ -75,8 +85,14 @@ class User extends Authenticatable
 
     public function restore(): void
     {
+        $deletedAt = $this->deleted_at;
         parent::restore();
         $this->username()->restore();
+        $this->contactUs()->restore();
+        $this->favorites()->whereBetween('deleted_at', [
+            $deletedAt->copy()->subSeconds(2),
+            $deletedAt->copy()->addSeconds(2)
+        ])->restore();
     }
 
     public function haveFakeVkEmail(): bool

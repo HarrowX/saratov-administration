@@ -14,6 +14,14 @@ return new class extends Migration {
         Schema::table('user_names', function (Blueprint $table) {
             $table->softDeletes();
         });
+
+        Schema::table('contact_us', function (Blueprint $table) {
+            $table->softDeletes();
+        });
+
+        Schema::table('favorites', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     public function down(): void
@@ -23,6 +31,14 @@ return new class extends Migration {
         });
 
         Schema::table('user_names', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
+
+        Schema::table('contact_us', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
+
+        Schema::table('favorites', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }
