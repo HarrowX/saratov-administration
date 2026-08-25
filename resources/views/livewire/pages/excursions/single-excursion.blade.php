@@ -13,150 +13,161 @@
         window.mapCenter = @js($startPosition);
     </script>
 
-    <section id="home" class="relative mt-35 xl:mt-40 3xl:mt-50 ">
-        <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10  relative">
-            <div class="relative overflow-hidden rounded-lg sm:rounded-2xl md:rounded-[30px] h-70 md:h-100 xl:h-125 3xl:h-200">
-                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                     style="background-image: url('{{ $excursion->attachments->get(0)?->url() ?? "" }}')">
-                </div>
-                <div class="absolute inset-x-0 bottom-0 h-40 sm:h-60 md:h-100 bg-linear-to-t from-black via-black/30 3xl:via-black/50 to-transparent"></div>
-                <div class="absolute w-full h-full flex justify-center items-end">
-                    <h1 class="text-xl sm:text-2xl md:text-4xl 3xl:text-6xl text-white font-extrabold pb-4 md:pb-8 lg:pb-15">{{$excursion->name}}</h1>
-                </div>
-            </div>
-
+    <section class="pt-25 3xl:pt-30 flex flex-col gap-5 bg-white">
+        <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10 flex flex-row justify-between items-start w-full">
             <a href="{{ route('all-excursions') }}"
-               class="absolute left-3 sm:left-14 -top-10 3xl:-top-15 items-center xl:gap-2 text-[#5F5F5F] hover:text-blue-800 transition-colors font-['FindSansPro']">
+               class="flex items-center xl:gap-2 text-[#5F5F5F] hover:text-blue-800 transition-colors font-['FindSansPro']">
                 <i class="fa-solid fa-chevron-left text-base xs:text-xl xl:text-xl 3xl:text-3xl"></i>
                 <span class="text-base xs:text-xl 3xl:text-3xl md:pl-4">Экскурсии</span>
             </a>
-
-            <button wire:click="toggleFavorite" class="flex absolute top-2 right-7.5 sm:top-4 sm:right-25 z-20 items-center gap-1 sm:gap-3 px-3 sm:px-5 py-1.5 sm:py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/50 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group">
-                <i class="fa-regular fa-heart text-lg sm:text-2xl xl:text-3xl group-hover:scale-110 group-hover:animate-pulse transition-transform {{ $isFavorite ? 'fa-solid text-red-400' : 'fa-regular' }}"></i>
-                <span class="text-xs xs:text-sm sm:text-lg 2xl:text-3xl font-medium">
+            <button wire:click="toggleFavorite" class="flex z-20 items-center gap-1 sm:gap-3 px-3 3xl:px-5 py-1.5 3xl:py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/10 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group">
+                <i class="fa-regular fa-heart text-lg sm:text-2xl 3xl:text-3xl group-hover:scale-110 group-hover:animate-pulse transition-transform {{ $isFavorite ? 'fa-solid text-red-400' : 'fa-regular' }}"></i>
+                <span class="text-xs xs:text-sm sm:text-lg 3xl:text-3xl font-medium">
                     {{ $isFavorite ? 'В избранном' : 'В избранное' }}
                 </span>
-                <span class="favorite-count ml-2 text-xs sm:text-base 2xl:text-xl font-bold flex justify-center items-center min-w-5 h-5 sm:min-w-8 sm:h-8 px-1 sm:px-2 rounded-full {{ $isFavorite ? 'bg-red-400 text-white' : 'bg-red-400/80 text-white' }} transition-colors shadow-lg">
+                <span class="favorite-count ml-2 text-xs sm:text-base 3xl:text-xl font-bold flex justify-center items-center min-w-5 h-5 sm:min-w-8 sm:h-8 px-1 sm:px-2 rounded-full {{ $isFavorite ? 'bg-red-400 text-white' : 'bg-red-400/80 text-white' }} transition-colors shadow-lg">
                 {{ $favoritesCount }}
                 </span>
             </button>
         </div>
+        <div wire:ignore class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10 flex flex-col gap-7 2xl:gap-11 w-full">
+            <div class="flex flex-col lg:flex-row gap-6 md:gap-8 xl:gap-11">
+                <div class="gallery-detail-swiper grid w-full relative opacity-0">
+                    <div class="place-detail-swiper-main swiper shadow-[0_4px_4px_0_#00000040] rounded-3xl h-120 lg:h-80 xl:h-100 2xl:h-120 3xl:h-160 relative group w-full">
+                        <div class="swiper-wrapper">
+                            @foreach($excursion->attachments as $attachment)
+                                <div class="swiper-slide cursor-pointer w-full!" data-fancybox="gallery" data-src="{{ $attachment->url() }}" data-caption="{{$attachment->alt_name}}">
+                                    <div class="w-full h-full rounded-3xl">
+                                        <img src="{{ $attachment->url() }}" alt="{{$attachment->alt_name}}" class="photo w-full h-full object-cover select-none" loading="lazy" />
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="absolute right-6 bottom-106 lg:bottom-6 z-20 flex items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-110 cursor-pointer select-none" onclick="openGallery()">
+                            <i class="fas fa-search-plus text-white/50 text-3xl transition-transform duration-300 group-hover:scale-125 group-hover:text-white/70"></i>
+                        </div>
+
+                        @if($excursion->attachments->count() > 1)
+                            <div class="button-navigation--main-left  absolute top-1/2 -translate-y-1/2 w-10 h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 rounded-full border-2 border-white/30 flex items-center justify-center cursor-pointer z-10 left-3 lg:left-4 xl:left-5 transition-all duration-300 hover:bg-white/20 hover:border-white/60 hover:scale-110 group/nav select-none">
+                                <i class="fa-solid fa-chevron-left text-xl lg:text-2xl xl:text-3xl text-white/70 group-hover/nav:text-white transition-colors duration-300"></i>
+                            </div>
+
+                            <div class="button-navigation--main-right absolute top-1/2 -translate-y-1/2 w-10 h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 rounded-full border-2 border-white/30 flex items-center justify-center cursor-pointer z-10 right-3 lg:right-4 xl:right-5 transition-all duration-300 hover:bg-white/20 hover:border-white/60 hover:scale-110 group/nav select-none">
+                                <i class="fa-solid fa-chevron-right text-xl lg:text-2xl xl:text-3xl text-white/70 group-hover/nav:text-white transition-colors duration-300"></i>
+                            </div>
+                        @endif
+                        <div class="absolute inset-0 z-9 bg-linear-to-t from-black/80 via-black/30 to-transparent rounded-b-3xl pointer-events-none"></div>
+
+                        <div class="absolute z-10 bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 rounded-b-3xl cursor-pointer select-none" onclick="openGallery()">
+                            <h1 class="text-3xl lg:text-4xl 3xl:text-5xl font-bold text-white drop-shadow-lg">
+                                {{ $excursion->name }}
+                            </h1>
+                        </div>
+                    </div>
+
+                    @if($excursion->attachments->count() >= 5)
+                        <div class="place-detail-swiper-thumbs swiper hidden! lg:block! mt-4">
+                            <div class="swiper-wrapper cursor-grab! focus:cursor-grabbing! active:cursor-grabbing!">
+                                @foreach($excursion->attachments as $attachment)
+                                    <div class="swiper-slide opacity-40 border-3 border-transparent overflow-hidden shrink-0! cursor-grab focus:cursor-grabbing! active:cursor-grabbing! rounded-2xl h-14! lg:h-25! 3xl:h-30! hover:opacity-100">
+                                        <img src="{{ $attachment->url() }}" alt="Thumb"
+                                             class="photo w-full h-full object-cover rounded-xl thumb-image transition-transform duration-300"
+                                             loading="lazy"/>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="pt-10 xl:pt-16 pb-10 bg-white">
-        <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10 flex flex-col gap-10 box-border relative">
-            <div class="bg-[#E5E6F6] rounded-xl sm:rounded-3xl p-3 sm:p-6 md:p-8">
-                <div class="flex flex-col justify-between gap-3">
-                    <div class="flex flex-col lg:flex-row gap-5 xl:gap-10">
-                        <div class="flex flex-col">
-                            <h2>О экскурсии</h2>
-                            <p class="text-base md:text-lg text-[#5F5F5F] leading-relaxed">{{ $excursion->description }}</p>
-                        </div>
-                        @if($excursion->attachments->count() >= 3)
-                            <div class="job-swiper__swiper swiper mx-auto max-w-full lg:min-w-140 h-110 lg:h-80 3xl:h-100 relative rounded-xl">
-                                <div class="swiper-wrapper">
-                                    @foreach($excursion->attachments->skip(1) as $attachment)
-                                        <div class="swiper-slide flex! justify-center items-center cursor-pointer" data-fancybox="gallery" data-src="{{ $attachment->url() }}" data-caption="{{$attachment->alt_name}}">
-                                            <img src="{{ $attachment->url() }}" alt="{{$attachment->alt_name}}"  class="w-full h-full photo object-cover ">
-                                        </div>
-                                    @endforeach
-                                </div>
-
-                                <div class="swiper-pagination pb-4"></div>
-
-                                <!-- Кнопки навигации -->
-                                <div class="button-navigation--job-left absolute top-1/2 -translate-y-1/2 w-8 h-13.5 bg-[#FFFFFF33] rounded-full text-white text-xl flex items-center justify-center cursor-pointer z-10 hover:bg-[#ffffffa8] left-2">
-                                    <i class="fa-solid fa-chevron-left"></i>
-                                </div>
-                                <div class="button-navigation--job-right absolute top-1/2 -translate-y-1/2 w-8 h-13.5 bg-[#FFFFFF33] rounded-full text-white text-xl flex items-center justify-center cursor-pointer z-10 hover:bg-[#ffffffa8] right-2">
-                                    <i class="fa-solid fa-chevron-right"></i>
-                                </div>
-                            </div>
-                        @endif
+    <section class="pt-10 xl:pt-16 pb-10">
+        <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10 box-border flex flex-col gap-10">
+            <div class="flex flex-col bg-[#E5E6F6] rounded-xl sm:rounded-3xl gap-3 p-3 sm:p-6 md:p-8">
+                <div class="flex flex-col lg:flex-row gap-2">
+                    <div>
+                        <h2>Об экскурсии</h2>
+                        <p class="text-base md:text-lg text-[#5F5F5F] leading-relaxed">{{ $excursion->description }}</p>
                     </div>
-                    <div class="flex flex-wrap lg:flex-nowrap gap-5 pt-2 min-w-fit border-t-2 border-gray-300 w-full">
-                        <div class="flex items-center gap-3">
-                                <span class="size-10 sm:size-12 flex justify-center items-center bg-white/60 rounded-xl shrink-0">
-                                    <i class="fas fa-shoe-prints text-[#5F5F5F] text-lg sm:text-2xl -rotate-90"></i>
-                                </span>
-                            <div>
-                                <span class="text-xs text-gray-400 block">Тип</span>
-                                <span class="font-medium">{{ $excursion->type}}</span>
+                    @if(!empty($excursion->price_adult) || !empty($excursion->price_child) || !empty($excursion->price_group))
+                        <div class="flex flex-col gap-4 p-3 sm:p-5 min-h-full w-full min-w-fit bg-white/60 rounded-xl">
+                            <p class="text-base font-semibold text-gray-800 text-center font-['Merriweather']">Цена билетов</p>
+                            <div class="flex flex-col gap-3 text-xs sm:text-sm">
+                                @if($excursion->price_adult)
+                                    <div class="flex items-center leading-3 gap-1 sm:gap-2">
+                                        <span class="text-gray-600 shrink-0">Взрослый</span>
+                                        <span class="flex-1 border-b-2 border-dotted border-gray-300 min-w-4 self-end"></span>
+                                        <span class="font-medium text-gray-800 shrink-0">{{ number_format($excursion->price_adult, 0, '', ' ') }} ₽</span>
+                                    </div>
+                                @endif
+                                @if($excursion->price_child)
+                                    <div class="flex items-center leading-3 gap-1 sm:gap-2">
+                                        <span class="text-gray-600 shrink-0">Детский</span>
+                                        <span class="flex-1 border-b-2 border-dotted border-gray-300 min-w-4 self-end"></span>
+                                        <span class="font-medium text-gray-800 shrink-0">{{ number_format($excursion->price_child, 0, '', ' ') }} ₽</span>
+                                    </div>
+                                @endif
+                                @if($excursion->price_group)
+                                    <div class="flex items-center leading-3 gap-1 sm:gap-2">
+                                        <span class="text-gray-600 shrink-0">Группа</span>
+                                        <span class="flex-1 border-b-2 border-dotted border-gray-300 min-w-4 self-end"></span>
+                                        <span class="font-medium text-gray-800 shrink-0">{{ number_format($excursion->price_group, 0, '', ' ') }} ₽</span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
-                        <a href="{{route('single-guided-tour', $excursion->guide)}}" class="group flex items-center gap-3 hover:bg-white/40 lg:p-2 rounded-xl transition-colors duration-300 cursor-pointer w-full">
-                                <span class="size-10 sm:size-12 min-w-10 sm:min-w-12 flex justify-center items-center bg-white/60 rounded-xl ">
+                    @endif
+                </div>
+                <div class="flex flex-row flex-wrap lg:flex-nowrap lg:justify-between gap-4 lg:gap-2 pt-2 min-w-fit border-t-2 border-gray-300">
+                    <div class="flex items-center gap-3">
+                        <span class="size-10 sm:size-12 flex justify-center items-center bg-white/60 rounded-xl">
+                            <i class="fa-solid fa-shoe-prints text-[#5F5F5F] text-lg sm:text-2xl -rotate-90"></i>
+                        </span>
+                        <div>
+                            <span class="text-xs text-gray-400 block">Тип</span>
+                            <span class="font-medium">{{ $excursion->type }}</span>
+                        </div>
+                    </div>
+                    <a href="{{route('single-guided-tour', $excursion->guide)}}" class="group flex items-center gap-3 hover:bg-white/40 lg:p-2 rounded-xl transition-colors duration-300 cursor-pointer">
+                                <span class="size-10 sm:size-12 min-w-10 sm:min-w-12 flex justify-center items-center bg-white/60 rounded-xl shrink-0">
                                     <i class="fa fa-user text-[#5F5F5F] text-lg sm:text-2xl group-hover:text-blue-800 transition-colors duration-300"></i>
                                 </span>
-                            <div>
-                                <span class="text-xs text-gray-400 text-nowrap block">Экскурсовод</span>
-                                <span class="font-medium text-blue-800 ">
+                        <div>
+                            <span class="text-xs text-gray-400 text-nowrap block">Экскурсовод</span>
+                            <span class="font-medium text-blue-800 underline text-nowrap">
                                     {{$excursion->guide->name }}
                                 </span>
-                            </div>
-                        </a>
-
-                        @if($excursion->price_adult || $excursion->price_child || $excursion->price_group)
-                            <div class="flex items-center gap-3">
-                                <span class="size-10 sm:size-12 flex justify-center items-center bg-white/60 rounded-xl shrink-0">
-                                    <i class="fas fa-ticket text-[#5F5F5F] text-lg sm:text-2xl"></i>
+                        </div>
+                    </a>
+                    @if($excursion->group_size_min || $excursion->group_size_max)
+                        <div class="flex items-center gap-3 lg:p-2">
+                            <span class="size-10 sm:size-12 flex justify-center items-center bg-white/60 rounded-xl shrink-0">
+                                <i class="fas fa-users text-[#5F5F5F] text-lg sm:text-2xl"></i>
+                            </span>
+                            <div>
+                                <span class="text-xs text-gray-400 block">Размер группы</span>
+                                <span class="font-medium">
+                                    от {{$excursion->group_size_min}} до {{$excursion->group_size_max}}
                                 </span>
-                                <div>
-                                    @if($excursion->is_free)
-                                        <span class="text-[#5F5F5F] font-medium">Бесплатно</span>
-                                    @else
-                                        <div class="font-medium text-sm space-y-0.5 mt-0.5 w-full">
-                                            @if($excursion->price_adult)
-                                                <div class="flex justify-between gap-4">
-                                                    <span class="text-gray-500">Взрослый</span>
-                                                    <span class="text-nowrap">{{ number_format($excursion->price_adult, 0, '', ' ') }} ₽</span>
-                                                </div>
-                                            @endif
-                                            @if($excursion->price_child)
-                                                <div class="flex justify-between gap-4">
-                                                    <span class="text-gray-500">Детский</span>
-                                                    <span class="text-nowrap">{{ number_format($excursion->price_child, 0, '', ' ') }} ₽</span>
-                                                </div>
-                                            @endif
-                                            @if($excursion->price_group)
-                                                <div class="flex justify-between gap-4">
-                                                    <span class="text-gray-500">Группа</span>
-                                                    <span class="text-nowrap">{{ number_format($excursion->price_group, 0, '', ' ') }} ₽</span>
-                                                </div>
-                                            @endif
-                                        </div>
-                                    @endif
-                                </div>
                             </div>
-                        @endif
-                        @if($excursion->group_size_min || $excursion->group_size_max)
-                            <div class="flex items-center gap-3 w-full">
-                                    <span class="size-10 sm:size-12 flex justify-center items-center bg-white/60 rounded-xl shrink-0">
-                                        <i class="fas fa-users text-[#5F5F5F] text-lg sm:text-2xl"></i>
-                                    </span>
-                                <div>
-                                    <span class="text-xs text-gray-400 block">Размер группы</span>
-                                    <span class="font-medium">
-                                            от {{$excursion->group_size_min}} до {{$excursion->group_size_max}}
-                                    </span>
-                                </div>
-                            </div>
-                        @endif
-                        @if($excursion->age_restriction)
-                            <div class="flex items-center gap-3 w-full">
-                                    <span class="size-10 sm:size-12 min-w-10 sm:min-w-12 flex justify-center items-center bg-white/60 rounded-xl shrink-0">
-                                        <i class="fa-solid fa-hand text-[#5F5F5F] text-lg sm:text-2xl"></i>
-                                    </span>
-                                <div>
-                                    <span class="text-xs text-gray-400 block">Возрастное ограничение</span>
-                                    <span class="font-medium">{{$excursion->age_restriction}}
-                                        </span>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                </div>
+                        </div>
+                    @endif
 
+                    @if($excursion->age_restriction)
+                        <div class="flex items-center gap-3 lg:p-2">
+                            <span class="size-10 sm:size-12 min-w-10 sm:min-w-12 flex justify-center items-center bg-white/60 rounded-xl shrink-0">
+                                <i class="fa-solid fa-hand text-[#5F5F5F] text-lg sm:text-2xl"></i>
+                            </span>
+                            <div>
+                                <span class="text-xs text-gray-400 block">Возрастное ограничение</span>
+                                <span class="font-medium">{{$excursion->age_restriction}}
+                                </span>
+                            </div>
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
     </section>
