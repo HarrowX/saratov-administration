@@ -2,7 +2,7 @@
     <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4">
         <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
             <div class="flex items-center space-x-2">
-                <img src="{{asset('images/new-logo.png')}}" alt="Логотип {{ config('app.name') }}" class="icon h-7">
+                <img src="{{asset('images/logo-invert.svg')}}" alt="Логотип {{ config('app.name') }}" class="icon h-7">
                 <span class="text-sm lg:text-base font-['FindSansPro']">{{config('app.name')}}</span>
             </div>
 

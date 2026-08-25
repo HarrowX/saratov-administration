@@ -4,9 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="icon" type="image/svg+xml" href="{{asset('/images/logo.svg')}}">
-        <link rel="shortcut icon" type="image/svg+xml" href="{{asset('/images/logo.svg')}}"> <!-- TODO может быть надо форма .ico для старых браузеров -->
-        <link rel="apple-touch-icon" href="{{asset('/images/logo.svg')}}"> <!-- TODO может быть apple safari не поддерживает svg в качестве apple-touch-icon -->
+        <link rel="icon" type="image/svg+xml" href="{{asset('/images/logo-invert.svg')}}">
+        <link rel="shortcut icon" type="image/svg+xml" href="{{asset('/images/logo-invert.svg')}}"> <!-- TODO может быть надо форма .ico для старых браузеров -->
+        <link rel="apple-touch-icon" href="{{asset('/images/logo-invert.svg')}}"> <!-- TODO может быть apple safari не поддерживает svg в качестве apple-touch-icon -->
 
         <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 
