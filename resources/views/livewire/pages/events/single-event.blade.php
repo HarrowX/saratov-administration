@@ -31,36 +31,32 @@
                 </span>
             </button>
         </div>
-        <div wire:ignore class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10 flex flex-col gap-7 2xl:gap-11">
-            <div class="flex flex-col lg:flex-row gap-6 md:gap-8 xl:gap-11">
-                <x-gallery :attachable="$event">
-                    <div class="absolute z-10 bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 rounded-b-3xl cursor-pointer select-none" onclick="openGallery()">
-                        <h1 class="text-3xl lg:text-4xl 3xl:text-5xl font-bold text-white drop-shadow-lg">
-                            {{ $event->name }}
-                        </h1>
-                        <div class="flex flex-col justify-end h-full md:h-screen w-full z-10 text-white">
-                            <h1 class="text-3xl xl:text-4xl 2xl:text-5xl font-extrabold leading-16 2xl:leading-24">{{$event->name}}</h1>
-                            <div class="flex flex-row gap-2 items-center rounded-xl xl:pb-10 text-black">
-                                @if($event->categories && $event->categories->count() > 0)
-                                    <div class="flex flex-wrap items-center gap-2">
-                                        @foreach($event->categories as $category)
-                                            <span class="inline-flex items-center py-1 sm:py-2 px-3 sm:px-3 2xl:px-6 border border-[rgba(197,139,255,0.72)] rounded-full bg-[rgba(22,18,30,0.38)] text-white text-xs sm:text-sm 2xl:text-2xl font-medium leading-none shadow-none backdrop-blur-[6px]">
-                                        {{ $category->name }}
-                                </span>
-                                        @endforeach
-                                    </div>
-                                @endif
-                                @if($event->age_restriction)
-                                    <span class="inline-flex items-center py-1 sm:py-2 px-3 sm:px-3 2xl:px-6 border border-[rgba(197,139,255,0.72)] rounded-full bg-[rgba(109,67,193,0.38)] text-white text-xs sm:text-sm 2xl:text-2xl font-medium leading-none shadow-none backdrop-blur-[6px]">
-                            {{ $event->age_restriction }}+
+        <x-gallery :attachable="$event">
+            <div class="absolute z-10 bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 rounded-b-3xl cursor-pointer select-none" onclick="openGallery()">
+                <h1 class="text-3xl lg:text-4xl 3xl:text-5xl font-bold text-white drop-shadow-lg">
+                    {{ $event->name }}
+                </h1>
+                <div class="flex flex-col justify-end h-full md:h-screen w-full z-10 text-white">
+                    <h1 class="text-3xl xl:text-4xl 2xl:text-5xl font-extrabold leading-16 2xl:leading-24">{{$event->name}}</h1>
+                    <div class="flex flex-row gap-2 items-center rounded-xl xl:pb-10 text-black">
+                        @if($event->categories && $event->categories->count() > 0)
+                            <div class="flex flex-wrap items-center gap-2">
+                                @foreach($event->categories as $category)
+                                    <span class="inline-flex items-center py-1 sm:py-2 px-3 sm:px-3 2xl:px-6 border border-[rgba(197,139,255,0.72)] rounded-full bg-[rgba(22,18,30,0.38)] text-white text-xs sm:text-sm 2xl:text-2xl font-medium leading-none shadow-none backdrop-blur-[6px]">
+                                {{ $category->name }}
                         </span>
-                                @endif
+                                @endforeach
                             </div>
-                        </div>
+                        @endif
+                        @if($event->age_restriction)
+                            <span class="inline-flex items-center py-1 sm:py-2 px-3 sm:px-3 2xl:px-6 border border-[rgba(197,139,255,0.72)] rounded-full bg-[rgba(109,67,193,0.38)] text-white text-xs sm:text-sm 2xl:text-2xl font-medium leading-none shadow-none backdrop-blur-[6px]">
+                    {{ $event->age_restriction }}+
+                </span>
+                        @endif
                     </div>
-                </x-gallery>
+                </div>
             </div>
-        </div>
+        </x-gallery>
     </section>
 
     <section class="pt-10 xl:pt-16 pb-10 bg-white">

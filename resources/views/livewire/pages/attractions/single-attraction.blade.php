@@ -30,18 +30,14 @@
                 </span>
             </button>
         </div>
-        <div wire:ignore class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10 flex flex-col gap-7 2xl:gap-11">
-            <div class="flex flex-col lg:flex-row gap-6 md:gap-8 xl:gap-11">
-                <x-gallery :attachable="$attraction">
-                    <div class="absolute z-10 bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 rounded-b-3xl cursor-pointer select-none" onclick="openGallery()">
-                        <h1 class="text-3xl lg:text-4xl 3xl:text-5xl font-bold text-white drop-shadow-lg">
-                            {{ $attraction->name }}
-                        </h1>
-                        <p class="text-white/70 line-clamp-4">{{ $attraction->short_description }}</p>
-                    </div>
-                </x-gallery>
+        <x-gallery :attachable="$attraction">
+            <div class="absolute z-10 bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 rounded-b-3xl cursor-pointer select-none" onclick="openGallery()">
+                <h1 class="text-3xl lg:text-4xl 3xl:text-5xl font-bold text-white drop-shadow-lg">
+                    {{ $attraction->name }}
+                </h1>
+                <p class="text-white/70 line-clamp-4">{{ $attraction->short_description }}</p>
             </div>
-        </div>
+        </x-gallery>
     </section>
 
     <section class="pt-10 xl:pt-16 pb-10 bg-white">
