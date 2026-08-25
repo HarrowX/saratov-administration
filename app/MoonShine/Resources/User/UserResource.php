@@ -7,6 +7,7 @@ namespace App\MoonShine\Resources\User;
 use App\Models\User;
 use App\MoonShine\Resources\User\Pages\UserDetailPage;
 use App\MoonShine\Resources\User\Pages\UserIndexPage;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use MoonShine\Contracts\Core\PageContract;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\Support\Enums\Action;
@@ -37,6 +38,12 @@ class UserResource extends ModelResource
     protected function activeActions(): ListOf
     {
         return parent::activeActions()->except(Action::UPDATE, Action::CREATE);
+    }
+
+    protected function modifyItemQueryBuilder(
+        Builder $builder
+    ): Builder {
+        return $builder->withTrashed();
     }
 
     protected function search(): array
