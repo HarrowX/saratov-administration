@@ -24,6 +24,7 @@ use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Fields\Checkbox;
 use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\Email;
 use MoonShine\UI\Fields\ID;
@@ -86,6 +87,7 @@ class EventFormPage extends FormPage
                         Number::make('Порядковый номер', 'order')->default(0),
                         Text::make('Подпись к картинке', 'alt_name'),
                     ])->removable(),
+                Checkbox::make('Отправить уведомление на устройства о событии?', ''),
             ]),
         ];
     }
