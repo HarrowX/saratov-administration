@@ -61,7 +61,7 @@ class ProfileController extends Controller
             }
         }
 
-        //todo is important
+        // todo is important
 
         $perPage = $request->integer('per_page', 15);
 
