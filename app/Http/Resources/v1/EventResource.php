@@ -30,7 +30,6 @@ class EventResource extends JsonResource
             }
         }
 
-
         return [
             'id' => $this->id,
             'name' => $this->name,
