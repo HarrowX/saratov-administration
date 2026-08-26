@@ -3,8 +3,10 @@
 namespace App\Http\Resources\v1;
 
 use App\Models\GuidedTour;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class GuidedTourResource extends JsonResource
 {
@@ -15,7 +17,19 @@ class GuidedTourResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $isFavorite = $this->favorites->where('user_id', $request->user()->id)->isNotEmpty() || false;
+        $isFavorite = null;
+
+        if ($request->bearerToken()) {
+            $accessToken = PersonalAccessToken::findToken($request->bearerToken());
+
+            if ($accessToken && $accessToken->tokenable_type === User::class && $accessToken->expires_at <= now()) {
+                $userId = $accessToken->tokenable_id;
+
+                $isFavorite = $this->favorites()
+                    ->where('user_id', $userId)
+                    ->exists();
+            }
+        }
 
         return [
             'id' => $this->id,
