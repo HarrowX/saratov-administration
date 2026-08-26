@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Channels\DatabaseChannel;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Fcm\FcmChannel;
 use NotificationChannels\Fcm\FcmMessage;
@@ -32,7 +33,7 @@ class NewEventOnFavoritable extends Notification implements ShouldQueue
      */
     public function via(object $notifiable): array
     {
-        return [FcmChannel::class];
+        return [FcmChannel::class, DatabaseChannel::class];
     }
 
     public function toFcm($notifiable): FcmMessage
@@ -41,5 +42,14 @@ class NewEventOnFavoritable extends Notification implements ShouldQueue
             title: $this->favoritableName,
             body: 'Запланировано новое событие '.$this->eventName.' на '.$this->eventStartDatetimeFormatted,
         ));
+    }
+
+    public function toArray(object $notifiable): array
+    {
+        return [
+            'notifiable_id' => $notifiable->getKey(),
+            'title' => $this->favoritableName,
+            'body' => 'Запланировано новое событие '.$this->eventName.' на '.$this->eventStartDatetimeFormatted,
+        ];
     }
 }

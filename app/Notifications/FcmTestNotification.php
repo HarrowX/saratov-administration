@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Channels\DatabaseChannel;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Fcm\FcmChannel;
 use NotificationChannels\Fcm\FcmMessage;
@@ -31,7 +32,7 @@ class FcmTestNotification extends Notification implements ShouldQueue
      */
     public function via(object $notifiable): array
     {
-        return [FcmChannel::class];
+        return [FcmChannel::class, DatabaseChannel::class];
     }
 
     public function toFcm(object $notifiable): FcmMessage
@@ -41,5 +42,15 @@ class FcmTestNotification extends Notification implements ShouldQueue
             body: $this->body,
             image: $this->image,
         ));
+    }
+
+    public function toArray(object $notifiable): array
+    {
+        return [
+            'notifiable_id' => $notifiable->getKey(),
+            'title' => $this->title,
+            'body' => $this->body,
+            'image' => $this?->image,
+        ];
     }
 }
