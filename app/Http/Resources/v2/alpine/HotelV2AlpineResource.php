@@ -3,6 +3,7 @@
 namespace App\Http\Resources\v2\alpine;
 
 use App\Models\User;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Laravel\Sanctum\PersonalAccessToken;
@@ -21,7 +22,12 @@ class HotelV2AlpineResource extends JsonResource
         if ($request->bearerToken()) {
             $accessToken = PersonalAccessToken::findToken($request->bearerToken());
 
-            if ($accessToken && $accessToken->tokenable_type === User::class && $accessToken->expires_at <= now()) {
+            if ($accessToken && $accessToken->tokenable_type === User::class) {
+
+                if ($accessToken->expires_at > now()) {
+                    throw new HttpResponseException(response()->json(['message' => 'Unauthenticated.'], 401));
+                }
+
                 $userId = $accessToken->tokenable_id;
 
                 $isFavorite = $this->favorites()

@@ -4,9 +4,12 @@ namespace App\Http\Resources\v1;
 
 use App\Models\Attraction;
 use App\Models\User;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Laravel\Sanctum\PersonalAccessToken;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class AttractionResource extends JsonResource
 {
@@ -22,7 +25,12 @@ class AttractionResource extends JsonResource
         if ($request->bearerToken()) {
             $accessToken = PersonalAccessToken::findToken($request->bearerToken());
 
-            if ($accessToken && $accessToken->tokenable_type === User::class && $accessToken->expires_at <= now()) {
+            if ($accessToken && $accessToken->tokenable_type === User::class) {
+
+                if ($accessToken->expires_at > now()) {
+                    throw new HttpResponseException(response()->json(['message' => 'Unauthenticated.'], 401));
+                }
+
                 $userId = $accessToken->tokenable_id;
 
                 $isFavorite = $this->favorites()
