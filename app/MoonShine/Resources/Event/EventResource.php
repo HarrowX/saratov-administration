@@ -6,7 +6,6 @@ namespace App\MoonShine\Resources\Event;
 
 use App\Jobs\NotifyAllUsers;
 use App\Models\Event;
-use App\Models\User;
 use App\MoonShine\Resources\Event\Pages\EventDetailPage;
 use App\MoonShine\Resources\Event\Pages\EventFormPage;
 use App\MoonShine\Resources\Event\Pages\EventIndexPage;

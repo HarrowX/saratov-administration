@@ -10,7 +10,7 @@ use NotificationChannels\Fcm\FcmChannel;
 use NotificationChannels\Fcm\FcmMessage;
 use NotificationChannels\Fcm\Resources\Notification as FcmNotification;
 
-class EventCreated extends Notification implements ShouldQueue, HasFcmView
+class EventCreated extends Notification implements HasFcmView, ShouldQueue
 {
     use Queueable;
 
