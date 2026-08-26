@@ -31,13 +31,9 @@
                     });
 
                 function showError(message) {
-                    let showMessage = message;
-                    if (message === "Ошибка VK ID: New tab has been closed") {
-                        showMessage = "Вы закрыли вкладку со входом через VK ID";
-                    }
                     const errorDiv = document.getElementById('vk-error-message');
                     if (errorDiv) {
-                        errorDiv.textContent = showMessage;
+                        errorDiv.textContent = message;
                         errorDiv.style.display = 'block';
                         setTimeout(() => {
                             errorDiv.style.display = 'none';
