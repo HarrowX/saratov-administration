@@ -45,15 +45,15 @@ class ProfileController extends Controller
     public function notifications(Request $request)
     {
         $validated = $request->validate([
-            'is_new' => 'sometimes nullable boolean',
-            'is_important' => 'sometimes nullable boolean',
+            'is_new' => 'sometimes|nullable|boolean',
+            'is_important' => 'sometimes|nullable|boolean',
         ]);
 
         $notifications = DatabaseNotification::query()
             ->where('notifiable_type', User::class)
             ->where('notifiable_id', auth()->id());
 
-        if ($validated['is_new'] != null) {
+        if (array_key_exists('is_new', $validated) && $validated['is_new'] != null) {
             if ($validated['is_new']) {
                 $notifications->whereNull('read_at');
             } else {
