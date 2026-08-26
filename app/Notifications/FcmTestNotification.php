@@ -47,7 +47,6 @@ class FcmTestNotification extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            'notifiable_id' => $notifiable->getKey(),
             'title' => $this->title,
             'body' => $this->body,
             'image' => $this?->image,

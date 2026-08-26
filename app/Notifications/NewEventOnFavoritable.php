@@ -47,7 +47,6 @@ class NewEventOnFavoritable extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            'notifiable_id' => $notifiable->getKey(),
             'title' => $this->favoritableName,
             'body' => 'Запланировано новое событие '.$this->eventName.' на '.$this->eventStartDatetimeFormatted,
         ];

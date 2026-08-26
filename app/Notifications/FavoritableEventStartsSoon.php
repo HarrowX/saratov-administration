@@ -45,8 +45,6 @@ class FavoritableEventStartsSoon extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            'notifiable_id' => $notifiable->getKey(),
-            'type' => get_class($this),
             'title' => 'Событие '.$this->eventName,
             'body' => 'Начало в '.$this->startTimeFormatted,
         ];
