@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\DTOs\UpdateProfileDTO;
+use App\Models\User;
 
 class UserService
 {
@@ -29,5 +30,10 @@ class UserService
         }
 
         return auth()->user();
+    }
+
+    public function deleteProfile(User $user): void
+    {
+        $user->delete();
     }
 }
