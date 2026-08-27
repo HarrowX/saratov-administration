@@ -9,6 +9,8 @@ use App\MoonShine\Resources\User\UserResource;
 use App\Notifications\FcmTestNotification;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use MoonShine\Contracts\Core\DependencyInjection\CrudRequestContract;
 use MoonShine\Contracts\UI\ActionButtonContract;
 use MoonShine\Contracts\UI\ComponentContract;
@@ -103,6 +105,14 @@ class UserIndexPage extends IndexPage
         CrudRequestContract $request
     ): JsonResponse {
         $item = $request->getResource()->getItem();
+        $validator = Validator::make($item->toArray(), [
+            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->withoutTrashed()],
+        ]);
+        if ($validator->fails()) {
+            return JsonResponse::make()
+                ->toast('У этого пользователя уже есть восстановленный аккаунт', ToastType::ERROR);
+        }
+
         $item->restore();
 
         return JsonResponse::make()
