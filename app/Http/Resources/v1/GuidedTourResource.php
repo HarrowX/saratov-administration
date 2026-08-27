@@ -25,7 +25,7 @@ class GuidedTourResource extends JsonResource
 
             if ($accessToken && $accessToken->tokenable_type === User::class) {
 
-                if ($accessToken->expires_at > now()) {
+                if ($accessToken->expires_at < now()) {
                     throw new HttpResponseException(response()->json(['message' => 'Unauthenticated.'], 401));
                 }
 
