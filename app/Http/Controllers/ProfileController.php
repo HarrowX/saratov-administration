@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\DTOs\UpdateProfileDTO;
+use App\Http\Resources\v1\NotificationResource;
 use App\Http\Resources\v1\ProfileResource;
+use App\Models\User;
 use App\Services\UserService;
+use Illuminate\Http\Request;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Log;
 
 class ProfileController extends Controller
@@ -36,5 +40,54 @@ class ProfileController extends Controller
 
             return response()->json(['error' => 'Произошла ошибка при удалении профиля'], 500);
         }
+    }
+
+    public function notifications(Request $request)
+    {
+        $validated = $request->validate([
+            'is_new' => 'sometimes|nullable|boolean',
+            'is_important' => 'sometimes|nullable|boolean',
+        ]);
+
+        $notifications = DatabaseNotification::query()
+            ->where('notifiable_type', User::class)
+            ->where('notifiable_id', auth()->id());
+
+        if (array_key_exists('is_new', $validated) && $validated['is_new'] != null) {
+            if ($validated['is_new']) {
+                $notifications->whereNull('read_at');
+            } else {
+                $notifications->whereNotNull('read_at');
+            }
+        }
+
+        // todo is important
+
+        $perPage = $request->integer('per_page', 15);
+
+        return NotificationResource::collection($notifications->paginate($perPage));
+    }
+
+    public function readAllNotifications(Request $request)
+    {
+        DatabaseNotification::query()
+            ->where('notifiable_type', User::class)
+            ->where('notifiable_id', auth()->id())
+            ->whereNull('read_at')
+            ->update(['read_at' => now()]);
+
+        return response()->noContent();
+    }
+
+    public function readNotification(Request $request)
+    {
+        DatabaseNotification::query()
+            ->where('notifiable_type', User::class)
+            ->where('notifiable_id', auth()->id())
+            ->where('id', $request->id)
+            ->whereNull('read_at')
+            ->update(['read_at' => now()]);
+
+        return response()->noContent();
     }
 }
