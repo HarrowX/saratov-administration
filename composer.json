@@ -9,6 +9,7 @@
         "php": "^8.2",
         "chocoway/moonshine-compressed-image": "^1.0",
         "dedoc/scramble": "^0.13.39",
+        "dyrynda/laravel-cascade-soft-deletes": "^4.6",
         "joelbutcher/socialstream": "^6.3",
         "larahook/sanctum-refresh-token": "^1.0",
         "laravel-notification-channels/fcm": "^6.1",

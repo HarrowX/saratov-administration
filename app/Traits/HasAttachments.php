@@ -15,10 +15,7 @@ trait HasAttachments
         return $this->morphMany(Attachment::class, 'attachable');
     }
 
-    protected function getDefaultImagePath(): ?string
-    {
-        return null;
-    }
+    abstract public function getDefaultImagePath(): ?string;
 
     public function getPrimaryImageUrl(): ?string
     {

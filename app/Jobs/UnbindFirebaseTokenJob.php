@@ -36,6 +36,6 @@ class UnbindFirebaseTokenJob implements ShouldQueue
 
             return;
         }
-        $firebaseDeviceTokensService->unbindToken($user, $this->deviceToken);
+        $firebaseDeviceTokensService->unbindToken($user, $this->deviceToken, false);
     }
 }

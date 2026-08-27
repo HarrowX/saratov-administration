@@ -25,14 +25,14 @@
 {{--                        <span class="text-2xl font-bold text-white">Саратов</span>--}}
 {{--                    </a>--}}
                     <a href="{{ route('index') }}" class="flex items-center space-x-1 xl:space-x-3">
-                        <img src="{{asset('images/4480112d-26b0-4ff4-a8cd-7720a7174f99.png')}}" alt="Логотип" class="icon h-7 xl:h-10">
+                        <img src="{{asset('images/new-logo.png')}}" alt="Логотип" class="icon h-7 xl:h-10">
                         <span class="text-base xl:text-xl 3xl:text-2xl text-white font-['FindSansPro']">Саратов</span>
                     </a>
                 </div>
 
                 <div class="relative text-white">
                     <h1 class="text-4xl xl:text-5xl font-bold leading-tight">
-                        Саратов<br>на волне времени
+                        {{config('app.name')}}
                     </h1>
                     <p class="mt-4 text-white/80 text-lg max-w-md">
                         Откройте для себя культурное наследие города: маршруты, экскурсии и знаковые места в вашем личном кабинете.
@@ -63,8 +63,8 @@
             <div class="flex flex-col justify-center items-center px-6 py-12 lg:bg-white">
                 {{-- Mobile logo --}}
                 <a href="/" class="flex lg:hidden items-center gap-2 mb-8">
-                    <img src="{{asset('images/4480112d-26b0-4ff4-a8cd-7720a7174f99.png')}}" alt="Логотип {{ config('app.name') }}" class="icon h-9 w-auto">
-                    <span class="text-xl text-gray-900 font-['FindSansPro']">{{ config('app.name') }}</span>
+                    <img src="{{asset('images/new-logo.png')}}" alt="Логотип {{ config('app.name') }}" class="icon h-9 w-auto">
+                    <span class="text-xl text-gray-900 font-['FindSansPro']">Саратов</span>
                 </a>
 
                 <div class="w-full max-w-md">

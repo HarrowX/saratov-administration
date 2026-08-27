@@ -864,15 +864,6 @@ button{
     transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
 }
 
-.job-swiper__swiper .swiper-wrapper {
-    opacity: 0;
-}
-
-.job-swiper__swiper.swiper-initialized .swiper-wrapper {
-    opacity: 1;
-}
-
-
 .place-detail-swiper-thumbs .swiper-wrapper {
     display: flex;
     align-items: center;

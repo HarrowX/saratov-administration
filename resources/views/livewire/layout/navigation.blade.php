@@ -36,7 +36,7 @@ new class extends Component
         <div class="flex justify-between items-center h-16">
             {{-- Logo --}}
             <a href="{{ route('index') }}" class="flex items-center space-x-1 3xl:space-x-3">
-                <img src="/images/logo.svg" alt="Логотип" class="icon h-7 3xl:h-10">
+                <img src="{{asset('/images/logo.svg')}}" alt="Логотип" class="icon h-7 3xl:h-10">
                 <span class="md:text-base xl:text-lg 3xl:text-2xl text-black font-['FindSansPro']">Саратов</span>
             </a>
 

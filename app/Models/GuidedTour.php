@@ -28,4 +28,9 @@ class GuidedTour extends Model
     {
         return $this->hasMany(Excursion::class, 'guided_tour_id');
     }
+
+    protected function getDefaultImagePath(): ?string
+    {
+        return asset('images/coming-soon-guide-tour.webp');
+    }
 }
