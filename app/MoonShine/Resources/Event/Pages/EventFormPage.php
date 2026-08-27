@@ -88,7 +88,7 @@ class EventFormPage extends FormPage
                 ])->removable(),
         ];
         if ($this->getItem() == null) {
-            $fields[] = Checkbox::make('Отправить уведомление на устройства о событии?', 'is_need_notify_all_users');
+            $fields[] = Checkbox::make('Отправить уведомление на устройства о событии?', 'is_need_notify_all_users')->canApply(static fn () => false);
         }
 
         return [Box::make($fields)];

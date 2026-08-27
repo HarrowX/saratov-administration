@@ -44,11 +44,9 @@ class EventResource extends ModelResource
 
     protected function afterCreated(DataWrapperContract $item): DataWrapperContract
     {
-        if (! $item->is_need_notify_all_users) {
-            return $item;
+        if (request()->boolean('is_need_notify_all_users')) {
+            dispatch(new NotifyAllUsers(new EventCreated($item->name, $item->start_date)));
         }
-
-        dispatch(new NotifyAllUsers(new EventCreated($item->name, $item->start_date)));
 
         return $item;
     }
