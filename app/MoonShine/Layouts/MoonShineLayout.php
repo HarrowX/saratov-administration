@@ -25,6 +25,8 @@ use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
 use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
 use App\MoonShine\Resources\Hotel\HotelResource;
 use App\MoonShine\Resources\Restaurant\RestaurantResource;
+use App\MoonShine\Resources\Schedule\ScheduleResource;
+use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
 use App\MoonShine\Resources\User\UserResource;
 use MoonShine\AssetManager\Raw;
 use MoonShine\ColorManager\ColorManager;
@@ -76,6 +78,10 @@ final class MoonShineLayout extends AppLayout
             ])->icon('academic-cap'),
             MenuItem::make(ContactUsResource::class, 'Связаться с нами')->icon('envelope')->badge(fn () => ContactUs::query()->count()),
             MenuItem::make(UserResource::class, 'Пользователи')->icon('user')->badge(fn () => User::query()->count()),
+            MenuGroup::make('Расписание', [
+                MenuItem::make(ScheduleResource::class, 'Расписание'),
+                MenuItem::make(ScheduleRecordResource::class, 'Записи Расписаний'),
+            ])->icon('view-columns'),
         ];
     }
 
@@ -91,7 +97,7 @@ final class MoonShineLayout extends AppLayout
         return [];
     }
 
-    //    // #[Override]
+    //    #[Override]
     //    protected function getSearchComponent(): ComponentContract
     //    {
     //        return Div::make();

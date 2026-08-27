@@ -52,6 +52,22 @@ class FirebaseDeviceTokensService
         ]);
     }
 
+    public function unbindUserTokens(User $user, bool $soft = true)
+    {
+        $query = $user->firebaseDeviceTokens();
+        if ($soft) {
+            $affectedRows = $query->update(['user_id' => null]);
+        } else {
+            $affectedRows = $query->delete();
+        }
+
+        Log::info('FCM device tokens was unbinded from user', [
+            'affected_rows_count' => $affectedRows,
+            'user_id' => $user->id,
+            'soft' => $soft,
+        ]);
+    }
+
     public function pruneUnusedTokens(int $daysUnactive = 30)
     {
         $deleted = FirebaseDeviceToken::where('user_id', null)

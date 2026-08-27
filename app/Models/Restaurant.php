@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\HasSchedules;
 use App\Http\Resources\v1\RestaurantResource;
 use App\Traits\HasAttachments;
 use App\Traits\HasEvents;
@@ -15,7 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 #[UseResource(RestaurantResource::class)]
 class Restaurant extends Model
 {
-    use HasAttachments, HasEvents, HasExcursionPoints, HasFavorites, HasViews, HasVisits;
+    use HasAttachments, HasEvents, HasExcursionPoints, HasFavorites, HasSchedules, HasViews, HasVisits;
 
     protected $fillable = [
         'name',

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Attraction;
 use App\Models\Excursion;
+use App\Models\GuidedTour;
 use App\Models\Hotel;
 use App\Models\Restaurant;
 use Illuminate\Support\Collection;
@@ -165,5 +166,16 @@ class SystemPromptDataService
     public function resetCachedExcursions()
     {
         Cache::forget(self::databaseExcursionsCacheKey);
+    }
+
+    public function allExplorableEntities(): array
+    {
+        return [
+            Attraction::class,
+            Hotel::class,
+            Excursion::class,
+            GuidedTour::class,
+            Restaurant::class,
+        ];
     }
 }

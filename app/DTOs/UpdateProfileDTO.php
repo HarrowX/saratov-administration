@@ -2,6 +2,8 @@
 
 namespace App\DTOs;
 
+use App\Models\User;
+use Illuminate\Validation\Rule;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
 class UpdateProfileDTO extends ValidatedDTO
@@ -25,7 +27,7 @@ class UpdateProfileDTO extends ValidatedDTO
 
             'phone' => ['phone:RU', 'sometimes', 'string', 'nullable', 'max:255'],
 
-            'email' => ['sometimes', 'nullable', 'email', 'max:255', 'unique:users,email'],
+            'email' => ['sometimes', 'nullable', 'email', 'max:255', Rule::unique(User::class)->withoutTrashed()->ignore(auth()->user()->id)],
         ];
     }
 
