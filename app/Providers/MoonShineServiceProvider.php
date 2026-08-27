@@ -34,8 +34,8 @@ class MoonShineServiceProvider extends ServiceProvider
     {
         $core->getConfig()
             ->title('Саратов на волне времени')
-            ->logo(asset('images/logo.svg'), true)
-            ->logo(asset('images/logo.svg'));
+            ->logo(asset('images/logo-invert.svg'), true)
+            ->logo(asset('images/logo-invert.svg'));
         $core
             ->resources([
                 MoonShineUserResource::class,

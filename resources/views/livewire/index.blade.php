@@ -16,7 +16,7 @@
 
             <div class="flex flex-col items-center md:items-end justify-center flex-1 gap-10 3xl:gap-15 pt-15 pb-7 lg:pb-10 3xl:pb-15">
                 <h1 class="hero-title text-5xl text-center md:text-right sm:text-7xl md:text-8xl 3xl:text-9xl text-white leading-none tracking-[5px] max-w-full md:max-w-xl 3xl:max-w-2xl">
-                    Саратов на волне времени!
+                    {{config('app.name')}}!
                 </h1>
                 <div class="flex flex-wrap gap-3.5 sm:gap-7.5 justify-center md:justify-start">
                     <button onclick="showAppDownload()" class="hero-section-button text-sm lg:text-base from-green-500 to-teal-600">
@@ -194,8 +194,8 @@
                         <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}">
                             <div class="min-w-70 xl:min-w-80 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group group/image group/color">
                                 <div class="relative h-48 overflow-hidden">
-                                    <img src="{{ $attraction->attachments?->get(0)?->url() ?? "" }}"
-                                         alt="Изображение {{ $attraction->name }}" class="photo w-full h-full object-cover group-hover/image:scale-110 transition-transform duration-500">
+                                    <img src="{{ asset($attraction->getPrimaryThumbImageUrl()) }}"
+                                         alt="{{ $attraction->getAltPrimaryImage() }}" class="photo w-full h-full object-cover group-hover/image:scale-110 transition-transform duration-500">
                                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
                                 </div>
                                 <div class="p-6">
@@ -239,8 +239,8 @@
                     <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}">
                         <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl duration-500 transition-shadow w-full">
                             <div class="relative h-64 overflow-hidden">
-                                <img src="{{ $attraction->attachments?->get(0)?->url() ?? "" }}"
-                                     alt="Изображение {{ $attraction->name }}"
+                                <img src="{{ asset($attraction->getPrimaryThumbImageUrl()) }}"
+                                     alt="{{ $attraction->getAltPrimaryImage() }}"
                                      class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                             </div>
                             <div class="p-6">

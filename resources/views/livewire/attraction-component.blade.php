@@ -15,7 +15,7 @@
                             <div class="card-content group/img group/title p-5 h-full font-['FindSansPro'] relative grid grid-rows-subgrid content-between row-span-2 gap-3 ">
                                 <div class="flex flex-col gap-5">
                                     <div class="overflow-hidden rounded-[7px] sm:rounded-[19px]">
-                                        <img src="{{ $attraction->attachments?->get(0)?->url() ?? '' }}" alt="Изображение {{ $attraction->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover/img:scale-110 transition-transform duration-500">
+                                        <img src="{{ $attraction->getPrimaryThumbImageUrl() }}" alt="Изображение {{ $attraction->getAltPrimaryImage() }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover/img:scale-110 transition-transform duration-500">
                                     </div>
                                     <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold group-hover/title:text-[#352AA2] transition-colors duration-300 line-clamp-1">{{ $attraction->name }}</h2>
                                     <p class="text-xs sm:text-sm lg:text-base 3xl:text-2xl font-light mb-2 text-[#5F5F5F]">{{ $attraction->short_description }}</p>

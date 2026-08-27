@@ -51,4 +51,9 @@ class Attraction extends Model implements HasScheduleContract
     {
         return 'slug';
     }
+
+    protected function getDefaultImagePath(): ?string
+    {
+        return asset('images/coming-soon-attraction.webp');
+    }
 }

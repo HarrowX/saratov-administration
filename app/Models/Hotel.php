@@ -42,6 +42,6 @@ class Hotel extends Model
 
     protected function getDefaultImagePath(): ?string
     {
-        return asset('images/image_coming_soon_hotel.webp');
+        return asset('images/coming-soon-hotel.webp');
     }
 }
