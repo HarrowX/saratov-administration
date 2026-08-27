@@ -38,7 +38,7 @@ class Attachment extends Model
 
     public function getThumbUrl(): ?string
     {
-        if (Storage::exists('thumb_'.$this->link)) {
+        if (!Storage::exists('thumb_'.$this->link)) {
             return null;
         }
 
