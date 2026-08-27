@@ -5,11 +5,13 @@ namespace App\Jobs;
 use App\Ai\Agents\SaratovAiModel;
 use App\DTOs\ModelPendingResponseDTO;
 use App\Models\User;
+use App\Notifications\AIAnswer;
 use App\Services\ModelConversationService;
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Laravel\Ai\Responses\StructuredAgentResponse;
 
 class PromptAgent implements ShouldQueue
@@ -47,6 +49,7 @@ class PromptAgent implements ShouldQueue
                 'ok' => true,
                 'response' => $message,
             ]);
+            $this->user->notify(new AIAnswer(Str::limit($this->message, preserveWords: true), true));
         } catch (Exception $ex) {
             $dto = ModelPendingResponseDTO::fromArray([
                 'userId' => $this->user->id,
@@ -54,9 +57,9 @@ class PromptAgent implements ShouldQueue
                 'errorMessage' => $ex->getMessage(),
             ]);
             Log::error('Unable to prompt model: '.$ex->getMessage(), ['user_id' => $this->user->id]);
+            $this->user->notify(new AIAnswer('Не удалось получить ответ от городского бота, повторите запрос позднее', false));
         } finally {
             $modelConversationService->writeModelResultsToCache($dto);
         }
-
     }
 }
