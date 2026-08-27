@@ -27,7 +27,7 @@ class UpdateProfileDTO extends ValidatedDTO
 
             'phone' => ['phone:RU', 'sometimes', 'string', 'nullable', 'max:255'],
 
-            'email' => ['sometimes', 'nullable', 'email', 'max:255', Rule::unique(User::class)->ignore(auth()->user()->id)],
+            'email' => ['sometimes', 'nullable', 'email', 'max:255', Rule::unique(User::class)->withoutTrashed()->ignore(auth()->user()->id)],
         ];
     }
 

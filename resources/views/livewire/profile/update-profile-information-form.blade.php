@@ -38,7 +38,7 @@ new class extends Component
             'surname' => ['string', 'required', 'min:2', 'max:255'],
             'patronymic' => ['sometimes', 'string', 'nullable', 'max:255'],
             'phone' => ['phone:RU', 'sometimes', 'string', 'nullable', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique(User::class)->ignore(auth()->user()->id)],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique(User::class)->withoutTrashed()->ignore(auth()->user()->id)],
         ]);
 
         $user->username->update([
