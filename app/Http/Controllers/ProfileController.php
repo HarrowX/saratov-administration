@@ -53,6 +53,12 @@ class ProfileController extends Controller
             ->where('notifiable_type', User::class)
             ->where('notifiable_id', auth()->id());
 
+        $unreadNotificationsCount = DatabaseNotification::query()
+            ->where('notifiable_type', User::class)
+            ->where('notifiable_id', auth()->id())
+            ->whereNull('read_at')
+            ->count();
+
         if (array_key_exists('is_new', $validated) && $validated['is_new'] != null) {
             if ($validated['is_new']) {
                 $notifications->whereNull('read_at');
@@ -65,7 +71,11 @@ class ProfileController extends Controller
 
         $perPage = $request->integer('per_page', 15);
 
-        return NotificationResource::collection($notifications->paginate($perPage));
+        return NotificationResource::collection($notifications->paginate($perPage))->additional([
+            'meta' => [
+                'unread_count' => $unreadNotificationsCount,
+            ]
+        ]);
     }
 
     public function readAllNotifications(Request $request)
