@@ -7,6 +7,7 @@ use App\Models\FirebaseDeviceToken;
 use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Notification;
 use Kreait\Laravel\Firebase\Facades\Firebase;
 
 class NotifyAllUsers implements ShouldQueue
@@ -23,11 +24,9 @@ class NotifyAllUsers implements ShouldQueue
      */
     public function handle(): void
     {
-        User::all()->each(function (User $user) {
-            $user->notify($this->notification);
-        });
+        Notification::send(User::all(), $this->notification);
 
-        $deviceTokens = FirebaseDeviceToken::all()->pluck('device_token')->toArray();
+        $deviceTokens = FirebaseDeviceToken::all()->whereNull('user_id')->pluck('device_token')->toArray();
 
         Firebase::messaging()->sendMulticast($this->notification->toFcmMessage(), $deviceTokens);
     }
