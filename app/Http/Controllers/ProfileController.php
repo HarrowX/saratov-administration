@@ -74,7 +74,7 @@ class ProfileController extends Controller
         return NotificationResource::collection($notifications->paginate($perPage))->additional([
             'meta' => [
                 'unread_count' => $unreadNotificationsCount,
-            ]
+            ],
         ]);
     }
 
