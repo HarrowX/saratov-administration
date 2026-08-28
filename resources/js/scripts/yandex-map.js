@@ -136,6 +136,9 @@ function addMarkers() {
     const isExcursionPage = document.querySelector('.excursion-page') !== null;
 
     landmarks.forEach((item, index) => {
+        if (isNaN(item.lat) || isNaN(item.lng)) {
+            return;
+        }
         const placemark = new ymaps.Placemark(
             [item.lat, item.lng],
             {
