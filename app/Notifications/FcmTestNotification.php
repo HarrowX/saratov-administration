@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\HasFcmView;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Channels\DatabaseChannel;
@@ -10,7 +11,7 @@ use NotificationChannels\Fcm\FcmChannel;
 use NotificationChannels\Fcm\FcmMessage;
 use NotificationChannels\Fcm\Resources\Notification as FcmNotification;
 
-class FcmTestNotification extends Notification implements ShouldQueue
+class FcmTestNotification extends Notification implements HasFcmView, ShouldQueue
 {
     use Queueable;
 
@@ -51,5 +52,14 @@ class FcmTestNotification extends Notification implements ShouldQueue
             'body' => $this->body,
             'image' => $this?->image,
         ];
+    }
+
+    public function toFcmMessage(): FcmMessage
+    {
+        return new FcmMessage(notification: new FcmNotification(
+            title: $this->title,
+            body: $this->body,
+            image: $this->image,
+        ));
     }
 }
