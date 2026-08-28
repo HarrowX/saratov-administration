@@ -17,10 +17,10 @@ class AttractionComponent extends Component
 
     public function mount()
     {
-        $query= Attraction::with('attachments');
+        $query = Attraction::with('attachments');
 
-        if (!empty($this->exceptId)) {
-            $query->where('id','!=',$this->exceptId);
+        if (! empty($this->exceptId)) {
+            $query->where('id', '!=', $this->exceptId);
         }
 
         $this->attractions = $query
