@@ -5,13 +5,12 @@ namespace App\Notifications;
 use App\HasFcmView;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Channels\DatabaseChannel;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Fcm\FcmChannel;
 use NotificationChannels\Fcm\FcmMessage;
 use NotificationChannels\Fcm\Resources\Notification as FcmNotification;
 
-class FcmTestNotification extends Notification implements HasFcmView, ShouldQueue
+class EventCreated extends Notification implements HasFcmView, ShouldQueue
 {
     use Queueable;
 
@@ -19,11 +18,10 @@ class FcmTestNotification extends Notification implements HasFcmView, ShouldQueu
      * Create a new notification instance.
      */
     public function __construct(
-        public string $title,
-        public string $body,
-        public ?string $image = null,
+        public string $eventName,
+        public string $startTimeFormatted,
     ) {
-        $this->onQueue('notifications');
+        $this->onQueue('global_notifications');
     }
 
     /**
@@ -33,33 +31,22 @@ class FcmTestNotification extends Notification implements HasFcmView, ShouldQueu
      */
     public function via(object $notifiable): array
     {
-        return [FcmChannel::class, DatabaseChannel::class];
+        return [FcmChannel::class];
     }
 
     public function toFcm(object $notifiable): FcmMessage
     {
         return new FcmMessage(notification: new FcmNotification(
-            title: $this->title,
-            body: $this->body,
-            image: $this->image,
+            title: 'Событие '.$this->eventName,
+            body: 'Начало в '.$this->startTimeFormatted,
         ));
-    }
-
-    public function toArray(object $notifiable): array
-    {
-        return [
-            'title' => $this->title,
-            'body' => $this->body,
-            'image' => $this?->image,
-        ];
     }
 
     public function toFcmMessage(): FcmMessage
     {
         return new FcmMessage(notification: new FcmNotification(
-            title: $this->title,
-            body: $this->body,
-            image: $this->image,
+            title: 'Событие '.$this->eventName,
+            body: 'Начало в '.$this->startTimeFormatted,
         ));
     }
 }

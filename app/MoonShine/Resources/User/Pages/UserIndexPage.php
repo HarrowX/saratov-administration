@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\User\Pages;
 
+use App\Jobs\NotifyAllUsers;
 use App\Models\User;
 use App\MoonShine\Resources\User\UserResource;
 use App\Notifications\FcmTestNotification;
@@ -119,6 +120,16 @@ class UserIndexPage extends IndexPage
             ->toast('Успешно', ToastType::SUCCESS);
     }
 
+    #[AsyncMethod]
+    public function massSendNotifications(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string'],
+            'body' => ['required', 'string'],
+        ]);
+        dispatch(new NotifyAllUsers(new FcmTestNotification($validated['title'], $validated['body'])));
+    }
+
     /**
      * @return list<FieldContract>
      */
@@ -197,6 +208,21 @@ class UserIndexPage extends IndexPage
     {
         return [
             ...parent::topLayer(),
+            ActionButton::make('Отправить всем уведомление')
+                ->style('margin-bottom:10px')
+                ->icon('fire')
+                ->inModal(
+                    title: 'Отправка уведомления на все устройства',
+                    name: static fn (mixed $item, ActionButtonContract $ctx): string => 'mass-send-notification',
+                    builder: fn (Modal $modal, ActionButton $ctx) => $modal->setComponents([
+                        FormBuilder::make('send-notification-form', fields: [
+                            Text::make('Заголовок', 'title')->required(),
+                            Text::make('Тело', 'body')->required(),
+                        ])
+                            ->asyncMethod('massSendNotifications')
+                            ->submit('Отправить'),
+                    ])
+                ),
         ];
     }
 

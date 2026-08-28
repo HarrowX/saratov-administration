@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Event;
 
+use App\Jobs\NotifyAllUsers;
 use App\Models\Event;
 use App\MoonShine\Resources\Event\Pages\EventDetailPage;
 use App\MoonShine\Resources\Event\Pages\EventFormPage;
 use App\MoonShine\Resources\Event\Pages\EventIndexPage;
+use App\Notifications\EventCreated;
 use MoonShine\Contracts\Core\PageContract;
+use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Laravel\Resources\ModelResource;
 
 /**
@@ -37,5 +40,14 @@ class EventResource extends ModelResource
     protected function search(): array
     {
         return ['id', 'name', 'description', 'organizer_name', 'organizer_phone', 'organizer_email', 'organizer_website'];
+    }
+
+    protected function afterCreated(DataWrapperContract $item): DataWrapperContract
+    {
+        if (request()->boolean('is_need_notify_all_users')) {
+            dispatch(new NotifyAllUsers(new EventCreated($item->name, $item->start_date)));
+        }
+
+        return $item;
     }
 }
