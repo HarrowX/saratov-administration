@@ -209,6 +209,7 @@ class UserIndexPage extends IndexPage
         return [
             ...parent::topLayer(),
             ActionButton::make('Отправить всем уведомление')
+                ->style('margin-bottom:10px')
                 ->icon('fire')
                 ->inModal(
                     title: 'Отправка уведомления на все устройства',
