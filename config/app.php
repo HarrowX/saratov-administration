@@ -125,10 +125,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    'attractions' => [
-        'radius' => (int) env('ATTRACTIONS_RADIUS', 10000000000000),
-    ],
-
     'visits' => [
         'search_radius' => (int) env('VISITS_RADIUS', 500),
     ],
