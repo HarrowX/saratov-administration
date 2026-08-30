@@ -44,6 +44,6 @@ class FavoritableService
             'user_id' => $userId,
             'favoriteable_id' => $favoriteableId,
             'favoriteable_type' => $class,
-        ])->delete();
+        ])->forceDelete();
     }
 }
