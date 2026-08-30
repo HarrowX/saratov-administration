@@ -144,7 +144,9 @@ class SaratovAi extends Component
                     $this->addMessageFromModel($dto->response);
                     $this->resetErrorBag();
                 } else {
-                    Log::error('ai answer error', $dto->toArray());
+                    Log::error('ai answer error', [
+                        'answer' => $dto->toArray()
+                    ]);
                     $this->addError('prompt', 'Пожалуйста попробуйте повторить запрос позже');
                 }
                 $this->isWaitingForResponse = false;
