@@ -14,13 +14,13 @@
 
 
     <section class="pt-25 3xl:pt-30 flex flex-col gap-5 bg-white">
-        <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10 flex flex-row justify-between items-start w-full">
+        <div class="max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10 flex flex-col lg:flex-row gap-3 lg:gap-0 justify-between items-start w-full">
             <a href="{{ route('all-attractions') }}"
                class="flex items-center xl:gap-2 text-[#5F5F5F] hover:text-blue-800 transition-colors font-['FindSansPro']">
                 <i class="fa-solid fa-chevron-left text-base xs:text-xl xl:text-xl 3xl:text-3xl"></i>
                 <span class="text-base xs:text-xl 3xl:text-3xl md:pl-4">Достопримечательности</span>
             </a>
-            <button wire:click="toggleFavorite" class="flex z-20 items-center gap-1 sm:gap-3 px-3 3xl:px-5 py-1.5 3xl:py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/10 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group">
+            <button wire:click="toggleFavorite" class="flex z-20 items-center gap-1 sm:gap-3 px-3 3xl:px-5 py-1.5 3xl:py-3 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 text-white hover:border-red-400/10 hover:text-red-400 transition-all duration-300 font-['FindSansPro'] group self-end">
                 <i class="fa-regular fa-heart text-lg sm:text-2xl 3xl:text-3xl group-hover:scale-110 group-hover:animate-pulse transition-transform {{ $isFavorite ? 'fa-solid text-red-400' : 'fa-regular' }}"></i>
                 <span class="text-xs xs:text-sm sm:text-lg 3xl:text-3xl font-medium">
                     {{ $isFavorite ? 'В избранном' : 'В избранное' }}
@@ -32,7 +32,7 @@
         </div>
         <x-gallery :attachable="$attraction">
             <div class="absolute z-10 bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 rounded-b-3xl cursor-pointer select-none" onclick="openGallery()">
-                <h1 class="text-3xl lg:text-4xl 3xl:text-5xl font-bold text-white drop-shadow-lg">
+                <h1 class="text-3xl lg:text-4xl 3xl:text-5xl font-bold text-white drop-shadow-lg leading-10 3xl:leading-16">
                     {{ $attraction->name }}
                 </h1>
                 <p class="text-white/70 line-clamp-4">{{ $attraction->short_description }}</p>

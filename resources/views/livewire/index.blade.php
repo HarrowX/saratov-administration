@@ -191,26 +191,26 @@
                      style="scrollbar-width: none; -ms-overflow-style: none;">
 
                     @foreach($carouselAttractions as $attraction)
-                        <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}">
-                            <div class="min-w-70 xl:min-w-80 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group group/image group/color">
+                        <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="block">
+                            <div class="min-w-70 xl:min-w-80 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer h-full flex flex-col group group/image group/color">
                                 <div class="relative h-48 overflow-hidden">
                                     <img src="{{ asset($attraction->getPrimaryThumbImageUrl()) }}"
                                          alt="{{ $attraction->getAltPrimaryImage() }}" class="photo w-full h-full object-cover group-hover/image:scale-110 transition-transform duration-500">
                                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
                                 </div>
-                                <div class="p-6">
-                                    <h2 class="card-title text-xl font-bold mb-2 line-clamp-1 group-hover/color:text-[#352AA2] transition-colors duration-300">{{ $attraction->name }}</h2>
+                                <div class="flex flex-col justify-between p-6 flex-1">
+                                    <h2 class="card-title text-xl font-bold mb-2 line-clamp-3 group-hover/color:text-[#352AA2] transition-colors duration-300 flex-2">{{ $attraction->name }}</h2>
                                     <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $attraction->short_description }}</p>
-                                    <div class="flex items-center justify-between">
+                                    <div class="flex items-center justify-between flex-1">
                                         <div class="flex items-center text-gray-500 text-sm">
                                             @if ($attraction->visit_duration)
                                                 <i class="fas fa-clock mr-2"></i>
                                                 <span>{{ $attraction->visit_duration }} мин</span>
                                             @endif
                                         </div>
-                                        <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="shrink-0 size-10 xl:size-11 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity hover:scale-110 group/button overflow-hidden relative">
+                                        <div class="shrink-0 size-10 xl:size-11 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity hover:scale-110 group/button overflow-hidden relative">
                                             <img src="{{asset('/images/arrow-right.png')}}" alt="" class="icon w-2 xl:w-3 h-4.5 xl:h-6 transition-transform duration-300 group-hover/button:translate-x-1">
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -234,18 +234,18 @@
                 @endif
             </div>
 
-            <div class="flex flex-col lg:flex-row gap-4 mb-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-12">
                 @foreach($featuredAttractions as $attraction)
-                    <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}">
-                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl duration-500 transition-shadow w-full">
-                            <div class="relative h-64 overflow-hidden">
+                    <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="block">
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl duration-500 transition-shadow h-full flex flex-col">
+                            <div class="relative h-64 overflow-hidden shrink-0">
                                 <img src="{{ asset($attraction->getPrimaryThumbImageUrl()) }}"
                                      alt="{{ $attraction->getAltPrimaryImage() }}"
                                      class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                             </div>
-                            <div class="p-6">
-                                <h2 class="card-title text-2xl font-bold mb-3 line-clamp-1 group-hover:text-[#352AA2] transition-colors duration-300">{{ $attraction->name }}</h2>
-                                <p class="text-gray-600 mb-4">{{ $attraction->short_description }}</p>
+                            <div class=" flex flex-col justify-between p-6 flex-1">
+                                <h2 class="card-title text-2xl font-bold mb-3 line-clamp-3 group-hover:text-[#352AA2] transition-colors duration-300 flex-3">{{ $attraction->name }}</h2>
+                                <p class="text-gray-600 mb-4 flex-1">{{ $attraction->short_description }}</p>
                                 <div class=" flex items-center justify-between">
                                     <div class="flex items-center text-gray-500 text-sm">
                                         @if ($attraction->visit_duration)
@@ -253,9 +253,9 @@
                                             <span>{{ $attraction->visit_duration }} мин</span>
                                         @endif
                                     </div>
-                                    <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
+                                    <div class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
                                         <img src="{{asset('/images/arrow-right.png')}}" alt="иконка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
-                                    </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

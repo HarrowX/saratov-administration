@@ -28,7 +28,7 @@
                             <div class="hidden lg:block sm:min-w-92 md:min-w-60 2xl:min-w-92 w-fit max-w-90  bg-white rounded-[20px] shadow-lg hover:shadow-xl transition-shadow duration-300 absolute -top-15 2xl:-top-12 group group/image">
                                 <div class="p-2 sm:p-4 3xl:p-5 flex flex-col">
                                     <a href="{{ route('single-attraction', ['attraction' => $attraction->slug]) }}" class="w-full mb-4 overflow-hidden rounded-[20px] shrink-0">
-                                        <img src="{{ asset($attraction->getPrimaryThumbImageUrl()) ?? "" }}" alt="{{ $attraction->getAltPrimaryImage() }}" class="photo h-37.5 sm:h-53.75 3xl:h-78.75 object-cover group-hover/image:scale-110 transition-transform duration-500">
+                                        <img src="{{ asset($attraction->getPrimaryThumbImageUrl()) ?? "" }}" alt="{{ $attraction->getAltPrimaryImage() }}" class="photo h-37.5 sm:h-53.75 3xl:h-78.75 w-full object-cover group-hover/image:scale-110 transition-transform duration-500">
                                     </a>
 
                                     <div class="font-['FindSansPro'] flex flex-col">
@@ -61,7 +61,7 @@
     @livewire('saratov-ai')
 
     <section id="cards" class="bg-white pb-10 sm:pb-15 xl:pb-20 3xl:pb-26">
-        <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-5 xl:px-20">
+        <div class="max-w-6xl 3xl:max-w-427 mx-auto px-4 sm:px-10">
             <div class="text-center mb-12">
                 <p class="text text-gray-600 content-center">Откройте для себя лучшие достопримечательности города: знаковые места, уютные уголки и природные локации.</p>
             </div>
@@ -152,7 +152,7 @@
 {{--                </div>--}}
 {{--            </div>--}}
             <!-- Сетка карточек -->
-            <div id="attraction-list" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 lg:p-6 xl:gap-y-12">
+            <div id="attraction-list" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 xl:gap-y-12">
                 @foreach ($this->attractions as $attraction)
                         <x-card :cardable="$attraction"
                                 :route="route('single-attraction', ['attraction' => $attraction->slug])"

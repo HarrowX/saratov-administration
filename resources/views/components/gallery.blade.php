@@ -1,7 +1,7 @@
 <div wire:ignore class="w-full max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-10 flex flex-col gap-7 2xl:gap-11">
     <div class="flex flex-col lg:flex-row gap-6 md:gap-8 xl:gap-11">
         <div class="gallery-detail-swiper grid w-full relative opacity-0">
-            <div class="place-detail-swiper-main swiper shadow-[0_4px_4px_0_#00000040] rounded-3xl h-120 lg:h-80 xl:h-100 2xl:h-120 3xl:h-160 relative group w-full">
+            <div class="place-detail-swiper-main swiper shadow-[0_4px_4px_0_#00000040] rounded-3xl h-120 lg:h-100 2xl:h-120 3xl:h-160 relative group w-full">
                 <div class="swiper-wrapper">
                     @forelse($attachable->attachments as $attachment)
                         <div class="swiper-slide cursor-pointer" data-fancybox="gallery" data-src="{{ $attachment->url() }}" data-caption="{{ $attachment->alt_name }}">

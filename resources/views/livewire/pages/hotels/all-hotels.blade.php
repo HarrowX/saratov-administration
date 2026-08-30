@@ -36,7 +36,7 @@
 
     <!-- Section with filter and card-vebue -->
     <section id="cards" class="bg-white pb-10 md:pb-15 xl:pb-20 3xl:pb-26 px-4 sm:px-10">
-        <div class="max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto flex flex-col gap-7 3xl:gap-12 items-center">
+        <div class="max-w-6xl 3xl:max-w-427 mx-auto px-4 sm:px-10 flex flex-col gap-7 3xl:gap-12 items-center">
             <div class="text-center">
                 <p class="text text-gray-600 content-center">Подскажем, в каких районах удобнее жить, и какие варианты жилья выбрать под ваш бюджет и планы.</p>
             </div>
@@ -124,7 +124,7 @@
 {{--                    </div>--}}
 {{--                </div>--}}
 {{--            </div>--}}
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 lg:p-6 xl:gap-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 xl:gap-y-12">
                 @foreach ($this->hotels as $hotel)
                     <x-card :cardable="$hotel"
                             :route="route('single-hotel', ['hotel' => $hotel->slug])"
