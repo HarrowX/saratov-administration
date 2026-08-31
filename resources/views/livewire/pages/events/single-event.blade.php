@@ -10,6 +10,8 @@
             attractions: @js($event->eventable_type == \App\Models\Attraction::class ? [$event->eventable] : null),
             hotels: @js($event->eventable_type == \App\Models\Hotel::class ? [$event->eventable] : null),
             restaurants: @js($event->eventable_type == \App\Models\Restaurant::class ? [$event->eventable] : null),
+            customPoints: @js($event->eventable_type == \App\Models\CustomLocation::class ? [$event->eventable] : null),
+
         };
         window.mapCenter = @js([$event?->eventable?->latitude , $event?->eventable?->longitude]);
     </script>
