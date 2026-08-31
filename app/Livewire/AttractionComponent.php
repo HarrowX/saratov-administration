@@ -13,41 +13,25 @@ class AttractionComponent extends Component
 
     public $latitude;
 
+    public $exceptId;
+
     public function mount()
     {
-        $this->attractions = Attraction::with('attachments')
-            ->get()
-            ->filter(function (Attraction $attraction) {
-                return static::vincentyGreatCircleDistance(
-                    $this->latitude, $this->longitude,
-                    $attraction->latitude, $attraction->longitude)
-                    <= config('app.attractions.radius');
-            });
+        $query = Attraction::with('attachments');
+
+        if (! empty($this->exceptId)) {
+            $query->where('id', '!=', $this->exceptId);
+        }
+
+        $this->attractions = $query
+            ->selectRaw('*, ST_Distance_Sphere(point(longitude, latitude), point(?, ?)) as distance', [$this->longitude, $this->latitude])
+            ->orderBy('distance')
+            ->limit(12)
+            ->get();
     }
 
-    //    public function mount($latitude = null, $longitude = null) {
-    //        $this->latitude = $latitude;
-    //        $this->longitude = $longitude;
-    //        $this->attractions = Attraction::with('attachments')->get();
-    //    }
     public function render()
     {
         return view('livewire.attraction-component');
-    }
-
-    public static function vincentyGreatCircleDistance($latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000)
-    {
-        // convert from degrees to radians
-        $latFrom = deg2rad($latitudeFrom);
-        $lonFrom = deg2rad($longitudeFrom);
-        $latTo = deg2rad($latitudeTo);
-        $lonTo = deg2rad($longitudeTo);
-        $lonDelta = $lonTo - $lonFrom;
-        $a = pow(cos($latTo) * sin($lonDelta), 2) +
-            pow(cos($latFrom) * sin($latTo) - sin($latFrom) * cos($latTo) * cos($lonDelta), 2);
-        $b = sin($latFrom) * sin($latTo) + cos($latFrom) * cos($latTo) * cos($lonDelta);
-        $angle = atan2(sqrt($a), $b);
-
-        return $angle * $earthRadius;
     }
 }

@@ -130,6 +130,6 @@
         </section>
     @endif
 
-    @livewire('attraction-component', ['latitude' => $attraction->latitude, 'longitude' => $attraction->longitude])
+    @livewire('attraction-component', ['latitude' => $attraction->latitude, 'longitude' => $attraction->longitude, 'exceptId' => $attraction->id])
 
 </div>
