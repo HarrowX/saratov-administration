@@ -58,7 +58,7 @@
                                 <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold group-hover:text-[#352AA2] transition-colors duration-300">{{ $guidedTour->name }}</h2>
                                 <div class="flex flex-col justify-between h-full font-['FindSansPro']">
                                     <div class="flex flex-row justify-between items-end gap-3.5 text-xs sm:text-sm lg:text-base 3xl:text-[22px] font-light">
-                                        <span class="items-center justify-end gap-3.5 text-[#5F5F5F]  leading-5 3xl:leading-7 line-clamp-3">
+                                        <span class="items-center justify-end gap-3.5 text-[#5F5F5F]  leading-5 3xl:leading-7 line-clamp-3  wrap-break-word">
                                             {{ $guidedTour->short_description }}
                                         </span>
                                         <a href="{{ route('single-guided-tour', ['guidedTour' => $guidedTour->id]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">

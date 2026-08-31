@@ -197,6 +197,7 @@
                                     <img src="{{ asset($attraction->getPrimaryThumbImageUrl()) }}"
                                          alt="{{ $attraction->getAltPrimaryImage() }}" class="photo w-full h-full object-cover group-hover/image:scale-110 transition-transform duration-500">
                                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
+                                    <livewire:favorite-mini-button :position='"right-2 top-2"' :object="$attraction"/>
                                 </div>
                                 <div class="flex flex-col justify-between p-6 flex-1">
                                     <h2 class="card-title text-xl font-bold mb-2 line-clamp-3 group-hover/color:text-[#352AA2] transition-colors duration-300 flex-2">{{ $attraction->name }}</h2>
@@ -242,6 +243,7 @@
                                 <img src="{{ asset($attraction->getPrimaryThumbImageUrl()) }}"
                                      alt="{{ $attraction->getAltPrimaryImage() }}"
                                      class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                <livewire:favorite-mini-button :position='"right-2 top-2"' :object="$attraction"/>
                             </div>
                             <div class=" flex flex-col justify-between p-6 flex-1">
                                 <h2 class="card-title text-2xl font-bold mb-3 line-clamp-3 group-hover:text-[#352AA2] transition-colors duration-300 flex-3">{{ $attraction->name }}</h2>
