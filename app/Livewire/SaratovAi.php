@@ -145,7 +145,7 @@ class SaratovAi extends Component
                     $this->resetErrorBag();
                 } else {
                     Log::error('ai answer error', [
-                        'answer' => $dto->toArray()
+                        'answer' => $dto->toArray(),
                     ]);
                     $this->addError('prompt', 'Пожалуйста попробуйте повторить запрос позже');
                 }
