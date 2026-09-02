@@ -24,6 +24,6 @@ class NotifyFavoriteUsers implements ShouldQueue
     {
         Notification::send(User::query()->whereHas('favorites',
             fn ($builder) => $builder->where('favoriteable_id', $this->favoritable->id)->where('favoriteable_type', get_class($this->favoritable))
-        ), $this->notification);
+        )->get(), $this->notification);
     }
 }

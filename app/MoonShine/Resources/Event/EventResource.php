@@ -47,11 +47,15 @@ class EventResource extends ModelResource
 
     protected function afterCreated(DataWrapperContract $item): DataWrapperContract
     {
-        if ($item->eventable && get_class($item->eventable) !== CustomLocation::class) {
-            dispatch(new NotifyFavoriteUsers(new EventOnFavoriteCreated($item->name, $item->start_date, $item->eventable->name), $item->eventable));
+        $eventable = null;
+        if ($item->eventable_type != '' && $item->eventable_id != '') {
+            $eventable = $item->eventable_type::query()->where('id', $item->eventable_id)->first();
+        }
+        if ($eventable && get_class($eventable) !== CustomLocation::class) {
+            dispatch(new NotifyFavoriteUsers(new EventOnFavoriteCreated($item->name, $item->start_date->toString(), $eventable->name), $eventable));
         }
         if (request()->boolean('is_need_notify_all_users')) {
-            dispatch(new NotifyAllUsers(new EventCreated($item->name, $item->start_date)));
+            dispatch(new NotifyAllUsers(new EventCreated($item->name, $item->start_date->toString())));
         }
 
         return $item;

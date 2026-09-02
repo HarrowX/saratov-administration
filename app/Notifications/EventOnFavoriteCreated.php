@@ -5,6 +5,7 @@ namespace App\Notifications;
 use App\HasFcmView;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Channels\DatabaseChannel;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Fcm\FcmChannel;
 use NotificationChannels\Fcm\FcmMessage;
@@ -32,7 +33,7 @@ class EventOnFavoriteCreated extends Notification implements HasFcmView, ShouldQ
      */
     public function via(object $notifiable): array
     {
-        return [FcmChannel::class];
+        return [FcmChannel::class, DatabaseChannel::class];
     }
 
     public function toFcm(object $notifiable): FcmMessage
@@ -49,5 +50,13 @@ class EventOnFavoriteCreated extends Notification implements HasFcmView, ShouldQ
             title: 'Проходит событие '.$this->eventName.' в избранной вами локации: '.$this->locationName,
             body: 'Начало в '.$this->startTimeFormatted,
         ));
+    }
+
+    public function toArray(object $notifiable): array
+    {
+        return [
+            'title' => 'Проходит событие '.$this->eventName.' в избранной вами локации: '.$this->locationName,
+            'body' => 'Начало в '.$this->startTimeFormatted,
+        ];
     }
 }
