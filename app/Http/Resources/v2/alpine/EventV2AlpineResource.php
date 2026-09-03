@@ -51,6 +51,9 @@ class EventV2AlpineResource extends JsonResource
 
             'views_count' => $this->views_count,
             'favorites_count' => $this->favorites?->count() ?? 0,
+
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
         ];
     }
 }
