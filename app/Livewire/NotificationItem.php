@@ -29,6 +29,7 @@ class NotificationItem extends Component
             ->update(['read_at' => now()]);
         $this->dispatch('notificationCountUpdated');
         $this->dispatch('notificationsUpdated');
+        $this->dispatch('refreshDrawer');
     }
 
     public function deleteNotification($notificationId)
@@ -41,6 +42,30 @@ class NotificationItem extends Component
 
         $this->dispatch('notificationCountUpdated');
         $this->dispatch('refreshDrawer');
+    }
+
+    public function getIconProperty()
+    {
+        $map = [
+            'App\Notifications\AIAnswer' => 'fa-robot',
+            'App\Notifications\EventCreated' => 'fa-calendar',
+            'App\Notifications\NewEventOnFavoritable' => 'fa-heart',
+            'App\Notifications\FavoritableEventStartsSoon' => 'fa-clock',
+        ];
+
+        return $map[$this->notification->type] ?? 'fa-bell';
+    }
+
+    public function getIconColorProperty()
+    {
+        $map = [
+            'App\Notifications\AIAnswer' => 'text-white bg-linear-to-br from-[#1e3a8a] to-[#2663EB]',
+            'App\Notifications\EventCreated' => 'text-white bg-linear-to-r from-green-500 to-teal-600',
+            'App\Notifications\NewEventOnFavoritable' => 'text-white bg-[#A556F7]',
+            'App\Notifications\FavoritableEventStartsSoon' => 'text-white bg-[#2663EB]',
+        ];
+
+        return $map[$this->notification->type] ?? 'text-white bg-linear-to-br from-[#A556F7] to-[#2663EB]';
     }
 
 

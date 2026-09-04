@@ -14,10 +14,18 @@ class NotificationDrawer extends Component
 
     public $filter = 'all';
     public $isOpen = false;
+    public $perPage = 10;
+
+    protected $importantTypes = [
+        'App\Notifications\AIAnswer',
+        'App\Notifications\EventCreated',
+        'App\Notifications\NewEventOnFavoritable',
+    ];
 
     protected $listeners = [
         'toggleDrawer' => 'toggle',
-        'refreshDrawer' => 'refreshDrawer'
+        'refreshDrawer' => 'refreshDrawer',
+        'notificationCountUpdated' => 'refreshDrawer',
     ];
     public function refreshDrawer()
     {
@@ -28,11 +36,53 @@ class NotificationDrawer extends Component
     public function toggle()
     {
         $this->isOpen = !$this->isOpen;
+        if ($this->isOpen) {
+            $this->perPage = 10;
+        }
     }
 
     public function close()
     {
         $this->isOpen = false;
+    }
+    public function loadMore()
+    {
+        $this->perPage += 10;
+    }
+
+    public function getTotalCountProperty()
+    {
+        return DatabaseNotification::query()
+            ->where('notifiable_type', User::class)
+            ->where('notifiable_id', auth()->id())
+            ->count();
+    }
+
+    public function getHasMoreProperty()
+    {
+        if ($this->filter === 'unread' || $this->filter === 'important') {
+            return false;
+        }
+
+        $total = $this->totalCount;
+        $loaded = $this->notifications->count();
+        return $loaded < $total;
+    }
+
+
+    public function getFilteredCountProperty()
+    {
+        $query = DatabaseNotification::query()
+            ->where('notifiable_type', User::class)
+            ->where('notifiable_id', auth()->id());
+
+        if ($this->filter === 'unread') {
+            $query->whereNull('read_at');
+        } elseif ($this->filter === 'important') {
+            return 0;
+        }
+
+        return $query->count();
     }
 
     public function getUnreadCountProperty()
@@ -46,7 +96,11 @@ class NotificationDrawer extends Component
 
     public function getImportantCountProperty()
     {
-        return 0;
+        return DatabaseNotification::query()
+            ->where('notifiable_type', User::class)
+            ->where('notifiable_id', auth()->id())
+            ->whereIn('type', $this->importantTypes)
+            ->count();
     }
 
     public function getNotificationsProperty()
@@ -58,10 +112,13 @@ class NotificationDrawer extends Component
         if ($this->filter === 'unread') {
             $query->whereNull('read_at');
         } elseif ($this->filter === 'important') {
-            return collect();
+            $query->whereIn('type', $this->importantTypes);
+        }
+        if ($this->filter === 'all') {
+            $query->limit($this->perPage);
         }
 
-        return $query->orderBy('created_at', 'desc')->paginate(8);
+        return $query->orderBy('created_at', 'desc')->get();
     }
 
     public function getGroupsProperty()
@@ -129,6 +186,8 @@ class NotificationDrawer extends Component
             'importantCount' => $this->importantCount,
             'filter' => $this->filter,
             'hasRead' => $this->hasRead,
+            'hasMore' => $this->hasMore,
+            'totalCount' => $this->totalCount,
         ]);
     }
 }
