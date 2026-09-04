@@ -100,4 +100,21 @@ class ProfileController extends Controller
 
         return response()->noContent();
     }
+
+    public function deleteNotification(Request $request)
+    {
+        $notification = DatabaseNotification::query()
+            ->where('notifiable_type', User::class)
+            ->where('notifiable_id', auth()->id())
+            ->where('id', $request->id)
+            ->first();
+
+        if (! $notification) {
+            return response()->json(status: 404);
+        }
+
+        $notification->delete();
+
+        return response()->noContent();
+    }
 }
