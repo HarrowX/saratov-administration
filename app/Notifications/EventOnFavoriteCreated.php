@@ -11,7 +11,7 @@ use NotificationChannels\Fcm\FcmChannel;
 use NotificationChannels\Fcm\FcmMessage;
 use NotificationChannels\Fcm\Resources\Notification as FcmNotification;
 
-class EventCreated extends Notification implements HasFcmView, ShouldQueue
+class EventOnFavoriteCreated extends Notification implements HasFcmView, ShouldQueue
 {
     use Queueable;
 
@@ -21,6 +21,7 @@ class EventCreated extends Notification implements HasFcmView, ShouldQueue
     public function __construct(
         public string $eventName,
         public string $startTimeFormatted,
+        public string $locationName
     ) {
         $this->onQueue('global_notifications');
     }
@@ -38,7 +39,7 @@ class EventCreated extends Notification implements HasFcmView, ShouldQueue
     public function toFcm(object $notifiable): FcmMessage
     {
         return new FcmMessage(notification: new FcmNotification(
-            title: 'Событие '.$this->eventName,
+            title: 'Проходит событие '.$this->eventName.' в избранной вами локации: '.$this->locationName,
             body: 'Начало в '.$this->startTimeFormatted,
         ));
     }
@@ -46,7 +47,7 @@ class EventCreated extends Notification implements HasFcmView, ShouldQueue
     public function toFcmMessage(): FcmMessage
     {
         return new FcmMessage(notification: new FcmNotification(
-            title: 'Событие '.$this->eventName,
+            title: 'Проходит событие '.$this->eventName.' в избранной вами локации: '.$this->locationName,
             body: 'Начало в '.$this->startTimeFormatted,
         ));
     }
@@ -54,7 +55,7 @@ class EventCreated extends Notification implements HasFcmView, ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            'title' => 'Событие '.$this->eventName,
+            'title' => 'Проходит событие '.$this->eventName.' в избранной вами локации: '.$this->locationName,
             'body' => 'Начало в '.$this->startTimeFormatted,
         ];
     }
