@@ -13,7 +13,9 @@ class NotificationDrawer extends Component
     use WithPagination;
 
     public $filter = 'all';
+
     public $isOpen = false;
+
     public $perPage = 10;
 
     protected $importantTypes = [
@@ -27,6 +29,7 @@ class NotificationDrawer extends Component
         'refreshDrawer' => 'refreshDrawer',
         'notificationCountUpdated' => 'refreshDrawer',
     ];
+
     public function refreshDrawer()
     {
         $this->resetPage();
@@ -35,7 +38,7 @@ class NotificationDrawer extends Component
 
     public function toggle()
     {
-        $this->isOpen = !$this->isOpen;
+        $this->isOpen = ! $this->isOpen;
         if ($this->isOpen) {
             $this->perPage = 10;
         }
@@ -45,6 +48,7 @@ class NotificationDrawer extends Component
     {
         $this->isOpen = false;
     }
+
     public function loadMore()
     {
         $this->perPage += 10;
@@ -66,9 +70,9 @@ class NotificationDrawer extends Component
 
         $total = $this->totalCount;
         $loaded = $this->notifications->count();
+
         return $loaded < $total;
     }
-
 
     public function getFilteredCountProperty()
     {
@@ -165,6 +169,7 @@ class NotificationDrawer extends Component
             ->whereNotNull('read_at')
             ->exists();
     }
+
     public function deleteAllRead()
     {
         DatabaseNotification::query()

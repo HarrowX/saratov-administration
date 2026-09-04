@@ -9,6 +9,7 @@ use Livewire\Component;
 class NotificationItem extends Component
 {
     public $notification;
+
     public $isDrawer = false;
 
     protected $listeners = ['notificationsUpdated' => '$refresh'];
@@ -67,7 +68,6 @@ class NotificationItem extends Component
 
         return $map[$this->notification->type] ?? 'text-white bg-linear-to-br from-[#A556F7] to-[#2663EB]';
     }
-
 
     public function render()
     {
