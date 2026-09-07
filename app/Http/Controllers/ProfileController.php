@@ -123,7 +123,7 @@ class ProfileController extends Controller
         DatabaseNotification::query()
             ->where('notifiable_type', User::class)
             ->where('notifiable_id', auth()->id())
-            ->whereNull('read_at')
+            ->whereNotNull('read_at')
             ->delete();
 
         return response()->noContent();
