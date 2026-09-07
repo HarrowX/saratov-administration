@@ -107,7 +107,7 @@
                     @endauth
                     @auth
                         <button wire:click="$dispatch('toggleDrawer')"
-                                class="relative text-2xl 3xl:text-3xl inline-flex items-center ml-2 sm:ml-0">
+                                class="relative text-2xl 3xl:text-3xl inline-flex items-center pr-1 ml-2 sm:ml-0">
                             <i class="fa-solid fa-bell bell-icon"></i>
                             <livewire:notification-counter />
                         </button>

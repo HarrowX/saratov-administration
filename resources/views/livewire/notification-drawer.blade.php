@@ -16,7 +16,7 @@
         </div>
 
         <div class="sticky top-20 3xl:top-23 bg-white z-100 flex flex-col lg:flex-row gap-4 lg:gap-0 items-start lg:items-center justify-between px-3 sm:px-6 py-3">
-            <div class="flex gap-1">
+            <div class="flex gap-2">
                 <button wire:click="$set('filter', 'all')"
                         class="px-3 py-1.5 rounded-full text-sm 3xl:text-lg font-medium transition-all {{ $filter === 'all' ? 'bg-[#2663EB] text-white' : 'text-gray-500 hover:bg-gray-100' }}">
                     Все
@@ -24,8 +24,8 @@
                 <button wire:click="$set('filter', 'unread')"
                         class="px-3 py-1.5 rounded-full text-sm 3xl:text-lg font-medium transition-all {{ $filter === 'unread' ? 'bg-[#2663EB] text-white' : 'text-gray-500 hover:bg-gray-100' }}">
                     <span class="relative">
-                        <span>Новые</span>
-                        <span class="pl-3">
+                        <span class="relative">Новые</span>
+                        <span class="pl-3 absolute">
                             <livewire:notification-counter />
                         </span>
                     </span>
