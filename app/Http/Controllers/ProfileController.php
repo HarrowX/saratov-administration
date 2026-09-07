@@ -117,4 +117,15 @@ class ProfileController extends Controller
 
         return response()->noContent();
     }
+
+    public function clearReadNotifications(Request $request)
+    {
+        DatabaseNotification::query()
+            ->where('notifiable_type', User::class)
+            ->where('notifiable_id', auth()->id())
+            ->whereNotNull('read_at')
+            ->delete();
+
+        return response()->noContent();
+    }
 }

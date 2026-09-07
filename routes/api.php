@@ -45,6 +45,7 @@ Route::prefix('v1')->group(function () {
 
                 Route::get('me/notifications', 'notifications');
                 Route::post('me/notifications/all-read', 'readAllNotifications');
+                Route::delete('me/notifications/clear-read', 'clearReadNotifications');
                 Route::post('me/notifications/{id}/read', 'readNotification');
                 Route::delete('me/notifications/{id}', 'deleteNotification');
             });
