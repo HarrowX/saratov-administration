@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\MoonShine\Fields\CompressedCropperImage;
 use App\MoonShine\Applies\CompressedImageApply;
+use App\MoonShine\Fields\CompressedCropperImage;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\Contracts\Core\DependencyInjection\AppliesRegisterContract;
 use MoonShine\Laravel\Resources\ModelResource;

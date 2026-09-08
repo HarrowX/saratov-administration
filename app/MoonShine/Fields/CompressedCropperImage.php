@@ -9,10 +9,10 @@ use MoonShine\AssetManager\Css;
 use MoonShine\AssetManager\Js;
 use MoonShine\UI\Fields\Image;
 
-
 class CompressedCropperImage extends Image
 {
     protected string $view = 'admin.fields.compressed-cropper-image';
+
     protected string $accept = 'image/*';
 
     public function assets(): array
@@ -25,42 +25,52 @@ class CompressedCropperImage extends Image
         ];
     }
 
-
     protected ?int $compressWidth = null;
+
     protected ?int $compressHeight = null;
+
     protected bool $keepAspectRatio = false;
+
     protected string $compressFormat = 'jpg';
+
     protected int $compressQuality = 80;
+
     protected ?int $thumbWidth = null;
+
     protected ?int $thumbHeight = null;
 
     public function width(int $width): static
     {
         $this->compressWidth = $width;
+
         return $this;
     }
 
     public function height(int $height): static
     {
         $this->compressHeight = $height;
+
         return $this;
     }
 
     public function aspectRatio(): static
     {
         $this->keepAspectRatio = true;
+
         return $this;
     }
 
     public function format(string $format): static
     {
         $this->compressFormat = $format;
+
         return $this;
     }
 
     public function quality(int $quality): static
     {
         $this->compressQuality = $quality;
+
         return $this;
     }
 
@@ -68,6 +78,7 @@ class CompressedCropperImage extends Image
     {
         $this->thumbWidth = $width;
         $this->thumbHeight = $height;
+
         return $this;
     }
 
@@ -110,21 +121,23 @@ class CompressedCropperImage extends Image
     {
         return $this->thumbWidth !== null || $this->thumbHeight !== null;
     }
+
     protected function resolveAfterDestroy(mixed $data): mixed
     {
         $data = parent::resolveAfterDestroy($data);
 
-        if ($this->hasThumb() && !blank($this->toValue())) {
+        if ($this->hasThumb() && ! blank($this->toValue())) {
             $values = $this->isMultiple() ? $this->toValue() : [$this->toValue()];
 
             foreach ($values as $file) {
-                $thumbFile = dirname($file) . '/thumb_' . basename($file);
+                $thumbFile = dirname($file).'/thumb_'.basename($file);
                 $this->deleteStorageFile($thumbFile);
             }
         }
 
         return $data;
     }
+
     public function removeExcludedFiles(null|array|string $newValue = null): void
     {
         if ($this->hasThumb()) {
@@ -135,7 +148,7 @@ class CompressedCropperImage extends Image
                 $old = array_filter(\is_array($newValue) ? $newValue : [$newValue]);
 
                 if ($file !== null && ! \in_array($file, $old, true)) {
-                    $thumbFile = dirname($file) . '/thumb_' . basename($file);
+                    $thumbFile = dirname($file).'/thumb_'.basename($file);
                     $this->deleteStorageFile($thumbFile);
                 }
             });

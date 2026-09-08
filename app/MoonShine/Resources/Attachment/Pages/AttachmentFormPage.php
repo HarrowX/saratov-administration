@@ -12,7 +12,6 @@ use App\Models\Hotel;
 use App\Models\Restaurant;
 use App\MoonShine\Fields\CompressedCropperImage;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
-use Chocoway\MoonshineCompressedImage\Fields\CompressedImage;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;

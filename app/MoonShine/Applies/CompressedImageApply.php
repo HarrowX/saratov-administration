@@ -13,7 +13,6 @@ use MoonShine\Contracts\UI\ApplyContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Crud\Exceptions\FileFieldException;
 use MoonShine\UI\Fields\File;
-use Chocoway\MoonshineCompressedImage\Fields\CompressedImage;
 
 final class CompressedImageApply implements ApplyContract
 {
@@ -68,14 +67,13 @@ final class CompressedImageApply implements ApplyContract
             }
         }
 
-        $fullPath = storage_path('app/public/' . $path);
+        $fullPath = storage_path('app/public/'.$path);
 
         if (! file_exists($fullPath)) {
             return $path;
         }
 
-
-        $manager = new ImageManager(new Driver());
+        $manager = new ImageManager(new Driver);
         $image = $manager->read($fullPath);
 
         if ($field->getCompressWidth() || $field->getCompressHeight()) {
@@ -93,12 +91,12 @@ final class CompressedImageApply implements ApplyContract
         }
 
         $format = $field->getCompressFormat();
-        $newFullPath = preg_replace('/\.[^.]+$/', '.' . $format, $fullPath);
+        $newFullPath = preg_replace('/\.[^.]+$/', '.'.$format, $fullPath);
         $image->save($newFullPath, quality: $field->getCompressQuality());
 
         if ($newFullPath !== $fullPath) {
             unlink($fullPath);
-            $path = preg_replace('/\.[^.]+$/', '.' . $format, $path);
+            $path = preg_replace('/\.[^.]+$/', '.'.$format, $path);
         }
 
         if ($field->hasThumb()) {
@@ -107,7 +105,7 @@ final class CompressedImageApply implements ApplyContract
                 width: $field->getThumbWidth(),
                 height: $field->getThumbHeight()
             );
-            $thumbFullPath = dirname($newFullPath) . '/thumb_' . basename($newFullPath);
+            $thumbFullPath = dirname($newFullPath).'/thumb_'.basename($newFullPath);
             $thumbImage->save($thumbFullPath, quality: $field->getCompressQuality());
         }
 
