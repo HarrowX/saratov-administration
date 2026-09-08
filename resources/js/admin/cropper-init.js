@@ -34,7 +34,7 @@ document.addEventListener('alpine:init', () => {
             }
         },
 
-        cropImage() {
+        cropImage(id) {
             const croppedCanvas = this.cropperInstance.getCroppedCanvas();
             if (!croppedCanvas) {
                 alert('Error: Failed to get cropped image.');
@@ -50,11 +50,10 @@ document.addEventListener('alpine:init', () => {
                 const croppedFile = new File([blob], fileName, { type: mimeType });
                 const dataTransfer = new DataTransfer();
                 dataTransfer.items.add(croppedFile);
-                const fileInput = document.querySelector('input[type="file"]');
+                const fileInput = document.getElementById(id);
                 if (fileInput) {
                     fileInput.files = dataTransfer.files;
                     fileInput.dispatchEvent(new Event('change'));
-
                 }
                 this.toggleModal();
             });
