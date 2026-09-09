@@ -8,17 +8,35 @@ use App\Http\Resources\v2\alpine\EventV2AlpineResource;
 use App\Http\Resources\v2\alpine\ExcursionV2AlpineResource;
 use App\Http\Resources\v2\alpine\HotelV2AlpineResource;
 use App\Http\Resources\v2\alpine\RestaurantV2AlpineResource;
+use App\Http\Resources\v2\MapEntityResource;
 use App\Models\Attraction;
 use App\Models\Event;
 use App\Models\Excursion;
 use App\Models\Hotel;
+use App\Models\MapEntity;
 use App\Models\Restaurant;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ContentV2Controller extends Controller
 {
+    public function allMapEntities(Request $request)
+    {
+        $validated = $request->validate([
+            'class' => ['nullable', 'string', 'sometimes', Rule::in([Attraction::class, Hotel::class, Restaurant::class])],
+        ]);
+
+        $query = MapEntity::query();
+
+        if (key_exists('class', $validated)) {
+            $query->where('class', $validated['class']);
+        }
+
+        return MapEntityResource::collection($query->get());
+    }
+
     public function listAttractions(Request $request)
     {
         $builder = Attraction::query()->with('attachments');
