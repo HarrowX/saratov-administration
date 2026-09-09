@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         DB::statement("
-            CREATE OR REPLACE VIEW map_entities_view AS
+            CREATE VIEW map_entities_view AS
             SELECT id, '".addslashes(Attraction::class)."' AS class, latitude, longitude FROM attractions
             UNION ALL
             SELECT id, '".addslashes(Hotel::class)."' AS class, latitude, longitude FROM hotels
