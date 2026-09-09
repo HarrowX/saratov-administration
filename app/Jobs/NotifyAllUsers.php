@@ -3,12 +3,10 @@
 namespace App\Jobs;
 
 use App\HasFcmView;
-use App\Models\FirebaseDeviceToken;
 use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Notification;
-use Kreait\Laravel\Firebase\Facades\Firebase;
 
 class NotifyAllUsers implements ShouldQueue
 {

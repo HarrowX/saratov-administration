@@ -17,7 +17,6 @@ class NotifyAllUnlinkedUsers implements ShouldQueue
      */
     public function __construct(protected HasFcmView $notification) {}
 
-
     /**
      * Execute the job.
      */
