@@ -5,9 +5,12 @@ namespace App\Livewire;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Notifications\DatabaseNotification;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
-
+use App\Notifications\AIAnswer;
+use App\Notifications\EventCreated;
+use App\Notifications\NewEventOnFavoritable;
 class NotificationDrawer extends Component
 {
     use WithPagination;
@@ -19,29 +22,26 @@ class NotificationDrawer extends Component
     public $perPage = 10;
 
     protected $importantTypes = [
-        'App\Notifications\AIAnswer',
-        'App\Notifications\EventCreated',
-        'App\Notifications\NewEventOnFavoritable',
+        AIAnswer::class,
+        EventCreated::class,
+        NewEventOnFavoritable::class,
     ];
 
-    protected $listeners = [
-        'toggleDrawer' => 'toggle',
-        'refreshDrawer' => 'refreshDrawer',
-        'notificationCountUpdated' => 'refreshDrawer',
-    ];
-
-    public function refreshDrawer()
-    {
-        $this->resetPage();
-        $this->dispatch('$refresh');
-    }
-
+    #[On('toggleDrawer')]
     public function toggle()
     {
         $this->isOpen = ! $this->isOpen;
         if ($this->isOpen) {
             $this->perPage = 10;
         }
+    }
+
+    #[On('refreshDrawer')]
+    #[On('notificationCountUpdated')]
+    public function refreshDrawer()
+    {
+        $this->resetPage();
+        $this->dispatch('$refresh');
     }
 
     public function close()

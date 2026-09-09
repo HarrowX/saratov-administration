@@ -3,8 +3,13 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use App\Notifications\AIAnswer;
+use App\Notifications\EventCreated;
+use App\Notifications\FavoritableEventStartsSoon;
+use App\Notifications\NewEventOnFavoritable;
 use Illuminate\Notifications\DatabaseNotification;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class NotificationItem extends Component
 {
@@ -12,12 +17,14 @@ class NotificationItem extends Component
 
     public $isDrawer = false;
 
-    protected $listeners = ['notificationsUpdated' => '$refresh'];
-
     public function mount($notification, $isDrawer = false)
     {
         $this->notification = $notification;
         $this->isDrawer = $isDrawer;
+    }
+    #[On('notificationsUpdated')]
+    public function refresh()
+    {
     }
 
     public function markAsRead($notificationId)
@@ -48,10 +55,10 @@ class NotificationItem extends Component
     public function getIconProperty()
     {
         $map = [
-            'App\Notifications\AIAnswer' => 'fa-robot',
-            'App\Notifications\EventCreated' => 'fa-calendar',
-            'App\Notifications\NewEventOnFavoritable' => 'fa-heart',
-            'App\Notifications\FavoritableEventStartsSoon' => 'fa-clock',
+            AIAnswer::class => 'fa-robot',
+            EventCreated::class => 'fa-calendar',
+            NewEventOnFavoritable::class => 'fa-heart',
+            FavoritableEventStartsSoon::class => 'fa-clock',
         ];
 
         return $map[$this->notification->type] ?? 'fa-bell';
@@ -60,10 +67,10 @@ class NotificationItem extends Component
     public function getIconColorProperty()
     {
         $map = [
-            'App\Notifications\AIAnswer' => 'text-white bg-linear-to-br from-[#1e3a8a] to-[#2663EB]',
-            'App\Notifications\EventCreated' => 'text-white bg-linear-to-r from-green-500 to-teal-600',
-            'App\Notifications\NewEventOnFavoritable' => 'text-white bg-[#A556F7]',
-            'App\Notifications\FavoritableEventStartsSoon' => 'text-white bg-[#2663EB]',
+            AIAnswer::class => 'text-white bg-linear-to-br from-[#1e3a8a] to-[#2663EB]',
+            EventCreated::class => 'text-white bg-linear-to-r from-green-500 to-teal-600',
+            NewEventOnFavoritable::class => 'text-white bg-[#A556F7]',
+            FavoritableEventStartsSoon::class => 'text-white bg-[#2663EB]',
         ];
 
         return $map[$this->notification->type] ?? 'text-white bg-linear-to-br from-[#A556F7] to-[#2663EB]';
