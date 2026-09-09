@@ -8,8 +8,8 @@ use App\Notifications\EventCreated;
 use App\Notifications\FavoritableEventStartsSoon;
 use App\Notifications\NewEventOnFavoritable;
 use Illuminate\Notifications\DatabaseNotification;
-use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\Component;
 
 class NotificationItem extends Component
 {
@@ -22,10 +22,9 @@ class NotificationItem extends Component
         $this->notification = $notification;
         $this->isDrawer = $isDrawer;
     }
+
     #[On('notificationsUpdated')]
-    public function refresh()
-    {
-    }
+    public function refresh() {}
 
     public function markAsRead($notificationId)
     {

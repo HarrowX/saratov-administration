@@ -4,8 +4,8 @@ namespace App\Livewire;
 
 use App\Models\User;
 use Illuminate\Notifications\DatabaseNotification;
-use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\Component;
 
 class NotificationCounter extends Component
 {
@@ -15,6 +15,7 @@ class NotificationCounter extends Component
     {
         $this->refreshCount();
     }
+
     #[On('notificationCountUpdated')]
     public function refreshCount()
     {

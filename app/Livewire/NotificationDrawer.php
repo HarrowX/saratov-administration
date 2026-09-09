@@ -3,14 +3,15 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use App\Notifications\AIAnswer;
+use App\Notifications\EventCreated;
+use App\Notifications\NewEventOnFavoritable;
 use Carbon\Carbon;
 use Illuminate\Notifications\DatabaseNotification;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Notifications\AIAnswer;
-use App\Notifications\EventCreated;
-use App\Notifications\NewEventOnFavoritable;
+
 class NotificationDrawer extends Component
 {
     use WithPagination;
