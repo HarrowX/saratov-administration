@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\User\Pages;
 
+use App\Jobs\NotifyAllUnlinkedUsers;
 use App\Jobs\NotifyAllUsers;
 use App\Models\User;
 use App\MoonShine\Resources\User\UserResource;
@@ -127,7 +128,10 @@ class UserIndexPage extends IndexPage
             'title' => ['required', 'string'],
             'body' => ['required', 'string'],
         ]);
-        dispatch(new NotifyAllUsers(new FcmTestNotification($validated['title'], $validated['body'])));
+        $notification = new FcmTestNotification($validated['title'], $validated['body']);
+
+        dispatch(new NotifyAllUsers($notification));
+        dispatch(new NotifyAllUnlinkedUsers($notification));
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Event;
 
+use App\Jobs\NotifyAllUnlinkedUsers;
 use App\Jobs\NotifyAllUsers;
 use App\Jobs\NotifyFavoriteUsers;
 use App\Models\CustomLocation;
@@ -55,7 +56,10 @@ class EventResource extends ModelResource
             dispatch(new NotifyFavoriteUsers(new EventOnFavoriteCreated($item->name, $item->start_date->toString(), $eventable->name), $eventable));
         }
         if (request()->boolean('is_need_notify_all_users')) {
-            dispatch(new NotifyAllUsers(new EventCreated($item->name, $item->start_date->toString())));
+            $notification = new EventCreated($item->name, $item->start_date->toString());
+
+            dispatch(new NotifyAllUsers($notification));
+            dispatch(new NotifyAllUnlinkedUsers($notification));
         }
 
         return $item;
