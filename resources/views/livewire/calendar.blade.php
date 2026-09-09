@@ -6,7 +6,7 @@
         </div>
 
         <div class="flex flex-col sm:flex-row justify-center font-['Centurygothic'] tracking-widest">
-            <div class="w-full sm:w-50 lg:w-70 xl:w-75 3xl:w-88">
+            <div class="w-full sm:w-50 lg:w-70 xl:w-75 3xl:w-88 sm:h-110 lg:h-132 3xl:h-160">
                 <div class="relative w-full h-50 sm:h-full rounded-t-xl sm:rounded-tr-none sm:rounded-l-xl lg:rounded-l-4xl overflow-hidden shadow-xl">
                     <img src="{{asset('/images/c90512dcca9e20f457e9bb87759114af.webp')}}" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black/20"></div>
@@ -19,7 +19,7 @@
             </div>
 
             <div class="rounded-b-xl sm:rounded-bl-none sm:rounded-r-xl lg:rounded-r-4xl shadow-xl">
-                <div class="calendar bg-white px-4 sm:px-3 pt-4 lg:pt-7 md:px-7 3xl:pt-8 rounded-b-xl sm:rounded-bl-0 rounded-r-xl lg:rounded-r-4xl">
+                <div class="calendar bg-white h-105 sm:h-auto px-4 sm:px-3 pt-4 lg:pt-7 md:px-7 3xl:pt-8 rounded-b-xl sm:rounded-bl-0 rounded-r-xl lg:rounded-r-4xl w-full sm:w-90 md:w-100 lg:w-145 xl:w-150">
                     <div class="calendar-header flex items-center justify-between mb-4 lg:mb-8">
                         <button type="button" class="calendar-btn size-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors" id="prev-btn">
                             <img src="{{asset('/images/arrow-left.svg')}}" alt="Предыдущий месяц" class="icon size-4">
