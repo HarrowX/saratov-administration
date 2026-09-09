@@ -20,7 +20,16 @@
                                     </div>
                                 </div>
                                 <div class="flex flex-col flex-1 gap-3">
-                                    <h2 class="card-title text-center text-base lg:text-xl font-bold group-hover/title:text-[#352AA2] transition-colors duration-300 line-clamp-3 max-h-18 lg:max-h-20 flex-1">{{ $attraction->name }}</h2>
+                                    <div class="relative group/tooltip shrink-0 flex-1">
+                                        <span class="absolute opacity-0 scale-95 translate-y-1 transition-all duration-200 bg-[#3f3e3ed9] text-white text-sm p-2 rounded-xl bottom-[calc(100%+8px)] pointer-events-none group-hover/tooltip:opacity-100 group-hover/tooltip:scale-100 group-hover/tooltip:translate-y-0 max-w-full -left-2 font-['Inter']">
+                                            {{ $attraction->name }}
+                                        </span>
+                                        <h2 class="card-title text-base lg:text-xl font-bold mb-3 line-clamp-3 group-hover/color:text-[#352AA2] transition-colors duration-300 max-h-18 lg:max-h-20 flex-1">
+                                            {{ $attraction->name }}
+                                        </h2>
+                                    </div>
+
+
                                     <p class="text-xs sm:text-sm lg:text-base 3xl:text-xl font-light mb-2 text-[#5F5F5F]">{{ $attraction->short_description }}</p>
                                 </div>
                                 <div class="shrink-0">

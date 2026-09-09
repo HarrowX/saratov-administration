@@ -150,7 +150,7 @@
                                         <livewire:favorite-mini-button :object="$excursion"/>
                                     </div>
                                 </div>
-                                <a href="{{ route('single-excursion', ['excursion' => $excursion->slug]) }}" class="flex flex-col gap-5">
+                                <a href="{{ route('single-excursion', ['excursion' => $excursion->slug]) }}" class="flex flex-col justify-between gap-5">
                                     <h2 class="card-title text-lg lg:text-xl 3xl:text-3xl font-bold group-hover:text-[#352AA2] transition-colors duration-300">{{ $excursion->name}}</h2>
                                     <div class="flex flex-col justify-end text-sm lg:text-base 3xl:text-2xl font-light gap-3 text-[#5F5F5F]">
                                         <div class="flex flex-row text-xs sm:text-sm lg:text-base 3xl:text-[22px] font-light gap-6 text-[#5F5F5F]">

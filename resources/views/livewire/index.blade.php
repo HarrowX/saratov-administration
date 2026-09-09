@@ -199,18 +199,28 @@
                                     <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
                                     <livewire:favorite-mini-button :position='"right-2 top-2"' :object="$attraction"/>
                                 </div>
-                                <div class="flex flex-col justify-between p-6 flex-1">
-                                    <h2 class="card-title text-xl font-bold mb-2 line-clamp-3 group-hover/color:text-[#352AA2] transition-colors duration-300 flex-2">{{ $attraction->name }}</h2>
-                                    <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $attraction->short_description }}</p>
-                                    <div class="flex items-center justify-between flex-1">
-                                        <div class="flex items-center text-gray-500 text-sm">
-                                            @if ($attraction->visit_duration)
-                                                <i class="fas fa-clock mr-2"></i>
-                                                <span>{{ $attraction->visit_duration }} мин</span>
-                                            @endif
-                                        </div>
-                                        <div class="shrink-0 size-10 xl:size-11 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity hover:scale-110 group/button overflow-hidden relative">
-                                            <img src="{{asset('/images/arrow-right.png')}}" alt="" class="icon w-2 xl:w-3 h-4.5 xl:h-6 transition-transform duration-300 group-hover/button:translate-x-1">
+                                <div class="flex flex-col flex-1 p-6">
+                                    <div class="relative group/tooltip shrink-0">
+                                        <span class="absolute opacity-0 scale-95 translate-y-1 transition-all duration-200 bg-[#3f3e3ed9] text-white text-sm p-2 rounded-xl bottom-[calc(100%+8px)] pointer-events-none group-hover/tooltip:opacity-100 group-hover/tooltip:scale-100 group-hover/tooltip:translate-y-0 max-w-full -left-2">
+                                            {{ $attraction->name }}
+                                        </span>
+                                        <h2 class="card-title text-xl font-bold line-clamp-3 group-hover/color:text-[#352AA2] transition-colors duration-300">
+                                            {{ $attraction->name }}
+                                        </h2>
+                                    </div>
+
+                                    <div class="flex flex-col flex-1 justify-end mt-2">
+                                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $attraction->short_description }}</p>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center text-gray-500 text-sm">
+                                                @if ($attraction->visit_duration)
+                                                    <i class="fas fa-clock mr-2"></i>
+                                                    <span>{{ $attraction->visit_duration }} мин</span>
+                                                @endif
+                                            </div>
+                                            <div class="shrink-0 size-10 xl:size-11 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 transition-opacity hover:scale-110 group/button overflow-hidden relative">
+                                                <img src="{{asset('/images/arrow-right.png')}}" alt="" class="icon w-2 xl:w-3 h-4.5 xl:h-6 transition-transform duration-300 group-hover/button:translate-x-1">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -246,7 +256,14 @@
                                 <livewire:favorite-mini-button :position='"right-2 top-2"' :object="$attraction"/>
                             </div>
                             <div class=" flex flex-col justify-between p-6 flex-1">
-                                <h2 class="card-title text-2xl font-bold mb-3 line-clamp-3 group-hover:text-[#352AA2] transition-colors duration-300 flex-3">{{ $attraction->name }}</h2>
+                                <div class="relative group/tooltip shrink-0">
+                                    <span class="absolute opacity-0 scale-95 translate-y-1 transition-all duration-200 bg-[#3f3e3ed9] text-white text-sm p-2 rounded-xl bottom-[calc(100%+8px)] pointer-events-none group-hover/tooltip:opacity-100 group-hover/tooltip:scale-100 group-hover/tooltip:translate-y-0 max-w-full -left-2">
+                                        {{ $attraction->name }}
+                                    </span>
+                                    <h2 class="card-title text-2xl font-bold mb-3 line-clamp-3 group-hover/color:text-[#352AA2] transition-colors duration-300">
+                                        {{ $attraction->name }}
+                                    </h2>
+                                </div>
                                 <p class="text-gray-600 mb-4 flex-1">{{ $attraction->short_description }}</p>
                                 <div class=" flex items-center justify-between">
                                     <div class="flex items-center text-gray-500 text-sm">
