@@ -28,13 +28,15 @@ class ContentV2Controller extends Controller
             'class' => ['nullable', 'string', 'sometimes', Rule::in([Attraction::class, Hotel::class, Restaurant::class])],
         ]);
 
-        $query = MapEntity::query();
+        $builder = MapEntity::query();
+
+        $this->useSearchTermFilter($request, $builder);
 
         if (array_key_exists('class', $validated)) {
-            $query->where('class', $validated['class']);
+            $builder->where('class', $validated['class']);
         }
 
-        return MapEntityResource::collection($query->get());
+        return MapEntityResource::collection($builder->get());
     }
 
     public function listAttractions(Request $request)
