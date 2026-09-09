@@ -30,7 +30,7 @@ class ContentV2Controller extends Controller
 
         $query = MapEntity::query();
 
-        if (key_exists('class', $validated)) {
+        if (array_key_exists('class', $validated)) {
             $query->where('class', $validated['class']);
         }
 
