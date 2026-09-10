@@ -977,3 +977,25 @@ button{
     opacity: 0 !important;
     pointer-events: none;
 }
+
+/*Анимация для колокольчика в нав*/
+@keyframes bellShake {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(15deg);
+    }
+    75% {
+        transform: rotate(-15deg);
+    }
+}
+.bell-icon {
+    transition: color 0.3s ease, transform 0.3s ease;
+    color: #9ca3af;
+}
+
+.bell-icon:hover {
+    color: #4a7bbd;
+    animation: bellShake 0.5s ease-in-out forwards;
+}

@@ -1,140 +1,188 @@
-<nav class="bg-white shadow-lg fixed w-full z-50 top-0">
-    <div class="max-w-6xl 3xl:max-w-427 mx-auto px-4 sm:px-10">
-        <div class="flex justify-between items-center h-20 3xl:h-24">
-            <div class="flex items-center">
-                <a href="{{ route('index') }}" class="flex items-center space-x-1 3xl:space-x-3">
-                    <img src="{{asset('/images/logo.svg')}}" alt="Логотип" class="icon h-7 3xl:h-10">
-                    <span class="md:text-base xl:text-lg 3xl:text-2xl text-black font-['FindSansPro']">Саратов</span>
-                </a>
-            </div>
-
-            <ul class="hidden lg:flex items-center md:space-x-3 lg:space-x-2.5 xl:space-x-4 3xl:space-x-6 transition text-xs 3xl:text-sm pt-1">
-                <li>
-                    <a href="{{ route('index') }}" class="{{ request()->is('/') ? "nav-link-active nav-link" : "nav-link" }}">Главная</a>
-                </li>
-                <li>
-                    <a href="{{ route('all-excursions') }}" class="{{ request()->is('excursions*') ? "nav-link-active nav-link" : "nav-link" }}">Туры и экскурсии</a>
-                </li>
-                <li>
-                    <a href="{{ route('all-guided-tours') }}" class="{{ request()->is('guided-tours*') ? "nav-link-active nav-link" : "nav-link" }}">Экскурсоводы</a>
-                </li>
-                <li>
-                    <a href="{{ route('all-events') }}" class="{{ request()->is('events*') ? "nav-link-active nav-link" : "nav-link" }}">События</a>
-                </li>
-                <li class="nav-link group">Места
-                    <ul class="absolute top-4.5 3xl:top-5.5 -translate-x-5 invisible hidden opacity-0 group-hover:flex group-hover:flex-col group-hover:opacity-100 group-hover:visible gap-5 p-5 bg-white z-1 rounded-xl transition-all duration-300 ease-in-out shadow-2xl group-hover:translate-y-0">
-                        <li class="block">
-                            <a href="{{ route('all-restaurants') }}" class="{{ request()->is('restaurants*') ? "nav-link-active nav-link" : "nav-link" }}">Заведения</a>
-                        </li>
-                        <li class="block">
-                            <a href="{{ route('all-attractions') }}" class="{{ request()->is('attractions*') ? "nav-link-active nav-link" : "nav-link" }}">Достопримечательности</a>
-                        </li>
-                        <li class="block">
-                            <a href="{{ route('all-hotels') }}" class="{{ request()->is('hotels*') ? "nav-link-active nav-link" : "nav-link" }}">Где остановиться</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-
-            <div class="flex items-center gap-0 xs:gap-3 3xl:gap-8">
-                <button onclick="showAppDownload()" class="hidden md:flex items-center bg-linear-to-r from-green-500 to-teal-600 text-white px-2 xl:px-5 py-2 rounded-lg hover:shadow-lg transition cursor-pointer font-['FindSansPro'] text-xs xl:text-sm 3xl:text-base z-2">
-                    <i class="fas fa-download mr-3"></i>Приложение
-                </button>
-                @auth
-{{--                <button id="" class="">--}}
-{{--                    <img src="/images/2b6fa29f-a169-4aa2-9b5d-f1e392962ba7.svg" alt="поиск" class="icon size-7 3xl:size-11 hover:scale-125 transition duration-300">--}}
-{{--                </button>--}}
-                    @php
-                        $u = auth()->user();
-                        $fn = optional($u->username)->name ?? '';
-                        $ln = optional($u->username)->surname ?? '';
-                        $initials = mb_strtoupper(mb_substr($ln, 0, 1) . mb_substr($fn, 0, 1));
-                        $fullName = trim("$fn $ln") ?: 'Профиль';
-
-                    @endphp
-                    <a href="{{ route('profile') }}"
-                       class="flex items-center gap-1.5 xl:gap-2.5 pl-1 sm:pl-1.5 sm:pr-3 py-1 rounded-full hover:bg-gray-100 transition-colors cursor-pointer group">
-                        {{-- Аватар --}}
-                        <span class="size-8 xl:size-10 rounded-full bg-linear-to-br from-[#A556F7] to-[#2663EB] font-['FindSansPro'] flex items-center justify-center text-white text-xs xl:text-sm font-bold shrink-0">
-                            {{ $initials ?: '👤' }}
-                        </span>
-
-                        {{-- Имя пользователя --}}
-                        <span class="text-xs xl:text-sm font-medium text-gray-700 max-w-20 xs:max-w-24 sm:max-w-32 truncate hidden xs:inline font-['FindSansPro'] text-wrap">
-                            {{ $fullName }}
-                        </span>
+<div>
+    <nav class="bg-white shadow-lg fixed w-full z-60 top-0">
+        <div class="max-w-6xl 3xl:max-w-427 mx-auto px-4 sm:px-10">
+            <div class="flex justify-between items-center h-20 3xl:h-24 font-['FindSansPro']">
+                <div class="flex items-center">
+                    <a href="{{ route('index') }}" class="flex items-center space-x-1 3xl:space-x-3">
+                        <img src="{{asset('/images/logo.svg')}}" alt="Логотип" class="icon h-7 3xl:h-10">
+                        <span class="md:text-base xl:text-lg 3xl:text-2xl text-black">Саратов</span>
                     </a>
-                @else
-                <a href="{{ route('login') }}"
-                   class="flex items-center gap-1.5 sm:gap-2 px-1.5 xs:px-5 py-2 text-white rounded-lg duration-300 text-xs xl:text-sm 3xl:text-base font-['FindSansPro'] bg-linear-to-r from-blue-500 to-purple-600 hover:shadow-lg transition cursor-pointer">
-                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                    <span>Войти</span>
-                </a>
-                @endauth
-                <div class="relative">
-                    <button id="mobileMenuBtn" class="flex lg:hidden cursor-pointer stroke-gray-500">
-                        <svg class="ham hamRotate ham1 w-16 md:w-16" viewBox="0 0 100 100" onclick="this.classList.toggle('active')">
-                            <path class="line top" d="m 30,33 h 40 c 0,0 9.044436,-0.654587 9.044436,-8.508902 0,-7.854315 -8.024349,-11.958003 -14.89975,-10.85914 -6.875401,1.098863 -13.637059,4.171617 -13.637059,16.368042 v 40"/>
-                            <path class="line middle" d="m 30,50 h 40"/>
-                            <path class="line bottom" d="m 30,67 h 40 c 12.796276,0 15.357889,-11.717785 15.357889,-26.851538 0,-15.133752 -4.786586,-27.274118 -16.667516,-27.274118 -11.88093,0 -18.499247,6.994427 -18.435284,17.125656 l 0.252538,40"/>
-                        </svg>
+                </div>
+
+                <ul class="hidden lg:flex items-center md:space-x-3 lg:space-x-2.5 xl:space-x-4 3xl:space-x-6 transition text-xs 3xl:text-sm pt-1">
+                    <li>
+                        <a href="{{ route('index') }}" class="{{ request()->is('/') ? "nav-link-active nav-link" : "nav-link" }}">Главная</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('all-excursions') }}" class="{{ request()->is('excursions*') ? "nav-link-active nav-link" : "nav-link" }}">Туры и экскурсии</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('all-guided-tours') }}" class="{{ request()->is('guided-tours*') ? "nav-link-active nav-link" : "nav-link" }}">Экскурсоводы</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('all-events') }}" class="{{ request()->is('events*') ? "nav-link-active nav-link" : "nav-link" }}">События</a>
+                    </li>
+                    <li class="nav-link group">Места
+                        <ul class="absolute top-4.5 3xl:top-5.5 -translate-x-5 invisible hidden opacity-0 group-hover:flex group-hover:flex-col group-hover:opacity-100 group-hover:visible gap-5 p-5 bg-white z-1 rounded-xl transition-all duration-300 ease-in-out shadow-2xl group-hover:translate-y-0">
+                            <li class="block">
+                                <a href="{{ route('all-restaurants') }}" class="{{ request()->is('restaurants*') ? "nav-link-active nav-link" : "nav-link" }}">Заведения</a>
+                            </li>
+                            <li class="block">
+                                <a href="{{ route('all-attractions') }}" class="{{ request()->is('attractions*') ? "nav-link-active nav-link" : "nav-link" }}">Достопримечательности</a>
+                            </li>
+                            <li class="block">
+                                <a href="{{ route('all-hotels') }}" class="{{ request()->is('hotels*') ? "nav-link-active nav-link" : "nav-link" }}">Где остановиться</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="flex items-center gap-0 xs:gap-3 3xl:gap-8">
+                    <button onclick="showAppDownload()" class="hidden md:flex items-center bg-linear-to-r from-green-500 to-teal-600 text-white px-2 xl:px-5 py-2 rounded-lg hover:shadow-lg transition cursor-pointer text-xs xl:text-sm 3xl:text-base z-2">
+                        <i class="fas fa-download mr-3"></i>Приложение
                     </button>
-                    <!-- Mobile menu -->
-                    <div id="mobileMenu" class="hidden fixed md:absolute inset-x-0 top-20 md:top-18 md:right-full w-full md:w-100 bg-white transition-all duration-300 ease-in-out md:-translate-x-78 rounded-b-3xl -z-1">
-                        <div class="px-2 xs:px-6 pb-5 lg:pb-2 space-y-2 text-sm sm:text-base xl:text-xl 3xl:text-2xl max-h-[calc(100vh-5rem)] overflow-y-auto">
-                            <a href="{{ route('index') }}" class="{{ request()->is('/') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
-                                <i class="fa-solid fa-house w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
-                                <span>Главная</span>
-                            </a>
 
-                            <a href="{{ route('all-excursions') }}" class="{{ request()->is('excursions*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
-                                <i class="fa-solid fa-map w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
-                                <span>Туры и экскурсии</span>
-                            </a>
+                    @auth
+                        @php
+                            $u = auth()->user();
+                            $fn = optional($u->username)->name ?? '';
+                            $ln = optional($u->username)->surname ?? '';
+                            $initials = mb_strtoupper(mb_substr($ln, 0, 1) . mb_substr($fn, 0, 1));
+                            $fullName = trim("$fn $ln") ?: 'Профиль';
+                        @endphp
 
-                            <a href="{{ route('all-guided-tours') }}" class="{{ request()->is('guided-tours*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
-                                <i class="fa-solid fa-users w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
-                                <span>Экскурсоводы</span>
-                            </a>
-
-                            <a href="{{ route('all-events') }}" class="{{ request()->is('events*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
-                                <i class="fas fa-calendar w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
-                                <span>События</span>
-                            </a>
-
-                            <a href="{{ route('all-restaurants') }}" class="{{ request()->is('restaurants*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
-                                <i class="fa-solid fa-utensils w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
-                                <span>Заведения</span>
-                            </a>
-
-                            <a href="{{ route('all-attractions') }}" class="{{ request()->is('attractions*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
-                                <i class="fa-solid fa-landmark w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
-                                <span>Достопримечательности</span>
-                            </a>
-
-                            <a href="{{ route('all-hotels') }}" class="{{ request()->is('hotels*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
-                                <i class="fa-solid fa-hotel w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
-                                <span>Где остановиться</span>
-                            </a>
-
-                            <div class="relative my-4 md:hidden">
-                                <div class="absolute inset-0 flex items-center">
-                                    <div class="w-full border-t border-gray-200"></div>
-                                </div>
-                            </div>
-
-                            <button onclick="showAppDownload()" class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white px-4 py-3.5 rounded-xl hover:shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer font-medium md:hidden flex items-center justify-center gap-2 group">
-                                <i class="fas fa-download group-hover:animate-bounce"></i>
-                                <span>Скачать приложение</span>
+                        <div class="flex items-center relative"
+                             x-data="{ user: false }">
+                            <button @click="user = !user" @click.outside="user = false"
+                                    class="flex items-center gap-2.5 px-1.5 py-1.5 rounded-full bg-[#5483ea29] hover:shadow-lg transition-shadow ease-in duration-300 cursor-pointer">
+                                <span class="size-8 xl:size-8.5 rounded-full bg-linear-to-br from-[#A556F7] to-[#2663EB] font-['FindSansPro'] flex items-center justify-center text-white text-xs font-bold shrink-0">
+                                    {{ $initials ?: '👤' }}
+                                </span>
+                                <i class="fas fa-chevron-down text-xs text-gray-400 transition-transform duration-300"
+                                   :class="user ? 'rotate-180' : ''"></i>
                             </button>
 
-                            <p class="text-xs text-center text-gray-400 pt-2 md:hidden">
-                                Откройте Саратов по-новому
-                            </p>
+                            <div x-show="user" x-cloak class="absolute right-0 top-full mt-2 w-56 bg-white rounded-2xl shadow-[0_12px_40px_rgb(0,0,0,0.12)] border border-gray-100 overflow-hidden py-2 z-50">
+
+                                <div class="px-4 py-3 border-b border-gray-100">
+                                    <div class="text-sm font-bold text-gray-900 truncate">{{ $fullName }}</div>
+                                    @if(!(auth()->user()->haveFakeVkEmail()))
+                                        <div class="text-xs text-gray-400 truncate">{{ $u->email }}</div>
+                                    @endif
+                                </div>
+                                <a href="{{ route('profile') }}"
+                                   class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                                    <i class="fas fa-user text-gray-400 w-4"></i>
+                                    Профиль
+                                </a>
+                                <a href="{{ route('profile-favorites') }}"
+                                   class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                                    <i class="fas fa-heart text-gray-400 w-4"></i>
+                                    Избранное
+                                </a>
+                                <a href="{{ route('profile-favorites') }}"
+                                   class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                                    <i class="fas fa-map-location-dot text-gray-400 w-4"></i>
+                                    Посещённые места
+                                </a>
+                                <a href="{{ route('history-views') }}"
+                                   class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                                    <i class="fas fa-clock-rotate-left  text-gray-400 w-4"></i>
+                                    История просмотров
+                                </a>
+                                <button wire:click="logout"
+                                        wire:confirm="Вы уверены, что хотите выйти?"
+                                        class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors cursor-pointer">
+                                    <i class="fas fa-arrow-right-from-bracket w-4"></i>
+                                    Выйти
+                                </button>
+                            </div>
+                        </div>
+                    @else
+                        <a href="{{ route('login') }}"
+                           class="flex items-center gap-1.5 sm:gap-2 px-1.5 xs:px-5 py-2 text-white rounded-lg duration-300 text-xs xl:text-sm 3xl:text-base font-['FindSansPro'] bg-linear-to-r from-blue-500 to-purple-600 hover:shadow-lg transition cursor-pointer">
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                            <span>Войти</span>
+                        </a>
+                    @endauth
+                    @auth
+                        <button wire:click="$dispatch('toggleDrawer')"
+                                class="relative text-2xl 3xl:text-3xl inline-flex items-center pr-1 ml-2 sm:ml-0">
+                            <i class="fa-solid fa-bell bell-icon"></i>
+                            <livewire:notification-counter />
+                        </button>
+                    @endauth
+
+                    <div class="relative">
+                        <button id="mobileMenuBtn" class="flex lg:hidden cursor-pointer stroke-gray-500">
+                            <svg class="ham hamRotate ham1 w-16 md:w-16" viewBox="0 0 100 100" onclick="this.classList.toggle('active')">
+                                <path class="line top" d="m 30,33 h 40 c 0,0 9.044436,-0.654587 9.044436,-8.508902 0,-7.854315 -8.024349,-11.958003 -14.89975,-10.85914 -6.875401,1.098863 -13.637059,4.171617 -13.637059,16.368042 v 40"/>
+                                <path class="line middle" d="m 30,50 h 40"/>
+                                <path class="line bottom" d="m 30,67 h 40 c 12.796276,0 15.357889,-11.717785 15.357889,-26.851538 0,-15.133752 -4.786586,-27.274118 -16.667516,-27.274118 -11.88093,0 -18.499247,6.994427 -18.435284,17.125656 l 0.252538,40"/>
+                            </svg>
+                        </button>
+                        <!-- Mobile menu -->
+                        <div id="mobileMenu" class="hidden fixed md:absolute inset-x-0 top-20 md:top-18 md:right-full w-full md:w-100 bg-white transition-all duration-300 ease-in-out md:-translate-x-78 rounded-b-3xl -z-1">
+                            <div class="px-2 xs:px-6 pb-5 lg:pb-2 space-y-2 text-sm sm:text-base xl:text-xl 3xl:text-2xl max-h-[calc(100vh-5rem)] overflow-y-auto">
+                                <a href="{{ route('index') }}" class="{{ request()->is('/') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
+                                    <i class="fa-solid fa-house w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
+                                    <span>Главная</span>
+                                </a>
+
+                                <a href="{{ route('all-excursions') }}" class="{{ request()->is('excursions*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
+                                    <i class="fa-solid fa-map w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
+                                    <span>Туры и экскурсии</span>
+                                </a>
+
+                                <a href="{{ route('all-guided-tours') }}" class="{{ request()->is('guided-tours*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
+                                    <i class="fa-solid fa-users w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
+                                    <span>Экскурсоводы</span>
+                                </a>
+
+                                <a href="{{ route('all-events') }}" class="{{ request()->is('events*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
+                                    <i class="fas fa-calendar w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
+                                    <span>События</span>
+                                </a>
+
+                                <a href="{{ route('all-restaurants') }}" class="{{ request()->is('restaurants*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
+                                    <i class="fa-solid fa-utensils w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
+                                    <span>Заведения</span>
+                                </a>
+
+                                <a href="{{ route('all-attractions') }}" class="{{ request()->is('attractions*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
+                                    <i class="fa-solid fa-landmark w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
+                                    <span>Достопримечательности</span>
+                                </a>
+
+                                <a href="{{ route('all-hotels') }}" class="{{ request()->is('hotels*') ? "nav-link-active nav-link" : "nav-link" }} flex items-center gap-1.5 xs:gap-5 px-2 xs:px-4 py-3 text-gray-900  transition-all duration-200 font-medium group">
+                                    <i class="fa-solid fa-hotel w-5 text-gray-500 group-hover:text-gray-700 transition-colors"></i>
+                                    <span>Где остановиться</span>
+                                </a>
+
+                                <div class="relative my-4 md:hidden">
+                                    <div class="absolute inset-0 flex items-center">
+                                        <div class="w-full border-t border-gray-200"></div>
+                                    </div>
+                                </div>
+
+                                <button onclick="showAppDownload()" class="w-full bg-linear-to-r from-green-500 to-teal-600 text-white px-4 py-3.5 rounded-xl hover:shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer font-medium md:hidden flex items-center justify-center gap-2 group">
+                                    <i class="fas fa-download group-hover:animate-bounce"></i>
+                                    <span>Скачать приложение</span>
+                                </button>
+
+                                <p class="text-xs text-center text-gray-400 pt-2 md:hidden">
+                                    Откройте Саратов по-новому
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
+
+    @auth
+        <livewire:notification-drawer />
+    @endauth
+</div>
+
