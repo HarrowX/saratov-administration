@@ -147,4 +147,10 @@ return [
     'database_entries' => [
         'ttl' => env('PROMPTABLE_DATABASE_ENTRIES_TTL', 600),
     ],
+
+    'selected_provider' => env('AI_LAB_NAME', 'anthropic'),
+
+    'conversations' => [
+        'generate_title' => false,
+    ],
 ];

@@ -2,6 +2,8 @@
 
 namespace App\DTOs;
 
+use App\DTOs\StructuredResponse\SaratovModelStructuredResponseDTO;
+use WendellAdriel\ValidatedDTO\Casting\DTOCast;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
 class ModelPendingResponseDTO extends ValidatedDTO
@@ -10,7 +12,7 @@ class ModelPendingResponseDTO extends ValidatedDTO
 
     public $userId;
 
-    public string $message;
+    public ?SaratovModelStructuredResponseDTO $response;
 
     public string $errorMessage;
 
@@ -19,7 +21,7 @@ class ModelPendingResponseDTO extends ValidatedDTO
         return [
             'ok' => ['required', 'boolean'],
             'userId' => ['required', 'exists:users,id'],
-            'message' => ['required_if:ok,true', 'string'],
+            'response' => ['required_if:ok,true'],
             'errorMessage' => ['required_if:ok,false', 'string'],
         ];
     }
@@ -31,6 +33,8 @@ class ModelPendingResponseDTO extends ValidatedDTO
 
     protected function casts(): array
     {
-        return [];
+        return [
+            'response' => new DTOCast(SaratovModelStructuredResponseDTO::class),
+        ];
     }
 }

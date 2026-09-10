@@ -4,6 +4,15 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Layouts;
 
+use App\Models\Attraction;
+use App\Models\ContactUs;
+use App\Models\CustomPoint;
+use App\Models\Event;
+use App\Models\Excursion;
+use App\Models\GuidedTour;
+use App\Models\Hotel;
+use App\Models\Restaurant;
+use App\Models\User;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Attraction\AttractionResource;
 use App\MoonShine\Resources\ContactUs\ContactUsResource;
@@ -16,6 +25,8 @@ use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
 use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
 use App\MoonShine\Resources\Hotel\HotelResource;
 use App\MoonShine\Resources\Restaurant\RestaurantResource;
+use App\MoonShine\Resources\Schedule\ScheduleResource;
+use App\MoonShine\Resources\ScheduleRecord\ScheduleRecordResource;
 use App\MoonShine\Resources\User\UserResource;
 use MoonShine\AssetManager\Raw;
 use MoonShine\ColorManager\ColorManager;
@@ -41,22 +52,36 @@ final class MoonShineLayout extends AppLayout
         return [
             ...parent::menu(),
             MenuGroup::make('Места', [
-                MenuItem::make(AttractionResource::class, 'Достопримечательности')->icon('building-library'),
-                MenuItem::make(HotelResource::class, 'Отели')->icon('home-modern'),
-                MenuItem::make(RestaurantResource::class, 'Заведения')->icon('building-storefront'),
+                MenuItem::make(AttractionResource::class, 'Достопримечательности')
+                    ->badge(fn () => Attraction::query()->count())
+                    ->icon('building-library'),
+                MenuItem::make(HotelResource::class, 'Отели')
+                    ->badge(fn () => Hotel::query()->count())
+                    ->icon('home-modern'),
+                MenuItem::make(RestaurantResource::class, 'Заведения')
+                    ->badge(fn () => Restaurant::query()->count())
+                    ->icon('building-storefront'),
             ])->icon('map'),
             MenuItem::make(AttachmentResource::class, 'Прикрепляемое')->icon('paper-clip'),
-            MenuItem::make(GuidedTourResource::class, 'Экскурсоводы')->icon('user-circle'),
+            MenuItem::make(GuidedTourResource::class, 'Экскурсоводы')
+                ->badge(fn () => GuidedTour::query()->count())
+                ->icon('user-circle'),
             MenuGroup::make('События', [
-                MenuItem::make(EventResource::class, 'События'),
+                MenuItem::make(EventResource::class, 'События')->badge(fn () => Event::query()->count()),
                 MenuItem::make(EventCategoryResource::class, 'Категории событий'),
                 MenuItem::make(CustomLocationResource::class, 'Дополнительная локация'),
             ])->icon('calendar-days'),
-            MenuItem::make(ExcursionResource::class, 'Экскурсии'),
-            MenuItem::make(ExcursionPointResource::class, 'Точки экскурсий'),
-            MenuItem::make(CustomPointResource::class, 'Дополнительные точки экскурсий'),
-            MenuItem::make(ContactUsResource::class, 'Связаться с нами')->icon('envelope'),
-            MenuItem::make(UserResource::class, 'Пользователи')->icon('user'),
+            MenuGroup::make('Экскурсии', [
+                MenuItem::make(ExcursionResource::class, 'Экскурсии')->badge(fn () => Excursion::query()->count()),
+                MenuItem::make(ExcursionPointResource::class, 'Точки экскурсий'),
+                MenuItem::make(CustomPointResource::class, 'Дополнительные точки экскурсий')->badge(fn () => CustomPoint::query()->count()),
+            ])->icon('academic-cap'),
+            MenuItem::make(ContactUsResource::class, 'Связаться с нами')->icon('envelope')->badge(fn () => ContactUs::query()->count()),
+            MenuItem::make(UserResource::class, 'Пользователи')->icon('user')->badge(fn () => User::query()->count()),
+            MenuGroup::make('Расписание', [
+                MenuItem::make(ScheduleResource::class, 'Расписание'),
+                MenuItem::make(ScheduleRecordResource::class, 'Записи Расписаний'),
+            ])->icon('view-columns'),
         ];
     }
 
@@ -72,11 +97,11 @@ final class MoonShineLayout extends AppLayout
         return [];
     }
 
-    // #[Override]
-    protected function getSearchComponent(): ComponentContract
-    {
-        return Div::make();
-    }
+    //    #[Override]
+    //    protected function getSearchComponent(): ComponentContract
+    //    {
+    //        return Div::make();
+    //    }
 
     /**
      * @param  ColorManager  $colorManager

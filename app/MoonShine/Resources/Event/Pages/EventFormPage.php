@@ -8,10 +8,10 @@ use App\Models\Attraction;
 use App\Models\CustomLocation;
 use App\Models\Hotel;
 use App\Models\Restaurant;
+use App\MoonShine\Fields\CompressedCropperImage;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Event\EventResource;
 use App\MoonShine\Resources\EventCategory\EventCategoryResource;
-use Chocoway\MoonshineCompressedImage\Fields\CompressedImage;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
@@ -24,6 +24,7 @@ use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Fields\Checkbox;
 use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\Email;
 use MoonShine\UI\Fields\ID;
@@ -43,49 +44,54 @@ class EventFormPage extends FormPage
      */
     protected function fields(): iterable
     {
-        return [
-            Box::make([
-                ID::make(),
-                Text::make('Название', 'name')->unescape()->required(),
-                Slug::make('Слаг', 'slug')->from('name')->unique()->canSee(function () {
-                    $item = $this->getResource()?->getItem();
+        $fields = [
+            ID::make(),
+            Text::make('Название', 'name')->unescape()->required(),
+            Slug::make('Слаг', 'slug')->from('name')->unique()->canSee(function () {
+                $item = $this->getResource()?->getItem();
 
-                    return $item && $item->exists;
+                return $item && $item->exists;
+            }),
+            Textarea::make('Описание', 'description')->unescape()->required(),
+            Number::make('Возрастное ограничение', 'age_restriction')->min(0)->max(18),
+            BelongsToMany::make('Категории', 'categories', formatted: 'name', resource: EventCategoryResource::class)
+                ->selectMode()
+                ->searchable()
+                ->valuesQuery(function ($query) {
+                    return $query->where('is_active', true);
                 }),
-                Textarea::make('Описание', 'description')->unescape()->required(),
-                Number::make('Возрастное ограничение', 'age_restriction')->min(0)->max(18),
-                BelongsToMany::make('Категории', 'categories', formatted: 'name', resource: EventCategoryResource::class)
-                    ->selectMode()
-                    ->searchable()
-                    ->valuesQuery(function ($query) {
-                        return $query->where('is_active', true);
-                    }),
-                Date::make('Начало', 'start_date')->withTime()->required(),
-                Date::make('Конец', 'end_date')->withTime(),
-                Box::make('Организатор', [
-                    Text::make('Название организации', 'organizer_name')->nullable(),
-                    Text::make('Телефон организатора', 'organizer_phone')->nullable(),
-                    Email::make('Email организатора', 'organizer_email')->nullable(),
-                    Url::make('Сайт организатора', 'organizer_website')->nullable(),
-                ]),
-                MorphTo::make('Локация', 'location')
-                    ->types([
-                        Attraction::class => ['name', 'Достопримечательность'],
-                        Hotel::class => ['name', 'Отель'],
-                        Restaurant::class => ['name', 'Ресторан'],
-                        CustomLocation::class => ['name', 'Своя локация'],
-                    ])->searchable()->nullable(),
-                RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
-                    ->fields([
-                        ID::make(),
-                        CompressedImage::make('Файл', 'link')
-                            ->format('webp')
-                            ->quality((int) config('app.admin.images.quality'))
-                            ->thumb((int) config('app.admin.images.thumb.width'), (int) config('app.admin.images.thumb.height')),
-                        Number::make('Порядковый номер', 'order')->default(0),
-                    ])->removable(),
+            Date::make('Начало', 'start_date')->withTime()->required(),
+            Date::make('Конец', 'end_date')->withTime(),
+            Box::make('Организатор', [
+                Text::make('Название организации', 'organizer_name')->nullable(),
+                Text::make('Телефон организатора', 'organizer_phone')->nullable(),
+                Email::make('Email организатора', 'organizer_email')->nullable(),
+                Url::make('Сайт организатора', 'organizer_website')->nullable(),
             ]),
+            MorphTo::make('Локация', 'eventable')
+                ->types([
+                    Attraction::class => ['name', 'Достопримечательность'],
+                    Hotel::class => ['name', 'Отель'],
+                    Restaurant::class => ['name', 'Ресторан'],
+                    CustomLocation::class => ['name', 'Своя локация'],
+                ])->searchable()->nullable(),
+
+            RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
+                ->fields([
+                    ID::make(),
+                    CompressedCropperImage::make('Файл', 'link')
+                        ->format('webp')
+                        ->quality(config('app.admin.images.quality'))
+                        ->thumb(config('app.admin.images.thumb.width'), config('app.admin.images.thumb.height')),
+                    Number::make('Порядковый номер', 'order')->default(0),
+                    Text::make('Подпись к картинке', 'alt_name'),
+                ])->removable(),
         ];
+        if ($this->getItem() == null) {
+            $fields[] = Checkbox::make('Отправить уведомление на устройства о событии?', 'is_need_notify_all_users')->canApply(static fn () => false);
+        }
+
+        return [Box::make($fields)];
     }
 
     protected function buttons(): ListOf

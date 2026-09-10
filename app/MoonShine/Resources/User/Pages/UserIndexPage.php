@@ -4,13 +4,29 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\User\Pages;
 
+use App\Jobs\NotifyAllUnlinkedUsers;
+use App\Jobs\NotifyAllUsers;
+use App\Models\User;
 use App\MoonShine\Resources\User\UserResource;
+use App\Notifications\FcmTestNotification;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use MoonShine\Contracts\Core\DependencyInjection\CrudRequestContract;
+use MoonShine\Contracts\UI\ActionButtonContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
+use MoonShine\Crud\JsonResponse;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
 use MoonShine\Laravel\QueryTags\QueryTag;
+use MoonShine\Support\Attributes\AsyncMethod;
+use MoonShine\Support\Enums\ToastType;
 use MoonShine\Support\ListOf;
+use MoonShine\UI\Components\ActionButton;
+use MoonShine\UI\Components\FormBuilder;
 use MoonShine\UI\Components\Metrics\Wrapped\Metric;
+use MoonShine\UI\Components\Modal;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\UI\Fields\Checkbox;
 use MoonShine\UI\Fields\Email;
@@ -32,11 +48,11 @@ class UserIndexPage extends IndexPage
     protected function fields(): iterable
     {
         return [
-            ID::make(),
+            ID::make()->sortable(),
             Text::make('Фио', 'fio')->changeFill(fn ($c) => $c->username->toFio()),
-            Email::make('Почта', 'email'),
-            Phone::make('Номер', 'phone'),
-            Checkbox::make('ВК привязан', 'vk_id'),
+            Email::make('Почта', 'email')->sortable(),
+            Phone::make('Номер', 'phone')->sortable(),
+            Checkbox::make('ВК привязан', 'vk_id')->sortable(),
         ];
     }
 
@@ -45,7 +61,77 @@ class UserIndexPage extends IndexPage
      */
     protected function buttons(): ListOf
     {
-        return parent::buttons();
+        return parent::buttons()->prepend(
+            ActionButton::make()
+                ->icon('fire')
+                ->inModal(
+                    title: 'Отправка уведомления на мобильные устройства',
+                    name: static fn (mixed $item, ActionButtonContract $ctx): string => 'send-notification-'.$ctx->getData()?->getKey(),
+                    builder: fn (Modal $modal, ActionButton $ctx) => $modal->setComponents([
+                        FormBuilder::make('send-notification-form', fields: [
+                            ID::make()->setValue($ctx->getData()?->getKey()),
+                            Text::make('Заголовок', 'title')->required(),
+                            Text::make('Тело', 'body')->required(),
+                        ])
+                            ->asyncMethod('sendNotification')
+                            ->submit('Отправить'),
+                    ])
+                ),
+
+            ActionButton::make('Восстановить')
+                ->method(
+                    'restore',
+                    events: [$this->getListEventName()]
+                )
+                ->canSee(
+                    fn (User $model) => $model->trashed()
+                ),
+        );
+    }
+
+    #[AsyncMethod]
+    public function sendNotification(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => ['exists:users,id'],
+            'title' => ['required', 'string'],
+            'body' => ['required', 'string'],
+        ]);
+        $user = User::find($validated['id']);
+        $user->notify(new FcmTestNotification($validated['title'], $validated['body']));
+        toast('Уведомление в очереди на отправку', ToastType::SUCCESS);
+    }
+
+    #[AsyncMethod]
+    public function restore(
+        CrudRequestContract $request
+    ): JsonResponse {
+        $item = $request->getResource()->getItem();
+        $validator = Validator::make($item->toArray(), [
+            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->withoutTrashed()],
+        ]);
+        if ($validator->fails()) {
+            return JsonResponse::make()
+                ->toast('У этого пользователя уже есть восстановленный аккаунт', ToastType::ERROR);
+        }
+
+        $item->restore();
+
+        return JsonResponse::make()
+            ->toast('Успешно', ToastType::SUCCESS);
+    }
+
+    #[AsyncMethod]
+    public function massSendNotifications(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string'],
+            'body' => ['required', 'string'],
+        ]);
+        $notification = new FcmTestNotification($validated['title'], $validated['body']);
+
+        dispatch(new NotifyAllUsers($notification));
+        dispatch(new NotifyAllUnlinkedUsers($notification));
     }
 
     /**
@@ -61,7 +147,25 @@ class UserIndexPage extends IndexPage
      */
     protected function queryTags(): array
     {
-        return [];
+        return [
+            QueryTag::make(
+                'Удалённые',
+                static function (Builder $q) {
+                    $q->onlyTrashed();
+
+                    $model = $q->getModel();
+                    if (method_exists($model, 'getCascadeDeletes')) {
+                        $with = [];
+                        foreach ($model->getCascadeDeletes() as $relation) {
+                            $with[$relation] = fn ($q) => $q->withTrashed();
+                        }
+                        $q->with($with);
+                    }
+
+                    return $q;
+                }
+            ),
+        ];
     }
 
     /**
@@ -78,7 +182,25 @@ class UserIndexPage extends IndexPage
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
     {
-        return $component;
+        return $component
+            ->stickyButtons()
+            ->columnSelection();
+    }
+
+    protected function modifyDeleteButton(
+        ActionButtonContract $button
+    ): ActionButtonContract {
+        return $button->canSee(
+            fn (User $model) => ! $model->trashed()
+        );
+    }
+
+    protected function modifyMassDeleteButton(
+        ActionButtonContract $button
+    ): ActionButtonContract {
+        return $button->canSee(
+            fn () => request()->input('query-tag') !== 'udalennye'
+        );
     }
 
     /**
@@ -90,6 +212,21 @@ class UserIndexPage extends IndexPage
     {
         return [
             ...parent::topLayer(),
+            ActionButton::make('Отправить всем уведомление')
+                ->style('margin-bottom:10px')
+                ->icon('fire')
+                ->inModal(
+                    title: 'Отправка уведомления на все устройства',
+                    name: static fn (mixed $item, ActionButtonContract $ctx): string => 'mass-send-notification',
+                    builder: fn (Modal $modal, ActionButton $ctx) => $modal->setComponents([
+                        FormBuilder::make('send-notification-form', fields: [
+                            Text::make('Заголовок', 'title')->required(),
+                            Text::make('Тело', 'body')->required(),
+                        ])
+                            ->asyncMethod('massSendNotifications')
+                            ->submit('Отправить'),
+                    ])
+                ),
         ];
     }
 

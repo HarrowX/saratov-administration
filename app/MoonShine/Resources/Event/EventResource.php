@@ -4,11 +4,18 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Event;
 
+use App\Jobs\NotifyAllUnlinkedUsers;
+use App\Jobs\NotifyAllUsers;
+use App\Jobs\NotifyFavoriteUsers;
+use App\Models\CustomLocation;
 use App\Models\Event;
 use App\MoonShine\Resources\Event\Pages\EventDetailPage;
 use App\MoonShine\Resources\Event\Pages\EventFormPage;
 use App\MoonShine\Resources\Event\Pages\EventIndexPage;
+use App\Notifications\EventCreated;
+use App\Notifications\EventOnFavoriteCreated;
 use MoonShine\Contracts\Core\PageContract;
+use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Laravel\Resources\ModelResource;
 
 /**
@@ -32,5 +39,29 @@ class EventResource extends ModelResource
             EventFormPage::class,
             EventDetailPage::class,
         ];
+    }
+
+    protected function search(): array
+    {
+        return ['id', 'name', 'description', 'organizer_name', 'organizer_phone', 'organizer_email', 'organizer_website'];
+    }
+
+    protected function afterCreated(DataWrapperContract $item): DataWrapperContract
+    {
+        $eventable = null;
+        if ($item->eventable_type != '' && $item->eventable_id != '') {
+            $eventable = $item->eventable_type::query()->where('id', $item->eventable_id)->first();
+        }
+        if ($eventable && get_class($eventable) !== CustomLocation::class) {
+            dispatch(new NotifyFavoriteUsers(new EventOnFavoriteCreated($item->name, $item->start_date->toString(), $eventable->name), $eventable));
+        }
+        if (request()->boolean('is_need_notify_all_users')) {
+            $notification = new EventCreated($item->name, $item->start_date->toString());
+
+            dispatch(new NotifyAllUsers($notification));
+            dispatch(new NotifyAllUnlinkedUsers($notification));
+        }
+
+        return $item;
     }
 }

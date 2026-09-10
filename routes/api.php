@@ -1,13 +1,16 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthAppleController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\AuthVkController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\FavoritableController;
+use App\Http\Controllers\FirebaseDeviceTokenController;
 use App\Http\Controllers\PlaceVisitController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SaratovChatController;
+use App\Http\Controllers\v2\ContentV2Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -17,6 +20,7 @@ Route::prefix('v1')->group(function () {
         ->group(function () {
             Route::post('login', 'login');
             Route::post('register', 'register');
+            Route::post('refresh', 'refresh')->name('token.refresh');
             Route::post('logout', 'logout')->middleware(['auth:sanctum']);
 
             Route::post('forgot-password', 'forgotPassword');
@@ -25,6 +29,11 @@ Route::prefix('v1')->group(function () {
         });
 
     Route::post('auth/vk/token/exchange', [AuthVkController::class, 'exchangeToken']);
+    Route::post('auth/apple/token/exchange', [AuthAppleController::class, 'exchangeToken']);
+
+    Route::prefix('firebase')->group(static function () {
+        Route::post('fresh-device-token', FirebaseDeviceTokenController::class)->middleware(['auth:sanctum']);
+    });
 
     Route::prefix('users')->group(function () {
         Route::middleware(['auth:sanctum'])
@@ -32,11 +41,17 @@ Route::prefix('v1')->group(function () {
             ->group(function () {
                 Route::get('me', 'show');
                 Route::put('me', 'update');
+                Route::delete('me', 'delete');
+
+                Route::get('me/notifications', 'notifications');
+                Route::post('me/notifications/all-read', 'readAllNotifications');
+                Route::delete('me/notifications/clear-read', 'clearReadNotifications');
+                Route::post('me/notifications/{id}/read', 'readNotification');
+                Route::delete('me/notifications/{id}', 'deleteNotification');
             });
     });
 
     Route::controller(ContentController::class)
-        ->middleware(['auth:sanctum'])
         ->group(function () {
             Route::prefix('places')->group(function () {
                 Route::get('hotels', 'hotels');
@@ -80,12 +95,15 @@ Route::prefix('v1')->group(function () {
 
             Route::get('excursions', 'indexExcursion');
             Route::get('guide-tours', 'indexGuideTour');
+            Route::get('events', 'indexEvent');
 
             Route::post('excursions/{id}', 'favoriteExcursion');
             Route::post('guide-tours/{id}', 'favoriteGuideTour');
+            Route::post('events/{id}', 'favoriteEvent');
 
             Route::delete('excursions/{id}', 'unfavoriteExcursion');
             Route::delete('guide-tours/{id}', 'unfavoriteGuideTour');
+            Route::delete('events/{id}', 'unfavoriteEvent');
 
         });
 
@@ -103,10 +121,25 @@ Route::prefix('v1')->group(function () {
         ->middleware(['auth:sanctum'])
         ->group(function () {
             Route::post('send', [SaratovChatController::class, 'processUserMessage']);
-            // TODO: not working
-            // Route::post('reset', [SaratovChatController::class, 'resetDialog']);
             Route::get('messages', [SaratovChatController::class, 'getAllMessages']);
         });
     Route::post('contact-us/send', [ContactUsController::class, 'store'])
         ->middleware(['auth:sanctum']);
+});
+
+Route::prefix('v2')->group(function () {
+    Route::controller(ContentV2Controller::class)
+        ->group(function () {
+            Route::prefix('places')->group(function () {
+                Route::get('hotels', 'listHotels');
+
+                Route::get('restaurants', 'listRestaurants');
+
+                Route::get('attractions', 'listAttractions');
+            });
+
+            Route::get('excursions', 'listExcursions');
+
+            Route::get('events', 'listEvents');
+        });
 });

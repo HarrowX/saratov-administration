@@ -16,7 +16,7 @@
                     </p>
                 </div>
                 <div data-aos="fade-left" class="min-w-full md:min-w-88 lg:min-w-146 h-88 xl:h-90 3xl:h-auto 3xl:min-w-237.5">
-                    <img src="{{asset('/images/4fe8539f70401070351fe8228c84deaf619dded8.jpg')}}" class="rounded-md md:rounded-2xl">
+                    <img src="{{asset('/images/4fe8539f70401070351fe8228c84deaf619dded8.webp')}}" class="rounded-md md:rounded-2xl">
                 </div>
             </div>
         </div>
@@ -25,9 +25,9 @@
     @livewire('saratov-ai')
 
     <!-- Section with tour cards -->
-    <section class="bg-white pb-10 sm:pb-15 xl:pb-20 3xl:pb-26">
-        <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-4 sm:px-10">
-            <div class="text-center mb-5 3xl:mb-12" data-aos="fade-up">
+    <section id="cards" class="bg-white pb-10 sm:pb-15 xl:pb-20 3xl:pb-26">
+        <div class="max-w-6xl 3xl:max-w-427 mx-auto px-4 sm:px-10">
+            <div class="text-center mb-5 3xl:mb-12">
                 <h2 class="title-big">Популярные экскурсии в Саратове</h2>
                 <p class="text text-gray-600 content-center">Лучшие экскурсии от профессиональных гидов и местных жителей.</p>
             </div>
@@ -138,18 +138,20 @@
 {{--                </div>--}}
 {{--            </div>--}}
 
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 lg:p-6 xl:gap-y-12">
-                    @foreach ($excursions as $excursion)
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 xl:gap-y-12">
+                    @foreach ($this->excursions as $excursion)
                         <div class="card bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            <div class="card-content group p-5 relative grid grid-rows-subgrid content-between row-span-2 gap-3 h-full font-['FindSansPro']">
+                            <div class="card-content group p-5 relative h-full font-['FindSansPro'] grid grid-rows-[auto_1fr_auto] content-between row-span-2 gap-3">
                                 <div>
                                     <div class="overflow-hidden rounded-[7px] sm:rounded-[19px]">
-                                        <img src="{{ $excursion->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $excursion->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
+                                        <a href="{{ route('single-excursion', [ 'excursion' => $excursion->slug ]) }}">
+                                            <img src="{{ $excursion->getPrimaryThumbImageUrl() }}" alt="{{ $excursion->getAltPrimaryImage() }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
+                                        </a>
                                         <livewire:favorite-mini-button :object="$excursion"/>
                                     </div>
                                 </div>
-                                <a href="{{ route('single-excursion', ['excursion' => $excursion->slug]) }}" class="flex flex-col gap-5">
-                                    <h2 class="card-title text-lg lg:text-xl 3xl:text-3xl font-bold line-clamp-1 group-hover:text-[#352AA2] transition-colors duration-300">{{ $excursion->name}}</h2>
+                                <a href="{{ route('single-excursion', ['excursion' => $excursion->slug]) }}" class="flex flex-col justify-between gap-5">
+                                    <h2 class="card-title text-lg lg:text-xl 3xl:text-3xl font-bold group-hover:text-[#352AA2] transition-colors duration-300">{{ $excursion->name}}</h2>
                                     <div class="flex flex-col justify-end text-sm lg:text-base 3xl:text-2xl font-light gap-3 text-[#5F5F5F]">
                                         <div class="flex flex-row text-xs sm:text-sm lg:text-base 3xl:text-[22px] font-light gap-6 text-[#5F5F5F]">
                                             <span class="flex items-center gap-2">
@@ -166,10 +168,10 @@
                                         <div class="flex flex-row justify-between items-end gap-3.5 text-xs sm:text-sm lg:text-base 3xl:text-[22px] font-light">
                                             <span class="flex items-center gap-3.5 text-[#5F5F5F]">
                                                 <i class="fa-solid fa-location-arrow text-xl xl:text-2xl"></i>
-                                                {{ $excursion->meeting_address }}
+                                                <p class="line-clamp-2">{{ $excursion->meeting_address }}</p>
                                             </span>
                                             <a href="{{ route('single-excursion', ['excursion' => $excursion->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
-                                                <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
+                                                <img src="{{asset('/images/arrow-right.png')}}" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
                                             </a>
                                         </div>
                                     </div>
@@ -178,7 +180,8 @@
                         </div>
                     @endforeach
                 </div>
-                @if($excursions->isEmpty())
+            {{ $this->excursions->links('livewire::tailwind') }}
+        @if($this->excursions->isEmpty())
                     <div class="text-center">
                         <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
                             <i class="fa fa-compass text-4xl text-[#352AA2]"></i>

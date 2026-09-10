@@ -62,7 +62,6 @@ class ViewService
             'user_agent' => request()->userAgent(),
             'created_at' => now()->toDateTimeString(),
         ];
-
         Cache::put('guest_views', $guestViews, now()->addHours(2));
 
         session()->put($sessionKey, true);

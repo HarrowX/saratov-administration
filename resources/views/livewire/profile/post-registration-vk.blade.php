@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
 use Livewire\Volt\Component;
 
-new class extends Component
-{
+new class extends Component {
     public string $email = '';
     public string $password = '';
     public string $password_confirmation = '';
@@ -19,7 +19,7 @@ new class extends Component
     {
         try {
             $validated = $this->validate([
-                'email' => ['required', 'email', 'max:255', 'unique:users,email'],
+                'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->withoutTrashed()],
                 'password' => ['required', Password::defaults(), 'confirmed:password_confirmation'],
                 'password_confirmation' => ['required', Password::defaults()],
             ]);
@@ -56,20 +56,25 @@ new class extends Component
     <form wire:submit="postRegistration" class="mt-6 space-y-5">
         <div>
             <label for="email" class="block text-sm font-medium text-gray-600 mb-1.5">Почта</label>
-            <input wire:model="email" id="update_password_password" name="email" type="email" class="{{ $inputClass }}" autocomplete="email" placeholder="example@mail.ru" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <input wire:model="email" id="update_password_password" name="email" type="email" class="{{ $inputClass }}"
+                   autocomplete="email" placeholder="example@mail.ru"/>
+            <x-input-error :messages="$errors->get('email')" class="mt-2"/>
         </div>
 
         <div>
             <label for="password" class="block text-sm font-medium text-gray-600 mb-1.5">Пароль</label>
-            <input wire:model="password" id="update_password_password" name="password" type="password" class="{{ $inputClass }}" autocomplete="new-password" placeholder="••••••••" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <input wire:model="password" id="update_password_password" name="password" type="password"
+                   class="{{ $inputClass }}" autocomplete="new-password" placeholder="••••••••"/>
+            <x-input-error :messages="$errors->get('password')" class="mt-2"/>
         </div>
 
         <div>
-            <label for="password_confirmation" class="block text-sm font-medium text-gray-600 mb-1.5">Подтвердите пароль</label>
-            <input wire:model="password_confirmation" id="update_password_password_confirmation" name="password_confirmation" type="password" class="{{ $inputClass }}" autocomplete="new-password" placeholder="••••••••" />
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+            <label for="password_confirmation" class="block text-sm font-medium text-gray-600 mb-1.5">Подтвердите
+                пароль</label>
+            <input wire:model="password_confirmation" id="update_password_password_confirmation"
+                   name="password_confirmation" type="password" class="{{ $inputClass }}" autocomplete="new-password"
+                   placeholder="••••••••"/>
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
         </div>
 
         <div class="flex items-center gap-4 pt-2">

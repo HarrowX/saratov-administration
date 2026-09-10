@@ -125,21 +125,17 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    'attractions' => [
-        'radius' => env('ATTRACTIONS_RADIUS', 10000000000000),
-    ],
-
     'visits' => [
-        'search_radius' => env('VISITS_RADIUS', 500),
+        'search_radius' => (int) env('VISITS_RADIUS', 500),
     ],
 
     'admin' => [
         'ymap_api_key' => env('YMAP_API_KEY'),
         'images' => [
-            'quality' => env('IMAGE_QUALITY', 85),
+            'quality' => (int) env('IMAGE_QUALITY', 85),
             'thumb' => [
-                'width' => env('IMAGE_THUMB_WIDTH', 500),
-                'height' => env('IMAGE_THUMB_HEIGHT', 200),
+                'width' => (int) env('IMAGE_THUMB_WIDTH', 500),
+                'height' => (int) env('IMAGE_THUMB_HEIGHT', 200),
             ],
         ],
     ],

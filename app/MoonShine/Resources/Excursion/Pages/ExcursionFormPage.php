@@ -8,11 +8,11 @@ use App\Models\Attraction;
 use App\Models\CustomPoint;
 use App\Models\Hotel;
 use App\Models\Restaurant;
+use App\MoonShine\Fields\CompressedCropperImage;
 use App\MoonShine\Resources\Attachment\AttachmentResource;
 use App\MoonShine\Resources\Excursion\ExcursionResource;
 use App\MoonShine\Resources\ExcursionPoint\ExcursionPointResource;
 use App\MoonShine\Resources\GuidedTour\GuidedTourResource;
-use Chocoway\MoonshineCompressedImage\Fields\CompressedImage;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
@@ -115,11 +115,12 @@ class ExcursionFormPage extends FormPage
             RelationRepeater::make('Изображения', 'attachments', resource: AttachmentResource::class)
                 ->fields([
                     ID::make(),
-                    CompressedImage::make('Файл', 'link')
+                    CompressedCropperImage::make('Файл', 'link')
                         ->format('webp')
                         ->quality((int) config('app.admin.images.quality'))
                         ->thumb((int) config('app.admin.images.thumb.width'), (int) config('app.admin.images.thumb.height')),
                     Number::make('Порядковый номер', 'order')->default(0),
+                    Text::make('Подпись к картинке', 'alt_name'),
                 ])->removable(),
 
             RelationRepeater::make('Точки маршрута', 'points', resource: ExcursionPointResource::class)
@@ -128,7 +129,7 @@ class ExcursionFormPage extends FormPage
                     ID::make(),
                     Number::make('Порядок', 'order')->default(0),
 
-                    MorphTo::make('Точка', 'pointable', resource: ExcursionPointResource::class)
+                    MorphTo::make('Точка', 'excursionPointable', resource: ExcursionPointResource::class)
                         ->types([
                             Attraction::class => ['name', 'Достопримечательность'],
                             Restaurant::class => ['name', 'Ресторан'],

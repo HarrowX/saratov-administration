@@ -2,22 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\AttractionResource;
-use App\Http\Resources\EventResource;
-use App\Http\Resources\ExcursionResource;
-use App\Http\Resources\GuidedTourResource;
-use App\Http\Resources\HotelResource;
-use App\Http\Resources\RestaurantResource;
+use App\Http\Resources\v1\AttractionResource;
+use App\Http\Resources\v1\EventResource;
+use App\Http\Resources\v1\ExcursionResource;
+use App\Http\Resources\v1\GuidedTourResource;
+use App\Http\Resources\v1\HotelResource;
+use App\Http\Resources\v1\RestaurantResource;
 use App\Models\Attraction;
 use App\Models\Event;
 use App\Models\Excursion;
 use App\Models\GuidedTour;
 use App\Models\Hotel;
 use App\Models\Restaurant;
+use App\Services\ViewService;
 use Illuminate\Http\Request;
 
 class ContentController extends Controller
 {
+    protected ViewService $viewService;
+
+    public function __construct(ViewService $viewService)
+    {
+        $this->viewService = $viewService;
+    }
+
     public function hotels(Request $request)
     {
         $term = $request->string('term', '');
@@ -41,6 +49,7 @@ class ContentController extends Controller
         if (! $model) {
             return response()->json(status: 404);
         }
+        $this->viewService->calculate($request->id, Hotel::class);
 
         return HotelResource::make($model);
     }
@@ -69,6 +78,8 @@ class ContentController extends Controller
             return response()->json(status: 404);
         }
 
+        $this->viewService->calculate($request->id, Restaurant::class);
+
         return RestaurantResource::make($model);
     }
 
@@ -96,12 +107,14 @@ class ContentController extends Controller
             return response()->json(status: 404);
         }
 
+        $this->viewService->calculate($request->id, Attraction::class);
+
         return AttractionResource::make($model);
     }
 
     public function excursions(Request $request)
     {
-        $query = Excursion::query()->with('attachments');
+        $query = Excursion::query()->with('points')->with('attachments');
 
         $perPage = $request->integer('per_page', 15);
 
@@ -117,6 +130,8 @@ class ContentController extends Controller
         if (! $model) {
             return response()->json(status: 404);
         }
+
+        $this->viewService->calculate($request->id, Excursion::class);
 
         return ExcursionResource::make($model);
     }
@@ -145,6 +160,8 @@ class ContentController extends Controller
             return response()->json(status: 404);
         }
 
+        $this->viewService->calculate($request->id, GuidedTour::class);
+
         return GuidedTourResource::make($model);
     }
 
@@ -171,6 +188,8 @@ class ContentController extends Controller
         if (! $model) {
             return response()->json(status: 404);
         }
+
+        $this->viewService->calculate($request->id, Event::class);
 
         return EventResource::make($model);
     }

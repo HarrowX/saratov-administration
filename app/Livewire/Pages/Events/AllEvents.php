@@ -8,10 +8,14 @@ use App\Models\CustomLocation;
 use App\Models\Event;
 use App\Models\Hotel;
 use App\Models\Restaurant;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class AllEvents extends Component
 {
+    use WithPagination;
+
     public $date = '';
 
     public $search = '';
@@ -107,13 +111,11 @@ class AllEvents extends Component
         }
     }
 
-    public function render()
+    #[Computed]
+    public function events()
     {
-        // TODO: необходима оптимизация:
-        // стоит вынести тяжелые запросы из render()
-        $categories = Category::where('is_active', true)->get();
-        $events = Event::query()
-            ->with('categories', 'attachments', 'location')
+        return Event::query()
+            ->with(['categories', 'attachments', 'eventable', 'favorites', 'views'])
             ->when($this->date, function ($query) {
                 return $query->whereDate('start_date', $this->date);
             })
@@ -134,14 +136,21 @@ class AllEvents extends Component
                 return $query->where('age_restriction', $this->ageRestriction);
             })
             ->when($this->selectedLocation, function ($query) {
-                return $query->whereHas('location', function ($q) {
+                return $query->whereHas('eventable', function ($q) {
                     $q->where('id', $this->selectedLocation);
                 });
             })
-            ->orderBy('start_date')->get();
+            ->orderBy('start_date')
+            ->paginate(15);
+    }
+
+    public function render()
+    {
+        // TODO: необходима оптимизация:
+        // стоит вынести тяжелые запросы из render()
+        $categories = Category::where('is_active', true)->get();
 
         return view('livewire.pages.events.all-events', [
-            'events' => $events,
             'categories' => $categories,
         ]);
     }

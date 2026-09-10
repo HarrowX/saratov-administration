@@ -45,21 +45,21 @@ class EventIndexPage extends IndexPage
     protected function fields(): iterable
     {
         return [
-            ID::make(),
-            Text::make('Название', 'name')->unescape(),
-            Slug::make('Слаг', 'slug')->from('name')->unique(),
-            Textarea::make('Описание', 'description')->unescape(),
-            Number::make('Возрастное ограничение', 'age_restriction'),
+            ID::make()->sortable(),
+            Text::make('Название', 'name')->sortable()->unescape(),
+            Slug::make('Слаг', 'slug')->sortable()->from('name')->unique(),
+            Textarea::make('Описание', 'description')->sortable()->unescape(),
+            Number::make('Возрастное ограничение', 'age_restriction')->sortable(),
             BelongsToMany::make('Категории', 'categories', resource: EventCategoryResource::class)
                 ->selectMode()
                 ->searchable(),
-            Date::make('Начало', 'start_date')->withTime(),
-            Date::make('Конец', 'end_date')->withTime(),
-            Text::make('Название организации', 'organizer_name')->nullable(),
-            Text::make('Телефон организатора', 'organizer_phone')->nullable(),
-            Email::make('Email организатора', 'organizer_email')->nullable(),
-            Url::make('Сайт организатора', 'organizer_website')->nullable(),
-            MorphTo::make('Локация', 'location')
+            Date::make('Начало', 'start_date')->sortable()->withTime(),
+            Date::make('Конец', 'end_date')->sortable()->withTime(),
+            Text::make('Название организации', 'organizer_name')->sortable()->nullable(),
+            Text::make('Телефон организатора', 'organizer_phone')->sortable()->nullable(),
+            Email::make('Email организатора', 'organizer_email')->sortable()->nullable(),
+            Url::make('Сайт организатора', 'organizer_website')->sortable()->nullable(),
+            MorphTo::make('Локация', 'eventable')
                 ->types([
                     Attraction::class => ['name', 'Достопримечательность'],
                     Hotel::class => ['name', 'Отель'],
@@ -71,6 +71,7 @@ class EventIndexPage extends IndexPage
                     ID::make(),
                     Image::make('Файл', 'link'),
                     Number::make('Порядковый номер', 'order')->default(0),
+                    Text::make('Подпись к картинке', 'alt_name'),
                 ]),
         ];
     }
@@ -110,7 +111,9 @@ class EventIndexPage extends IndexPage
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
     {
-        return $component;
+        return $component
+            ->stickyButtons()
+            ->columnSelection();
     }
 
     /**

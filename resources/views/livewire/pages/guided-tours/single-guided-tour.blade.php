@@ -17,8 +17,8 @@
                 <span class="text-xs xs:text-sm sm:text-lg 2xl:text-3xl font-medium">
                     {{ $isFavorite ? 'В избранном' : 'В избранное' }}
                 </span>
-                <span class="favorite-count ml-2 text-xs sm:text-base 2xl:text-xl font-bold flex justify-center items-center size-5 sm:size-8 rounded-full {{ $isFavorite ? 'bg-red-400 text-white' : 'bg-red-400/80 text-white' }} transition-colors shadow-lg">
-                {{ $favoritesCount }}
+                <span class="favorite-count ml-2 text-[10px] sm:text-base 2xl:text-xl font-bold flex justify-center items-center min-w-5 h-5 sm:min-w-8 sm:h-8 px-1 sm:px-2 rounded-full {{ $isFavorite ? 'bg-red-400 text-white' : 'bg-red-400/80 text-white' }} transition-colors shadow-lg">
+                   {{ $favoritesCount }}
                 </span>
             </button>
         </div>
@@ -27,7 +27,7 @@
     <section class="features-section flex justify-center pt-10 sm:pt-20 xl:pt-30 bg-white">
         <div class="flex flex-col md:flex-row gap-2.5 sm:gap-5 md:gap-7 3xl:gap-17.5 max-w-6xl 3xl:max-w-421 mx-auto px-4 sm:px-10">
             <div class="relative rounded-2xl overflow-hidden min-w-full md:min-w-95 lg:min-w-120 3xl:min-w-202 h-90 md:h-135 lg:h-auto">
-                <img src="{{ $guidedTour->attachments?->get(0)?->url() ?? "" }}" alt="Изображение {{ $guidedTour->name }}">
+                <img src="{{ $guidedTour->getPrimaryImageUrl() }}" alt="{{ $guidedTour->getAltPrimaryImage() }}">
 {{--                <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-lg flex items-center gap-1.5">--}}
 {{--                    <i class="fas fa-star text-yellow-500"></i>--}}
 {{--                    <span class="text-sm font-semibold text-black">4.9</span>--}}
@@ -39,12 +39,20 @@
                     <p>{{ $guidedTour->short_description }}</p>
                     <p>Стаж работы: {{ $guidedTour->experience }}</p>
                     <p>{{ $guidedTour->description }}</p>
-                    <a href="tel:{{ $guidedTour->phone }}" class="flex flex-row gap-5 3xl:gap-10 w-fit hover:text-[#352AA2] transition-colors duration-300">
-                        <div class="size-4 3xl:size-6">
-                            <i class="fa fa-phone text-lg lg:text-2xl"></i>
-                        </div>
-                       <p>{{ $guidedTour->phone }}</p>
-                    </a>
+                    @php
+                        $phones = array_map(fn (string $item) => trim($item), explode(',', $guidedTour->phone));
+                    @endphp
+                    @if(!empty($phones))
+                        @foreach($phones as $phone)
+                            <a href="tel:{{ $phone }}" class="flex flex-row gap-5 3xl:gap-10 w-fit hover:text-[#352AA2] transition-colors duration-300">
+                                <div class="size-4 3xl:size-6">
+                                    <i class="fa fa-phone text-lg lg:text-2xl"></i>
+                                </div>
+                                <p>{{ $phone }}</p>
+                            </a>
+                        @endforeach
+                    @endif
+
                     <a href="mailto:{{ $guidedTour->email }}" class="flex flex-row gap-5 3xl:gap-10 3xl:ml-3 w-fit hover:text-[#352AA2] transition-colors duration-300">
                         <div class="w-4 h-6 3xl:w-4.5 3xl:h-8">
                             <i class="fa fa-question text-lg lg:text-2xl"></i>
@@ -54,12 +62,12 @@
                     <div class="flex flex-row gap-5 justify-start">
                         @if($guidedTour->max)
                             <a href="{{$guidedTour->max}}" target="_blank">
-                                <img src="{{asset('images/max-dark.svg')}}" class="icon size-10 hover:scale-130 transition-transform duration-300">
+                                <img src="{{asset('images/max-dark.svg')}}" class="icon size-10 hover:scale-130 transition-transform duration-300" alt="значок макса">
                             </a>
                         @endif
                         @if($guidedTour->vk)
                             <a href="{{$guidedTour->vk}}" target="_blank">
-                                <img src="{{asset('images/vk.png')}}" class="icon size-10 hover:scale-130 transition-transform duration-300">
+                                <img src="{{asset('images/vk.png')}}" class="icon size-10 hover:scale-130 transition-transform duration-300" alt="значок вк">
                             </a>
                         @endif
 
@@ -80,7 +88,7 @@
                             <div class="card-content group p-5 relative grid grid-rows-subgrid content-between row-span-2 gap-3 h-full font-['FindSansPro']">
                                 <div class="flex flex-col gap-5">
                                     <div class="overflow-hidden rounded-[7px] sm:rounded-[19px]">
-                                        <img src="{{ $excursion->attachments?->get(0)?->url() ?? asset('images/default.jpg') }}" alt="Изображение {{ $excursion->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
+                                        <img src="{{ $excursion->getPrimaryThumbImageUrl() }}" alt="{{$excursion->getAltPrimaryImage()}}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
                                     </div>
                                     <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold">{{ $excursion->name}}</h2>
                                     <div class="flex flex-col justify-end text-sm lg:text-base 3xl:text-2xl font-light gap-3 text-[#5F5F5F]">
@@ -103,7 +111,7 @@
                                             {{ $excursion->meeting_address }}
                                         </span>
                                         <a href="{{ route('single-excursion', ['excursion' => $excursion->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
-                                            <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
+                                            <img src="{{asset('/images/arrow-right.png')}}" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
                                         </a>
                                     </div>
                                 </div>

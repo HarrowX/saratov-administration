@@ -45,12 +45,13 @@ class ExcursionIndexPage extends IndexPage
     protected function fields(): iterable
     {
         return [
-            ID::make(),
-            Text::make('Название', 'name')->unescape()->required(),
-            Slug::make('Слаг', 'slug')->from('name')->unique(),
-            BelongsTo::make('Оператор', 'guide', 'name', GuidedTourResource::class),
-            Textarea::make('Описание', 'description')->unescape()->required(),
+            ID::make()->sortable(),
+            Text::make('Название', 'name')->sortable()->unescape()->required(),
+            Slug::make('Слаг', 'slug')->sortable()->from('name')->unique(),
+            BelongsTo::make('Оператор', 'guide', 'name', GuidedTourResource::class)->columnSelection(false), // TODO еще один баг от moonshine который скорет title в таблице, но самих операторов нет и все поплывет, поэтому отключаем возможность скрытие оператора, bug report точно будет
+            Textarea::make('Описание', 'description')->sortable()->unescape()->required(),
             Select::make('Тип экскурсии', 'type')
+                ->sortable()
                 ->options([
                     'пеший' => 'Пеший',
                     'автобусный' => 'Автобусный',
@@ -60,50 +61,63 @@ class ExcursionIndexPage extends IndexPage
                 ])
                 ->required(),
             Number::make('Длительность (минут)', 'duration')
+                ->sortable()
                 ->min(1)
                 ->required(),
             Number::make('Дистанция (км)', 'distance')
+                ->sortable()
                 ->min(0)
                 ->step(0.1),
             Select::make('Сложность', 'difficulty')
+                ->sortable()
                 ->options([
                     'Легко' => 'Легко',
                     'Средне' => 'Средне',
                     'Тяжело' => 'Тяжело',
                 ]),
             Number::make('Мин. размер группы', 'group_size_min')
-                ->min(1),
+                ->sortable()->min(1),
             Number::make('Макс. размер группы', 'group_size_max')
-                ->min(1),
+                ->sortable()->min(1),
             Number::make('Цена взрослый', 'price_adult')
+                ->sortable()
                 ->min(0)
                 ->step(1)
                 ->buttons(),
 
             Number::make('Цена детский', 'price_child')
+                ->sortable()
                 ->min(0)
                 ->step(1)
                 ->buttons(),
 
             Number::make('Цена группа', 'price_group')
+                ->sortable()
                 ->min(0)
                 ->step(1)
                 ->buttons(),
-            Checkbox::make('Бесплатно', 'is_free'),
+            Checkbox::make('Бесплатно', 'is_free')
+                ->sortable(),
             Text::make('Возрастное ограничение', 'age_restriction')
+                ->sortable()
                 ->placeholder('12+'),
             Text::make('Место встречи', 'meeting_point')
+                ->sortable()
                 ->required(),
             Text::make('Адрес встречи', 'meeting_address')
+                ->sortable()
                 ->required(),
             Select::make('Тип расписания', 'schedule_type')
+                ->sortable()
                 ->options([
                     'По расписанию' => 'По расписанию',
                     'По запросу' => 'По запросу',
                 ])
                 ->required(),
-            Checkbox::make('Бронирование включено', 'booking_enabled'),
+            Checkbox::make('Бронирование включено', 'booking_enabled')
+                ->sortable(),
             Select::make('Статус', 'status')
+                ->sortable()
                 ->options([
                     'Активный' => 'Активный',
                     'Неактивный' => 'Неактивный',
@@ -120,7 +134,7 @@ class ExcursionIndexPage extends IndexPage
             RelationRepeater::make('Точки маршрута', 'points', resource: ExcursionPointResource::class)
                 ->fields([
                     Number::make('Порядок', 'order')->default(0),
-                    MorphTo::make('Точка', 'pointable', resource: ExcursionPointResource::class)
+                    MorphTo::make('Точка', 'excursionPointable', resource: ExcursionPointResource::class)
                         ->types([
                             Attraction::class => ['name', 'Достопримечательность'],
                             Restaurant::class => ['name', 'Ресторан'],
@@ -128,6 +142,7 @@ class ExcursionIndexPage extends IndexPage
                             CustomPoint::class => ['name', 'Дополнительная точка экскурсии'],
                         ]),
                     Number::make('Время на точке', 'duration_minutes')->nullable(),
+                    Text::make('Подпись к картинке', 'alt_name'),
                 ])
                 ->creatable()
                 ->removable(),
@@ -169,7 +184,9 @@ class ExcursionIndexPage extends IndexPage
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
     {
-        return $component;
+        return $component
+            ->stickyButtons()
+            ->columnSelection();
     }
 
     /**

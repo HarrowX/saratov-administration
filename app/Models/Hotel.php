@@ -2,14 +2,24 @@
 
 namespace App\Models;
 
-use App\Http\Resources\HotelResource;
+use App\HasSchedules;
+use App\Http\Resources\v1\HotelResource;
+use App\Traits\HasAttachments;
+use App\Traits\HasEvents;
+use App\Traits\HasExcursionPoints;
+use App\Traits\HasFavorites;
+use App\Traits\HasViews;
+use App\Traits\HasVisits;
 use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 #[UseResource(HotelResource::class)]
 class Hotel extends Model
 {
+    use HasAttachments, HasEvents, HasExcursionPoints, HasFavorites, HasSchedules, HasViews, HasVisits;
+
+    protected ?string $defaultImagePath = '/images/image-coming-soon-hotel.webp';
+
     protected $fillable = [
         'name',
         'type',
@@ -25,38 +35,13 @@ class Hotel extends Model
         'worktime' => 'array',
     ];
 
-    public function attachments(): MorphMany
-    {
-        return $this->morphMany(Attachment::class, 'attachable');
-    }
-
-    public function excursionPoints(): MorphMany
-    {
-        return $this->morphMany(ExcursionPoint::class, 'pointable');
-    }
-
-    public function events(): MorphMany
-    {
-        return $this->morphMany(Event::class, 'location');
-    }
-
     public function getRouteKeyName(): string
     {
         return 'slug';
     }
 
-    public function favorites(): MorphMany
+    protected function getDefaultImagePath(): ?string
     {
-        return $this->morphMany(Favorite::class, 'favoriteable');
-    }
-
-    public function visits(): MorphMany
-    {
-        return $this->morphMany(PlaceVisit::class, 'visitable');
-    }
-
-    public function views(): MorphMany
-    {
-        return $this->morphMany(HistoryView::class, 'viewable');
+        return asset('images/coming-soon-hotel.webp');
     }
 }

@@ -3,15 +3,18 @@
 namespace App\Livewire\Pages\Attractions;
 
 use App\Models\Attraction;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class AllAttractions extends Component
 {
-    public $attractions;
+    use WithPagination;
 
-    public function mount()
+    #[Computed]
+    public function attractions()
     {
-        $this->attractions = Attraction::with('attachments')->get();
+        return Attraction::with(['attachments', 'favorites', 'views'])->paginate(15);
     }
 
     public function render()

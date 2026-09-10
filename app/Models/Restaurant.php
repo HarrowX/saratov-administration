@@ -2,14 +2,22 @@
 
 namespace App\Models;
 
-use App\Http\Resources\RestaurantResource;
+use App\HasSchedules;
+use App\Http\Resources\v1\RestaurantResource;
+use App\Traits\HasAttachments;
+use App\Traits\HasEvents;
+use App\Traits\HasExcursionPoints;
+use App\Traits\HasFavorites;
+use App\Traits\HasViews;
+use App\Traits\HasVisits;
 use Illuminate\Database\Eloquent\Attributes\UseResource;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 #[UseResource(RestaurantResource::class)]
 class Restaurant extends Model
 {
+    use HasAttachments, HasEvents, HasExcursionPoints, HasFavorites, HasSchedules, HasViews, HasVisits;
+
     protected $fillable = [
         'name',
         'slug',
@@ -35,38 +43,13 @@ class Restaurant extends Model
         'worktime' => 'array',
     ];
 
-    public function attachments(): MorphMany
-    {
-        return $this->morphMany(Attachment::class, 'attachable');
-    }
-
-    public function excursionPoints()
-    {
-        return $this->morphMany(ExcursionPoint::class, 'pointable');
-    }
-
-    public function events(): MorphMany
-    {
-        return $this->morphMany(Event::class, 'location');
-    }
-
     public function getRouteKeyName(): string
     {
         return 'slug';
     }
 
-    public function favorites(): MorphMany
+    protected function getDefaultImagePath(): ?string
     {
-        return $this->morphMany(Favorite::class, 'favoriteable');
-    }
-
-    public function visits(): MorphMany
-    {
-        return $this->morphMany(PlaceVisit::class, 'visitable');
-    }
-
-    public function views(): MorphMany
-    {
-        return $this->morphMany(HistoryView::class, 'viewable');
+        return asset('images/coming-soon-restaurant.webp');
     }
 }

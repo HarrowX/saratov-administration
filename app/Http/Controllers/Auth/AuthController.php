@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\DTOs\ChangePasswordDTO;
 use App\DTOs\ForgotPasswordDTO;
 use App\DTOs\LoginDTO;
+use App\DTOs\LogoutDTO;
 use App\DTOs\PostRegistrationDTO;
 use App\DTOs\RegisterDTO;
 use App\Exceptions\Auth\BadCredentialsException;
@@ -23,9 +24,9 @@ class AuthController extends Controller
     {
         $request->validate();
 
-        $token = $this->authService->register($request);
+        $tokens = $this->authService->register($request);
 
-        return response()->json($token, 201);
+        return response()->json($tokens, 201);
     }
 
     public function login(LoginDTO $request)
@@ -33,19 +34,29 @@ class AuthController extends Controller
         try {
             $request->validate();
 
-            $token = $this->authService->login($request);
+            $tokens = $this->authService->login($request);
 
-            return response()->json($token, 200);
+            return response()->json($tokens, 200);
         } catch (BadCredentialsException $exception) {
             return response()->json(['error' => $exception->getMessage()], $exception->getCode());
         }
     }
 
-    public function logout()
+    public function logout(LogoutDTO $dto)
     {
-        $this->authService->logout();
+        $dto->validate();
+        if ($this->authService->logout(auth()->user(), $dto)) {
+            return response(status: 204);
+        }
 
-        return response(status: 204);
+        return response(status: 404);
+    }
+
+    public function refresh()
+    {
+        $refreshToken = request()->string('refresh_token');
+
+        return $this->authService->refresh($refreshToken);
     }
 
     public function forgotPassword(ForgotPasswordDTO $request)

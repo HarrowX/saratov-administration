@@ -4,7 +4,7 @@
 
 <div>
     <section id="home" class="hero-section pt-21 min-h-100 md:min-h-screen flex flex-col gap-17 items-center justify-center relative">
-        <div class="absolute inset-0 bg-no-repeat bg-cover" style="background-image: url('/images/bg-events.jpg');">
+        <div class="absolute inset-0 bg-no-repeat bg-cover" style="background-image: url('/images/bg-events.webp');">
             <div class="absolute inset-0 bg-[rgba(239,230,215,0.73)]" style="background-color:#45618696;"></div>
         </div>
         <div class="relative z-10 text-center text-white">
@@ -83,7 +83,7 @@
                 </div>
             </div>
 
-        @if($events->isEmpty())
+        @if($this->events->isEmpty())
             <div class="text-center py-20">
                 <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
                     <i class="fas fa-calendar-times text-4xl text-[#352AA2]"></i>
@@ -102,18 +102,16 @@
             </div>
         @endif
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 xl:gap-y-12">
-                @foreach ($events as $event)
+            <div id="cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 xl:gap-y-12">
+                @foreach ($this->events as $event)
                     <div class="card bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div class="card-content group p-2 sm:p-5 h-full font-['FindSansPro'] grid grid-rows-[auto_1fr_auto] row-span-2 gap-3">
                             <div class="flex flex-col gap-3 xl:gap-5">
                                 <div class="relative overflow-hidden rounded-[7px] sm:rounded-[19px]">
-                                    <img src="{{ $event->attachments?->get(0)?->url() ?? "" }}" alt="{{ $event->name }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 sm:h-70 md:h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
-                                    @if($event->age_restriction)
-                                        <span class="absolute right-2 top-2 size-10 xl:size-12 3xl:size-15 bg-[#A855F7] rounded-md xl:rounded-xl flex items-center justify-center text-white text-sm xl:text-base 3xl:text-xl shadow-lg">
-                                            {{ $event->age_restriction }} +
-                                        </span>
-                                    @endif
+                                    <a href="{{ route('single-event', ['event' => $event->slug]) }}">
+                                        <img src="{{ $event->getPrimaryThumbImageUrl() }}" alt="{{ $event->getAltPrimaryImage() }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 sm:h-70 md:h-50 3xl:h-81.75 object-cover group-hover:scale-110 transition-transform duration-500">
+                                    </a>
+                                    <livewire:favorite-mini-button :position='"right-2 top-2"' :object="$event"/>
                                 </div>
                                 <a href="{{route('single-event', ['event' => $event->slug])}}" class="flex flex-col gap-2">
                                     <h2 class="card-title text-start text-lg xl:text-xl 3xl:text-3xl group-hover:text-[#352AA2] transition-colors duration-300 font-bold">
@@ -128,25 +126,29 @@
                                 </a>
                             </div>
                             <div class="flex flex-col gap-1 justify-end h-full font-['FindSansPro']">
-                                @if($event->categories && $event->categories->count() > 0)
-                                    <div class="flex flex-wrap gap-1.5 pt-1">
+                                <div class="flex flex-wrap gap-1.5 pt-1">
+                                    @if($event->categories && $event->categories->count() > 0)
                                         @foreach($event->categories as $category)
                                             <span class="inline-block p-0.5 rounded-full bg-linear-to-r from-[#A556F7] to-[#2663EB]">
-                                            <span class="block px-3 py-0.5 text-[10px] xl:text-xs rounded-full"
-                                                  style="background: rgba(255,255,255,0.9);">
+                                            <span class="block px-3 py-0.5 text-[10px] xl:text-xs rounded-full bg-[#ffffffe6]">
                                                 {{ $category->name }}
                                             </span>
                                         </span>
                                         @endforeach
-                                    </div>
-                                @endif
+                                    @endif
+                                    @if($event->age_restriction)
+                                        <span class="px-2 py-0.5 text-white text-[10px] xl:text-xs flex justify-center items-center rounded-full bg-[#A855F7]">
+                                        {{ $event->age_restriction }} +
+                                    </span>
+                                    @endif
+                                </div>
                                 <div class="flex flex-row justify-between items-end gap-3.5 text-xs xl:text-sm font-light">
                                     <span class="flex items-center gap-1 font-medium text-[#5F5F5F]">
                                         <i class="fas fa-map-marker-alt text-base xl:text-xl"></i>
-                                         {{ $event->location->name ?? 'Адрес не указан' }}
+                                         {{ $event->eventable->name ?? 'Адрес не указан' }}
                                     </span>
                                     <a href="{{ route('single-event', ['event' => $event->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
-                                        <img src="/images/Arrow 2.png" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
+                                        <img src="{{asset('/images/arrow-right.png')}}" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
                                     </a>
                                 </div>
                             </div>
@@ -154,6 +156,7 @@
                     </div>
                 @endforeach
             </div>
+            {{ $this->events()->links('livewire::tailwind') }}
             @endif
         </div>
     </section>

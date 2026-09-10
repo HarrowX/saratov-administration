@@ -4,9 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="icon" type="image/jpeg" href="{{asset('/images/logo.svg')}}">
-        <link rel="shortcut icon" type="image/jpeg" href="{{asset('/images/logo.svg')}}">
-        <link rel="apple-touch-icon" href="{{asset('/images/logo.svg')}}">
+        <link rel="icon" type="image/svg+xml" href="{{asset('/images/logo-invert.svg')}}">
+        <link rel="shortcut icon" type="image/svg+xml" href="{{asset('/images/logo-invert.svg')}}"> <!-- TODO может быть надо форма .ico для старых браузеров -->
+        <link rel="apple-touch-icon" href="{{asset('/images/logo-invert.svg')}}"> <!-- TODO может быть apple safari не поддерживает svg в качестве apple-touch-icon -->
 
         <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 
@@ -54,14 +54,14 @@
                             <div class="flex flex-col space-y-3">
                                 <a href="#" class="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors duration-300 flex items-center justify-center space-x-3">
                                     <img src="{{asset('/images/appstore.svg')}}" alt="Иконка App Store" class="icon size-10 rounded-md">
-                                    <div class="text-left">
+                                    <div class="text-left w-20">
                                         <div class="text-xs">Загрузите в</div>
                                         <div class="font-semibold">App Store</div>
                                     </div>
                                 </a>
                                 <a href="#" class="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors duration-300 flex items-center justify-center space-x-3">
                                     <img src="{{asset('/images/rustore.svg')}}" alt="Иконка Rustore" class="icon size-10 rounded-md">
-                                    <div class="text-left">
+                                    <div class="text-left w-20">
                                         <div class="text-xs">Доступно в</div>
                                         <div class="font-semibold">RuStore</div>
                                     </div>

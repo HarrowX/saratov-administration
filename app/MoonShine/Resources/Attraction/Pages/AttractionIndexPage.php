@@ -23,7 +23,6 @@ use MoonShine\UI\Fields\Json;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Phone;
 use MoonShine\UI\Fields\Select;
-use MoonShine\UI\Fields\Switcher;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 use MoonShine\UI\Fields\Url;
@@ -42,14 +41,14 @@ class AttractionIndexPage extends IndexPage
     protected function fields(): iterable
     {
         return [
-            ID::make(),
-            Text::make('Название', 'name')->unescape(),
-            Slug::make('Слаг', 'slug')->from('name')->unique(),
-            Text::make('Краткое описание', 'short_description')->unescape(),
-            Textarea::make('Описание', 'description')->unescape(),
+            ID::make()->sortable(),
+            Text::make('Название', 'name')->unescape()->sortable(),
+            Slug::make('Слаг', 'slug')->from('name')->unique()->sortable(),
+            Text::make('Краткое описание', 'short_description')->unescape()->sortable(),
+            Textarea::make('Описание', 'description')->unescape()->sortable(),
             Json::make('Рабочее время', 'worktime')->keyValue('День', 'Время'),
-            Phone::make('Номер телефона', 'phone'),
-            Text::make('Адрес', 'address')->unescape(),
+            Phone::make('Номер телефона', 'phone')->sortable(),
+            Text::make('Адрес', 'address')->unescape()->sortable(),
             Select::make('Отображение на главной', 'display_location')
                 ->options([
                     'null' => 'Не показывать',
@@ -58,8 +57,8 @@ class AttractionIndexPage extends IndexPage
                 ])
                 ->default(''),
             Text::make('Район', 'district'),
-            Text::make('Email', 'email'),
-            Url::make('Сайт', 'website'),
+            Text::make('Email', 'email')->sortable(),
+            Url::make('Сайт', 'website')->sortable(),
             //            Url::make('Ссылка на карту', 'map_link'),
             Text::make('Виджет отзывов', 'yandex_review_widget')->changePreview(
                 fn ($value) => $value ? ActionButton::make('Посмотреть')->inModal(
@@ -69,16 +68,25 @@ class AttractionIndexPage extends IndexPage
                 ) : 'Отсутствует'
             ),
             Select::make('Статус', 'status')
+                ->sortable()
                 ->options([
                     'active' => 'Активный',
                     'draft' => 'Черновик',
                     'archived' => 'Архив',
                 ])
                 ->required(),
-            Number::make('Цена билета', 'ticket_price'),
-            Number::make('Время посещения (мин)', 'visit_duration'),
-            Switcher::make('Доступность', 'is_accessible'),
-            Switcher::make('Парковка', 'has_parking'),
+            Number::make('Цена билета', 'ticket_price')->sortable(),
+            Number::make('Время посещения (мин)', 'visit_duration')->sortable(),
+            Select::make('Доступность', 'is_accessible')
+                ->options([
+                    false => 'Не обустроено для людей с ограниченными возможностями',
+                    true => 'Обустроено для людей с ограниченными возможностями',
+                ]),
+            Select::make('Парковка', 'has_parking')
+                ->options([
+                    false => 'Не имеется',
+                    true => 'Имеется',
+                ]),
             Text::make('Координаты', 'coordinates')
                 ->changeFill(fn ($data) => "{$data->latitude}, {$data->longitude}"),
 
@@ -87,6 +95,7 @@ class AttractionIndexPage extends IndexPage
                     ID::make(),
                     Image::make('Файл', 'link'),
                     Number::make('Порядковый номер', 'order')->default(0),
+                    Text::make('Подпись к картинке', 'alt_name'),
                 ]),
         ];
     }
@@ -126,7 +135,9 @@ class AttractionIndexPage extends IndexPage
      */
     protected function modifyListComponent(ComponentContract $component): ComponentContract
     {
-        return $component;
+        return $component
+            ->columnSelection()
+            ->stickyButtons();
     }
 
     /**
