@@ -7,28 +7,40 @@
         </div>
         <!-- Карусель -->
         <div class="relative group">
-            <div class="flex overflow-x-auto gap-2 md:gap-3 pb-6 scrollbar-hide scroll-smooth snap-x snap-mandatory"
+            <div class="flex overflow-x-auto gap-2 md:gap-3 pb-6 scrollbar-hide scroll-smooth snap-x snap-mandatory items-stretch"
                  style="scrollbar-width: none; -ms-overflow-style: none;">
                 @forelse ($attractions as $attraction)
-                    <a href="{{route('single-attraction', ['attraction' => $attraction->slug])}}">
-                        <div class="card snap-start shrink-0 w-[calc(90%-8px)] sm:w-80 lg:w-[calc(33.333%-16px)] bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            <div class="card-content group/img group/title p-5 h-full font-['FindSansPro'] relative grid grid-rows-subgrid content-between row-span-2 gap-3 ">
-                                <div class="flex flex-col gap-5">
+                    <a href="{{route('single-attraction', ['attraction' => $attraction->slug])}}" class="snap-start shrink-0 w-[calc(90%-8px)] sm:w-80 lg:w-[calc(33.333%-16px)]">
+                        <div class="card snap-start shrink-0 bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
+                            <div class="card-content group/img group/title p-5 h-full font-['FindSansPro'] relative flex flex-col gap-3">
+                                <div class="shrink-0">
                                     <div class="overflow-hidden rounded-[7px] sm:rounded-[19px]">
                                         <img src="{{ $attraction->getPrimaryThumbImageUrl() }}" alt="Изображение {{ $attraction->getAltPrimaryImage() }}" class="photo rounded-[7px] sm:rounded-[19px] w-full h-50 3xl:h-81.75 object-cover group-hover/img:scale-110 transition-transform duration-500">
+                                        <livewire:favorite-mini-button :object="$attraction"/>
                                     </div>
-                                    <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold group-hover/title:text-[#352AA2] transition-colors duration-300 line-clamp-1">{{ $attraction->name }}</h2>
-                                    <p class="text-xs sm:text-sm lg:text-base 3xl:text-2xl font-light mb-2 text-[#5F5F5F]">{{ $attraction->short_description }}</p>
                                 </div>
-                                <div class="flex flex-col justify-between h-full font-['FindSansPro']">
-                                    <div class="flex flex-row justify-between items-end gap-3.5 text-xs sm:text-sm lg:text-base 3xl:text-2xl font-light">
+                                <div class="flex flex-col flex-1 gap-3">
+                                    <div class="relative group/tooltip shrink-0 flex-1">
+                                        <span class="absolute opacity-0 scale-95 translate-y-1 transition-all duration-200 bg-[#3f3e3ed9] text-white text-sm p-2 rounded-xl bottom-[calc(100%+8px)] pointer-events-none group-hover/tooltip:opacity-100 group-hover/tooltip:scale-100 group-hover/tooltip:translate-y-0 max-w-full -left-2 font-['Inter']">
+                                            {{ $attraction->name }}
+                                        </span>
+                                        <h2 class="card-title text-base lg:text-xl font-bold mb-3 line-clamp-3 group-hover/color:text-[#352AA2] transition-colors duration-300 max-h-18 lg:max-h-20 flex-1">
+                                            {{ $attraction->name }}
+                                        </h2>
+                                    </div>
+
+
+                                    <p class="text-xs sm:text-sm lg:text-base 3xl:text-xl font-light mb-2 text-[#5F5F5F]">{{ $attraction->short_description }}</p>
+                                </div>
+                                <div class="shrink-0">
+                                    <div class="flex flex-row justify-between items-end gap-3.5 text-xs sm:text-sm lg:text-base 3xl:text-xl font-light">
                                         <span class="flex items-center gap-3.5 text-[#5F5F5F]">
                                             <i class="fas fa-map-marker-alt text-xl xl:text-2xl"></i>
-                                            {{ $attraction->address }}
+                                            <p class="line-clamp-3">{{ $attraction->address }}</p>
                                         </span>
-                                        <a href="{{route('single-attraction', ['attraction' => $attraction->slug]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
+                                        <div class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">
                                             <img src="{{asset('/images/arrow-right.png')}}" alt="Стрелка" class="icon w-2 xl:w-3 3xl:w-4 h-4.5 xl:h-6 3xl:h-7.5 transition-transform duration-300 group-hover/button:translate-x-1">
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

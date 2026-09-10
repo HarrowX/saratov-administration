@@ -35,7 +35,7 @@
                 <h1 class="text-3xl lg:text-4xl 3xl:text-5xl font-bold drop-shadow-lg text-white">
                     {{ $hotel->name }}
                 </h1>
-                <p class="text-white/70 line-clamp-4"> {{ $hotel->description }}</p>
+                <p class="text-white/70 line-clamp-4 pr-10"> {{ $hotel->description }}</p>
             </div>
         </x-gallery>
 

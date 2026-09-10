@@ -24,8 +24,8 @@
     </section>
 
     <!-- Section with guided cards -->
-    <section id="cards" class="bg-white pb-10  py-5 sm:py-10 md:py-15 xl:py-20 3xl:py-26">
-        <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-4 sm:px-10 flex flex-col gap-7 md:gap-12 items-center">
+    <section id="cards" class="bg-white pb-10 py-5 sm:py-10 md:py-15 xl:py-20 3xl:py-26">
+        <div class="max-w-6xl 3xl:max-w-427 mx-auto px-4 sm:px-10 flex flex-col gap-7 md:gap-12 items-center">
             <form wire:submit="loadGuidedTours" class="relative w-67 sm:w-114 group">
                 <input type="search"
                        wire:model="searchString"
@@ -42,7 +42,7 @@
                     <i class="fas fa-search text-black transition-colors duration-200 group-focus-within:text-blue-500 hover:text-gray-600"></i>
                 </button>
             </form>
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 lg:p-6 xl:gap-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 xl:gap-y-12">
                 @foreach ($this->guidedTours as $guidedTour)
                     <div class="card bg-white rounded-[7px] sm:rounded-[20px] overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group">
                         <div class="card-content group p-5 relative grid grid-rows-subgrid content-between row-span-2 gap-3 h-full font-['FindSansPro']">
@@ -58,7 +58,7 @@
                                 <h2 class="card-title text-center text-lg lg:text-xl 3xl:text-3xl font-bold group-hover:text-[#352AA2] transition-colors duration-300">{{ $guidedTour->name }}</h2>
                                 <div class="flex flex-col justify-between h-full font-['FindSansPro']">
                                     <div class="flex flex-row justify-between items-end gap-3.5 text-xs sm:text-sm lg:text-base 3xl:text-[22px] font-light">
-                                        <span class="items-center justify-end gap-3.5 text-[#5F5F5F] leading-4 3xl:leading-5 line-clamp-2">
+                                        <span class="items-center justify-end gap-3.5 text-[#5F5F5F]  leading-5 3xl:leading-7 line-clamp-3  wrap-break-word">
                                             {{ $guidedTour->short_description }}
                                         </span>
                                         <a href="{{ route('single-guided-tour', ['guidedTour' => $guidedTour->id]) }}" class="arrow-link shrink-0 size-10 xl:size-11 3xl:size-15 bg-linear-to-r from-[#A556F7] to-[#2663EB] rounded-full flex items-center justify-center hover:opacity-90 hover:scale-110 group/button relative overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-purple-500/30">

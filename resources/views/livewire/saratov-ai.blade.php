@@ -8,7 +8,7 @@
             </div>
 
             <div class="max-w-4xl mx-auto font-['FindSansPro']">
-                <div class="flex flex-col rounded-3xl bg-white overflow-hidden shadow-[0_20px_60px_rgba(30,58,138,0.16)] ring-1 ring-slate-200">
+                <div class="flex flex-col rounded-2xl lg:rounded-3xl bg-white overflow-hidden shadow-[0_5px_10px_rgba(30,58,138,0.16)] lg:shadow-[0_10px_40px_rgba(30,58,138,0.16)] ring-1 ring-slate-200">
                     {{-- Header (dark) --}}
                     <div class="flex items-center gap-3 px-5 py-4 bg-linear-to-r from-[#1e2a5a] to-[#1e3a8a] text-white">
                         <div class="relative shrink-0">

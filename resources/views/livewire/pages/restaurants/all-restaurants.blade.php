@@ -18,7 +18,7 @@
 
     <!-- Section with filter and card-vebue -->
     <section id="cards" class="bg-white pb-5 md:pb-10 xl:pb-20 3xl:pb-26">
-        <div class="max-w-3xl lg:max-w-5xl xl:max-w-7xl 3xl:max-w-398.25 mx-auto px-4 sm:px-10">
+        <div class="max-w-6xl 3xl:max-w-427 mx-auto px-4 sm:px-10">
             <div class="text-center mb-2 3xl:mb-12">
                 <p class="text text-gray-600 content-center">Заведения рядом на любой вкус - от кофеен и пекарен до ресторанов и баров</p>
             </div>
@@ -108,7 +108,7 @@
 {{--                    </div>--}}
 {{--                </div>--}}
 {{--            </div>--}}
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 lg:p-6 xl:gap-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 3xl:gap-7.5 gap-y-7 xl:gap-y-12">
                 @foreach ($this->restaurants as $restaurant)
                     <x-card :cardable="$restaurant"
                             :route="route('single-restaurant', ['restaurant' => $restaurant->slug])"
