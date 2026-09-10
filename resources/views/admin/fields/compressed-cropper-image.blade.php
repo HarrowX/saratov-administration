@@ -38,8 +38,8 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div id="cropper-wrapper">
-                                <img x-ref="cropperImage">
+                            <div class="cropper-wrapper">
+                                <img x-ref="cropperImage" alt="" />
                             </div>
                         </div>
                         <div class="modal-header">

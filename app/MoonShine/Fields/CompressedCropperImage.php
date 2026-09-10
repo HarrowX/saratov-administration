@@ -18,9 +18,7 @@ class CompressedCropperImage extends Image
     public function assets(): array
     {
         return [
-            Css::make(Vite::asset('resources/css/admin/cropper.min.css')),
             Css::make(Vite::asset('resources/css/admin/moonshine-cropper.css')),
-            Js::make(Vite::asset('resources/js/admin/cropper.min.js')),
             Js::make(Vite::asset('resources/js/admin/cropper-init.js')),
         ];
     }
