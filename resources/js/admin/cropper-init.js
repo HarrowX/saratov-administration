@@ -1,3 +1,4 @@
+import Cropper from 'cropperjs';
 document.addEventListener('alpine:init', () => {
     Alpine.data('cropper', () => ({
         open: false,
@@ -6,17 +7,24 @@ document.addEventListener('alpine:init', () => {
         cropperInstance: null,
 
         init() {
-            this.$el.addEventListener('file-uploaded', (event) => {
+            this.$el.addEventListener('file-uploaded', () => {
                 const reader = new FileReader();
-                reader.onload = (e) => {
-                    const imageElement = this.$refs.cropperImage;
-                    imageElement.src = e.target.result;
+                reader.onload = async (e) => {
+                    const img = this.$refs.cropperImage;
+
                     if (this.cropperInstance) {
                         this.cropperInstance.destroy();
                     }
-                    this.cropperInstance = new Cropper(imageElement, {
-                        responsive: true,
+
+                    img.src = e.target.result;
+
+                    await new Promise((resolve) => {
+                        if (img.complete) resolve();
+                        else img.addEventListener('load', resolve, { once: true });
                     });
+
+                    this.cropperInstance = new Cropper(img);
+
                     this.toggleModal();
                 };
                 reader.readAsDataURL(this.file);
@@ -24,22 +32,32 @@ document.addEventListener('alpine:init', () => {
         },
 
         handleFileChange(event) {
-            if(this.dontOpen) {
+            if (this.dontOpen) {
                 this.file = event.target.files[0];
-                const t = this
                 if (!this.file) return;
-                const reader = new FileReader();
                 this.$dispatch('file-uploaded', { file: this.file });
-                this.dontOpen = false
+                this.dontOpen = false;
             }
         },
 
-        cropImage(id) {
-            const croppedCanvas = this.cropperInstance.getCroppedCanvas();
+        async cropImage(id) {
+            if (!this.cropperInstance) {
+                alert('Error: Cropper not initialized.');
+                return;
+            }
+
+            const selection = this.cropperInstance.getCropperSelection();
+            if (!selection) {
+                alert('Error: No selection found.');
+                return;
+            }
+
+            const croppedCanvas = await selection.$toCanvas();
             if (!croppedCanvas) {
                 alert('Error: Failed to get cropped image.');
                 return;
             }
+
             croppedCanvas.toBlob((blob) => {
                 if (!blob) {
                     alert('Error: Failed to convert image.');
@@ -60,7 +78,7 @@ document.addEventListener('alpine:init', () => {
         },
 
         toggleModal() {
-            this.open = !this.open
+            this.open = !this.open;
         }
     }));
 });
