@@ -45,6 +45,13 @@ width: 100% !important;
 {!! $subcopy ?? '' !!}
 </td>
 </tr>
+    @isset($bottomImage)
+        <tr>
+            <td class="bottom-image-cell">
+                <img src="{{ $bottomImage }}" alt="" class="bottom-image">
+            </td>
+        </tr>
+    @endisset
 </table>
 </td>
 </tr>

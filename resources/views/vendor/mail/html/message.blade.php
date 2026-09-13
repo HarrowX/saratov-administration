@@ -12,6 +12,11 @@
 {{-- Body --}}
 {!! $slot !!}
 
+{{-- Bottom image --}}
+<x-slot:bottomImage>
+    {{ asset('images/bg-mail.jpg') }}
+</x-slot:bottomImage>
+
 {{-- Subcopy --}}
 @isset($subcopy)
 <x-slot:subcopy>
