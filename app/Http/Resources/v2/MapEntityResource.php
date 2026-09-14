@@ -18,8 +18,8 @@ class MapEntityResource extends JsonResource
             'id' => $this->id,
             'class' => $this->class,
             'name' => $this->name,
-//            'latitude' => $this->latitude,
-//            'longitude' => $this->longitude,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude,
         ];
     }
 }
