@@ -13,11 +13,11 @@ use App\Models\Attraction;
 use App\Models\Event;
 use App\Models\Excursion;
 use App\Models\Hotel;
-use App\Models\MapEntity;
 use App\Models\Restaurant;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class ContentV2Controller extends Controller
@@ -28,13 +28,45 @@ class ContentV2Controller extends Controller
             'class' => ['nullable', 'string', 'sometimes', Rule::in([Attraction::class, Hotel::class, Restaurant::class])],
         ]);
 
-        $builder = MapEntity::query();
-
-        $this->useSearchTermFilter($request, $builder);
+        $builder = null;
 
         if (array_key_exists('class', $validated)) {
-            $builder->where('class', $validated['class']);
+            $builder = DB::table((new $validated['class'])->getTable())->select([
+                    'id',
+                    DB::raw("'" . addslashes($validated['class']) . "'" . "AS class"),
+                    'name',
+                    'latitude',
+                    'longitude',
+                ]);
+        } else {
+            $builderAttraction = DB::table('attractions')->select([
+                'id',
+                DB::raw("'" . addslashes(Attraction::class) . "'" . "AS class"),
+                'name',
+                'latitude',
+                'longitude',
+            ]);
+            $builderHotel = DB::table('hotels')->select([
+                'id',
+                DB::raw("'" . addslashes(Hotel::class) . "'" . "AS class"),
+                'name',
+                'latitude',
+                'longitude',
+            ]);
+            $builderRestaurant = DB::table('restaurants')->select([
+                'id',
+                DB::raw("'" . addslashes(Restaurant::class) . "'" . "AS class"),
+                'name',
+                'latitude',
+                'longitude',
+            ]);
+
+            $union = $builderAttraction->unionAll($builderHotel)->unionAll($builderRestaurant);
+
+            $builder = DB::query()->fromSub($union, 'map_entities');
         }
+
+        $this->useSearchTermFilter($request, $builder);
 
         return MapEntityResource::collection($builder->get());
     }
@@ -90,16 +122,16 @@ class ContentV2Controller extends Controller
         return ExcursionV2AlpineResource::collection($this->paginateBuilder($request, $builder));
     }
 
-    private function useSearchTermFilter(Request $request, Builder $builder)
+    private function useSearchTermFilter(Request $request, $builder)
     {
-        $term = $request->string('term', '');
+        $term = $request->string('term', '')->value;
 
         if ($term != '') {
             $builder->where('name', 'LIKE', '%'.$term.'%');
         }
     }
 
-    private function useSearchDistanceFilter(Request $request, Builder $builder)
+    private function useSearchDistanceFilter(Request $request, $builder)
     {
         if ($request->has('distance') && $request->has('latitude') && $request->has('longitude')) {
             $distance = $request->string('distance')->value();
