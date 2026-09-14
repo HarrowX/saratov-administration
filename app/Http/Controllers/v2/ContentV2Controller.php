@@ -32,30 +32,30 @@ class ContentV2Controller extends Controller
 
         if (array_key_exists('class', $validated)) {
             $builder = DB::table((new $validated['class'])->getTable())->select([
-                    'id',
-                    DB::raw("'" . addslashes($validated['class']) . "'" . "AS class"),
-                    'name',
-                    'latitude',
-                    'longitude',
-                ]);
+                'id',
+                DB::raw("'".addslashes($validated['class'])."'".'AS class'),
+                'name',
+                'latitude',
+                'longitude',
+            ]);
         } else {
             $builderAttraction = DB::table('attractions')->select([
                 'id',
-                DB::raw("'" . addslashes(Attraction::class) . "'" . "AS class"),
+                DB::raw("'".addslashes(Attraction::class)."'".'AS class'),
                 'name',
                 'latitude',
                 'longitude',
             ]);
             $builderHotel = DB::table('hotels')->select([
                 'id',
-                DB::raw("'" . addslashes(Hotel::class) . "'" . "AS class"),
+                DB::raw("'".addslashes(Hotel::class)."'".'AS class'),
                 'name',
                 'latitude',
                 'longitude',
             ]);
             $builderRestaurant = DB::table('restaurants')->select([
                 'id',
-                DB::raw("'" . addslashes(Restaurant::class) . "'" . "AS class"),
+                DB::raw("'".addslashes(Restaurant::class)."'".'AS class'),
                 'name',
                 'latitude',
                 'longitude',
