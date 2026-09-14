@@ -11,6 +11,7 @@ use App\Http\Controllers\PlaceVisitController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SaratovChatController;
 use App\Http\Controllers\v2\ContentV2Controller;
+use App\Http\Controllers\v2\FavoritableV2Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -140,6 +141,22 @@ Route::prefix('v2')->group(function () {
 
             Route::get('excursions', 'listExcursions');
 
+            Route::get('events', 'listEvents');
+        });
+
+    Route::prefix('favorites')
+        ->controller(FavoritableV2Controller::class)
+        ->middleware(['auth:sanctum'])
+        ->group(function () {
+            Route::get('', 'listFavorites');
+            Route::prefix('places')->group(function () {
+                Route::get('hotels', 'listHotels');
+                Route::get('restaurants', 'listRestaurants');
+                Route::get('attractions', 'listAttractions');
+            });
+
+            Route::get('excursions', 'listExcursions');
+            Route::get('guide-tours', 'listGuideTours');
             Route::get('events', 'listEvents');
         });
 });
