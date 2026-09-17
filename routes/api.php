@@ -141,5 +141,7 @@ Route::prefix('v2')->group(function () {
             Route::get('excursions', 'listExcursions');
 
             Route::get('events', 'listEvents');
+
+            Route::get('map-entities', 'allMapEntities');
         });
 });
