@@ -122,6 +122,62 @@ class ContentV2Controller extends Controller
         return ExcursionV2AlpineResource::collection($this->paginateBuilder($request, $builder));
     }
 
+
+    public function attraction(Request $request)
+    {
+        $item = Attraction::query()->with('attachments')->find($request->id);
+
+        if (! $item) {
+            return response()->json(status: 404);
+        }
+
+        return AttractionV2AlpineResource::make($item);
+    }
+
+    public function hotel(Request $request)
+    {
+        $item = Hotel::query()->with('attachments')->find($request->id);
+
+        if (! $item) {
+            return response()->json(status: 404);
+        }
+
+        return HotelV2AlpineResource::make($item);
+    }
+
+    public function restaurant(Request $request)
+    {
+        $item = Restaurant::query()->with('attachments')->find($request->id);
+
+        if (! $item) {
+            return response()->json(status: 404);
+        }
+
+        return RestaurantV2AlpineResource::make($item);
+    }
+
+    public function event(Request $request)
+    {
+        $item = Event::query()->with('attachments')->find($request->id);
+
+        if (! $item) {
+            return response()->json(status: 404);
+        }
+
+        return EventV2AlpineResource::make($item);
+    }
+
+    public function excursion(Request $request)
+    {
+        $item = Excursion::query()->with('attachments')->find($request->id);
+
+        if (! $item) {
+            return response()->json(status: 404);
+        }
+
+        return ExcursionV2AlpineResource::make($item);
+    }
+
     private function useSearchTermFilter(Request $request, $builder)
     {
         $term = $request->string('term', '')->value;
